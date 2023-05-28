@@ -45,7 +45,7 @@
             </button>
             <!-- Brand -->
             <a class="navbar-brand pt-0" href="{{ route('home') }}">
-                <h1>SIAB</h1>
+                <h1>{{ config('app.name') }}</h1>
             </a>
             <!-- User -->
             <ul class="nav align-items-center d-md-none">
@@ -60,7 +60,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                        <a href="{{ route('logout') }}"
+                        <a href="{{ route('auth.logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="dropdown-item">
                             <i class="ni ni-user-run"></i>
@@ -91,13 +91,13 @@
                 </div>
                 <!-- Navigation -->
                 <ul class="navbar-nav">
-                    @if (auth()->user()->role->role == "Admin")
+                    @if (auth()->user()->role == "admin")
                         @if (Request::segment(1) == 'kehadiran')
                             <li class="nav-item active">
-                            <a class="nav-link active" href="{{ route('kehadiran.index') }}">
+                            <a class="nav-link active" href="">
                         @else
                             <li class="nav-item">
-                            <a class="nav-link" href="{{ route('kehadiran.index') }}">
+                            <a class="nav-link" href="">
                         @endif
                                 <i class="ni ni-check-bold text-primary"></i> Kehadiran
                             </a>
@@ -105,10 +105,10 @@
 
                         @if (Request::segment(1) == 'users')
                             <li class="nav-item active">
-                            <a class="nav-link active" href="{{ route('users.index') }}">
+                            <a class="nav-link active" href="{{route('users.index')}}">
                         @else
                             <li class="nav-item">
-                            <a class="nav-link" href="{{ route('users.index') }}">
+                            <a class="nav-link" href="{{route('users.index')}}">
                         @endif
                                 <i class="ni ni-circle-08 text-primary"></i> Users
                             </a>
@@ -116,10 +116,10 @@
                     @else
                         @if (Request::segment(1) == 'daftar-hadir')
                             <li class="nav-item active">
-                            <a class="nav-link active" href="{{ route('daftar-hadir') }}">
+                            <a class="nav-link active" href="">
                         @else
                             <li class="nav-item">
-                            <a class="nav-link" href="{{ route('daftar-hadir') }}">
+                            <a class="nav-link" href="">
                         @endif
                                 <i class="ni ni-check-bold text-primary"></i> Kehadiran
                             </a>
@@ -151,7 +151,7 @@
                 <hr class="my-3">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"
+                        <a class="nav-link" href="{{ route('auth.logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ni ni-user-run text-info"></i> Logout
                         </a>
@@ -183,14 +183,14 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                            <a href="{{ route('logout') }}"
+                            <a href="{{ route('auth.logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 class="dropdown-item">
                                 <i class="ni ni-user-run"></i>
                                 <span>Logout</span>
                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('auth.logout') }}" method="GET" style="display: none;">
                                 @csrf
                             </form>
                         </div>
@@ -233,9 +233,9 @@
                 <div class="row align-items-center justify-content-xl-between">
                     <div class="col-xl-6">
                         <div class="copyright text-center text-xl-left text-muted">
-                            © {{ date('Y')}} Developed By <a href="https://maulanakevinp.github.io/" class="font-weight-bold ml-1"
-                                target="_lank">Kevin</a> Theme By <a href="https://www.creative-tim.com"
-                                class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+                            © {{ date('Y')}} Developed By <a href="https://lovely-rabanadas-9fc482.netlify.app" class="font-weight-bold ml-1"
+                                target="_lank">Ihya Natik W</a> Theme By <a href=""
+                                class="font-weight-bold ml-1" target="_blank">BuruhDigital</a>
                         </div>
                     </div>
                 </div>

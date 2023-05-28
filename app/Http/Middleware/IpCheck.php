@@ -14,8 +14,13 @@ class IpCheck
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$ips)
     {
-        return $next($request);
+        $access = array_filter(array_map(function($v){
+            return ( $star = strpos($v, "*") ) ? ( substr(request()->ip(), 0, $star) == substr($v, 0, $star) )
+                                               : ( request()->ip() == $v );
+        }, $ips));
+
+        return $access ? $next($request) : App::abort(403);
     }
 }

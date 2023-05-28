@@ -22,6 +22,11 @@ class CheckRole
                 return $next($request);
             }    
         }
-        return redirect('auth.index')->with('forbidden', 'Anda Tidak Memiliki Akses');
+        return redirect('/login')->with('forbidden', 'Anda Tidak Memiliki Akses');
+    }
+    public function cekRoute($route)
+    {
+        $actions = $route->getAction();
+        return isset($actions['roles']) ? $actions['roles'] : null;
     }
 }

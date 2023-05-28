@@ -18,7 +18,7 @@ class AuthController extends Controller
     {
         $cek_login = $request->only('nik', 'password');
         if(Auth::attempt($cek_login)) {
-            return redirect()->intended('home');
+            return redirect()->intended('/home');
             // $role = Auth::user()->role;
             // if ($role == 'admin'){
             //     return redirect()->intended('/dashboard');
