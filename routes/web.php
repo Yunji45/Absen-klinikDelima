@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PresensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,24 +36,26 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::patch('/users/password/{user}', [UserController::class,'password'])->name('users.password');
         Route::resource('/users', UserController::class);
 
-        // Route::get('/kehadiran', 'PresentsController@index')->name('kehadiran.index');
-        // Route::get('/kehadiran/cari', 'PresentsController@search')->name('kehadiran.search');
-        // Route::get('/kehadiran/{user}/cari', 'PresentsController@cari')->name('kehadiran.cari');
-        // Route::get('/kehadiran/excel-users', 'PresentsController@excelUsers')->name('kehadiran.excel-users');
-        // Route::get('/kehadiran/{user}/excel-user', 'PresentsController@excelUser')->name('kehadiran.excel-user');
-        // Route::post('/kehadiran/ubah', 'PresentsController@ubah')->name('ajax.get.kehadiran');
-        // Route::patch('/kehadiran/{kehadiran}', 'PresentsController@update')->name('kehadiran.update');
-        // Route::post('/kehadiran', 'PresentsController@store')->name('kehadiran.store');
+        Route::get('/kehadiran', [PresensiController::class,'index'])->name('kehadiran.index');
+        Route::get('/kehadiran/cari', [PresensiController::class,'search'])->name('kehadiran.search');
+        Route::get('/kehadiran/{user}/cari', [PresensiController::class,'cari'])->name('kehadiran.cari');
+        Route::get('/kehadiran/excel-users', [PresensiController::class,'excelUser'])->name('kehadiran.excel-users');
+        Route::get('/kehadiran/{user}/excel-user', [PresensiController::class,'excelUser'])->name('kehadiran.excel-user');
+        Route::post('/kehadiran/ubah', [PresensiController::class,'ubah'])->name('ajax.get.kehadiran');
+        Route::patch('/kehadiran/{kehadiran}', [PresensiController::class,'update'])->name('kehadiran.update');
+        Route::post('/kehadiran-tambah', [PresensiController::class,'store'])->name('kehadiran.store');
     });
 
     Route::group(['roles' => 'pegawai'], function(){
-        // Route::get('/daftar-hadir', 'PresentsController@show')->name('daftar-hadir');
-        // Route::get('/daftar-hadir/cari', 'PresentsController@cariDaftarHadir')->name('daftar-hadir.cari');
+        Route::get('/daftar-hadir', [PresensiController::class,'show'])->name('daftar-hadir');
+        Route::get('/daftar-hadir/cari', [PresensiController::class,'cariDaftarHadir'])->name('daftar-hadir.cari');
     });
 
     // ATUR IP ADDRESS DISINI
-    Route::group(['middleware' => ['ipcheck:'.config('absensi.ip_address')]], function() {
-        // Route::patch('/absen/{kehadiran}', 'PresentsController@checkOut')->name('kehadiran.check-out');
-        // Route::post('/absen', 'PresentsController@checkIn')->name('kehadiran.check-in');
+    Route::group(['middleware' => ['cekIp:'.config('absensi.ip_address')]], function() {
+        Route::patch('/absen/{kehadiran}', [PresensiController::class,'checkOut'])->name('kehadiran.check-out');
+        Route::post('/absen', [PresensiController::class,'checkIn'])->name('kehadiran.check-in');
     });
+    // Route::post('/absen', [PresensiController::class,'checkIn'])->middleware('cekIp')->name('kehadiran.check-in');
+
 });

@@ -39,5 +39,16 @@ class UserSeeder extends Seeder
             'foto' => 'default.jpg'
         ]);
 
+        DB::table('users')->insert([
+            'name'=> 'pegawi',
+            'no_hp'=> '08777892394',
+            'nik' => '123459334',
+            'email'=> 'ihyaadmin@gmail.com',
+            'password'=> Hash::make('pegawai'),
+            'remember_token'=> Str::random(10),
+            'role'=> 'pegawai',
+            'foto' => 'default.jpg'
+        ]);
+
     }
 }

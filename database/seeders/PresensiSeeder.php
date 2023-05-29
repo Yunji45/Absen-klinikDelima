@@ -22,7 +22,24 @@ class PresensiSeeder extends Seeder
             'keterangan' => 'Masuk',
             'tanggal' => now(),
             'jam_masuk' => '08:00',
-            'jam_keluar' => '17:00',
+            'jam_keluar' => '16:00',
         ]);
+
+        DB::table('presensis')->insert([
+            'user_id' => 2,
+            'keterangan' => 'Telat',
+            'tanggal' => now(),
+            'jam_masuk' => '09:00',
+            'jam_keluar' => '16:00',
+        ]);
+
+        DB::table('presensis')->insert([
+            'user_id' => 2,
+            'keterangan' => 'Masuk',
+            'tanggal' => now(),
+            'jam_masuk' => '08:00',
+            'jam_keluar' => '16:00',
+        ]);
+
     }
 }

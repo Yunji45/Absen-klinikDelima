@@ -94,10 +94,10 @@
                     @if (auth()->user()->role == "admin")
                         @if (Request::segment(1) == 'kehadiran')
                             <li class="nav-item active">
-                            <a class="nav-link active" href="">
+                            <a class="nav-link active" href="{{ route('kehadiran.index') }}">
                         @else
                             <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('kehadiran.index') }}">
                         @endif
                                 <i class="ni ni-check-bold text-primary"></i> Kehadiran
                             </a>
@@ -116,10 +116,10 @@
                     @else
                         @if (Request::segment(1) == 'daftar-hadir')
                             <li class="nav-item active">
-                            <a class="nav-link active" href="">
+                            <a class="nav-link active" href="{{ route('daftar-hadir') }}">
                         @else
                             <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('daftar-hadir') }}">
                         @endif
                                 <i class="ni ni-check-bold text-primary"></i> Kehadiran
                             </a>

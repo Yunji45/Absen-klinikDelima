@@ -334,7 +334,7 @@ Detail User - {{ config('app.name') }}
                 const id = $(this).data('id');
                 $('#formUbahKehadiran').attr('action', "{{ url('kehadiran') }}/" + id);
                 $.ajax({
-                    url: "",
+                    url: "{{route('ajax.get.kehadiran')}}",
                     method: 'post',
                     dataType: 'json',
                     data: {

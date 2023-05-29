@@ -115,7 +115,7 @@ Kehadiran - {{ config('app.name') }}
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>NRP</th>
+                                <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Keterangan</th>
                                 <th>Jam Masuk</th>
@@ -132,8 +132,8 @@ Kehadiran - {{ config('app.name') }}
                                 @foreach ($presents as $present)
                                     <tr>
                                         <th>{{ $rank++ }}</th>
-                                        <td><a href="{{ route('users.show',$present->user) }}">{{ $present->user->nrp }}</a></td>
-                                        <td>{{ $present->user->nama }}</td>
+                                        <td><a href="{{ route('users.show',$present->user) }}">{{ $present->user->nik }}</a></td>
+                                        <td>{{ $present->user->name }}</td>
                                         <td>{{ $present->keterangan }}</td>
                                         @if ($present->jam_masuk)
                                             <td>{{ date('H:i:s', strtotime($present->jam_masuk)) }}</td>

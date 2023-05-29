@@ -105,9 +105,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view ('frontend.users.edit',compact('user'));
     }
 
     /**
@@ -119,7 +119,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'name'  => ['required', 'max:32', 'string'],
+            'email' => ['required'],
+            'no_hp' => ['required'],
+            'nik'   => ['required', 'max:9','unique:users'],
+            'role'  => ['required'],
+            'foto'  => ['image', 'mimes:jpeg,png,gif', 'max:2048']
+        ]);
+        $data['role'] = $request->role;
+        if ($request->file('foto')) {
+            if ($user->foto != 'default.jpg') {
+                File::delete(public_path('storage'.'/'.$user->foto));
+            }
+            $data['foto'] = $request->file('foto')->store('foto-profil');
+        }
+        $user ->update($data);
+        return redirect()->back()->with('success', 'User berhasil diperbarui');
+
     }
 
     /**
@@ -128,9 +145,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $name = $user->name;
+        if ($user->foto != 'default.jpg') {
+            File::delete(public_path('storage'.'/'.$user->foto));
+        }
+        User::destroy($user->id);
+        return redirect('/users')->with('success','User "'.$user->name.'" berhasil dihapus');
     }
 
     public function profil()
@@ -191,7 +213,16 @@ class UserController extends Controller
                     ->paginate(6);
         $rank = $users->firstItem();
 
-        return view('users.index', compact('users','rank'));
+        // return view('users.index', compact('users','rank'));
+        return redirect()->back();
+    }
+
+    public function password(Request $request, User $user)
+    {
+        $user->password = Hash::make('baruniyach');
+        $user->save();
+
+        return redirect()->back()->with('success','Password berhasil direset, Password = baruniyach');
     }
 
 }
