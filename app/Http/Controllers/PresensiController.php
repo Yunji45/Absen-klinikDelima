@@ -92,48 +92,92 @@ class PresensiController extends Controller
 
     public function checkIn(Request $request)
     {
-        $users = User::all();
-        $data['jam_masuk']  = date('H:i:s');
-        $data['tanggal']    = date('Y-m-d');
-        $data['user_id']    = $request->user_id;
+        // $users = User::all();
+        // $data['jam_masuk']  = date('H:i:s');
+        // $data['tanggal']    = date('Y-m-d');
+        // $data['user_id']    = $request->user_id;
 
-        if (date('l') == 'Saturday' || date('l') == 'Sunday') {
-            return redirect()->back()->with('error','Hari Libur Tidak bisa Check In');
+        // if (date('l') == 'Saturday' || date('l') == 'Sunday') {
+        //     return redirect()->back()->with('error','Hari Libur Tidak bisa Absen');
+        // }
+
+        // foreach ($users as $user) {
+        //     $absen = presensi::whereUserId($user->id)->whereTanggal($data['tanggal'])->first();
+        //     if (!$absen) {
+        //         if ($user->id != $data['user_id']) {
+        //             presensi::create([
+        //                 'keterangan'    => 'Alpha',
+        //                 'tanggal'       => date('Y-m-d'),
+        //                 'user_id'       => $user->id
+        //             ]);
+        //         }
+        //     }
+        // }
+
+        // if (strtotime($data['jam_masuk']) >= strtotime(config('absensi.jam_masuk') .' -1 hours') && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_masuk'))) {
+        //     $data['keterangan'] = 'Masuk';
+        // } else if (strtotime($data['jam_masuk']) > strtotime(config('absensi.jam_masuk')) && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_keluar'))) {
+        //     $data['keterangan'] = 'Telat';
+        // } else {
+        //     $data['keterangan'] = 'Alpha';
+        // }
+
+        // $present = presensi::whereUserId($data['user_id'])->whereTanggal($data['tanggal'])->first();
+        // if ($present) {
+        //     if ($present->keterangan == 'Alpha') {
+        //         $present->update($data);
+        //         return redirect()->back()->with('success','Check-in berhasil');
+        //     } else {
+        //         return redirect()->back()->with('error','Check-in gagal');
+        //     }
+        // }
+
+        // presensi::create($data);
+        // return redirect()->back()->with('success','Check-in berhasil');
+        $currentDate = date('Y-m-d');
+        $currentTime = date('H:i:s');
+        $user_id = $request->user_id;
+
+        $weekendDays = ['Saturday', 'Sunday'];
+        if (in_array(date('l'), $weekendDays)) {
+            return back()->with('error', 'Hari Libur, Tidak bisa Absen');
         }
 
-        foreach ($users as $user) {
-            $absen = presensi::whereUserId($user->id)->whereTanggal($data['tanggal'])->first();
-            if (!$absen) {
-                if ($user->id != $data['user_id']) {
-                    presensi::create([
-                        'keterangan'    => 'Alpha',
-                        'tanggal'       => date('Y-m-d'),
-                        'user_id'       => $user->id
-                    ]);
-                }
-            }
+        $attendanceStatus = 'Alpha';
+        $jam_masuk = strtotime($currentTime);
+        $jam_masuk_config = strtotime(config('absensi.jam_masuk'));
+        $jam_keluar_config = strtotime(config('absensi.jam_keluar'));
+
+        if ($jam_masuk >= ($jam_masuk_config - 3600) && $jam_masuk <= $jam_masuk_config) {
+            $attendanceStatus = 'Masuk';
+        } else if ($jam_masuk > $jam_masuk_config && $jam_masuk <= $jam_keluar_config) {
+            $attendanceStatus = 'Telat';
         }
 
-        if (strtotime($data['jam_masuk']) >= strtotime(config('absensi.jam_masuk') .' -1 hours') && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_masuk'))) {
-            $data['keterangan'] = 'Masuk';
-        } else if (strtotime($data['jam_masuk']) > strtotime(config('absensi.jam_masuk')) && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_keluar'))) {
-            $data['keterangan'] = 'Telat';
-        } else {
-            $data['keterangan'] = 'Alpha';
-        }
+        $existingAttendance = Presensi::where('user_id', $user_id)
+            ->where('tanggal', $currentDate)
+            ->first();
 
-        $present = presensi::whereUserId($data['user_id'])->whereTanggal($data['tanggal'])->first();
-        if ($present) {
-            if ($present->keterangan == 'Alpha') {
-                $present->update($data);
-                return redirect()->back()->with('success','Check-in berhasil');
+        if ($existingAttendance) {
+            if ($existingAttendance->keterangan == 'Alpha') {
+                $existingAttendance->update(['keterangan' => $attendanceStatus]);
+                return Redirect::back()->with('success', 'Check-in berhasil');
             } else {
-                return redirect()->back()->with('error','Check-in gagal');
+                return back()->with('error', 'Check-in gagal');
             }
         }
 
-        presensi::create($data);
-        return redirect()->back()->with('success','Check-in berhasil');
+        $attendanceData = [
+            'user_id' => $user_id,
+            'keterangan' => $attendanceStatus,
+            'tanggal' => $currentDate,
+            'jam_masuk' => $currentTime,
+            'jam_keluar' => null,
+        ];
+
+        Presensi::create($attendanceData);
+        return Redirect::back()->with('success', 'Check-in berhasil');
+
     }
 
     public function checkOut(Request $request, presensi $kehadiran)

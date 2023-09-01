@@ -19,6 +19,8 @@ class presensi extends Model
         'jam_keluar',
     ];
 
+    public $timestamps = false;
+
     public function user ()
     {
         return $this->belongsTo(User::class);

@@ -58,7 +58,7 @@
                         <form action="{{ route('kehadiran.check-in') }}" method="post">
                             @csrf
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                            <button class="btn btn-primary" type="submit">Check-in</button>
+                            <button class="btn btn-primary" type="submit">Absen</button>
                         </form>
                     @else
                         <p>Check-in Belum Tersedia</p>

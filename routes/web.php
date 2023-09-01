@@ -57,5 +57,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/absen', [PresensiController::class,'checkIn'])->name('kehadiran.check-in');
     });
     // Route::post('/absen', [PresensiController::class,'checkIn'])->middleware('cekIp')->name('kehadiran.check-in');
+    Route::post('/absen', [PresensiController::class,'checkIn'])->name('kehadiran.check-in');
+
 
 });
