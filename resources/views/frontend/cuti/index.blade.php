@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <form action="{{ route('submit.cuti') }}" method="post">
+    <form action="{{ route('pengajuan.cuti') }}" method="post">
         @csrf
 
         <label for="tanggal_mulai">Tanggal Mulai</label>
@@ -27,7 +27,7 @@
         <br>
 
         <label for="tanggal_selesai">Tanggal Selesai</label>
-        <input type="date" name="tanggal_selesai" required>
+        <input type="date" name="tanggal_berakhir" required>
 
         <br>
 

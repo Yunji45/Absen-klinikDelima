@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(presensi::class);
     }
+
+    public function cuti ()
+    {
+        return $this->hasMany(cuti::class);
+    }
 }

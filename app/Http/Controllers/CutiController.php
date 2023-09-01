@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\presensi;
 use App\Models\User;
+use App\Models\cuti;
+use Illuminate\Support\Facades\Auth;
 
 class CutiController extends Controller
 {
@@ -15,7 +17,10 @@ class CutiController extends Controller
      */
     public function index()
     {
-        return view('frontend.cuti.index');
+        $title = 'Pengajuan Cuti';
+        $cuti = cuti::all();
+        return view('frontend.cuti.index',compact('title'));
+        // return $cuti;
     }
 
     /**
@@ -34,7 +39,7 @@ class CutiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function presensi(Request $request)
     {
         $request->validate([
             'tanggal_mulai' => 'required|date',
@@ -42,7 +47,6 @@ class CutiController extends Controller
             'alasan' => 'required|string',
         ]);
 
-        // Cek jika tanggal cuti jatuh pada akhir pekan
         $weekendDays = ['Saturday', 'Sunday'];
         $tanggalMulai = date('l', strtotime($request->tanggal_mulai));
         $tanggalSelesai = date('l', strtotime($request->tanggal_selesai));
@@ -52,14 +56,13 @@ class CutiController extends Controller
         }
 
         $cutiData = [
-            'user_id' => auth()->user()->id,
+            'user_id' => Auth()->user()->id,
             'keterangan' => 'Cuti',
-            'tanggal' => $request->tanggal_mulai, // Tanggal awal cuti
+            'tanggal' => $request->tanggal_mulai, 
             'jam_masuk' => null,
             'jam_keluar' => null,
         ];
 
-        // Cek jika cuti dalam rentang tanggal_mulai hingga tanggal_selesai
         $tanggalCuti = strtotime($cutiData['tanggal']);
         $tanggalSelesai = strtotime($request->tanggal_selesai);
 
@@ -72,15 +75,35 @@ class CutiController extends Controller
                 $existingAttendance->update(['keterangan' => 'Cuti']);
             } else {
                 $cutiData['tanggal'] = date('Y-m-d', $tanggalCuti);
-                Presensi::create($cutiData);
+                presensi::create($cutiData);
             }
 
-            $tanggalCuti = strtotime('+1 day', $tanggalCuti); // Lanjut ke tanggal berikutnya
+            $tanggalCuti = strtotime('+1 day', $tanggalCuti); 
         }
 
         return redirect()->route('cuti.create')->with('success', 'Pengajuan cuti berhasil diajukan.');
     }
 
-    
+    public function store (Request $request)
+    {
+        $request->validate([
+            'tanggal_mulai' => 'required|date',
+            'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
+            'alasan' => 'required|string',
+        ]);
+
+        $cutiData = [
+            'user_id' => Auth()->user()->id,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_berakhir' => $request->tanggal_berakhir,
+            'alasan' => $request->alasan,
+            'status' => 'pengajuan', 
+        ];
+
+        cuti::create($cutiData);
+        return $cutiData;
+        // return redirect()->route('cuti.create')->with('success', 'Pengajuan cuti berhasil diajukan.');
+
+    }
 
 }

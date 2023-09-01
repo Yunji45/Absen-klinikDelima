@@ -62,4 +62,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     // Route::post('/absen', [PresensiController::class,'checkIn'])->middleware('cekIp')->name('kehadiran.check-in');
     Route::post('/absen', [PresensiController::class,'checkIn'])->name('kehadiran.check-in');
     Route::patch('/absen/{kehadiran}', [PresensiController::class,'checkOut'])->name('kehadiran.check-out');
+
+    //cuti
+    Route::get('/cuti-index',[CutiController::class,'index'])->name('data.cuti');
+    Route::post('/pengajuan-cuti',[CutiController::class,'store'])->name('pengajuan.cuti');
 });
