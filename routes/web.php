@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\CutiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::group(['roles' => 'pegawai'], function(){
         Route::get('/daftar-hadir', [PresensiController::class,'show'])->name('daftar-hadir');
         Route::get('/daftar-hadir/cari', [PresensiController::class,'cariDaftarHadir'])->name('daftar-hadir.cari');
+        Route::get('/pengajuan-cuti',[CutiController::class,'index'])->name('cuti.pegawai');
+        Route::post('/simpan-cuti',[CutiController::class,'store'])->name('submit.cuti');
     });
 
     // ATUR IP ADDRESS DISINI
@@ -58,6 +61,5 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     });
     // Route::post('/absen', [PresensiController::class,'checkIn'])->middleware('cekIp')->name('kehadiran.check-in');
     Route::post('/absen', [PresensiController::class,'checkIn'])->name('kehadiran.check-in');
-
-
+    Route::patch('/absen/{kehadiran}', [PresensiController::class,'checkOut'])->name('kehadiran.check-out');
 });

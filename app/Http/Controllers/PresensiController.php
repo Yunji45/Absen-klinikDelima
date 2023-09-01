@@ -161,7 +161,7 @@ class PresensiController extends Controller
         if ($existingAttendance) {
             if ($existingAttendance->keterangan == 'Alpha') {
                 $existingAttendance->update(['keterangan' => $attendanceStatus]);
-                return Redirect::back()->with('success', 'Check-in berhasil');
+                return back()->with('success', 'Check-in berhasil');
             } else {
                 return back()->with('error', 'Check-in gagal');
             }
@@ -176,7 +176,7 @@ class PresensiController extends Controller
         ];
 
         Presensi::create($attendanceData);
-        return Redirect::back()->with('success', 'Check-in berhasil');
+        return back()->with('success', 'Check-in berhasil');
 
     }
 
