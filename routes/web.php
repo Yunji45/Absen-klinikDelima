@@ -1,11 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//frontend
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+//backend
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\CutiController;
+//Error Bro
+use App\Http\Controllers\ErrorMas\ErrorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +68,13 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::patch('/absen/{kehadiran}', [PresensiController::class,'checkOut'])->name('kehadiran.check-out');
 
     //cuti
-    Route::get('/cuti-index',[CutiController::class,'index'])->name('data.cuti');
+    Route::get('/data-cuti',[CutiController::class,'index']);
+    Route::get('/cuti-form',[CutiController::class,'create'])->name('data.cuti');
     Route::post('/pengajuan-cuti',[CutiController::class,'store'])->name('pengajuan.cuti');
+    Route::get('/VerifikasiCuti/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
+    Route::get('/RejectCuti/{id}/gagal',[CutiController::class,'RejectCuti']);
+
+    //Hari-Hari Error Mulu Mas Bro Emang Ga Bosen
+    Route::get('/ForBidden', [ErrorController::class,'forBidden'])->name('error.input');
+    Route::get('/Server', [ErrorController::class,'server'])->name('error.server');
 });

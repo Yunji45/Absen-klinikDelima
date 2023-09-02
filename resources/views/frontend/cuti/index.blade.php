@@ -1,42 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ajukan Cuti</title>
-</head>
-<body>
-    <h1>Ajukan Cuti</h1>
+<section class="section">
+          <div class="section-header">
+            <h1>{{$title}}</h1>
+          </div>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+          <div class="section-body">
 
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+            <div class="row">
+              <div class="col-12 col-md-12 col-lg-12">
+              <div class="card">
+                
+                  <div class="card-body">
+                    <div class="section-title">Tabel {{$title}}</div>
+                    <table class="table table-sm table-white">
+                      <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Nama</th>
+                          <th scope="col">tanggal-mulai</th>
+                          <th scope="col">tanggal-berakhir</th>
+                          <th scope="col">Alasan</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php $no =1; @endphp @foreach ($cuti as $item)
+                        <tr>
+                            <td>{{$no++}}.</td>
+                            <td>{{$item->user->name}}</td>
+                            <td>{{$item->tanggal_mulai}}</td>
+                            <td>{{$item->tanggal_berakhir}}</td>
+                            <td>{{$item->alasan}}</td>
+                            <td>{{$item->status}}</td>
+                            <td>
+                                <a
+                                    href="/VerifikasiCuti/{{$item->id}}/berhasil"
+                                    onclick="return confirm('Yakin akan Update Data?')"
+                                    class="btn btn-success btn-sm">
+                                    <i class="fas fas fa-unlock-alt"></i><Strong>Verifikasi</Strong></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                   
+                  </div>
+                </div>
+                
+              </div>
+              
+            </div>
+          </div>
+        </section>
+       
+        <style>
+            .card-body {
+                position: relative;
+            }
 
-    <form action="{{ route('pengajuan.cuti') }}" method="post">
-        @csrf
-
-        <label for="tanggal_mulai">Tanggal Mulai</label>
-        <input type="date" name="tanggal_mulai" required>
-
-        <br>
-
-        <label for="tanggal_selesai">Tanggal Selesai</label>
-        <input type="date" name="tanggal_berakhir" required>
-
-        <br>
-
-        <label for="alasan">Alasan Cuti</label>
-        <textarea name="alasan" rows="4" required></textarea>
-
-        <br>
-
-        <button type="submit">Ajukan Cuti</button>
-    </form>
-</body>
-</html>
+            .buttons {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+        </style>
