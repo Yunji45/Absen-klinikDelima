@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->enum('jenis_izin',['cuti','sakit'])->default('sakit');
             $table->date ('tanggal_mulai');
             $table->date('tanggal_berakhir');
             $table->string('alasan');

@@ -16,6 +16,7 @@
                         <tr>
                           <th scope="col">No</th>
                           <th scope="col">Nama</th>
+                          <th scope="col">Jenis Izin</th>
                           <th scope="col">tanggal-mulai</th>
                           <th scope="col">tanggal-berakhir</th>
                           <th scope="col">Alasan</th>
@@ -28,14 +29,15 @@
                         <tr>
                             <td>{{$no++}}.</td>
                             <td>{{$item->user->name}}</td>
+                            <td>{{$item->jenis_izin}}</td>
                             <td>{{$item->tanggal_mulai}}</td>
                             <td>{{$item->tanggal_berakhir}}</td>
                             <td>{{$item->alasan}}</td>
                             <td>{{$item->status}}</td>
                             <td>
                                 <a
-                                    href="/VerifikasiCuti/{{$item->id}}/berhasil"
-                                    onclick="return confirm('Yakin akan Update Data?')"
+                                    href="/VerifikasiIzin/{{$item->id}}/berhasil"
+                                    onclick="return confirm('Yakin akan Update Data Izin?')"
                                     class="btn btn-success btn-sm">
                                     <i class="fas fas fa-unlock-alt"></i><Strong>Verifikasi</Strong></a>
                             </td>

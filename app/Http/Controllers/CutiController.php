@@ -30,7 +30,7 @@ class CutiController extends Controller
      */
     public function create()
     {
-        $title = 'Pengajuan Cuti';
+        $title = 'Pengajuan Izin';
         return view('frontend.cuti.create',compact('title'));
     }
 
@@ -88,6 +88,7 @@ class CutiController extends Controller
     public function store (Request $request)
     {
         $request->validate([
+            'jenis_izin' => 'required',
             'tanggal_mulai' => 'required|date',
             'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
             'alasan' => 'required|string',
@@ -95,18 +96,19 @@ class CutiController extends Controller
         $user_id = auth()->user()->id;
 
         // Periksa apakah ada pengajuan cuti yang masih berlangsung dan belum disetujui
-        $existingCuti = Cuti::where('user_id', $user_id)
+        $existingCuti = cuti::where('user_id', $user_id)
             ->where('status', 'pengajuan')
-            ->where('tanggal_mulai', '<=', $request->tanggal_berakhir)
-            ->where('tanggal_berakhir', '>=', $request->tanggal_mulai)
+            // ->where('tanggal_mulai', '<=', $request->tanggal_berakhir)
+            // ->where('tanggal_berakhir', '>=', $request->tanggal_mulai)
             ->first();
 
         if ($existingCuti) {
-            return redirect()->back()->with('error', 'Anda tidak dapat mengajukan cuti baru selama pengajuan cuti sebelumnya masih berlangsung atau belum disetujui.');
+            return redirect()->back()->with('error', 'Anda tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
         }
 
         $cutiData = [
             'user_id' => Auth()->user()->id,
+            'jenis_izin' => $request->jenis_izin,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_berakhir' => $request->tanggal_berakhir,
             'alasan' => $request->alasan,
@@ -121,20 +123,26 @@ class CutiController extends Controller
     public function VerifikasiCuti($id)
     {
         $status = cuti::find($id);
-        // $status ->update(['status' => 'approve']);
-        if($status)
-        {
-            $status ->update(['status' => 'approve']);
-            $mulai = $status ->tanggal_mulai;
-            $akhir = $status ->tanggal_berakhir;
-            presensi::where('user_id',$status->user_id)
-                    ->whereBetween('tanggal', [$mulai,$akhir])
-                    ->update(['keterangan' => 'Cuti']);
+
+        if ($status) {
+            $status->update(['status' => 'approve']);
+            $mulai = $status->tanggal_mulai;
+            $akhir = $status->tanggal_berakhir;
+            $jenisIzin = $status->jenis_izin;
+
+            $keterangan = ($jenisIzin == 'cuti') ? 'Cuti' : (($jenisIzin == 'sakit') ? 'Sakit' : null);
+
+            if ($keterangan) {
+                Presensi::where('user_id', $status->user_id)
+                    ->whereBetween('tanggal', [$mulai, $akhir])
+                    ->update(['keterangan' => $keterangan]);
+            }
+
             return $status;
-        }else{
-            return('error');
+        } else {
+            return ('error');
         }
-        // return $status;
+
     }
 
     public function RejectCuti($id)

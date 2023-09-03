@@ -68,11 +68,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::patch('/absen/{kehadiran}', [PresensiController::class,'checkOut'])->name('kehadiran.check-out');
 
     //cuti
-    Route::get('/data-cuti',[CutiController::class,'index']);
-    Route::get('/cuti-form',[CutiController::class,'create'])->name('data.cuti');
-    Route::post('/pengajuan-cuti',[CutiController::class,'store'])->name('pengajuan.cuti');
-    Route::get('/VerifikasiCuti/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
-    Route::get('/RejectCuti/{id}/gagal',[CutiController::class,'RejectCuti']);
+    Route::get('/data-izin',[CutiController::class,'index']);
+    Route::get('/izin-form',[CutiController::class,'create'])->name('data.cuti');
+    Route::post('/pengajuan-izin',[CutiController::class,'store'])->name('pengajuan.cuti');
+    Route::get('/VerifikasiIzin/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
+    Route::get('/RejectIzin/{id}/gagal',[CutiController::class,'RejectCuti']);
 
     //Hari-Hari Error Mulu Mas Bro Emang Ga Bosen
     Route::get('/ForBidden', [ErrorController::class,'forBidden'])->name('error.input');
