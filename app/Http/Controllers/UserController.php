@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 
 class UserController extends Controller
 {
@@ -41,6 +43,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $existingUser = User::where('email', $request->email)->first();
+
+        if ($existingUser) {
+            return redirect('/users')->with('error', 'Email sudah terdaftar.');
+        }
+
         $user = $request->validate([
             'name'  => ['required', 'max:32', 'string'],
             'email' => ['required'],
@@ -50,11 +58,11 @@ class UserController extends Controller
             'foto'  => ['image', 'mimes:jpeg,png,gif', 'max:2048']
         ]);
         $user['role'] = $request->role;
-        $user['password'] = Hash::make('baruniyach');
+        $user['password'] = Hash::make('pegawaibaru');
         if ($request->file('foto')) {
             $user['foto'] = $request->file('foto')->store('foto-profil');
         } else {
-            $user['foto'] = 'default.jpg';
+            $user['foto'] = 'default.jpeg';
         }
 
         User::create($user);
@@ -129,7 +137,7 @@ class UserController extends Controller
         ]);
         $data['role'] = $request->role;
         if ($request->file('foto')) {
-            if ($user->foto != 'default.jpg') {
+            if ($user->foto != 'default.jpeg') {
                 File::delete(public_path('storage'.'/'.$user->foto));
             }
             $data['foto'] = $request->file('foto')->store('foto-profil');
@@ -148,7 +156,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $name = $user->name;
-        if ($user->foto != 'default.jpg') {
+        if ($user->foto != 'default.jpeg') {
             File::delete(public_path('storage'.'/'.$user->foto));
         }
         User::destroy($user->id);
@@ -168,7 +176,7 @@ class UserController extends Controller
         ]);
         $user->name = $request->name;
         if ($request->file('foto')) {
-            if ($user->foto != 'default.jpg') {
+            if ($user->foto != 'default.jpeg') {
                 File::delete(public_path('storage'.'/'.$user->foto));
             }
             $user->foto = $request->file('foto')->store('foto-profil');
