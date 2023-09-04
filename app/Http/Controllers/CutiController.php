@@ -18,8 +18,8 @@ class CutiController extends Controller
     public function index()
     {
         $title = 'Pengajuan Cuti';
-        $cuti = cuti::where('status','pengajuan')->get();
-        return view('frontend.cuti.index',compact('title','cuti'));
+        $cuti = cuti::where('status',['pengajuan','approve'])->get();
+        return view('backend.admin.izin.index',compact('title','cuti'));
         // return $cuti;
     }
 
@@ -106,6 +106,18 @@ class CutiController extends Controller
             return redirect()->back()->with('error', 'Anda tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
         }
 
+        $izinSebelumnya = cuti::where('user_id', $user_id)
+            ->where(function ($query) use ($request) {
+                $query->where('tanggal_mulai', '<=', $request->tanggal_berakhir)
+                    ->where('tanggal_berakhir', '>=', $request->tanggal_mulai);
+            })
+            ->first();
+
+        if ($izinSebelumnya) {
+            return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan untuk izin sebelumnya.');
+        }
+
+
         $cutiData = [
             'user_id' => Auth()->user()->id,
             'jenis_izin' => $request->jenis_izin,
@@ -116,8 +128,8 @@ class CutiController extends Controller
         ];
 
         cuti::create($cutiData);
-        return $cutiData;
-        // return redirect()->route('cuti.create')->with('success', 'Pengajuan cuti berhasil diajukan.');
+        // return $cutiData;
+        return redirect()->back()->with('success', 'Berhasil di ajukan.');
     }
 
     public function VerifikasiCuti($id)
@@ -138,7 +150,7 @@ class CutiController extends Controller
                     ->update(['keterangan' => $keterangan]);
             }
 
-            return $status;
+            return redirect()->back()->with('success', 'Data Berhasil Di Konfirmasi.');
         } else {
             return ('error');
         }
@@ -150,6 +162,17 @@ class CutiController extends Controller
         $status = cuti::find($id);
         $status ->delete();
         return $status;
+    }
+
+    public function indexCutiUser()
+    {
+        $title = 'Pengajuan Cuti';
+        $cuti = cuti::whereIn('status', ['pengajuan','approve'])
+                    ->where('user_id', Auth::id())
+                    ->get();
+        
+        return view('frontend.users.izin.index', compact('title', 'cuti'));
+    
     }
 
 }

@@ -8,6 +8,7 @@ use App\Exports\PresentExport;
 use App\Exports\UsersPresentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use PDF;
 
 class PresensiController extends Controller
 {
@@ -138,10 +139,10 @@ class PresensiController extends Controller
         $currentTime = date('H:i:s');
         $user_id = $request->user_id;
 
-        $weekendDays = ['Saturday', 'Sunday'];
-        if (in_array(date('l'), $weekendDays)) {
-            return back()->with('error', 'Hari Libur, Tidak bisa Absen');
-        }
+        // $weekendDays = ['Saturday', 'Sunday'];
+        // if (in_array(date('l'), $weekendDays)) {
+        //     return back()->with('error', 'Hari Libur, Tidak bisa Absen');
+        // }
 
         $attendanceStatus = 'Alpha';
         $jam_masuk = strtotime($currentTime);
@@ -281,5 +282,21 @@ class PresensiController extends Controller
     public function excelUsers(Request $request)
     {
         return Excel::download(new UsersPresentExport($request->tanggal), 'kehadiran-'.$request->tanggal.'.xlsx');
+    }
+
+    public function DownloadPreDay()
+    {
+        $presents = presensi::whereTanggal(date('Y-m-d'))->orderBy('jam_masuk','desc')->paginate(6);
+        $pdf = PDF::loadview('frontend.users.daypresensi',['presents'=>$presents]);
+        return $pdf->download('Presensi-per-day');            
+    }
+
+    public function DownloadPerUser($user_id)
+    {
+        $presents = presensi::find($user_id);
+        $pdf = PDF::loadview('frontend.users.userpresensi',['presents'=>$presents]);
+        return $pdf->download('Presensi-per-user');            
+        // return $presents;
+    
     }
 }

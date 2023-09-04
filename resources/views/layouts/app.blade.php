@@ -92,6 +92,7 @@
                 <!-- Navigation -->
                 <ul class="navbar-nav">
                     @if (auth()->user()->role == "admin")
+                    
                         @if (Request::segment(1) == 'kehadiran')
                             <li class="nav-item active">
                             <a class="nav-link active" href="{{ route('kehadiran.index') }}">
@@ -113,6 +114,12 @@
                                 <i class="ni ni-circle-08 text-primary"></i> Users
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('konfirmasi.izin')}}">
+                                <i class="ni ni-single-copy-04 text-success"></i> Konfirmasi Izin
+                            </a>
+                        </li>
+
                     @else
                         @if (Request::segment(1) == 'daftar-hadir')
                             <li class="nav-item active">
@@ -125,6 +132,14 @@
                             </a>
                         </li>
                     @endif
+                    @if (auth()->user()->role == 'pegawai')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('index.izin.user')}}">
+                                <i class="ni ni-send text-success"></i> Izin
+                            </a>
+                        </li>
+                    @endif
+
 
                     @if (Request::segment(1) == 'profil')
                         <li class="nav-item active">
@@ -144,7 +159,7 @@
                         <li class="nav-item">
                         <a class="nav-link" href="{{ route('ganti-password') }}">
                     @endif
-                            <i class="ni ni-key-25 text-green"></i> Ganti Password
+                            <i class="ni ni-key-25 text-danger"></i> Ganti Password
                         </a>
                     </li>
                 </ul>
@@ -234,8 +249,8 @@
                     <div class="col-xl-6">
                         <div class="copyright text-center text-xl-left text-muted">
                             © {{ date('Y')}} Developed By <a href="https://lovely-rabanadas-9fc482.netlify.app" class="font-weight-bold ml-1"
-                                target="_lank">Ihya Natik W</a> Theme By <a href=""
-                                class="font-weight-bold ml-1" target="_blank">BuruhDigital</a>
+                                target="_lank">Klinik Delima</a> Theme By <a href=""
+                                class="font-weight-bold ml-1" target="_blank">JSTechno</a>
                         </div>
                     </div>
                 </div>

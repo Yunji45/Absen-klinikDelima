@@ -49,6 +49,17 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/kehadiran/ubah', [PresensiController::class,'ubah'])->name('ajax.get.kehadiran');
         Route::patch('/kehadiran/{kehadiran}', [PresensiController::class,'update'])->name('kehadiran.update');
         Route::post('/kehadiran-tambah', [PresensiController::class,'store'])->name('kehadiran.store');
+
+        //download
+        Route::get('/download',[PresensiController::class,'DownloadPreDay'])->name('download.perday');
+        Route::get('/download-per-user/{id}',[PresensiController::class,'DownloadPerUser']);
+
+        //cuti
+        Route::get('/data-izin',[CutiController::class,'index'])->name('konfirmasi.izin');
+        Route::get('/izin-form',[CutiController::class,'create'])->name('data.cuti');
+        Route::get('/VerifikasiIzin/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
+        Route::get('/RejectIzin/{id}/gagal',[CutiController::class,'RejectCuti']);
+
     });
 
     Route::group(['roles' => 'pegawai'], function(){
@@ -56,6 +67,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/daftar-hadir/cari', [PresensiController::class,'cariDaftarHadir'])->name('daftar-hadir.cari');
         Route::get('/pengajuan-cuti',[CutiController::class,'index'])->name('cuti.pegawai');
         Route::post('/simpan-cuti',[CutiController::class,'store'])->name('submit.cuti');
+
+        //izin
+        Route::get('/Data-izin',[CutiController::class,'indexCutiUser'])->name('index.izin.user');
+        Route::post('/pengajuan-izin',[CutiController::class,'store'])->name('pengajuan.cuti');
     });
 
     // ATUR IP ADDRESS DISINI
@@ -67,12 +82,6 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::post('/absen', [PresensiController::class,'checkIn'])->name('kehadiran.check-in');
     Route::patch('/absen/{kehadiran}', [PresensiController::class,'checkOut'])->name('kehadiran.check-out');
 
-    //cuti
-    Route::get('/data-izin',[CutiController::class,'index']);
-    Route::get('/izin-form',[CutiController::class,'create'])->name('data.cuti');
-    Route::post('/pengajuan-izin',[CutiController::class,'store'])->name('pengajuan.cuti');
-    Route::get('/VerifikasiIzin/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
-    Route::get('/RejectIzin/{id}/gagal',[CutiController::class,'RejectCuti']);
 
     //Hari-Hari Error Mulu Mas Bro Emang Ga Bosen
     Route::get('/ForBidden', [ErrorController::class,'forBidden'])->name('error.input');
