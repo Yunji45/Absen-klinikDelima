@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(cuti::class);
     }
+
+    public function detailpegawai ()
+    {
+        return $this->hasOne(DetailPegawai::class);
+    }
 }

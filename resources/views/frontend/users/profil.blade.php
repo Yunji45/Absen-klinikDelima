@@ -46,6 +46,14 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="form-group row justify-content-end">
+                            <div class="col-sm-10">
+                                <a href="{{route('detail.user.index',Auth::user()->id)}}" class="btn btn-danger btn-block">
+                                    Detail
+                                </a>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

@@ -162,9 +162,9 @@ class PresensiController extends Controller
         if ($existingAttendance) {
             if ($existingAttendance->keterangan == 'Alpha') {
                 $existingAttendance->update(['keterangan' => $attendanceStatus]);
-                return back()->with('success', 'Check-in berhasil');
+                return back()->with('success', 'Absen berhasil');
             } else {
-                return back()->with('error', 'Check-in gagal');
+                return back()->with('error', 'Absen gagal');
             }
         }
 
@@ -177,7 +177,7 @@ class PresensiController extends Controller
         ];
 
         Presensi::create($attendanceData);
-        return back()->with('success', 'Check-in berhasil');
+        return back()->with('success', 'Absen berhasil');
 
     }
 
@@ -185,7 +185,7 @@ class PresensiController extends Controller
     {
         $data['jam_keluar'] = date('H:i:s');
         $kehadiran->update($data);
-        return redirect()->back()->with('success', 'Check-out berhasil');
+        return redirect()->back()->with('success', 'Absen berhasil');
     }
 
     /**

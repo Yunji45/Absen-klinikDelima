@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\CutiController;
+use App\Http\Controllers\DetailController;
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
 
@@ -82,8 +83,13 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::post('/absen', [PresensiController::class,'checkIn'])->name('kehadiran.check-in');
     Route::patch('/absen/{kehadiran}', [PresensiController::class,'checkOut'])->name('kehadiran.check-out');
 
-
     //Hari-Hari Error Mulu Mas Bro Emang Ga Bosen
     Route::get('/ForBidden', [ErrorController::class,'forBidden'])->name('error.input');
     Route::get('/Server', [ErrorController::class,'server'])->name('error.server');
+
+    //detail_user
+    Route::get('/profil-pegawai/{id}',[DetailController::class,'index'])->name('detail.user.index');
+    Route::post('/lengkapi-profil',[DetailController::class,'store'])->name('update-profil.store');
+    Route::post('/update-profil/{user_id}',[DetailController::class,'update'])->name('profil-update');
+    
 });
