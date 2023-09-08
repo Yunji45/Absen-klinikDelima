@@ -28,6 +28,7 @@ class User extends Authenticatable
         'password',
         'role',
         'foto',
+        'saldo_cuti',
     ];
 
     /**

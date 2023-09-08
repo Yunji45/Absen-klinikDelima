@@ -58,6 +58,7 @@ class UserController extends Controller
             'foto'  => ['image', 'mimes:jpeg,png,gif', 'max:2048']
         ]);
         $user['role'] = $request->role;
+        $user['saldo_cuti'] = 12;
         $user['password'] = Hash::make('pegawaibaru');
         if ($request->file('foto')) {
             $user['foto'] = $request->file('foto')->store('foto-profil');
@@ -66,7 +67,7 @@ class UserController extends Controller
         }
 
         User::create($user);
-        return redirect('/users')->with('success', 'User berhasil ditambahkan, password = baruniyach ');
+        return redirect('/users')->with('success', 'User berhasil ditambahkan, password = pegawaibaru ');
     }
 
     /**

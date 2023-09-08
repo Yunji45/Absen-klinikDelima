@@ -56,6 +56,7 @@ Users Management - {{ config('app.name') }}
                                 <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Sebagai</th>
+                                <th>Saldo Cuti</th>
                                 <th>Opsi</th>
                             </tr>
                         </thead>
@@ -71,6 +72,7 @@ Users Management - {{ config('app.name') }}
                                         <td>{{ $user->nik }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->role }}</td>
+                                        <td>{{ $user->saldo_cuti }}</td>
                                         <td>
                                             <a href="{{ route('users.show', $user) }}" class="btn btn-sm btn-info" title="Detail User"><i class="fas fa-eye"></i></a>
                                         </td>

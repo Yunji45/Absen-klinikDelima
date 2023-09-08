@@ -12,6 +12,7 @@ class cuti extends Model
     protected $table = 'cutis';
     protected $fillable = [
         'user_id',
+        'jenis_izin',
         'tanggal_mulai',
         'tanggal_berakhir',
         'alasan',

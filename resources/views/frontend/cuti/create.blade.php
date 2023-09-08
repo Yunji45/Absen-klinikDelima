@@ -23,8 +23,12 @@
 
     <label for="jenis_izin">Jenis Izin</label>
     <select name="jenis_izin" required>
-        <option value="cuti">Cuti</option>
         <option value="sakit">Sakit</option>
+        <option value="izin">Izin</option>
+        <option value="cuti_tahunan">Cuti Tahunan</option>
+        <option value="cuti_bersama">Cuti Bersama</option>
+        <option value="cuti_besar">Cuti Besar</option>
+        <option value="cuti_melahirkan">Cuti Melahirkan</option>
         <!-- Anda bisa menambahkan jenis izin lainnya jika diperlukan -->
     </select>
     <br>

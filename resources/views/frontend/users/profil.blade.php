@@ -37,6 +37,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <div class="col-sm-2"><label for="nik" class="col-form-label">Cuti</label></div>
+                            <div class="col-sm-10">
+                                <input disabled type="text" class="form-control" id="saldo_cuti" name="saldo_cuti" value="{{ Auth::user()->saldo_cuti }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-sm-2"><label for="name" class="col-form-label">Nama</label></div>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ Auth::user()->name }}">

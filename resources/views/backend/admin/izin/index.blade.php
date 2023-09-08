@@ -55,11 +55,15 @@ Detail User - {{ config('app.name') }}
                                     <td>{{$item->alasan}}</td>
                                     <td>{{$item->status}}</td>
                                     <td>
-                                            <a href="/VerifikasiIzin/{{$item->id}}/berhasil"
-                                                onclick="return confirm('Yakin akan Verifikasi Data Izin?')"
-                                                class="btn btn-danger btn-sm">
-                                                <i class="fas fas fa-unlock-alt"></i><strong>Verifikasi</strong>
-                                            </a>
+                                    <a href="{{ $item->status == 'approve' ? '#' : '/VerifikasiIzin/' . $item->id . '/berhasil' }}"
+    onclick="return @if ($item->status == 'approve') confirm('Sudah Di Approve Mas/Mba !!') @else true @endif"
+    class="btn btn-sm @if ($item->status == 'approve') bg-success @else btn-danger @endif">
+    @if ($item->status == 'approve')
+        <i class="fas fa-unlock-alt"></i><strong> Confirmed</strong>
+    @else
+        <i class="fas fa-lock"></i><strong> Verifikasi</strong>
+    @endif
+</a>
                                     </td>
                                 </tr>
                                 @endforeach

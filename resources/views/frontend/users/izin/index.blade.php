@@ -39,7 +39,7 @@ Detail User - {{ config('app.name') }}
                                 <thead>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Alasan</th>
+                                        <th>Jenis</th>
                                         <th>Tanggal Mulai</th>
                                         <th>Tanggal Berakhir</th>
                                         <th>Alasan</th>
@@ -96,11 +96,15 @@ Detail User - {{ config('app.name') }}
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
                         <input type="hidden" name="user_id" value="">
                         <div class="form-group row">
-                            <label for="keterangan" class="col-form-label col-sm-3">Jenis Izin</label>
+                            <label for="keterangan" class="col-form-label col-sm-3">Jenis </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('jenis_izin') is-invalid @enderror" name="jenis_izin" id="jenis_izin">
-                                    <option value="Cuti" >Cuti</option>
-                                    <option value="Sakit" >Sakit</option>
+                                    <option value="sakit">Sakit</option>
+                                    <option value="izin">Izin</option>
+                                    <option value="cuti_tahunan">Cuti Tahunan</option>
+                                    <option value="cuti_bersama">Cuti Bersama</option>
+                                    <option value="cuti_besar">Cuti Besar</option>
+                                    <option value="cuti_melahirkan">Cuti Melahirkan</option>
                                 </select>
                                 @error('keterangan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>

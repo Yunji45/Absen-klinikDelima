@@ -7,6 +7,7 @@ use App\Models\presensi;
 use App\Models\User;
 use App\Models\cuti;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CutiController extends Controller
 {
@@ -18,7 +19,8 @@ class CutiController extends Controller
     public function index()
     {
         $title = 'Pengajuan Cuti';
-        $cuti = cuti::where('status',['pengajuan','approve'])->get();
+        // $cuti = cuti::where('status',['pengajuan','approve'])->get();
+        $cuti = cuti::all();
         return view('backend.admin.izin.index',compact('title','cuti'));
         // return $cuti;
     }
@@ -95,7 +97,6 @@ class CutiController extends Controller
         ]);
         $user_id = auth()->user()->id;
 
-        // Periksa apakah ada pengajuan cuti yang masih berlangsung dan belum disetujui
         $existingCuti = cuti::where('user_id', $user_id)
             ->where('status', 'pengajuan')
             // ->where('tanggal_mulai', '<=', $request->tanggal_berakhir)
@@ -134,26 +135,62 @@ class CutiController extends Controller
 
     public function VerifikasiCuti($id)
     {
-        $status = cuti::find($id);
+        // $status = cuti::find($id);
+
+        // if ($status) {
+        //     $status->update(['status' => 'approve']);
+        //     $mulai = $status->tanggal_mulai;
+        //     $akhir = $status->tanggal_berakhir;
+        //     $jenisIzin = $status->jenis_izin;
+
+        //     $keterangan = ($jenisIzin == 'cuti') ? 'Cuti' : (($jenisIzin == 'sakit') ? 'Sakit' : null);
+
+        //     if ($keterangan) {
+        //         Presensi::where('user_id', $status->user_id)
+        //             ->whereBetween('tanggal', [$mulai, $akhir])
+        //             ->update(['keterangan' => $keterangan]);
+        //     }
+
+        //     return redirect()->back()->with('success', 'Data Berhasil Di Konfirmasi.');
+        // } else {
+        //     return ('error');
+        // }
+        $status = Cuti::find($id);
 
         if ($status) {
-            $status->update(['status' => 'approve']);
-            $mulai = $status->tanggal_mulai;
-            $akhir = $status->tanggal_berakhir;
+            $user = User::find($status->user_id);
             $jenisIzin = $status->jenis_izin;
-
+        
+            if ($jenisIzin == 'cuti_tahunan') {
+                $mulai = Carbon::parse($status->tanggal_mulai);
+                $akhir = Carbon::parse($status->tanggal_berakhir);
+        
+                // Hitung jumlah hari dalam rentang tanggal
+                $jumlahHari = $mulai->diffInDays($akhir) + 1; 
+        
+                if ($user->saldo_cuti >= $jumlahHari) {
+                    $user->saldo_cuti -= $jumlahHari;
+                    $user->save();
+                } else {
+                    return redirect()->back()->with('error', 'Saldo cuti tahunan tidak mencukupi.');
+                }
+            }
+        
+            $status->update(['status' => 'approve']);
             $keterangan = ($jenisIzin == 'cuti') ? 'Cuti' : (($jenisIzin == 'sakit') ? 'Sakit' : null);
-
+        
             if ($keterangan) {
+                // Gunakan Eloquent untuk memperbarui catatan presensi
                 Presensi::where('user_id', $status->user_id)
-                    ->whereBetween('tanggal', [$mulai, $akhir])
+                    ->whereBetween('tanggal', [$mulai->toDateString(), $akhir->toDateString()])
                     ->update(['keterangan' => $keterangan]);
             }
-
-            return redirect()->back()->with('success', 'Data Berhasil Di Konfirmasi.');
+        
+            return redirect()->back()->with('success', 'Data Berhasil Dikonfirmasi.');
         } else {
-            return ('error');
+            return redirect()->back()->with('error', 'Data Tidak Ditemukan.');
         }
+        
 
     }
 
