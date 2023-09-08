@@ -15,7 +15,11 @@
                         @method('patch')
                         @csrf
                         <div class="text-center mb-3">
-                            <img id="image" src="{{ asset('/storage/public/'. Auth::user()->foto) }}" alt="{{ Auth::user()->foto }}" class="img-thumbnail mb-1">
+                        @if (Auth::user()->foto == 'default.jpeg')
+                            <img id="image" src="{{ asset('/storage/default.jpeg') }}" alt="" class="img-thumbnail mb-1">
+                        @else
+                            <img id="image" src="{{ asset(Storage::url(Auth::user()->foto)) }}" alt="{{ Auth::user()->foto }}" class="img-thumbnail mb-1">
+                        @endif
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-2"><label for="foto" class="col-form-label">Foto</label></div>
@@ -50,6 +54,20 @@
                             <div class="col-sm-10">
                                 <a href="{{route('detail.user.index',Auth::user()->id)}}" class="btn btn-danger btn-block">
                                     Detail
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-end">
+                            <div class="col-sm-10">
+                                <a href="{{route('upload.dokumen')}}" class="btn btn-danger btn-block">
+                                    Upload Dokumen Pendukung
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-end">
+                            <div class="col-sm-10">
+                                <a href="{{route('upload.sertifikat')}}" class="btn btn-danger btn-block">
+                                    Upload Sertifikat Pendukung
                                 </a>
                             </div>
                         </div>

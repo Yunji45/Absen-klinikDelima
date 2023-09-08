@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\SertifikatController;
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
 
@@ -91,5 +93,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::get('/profil-pegawai/{id}',[DetailController::class,'index'])->name('detail.user.index');
     Route::post('/lengkapi-profil',[DetailController::class,'store'])->name('update-profil.store');
     Route::post('/update-profil/{user_id}',[DetailController::class,'update'])->name('profil-update');
-    
+
+    Route::get('/dokumen',[DokumenController::class,'index'])->name('upload.dokumen');
+    Route::post('/save-dokumen',[DokumenController::class,'store'])->name('save.multiple');
+
+    Route::get('/sertifikat',[SertifikatController::class,'index'])->name('upload.sertifikat');
+    Route::post('/save-sertifikat',[SertifikatController::class,'store'])->name('save.sertifikat');
+
 });

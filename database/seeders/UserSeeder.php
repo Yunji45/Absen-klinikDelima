@@ -25,7 +25,8 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('admin'),
             'remember_token'=> Str::random(10),
             'role'=> 'admin',
-            'foto' => 'default.jpg'
+            'foto' => 'default.jpeg',
+            'saldo_cuti' => 12,
         ]);
 
         DB::table('users')->insert([
@@ -36,7 +37,8 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('pegawai'),
             'remember_token'=> Str::random(10),
             'role'=> 'pegawai',
-            'foto' => 'default.jpg'
+            'foto' => 'default.jpeg',
+            'saldo_cuti' => 12,
         ]);
 
         DB::table('users')->insert([
@@ -47,7 +49,8 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('pegawai'),
             'remember_token'=> Str::random(10),
             'role'=> 'pegawai',
-            'foto' => 'default.jpg'
+            'foto' => 'default.jpeg',
+            'saldo_cuti' => 12,
         ]);
 
     }

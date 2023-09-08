@@ -63,4 +63,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(DetailPegawai::class);
     }
+
+    public function dokumen()
+    {
+        return $this->hasMany(DokumenUser::class);
+    }
+
+    public function sertifikat()
+    {
+        return $this->hasMany(SertifikatUser::class);
+    }
 }

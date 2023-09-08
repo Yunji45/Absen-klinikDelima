@@ -13,11 +13,11 @@
                 <div class="card-body">
                     <div class="text-right mb-3">
                         @if (!$existingDetail)
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#kehadiran">Lengkapi Profil</a>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#kehadiran">Ayo Update Pak/Bu !!</a>
                         @endif
                     </div>
                         <div class="text-center mb-3">
-                            <img id="image" src="{{ asset('/storage/public/'. Auth::user()->foto) }}" alt="{{ Auth::user()->foto }}" class="img-thumbnail mb-1">
+                            <img id="image" src="{{ asset(Storage::url(Auth::user()->foto)) }}" alt="{{ Auth::user()->foto }}" class="img-thumbnail mb-1" >
                         </div>
 
                         <div class="form-group row">
@@ -223,13 +223,6 @@
                                 @error('tanggal_mulai') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div class="form-group row" id="length_of_service">
-                            <label for="length_of_service" class="col-form-label col-sm-3">Lama Bekerja</label>
-                            <div class="col-sm-9">
-                                <input name="length_of_service" rows="4" class="form-control @error('length_of_service') is-invalid @enderror" required></input>
-                                @error('length_of_service') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
                         <div class="form-group row" id="exit_date">
                             <label for="exit_date" class="col-form-label col-sm-3">Berakhir Bekerja</label>
                             <div class="col-sm-9">
@@ -240,7 +233,7 @@
                         <div class="form-group row" id="exit_reason">
                             <label for="exit_reason" class="col-form-label col-sm-3">Alasan</label>
                             <div class="col-sm-9">
-                                <input name="exit_reason" rows="4" class="form-control @error('exit_reason') is-invalid @enderror" required></input>
+                                <input name="exit_reason" rows="4" class="form-control @error('exit_reason') is-invalid @enderror" ></input>
                                 @error('exit_reason') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -291,12 +284,9 @@
                 </form>
             </div>
         </div>
-    </div>
-
-    
+    </div>  
 
 @endsection
-
 @push('scripts')
 <script>
     $('document').ready(function(){

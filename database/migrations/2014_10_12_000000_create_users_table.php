@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role',['admin','pegawai']);
             $table->string('foto')->nullable();
+            $table->string('saldo_cuti')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

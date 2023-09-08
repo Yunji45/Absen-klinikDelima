@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DetailPegawai;
 use App\Models\User;
+use App\Models\DokumenUser;
 use Carbon\Carbon;
 use Auth;
 
@@ -12,7 +13,7 @@ class DetailController extends Controller
 {
     public function index($id)
     {
-        $title = 'Detail Pegawai';
+        $title = 'INFORMASI KARYAWAN';
         $data = User::find($id);
         $detail = DetailPegawai::where('user_id', $data->id)->get();
         $existingDetail = DetailPegawai::where('user_id', Auth::user()->id)->first();
@@ -79,15 +80,21 @@ class DetailController extends Controller
             $detail ->position = $request->position;
             $detail ->phone = $request->phone;
             $detail ->email = $request->email;
-            $detail ->hire_date = $request->hire_date;
-            $detail ->length_of_service = $request->length_of_service;
+            // Hitung masa kerja
+            $hireDate = Carbon::parse($request->hire_date);
+            $currentDate = Carbon::now();
+            $lengthOfServiceMonths = $hireDate->diffInMonths($currentDate);
+            $detail->length_of_service = ($lengthOfServiceMonths < 12) ? 1 : $lengthOfServiceMonths;
+
+            $detail->hire_date = $request->hire_date;
+            $detail->exit_date = $request->exit_date ?: null;
+            $detail->exit_reason = $request->exit_reason ?: null;
             $detail ->marital_status = $request->marital_status;
             $detail ->spouse_name = $request->spouse_name;
             $detail ->number_of_children = $request->number_of_children;
             $detail ->hobbies = $request->hobbies;
             $detail ->skills = $request->skills;
-            $detail ->save();    
-
+            $detail ->save();
             return $detail;
         }
         

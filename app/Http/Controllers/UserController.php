@@ -136,12 +136,19 @@ class UserController extends Controller
             'foto'  => ['image', 'mimes:jpeg,png,gif', 'max:2048']
         ]);
         $data['role'] = $request->role;
-        if ($request->file('foto')) {
+        // if ($request->file('foto')) {
+        //     if ($user->foto != 'default.jpeg') {
+        //         File::delete(public_path('storage'.'/'.$user->foto));
+        //     }
+        //     $data['foto'] = $request->file('foto')->store('foto-profil');
+        // }
+        if ($request->hasFile('foto')) {
+            // Menghapus gambar yang lama jika bukan 'default.jpeg'
             if ($user->foto != 'default.jpeg') {
-                File::delete(public_path('storage'.'/'.$user->foto));
+                File::delete(public_path('storage' . '/' . $user->foto));
             }
             $data['foto'] = $request->file('foto')->store('foto-profil');
-        }
+        }        
         $user ->update($data);
         return redirect()->back()->with('success', 'User berhasil diperbarui');
 
@@ -177,9 +184,9 @@ class UserController extends Controller
         $user->name = $request->name;
         if ($request->file('foto')) {
             if ($user->foto != 'default.jpeg') {
-                File::delete(public_path('storage'.'/'.$user->foto));
+                File::delete(storage_path('app/public/' . $user->foto));
             }
-            $user->foto = $request->file('foto')->store('foto-profil');
+            $user->foto = $request->file('foto')->store('foto-profil', 'public');
         }
         $user->save();
         return redirect()->back()->with('success','Profil berhasil di perbarui');
