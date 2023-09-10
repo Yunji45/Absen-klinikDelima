@@ -68,6 +68,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/hapus-info-pegawai/{id}',[DetailController::class,'delete'])->name('delete.pegawai.admin');
         Route::get('/detail-informasi/{id}',[DetailController::class,'show'])->name('detail.info.admin');
 
+        //dokumen
+        Route::get('/dokumen-pegawai',[DokumenController::class,'admDokumen'])->name('adm.dokumen');
+        Route::get('/delete-dokumen',[DokumenController::class,'destroy'])->name('delete.dokumen');
+
     });
 
     Route::group(['roles' => 'pegawai'], function(){

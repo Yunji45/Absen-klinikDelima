@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\DokumenUser;
 use Auth;
 use File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DokumenController extends Controller
 {
@@ -44,10 +46,10 @@ class DokumenController extends Controller
             ], [
                 'pdf_files.*.required' => 'File PDF harus diunggah.',
                 'pdf_files.*.mimes' => 'File PDF harus memiliki ekstensi .pdf.',
-                'pdf_files.*.max' => 'File PDF tidak boleh lebih dari 2MB.',
+                'pdf_files.*.max' => 'File PDF tidak boleh lebih dari 5MB.',
                 'image_files.*.required' => 'File gambar (foto) harus diunggah.',
                 'image_files.*.mimes' => 'File gambar (foto) harus memiliki ekstensi .jpg, .jpeg, atau .png.',
-                'image_files.*.max' => 'File gambar (foto) tidak boleh lebih dari 5MB.',
+                'image_files.*.max' => 'File gambar (foto) tidak boleh lebih dari 2MB.',
             ]);
         if ($request->hasFile('pdf_files')) {
             foreach ($request->file('pdf_files') as $file) {
@@ -115,8 +117,37 @@ class DokumenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        try {
+            $data = DokumenUser::join('users', 'dokumen_users.user_id', '=', 'users.id')
+            ->select('users.id', 'users.name', DB::raw('COUNT(*) as jumlah_dokumen'))
+            ->groupBy('users.id', 'users.name')
+            ->get();
+            foreach ($data as $user) {
+                $dokumenToDelete = DokumenUser::where('user_id', $user->id)->get();
+                foreach ($dokumenToDelete as $dokumen) {
+                    $path = 'public/dok_pegawai/' . $user->name . '/' . $dokumen->filename;
+                    Storage::delete($path);
+
+                    $dokumen->delete();
+                }
+            }
+            return redirect('/dokumen-pegawai')->with('success', 'Data pengguna berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect('/dokumen-pegawai')->with('error', 'Gagal menghapus data pengguna.');
+        }
+        
+    }
+
+    public function admDokumen()
+    {
+        $title = 'Dokumen Pegawai';
+        $data = DokumenUser::join('users', 'dokumen_users.user_id', '=', 'users.id')
+                            ->select('users.name', DB::raw('COUNT(*) as jumlah_dokumen'))
+                            ->groupBy('users.name')
+                            ->get();
+        // return $data;
+        return view ('backend.admin.dokumen.dokumen',compact('title','data'));
     }
 }

@@ -127,7 +127,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="{{ route('detail.pegawai.admin') }}">Detail Pegawai</a>
-                                <a class="dropdown-item" href="">Dokumen Pegawai</a>
+                                <a class="dropdown-item" href="{{route('adm.dokumen')}}">Dokumen Pegawai</a>
                                 <!-- Tambahkan lebih banyak opsi dropdown sesuai kebutuhan -->
                             </div>
                         </li>
