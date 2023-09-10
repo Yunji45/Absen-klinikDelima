@@ -62,9 +62,9 @@ Detail User - {{ config('app.name') }}
                                                 onclick="return confirm('Anda Bukan Admin Yaa !!')"
                                                 class="btn btn-sm @if ($item->status == 'approve') bg-success @else btn-danger @endif">
                                                 @if ($item->status == 'approve')
-                                                    <i class="fas fa-unlock-alt"></i><strong> Confirmed</strong>
+                                                    <i class="fas fa-unlock-alt"></i><strong> Terverifikasi</strong>
                                                 @else
-                                                    <i class="fas fa-lock"></i><strong> Verifikasi</strong>
+                                                    <i class="fas fa-lock"></i><strong> Belum Terverifikasi</strong>
                                                 @endif
                                             </a>
                                     </td>

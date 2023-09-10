@@ -148,7 +148,7 @@
                     @if (auth()->user()->role == 'pegawai')
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('index.izin.user')}}">
-                                <i class="ni ni-send text-success"></i> Izin
+                                <i class="ni ni-send text-success"></i> Permohonan Cuti
                             </a>
                         </li>
                     @endif

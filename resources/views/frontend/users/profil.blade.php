@@ -75,14 +75,14 @@
                         <div class="form-group row justify-content-end">
                             <div class="col-sm-10">
                                 <a href="{{route('upload.dokumen')}}" class="btn btn-dark btn-block">
-                                    Upload Dokumen Pendukung
+                                    Upload Sertifikat Pendukung
                                 </a>
                             </div>
                         </div>
                         <div class="form-group row justify-content-end">
                             <div class="col-sm-10">
                                 <a href="{{route('upload.sertifikat')}}" class="btn btn-warning btn-block">
-                                    Upload Sertifikat Pendukung
+                                    Upload Dokumen Pendukung
                                 </a>
                             </div>
                         </div>
