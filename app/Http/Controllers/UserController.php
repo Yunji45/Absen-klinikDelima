@@ -235,10 +235,10 @@ class UserController extends Controller
 
     public function password(Request $request, User $user)
     {
-        $user->password = Hash::make('baruniyach');
+        $user->password = Hash::make('pegawaibaru');
         $user->save();
 
-        return redirect()->back()->with('success','Password berhasil direset, Password = baruniyach');
+        return redirect()->back()->with('success','Password berhasil direset, Password = pegawaibaru');
     }
 
 }

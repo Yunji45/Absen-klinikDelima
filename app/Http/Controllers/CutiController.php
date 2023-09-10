@@ -19,8 +19,9 @@ class CutiController extends Controller
     public function index()
     {
         $title = 'Pengajuan Cuti';
-        // $cuti = cuti::where('status',['pengajuan','approve'])->get();
-        $cuti = cuti::all();
+        $cuti = cuti::whereIn('status', ['pengajuan', 'approve'])
+        ->orderBy('created_at', 'desc') 
+        ->get();
         return view('backend.admin.izin.index',compact('title','cuti'));
         // return $cuti;
     }
@@ -165,7 +166,6 @@ class CutiController extends Controller
                 $mulai = Carbon::parse($status->tanggal_mulai);
                 $akhir = Carbon::parse($status->tanggal_berakhir);
         
-                // Hitung jumlah hari dalam rentang tanggal
                 $jumlahHari = $mulai->diffInDays($akhir) + 1; 
         
                 if ($user->saldo_cuti >= $jumlahHari) {
@@ -177,10 +177,22 @@ class CutiController extends Controller
             }
         
             $status->update(['status' => 'approve']);
-            $keterangan = ($jenisIzin == 'cuti') ? 'Cuti' : (($jenisIzin == 'sakit') ? 'Sakit' : null);
-        
+            $keterangan = null;
+            switch ($jenisIzin) {
+                case 'cuti_tahunan':
+                case 'cuti_bersama':
+                case 'cuti_melahirkan':
+                case 'cuti_besar':
+                    $keterangan = 'Cuti';
+                    break;
+                case 'sakit':
+                    $keterangan = 'Sakit';
+                    break;
+                case 'izin':
+                    $keterangan = 'Izin';
+                    break;
+            }                    
             if ($keterangan) {
-                // Gunakan Eloquent untuk memperbarui catatan presensi
                 Presensi::where('user_id', $status->user_id)
                     ->whereBetween('tanggal', [$mulai->toDateString(), $akhir->toDateString()])
                     ->update(['keterangan' => $keterangan]);
@@ -206,10 +218,9 @@ class CutiController extends Controller
         $title = 'Pengajuan Cuti';
         $cuti = cuti::whereIn('status', ['pengajuan','approve'])
                     ->where('user_id', Auth::id())
+                    ->orderBy('created_at', 'desc')
                     ->get();
-        
         return view('frontend.users.izin.index', compact('title', 'cuti'));
-    
     }
 
 }

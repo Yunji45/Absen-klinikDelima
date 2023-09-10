@@ -3,6 +3,14 @@
 Tambah User - {{ config('app.name') }}
 @endsection
 @section('content')
+<style>
+        .profile-picture {
+            width: 150px; /* Lebar ideal */
+            height: 150px; /* Tinggi ideal */
+            border-radius: 50%; /* Untuk membuat gambar bulat */
+            object-fit: cover; /* Membuat gambar memenuhi kotak tanpa merusak aspek ratio */
+        }
+    </style>
 
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -15,7 +23,7 @@ Tambah User - {{ config('app.name') }}
                     <form action=" {{ route('users.store') }} " method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="text-center mb-3">
-                            <img id="image" src="{{ asset(Storage::url('default.jpg')) }}" alt="{{ asset(Storage::url('default.jpg')) }}" class="img-thumbnail mb-1">
+                            <img id="image" src="{{ asset(Storage::url('default.jpeg')) }}" alt="{{ asset(Storage::url('default.jpeg')) }}" class="profile-picture">
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-2"><label for="foto" class="float-right col-form-label">Foto</label></div>

@@ -29,7 +29,6 @@
         <option value="cuti_bersama">Cuti Bersama</option>
         <option value="cuti_besar">Cuti Besar</option>
         <option value="cuti_melahirkan">Cuti Melahirkan</option>
-        <!-- Anda bisa menambahkan jenis izin lainnya jika diperlukan -->
     </select>
     <br>
 

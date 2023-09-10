@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\DetailPegawai;
 use App\Models\User;
 use App\Models\DokumenUser;
+use App\Models\SertifikatUser;
 use Carbon\Carbon;
 use Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class DetailController extends Controller
 {
@@ -17,9 +20,11 @@ class DetailController extends Controller
         $data = User::find($id);
         $detail = DetailPegawai::where('user_id', $data->id)->get();
         $existingDetail = DetailPegawai::where('user_id', Auth::user()->id)->first();
+        $dokumen = DokumenUser::where('user_id',Auth::user()->id)->get();
+        $sertifikat = SertifikatUser::where('user_id',Auth::user()->id)->get();
         $post   = DetailPegawai::whereId($id)->first();
         // return $detail;
-        return view ('frontend.users.detail_user.index',compact('title','data','detail','existingDetail','post'));
+        return view ('frontend.users.detail_user.index',compact('title','data','detail','existingDetail','post','dokumen','sertifikat'));
     }
 
     public function store(Request $request)
@@ -154,4 +159,33 @@ class DetailController extends Controller
     {
 
     }
+
+    public function indexAdm()
+    {
+        $title = 'Detail Pegawai';
+        $data = DetailPegawai::all();
+        return view ('backend.admin.detail-pegawai.index',compact('title','data'));
+    }
+
+    public function delete($id)
+    {
+        $data = DetailPegawai::findOrFail($id);
+        $data ->delete();
+        return redirect('/detail-pegawai')->with('success','Data Berhasil Di Hapus');        
+    }
+    public function show($id)
+    {
+        $title = 'INFORMASI KARYAWAN';
+        $data = User::all();
+        // if (!$data) {
+        //     return redirect()->route('route_name_for_error_page');
+        // }
+        $detail = DetailPegawai::find($id);
+        $dokumen = DokumenUser::where('user_id', $id)->get();
+        $sertifikat = SertifikatUser::where('user_id', $id)->get();
+        $post = DetailPegawai::whereId($id)->first();
+        // return $detail->user->foto;
+        return view ('backend.admin.detail-pegawai.show',compact('title','data','detail','dokumen','post','sertifikat'));
+    }
+
 }

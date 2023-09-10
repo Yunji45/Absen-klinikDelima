@@ -63,6 +63,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/VerifikasiIzin/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
         Route::get('/RejectIzin/{id}/gagal',[CutiController::class,'RejectCuti']);
 
+        //detailpegawai
+        Route::get('/detail-pegawai',[DetailController::class,'indexAdm'])->name('detail.pegawai.admin');
+        Route::get('/hapus-info-pegawai/{id}',[DetailController::class,'delete'])->name('delete.pegawai.admin');
+        Route::get('/detail-informasi/{id}',[DetailController::class,'show'])->name('detail.info.admin');
+
     });
 
     Route::group(['roles' => 'pegawai'], function(){
@@ -95,7 +100,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::post('/update-profil/{user_id}',[DetailController::class,'update'])->name('profil-update');
 
     Route::get('/dokumen',[DokumenController::class,'index'])->name('upload.dokumen');
-    Route::post('/save-dokumen',[DokumenController::class,'store'])->name('save.multiple');
+    Route::post('/save-dokumen',[DokumenController::class,'store'])->name('save.dokumen');
 
     Route::get('/sertifikat',[SertifikatController::class,'index'])->name('upload.sertifikat');
     Route::post('/save-sertifikat',[SertifikatController::class,'store'])->name('save.sertifikat');

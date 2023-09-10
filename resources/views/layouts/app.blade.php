@@ -32,8 +32,10 @@
     <!-- CSS Files -->
     <link href="{{ url('argon') }}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
     @yield('styles')
+    
 
 </head>
+
 
 <body class="">
     <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -55,7 +57,7 @@
                         <div class="media align-items-center">
                             <span class="avatar avatar-sm rounded-circle">
                                 <img alt="Image placeholder" src="{{ asset(Storage::url(Auth::user()->foto)) }}"
-                                    alt="{{ Auth::user()->foto }}">
+                                    alt="{{ Auth::user()->foto }}" >
                             </span>
                         </div>
                     </a>
@@ -119,6 +121,17 @@
                                 <i class="ni ni-single-copy-04 text-success"></i> Konfirmasi Izin
                             </a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ni ni-bullet-list-67 text-info"></i> Informasi Pegawai
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{{ route('detail.pegawai.admin') }}">Detail Pegawai</a>
+                                <a class="dropdown-item" href="">Dokumen Pegawai</a>
+                                <!-- Tambahkan lebih banyak opsi dropdown sesuai kebutuhan -->
+                            </div>
+                        </li>
+
 
                     @else
                         @if (Request::segment(1) == 'daftar-hadir')
@@ -190,7 +203,7 @@
                             <div class="media align-items-center">
                                 <span class="avatar avatar-sm rounded-circle">
                                     <img alt="Image placeholder" src="{{ Storage::url(Auth::user()->foto ) }}"
-                                        alt="{{ Auth::user()->foto }}">
+                                        alt="{{ Auth::user()->foto }}" >
                                 </span>
                                 <div class="media-body ml-2 d-none d-lg-block">
                                     <span class="mb-0 text-sm  font-weight-bold">{{ auth()->user()->nama }}</span>

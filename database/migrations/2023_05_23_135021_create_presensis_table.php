@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->enum('keterangan',['Masuk','Alpha','Telat','Sakit','Cuti']);
+            $table->enum('keterangan',['Masuk','Alpha','Telat','Sakit','Cuti','Izin']);
             $table->date('tanggal');
             $table->time('jam_masuk')->nullable();
             $table->time('jam_keluar')->nullable();

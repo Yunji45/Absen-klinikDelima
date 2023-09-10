@@ -3,7 +3,15 @@
     Profil - {{ config('app.name') }}
 @endsection
 @section('content')
+<style>
+            .profile-picture {
+            width: 150px; /* Lebar ideal */
+            height: 150px; /* Tinggi ideal */
+            border-radius: 50%; /* Untuk membuat gambar bulat */
+            object-fit: cover; /* Membuat gambar memenuhi kotak tanpa merusak aspek ratio */
+        }
 
+</style>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card shadow h-100">
@@ -17,10 +25,15 @@
                         @endif
                     </div>
                         <div class="text-center mb-3">
-                            <img id="image" src="{{ asset(Storage::url(Auth::user()->foto)) }}" alt="{{ Auth::user()->foto }}" class="img-thumbnail mb-1" >
+                            <img id="image" src="{{ asset(Storage::url(Auth::user()->foto)) }}" alt="{{ Auth::user()->foto }}" class="profile-picture" >
+                        </div>
+                        <div class="text-center mb-3">
+                        
+                            <h5>{{ $detail->isNotEmpty() ? $detail->first()->name : 'Belum Lengkap' }}</h5>
                         </div>
 
                         <div class="form-group row">
+                            
                             <div class="col-sm-2 text-left">NIK Pegawai</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ Auth::user()->nik }}</p>
@@ -102,12 +115,56 @@
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->skills : 'Belum Ada' }}</p>
                             </div>
                         </div>
+                        <div class="text-center mb-3">
+                            <h5>FILE PENDUKUNG</h5>
+                        </div>
 
+                        <div class="form-group row">
+                        @php
+                            $userId = Auth::id();
+                        @endphp
+
+                        <div class="col-sm-2 text-left">Dokumen : </div>
+                            <div class="col-sm-10">
+                                @if ($dokumen->isNotEmpty())
+                                    <ul>
+                                        @foreach ($dokumen as $d)
+                                            <li>
+                                                <a href="{{ asset('storage/dok_pegawai/' . Auth::user()->name . '/' . $d->filename) }}" target="_blank">
+                                                    {{ $d->filename }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p>: Tidak ada data .Mohon upload terlebih dahulu.</p>
+                                @endif
+                            </div>
+                            <div class="col-sm-2 text-left">Sertifikat : </div>
+                            <div class="col-sm-10">
+                                @if ($sertifikat->isNotEmpty())
+                                    <ul>
+                                        @foreach ($sertifikat as $d)
+                                            <li>
+                                                <a href="{{ asset('storage/sertifikat_pegawai/' . Auth::user()->name . '/' . $d->filename) }}" target="_blank">
+                                                    {{ $d->filename }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p>: Tidak ada data .Mohon upload terlebih dahulu.</p>
+                                @endif
+                            </div>
+                        </div>
+                        </div>
+                        
+                        
 
                     </div>
 
                 </div>
-            </div>
+            </div>    
         </div>
     </div>
     <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
@@ -285,7 +342,6 @@
             </div>
         </div>
     </div>  
-
 @endsection
 @push('scripts')
 <script>

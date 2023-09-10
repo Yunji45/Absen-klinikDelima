@@ -3,6 +3,15 @@
     Profil - {{ config('app.name') }}
 @endsection
 @section('content')
+<style>
+            .profile-picture {
+            width: 150px; /* Lebar ideal */
+            height: 150px; /* Tinggi ideal */
+            border-radius: 50%; /* Untuk membuat gambar bulat */
+            object-fit: cover; /* Membuat gambar memenuhi kotak tanpa merusak aspek ratio */
+        }
+
+</style>
 
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -16,9 +25,9 @@
                         @csrf
                         <div class="text-center mb-3">
                         @if (Auth::user()->foto == 'default.jpeg')
-                            <img id="image" src="{{ asset('/storage/default.jpeg') }}" alt="" class="img-thumbnail mb-1">
+                            <img id="image" src="{{ asset('/storage/default.jpeg') }}" alt="" class="profile-picture">
                         @else
-                            <img id="image" src="{{ asset(Storage::url(Auth::user()->foto)) }}" alt="{{ Auth::user()->foto }}" class="img-thumbnail mb-1">
+                            <img id="image" src="{{ asset(Storage::url(Auth::user()->foto)) }}" alt="{{ Auth::user()->foto }}" class="profile-picture">
                         @endif
                         </div>
                         <div class="form-group row">
@@ -51,28 +60,28 @@
                         </div>
                         <div class="form-group row justify-content-end">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="submit" class="btn btn-success btn-block">
                                     Simpan
                                 </button>
                             </div>
                         </div>
                         <div class="form-group row justify-content-end">
                             <div class="col-sm-10">
-                                <a href="{{route('detail.user.index',Auth::user()->id)}}" class="btn btn-danger btn-block">
+                                <a href="{{route('detail.user.index',Auth::user()->id)}}" class="btn btn-info btn-block">
                                     Detail
                                 </a>
                             </div>
                         </div>
                         <div class="form-group row justify-content-end">
                             <div class="col-sm-10">
-                                <a href="{{route('upload.dokumen')}}" class="btn btn-danger btn-block">
+                                <a href="{{route('upload.dokumen')}}" class="btn btn-dark btn-block">
                                     Upload Dokumen Pendukung
                                 </a>
                             </div>
                         </div>
                         <div class="form-group row justify-content-end">
                             <div class="col-sm-10">
-                                <a href="{{route('upload.sertifikat')}}" class="btn btn-danger btn-block">
+                                <a href="{{route('upload.sertifikat')}}" class="btn btn-warning btn-block">
                                     Upload Sertifikat Pendukung
                                 </a>
                             </div>

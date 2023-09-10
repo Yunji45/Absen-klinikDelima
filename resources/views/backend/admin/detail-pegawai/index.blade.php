@@ -10,7 +10,7 @@ Detail User - {{ config('app.name') }}
             <div class="col-md-12 mb-3">
                 <div class="card shadow h-100">
                     <div class="card-header">
-                        <h5 class="m-0 pt-1 font-weight-bold float-left">Konfirmasi Izin</h5>
+                        <h5 class="m-0 pt-1 font-weight-bold float-left">Detail Pegawai</h5>
 
                         <form class="float-right d-inline-block" action="" method="get">
                             <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
@@ -36,34 +36,29 @@ Detail User - {{ config('app.name') }}
                                 <thead>
                                     <tr>
                                         <th>Nama</th>
-                                        <th>Jenis Izin</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Berakhir</th>
-                                        <th>Alasan</th>
-                                        <th>Status</th>
+                                        <th>TTL</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Agama</th>
+                                        <th>Jabatan</th>
+                                        <th>No.Telp</th>
+                                        <th>Email</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @php $no =1; @endphp @foreach ($cuti as $item)
+                                @php $no =1; @endphp @foreach ($data as $item)
                                 <tr>
                                     <!-- <td>{{$no++}}.</td> -->
-                                    <td>{{$item->user->name}}</td>
-                                    <td>{{$item->jenis_izin}}</td>
-                                    <td>{{$item->tanggal_mulai}}</td>
-                                    <td>{{$item->tanggal_berakhir}}</td>
-                                    <td>{{$item->alasan}}</td>
-                                    <td>{{$item->status}}</td>
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->place_birth}}, {{$item->date_birth}}</td>
+                                    <td>{{$item->gender}}</td>
+                                    <td>{{$item->religion}}</td>
+                                    <td>{{$item->position}}</td>
+                                    <td>{{$item->phone}}</td>
+                                    <td>{{$item->email}}</td>
                                     <td>
-                                    <a href="{{ $item->status == 'approve' ? '#' : '/VerifikasiIzin/' . $item->id . '/berhasil' }}"
-                                        onclick="return @if ($item->status == 'approve') confirm('Sudah Di Approve Mas/Mba !!') @else true @endif"
-                                        class="btn btn-sm @if ($item->status == 'approve') bg-success @else btn-danger @endif">
-                                        @if ($item->status == 'approve')
-                                            <i class="fas fa-unlock-alt"></i><strong> Confirmed</strong>
-                                        @else
-                                            <i class="fas fa-lock"></i><strong> Verifikasi</strong>
-                                        @endif
-                                    </a>
+                                        <a href="{{route('detail.info.admin',$item->id)}}" class="btn btn-sm btn-info" title="Detail User"><i class="fas fa-eye"></i></a>
+                                        <a href="{{route('delete.pegawai.admin',$item->id)}}" class="btn btn-sm btn-danger" title="Detail User"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
