@@ -46,15 +46,15 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->place_birth . ', ' . $detail->first()->date_birth : 'Belum Ada' }}</p>
                             </div>
-                            <div class="col-sm-2 text-left">Gender</div>
+                            <div class="col-sm-2 text-left">Jenis Kelamin</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->gender : 'Belum Ada' }}</p>
                             </div>
-                            <div class="col-sm-2 text-left">Religion</div>
+                            <div class="col-sm-2 text-left">Agama</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->religion : 'Belum Ada' }}</p>
                             </div>
-                            <div class="col-sm-2 text-left">Education</div>
+                            <div class="col-sm-2 text-left">Pendidikan Terakhir</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->education : 'Belum Ada' }}</p>
                             </div>
@@ -70,7 +70,7 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->position : 'Belum Ada' }}</p>
                             </div>
-                            <div class="col-sm-2 text-left">No.Telp</div>
+                            <div class="col-sm-2 text-left">No.Telp/HP</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->phone : 'Belum Ada' }}</p>
                             </div>
@@ -98,7 +98,7 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->marital_status : 'Belum Ada' }}</p>
                             </div>
-                            <div class="col-sm-2 text-left">Suami/Istri</div>
+                            <div class="col-sm-2 text-left">Nama Suami/Istri</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->isNotEmpty() ? $detail->first()->spouse_name : 'Belum Ada' }}</p>
                             </div>
@@ -124,14 +124,14 @@
                             $userId = Auth::id();
                         @endphp
 
-                        <div class="col-sm-2 text-left">Dokumen : </div>
+                        <div class="col-sm-2 text-left">Dokumen  </div>
                             <div class="col-sm-10">
                                 @if ($dokumen->isNotEmpty())
                                     <ul>
                                         @foreach ($dokumen as $d)
                                             <li>
                                                 <a href="{{ asset('storage/dok_pegawai/' . Auth::user()->name . '/' . $d->filename) }}" target="_blank">
-                                                    {{ $d->filename }}
+                                                    : {{ $d->filename }}
                                                 </a>
                                             </li>
                                         @endforeach
@@ -140,14 +140,14 @@
                                     <p>: Tidak ada data .Mohon upload terlebih dahulu.</p>
                                 @endif
                             </div>
-                            <div class="col-sm-2 text-left">Sertifikat : </div>
+                            <div class="col-sm-2 text-left">Sertifikat Keahlian dan Diklat  </div>
                             <div class="col-sm-10">
                                 @if ($sertifikat->isNotEmpty())
                                     <ul>
                                         @foreach ($sertifikat as $d)
                                             <li>
                                                 <a href="{{ asset('storage/sertifikat_pegawai/' . Auth::user()->name . '/' . $d->filename) }}" target="_blank">
-                                                    {{ $d->filename }}
+                                                    : {{ $d->filename }}
                                                 </a>
                                             </li>
                                         @endforeach

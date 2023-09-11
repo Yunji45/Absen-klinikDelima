@@ -13,7 +13,7 @@
 	</style>
 	<center>
 		<h5>Laporan Presensi Klinik Delima Per User</h4>
-		<h6><a target="_blank" href="https://www.malasngoding.com/membuat-laporan-…n-dompdf-laravel/">www.klinikdelima.com</a></h5>
+		<h6><a target="_blank" href="https://klinikmitradelima.com/">www.klinimitrakdelima.com</a></h5>
 	</center>
  
 	<table class='table table-bordered'>
@@ -44,14 +44,3 @@
  
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-p

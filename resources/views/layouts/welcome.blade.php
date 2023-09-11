@@ -35,7 +35,7 @@
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
         <div class="container px-4">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <h1 class="text-white">{{ config('app.name') }}</h1>
+                <h1 class="text-white">Klinik Mitra Delima</h1>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-6 collapse-brand">
                             <a href="{{ route('home') }}">
-                                <h1>{{ config('app.name') }}</h1>
+                                <h1>Mitra Delima</h1>
                             </a>
                         </div>
                         <div class="col-6 collapse-close">
@@ -66,7 +66,7 @@
                         <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link nav-link-icon">
                                 <i class="ni ni-circle-08"></i>
-                                <span class="nav-link-inner--text">Users</span>
+                                <span class="nav-link-inner--text">Management User</span>
                             </a>
                         </li>
                     @endif
@@ -84,14 +84,14 @@
                     <li class="nav-item">
                         <a class="nav-link nav-link-icon" href="{{route('profil')}}">
                             <i class="ni ni-single-02"></i>
-                            <span class="nav-link-inner--text">Profile</span>
+                            <span class="nav-link-inner--text">Profil</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link nav-link-icon" href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ni ni-user-run"></i>
-                            <span class="nav-link-inner--text">Logout</span>
+                            <span class="nav-link-inner--text">Keluar</span>
                         </a>
 
                         <form id="logout-form" action="{{ route('auth.logout') }}" method="GET" style="display: none;">
@@ -155,9 +155,9 @@
         <footer class="py-5">
             <div class="container">
                 <div class="copyright text-center">
-                    © {{ date('Y')}} Developed By <a href="https://lovely-rabanadas-9fc482.netlify.app" class="font-weight-bold ml-1"
-                                target="_lank">Ihya Natik W</a> Theme By <a href=""
-                                class="font-weight-bold ml-1" target="_blank">BuruhDigital</a>
+                    © {{ date('Y')}} Developed By <a href="https://klinikmitradelima.com/" class="font-weight-bold ml-1"
+                                target="_lank">Klinik Mitra Delima</a> Theme By <a href="https://lovely-rabanadas-9fc482.netlify.app/"
+                                class="font-weight-bold ml-1" target="_blank">JSTechno</a>
                 </div>
             </div>
         </footer>

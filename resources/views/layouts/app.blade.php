@@ -47,7 +47,7 @@
             </button>
             <!-- Brand -->
             <a class="navbar-brand pt-0" href="{{ route('home') }}">
-                <h1>{{ config('app.name') }}</h1>
+                <h1>Mitra Delima</h1>
             </a>
             <!-- User -->
             <ul class="nav align-items-center d-md-none">
@@ -66,7 +66,7 @@
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="dropdown-item">
                             <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
+                            <span>Keluar</span>
                         </a>
                     </div>
                 </li>
@@ -113,7 +113,7 @@
                             <li class="nav-item">
                             <a class="nav-link" href="{{route('users.index')}}">
                         @endif
-                                <i class="ni ni-circle-08 text-primary"></i> Users
+                                <i class="ni ni-circle-08 text-primary"></i> Management User
                             </a>
                         </li>
                         <li class="nav-item">
@@ -181,7 +181,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('auth.logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="ni ni-user-run text-info"></i> Logout
+                            <i class="ni ni-user-run text-info"></i> Keluar
                         </a>
                     </li>
                 </ul>

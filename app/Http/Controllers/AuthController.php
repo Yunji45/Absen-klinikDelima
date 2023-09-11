@@ -28,7 +28,7 @@ class AuthController extends Controller
             //     return redirect()->intended('/customer');
             // }
         }else{
-            return redirect('/login');
+            return redirect('/');
         }
 
         // return redirect('/home');

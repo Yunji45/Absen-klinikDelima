@@ -25,10 +25,10 @@ use App\Http\Controllers\ErrorMas\ErrorController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/login', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
 Route::post('/act-login', [AuthController::class,'login'])->name('auth.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 Route::get('/home',[HomeController::class,'index'])->name('home');
