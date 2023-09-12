@@ -1,7 +1,7 @@
 @extends('layouts.welcome')
 
 @section('title')
-    Login - {{ config('app.name') }}
+    Login - Klinik Mitra Delima
 @endsection
 
 @section('content')

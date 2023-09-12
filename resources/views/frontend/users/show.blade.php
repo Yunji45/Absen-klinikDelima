@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Detail User - {{ config('app.name') }}
+Absensi - Klinik Mitra Delima
 @endsection
 
 

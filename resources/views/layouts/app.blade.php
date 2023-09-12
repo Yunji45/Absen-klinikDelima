@@ -131,8 +131,11 @@
                                 <!-- Tambahkan lebih banyak opsi dropdown sesuai kebutuhan -->
                             </div>
                         </li>
-
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('jadwal.shift')}}">
+                                <i class="ni ni-single-copy-04 text-success"></i> Jadwal Shift
+                            </a>
+                        </li>
                     @else
                         @if (Request::segment(1) == 'daftar-hadir')
                             <li class="nav-item active">

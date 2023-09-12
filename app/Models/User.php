@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SertifikatUser::class);
     }
+
+    public function jadwal()
+    {
+        return $this->hasMany(jadwal::class);
+    }
 }

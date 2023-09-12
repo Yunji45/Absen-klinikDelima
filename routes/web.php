@@ -11,6 +11,7 @@ use App\Http\Controllers\CutiController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\SertifikatController;
+use App\Http\Controllers\JadwalshiftController;
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
 
@@ -71,6 +72,12 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         //dokumen
         Route::get('/dokumen-pegawai',[DokumenController::class,'admDokumen'])->name('adm.dokumen');
         Route::get('/delete-dokumen',[DokumenController::class,'destroy'])->name('delete.dokumen');
+
+        //JadwalShift
+        Route::get('/jadwal-shift',[JadwalshiftController::class,'index'])->name('jadwal.shift');
+        Route::post('/jadwal-save',[JadwalshiftController::class,'store'])->name('jadwal.save');
+        Route::get('/jadwal-hapus/{id}',[JadwalshiftController::class,'destroy'])->name('jadwal.hapus');
+        Route::get('/download-jadwal',[JadwalshiftController::class,'jadwaldownload'])->name('download.jadwal');
 
     });
 

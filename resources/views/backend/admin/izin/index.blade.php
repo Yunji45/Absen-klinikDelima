@@ -31,6 +31,9 @@ Detail User - {{ config('app.name') }}
                                 </div>
                             </div>
                         </form>
+                        <div class="mb-3">
+                            <h3>dnsk</h3>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>

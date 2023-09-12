@@ -28,6 +28,46 @@
     <!-- CSS Files -->
     <link href="{{ url('argon') }}/assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 </head>
+<style>
+    .rainbow-letters {
+  font-size: 35px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
+.rainbow-letters span:nth-child(10n + 1) {
+  color: #ef5350;
+}
+
+.rainbow-letters span:nth-child(10n + 2) {
+  color: #ab47bc;
+}
+
+.rainbow-letters span:nth-child(10n + 3){
+  color: #651fff;
+}
+
+.rainbow-letters span:nth-child(10n + 5){
+  color: #3949ab;
+}
+
+.rainbow-letters span:nth-child(10n + 4) {
+  color: #2196f3;
+}
+
+.rainbow-letters span:nth-child(10n + 6){
+  color: #00bcd4;
+}
+
+.rainbow-letters span:nth-child(10n + 7){
+  color: #4caf50;
+}
+
+.rainbow-letters span:nth-child(10n + 8){
+  color: #ffc107;
+}
+
+</style>
 
 <body class="bg-default">
     <!-- Navbar -->
@@ -111,8 +151,19 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-lg-5 col-md-6">
-                            <h1 class="text-white">Selamat Datang!</h1>
-                            <p class="text-lead text-light">Sistem Absensi Terpadu</p>
+                            <img src="{{asset('argon/logo.png')}}" alt="Logo Desa" width="100px"> <!-- Ganti 'path-to-your-logo.png' dengan URL atau path ke gambar logo Anda -->
+                            <h1 class="rainbow-letters">
+                                <span>R</span>
+                                <span>A</span>
+                                <span>M</span>
+                                <span>A</span>
+                                <span>S</span>
+                                <span>i</span>
+                                <span>N</span>
+                                <span>T</span>
+                                <span>A</span>
+                            </h1>
+                            <p class="text-lead text-light">Klinik Mitra Delima, Sistem Informasi Terintegrasi</p>
                         </div>
                     </div>
                 </div>
@@ -125,7 +176,7 @@
             </div>
         </div>
         <!-- Page content -->
-        <div class="container mt--8 pb-5">
+        <div class="container mt--9 pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
                     <div class="card bg-secondary shadow border-0">
