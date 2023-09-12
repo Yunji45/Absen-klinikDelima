@@ -1,6 +1,6 @@
 @extends('layouts.welcome')
 @section('title')
-    Home - {{ config('app.name') }}
+    Home - Klinik Mitra Delima
 @endsection
 @section('content')
     @if ($libur)
@@ -8,7 +8,7 @@
             <p>Absen Libur (Hari Libur Nasional {{ $holiday }})</p>
         </div>
     @else
-        @if (date('l') == "Saturday" || date('l') == "Sunday")
+        @if ($libur)
             <div class="text-center">
                 <p>Absen Libur</p>
             </div>

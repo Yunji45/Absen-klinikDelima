@@ -1,6 +1,6 @@
 @extends('layouts.welcome')
 @section('title')
-    Home - {{ config('app.name') }}
+    Home - Klinik Mitra Delima
 @endsection
 @section('content')
     @if ($libur)

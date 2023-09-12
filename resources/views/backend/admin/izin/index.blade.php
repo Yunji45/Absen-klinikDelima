@@ -32,7 +32,7 @@ Detail User - {{ config('app.name') }}
                             </div>
                         </form>
                         <div class="mb-3">
-                            <h3>dnsk</h3>
+                            <h5 class="m-0 pt-1 font-weight-bold float-left">Konfirmasi Izin</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table">

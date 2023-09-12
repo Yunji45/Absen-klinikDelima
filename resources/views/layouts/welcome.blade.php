@@ -36,35 +36,35 @@
 }
 
 .rainbow-letters span:nth-child(10n + 1) {
-  color: #ef5350;
+  color: #ff5722; /* Warna oranye yang cerah */
 }
 
 .rainbow-letters span:nth-child(10n + 2) {
-  color: #ab47bc;
+  color: #ff9800; /* Warna oranye keemasan */
 }
 
 .rainbow-letters span:nth-child(10n + 3){
-  color: #651fff;
-}
-
-.rainbow-letters span:nth-child(10n + 5){
-  color: #3949ab;
+  color: #ffc107; /* Warna kuning yang cerah */
 }
 
 .rainbow-letters span:nth-child(10n + 4) {
-  color: #2196f3;
+  color: #ffeb3b; /* Warna kuning cerah */
+}
+
+.rainbow-letters span:nth-child(10n + 5){
+  color: #cddc39; /* Warna hijau cerah */
 }
 
 .rainbow-letters span:nth-child(10n + 6){
-  color: #00bcd4;
+  color: #8bc34a; /* Warna hijau cerah */
 }
 
 .rainbow-letters span:nth-child(10n + 7){
-  color: #4caf50;
+  color: #4caf50; /* Warna hijau terang */
 }
 
 .rainbow-letters span:nth-child(10n + 8){
-  color: #ffc107;
+  color: #009688; /* Warna hijau toska cerah */
 }
 
 </style>
@@ -158,7 +158,7 @@
                                 <span>M</span>
                                 <span>A</span>
                                 <span>S</span>
-                                <span>i</span>
+                                <span>I</span>
                                 <span>N</span>
                                 <span>T</span>
                                 <span>A</span>
@@ -229,6 +229,23 @@
 
     </script>
     <script src="{{ asset('js/myscript.js') }}"></script>
+    <script>
+    // Ambil semua elemen span dalam elemen dengan kelas .rainbow-letters
+    const rainbowLetters = document.querySelectorAll('.rainbow-letters span');
+
+    // Loop melalui setiap elemen span
+    rainbowLetters.forEach((span) => {
+        // Cek apakah teks dalam elemen span adalah 'I'
+        if (span.innerText === 'I') {
+            // Jika ya, ubah menjadi huruf besar
+            span.style.textTransform = 'lowercase';
+        } else {
+            // Jika tidak, ubah menjadi huruf kecil
+            span.style.textTransform = 'uppercase';
+        }
+    });
+</script>
+
 
 </body>
 

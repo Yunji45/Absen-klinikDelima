@@ -34,6 +34,11 @@ Detail User - {{ config('app.name') }}
                                 </div>
                             </div>
                         </form>
+                        <div class="mb-3">
+                            <h5 class="m-0 pt-1 font-weight-bold float-left">Bulan : </h5>
+                            <br>
+                            <h5 class="m-0 pt-1 font-weight-bold float-left">Tahun : 2023 </h5>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
