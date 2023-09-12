@@ -152,7 +152,7 @@ class PresensiController extends Controller
             $namaKolom = 'j' . $tanggalSekarang;
             $statusHariIni = $jadwal->$namaKolom;
 
-            if (in_array($statusHariIni, ['PS', 'L1', 'L2', 'C', 'IJ'])) {
+            if (in_array($statusHariIni, ['SM', 'L1', 'L2', 'C', 'IJ'])) {
 
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i:s');
@@ -192,7 +192,7 @@ class PresensiController extends Controller
 
                 Presensi::create($attendanceData);
                 return back()->with('success', 'Absen berhasil.');
-            } else if ($statusHariIni === 'SM') {
+            } else if ($statusHariIni === 'PS') {
                 // Status PS memerlukan persetujuan admin, tampilkan pesan yang sesuai
                 return redirect()->back()->with('error', 'Anda perlu meminta persetujuan admin untuk check-in.');
             } else {
