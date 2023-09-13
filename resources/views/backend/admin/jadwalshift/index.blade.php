@@ -23,7 +23,7 @@ Detail User - {{ config('app.name') }}
                         </form>
                     </div>
                     <div class="card-body">
-                        <form action="" class="mb-3" method="get">
+                        <form action="{{route('cari.jadwal')}}" class="mb-3" method="get">
                             <div class="form-group row mb-3 ">
                                 <label for="bulan" class="col-form-label col-sm-2">Bulan</label>
                                 <div class="input-group col-sm-10">
@@ -35,8 +35,6 @@ Detail User - {{ config('app.name') }}
                             </div>
                         </form>
                         <div class="mb-3">
-                            <h5 class="m-0 pt-1 font-weight-bold float-left">Bulan : </h5>
-                            <br>
                             <h5 class="m-0 pt-1 font-weight-bold float-left">Tahun : 2023 </h5>
                         </div>
                         <div class="table-responsive">
@@ -80,7 +78,13 @@ Detail User - {{ config('app.name') }}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @php $no =1; @endphp @foreach ($data as $item)
+                                @php $no =1; @endphp 
+                                @if($data->isEmpty())
+                                    <tr>
+                                        <td colspan="7" class="text-center">Tidak ada data yang tersedia</td>
+                                    </tr>
+                                @else
+                                    @foreach ($data as $item)
                                 <tr>
                                     <td>{{$no++}}.</td>
                                     <td>{{$item->user->name}}</td>
@@ -122,7 +126,8 @@ Detail User - {{ config('app.name') }}
                                         </a>
                                     </td>
                                 </tr>
-                                @endforeach
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                             <div class="float-right">
@@ -574,6 +579,8 @@ Detail User - {{ config('app.name') }}
                             <label for="j27" class="col-form-label col-sm-3">Tanggal 27 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j27') is-invalid @enderror" name="j27" id="j27">
+                                    <option value="">Pilih</option>
+
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -588,6 +595,7 @@ Detail User - {{ config('app.name') }}
                             <label for="j28" class="col-form-label col-sm-3">Tanggal 28 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j28') is-invalid @enderror" name="j28" id="j28">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -602,6 +610,7 @@ Detail User - {{ config('app.name') }}
                             <label for="j29" class="col-form-label col-sm-3">Tanggal 29 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j29') is-invalid @enderror" name="j29" id="j29">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -616,6 +625,7 @@ Detail User - {{ config('app.name') }}
                             <label for="j30" class="col-form-label col-sm-3">Tanggal 30 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j30') is-invalid @enderror" name="j30" id="j30">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -630,6 +640,7 @@ Detail User - {{ config('app.name') }}
                             <label for="j31" class="col-form-label col-sm-3">Tanggal 31 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j31') is-invalid @enderror" name="j31" id="j31">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>

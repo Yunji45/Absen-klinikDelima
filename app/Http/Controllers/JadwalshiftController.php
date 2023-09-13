@@ -18,10 +18,17 @@ class JadwalshiftController extends Controller
     public function index()
     {
         $title = 'Jadwal Shift';
-        $data = jadwal::all();
+        // $data = jadwal::all();
         $user = User::all();
+        $bulan = date('m'); // Bulan saat ini
+        $tahun = date('Y'); // Tahun saat ini
+    
+        // Filter jadwal berdasarkan bulan dan tahun pada atribut 'masa_aktif'
+        $data = jadwal::whereYear('masa_aktif', $tahun)
+                    ->whereMonth('masa_aktif', $bulan)
+                    ->get();    
         // return $user;        
-        return view ('backend.admin.jadwalshift.index',compact('title','data','user'));
+        return view ('backend.admin.jadwalshift.index',compact('title','data','user','bulan','tahun'));
     }
 
     /**
@@ -148,4 +155,17 @@ class JadwalshiftController extends Controller
         return $pdf->download('Jadwal-Shift');            
     }
 
+    public function cari(Request $request)
+    {
+        $title = 'Jadwal Shift';
+        $user = User::all();
+        $bulan = $request->input('bulan');
+        
+        // Lakukan pencarian berdasarkan bulan di sini, contohnya menggunakan Eloquent
+        $data = jadwal::where('masa_aktif', '>=', $bulan . '-01')
+                        ->where('masa_akhir', '<=', $bulan . '-31')
+                        ->get();
+                
+        return view ('backend.admin.jadwalshift.index',compact('data','title','user'));
+    }
 }

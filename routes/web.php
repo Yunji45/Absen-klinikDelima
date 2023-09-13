@@ -78,6 +78,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/jadwal-save',[JadwalshiftController::class,'store'])->name('jadwal.save');
         Route::get('/jadwal-hapus/{id}',[JadwalshiftController::class,'destroy'])->name('jadwal.hapus');
         Route::get('/download-jadwal',[JadwalshiftController::class,'jadwaldownload'])->name('download.jadwal');
+        Route::get('/cari-jadwal', [JadwalshiftController::class,'cari'])->name('cari.jadwal');
 
     });
 

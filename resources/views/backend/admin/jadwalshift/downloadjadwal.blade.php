@@ -9,12 +9,18 @@
             crossorigin="anonymous">
     </head>
     <body>
-        <style type="text/css">
-            table tr td,
-            table tr th {
-                font-size: 9pt;
-            }
-        </style>
+    <style type="text/css">
+    table tr td,
+    table tr th {
+        font-size: 9pt;
+    }
+
+    @media print {
+        table {
+            width: 100%; /* Membuat tabel memanjang sepanjang halaman saat dicetak */
+        }
+    }
+</style>
         <center>
             <h5>Jadwal Shift klinik Mitra Delima</h4>
             <h6>
