@@ -81,6 +81,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/jadwal-hapus/{id}',[JadwalshiftController::class,'destroy'])->name('jadwal.hapus');
         Route::get('/cari-jadwal', [JadwalshiftController::class,'cari'])->name('cari.jadwal');
 
+        //rubah jadwal
+        Route::get('/data-permohonan',[RubahjadwalController::class,'indexAdmin'])->name('permohonan.index');
+        Route::get('/Verifikasi/{id}/berhasil',[RubahjadwalController::class,'VerifPermohonan']);
+        Route::get('/Reject/{id}/gagal',[RubahjadwalController::class,'destroy']);
     });
     //role pegawai
     Route::group(['roles' => 'pegawai'], function(){

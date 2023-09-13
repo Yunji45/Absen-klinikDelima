@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use PDF;
 use Auth;
 use App\Models\jadwal;
+use App\Models\rubahjadwal;
 
 class PresensiController extends Controller
 {
@@ -152,7 +153,7 @@ class PresensiController extends Controller
             $namaKolom = 'j' . $tanggalSekarang;
             $statusHariIni = $jadwal->$namaKolom;
 
-            if (in_array($statusHariIni, ['SM', 'L1', 'L2', 'C', 'IJ'])) {
+            if (in_array($statusHariIni, ['SM', 'PS','C', 'IJ'])) {
 
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i:s');
@@ -192,9 +193,103 @@ class PresensiController extends Controller
 
                 Presensi::create($attendanceData);
                 return back()->with('success', 'Absen berhasil.');
-            } else if ($statusHariIni === 'PS') {
-                // Status PS memerlukan persetujuan admin, tampilkan pesan yang sesuai
-                return redirect()->back()->with('error', 'Anda perlu meminta persetujuan admin untuk check-in.');
+            } else if ($statusHariIni === 'L1') {
+                //tukar jaga
+                $user_id = $user->id;
+                $approvedRequest = rubahjadwal::where('user_id', $user_id)
+                    ->where('status', 'approve')
+                    ->where('permohonan', 'tukar_jaga')
+                    ->first();
+
+                $userExists = User::where('id', $user_id)->exists();
+
+                if (!$approvedRequest || !$userExists) {
+                    return redirect()->back()->with('error', 'Jadwal Anda Hari Ini Tukar Jaga !! Anda perlu meminta persetujuan admin untuk check-in.');
+                }
+                $currentTime = date('H:i:s');
+                $attendanceStatus = 'Alpha';
+                $jam_masuk = strtotime($currentTime);
+                $jam_masuk_config = strtotime(config('absensi.jam_masuk'));
+                $jam_keluar_config = strtotime(config('absensi.jam_keluar'));
+
+                if ($jam_masuk >= ($jam_masuk_config - 3600) && $jam_masuk <= $jam_masuk_config) {
+                    $attendanceStatus = 'Masuk';
+                } else if ($jam_masuk > $jam_masuk_config && $jam_masuk <= $jam_keluar_config) {
+                    $attendanceStatus = 'Telat';
+                }
+
+                $currentDate = date('Y-m-d');
+                $existingAttendance = Presensi::where('user_id', $user_id)
+                    ->where('tanggal', $currentDate)
+                    ->first();
+
+                if ($existingAttendance) {
+                    if ($existingAttendance->keterangan == 'Alpha') {
+                        $existingAttendance->update(['keterangan' => $attendanceStatus]);
+                        return back()->with('success', 'Absen berhasil');
+                    } else {
+                        return back()->with('error', 'Absen gagal');
+                    }
+                }
+
+                $attendanceData = [
+                    'user_id' => $user_id,
+                    'keterangan' => $attendanceStatus,
+                    'tanggal' => $currentDate,
+                    'jam_masuk' => $currentTime,
+                    'jam_keluar' => null,
+                ];
+
+                Presensi::create($attendanceData);
+                return back()->with('success', 'Absen berhasil.');
+            }else if($statusHariIni === 'L2'){
+                //ganti jaga
+                $user_id = $user->id;
+                $approvedRequest = rubahjadwal::where('user_id', $user_id)
+                    ->where('status', 'approve')
+                    ->where('permohonan', 'ganti_jaga')
+                    ->first();
+                $userExists = User::where('id', $user_id)->exists();
+
+                if (!$approvedRequest || !$userExists) {
+                    return redirect()->back()->with('error', 'Jadwal Anda Hari Ini Ganti Jaga !!Anda perlu meminta persetujuan admin untuk check-in.');
+                }
+                $currentTime = date('H:i:s');
+                $attendanceStatus = 'Alpha';
+                $jam_masuk = strtotime($currentTime);
+                $jam_masuk_config = strtotime(config('absensi.jam_masuk'));
+                $jam_keluar_config = strtotime(config('absensi.jam_keluar'));
+
+                if ($jam_masuk >= ($jam_masuk_config - 3600) && $jam_masuk <= $jam_masuk_config) {
+                    $attendanceStatus = 'Masuk';
+                } else if ($jam_masuk > $jam_masuk_config && $jam_masuk <= $jam_keluar_config) {
+                    $attendanceStatus = 'Telat';
+                }
+
+                $currentDate = date('Y-m-d');
+                $existingAttendance = Presensi::where('user_id', $user_id)
+                    ->where('tanggal', $currentDate)
+                    ->first();
+
+                if ($existingAttendance) {
+                    if ($existingAttendance->keterangan == 'Alpha') {
+                        $existingAttendance->update(['keterangan' => $attendanceStatus]);
+                        return back()->with('success', 'Absen berhasil');
+                    } else {
+                        return back()->with('error', 'Absen gagal');
+                    }
+                }
+
+                $attendanceData = [
+                    'user_id' => $user_id,
+                    'keterangan' => $attendanceStatus,
+                    'tanggal' => $currentDate,
+                    'jam_masuk' => $currentTime,
+                    'jam_keluar' => null,
+                ];
+
+                Presensi::create($attendanceData);
+                return back()->with('success', 'Absen berhasil.');
             } else {
                 return redirect()->back()->with('error', 'Check-in tidak diizinkan untuk hari ini.');
             }

@@ -131,4 +131,25 @@ class RubahjadwalController extends Controller
     {
         //
     }
+
+    public function indexAdmin()
+    {
+        $title = 'Permohonan Jadwal';
+        $permohonan = rubahjadwal::whereIn('status', ['pengajuan', 'approve'])
+        ->orderBy('created_at', 'desc') 
+        ->get();
+        return view ('backend.admin.permohonan.index',compact('title','permohonan'));
+    }
+
+    public function VerifPermohonan($id)
+    {
+        $permohonan = rubahjadwal::find($id);
+        if($permohonan)
+        {
+            $permohonan->update(['status' => 'approve']);
+            return redirect()->back()->with('success', 'Permohonan User Berhasil Di Setujui');
+        }else{
+            return redirect()->back()->with('error', 'Permohonan Tidak Di Setujui');
+        }   
+    }
 }

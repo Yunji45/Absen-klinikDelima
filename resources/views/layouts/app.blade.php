@@ -116,10 +116,15 @@
                                 <i class="ni ni-circle-08 text-primary"></i> Management User
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('konfirmasi.izin')}}">
-                                <i class="ni ni-single-copy-04 text-success"></i> Konfirmasi Izin
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="konfirmasiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ni ni-single-copy-04 text-success"></i> Management Jadwal
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="konfirmasiDropdown">
+                                <a class="dropdown-item" href="{{ route('jadwal.shift') }}">Jadwal Shift</a>
+                                <a class="dropdown-item" href="{{ route('konfirmasi.izin') }}">Konfirmasi Izin</a>
+                                <a class="dropdown-item" href="{{ route('permohonan.index') }}">Konfirmasi Permohonan</a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -131,11 +136,7 @@
                                 <!-- Tambahkan lebih banyak opsi dropdown sesuai kebutuhan -->
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('jadwal.shift')}}">
-                                <i class="ni ni-single-copy-04 text-success"></i> Jadwal Shift
-                            </a>
-                        </li>
+
                     @else
                         @if (Request::segment(1) == 'daftar-hadir')
                             <li class="nav-item active">
@@ -149,20 +150,15 @@
                         </li>
                     @endif
                     @if (auth()->user()->role == 'pegawai')
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('index.izin.user')}}">
-                                <i class="ni ni-send text-success"></i> Permohonan Cuti
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ni ni-send text-success"></i> Jadwal Kerja
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('permohonan.jadwal.user')}}">
-                                <i class="ni ni-send text-success"></i> Permohonan Jadwal
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('jadwal.user')}}">
-                                <i class="ni ni-send text-success"></i> Jadwal Shift
-                            </a>
+                            <div class="dropdown-menu" aria-labelledby="permohonanDropdown">
+                                <a class="dropdown-item" href="{{ route('jadwal.user') }}">Jadwal Shift</a>
+                                <a class="dropdown-item" href="{{ route('index.izin.user') }}">Permohonan Cuti</a>
+                                <a class="dropdown-item" href="{{ route('permohonan.jadwal.user') }}">Permohonan Jadwal</a>
+                            </div>
                         </li>
                     @endif
 
