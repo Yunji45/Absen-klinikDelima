@@ -13,7 +13,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-credit-card"></i></span>
                 </div>
-                <input id="nik" type="nik" onkeypress="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" autocomplete="nik" autofocus placeholder="NIK pegawai">
+                <input id="nik" type="nik" onkeypress="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" autocomplete="nik" autofocus placeholder="NIK">
                 @error('nik')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Passwordnya Kaka">
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password" placeholder="Password">
                 @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
