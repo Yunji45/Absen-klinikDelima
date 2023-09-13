@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Ubah User - {{ config('app.name') }}
+Ubah User - Klinik Mitra Delima
 @endsection
 @section('content')
 

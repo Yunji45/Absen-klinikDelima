@@ -154,6 +154,11 @@
                                 <i class="ni ni-send text-success"></i> Permohonan Cuti
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('jadwal.user')}}">
+                                <i class="ni ni-send text-success"></i> Jadwal Shift
+                            </a>
+                        </li>
                     @endif
 
 

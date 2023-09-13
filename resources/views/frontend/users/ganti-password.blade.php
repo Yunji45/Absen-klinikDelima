@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Ganti Password - {{ config('app.name') }}
+Ganti Password - Klinik Mitra Delima
 @endsection
 @section('content')
 

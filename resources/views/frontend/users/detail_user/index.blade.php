@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Profil - {{ config('app.name') }}
+    Detail User - Klinik Mitra Delima
 @endsection
 @section('content')
 <style>

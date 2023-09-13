@@ -20,8 +20,8 @@ class JadwalshiftController extends Controller
         $title = 'Jadwal Shift';
         // $data = jadwal::all();
         $user = User::all();
-        $bulan = date('m'); // Bulan saat ini
-        $tahun = date('Y'); // Tahun saat ini
+        $bulan = date('m');
+        $tahun = date('Y');
     
         // Filter jadwal berdasarkan bulan dan tahun pada atribut 'masa_aktif'
         $data = jadwal::whereYear('masa_aktif', $tahun)
@@ -29,6 +29,17 @@ class JadwalshiftController extends Controller
                     ->get();    
         // return $user;        
         return view ('backend.admin.jadwalshift.index',compact('title','data','user','bulan','tahun'));
+    }
+
+    public function indexUser()
+    {
+        $title = 'Jadwal Shift';
+        $bulan = date('m');
+        $tahun = date('Y');
+        $data = jadwal::whereYear('masa_aktif', $tahun)
+                    ->whereMonth('masa_aktif', $bulan)
+                    ->get();    
+        return view ('frontend.users.jadwal.index',compact('title','data','tahun','bulan'));
     }
 
     /**
@@ -150,7 +161,12 @@ class JadwalshiftController extends Controller
 
     public function jadwaldownload()
     {
-        $data = jadwal::all();
+        $bulan = date('m');
+        $tahun = date('Y');
+        $data = jadwal::whereYear('masa_aktif', $tahun)
+                        ->whereMonth('masa_aktif', $bulan)
+                        ->get();
+        // $data = jadwal::all();
         $pdf = PDF::loadview('backend.admin.jadwalshift.downloadjadwal',['data'=>$data]);
         return $pdf->download('Jadwal-Shift');            
     }
@@ -167,5 +183,15 @@ class JadwalshiftController extends Controller
                         ->get();
                 
         return view ('backend.admin.jadwalshift.index',compact('data','title','user'));
+    }
+
+    public function cariJadwal(Request $request)
+    {
+        $title = 'Jadwal Shift';
+        $bulan = $request->input('bulan');
+        $data = jadwal::where('masa_aktif', '>=', $bulan . '-01')
+                        ->where('masa_akhir', '<=', $bulan . '-31')
+                        ->get();   
+        return view ('frontend.users.jadwal.index',compact('title','data','bulan'));
     }
 }

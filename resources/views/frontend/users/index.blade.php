@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Users Management - {{ config('app.name') }}
+Users Management - Klinik Mitra Delima
 @endsection
 
 @section('header')

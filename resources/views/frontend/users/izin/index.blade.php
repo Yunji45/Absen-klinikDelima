@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Detail User - {{ config('app.name') }}
+Permohonan Karyawan - Klinik Mitra Delima
 @endsection
 @section('content')
 <div class="container">

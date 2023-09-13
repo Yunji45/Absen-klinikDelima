@@ -77,7 +77,6 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/jadwal-shift',[JadwalshiftController::class,'index'])->name('jadwal.shift');
         Route::post('/jadwal-save',[JadwalshiftController::class,'store'])->name('jadwal.save');
         Route::get('/jadwal-hapus/{id}',[JadwalshiftController::class,'destroy'])->name('jadwal.hapus');
-        Route::get('/download-jadwal',[JadwalshiftController::class,'jadwaldownload'])->name('download.jadwal');
         Route::get('/cari-jadwal', [JadwalshiftController::class,'cari'])->name('cari.jadwal');
 
     });
@@ -111,10 +110,14 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::post('/lengkapi-profil',[DetailController::class,'store'])->name('update-profil.store');
     Route::post('/update-profil/{user_id}',[DetailController::class,'update'])->name('profil-update');
 
+    //dokumen
     Route::get('/dokumen',[DokumenController::class,'index'])->name('upload.dokumen');
     Route::post('/save-dokumen',[DokumenController::class,'store'])->name('save.dokumen');
-
+    //dokumen-sertifikat
     Route::get('/sertifikat',[SertifikatController::class,'index'])->name('upload.sertifikat');
     Route::post('/save-sertifikat',[SertifikatController::class,'store'])->name('save.sertifikat');
-
+    //jadwal-shift
+    Route::get('/download-jadwal',[JadwalshiftController::class,'jadwaldownload'])->name('download.jadwal');
+    Route::get('/jadwal-shift-karyawan',[JadwalshiftController::class,'indexUser'])->name('jadwal.user');
+    Route::get('/cari-jadwal-user', [JadwalshiftController::class,'cariJadwal'])->name('cari.jadwal.user');
 });

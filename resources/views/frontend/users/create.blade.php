@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Tambah User - {{ config('app.name') }}
+Tambah User - Klinik Mitra Delima
 @endsection
 @section('content')
 <style>
