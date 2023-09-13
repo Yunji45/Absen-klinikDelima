@@ -78,7 +78,7 @@
                     <div class="row">
                         <div class="col-6 collapse-brand">
                             <a href="{{ route('home') }}">
-                                <h1>{{ config('app.name') }}</h1>
+                                <h1>Klinik Mitra Delima</h1>
                             </a>
                         </div>
                         <div class="col-6 collapse-close">
@@ -152,6 +152,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('index.izin.user')}}">
                                 <i class="ni ni-send text-success"></i> Permohonan Cuti
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('permohonan.jadwal.user')}}">
+                                <i class="ni ni-send text-success"></i> Permohonan Jadwal
                             </a>
                         </li>
                         <li class="nav-item">

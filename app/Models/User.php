@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(jadwal::class);
     }
+
+    public function permohonan()
+    {
+        return $this->hasMany(rubahjadwal::class);
+    }
 }

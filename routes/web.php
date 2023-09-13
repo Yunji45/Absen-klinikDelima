@@ -12,6 +12,7 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\JadwalshiftController;
+use App\Http\Controllers\RubahjadwalController;
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
 
@@ -39,7 +40,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::patch('/update-password/{user}', [UserController::class,'updatePassword'])->name('update-password');
     Route::get('/profil',[UserController::class,'profil'])->name('profil');
     Route::patch('/update-profil/{user}', [UserController::class,'updateProfil'])->name('update-profil');
-
+    
+    //role admin
     Route::group(['roles' => 'admin'], function(){
         Route::get('/users/cari', [UserController::class,'search'])->name('users.search');
         Route::patch('/users/password/{user}', [UserController::class,'password'])->name('users.password');
@@ -80,7 +82,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/cari-jadwal', [JadwalshiftController::class,'cari'])->name('cari.jadwal');
 
     });
-
+    //role pegawai
     Route::group(['roles' => 'pegawai'], function(){
         Route::get('/daftar-hadir', [PresensiController::class,'show'])->name('daftar-hadir');
         Route::get('/daftar-hadir/cari', [PresensiController::class,'cariDaftarHadir'])->name('daftar-hadir.cari');
@@ -90,6 +92,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         //izin
         Route::get('/Data-izin',[CutiController::class,'indexCutiUser'])->name('index.izin.user');
         Route::post('/pengajuan-izin',[CutiController::class,'store'])->name('pengajuan.cuti');
+        //rubah-jadwal
+        Route::get('/permohonan-jadwal',[RubahjadwalController::class,'index'])->name('permohonan.jadwal.user');
+        Route::post('/permohonan-save',[RubahjadwalController::class,'store'])->name('permohonan.save');
     });
 
     // ATUR IP ADDRESS DISINI
