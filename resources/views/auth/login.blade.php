@@ -13,7 +13,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-credit-card"></i></span>
                 </div>
-                <input id="nik" type="nik" onkeypress="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" autocomplete="nik" autofocus placeholder="NIK">
+                <!-- <input id="nik" type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" autocomplete="nik" autofocus placeholder="NIK"> -->
+                <input id="nik" type="text"  class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" autocomplete="nik" autofocus placeholder="NIK">
                 @error('nik')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

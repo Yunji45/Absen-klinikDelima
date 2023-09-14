@@ -53,7 +53,7 @@ class UserController extends Controller
             'name'  => ['required', 'max:32', 'string'],
             'email' => ['required'],
             'no_hp' => ['required'],
-            'nik'   => ['required', 'max:9','unique:users'],
+            'nik'   => ['required'],
             'role'  => ['required'],
             'foto'  => ['image', 'mimes:jpeg,png,gif', 'max:2048']
         ]);
@@ -132,7 +132,7 @@ class UserController extends Controller
             'name'  => ['required', 'max:32', 'string'],
             'email' => ['required'],
             'no_hp' => ['required'],
-            'nik'   => ['required', 'max:9','unique:users'],
+            'nik'   => ['required'],
             'role'  => ['required'],
             'foto'  => ['image', 'mimes:jpeg,png,gif', 'max:2048']
         ]);

@@ -70,7 +70,8 @@ class DetailController extends Controller
                 'hobbies'   => $request->hobbies,
                 'skills'   => $request->skills,        
             ]);
-            return $existingDetail;
+            // return $existingDetail;
+            return redirect()->back()->with('success','Terimakasih Sudah Lengkapi Profil');
         }else{
             $detail = new DetailPegawai;
             $detail ->user_id = Auth::user()->id;
@@ -100,7 +101,8 @@ class DetailController extends Controller
             $detail ->hobbies = $request->hobbies;
             $detail ->skills = $request->skills;
             $detail ->save();
-            return $detail;
+            // return $detail;
+            return redirect()->back()->with('success','Terimakasih Sudah Lengkapi Profil');
         }
         
     }
@@ -152,7 +154,8 @@ class DetailController extends Controller
         $detail ->hobbies = $request->hobbies;
         $detail ->skills = $request->skills;
         $detail->save();
-        return $detail;
+        // return $detail;
+        return redirect()->back()->with('success','Terimakasih Sudah Lengkapi Profil');
     }
 
     public function destroy($id)

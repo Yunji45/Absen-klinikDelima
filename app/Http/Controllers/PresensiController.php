@@ -12,6 +12,7 @@ use PDF;
 use Auth;
 use App\Models\jadwal;
 use App\Models\rubahjadwal;
+use App\Models\cuti;
 
 class PresensiController extends Controller
 {
@@ -153,7 +154,7 @@ class PresensiController extends Controller
             $namaKolom = 'j' . $tanggalSekarang;
             $statusHariIni = $jadwal->$namaKolom;
 
-            if (in_array($statusHariIni, ['SM', 'PS','C', 'IJ'])) {
+            if (in_array($statusHariIni, ['SM', 'PS'])) {
 
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i:s');
@@ -290,6 +291,53 @@ class PresensiController extends Controller
 
                 Presensi::create($attendanceData);
                 return back()->with('success', 'Absen berhasil.');
+            }else if(in_array($statusHariIni, ['C', 'IJ'])){
+                $user_id = $user->id;
+
+                // Check status izin cuti pengguna
+                $cuti = cuti::where('user_id', $user_id)
+                            ->where('tanggal_mulai', '<=', $currentDate)
+                            ->where('tanggal_berakhir', '>=', $currentDate)
+                            ->where('status', 'approve')
+                            ->first();
+                    if (!$cuti) {
+                        $attendanceStatus = 'Alpha';
+                        $jam_masuk = strtotime($currentTime);
+                        $jam_masuk_config = strtotime(config('absensi.jam_masuk'));
+                        $jam_keluar_config = strtotime(config('absensi.jam_keluar'));
+                
+                        if ($jam_masuk >= ($jam_masuk_config - 3600) && $jam_masuk <= $jam_masuk_config) {
+                            $attendanceStatus = 'Masuk';
+                        } else if ($jam_masuk > $jam_masuk_config && $jam_masuk <= $jam_keluar_config) {
+                            $attendanceStatus = 'Telat';
+                        }
+                
+                        $existingAttendance = Presensi::where('user_id', $user_id)
+                            ->where('tanggal', $currentDate)
+                            ->first();
+                
+                        if ($existingAttendance) {
+                            if ($existingAttendance->keterangan == 'Alpha') {
+                                $existingAttendance->update(['keterangan' => $attendanceStatus]);
+                                return back()->with('success', 'Absen berhasil');
+                            } else {
+                                return back()->with('error', 'Absen gagal');
+                            }
+                        }
+                
+                        $attendanceData = [
+                            'user_id' => $user_id,
+                            'keterangan' => $attendanceStatus,
+                            'tanggal' => $currentDate,
+                            'jam_masuk' => $currentTime,
+                            'jam_keluar' => null,
+                        ];
+                
+                        Presensi::create($attendanceData);
+                        return back()->with('success', 'Absen berhasil.');
+                    } else {
+                        return back()->with('error', 'Anda memiliki izin cuti untuk hari ini.');
+                    }                            
             } else {
                 return redirect()->back()->with('error', 'Check-in tidak diizinkan untuk hari ini.');
             }

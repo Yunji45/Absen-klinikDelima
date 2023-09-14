@@ -3,6 +3,7 @@
     Home - Klinik Mitra Delima
 @endsection
 @section('content')
+
     @if ($libur)
         <div class="text-center">
             <p>Absen Libur (Hari Libur Nasional {{ $holiday }})</p>

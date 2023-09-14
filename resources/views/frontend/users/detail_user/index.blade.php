@@ -314,7 +314,7 @@
                         <div class="form-group row" id="number_of_children">
                             <label for="number_of_children" class="col-form-label col-sm-3">Jumlah Anak</label>
                             <div class="col-sm-9">
-                                <input name="number_of_children" rows="4" class="form-control @error('number_of_children') is-invalid @enderror" required></input>
+                                <input type="number" name="number_of_children" rows="4" class="form-control @error('number_of_children') is-invalid @enderror" required></input>
                                 @error('number_of_children') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
