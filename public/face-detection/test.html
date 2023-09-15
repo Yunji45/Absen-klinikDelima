@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection</title>
+    <!-- Tambahkan tautan ke library face-api.js dan model yang diperlukan di sini -->
+</head>
+<body>
+    <video id="video" autoplay muted></video>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const errorPopup = document.createElement('div'); // Popup kesalahan
+
+        // Mengambil data wajah dari database (contoh)
+        function getFaceVectorFromDatabase() {
+            // Implementasikan cara mengambil data wajah dari database di sini
+            // Mengembalikan vektor wajah jika berhasil, atau null jika gagal
+            return null; // Contoh: return null jika gagal
+        }
+
+        // Proses pemanggilan model dan logika utama
+        Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri('/face-detection/models'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('/face-detection/models'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('/face-detection/models'),
+            faceapi.nets.faceExpressionNet.loadFromUri('/face-detection/models')
+        ]).then(startWebcam);
+
+        function startWebcam() {
+            navigator.getUserMedia({ video: {} }, (stream) => (video.srcObject = stream), (err) => console.error(err));
+        }
+
+        video.addEventListener('play', renderVideo);
+
+        async function renderVideo() {
+            const displaySize = { width: video.width, height: video.height }
+            faceapi.matchDimensions(canvas, displaySize)
+
+            // Cek apakah databaseFaceVector dapat diambil dengan sukses
+            const databaseFaceVector = getFaceVectorFromDatabase(); // Gantilah ini dengan cara mengambil vektor wajah dari database
+
+            if (!databaseFaceVector) {
+                // Tampilkan popup kesalahan jika database tidak terbaca
+                errorPopup.innerHTML = 'Error: Database tidak dapat diakses.';
+                errorPopup.className = 'error-popup'; // Anda perlu mendefinisikan CSS untuk gaya popup
+                document.body.appendChild(errorPopup);
+
+                // Hilangkan popup setelah beberapa detik (misalnya, 5 detik)
+                setTimeout(() => {
+                    document.body.removeChild(errorPopup);
+                }, 5000); // Popup akan hilang setelah 5 detik
+            } else {
+                const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+                    .withFaceLandmarks()
+                    .withFaceExpressions()
+                const resizedDetections = faceapi.resizeResults(detections, displaySize)
+                canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+
+                // Lanjutkan dengan pencocokan jika databaseFaceVector ada
+                // ...
+            }
+
+            // Lanjutkan dengan pemrosesan video berikutnya
+            setTimeout(() => renderVideo(), 3000)
+        }
+    </script>
+</body>
+</html>
