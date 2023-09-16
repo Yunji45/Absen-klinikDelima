@@ -20,9 +20,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
-        $rank = $users->firstItem();
-        return view('frontend.users.index', compact('users','rank'));
+        // $users = User::paginate(5);
+        $users = User::all();
+        // $rank = $users->firstItem();
+
+        return view('frontend.users.index', compact('users'));
     }
 
     /**

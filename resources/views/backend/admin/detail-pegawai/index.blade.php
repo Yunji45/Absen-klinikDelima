@@ -48,7 +48,7 @@ Detail User - Klinik Mitra Delima
                                 <tbody>
                                 @php $no =1; @endphp @foreach ($data as $item)
                                 <tr>
-                                    <!-- <td>{{$no++}}.</td> -->
+                                    <td>{{$no++}}.</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->place_birth}}, {{$item->date_birth}}</td>
                                     <td>{{$item->gender}}</td>

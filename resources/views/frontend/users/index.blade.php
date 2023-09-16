@@ -42,17 +42,19 @@ Users Management - Klinik Mitra Delima
                             <input type="text" name="cari" id="cari" class="form-control mb-3" value="{{ request('cari') }}" placeholder="Cari . . ." autocomplete="off">
                         </form>
                     </div>
-                    <!-- <div class="col-lg-6">
+
+                                    <!-- <div class="col-lg-6" >
                         <div class="float-right">
-                            {{ $users->links() }}
+                            //user->link
                         </div>
                     </div> -->
+
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Sebagai</th>
@@ -66,9 +68,10 @@ Users Management - Klinik Mitra Delima
                                     <td colspan="5" class="text-center">Tidak ada data yang tersedia</td>
                                 </tr>
                             @else
+                            @php $no =1; @endphp
                                 @foreach ($users as $user)
                                     <tr>
-                                        <th>{{ $rank++ }}</th>
+                                        <th>{{ $no++ }}</th>
                                         <td>{{ $user->nik }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->role }}</td>
@@ -82,12 +85,8 @@ Users Management - Klinik Mitra Delima
                         </tbody>
                     </table>
                 </div>
+
             </div>
-            <!-- <div class="col-lg-6" style="margin-right: 0px; margin-bottom: 0px;">
-                        <div class="float-right">
-                            {{ $users->links() }}
-                        </div>
-                    </div> -->
         </div>
     </div>
 <!-- /.container-fluid -->
