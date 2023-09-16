@@ -13,6 +13,8 @@ use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\JadwalshiftController;
 use App\Http\Controllers\RubahjadwalController;
+use App\Http\Controllers\FaceController;
+
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
 
@@ -31,7 +33,7 @@ use App\Http\Controllers\ErrorMas\ErrorController;
 //     return view('welcome');
 // });
 Route::get('/face', function () {
-    return view('face');
+    return view('api');
 });
 Route::get('/', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
 Route::post('/act-login', [AuthController::class,'login'])->name('auth.login');
@@ -132,4 +134,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::get('/download-jadwal',[JadwalshiftController::class,'jadwaldownload'])->name('download.jadwal');
     Route::get('/jadwal-shift-karyawan',[JadwalshiftController::class,'indexUser'])->name('jadwal.user');
     Route::get('/cari-jadwal-user', [JadwalshiftController::class,'cariJadwal'])->name('cari.jadwal.user');
+
+    Route::get('/api', function () {
+        return view('face');
+    });
+    Route::post('/compare-face', [FaceController::class,'compareFace']);
+    
 });
