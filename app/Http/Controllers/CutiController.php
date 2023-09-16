@@ -143,7 +143,8 @@ class CutiController extends Controller
     {
         $status = cuti::find($id);
         $status ->delete();
-        return $status;
+        // return $status;
+        return redirect()->back()->with('success','Data Izin Berhasil Di Hapus Dari Database');
     }
 
     public function indexCutiUser()

@@ -67,6 +67,7 @@ Detail User - {{ config('app.name') }}
                                             <i class="fas fa-lock"></i><strong> Verifikasi</strong>
                                         @endif
                                     </a>
+                                    <a href="{{route('delete.izin.cuti',$item->id)}}" class="btn btn-sm btn-primary" title="Detail User"><i class="fas fa-trash"></i>Hapus</a>
                                     </td>
                                 </tr>
                                 @endforeach

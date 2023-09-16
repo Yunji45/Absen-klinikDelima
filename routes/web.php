@@ -69,7 +69,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/data-izin',[CutiController::class,'index'])->name('konfirmasi.izin');
         Route::get('/izin-form',[CutiController::class,'create'])->name('data.cuti');
         Route::get('/VerifikasiIzin/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
-        Route::get('/RejectIzin/{id}/gagal',[CutiController::class,'RejectCuti']);
+        Route::get('/RejectIzin/{id}/gagal',[CutiController::class,'RejectCuti'])->name('delete.izin.cuti');
 
         //detailpegawai
         Route::get('/detail-pegawai',[DetailController::class,'indexAdm'])->name('detail.pegawai.admin');
