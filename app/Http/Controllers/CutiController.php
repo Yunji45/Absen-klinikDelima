@@ -95,7 +95,7 @@ class CutiController extends Controller
             $user = User::find($status->user_id);
             $jenisIzin = $status->jenis_izin;
         
-            if ($jenisIzin == 'izin') {
+            if ($jenisIzin == 'cuti_tahunan') {
                 $mulai = Carbon::parse($status->tanggal_mulai);
                 $akhir = Carbon::parse($status->tanggal_berakhir);
         
