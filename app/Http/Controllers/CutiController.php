@@ -135,8 +135,6 @@ class CutiController extends Controller
         } else {
             return redirect()->back()->with('error', 'Data Tidak Ditemukan.');
         }
-        
-
     }
 
     public function RejectCuti($id)
