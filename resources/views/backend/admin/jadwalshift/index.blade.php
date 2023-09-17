@@ -265,6 +265,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j1" class="col-form-label col-sm-3">Tanggal 1 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j1') is-invalid @enderror" name="j1" id="j1">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -279,6 +280,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j2" class="col-form-label col-sm-3">Tanggal 2 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j2') is-invalid @enderror" name="j2" id="j2">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -293,6 +295,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j3" class="col-form-label col-sm-3">Tanggal 3 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j3') is-invalid @enderror" name="j3" id="j3">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -307,6 +310,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j4" class="col-form-label col-sm-3">Tanggal 4 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j4') is-invalid @enderror" name="j4" id="j4">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -321,6 +325,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j5" class="col-form-label col-sm-3">Tanggal 5 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j5') is-invalid @enderror" name="j5" id="j5">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -335,6 +340,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j6" class="col-form-label col-sm-3">Tanggal 6 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j6') is-invalid @enderror" name="j6" id="j6">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -349,20 +355,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j7" class="col-form-label col-sm-3">Tanggal 7 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j7') is-invalid @enderror" name="j7" id="j7">
-                                    <option value="PS">PS</option>
-                                    <option value="SM">SM</option>
-                                    <option value="L1">L1</option>
-                                    <option value="L2">L2</option>
-                                    <option value="C">C</option>
-                                    <option value="IJ">IJ</option>
-                                </select>
-                                @error('j7') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="j1" class="col-form-label col-sm-3">Tanggal 1 </label>
-                            <div class="col-sm-9">
-                                <select class="form-control @error('j1') is-invalid @enderror" name="j1" id="j1">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -377,6 +370,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j8" class="col-form-label col-sm-3">Tanggal 8 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j8') is-invalid @enderror" name="j8" id="j8">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -391,6 +385,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j9" class="col-form-label col-sm-3">Tanggal 9 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j9') is-invalid @enderror" name="j9" id="j9">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -405,6 +400,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j10" class="col-form-label col-sm-3">Tanggal 10 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j10') is-invalid @enderror" name="j10" id="j10">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -419,6 +415,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j11" class="col-form-label col-sm-3">Tanggal 11 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j11') is-invalid @enderror" name="j11" id="j11">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -433,6 +430,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j12" class="col-form-label col-sm-3">Tanggal 12 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j12') is-invalid @enderror" name="j12" id="j12">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -447,6 +445,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j13" class="col-form-label col-sm-3">Tanggal 13 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j13') is-invalid @enderror" name="j13" id="j13">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -461,6 +460,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j14" class="col-form-label col-sm-3">Tanggal 14 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j14') is-invalid @enderror" name="j14" id="j14">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -475,6 +475,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j15" class="col-form-label col-sm-3">Tanggal 15 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j15') is-invalid @enderror" name="j15" id="j15">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -489,6 +490,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j16" class="col-form-label col-sm-3">Tanggal 16 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j16') is-invalid @enderror" name="j16" id="j16">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -503,6 +505,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j17" class="col-form-label col-sm-3">Tanggal 17 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j17') is-invalid @enderror" name="j17" id="j17">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -517,6 +520,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j18" class="col-form-label col-sm-3">Tanggal 18 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j18') is-invalid @enderror" name="j18" id="j18">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -531,6 +535,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j19" class="col-form-label col-sm-3">Tanggal 19 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j19') is-invalid @enderror" name="j19" id="j19">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -545,6 +550,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j20" class="col-form-label col-sm-3">Tanggal 20 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j20') is-invalid @enderror" name="j20" id="j20">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -559,6 +565,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j21" class="col-form-label col-sm-3">Tanggal 21 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j2') is-invalid @enderror" name="j21" id="j21">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -573,6 +580,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j22" class="col-form-label col-sm-3">Tanggal 22 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j22') is-invalid @enderror" name="j22" id="j22">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -587,6 +595,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j23" class="col-form-label col-sm-3">Tanggal 23 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j23') is-invalid @enderror" name="j23" id="j23">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -601,6 +610,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j24" class="col-form-label col-sm-3">Tanggal 24 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j24') is-invalid @enderror" name="j24" id="j24">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -615,6 +625,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j25" class="col-form-label col-sm-3">Tanggal 25 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j25') is-invalid @enderror" name="j25" id="j25">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -629,6 +640,7 @@ Jadwal Shift - Klinik Mitra Delima
                             <label for="j26" class="col-form-label col-sm-3">Tanggal 26 </label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('j26') is-invalid @enderror" name="j26" id="j26">
+                                    <option value="">Pilih</option>
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
@@ -644,7 +656,6 @@ Jadwal Shift - Klinik Mitra Delima
                             <div class="col-sm-9">
                                 <select class="form-control @error('j27') is-invalid @enderror" name="j27" id="j27">
                                     <option value="">Pilih</option>
-
                                     <option value="PS">PS</option>
                                     <option value="SM">SM</option>
                                     <option value="L1">L1</option>
