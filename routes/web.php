@@ -122,7 +122,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     //detail_user
     Route::get('/profil-pegawai/{id}',[DetailController::class,'index'])->name('detail.user.index');
     Route::post('/lengkapi-profil',[DetailController::class,'store'])->name('update-profil.store');
-    Route::post('/update-profil/{id}',[DetailController::class,'update']);
+    Route::post('/update-profil/{id}',[DetailController::class,'update'])->name('update.detail.user');
     Route::get('/form-eedit/{id}',[DetailController::class,'edit'])->name('edit.detail');
 
     //dokumen

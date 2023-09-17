@@ -110,34 +110,40 @@ class DetailController extends Controller
 
     public function edit ($id)
     {
-        $update = DetailPegawai::find($id);
-        return view ('frontend.users.detail_user.edit',compact('update'));
+        //
     }
 
     public function update(Request $request,$id)
     {
         $detail = DetailPegawai ::find($id);
-        $detail ->name = $request->name;
-        $detail ->place_birth = $request->place_birth;
-        $detail ->date_birth = $request->date_birth;
-        $detail ->gender = $request->gender;
-        $detail ->religion = $request->religion;
-        $detail ->education = $request->education;
-        $detail ->program_study = $request->program_study;
-        $detail ->address = $request->address;
-        $detail ->position = $request->position;
-        $detail ->phone = $request->phone;
-        $detail ->email = $request->email;
-        $detail ->hire_date = $request->hire_date;
-        $detail ->length_of_service = $request->length_of_service;
-        $detail ->marital_status = $request->marital_status;
-        $detail ->spouse_name = $request->spouse_name;
-        $detail ->number_of_children = $request->number_of_children;
-        $detail ->hobbies = $request->hobbies;
-        $detail ->skills = $request->skills;
-        $detail->save();
-        // return $detail;
-        return redirect()->back()->with('success','Terimakasih Sudah Update Profil');
+        if ($detail && $detail->user_id === Auth::user()->id) {
+            // Simpan data yang diterima dari formulir ke model DetailPegawai
+            $detail ->name = $request->name;
+            $detail ->place_birth = $request->place_birth;
+            $detail ->date_birth = $request->date_birth;
+            $detail ->gender = $request->gender;
+            $detail ->religion = $request->religion;
+            $detail ->education = $request->education;
+            $detail ->program_study = $request->program_study;
+            $detail ->address = $request->address;
+            $detail ->position = $request->position;
+            $detail ->phone = $request->phone;
+            $detail ->email = $request->email;
+            $detail ->hire_date = $request->hire_date;
+            $detail ->length_of_service = $request->length_of_service;
+            $detail ->marital_status = $request->marital_status;
+            $detail ->spouse_name = $request->spouse_name;
+            $detail ->number_of_children = $request->number_of_children;
+            $detail ->hobbies = $request->hobbies;
+            $detail ->skills = $request->skills;
+            $detail->save();
+        
+            return redirect()->back()->with('success', 'Terimakasih Sudah Update Profil');
+        } else {
+            // Handle kesalahan atau pesan jika pengguna tidak diizinkan mengupdate detail pegawai ini
+            return redirect()->back()->with('error', 'Anda tidak diizinkan mengupdate detail pegawai ini');
+        }
+    
     }
 
     public function destroy($id)
