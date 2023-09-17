@@ -79,6 +79,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(jadwal::class);
     }
+    public function jadwalterbaru()
+    {
+        return $this->hasMany(jadwalterbaru::class);
+    }
 
     public function permohonan()
     {

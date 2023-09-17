@@ -21,6 +21,34 @@
         }
     }
 </style>
+<style>
+    .table-container {
+    width: 100%;
+    overflow-x: auto; /* Membuat tabel responsif jika terlalu lebar */
+    margin: 0 auto; /* Pusatkan tabel secara horizontal */
+}
+
+table {
+    width: 100%; /* Lebar tabel mengisi wadah */
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 2px; /* Atur padding sel header dan sel data */
+}
+
+th {
+    background-color: yellow;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Atur latar belakang baris ganjil */
+}
+
+/* Tambahkan gaya lain yang Anda inginkan di sini */
+
+</style>
+
         <center>
             <h5>Jadwal Shift klinik Mitra Delima</h4>
             <h6>
@@ -28,85 +56,64 @@
             </h5>
         </center>
 
-        <table class='table table-bordered'>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Pegawai</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>10</th>
-                    <th>11</th>
-                    <th>12</th>
-                    <th>13</th>
-                    <th>14</th>
-                    <th>15</th>
-                    <th>16</th>
-                    <th>17</th>
-                    <th>18</th>
-                    <th>19</th>
-                    <th>20</th>
-                    <th>21</th>
-                    <th>22</th>
-                    <th>23</th>
-                    <th>24</th>
-                    <th>25</th>
-                    <th>26</th>
-                    <th>27</th>
-                    <th>28</th>
-                    <th>29</th>
-                    <th>30</th>
-                    <th>31</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php $no =1; @endphp @foreach ($data as $item)
-                <tr>
-                    <td>{{$no++}}.</td>
-                    <td>{{$item->user->name}}</td>
-                    <td>{{$item->j1}}</td>
-                    <td>{{$item->j2}}</td>
-                    <td>{{$item->j3}}</td>
-                    <td>{{$item->j4}}</td>
-                    <td>{{$item->j5}}</td>
-                    <td>{{$item->j6}}</td>
-                    <td>{{$item->j7}}</td>
-                    <td>{{$item->j8}}</td>
-                    <td>{{$item->j9}}</td>
-                    <td>{{$item->j10}}</td>
-                    <td>{{$item->j11}}</td>
-                    <td>{{$item->j12}}</td>
-                    <td>{{$item->j13}}</td>
-                    <td>{{$item->j14}}</td>
-                    <td>{{$item->j15}}</td>
-                    <td>{{$item->j16}}</td>
-                    <td>{{$item->j17}}</td>
-                    <td>{{$item->j18}}</td>
-                    <td>{{$item->j19}}</td>
-                    <td>{{$item->j20}}</td>
-                    <td>{{$item->j21}}</td>
-                    <td>{{$item->j22}}</td>
-                    <td>{{$item->j23}}</td>
-                    <td>{{$item->j24}}</td>
-                    <td>{{$item->j25}}</td>
-                    <td>{{$item->j26}}</td>
-                    <td>{{$item->j27}}</td>
-                    <td>{{$item->j28}}</td>
-                    <td>{{$item->j29}}</td>
-                    <td>{{$item->j30}}</td>
-                    <td>{{$item->j31}}</td>
-                </tr>
-                @endforeach
+        <div class="table-container">
+                        <table border="1" style="text-align: center;">
+                            <tr>
+                                <th rowspan="2" bgcolor="yellow">NO</th>
+                                <th rowspan="2" bgcolor="yellow">Nama Pegawai</th>
+                                <th colspan="31" bgcolor="#00ff80" style="text-align: center;">Jadwal Shift</th>
+                            </tr>
+                            <tr>
+                                @for ($i = 1; $i <= 31; $i++)
+                                <th>{{ $i }}</th>
+                                @endfor
 
-            </tbody>
-        </table>
+                            </tr>
+                            @php $no =1; @endphp @if($data->isEmpty())
+                            <tr>
+                                <td colspan="34" style="text-align: center; font-size: 14px;">Tidak ada data yang tersedia</td>
+                            </tr>
+                            @else @foreach ($data as $item)
+                            <tr>
+                                <td style="text-align: center; font-size: 14px;">{{$no++}}.</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->user->name}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j1}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j2}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j3}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j4}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j5}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j6}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j7}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j8}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j9}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j10}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j11}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j12}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j13}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j14}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j15}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j16}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j17}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j18}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j19}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j20}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j21}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j22}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j23}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j24}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j25}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j26}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j27}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j28}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j29}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j30}}</td>
+                                <td style="text-align: center; font-size: 14px;">{{$item->j31}}</td>
+                            </tr>
+                            @endforeach @endif
+
+                        </table>                        
+                        </div>
+
 
     </body>
 </html>

@@ -122,7 +122,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     //detail_user
     Route::get('/profil-pegawai/{id}',[DetailController::class,'index'])->name('detail.user.index');
     Route::post('/lengkapi-profil',[DetailController::class,'store'])->name('update-profil.store');
-    Route::post('/update-profil/{user_id}',[DetailController::class,'update'])->name('profil-update');
+    Route::post('/update-profil/{id}',[DetailController::class,'update']);
+    Route::get('/form-eedit/{id}',[DetailController::class,'edit'])->name('edit.detail');
 
     //dokumen
     Route::get('/dokumen',[DokumenController::class,'index'])->name('upload.dokumen');

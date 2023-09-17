@@ -10,7 +10,6 @@
             border-radius: 50%; /* Untuk membuat gambar bulat */
             object-fit: cover; /* Membuat gambar memenuhi kotak tanpa merusak aspek ratio */
         }
-
 </style>
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -22,6 +21,8 @@
                     <div class="text-right mb-3">
                         @if (!$existingDetail)
                             <a href="" class="btn btn-primary" data-toggle="modal" data-target="#kehadiran">Ayo Update Pak/Bu !!</a>
+                            @else
+                            <a href="" class="btn btn-success" >Update</a>
                         @endif
                     </div>
                         <div class="text-center mb-3">
@@ -158,11 +159,7 @@
                             </div>
                         </div>
                         </div>
-                        
-                        
-
                     </div>
-
                 </div>
             </div>    
         </div>
@@ -342,6 +339,8 @@
             </div>
         </div>
     </div>  
+
+
 @endsection
 @push('scripts')
 <script>
@@ -351,7 +350,6 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             readURL(this);
         });
-
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

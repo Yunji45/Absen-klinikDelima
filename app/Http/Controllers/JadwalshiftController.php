@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\jadwal;
+use App\Models\jadwalterbaru;
 use App\Models\shift;
 use App\Models\User;
 use PDF;
@@ -24,7 +25,7 @@ class JadwalshiftController extends Controller
         $tahun = date('Y');
     
         // Filter jadwal berdasarkan bulan dan tahun pada atribut 'masa_aktif'
-        $data = jadwal::whereYear('masa_aktif', $tahun)
+        $data = jadwalterbaru::whereYear('masa_aktif', $tahun)
                     ->whereMonth('masa_aktif', $bulan)
                     ->get();    
         // return $user;        
@@ -36,7 +37,7 @@ class JadwalshiftController extends Controller
         $title = 'Jadwal Shift';
         $bulan = date('m');
         $tahun = date('Y');
-        $data = jadwal::whereYear('masa_aktif', $tahun)
+        $data = jadwalterbaru::whereYear('masa_aktif', $tahun)
                     ->whereMonth('masa_aktif', $bulan)
                     ->get();    
         return view ('frontend.users.jadwal.index',compact('title','data','tahun','bulan'));
@@ -67,7 +68,7 @@ class JadwalshiftController extends Controller
             'masa_akhir' => 'required',
         ]);
 
-        $data = new jadwal;
+        $data = new jadwalterbaru;
         $data ->user_id= $request->user_id;
         $data ->bulan = $request->bulan;
         $data ->masa_aktif = $request->masa_aktif;
@@ -150,7 +151,7 @@ class JadwalshiftController extends Controller
      */
     public function destroy($id)
     {
-        $data= jadwal::find($id);
+        $data= jadwalterbaru::find($id);
         $data->delete();
         if($data){
             return redirect()->back()->with('success','Data Jadwal User Berhasil Di Hapus Dari Database');
@@ -163,7 +164,7 @@ class JadwalshiftController extends Controller
     {
         $bulan = date('m');
         $tahun = date('Y');
-        $data = jadwal::whereYear('masa_aktif', $tahun)
+        $data = jadwalterbaru::whereYear('masa_aktif', $tahun)
                         ->whereMonth('masa_aktif', $bulan)
                         ->get();
         // $data = jadwal::all();
@@ -178,7 +179,7 @@ class JadwalshiftController extends Controller
         $bulan = $request->input('bulan');
         
         // Lakukan pencarian berdasarkan bulan di sini, contohnya menggunakan Eloquent
-        $data = jadwal::where('masa_aktif', '>=', $bulan . '-01')
+        $data = jadwalterbaru::where('masa_aktif', '>=', $bulan . '-01')
                         ->where('masa_akhir', '<=', $bulan . '-31')
                         ->get();
                 
@@ -189,7 +190,7 @@ class JadwalshiftController extends Controller
     {
         $title = 'Jadwal Shift';
         $bulan = $request->input('bulan');
-        $data = jadwal::where('masa_aktif', '>=', $bulan . '-01')
+        $data = jadwalterbaru::where('masa_aktif', '>=', $bulan . '-01')
                         ->where('masa_akhir', '<=', $bulan . '-31')
                         ->get();   
         return view ('frontend.users.jadwal.index',compact('title','data','bulan'));

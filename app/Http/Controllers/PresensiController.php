@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use PDF;
 use Auth;
 use App\Models\jadwal;
+use App\Models\jadwalterbaru;
 use App\Models\rubahjadwal;
 use App\Models\cuti;
 
@@ -145,7 +146,7 @@ class PresensiController extends Controller
         $tanggalSekarang = date('j'); // Tanggal hari ini (1-31)
         $bulanSekarang = date('F'); // Nama bulan saat ini (e.g., "September")
 
-        $jadwal = jadwal::where('user_id', $user->id)
+        $jadwal = jadwalterbaru::where('user_id', $user->id)
             ->where('masa_aktif', '<=', date('Y-m-d'))
             ->where('masa_akhir', '>=', date('Y-m-d'))
             ->first();
@@ -154,7 +155,7 @@ class PresensiController extends Controller
             $namaKolom = 'j' . $tanggalSekarang;
             $statusHariIni = $jadwal->$namaKolom;
 
-            if (in_array($statusHariIni, ['SM', 'PS'])) {
+            if (in_array($statusHariIni, ['SM', 'PS','PM'])) {
 
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i:s');

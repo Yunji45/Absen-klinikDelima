@@ -18,13 +18,14 @@ class DetailController extends Controller
     {
         $title = 'INFORMASI KARYAWAN';
         $data = User::find($id);
+        $update = DetailPegawai::find($id);
         $detail = DetailPegawai::where('user_id', $data->id)->get();
         $existingDetail = DetailPegawai::where('user_id', Auth::user()->id)->first();
         $dokumen = DokumenUser::where('user_id',Auth::user()->id)->get();
         $sertifikat = SertifikatUser::where('user_id',Auth::user()->id)->get();
         $post   = DetailPegawai::whereId($id)->first();
         // return $detail;
-        return view ('frontend.users.detail_user.index',compact('title','data','detail','existingDetail','post','dokumen','sertifikat'));
+        return view ('frontend.users.detail_user.index',compact('title','data','detail','existingDetail','post','dokumen','sertifikat','update'));
     }
 
     public function store(Request $request)
@@ -109,32 +110,13 @@ class DetailController extends Controller
 
     public function edit ($id)
     {
-
+        $update = DetailPegawai::find($id);
+        return view ('frontend.users.detail_user.edit',compact('update'));
     }
 
     public function update(Request $request,$id)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'name'  => ['required'],
-            'place_birth' => ['required'],
-            'date_birth' => ['required'],
-            'gender'   => 'required',
-            'religion'  => ['required'],
-            'education'  => 'required',
-            'program_study'   => 'required',
-            'address'   => 'required',
-            'position'   => 'required',
-            'phone'   => 'required',
-            'email'   => 'required',
-            'hire_date'   => 'required',
-            'marital_status'   => 'required',
-            'spouse_name'   => 'required',
-            'number_of_children'   => 'required',
-            'hobbies'   => 'required',
-            'skills'   => 'required',
-        ]);
-        $detail = DetailPegawai ::findOrFail($id);
+        $detail = DetailPegawai ::find($id);
         $detail ->name = $request->name;
         $detail ->place_birth = $request->place_birth;
         $detail ->date_birth = $request->date_birth;
@@ -155,7 +137,7 @@ class DetailController extends Controller
         $detail ->skills = $request->skills;
         $detail->save();
         // return $detail;
-        return redirect()->back()->with('success','Terimakasih Sudah Lengkapi Profil');
+        return redirect()->back()->with('success','Terimakasih Sudah Update Profil');
     }
 
     public function destroy($id)
