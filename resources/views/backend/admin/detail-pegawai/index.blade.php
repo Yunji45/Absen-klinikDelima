@@ -35,6 +35,7 @@ Detail User - Klinik Mitra Delima
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama</th>
                                         <th>TTL</th>
                                         <th>Jenis Kelamin</th>

@@ -4,6 +4,33 @@
 Jadwal Shift - Klinik Mitra Delima
 @endsection
 @section('content')
+<style>
+    .table-container {
+    width: 100%;
+    overflow-x: auto; /* Membuat tabel responsif jika terlalu lebar */
+    margin: 0 auto; /* Pusatkan tabel secara horizontal */
+}
+
+table {
+    width: 100%; /* Lebar tabel mengisi wadah */
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 2px; /* Atur padding sel header dan sel data */
+}
+
+th {
+    background-color: yellow;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Atur latar belakang baris ganjil */
+}
+
+/* Tambahkan gaya lain yang Anda inginkan di sini */
+
+</style>
 
 <div class="container">
         <div class="row">
@@ -35,6 +62,7 @@ Jadwal Shift - Klinik Mitra Delima
                                 </div>
                             </div>
                         </form>
+                        <div class="table-container">
                         <table border="1" style="text-align: center;">
                             <tr>
                                 <th rowspan="2" bgcolor="yellow">NO</th>
@@ -101,6 +129,7 @@ Jadwal Shift - Klinik Mitra Delima
                             @endforeach @endif
 
                         </table>                        
+                        </div>
                     <!-- <div class="table-responsive">
                             <table class="table">
                                 <thead>
