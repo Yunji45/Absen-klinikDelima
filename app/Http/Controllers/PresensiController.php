@@ -24,13 +24,14 @@ class PresensiController extends Controller
      */
     public function index()
     {
-        $presents = presensi::whereTanggal(date('Y-m-d'))->orderBy('jam_masuk','desc')->paginate(6);
+        // $presents = presensi::whereTanggal(date('Y-m-d'))->orderBy('jam_masuk','desc')->paginate(6);
+        $presents = presensi::whereTanggal(date('Y-m-d'))->orderBy('jam_masuk','desc')->get();
         $masuk = presensi::whereTanggal(date('Y-m-d'))->whereKeterangan('masuk')->count();
         $telat = presensi::whereTanggal(date('Y-m-d'))->whereKeterangan('telat')->count();
         $cuti = presensi::whereTanggal(date('Y-m-d'))->whereKeterangan('cuti')->count();
         $alpha = presensi::whereTanggal(date('Y-m-d'))->whereKeterangan('alpha')->count();
-        $rank = $presents->firstItem();
-        return view('backend.admin.index', compact('presents','rank','masuk','telat','cuti','alpha'));
+        // $rank = $presents->firstItem();
+        return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha'));
     }
 
     public function search(Request $request)
@@ -454,7 +455,7 @@ class PresensiController extends Controller
 
     public function DownloadPreDay()
     {
-        $presents = presensi::whereTanggal(date('Y-m-d'))->orderBy('jam_masuk','desc')->paginate(6);
+        $presents = presensi::whereTanggal(date('Y-m-d'))->orderBy('jam_masuk','desc')->get();
         $pdf = PDF::loadview('frontend.users.daypresensi',['presents'=>$presents]);
         return $pdf->download('Presensi-per-day');            
     }

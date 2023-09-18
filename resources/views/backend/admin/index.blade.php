@@ -173,17 +173,17 @@ Kehadiran - {{ config('app.name') }}
                             </div>
                         </form>
                     </div>
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <div class="float-right">
-                            {{ $presents->links() }}
+                            present->link
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Keterangan</th>
@@ -198,9 +198,11 @@ Kehadiran - {{ config('app.name') }}
                                     <td colspan="7" class="text-center">Tidak ada data yang tersedia</td>
                                 </tr>
                             @else
+                            @php $no =1; @endphp
+
                                 @foreach ($presents as $present)
                                     <tr>
-                                        <th>{{ $rank++ }}</th>
+                                        <th>{{ $no++ }}.</th>
                                         <td><a href="{{ route('users.show',$present->user) }}">{{ $present->user->nik }}</a></td>
                                         <td>{{ $present->user->name }}</td>
                                         <td>{{ $present->keterangan }}</td>
