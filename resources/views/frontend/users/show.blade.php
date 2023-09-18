@@ -6,6 +6,27 @@ Absensi - Klinik Mitra Delima
 
 
 @section('header')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card shadow h-100">
+                    <div class="card-body">
+                        <form action="" class="mb-3" method="get">
+                            <div class="form-group row mb- ">
+                                <label for="bulan" class="col-form-label col-sm-2">Periode Bulan</label>
+                                <div class="input-group col-sm-10">
+                                    <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan',date('Y-m')) }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="submit">Cari</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xl-3 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
@@ -87,6 +108,86 @@ Absensi - Klinik Mitra Delima
                 </div>
             </div>
         </div>
+        <div class="col-xl-3 col-lg-6" style="padding: 14px;" >
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Test</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        Total Keterangan Alpha
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6" style="padding: 14px;">
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Test</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        Total Keterangan Alpha
+                    </p>
+                </div>
+            </div>
+        </div>        
+        <div class="col-xl-3 col-lg-6" style="padding: 14px;">
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Test</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        Total Keterangan Alpha
+                    </p>
+                </div>
+            </div>
+        </div>        
+        <div class="col-xl-3 col-lg-6" style="padding: 14px;">
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Test</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        Total Keterangan Alpha
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -145,17 +246,6 @@ Absensi - Klinik Mitra Delima
                         </form>
                     </div>
                     <div class="card-body">
-                        <form action="" class="mb-3" method="get">
-                            <div class="form-group row mb-3 ">
-                                <label for="bulan" class="col-form-label col-sm-2">Bulan</label>
-                                <div class="input-group col-sm-10">
-                                    <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan',date('Y-m')) }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit">Cari</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>

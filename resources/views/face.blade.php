@@ -1,20 +1,37 @@
-<!-- HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Tambahan -->
     <script defer src="{{ asset('face-detection/dist/face-api.min.js') }}"></script>
     <script defer src="{{ asset('face-detection/dist/controller.js') }}"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            position: absolute;
+        }
+    </style>
+
 </head>
 <body>
     <!-- Video dan Tombol -->
-    <video id="video" width="640" height="480" autoplay muted></video>
+    <!-- <video id="video" width="640" height="480" autoplay muted></video>
     <canvas id="canvas" width="640" height="480"></canvas>
     <button id="captureButton">Ambil Foto</button>
-
+ -->
     <!-- Gambar Profil Pengguna -->
-    <img id="profileImage" src="{{ asset(Storage::url(Auth::user()->foto)) }}" alt="{{ Auth::user()->foto }}" class="profile-picture">
+    <!-- <img id="profileImage" src="{{ asset(Storage::url(Auth::user()->foto)) }}" alt="{{ Auth::user()->foto }}" class="profile-picture"> -->
 
     <!-- JavaScript -->
+    <video id="video" width="1024" height="560" autoplay muted></video>
+    <canvas id="canvas" />
+
 </body>
 </html>

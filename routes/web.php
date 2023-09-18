@@ -137,7 +137,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::get('/cari-jadwal-user', [JadwalshiftController::class,'cariJadwal'])->name('cari.jadwal.user');
 
     Route::get('/api', function () {
-        return view('face');
+        return view('testyu');
     });
     Route::post('/compare-face', [FaceController::class,'compareFace']);
     

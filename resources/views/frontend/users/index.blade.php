@@ -39,7 +39,7 @@ Users Management - Klinik Mitra Delima
                 <div class="row">
                     <div class="col-lg-6">
                         <form action="{{ route('users.search') }}" method="get">
-                            <input type="text" name="cari" id="cari" class="form-control mb-3" value="{{ request('cari') }}" placeholder="Cari . . ." autocomplete="off">
+                            <input type="text" name="cari" id="cari" class="form-control mb-3" value="{{ request('cari') }}" placeholder="Cari Berdasarkan Nama . . ." autocomplete="off">
                         </form>
                     </div>
 

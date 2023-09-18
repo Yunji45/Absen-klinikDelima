@@ -23,8 +23,8 @@ class UserController extends Controller
         // $users = User::paginate(5);
         $users = User::all();
         // $rank = $users->firstItem();
-
         return view('frontend.users.index', compact('users'));
+    
     }
 
     /**
@@ -226,6 +226,7 @@ class UserController extends Controller
         $request->validate([
             'cari' => ['required']
         ]);
+        $cari = $request->input('cari'); // Mengambil nilai pencarian dari inputan
         $users = User::where('name','like','%'.$request->cari.'%')
                     ->orWhere('nik','like','%'.$request->cari.'%')
                     ->paginate(6);
