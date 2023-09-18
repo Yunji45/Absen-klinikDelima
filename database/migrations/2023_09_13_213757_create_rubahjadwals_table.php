@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->enum('permohonan',['ganti_jaga','tukar_jaga'])->default('ganti_jaga')->nullable();
+            $table->enum('permohonan',['ganti_jaga','tukar_jaga','lembur'])->default('ganti_jaga')->nullable();
             $table->string('pengganti')->nullable();
             $table->date ('tanggal')->nullable();
             $table->string('alasan')->nullable();

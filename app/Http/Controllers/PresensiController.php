@@ -53,8 +53,21 @@ class PresensiController extends Controller
         $telat = presensi::whereTanggal($request->tanggal)->whereKeterangan('telat')->count();
         $cuti = presensi::whereTanggal($request->tanggal)->whereKeterangan('cuti')->count();
         $alpha = presensi::whereTanggal($request->tanggal)->whereKeterangan('alpha')->count();
+        $gantijaga = rubahjadwal::whereTanggal($request->tanggal)
+                                ->where('status','approve')
+                                ->where('permohonan','ganti_jaga')
+                                ->count();
+        $tukarjaga = rubahjadwal::whereTanggal($request->tanggal)
+                                ->where('status','approve')
+                                ->where('permohonan','tukar_jaga')
+                                ->count();
+        $permohonan = rubahjadwal::whereTanggal($request->tanggal)
+                                // ->where('status','approve')
+                                // ->where('permohonan','tukar_jaga')
+                                ->count();
+
         $rank = $presents->firstItem();
-        return view('backend.admin.index', compact('presents','rank','masuk','telat','cuti','alpha'));
+        return view('backend.admin.index', compact('presents','rank','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan'));
     }
 
     public function cari(Request $request, User $user)

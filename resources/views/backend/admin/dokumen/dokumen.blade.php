@@ -48,7 +48,7 @@ Hapus Dokumen - Klinik Mitra Delima
                                     <td>{{$item->name}}</td>
                                     <td>{{ $item->jumlah_dokumen }}</td>
                                     <td>
-                                        <a href="{{ route('delete.dokumen')}}" class="btn btn-sm btn-danger" title="{{$title}}"
+                                        <a href="" class="btn btn-sm btn-danger" title="{{$title}}"
                                         onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen pengguna ini?')">
                                         <i class="fas fa-trash"> Hapus Dokumen</i>
                                         </a>

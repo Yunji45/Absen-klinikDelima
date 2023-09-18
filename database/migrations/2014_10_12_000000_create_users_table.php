@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nik')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('role',['admin','pegawai']);
+            $table->enum('role',['admin','pegawai','admin2x']);
             $table->string('foto')->nullable();
             $table->string('saldo_cuti')->nullable();
             $table->rememberToken();
