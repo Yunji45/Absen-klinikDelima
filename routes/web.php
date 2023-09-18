@@ -60,6 +60,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/kehadiran/ubah', [PresensiController::class,'ubah'])->name('ajax.get.kehadiran');
         Route::patch('/kehadiran/{kehadiran}', [PresensiController::class,'update'])->name('kehadiran.update');
         Route::post('/kehadiran-tambah', [PresensiController::class,'store'])->name('kehadiran.store');
+        Route::get('/presensi/cari/{user}',[PresensiController::class,'cari'])->name('cari.presensi.peruser');
 
         //download
         Route::get('/download',[PresensiController::class,'DownloadPreDay'])->name('download.perday');

@@ -11,7 +11,7 @@ Absensi - Klinik Mitra Delima
             <div class="col-md-12 mb-3">
                 <div class="card shadow h-100">
                     <div class="card-body">
-                        <form action="" class="mb-3" method="get">
+                        <form action="{{route('cari.presensi.peruser',$user)}}" class="mb-3" method="GET">
                             <div class="form-group row mb- ">
                                 <label for="bulan" class="col-form-label col-sm-2">Periode Bulan</label>
                                 <div class="input-group col-sm-10">
@@ -108,86 +108,67 @@ Absensi - Klinik Mitra Delima
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6" style="padding: 14px;" >
+        <!-- style="padding: 14px;" -->
+        <div class="col-xl-3 col-lg-6" >
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Test</h5>
-                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Tukar Jaga</h5>
+                            <span class="h2 font-weight-bold mb-0">{{$tukarjaga}}</span>
                         </div>
                         <div class="col-auto">
-                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-times"></i>
+                            <div class="icon icon-shape bg-gradient-gray text-white rounded-circle shadow">
+                                <i class="fas fa-people-carry"></i>
                             </div>
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Keterangan Alpha
+                        Total Tukar Jaga
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6" style="padding: 14px;">
+        <div class="col-xl-3 col-lg-6" >
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Test</h5>
-                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Ganti Jaga</h5>
+                            <span class="h2 font-weight-bold mb-0">{{$gantijaga}}</span>
                         </div>
                         <div class="col-auto">
-                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-times"></i>
+                            <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                <i class="fas fa-user-shield"></i>
                             </div>
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Keterangan Alpha
+                        Total Ganti Jaga
                     </p>
                 </div>
             </div>
         </div>        
-        <div class="col-xl-3 col-lg-6" style="padding: 14px;">
+        <div class="col-xl-3 col-lg-6" >
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Test</h5>
-                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Lembur</h5>
+                            <span class="h2 font-weight-bold mb-0">0</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-times"></i>
+                                <i class="fas fa-user-md"></i>
                             </div>
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Keterangan Alpha
+                        Total Lembur
                     </p>
                 </div>
             </div>
         </div>        
-        <div class="col-xl-3 col-lg-6" style="padding: 14px;">
-            <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Test</h5>
-                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-times"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Keterangan Alpha
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 

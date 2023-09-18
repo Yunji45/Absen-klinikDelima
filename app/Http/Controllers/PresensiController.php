@@ -30,8 +30,17 @@ class PresensiController extends Controller
         $telat = presensi::whereTanggal(date('Y-m-d'))->whereKeterangan('telat')->count();
         $cuti = presensi::whereTanggal(date('Y-m-d'))->whereKeterangan('cuti')->count();
         $alpha = presensi::whereTanggal(date('Y-m-d'))->whereKeterangan('alpha')->count();
+        $gantijaga = rubahjadwal::where('tanggal', date('Y-m-d'))
+            ->where('permohonan', 'ganti_jaga')
+            ->where('status', 'approve')
+            ->count();
+        $tukarjaga = rubahjadwal::where('tanggal', date('Y-m-d'))
+            ->where('permohonan', 'tukar_jaga')
+            ->where('status', 'approve')
+            ->count();
+        $permohonan = rubahjadwal::whereDate('tanggal', now()->format('Y-m-d'))->count();
         // $rank = $presents->firstItem();
-        return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha'));
+        return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan'));
     }
 
     public function search(Request $request)
@@ -60,6 +69,19 @@ class PresensiController extends Controller
         $cuti = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('cuti')->count();
         $alpha = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('alpha')->count();
         $kehadiran = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('telat')->get();
+        $gantijaga = rubahjadwal::whereUserId($user->id)
+                                ->whereMonth('tanggal', $data[1])
+                                ->whereYear('tanggal', $data[0])
+                                ->where('status', 'approve')
+                                ->where('permohonan', 'ganti_jaga')
+                                ->count();
+        $tukarjaga = rubahjadwal::whereUserId($user->id)
+                                ->whereMonth('tanggal', $data[1])
+                                ->whereYear('tanggal', $data[0])
+                                ->where('status', 'approve')
+                                ->where('permohonan', 'tukar_jaga')
+                                ->count();
+                            
         $totalJamTelat = 0;
         foreach ($kehadiran as $present) {
             $totalJamTelat = $totalJamTelat + (\Carbon\Carbon::parse($present->jam_masuk)->diffInHours(\Carbon\Carbon::parse(config('absensi.jam_masuk') .' -1 hours')));
@@ -80,7 +102,8 @@ class PresensiController extends Controller
                 }
             }
         }
-        return view('frontend.users.show', compact('presents','user','masuk','telat','cuti','alpha','libur','totalJamTelat'));
+        return view('frontend.users.show', compact('presents','user','masuk','telat','cuti','alpha','libur','totalJamTelat','gantijaga','tukarjaga'));
+        // return redirect()->back();
     }
 
     public function cariDaftarHadir(Request $request)
@@ -406,7 +429,18 @@ class PresensiController extends Controller
         $telat = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('telat')->count();
         $cuti = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('cuti')->count();
         $alpha = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('alpha')->count();
-        return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha'));
+        $gantijaga = rubahjadwal::whereUserId(auth()->user()->id)
+                            ->whereMonth('tanggal', date('m'))
+                            ->whereYear('tanggal', date('Y'))
+                            ->where('permohonan', 'ganti_jaga')
+                            ->count();
+        $tukarjaga = rubahjadwal::whereUserId(auth()->user()->id)
+                            ->whereMonth('tanggal', date('m'))
+                            ->whereYear('tanggal', date('Y'))
+                            ->where('permohonan', 'tukar_jaga')
+                            ->count();
+                        
+        return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga'));
     }
 
     /**

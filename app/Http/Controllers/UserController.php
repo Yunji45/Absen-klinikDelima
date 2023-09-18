@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\presensi;
+use App\Models\rubahjadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -80,12 +81,28 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $bulanIni = date('m');
+        $tahunIni = date('Y');
+
         $presents = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->orderBy('tanggal','desc')->paginate(5);
         $masuk = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('masuk')->count();
         $telat = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('telat')->count();
         $cuti = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('cuti')->count();
         $alpha = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('alpha')->count();
         $kehadiran = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('telat')->get();
+        $gantijaga = rubahjadwal::whereUserId($user->id)
+                                ->whereMonth('tanggal', $bulanIni)
+                                ->whereYear('tanggal', $tahunIni)
+                                ->where('permohonan', 'ganti_jaga')
+                                ->where('status', 'approve')
+                                ->count();
+        $tukarjaga = rubahjadwal::whereUserId($user->id)
+                                ->whereMonth('tanggal', $bulanIni)
+                                ->whereYear('tanggal', $tahunIni)
+                                ->where('permohonan', 'tukar_jaga')
+                                ->where('status', 'approve')
+                                ->count();
+
         $totalJamTelat = 0;
         foreach ($kehadiran as $present) {
             $totalJamTelat = $totalJamTelat + (\Carbon\Carbon::parse($present->jam_masuk)->diffInHours(\Carbon\Carbon::parse(config('absensi.jam_masuk'))));
@@ -106,7 +123,8 @@ class UserController extends Controller
                 }
             }
         }
-        return view('frontend.users.show',compact('user','presents','libur','masuk','telat','cuti','alpha','totalJamTelat'));
+        // dd($tukarjaga);
+        return view('frontend.users.show',compact('user','presents','libur','masuk','telat','cuti','alpha','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni'));
 
     }
 

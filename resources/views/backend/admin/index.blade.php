@@ -74,68 +74,69 @@ Kehadiran - {{ config('app.name') }}
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6" style="padding: 13px;">
+        <!-- style="padding: 13px;" -->
+        <div class="col-xl-3 col-lg-6" >
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">TEST</h5>
-                            <span class="h2 font-weight-bold mb-0">TEST</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Tukar Jaga</h5>
+                            <span class="h2 font-weight-bold mb-0">{{$tukarjaga}}</span>
                         </div>
                         <div class="col-auto">
-                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-user-clock"></i>
+                            <div class="icon icon-shape bg-gradient-gray text-white rounded-circle shadow">
+                                <i class="fas fa-people-carry"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6" style="padding: 13px;">
+        <div class="col-xl-3 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">TEST</h5>
-                            <span class="h2 font-weight-bold mb-0">TEST</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Ganti Jaga</h5>
+                            <span class="h2 font-weight-bold mb-0">{{$gantijaga}}</span>
                         </div>
                         <div class="col-auto">
-                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-user-clock"></i>
+                            <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                <i class="fas fa-user-shield"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6" style="padding: 13px;">
+        <div class="col-xl-3 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">TEST</h5>
-                            <span class="h2 font-weight-bold mb-0">TEST</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Lembur</h5>
+                            <span class="h2 font-weight-bold mb-0">0</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-user-clock"></i>
+                                <i class="fas fa-user-md"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6" style="padding: 13px;">
+        <div class="col-xl-3 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">TEST</h5>
-                            <span class="h2 font-weight-bold mb-0">TEST</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Notif</h5>
+                            <span class="h2 font-weight-bold mb-0">{{$permohonan}}</span>
                         </div>
                         <div class="col-auto">
-                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-user-clock"></i>
+                            <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                <i class="fas fa-thumbtack"></i>
                             </div>
                         </div>
                     </div>
