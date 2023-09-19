@@ -133,13 +133,22 @@ if ($existingDetail) {
             $detail ->phone = $request->phone;
             $detail ->email = $request->email;
             // Hitung masa kerja
+            // $hireDate = Carbon::parse($request->hire_date);
+            // $currentDate = Carbon::now();
+            // $lengthOfServiceMonths = $hireDate->diffInMonths($currentDate);
+            // $detail->length_of_service = ($lengthOfServiceMonths < 12) ? 1 : $lengthOfServiceMonths;
+            // $detail->hire_date = $request->hire_date;
+            // $detail->exit_date = $request->exit_date ?: null;
             $hireDate = Carbon::parse($request->hire_date);
-            $currentDate = Carbon::now();
-            $lengthOfServiceMonths = $hireDate->diffInMonths($currentDate);
-            $detail->length_of_service = ($lengthOfServiceMonths < 12) ? 1 : $lengthOfServiceMonths;
-
-            $detail->hire_date = $request->hire_date;
-            $detail->exit_date = $request->exit_date ?: null;
+            $exitDate = $request->exit_date ? Carbon::parse($request->exit_date) : Carbon::now();
+            $lengthService = $hireDate->diff($exitDate);
+            $years = $lengthService->y;
+            $month = $lengthService->m;
+            $lamakerja = $years . ' tahun ' . $month . ' bulan';
+            $detail->length_of_service = $lamakerja;
+            $detail->hire_date = $hireDate->toDateString();
+            $detail->exit_date = $exitDate->toDateString();
+            
             $detail->exit_reason = $request->exit_reason ?: null;
             $detail ->marital_status = $request->marital_status;
             $detail ->spouse_name = $request->spouse_name;
@@ -174,8 +183,19 @@ if ($existingDetail) {
             $detail ->position = $request->position;
             $detail ->phone = $request->phone;
             $detail ->email = $request->email;
-            $detail ->hire_date = $request->hire_date;
-            $detail ->length_of_service = $request->length_of_service;
+            // $detail ->hire_date = $request->hire_date;
+            $hireDate = Carbon::parse($request->hire_date);
+            $exitDate = $request->exit_date ? Carbon::parse($request->exit_date) : Carbon::now();
+            $lengthService = $hireDate->diff($exitDate);
+            $years = $lengthService->y;
+            $month = $lengthService->m;
+            $lamakerja = $years . ' tahun ' . $month . ' bulan';
+            $detail->length_of_service = $lamakerja;
+            $detail->hire_date = $hireDate->toDateString();
+            $detail->exit_date = $exitDate->toDateString();
+
+            // $detail ->length_of_service = $request->length_of_service;
+            $detail->exit_reason = $request->exit_reason ?: null;
             $detail ->marital_status = $request->marital_status;
             $detail ->spouse_name = $request->spouse_name;
             $detail ->number_of_children = $request->number_of_children;

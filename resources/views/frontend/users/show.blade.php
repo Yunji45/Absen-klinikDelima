@@ -4,6 +4,16 @@
 Absensi - Klinik Mitra Delima
 @endsection
 @section('header')
+<style>
+            .profile-picture {
+            width: 150px; /* Lebar ideal */
+            height: 150px; /* Tinggi ideal */
+            border-radius: 50%; /* Untuk membuat gambar bulat */
+            object-fit: cover; /* Membuat gambar memenuhi kotak tanpa merusak aspek ratio */
+        }
+
+</style>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12 mb-3">
@@ -26,7 +36,7 @@ Absensi - Klinik Mitra Delima
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
@@ -46,7 +56,7 @@ Absensi - Klinik Mitra Delima
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
@@ -66,7 +76,7 @@ Absensi - Klinik Mitra Delima
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
@@ -86,7 +96,7 @@ Absensi - Klinik Mitra Delima
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
@@ -107,7 +117,7 @@ Absensi - Klinik Mitra Delima
             </div>
         </div>
         <!-- style="padding: 14px;" -->
-        <div class="col-xl-3 col-lg-6" >
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12" >
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
@@ -127,7 +137,7 @@ Absensi - Klinik Mitra Delima
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6" >
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12" >
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
@@ -147,7 +157,7 @@ Absensi - Klinik Mitra Delima
                 </div>
             </div>
         </div>        
-        <div class="col-xl-3 col-lg-6" >
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12" >
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">

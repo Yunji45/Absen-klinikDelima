@@ -149,29 +149,35 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'name'  => ['required', 'max:32', 'string'],
-            'email' => ['required'],
-            'no_hp' => ['required'],
-            'nik'   => ['required'],
-            'role'  => ['required'],
-            'foto'  => ['image', 'mimes:jpeg,png,gif', 'max:2048']
+            'name' => ['required', 'max:32', 'string'],
+            'nik' => ['required'],
+            'role' => ['required'],
+            'saldo_cuti' => ['required'],
+            'foto' => ['image', 'mimes:jpeg,png,gif', 'max:2048']
         ]);
-        $data['role'] = $request->role;
-        // if ($request->file('foto')) {
-        //     if ($user->foto != 'default.jpeg') {
-        //         File::delete(public_path('storage'.'/'.$user->foto));
-        //     }
-        //     $data['foto'] = $request->file('foto')->store('foto-profil');
-        // }
-        if ($request->hasFile('foto')) {
-            // Menghapus gambar yang lama jika bukan 'default.jpeg'
-            if ($user->foto != 'default.jpeg') {
-                File::delete(public_path('storage' . '/' . $user->foto));
+        
+        // Menggunakan model Eloquent untuk menemukan pengguna berdasarkan ID
+        $user = User::find($id); // Ganti 'User' dengan model Anda
+        
+        if ($user) {
+            // Menghapus gambar lama jika ada file gambar yang diunggah
+            if ($request->hasFile('foto')) {
+                // Menghapus gambar yang lama jika bukan 'default.jpeg'
+                if ($user->foto != 'default.jpeg') {
+                    File::delete(storage_path('app/public/' . $user->foto));
+                }
+                $user->foto = $request->file('foto')->storeAs('foto-profil', $user->id . '.' . $request->file('foto')->getClientOriginalExtension(), 'public');
             }
-            $data['foto'] = $request->file('foto')->store('foto-profil');
-        }        
-        $user ->update($data);
-        return redirect()->back()->with('success', 'User berhasil diperbarui');
+        
+            // Memperbarui data pengguna
+            $user->update($data);
+        
+            return redirect()->back()->with('success', 'User berhasil diperbarui');
+        } else {
+            return redirect()->back()->with('error', 'User tidak ditemukan');
+        }
+        
+        // return redirect()->back()->with('success', 'User berhasil diperbarui');
 
     }
 
