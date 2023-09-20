@@ -17,7 +17,7 @@
             @if ($present)
                 @if ($present->keterangan == 'Alpha')
                     <div class="text-center">
-                        @if (strtotime(date('H:i:s')) >= strtotime(config('absensi.jam_masuk') .' -1 hours') && strtotime(date('H:i:s')) <= strtotime(config('absensi.jam_pulang')))
+                        @if (strtotime(date('H:i:s')) >= strtotime(config('absensi.jam_masuk_PS') .' -1 hours') && strtotime(date('H:i:s')) <= strtotime(config('absensi.jam_keluar_PS')))
                             <p>Silahkan Check-in</p>
                             <form action="{{ route('kehadiran.check-in') }}" method="post">
                                 @csrf
@@ -40,7 +40,7 @@
                         @if ($present->jam_keluar)
                             <p>Check-out hari ini pukul : ({{ $present->jam_keluar }})</p>
                         @else
-                            @if (strtotime('now') >= strtotime(config('absensi.jam_pulang')))
+                            @if (strtotime('now') >= strtotime(config('absensi.jam_keluar_PS')))
                                 <p>Jika pekerjaan telah selesai silahkan check-out</p>
                                 <form action="{{ route('kehadiran.check-out', ['kehadiran' => $present]) }}" method="post">
                                     @csrf @method('patch')
@@ -54,7 +54,7 @@
                 @endif
             @else
                 <div class="text-center">
-                    @if (strtotime(date('H:i:s')) >= strtotime(config('absensi.jam_masuk') . ' -1 hours') && strtotime(date('H:i:s')) <= strtotime(config('absensi.jam_keluar')))
+                    @if (strtotime(date('H:i:s')) >= strtotime(config('absensi.jam_masuk_PS') . ' -1 hours') && strtotime(date('H:i:s')) <= strtotime(config('absensi.jam_keluar_PS')))
                         <p>Silahkan Check-in</p>
                         <form action="{{ route('kehadiran.check-in') }}" method="post">
                             @csrf
