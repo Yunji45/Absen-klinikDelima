@@ -41,33 +41,33 @@ class DetailController extends Controller
         //     ->with('showUpdateModal', true);
         // }
         $title = 'INFORMASI KARYAWAN';
-$data = User::find($id);
+        $data = User::find($id);
 
-// Periksa apakah $id memiliki nilai yang benar
-if (!$data) {
-    return abort(404); // Atau lakukan penanganan kesalahan lain sesuai kebutuhan Anda
-}
+        // Periksa apakah $id memiliki nilai yang benar
+        if (!$data) {
+            return abort(404); // Atau lakukan penanganan kesalahan lain sesuai kebutuhan Anda
+        }
 
-$existingDetail = DetailPegawai::where('user_id', Auth::user()->id)->first();
-$dokumen = DokumenUser::where('user_id', Auth::user()->id)->get();
-$sertifikat = SertifikatUser::where('user_id', Auth::user()->id)->get();
+        $existingDetail = DetailPegawai::where('user_id', Auth::user()->id)->first();
+        $dokumen = DokumenUser::where('user_id', Auth::user()->id)->get();
+        $sertifikat = SertifikatUser::where('user_id', Auth::user()->id)->get();
 
-// Inisialisasi $update dan $detail dengan null
-$update = null;
-$detail = null;
+        // Inisialisasi $update dan $detail dengan null
+        $update = null;
+        $detail = null;
 
-if ($existingDetail) {
-    $detail = DetailPegawai::where('user_id', $existingDetail->user_id)->get();
-    $update = $existingDetail;
-}
+        if ($existingDetail) {
+            $detail = DetailPegawai::where('user_id', $existingDetail->user_id)->get();
+            $update = $existingDetail;
+        }
 
-if ($existingDetail) {
-    return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update'));
-} else {
-    // Jika detail pegawai belum ada, tampilkan modal update profil
-    return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update'))
-        ->with('showUpdateModal', true);
-}
+        if ($existingDetail) {
+            return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update'));
+        } else {
+            // Jika detail pegawai belum ada, tampilkan modal update profil
+            return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update'))
+                ->with('showUpdateModal', true);
+        }
 
     
         // return view ('frontend.users.detail_user.index',compact('title','data','detail','existingDetail','post','dokumen','sertifikat','update'));

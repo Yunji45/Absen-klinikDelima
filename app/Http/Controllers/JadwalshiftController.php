@@ -128,7 +128,18 @@ class JadwalshiftController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Edit Jadwal Shift';
+        $jadwal = jadwalterbaru::find($id);
+        $user = User::all();
+        $bulan = date('m');
+        $tahun = date('Y');
+    
+        // Filter jadwal berdasarkan bulan dan tahun pada atribut 'masa_aktif'
+        $data = jadwalterbaru::whereYear('masa_aktif', $tahun)
+                            ->whereMonth('masa_aktif', $bulan)
+                            ->get();    
+        // return $user;
+        return view ('backend.admin.jadwalshift.edit',compact('title','user','data','bulan','tahun','jadwal'));
     }
 
     /**
@@ -140,7 +151,58 @@ class JadwalshiftController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'bulan' => 'required',
+            'masa_aktif' => 'required',
+            'masa_akhir' => 'required',
+        ]);
+
+        $data = jadwalterbaru::find($id);
+        if (!$data) {
+            return redirect()->back()->with('error', 'Jadwal Terbaru tidak ditemukan');
+        }
+        $data->user_id = $request->input('user_id');
+        $data->bulan = $request->input('bulan');
+        $data->masa_aktif = $request->input('masa_aktif');
+        $data->masa_akhir = $request->input('masa_akhir');
+        $data ->j1 = $request->j1;
+        $data ->j2 = $request->j2;
+        $data ->j3 = $request->j3;
+        $data ->j4 = $request->j4;
+        $data ->j5 = $request->j5;
+        $data ->j6 = $request->j6;
+        $data ->j7 = $request->j7;
+        $data ->j8 = $request->j8;
+        $data ->j9 = $request->j9;
+        $data ->j10 = $request->j10;
+        $data ->j11 = $request->j11;
+        $data ->j12 = $request->j12;
+        $data ->j13 = $request->j13;
+        $data ->j14 = $request->j14;
+        $data ->j15 = $request->j15;
+        $data ->j16 = $request->j16;
+        $data ->j17 = $request->j17;
+        $data ->j18 = $request->j18;
+        $data ->j19 = $request->j19;
+        $data ->j20 = $request->j20;
+        $data ->j21 = $request->j21;
+        $data ->j22 = $request->j22;
+        $data ->j23 = $request->j23;
+        $data ->j24 = $request->j24;
+        $data ->j25 = $request->j25;
+        $data ->j26 = $request->j26;
+        $data ->j27 = $request->j27;
+        $data ->j28 = $request->j28;
+        $data ->j29 = $request->j29;
+        $data ->j30 = $request->j30;
+        $data ->j31 = $request->j31;
+        $data->save();
+        if($data){
+            return redirect()->route('jadwal.shift')->with('success','Terimakasih Telah Update Jadwal Terbaru');
+        }else{
+            return redirect()->back()->with('error','Update Jadwal Terbaru Gagal');
+        }
     }
 
     /**

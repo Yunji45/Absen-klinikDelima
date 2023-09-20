@@ -86,6 +86,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/jadwal-save',[JadwalshiftController::class,'store'])->name('jadwal.save');
         Route::get('/jadwal-hapus/{id}',[JadwalshiftController::class,'destroy'])->name('jadwal.hapus');
         Route::get('/cari-jadwal', [JadwalshiftController::class,'cari'])->name('cari.jadwal');
+        Route::get('/jadwal-edit/{id}',[JadwalshiftController::class,'edit'])->name('jadwal.edit');
+        Route::post('/jadwal-update/{id}',[JadwalshiftController::class,'update'])->name('jadwal.update');
 
         //rubah jadwal
         Route::get('/data-permohonan',[RubahjadwalController::class,'indexAdmin'])->name('permohonan.index');

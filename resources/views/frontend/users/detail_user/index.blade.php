@@ -31,10 +31,10 @@
                         <div class="text-center mb-3">
                         
                         @if ($detail)
-        <h5>{{ $detail->isNotEmpty() ? $detail->first()->name : 'Belum Lengkap' }}</h5>
-    @else
-        <h5>Belum Lengkap</h5>
-    @endif
+                            <h5>{{ $detail->isNotEmpty() ? $detail->first()->name : 'Belum Lengkap' }}</h5>
+                        @else
+                            <h5>Belum Lengkap</h5>
+                        @endif
                         </div>
 
                         <div class="form-group row">
