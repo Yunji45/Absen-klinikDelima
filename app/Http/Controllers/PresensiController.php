@@ -46,28 +46,84 @@ class PresensiController extends Controller
     public function search(Request $request)
     {
         $request->validate([
-            'tanggal' => ['required']
+            'tanggal' => ['nullable', 'date'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable','date']
         ]);
-        $presents = presensi::whereTanggal($request->tanggal)->orderBy('jam_masuk','desc')->get();
-        $masuk = presensi::whereTanggal($request->tanggal)->whereKeterangan('masuk')->count();
-        $telat = presensi::whereTanggal($request->tanggal)->whereKeterangan('telat')->count();
-        $cuti = presensi::whereTanggal($request->tanggal)->whereKeterangan('cuti')->count();
-        $alpha = presensi::whereTanggal($request->tanggal)->whereKeterangan('alpha')->count();
-        $gantijaga = rubahjadwal::whereTanggal($request->tanggal)
-                                ->where('status','approve')
-                                ->where('permohonan','ganti_jaga')
-                                ->count();
-        $tukarjaga = rubahjadwal::whereTanggal($request->tanggal)
-                                ->where('status','approve')
-                                ->where('permohonan','tukar_jaga')
-                                ->count();
-        $permohonan = rubahjadwal::whereTanggal($request->tanggal)
-                                // ->where('status','approve')
-                                // ->where('permohonan','tukar_jaga')
-                                ->count();
+        $presents = Presensi::query(); // Mulai query builder
 
-        // $rank = $presents->firstItem();
-        return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan'));
+        if ($request->filled('tanggal')) {
+            $presents->where('tanggal', $request->tanggal);
+        } elseif ($request->filled('start_date') && $request->filled('end_date')) {
+            $presents->whereBetween('tanggal', [$request->start_date, $request->end_date]);
+        }
+
+        $presents = $presents->orderBy('jam_masuk', 'desc')->get();
+
+        $masuk = presensi::query()
+                        ->where('keterangan', 'Masuk')
+                        ->when($request->filled('tanggal'), function ($query) use ($request) {
+                            return $query->where('tanggal', $request->tanggal)->where('keterangan', 'Masuk');
+                        })
+                        ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                            return $query->whereBetween('tanggal', [$request->start_date, $request->end_date])->where('keterangan', 'Masuk');
+                        })->count();
+        $telat = presensi::query()
+                        ->where('keterangan', 'Telat')
+                        ->when($request->filled('tanggal'), function ($query) use ($request) {
+                            return $query->where('tanggal', $request->tanggal)->where('keterangan', 'Telat');
+                        })
+                        ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                            return $query->whereBetween('tanggal', [$request->start_date, $request->end_date])->where('keterangan', 'Telat');
+                        })->count();
+        $cuti = presensi::query()
+                        ->where('keterangan', 'Cuti')
+                        ->when($request->filled('tanggal'), function ($query) use ($request) {
+                            return $query->where('tanggal', $request->tanggal)->where('keterangan', 'Cuti');
+                        })
+                        ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                            return $query->whereBetween('tanggal', [$request->start_date, $request->end_date])->where('keterangan', 'Cuti');
+                        })->count();
+        $alpha = presensi::query()
+                        ->where('keterangan', 'Alpha')
+                        ->when($request->filled('tanggal'), function ($query) use ($request) {
+                            return $query->where('tanggal', $request->tanggal)->where('keterangan', 'Alpha');
+                        })
+                        ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                            return $query->whereBetween('tanggal', [$request->start_date, $request->end_date])->where('keterangan', 'Alpha');
+                        })->count();
+
+        $gantijaga = RubahJadwal::query()
+            ->where('status', 'approve')
+            ->when($request->filled('tanggal'), function ($query) use ($request) {
+                return $query->where('tanggal', $request->tanggal)->where('permohonan', 'ganti_jaga');
+            })
+            ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                return $query->whereBetween('tanggal', [$request->start_date, $request->end_date])->where('permohonan', 'ganti_jaga');
+            })
+            ->count();
+
+        $tukarjaga = RubahJadwal::query()
+            ->where('status', 'approve')
+            ->when($request->filled('tanggal'), function ($query) use ($request) {
+                return $query->where('tanggal', $request->tanggal)->where('permohonan', 'tukar_jaga');
+            })
+            ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                return $query->whereBetween('tanggal', [$request->start_date, $request->end_date])->where('permohonan', 'tukar_jaga');
+            })
+            ->count();
+
+        $permohonan = RubahJadwal::query()
+            ->when($request->filled('tanggal'), function ($query) use ($request) {
+                return $query->where('tanggal', $request->tanggal);
+            })
+            ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                return $query->whereBetween('tanggal', [$request->start_date, $request->end_date]);
+            })
+            ->count();
+
+        return view('backend.admin.index', compact('presents', 'masuk', 'telat', 'cuti', 'alpha', 'gantijaga', 'tukarjaga', 'permohonan'));
+ 
     }
 
     public function cari(Request $request, User $user)
@@ -76,7 +132,7 @@ class PresensiController extends Controller
             'bulan' => ['required']
         ]);
         $data = explode('-',$request->bulan);
-        $presents = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->orderBy('tanggal','desc')->paginate(5);
+        $presents = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->orderBy('tanggal','desc')->get();
         $masuk = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('masuk')->count();
         $telat = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('telat')->count();
         $cuti = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('cuti')->count();
@@ -743,12 +799,21 @@ class PresensiController extends Controller
         return $pdf->download('Presensi-per-day');            
     }
 
-    public function DownloadPerUser($user_id)
+    public function DownloadPerUser(Request $request, User $user)
     {
-        $presents = presensi::find($user_id);
-        $pdf = PDF::loadview('frontend.users.userpresensi',['presents'=>$presents]);
-        return $pdf->download('Presensi-per-user');            
-        // return $presents;
-    
+        $request->validate([
+            'bulan' => ['required']
+        ]);
+        $data = explode('-', $request->bulan);
+
+        $presents = presensi::whereUserId($user->id)
+            ->whereMonth('tanggal', $data[1])
+            ->whereYear('tanggal', $data[0])
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+        $pdf = PDF::loadView('frontend.users.userpresensi', compact('presents', 'user'));
+        return $pdf->download('Presensi-per-user.pdf');
     }
+
 }

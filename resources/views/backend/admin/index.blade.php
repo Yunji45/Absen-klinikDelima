@@ -163,17 +163,27 @@ Kehadiran - {{ config('app.name') }}
                 <div class="row">
                     <div class="col-lg-6 mb-1">
 
-                        <form action="{{ route('kehadiran.search') }}" method="get">
-                            <div class="form-group row">
-                                <label for="tanggal" class="col-form-label col-sm-3">Periode</label>
-                                <div class="input-group col-sm-6">
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ request('tanggal', date('Y-m-d')) }}" placeholder="YYYY-MM-DD">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit">Cari</button>
-                                    </div>
-                                </div>
+                    <form action="{{ route('kehadiran.search') }}" method="get">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="tanggal" class="col-form-label">By Tanggal:</label>
+                                <input type="date" class="form-control" name="tanggal" id="tanggal">
                             </div>
-                        </form>
+                            <div class="col-md-4">
+                                <label for="start_date" class="col-form-label">Start Date:</label>
+                                <input type="date" name="start_date" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="end_date" class="col-form-label">End Date:</label>
+                                <input type="date" name="end_date" class="form-control">
+                            </div>
+                            <div class="col mt-18">
+                                <button type="submit" class="btn btn-primary mt-4">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+
+
                     </div>
                     <!-- <div class="col-lg-6">
                         <div class="float-right">

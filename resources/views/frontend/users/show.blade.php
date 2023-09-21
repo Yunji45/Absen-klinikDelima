@@ -227,7 +227,7 @@ Absensi - Klinik Mitra Delima
                                 </button>
                             @endif
                         @endif
-                        <form class="float-right d-inline-block" action="" method="get">
+                        <form class="float-right d-inline-block" action="{{route('download.peruser',$user)}}" method="get">
                             <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
                             <button title="Download" type="submit" class="btn btn-sm btn-success">
                                 <i class="fas fa-download"></i>
@@ -289,9 +289,9 @@ Absensi - Klinik Mitra Delima
                                     @endif
                                 </tbody>
                             </table>
-                            <div class="float-right">
-                                {{ $presents->links() }}
-                            </div>
+                            <!-- <div class="float-right">
+                                presents->link()
+                            </div> -->
                         </div>
                     </div>
                 </div>

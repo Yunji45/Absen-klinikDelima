@@ -66,7 +66,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
 
         //download-kehadiran-backend
         Route::get('/download',[PresensiController::class,'DownloadPreDay'])->name('download.perday');
-        Route::get('/download-per-user/{id}',[PresensiController::class,'DownloadPerUser']);
+        Route::get('/download-per-user/{user}',[PresensiController::class,'DownloadPerUser'])->name('download.peruser');
 
         //cuti-backend
         Route::get('/data-izin',[CutiController::class,'index'])->name('konfirmasi.izin');
