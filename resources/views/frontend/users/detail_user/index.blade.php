@@ -333,6 +333,21 @@
                                 @error('skills') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        <div id="anak-anak">
+                            <h2>Data Anak-Anak</h2>
+                            <button type="button" id="tambah-anak">Tambah Anak</button>
+                            <div class="anak">
+                                <label for="nama_anak[]">Nama Anak</label>
+                                <input type="text" name="nama_anak[]" required>
+                                <label for="umur_anak[]">Umur Anak</label>
+                                <input type="text" name="umur_anak[]" required>
+                                <label for="anak_ke[]">Anak ke</label>
+                                <input type="text" name="anak_ke[]" required>
+                                <label for="tanggal_lahir_anak[]">Tanggal Lahir Anak</label>
+                                <input type="date" name="tanggal_lahir_anak[]" required>
+                            </div>
+                        </div>
+
 
                     </div>
                     <div class="modal-footer">
@@ -556,4 +571,24 @@
         }
     });
 </script>
+<script>
+    document.getElementById('tambah-anak').addEventListener('click', function () {
+        var anakDiv = document.createElement('div');
+        anakDiv.classList.add('anak');
+
+        anakDiv.innerHTML = `
+            <label for="nama_anak[]">Nama Anak</label>
+            <input type="text" name="nama_anak[]" required>
+            <label for="umur_anak[]">Umur Anak</label>
+            <input type="text" name="umur_anak[]" required>
+            <label for="anak_ke[]">Anak ke</label>
+            <input type="text" name="anak_ke[]" required>
+            <label for="tanggal_lahir_anak[]">Tanggal Lahir Anak</label>
+            <input type="date" name="tanggal_lahir_anak[]" required>
+        `;
+
+        document.getElementById('anak-anak').appendChild(anakDiv);
+    });
+</script>
+
 @endpush

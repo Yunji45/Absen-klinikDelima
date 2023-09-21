@@ -33,6 +33,8 @@ class DetailPegawai extends Model
         'number_of_children',
         'hobbies',
         'skills',
+        'status_pekerjaan',
+        'tes_psikologi',
     ];
 
     public function user ()

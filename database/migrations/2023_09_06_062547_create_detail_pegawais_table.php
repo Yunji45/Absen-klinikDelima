@@ -38,6 +38,8 @@ return new class extends Migration
             // $table->json('children_info')->nullable();
             $table->text('hobbies')->nullable();
             $table->text('skills')->nullable();
+            $table->string('status_pekerjaan')->nullable();
+            $table->string('tes_psikologi')->nullable();
             $table->timestamps();
         });
     }

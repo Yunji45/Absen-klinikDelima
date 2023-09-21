@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DetailPegawai;
+use App\Models\JumlahAnak;
 use App\Models\User;
 use App\Models\DokumenUser;
 use App\Models\SertifikatUser;
@@ -155,7 +156,28 @@ class DetailController extends Controller
             $detail ->number_of_children = $request->number_of_children;
             $detail ->hobbies = $request->hobbies;
             $detail ->skills = $request->skills;
+            $detail -> status_pekerjaan = null;
+            $detail -> tes_psikologi = null;
             $detail ->save();
+            if ($request->has('nama_anak')) {
+            $namaAnakArray = $request->nama_anak;
+            $umurAnakArray = $request->umur_anak;
+            $anakKeArray = $request->anak_ke;
+            $tanggalLahirAnakArray = $request->tanggal_lahir_anak;
+
+            foreach ($namaAnakArray as $key => $namaAnak) {
+                // Pastikan nama_anak yang tidak kosong
+                if (!empty($namaAnak)) {
+                    $anak = new JumlahAnak();
+                    $anak->user_id = Auth::user()->id;
+                    $anak->nama_anak = $namaAnak;
+                    $anak->umur = $umurAnakArray[$key];
+                    $anak->anak_ke = $anakKeArray[$key];
+                    $anak->tanggal_lahir = $tanggalLahirAnakArray[$key];
+                    $anak->save();
+                }
+            }
+        }
             // return $detail;
             return redirect()->back()->with('success','Terimakasih Sudah Lengkapi Profil');
         }
@@ -201,6 +223,8 @@ class DetailController extends Controller
             $detail ->number_of_children = $request->number_of_children;
             $detail ->hobbies = $request->hobbies;
             $detail ->skills = $request->skills;
+            $detail -> status_pekerjaan = null;
+            $detail -> tes_psikologi = null;
             $detail->save();
         
             return redirect()->back()->with('success', 'Terimakasih Sudah Update Profil');

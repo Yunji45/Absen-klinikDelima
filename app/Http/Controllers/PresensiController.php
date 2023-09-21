@@ -50,7 +50,7 @@ class PresensiController extends Controller
             'start_date' => ['nullable', 'date'],
             'end_date' => ['nullable','date']
         ]);
-        $presents = Presensi::query(); // Mulai query builder
+        $presents = Presensi::query();
 
         if ($request->filled('tanggal')) {
             $presents->where('tanggal', $request->tanggal);

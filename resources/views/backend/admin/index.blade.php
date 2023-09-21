@@ -166,7 +166,7 @@ Kehadiran - {{ config('app.name') }}
                     <form action="{{ route('kehadiran.search') }}" method="get">
                         <div class="form-row">
                             <div class="col-md-4">
-                                <label for="tanggal" class="col-form-label">By Tanggal:</label>
+                                <label for="tanggal" class="col-form-label">By Date:</label>
                                 <input type="date" class="form-control" name="tanggal" id="tanggal">
                             </div>
                             <div class="col-md-4">

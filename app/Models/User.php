@@ -88,4 +88,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(rubahjadwal::class);
     }
+
+    public function jumlahanak()
+    {
+        return $this->hasMany(JumlahAnak::class);
+    }
 }
