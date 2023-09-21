@@ -48,7 +48,7 @@ class PresensiController extends Controller
         $request->validate([
             'tanggal' => ['required']
         ]);
-        $presents = presensi::whereTanggal($request->tanggal)->orderBy('jam_masuk','desc')->paginate(6);
+        $presents = presensi::whereTanggal($request->tanggal)->orderBy('jam_masuk','desc')->get();
         $masuk = presensi::whereTanggal($request->tanggal)->whereKeterangan('masuk')->count();
         $telat = presensi::whereTanggal($request->tanggal)->whereKeterangan('telat')->count();
         $cuti = presensi::whereTanggal($request->tanggal)->whereKeterangan('cuti')->count();
@@ -66,8 +66,8 @@ class PresensiController extends Controller
                                 // ->where('permohonan','tukar_jaga')
                                 ->count();
 
-        $rank = $presents->firstItem();
-        return view('backend.admin.index', compact('presents','rank','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan'));
+        // $rank = $presents->firstItem();
+        return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan'));
     }
 
     public function cari(Request $request, User $user)

@@ -130,7 +130,14 @@ class RubahjadwalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $title = 'Hapus Permohonan';
+        $data = rubahjadwal::find($id);
+        $data->delete();
+        if ($data){
+            return redirect()->back()->with('success', 'Data Permohonan Berhasil Di Hapus');
+        }else {
+            return redirect()->back()->with('error', 'Data Permohonan Gagal Di Hapus');
+        }
     }
 
     public function indexAdmin()

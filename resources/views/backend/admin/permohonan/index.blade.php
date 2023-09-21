@@ -65,6 +65,7 @@ Permohonan Jadwal - Klinik Mitra Delima
                                             <i class="fas fa-lock"></i><strong> Verifikasi</strong>
                                         @endif
                                     </a>
+                                    <a href="{{route('permohonan.delete',$item->id)}}" class="btn btn-sm btn-primary" title="Detail User"><i class="fas fa-trash"></i>Hapus</a>
                                     </td>
                                 </tr>
                                 @endforeach

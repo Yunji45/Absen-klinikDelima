@@ -48,10 +48,12 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     
     //role admin
     Route::group(['roles' => 'admin'], function(){
+        //user-backend
         Route::get('/users/cari', [UserController::class,'search'])->name('users.search');
         Route::patch('/users/password/{user}', [UserController::class,'password'])->name('users.password');
         Route::resource('/users', UserController::class);
 
+        //kehadiran-backend
         Route::get('/kehadiran', [PresensiController::class,'index'])->name('kehadiran.index');
         Route::get('/kehadiran/cari', [PresensiController::class,'search'])->name('kehadiran.search');
         Route::get('/kehadiran/{user}/cari', [PresensiController::class,'cari'])->name('kehadiran.cari');
@@ -62,17 +64,17 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/kehadiran-tambah', [PresensiController::class,'store'])->name('kehadiran.store');
         Route::get('/presensi/cari/{user}',[PresensiController::class,'cari'])->name('cari.presensi.peruser');
 
-        //download
+        //download-kehadiran-backend
         Route::get('/download',[PresensiController::class,'DownloadPreDay'])->name('download.perday');
         Route::get('/download-per-user/{id}',[PresensiController::class,'DownloadPerUser']);
 
-        //cuti
+        //cuti-backend
         Route::get('/data-izin',[CutiController::class,'index'])->name('konfirmasi.izin');
         Route::get('/izin-form',[CutiController::class,'create'])->name('data.cuti');
         Route::get('/VerifikasiIzin/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
         Route::get('/RejectIzin/{id}/gagal',[CutiController::class,'RejectCuti'])->name('delete.izin.cuti');
 
-        //detailpegawai
+        //detailpegawai-backend
         Route::get('/detail-pegawai',[DetailController::class,'indexAdm'])->name('detail.pegawai.admin');
         Route::get('/hapus-info-pegawai/{id}',[DetailController::class,'delete'])->name('delete.pegawai.admin');
         Route::get('/detail-informasi/{id}',[DetailController::class,'show'])->name('detail.info.admin');
@@ -92,7 +94,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         //rubah jadwal
         Route::get('/data-permohonan',[RubahjadwalController::class,'indexAdmin'])->name('permohonan.index');
         Route::get('/Verifikasi/{id}/berhasil',[RubahjadwalController::class,'VerifPermohonan']);
-        Route::get('/Reject/{id}/gagal',[RubahjadwalController::class,'destroy']);
+        Route::get('/Reject/{id}/gagal',[RubahjadwalController::class,'destroy'])->name('permohonan.delete');
     });
     //role pegawai
     Route::group(['roles' => 'pegawai'], function(){
