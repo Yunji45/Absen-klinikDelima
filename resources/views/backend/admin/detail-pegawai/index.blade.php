@@ -11,12 +11,6 @@ Detail User - Klinik Mitra Delima
                 <div class="card shadow h-100">
                     <div class="card-header">
                         <h5 class="m-0 pt-1 font-weight-bold float-left">Detail Pegawai</h5>
-                        <form class="float-right d-inline-block" action="" method="get">
-                            <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
-                            <button title="Download" type="submit" class="btn btn-sm btn-success">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </form>
                     </div>
                     <div class="card-body">
                         <form action="" class="mb-3" method="get">

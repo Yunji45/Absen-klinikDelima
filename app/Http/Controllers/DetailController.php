@@ -10,6 +10,7 @@ use App\Models\DokumenUser;
 use App\Models\SertifikatUser;
 use Carbon\Carbon;
 use Auth;
+use PDF;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -286,8 +287,16 @@ class DetailController extends Controller
         $dokumen = DokumenUser::where('user_id', $id)->get();
         $sertifikat = SertifikatUser::where('user_id', $id)->get();
         $post = DetailPegawai::whereId($id)->first();
+        $jumlahanak = JumlahAnak::where('user_id')->get();
         // return $detail->user->foto;
-        return view ('backend.admin.detail-pegawai.show',compact('title','data','detail','dokumen','post','sertifikat'));
+        return view ('backend.admin.detail-pegawai.show',compact('title','data','detail','dokumen','post','sertifikat','jumlahanak'));
+    }
+
+    public function downdetail($id)
+    {
+        $detail =DetailPegawai::find($id);
+        $pdf = PDF::loadView('backend.admin.detail-pegawai.download', compact('detail'));
+        return $pdf->download('Profile-Pegawai.pdf');
     }
 
 }

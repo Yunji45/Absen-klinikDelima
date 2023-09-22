@@ -21,20 +21,11 @@
                 <a target="_blank" href="https://klinikmitradelima.com/">www.klinimitrakdelima.com</a>
             </h5>
         </center>
-		<table>
-			@foreach($presents as $present)
-				<tr>
-					<td>Nik   : {{$present->user->nik}}</td>
-				</tr>
-				<tr>
-					<td>Nama  : {{ $present->user->name }}</td>
-				</tr>
-			@endforeach
-		</table>
 
         <table class='table table-bordered'>
             <thead>
                 <tr>
+                    <th>Nama</th>
                     <th>Tanggal</th>
                     <th>Keterangan</th>
                     <th>Jam Masuk</th>
@@ -49,6 +40,7 @@
                 </tr>
                 @else @foreach ($presents as $present)
                 <tr>
+                    <td>{{$present->user->name}}</td>
                     <td>{{ date('d/m/Y', strtotime($present->tanggal)) }}</td>
                     <td>{{ $present->keterangan }}</td>
                     @if ($present->jam_masuk)

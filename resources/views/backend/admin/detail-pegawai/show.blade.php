@@ -17,6 +17,12 @@
             <div class="card shadow h-100">
                 <div class="card-header">
                     <h5 class="m-0 pt-1 font-weight-bold">{{$title}}</h5>
+                    <form class="float-right d-inline-block" action="{{route('download.detail.admin',$detail->id)}}" method="get">
+                            <button title="Download" type="submit" class="btn btn-sm btn-success">
+                                <i class="fas fa-download"></i>
+                            </button>
+                    </form>
+
                 </div>
                 <div class="card-body">
                         <div class="text-center mb-3">
@@ -63,6 +69,14 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->position}}</p>
                             </div>
+                            <div class="col-sm-2 text-left">Status pekerjaan</div>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">: {{ $detail->status_pekerjaan}}</p>
+                            </div>
+                            <div class="col-sm-2 text-left">Tes Psikologi</div>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">: {{ $detail->tes_psikologi}}</p>
+                            </div>
                             <div class="col-sm-2 text-left">No.Telp</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->phone }}</p>
@@ -99,6 +113,22 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->number_of_children  }}</p>
                             </div>
+                            @if (isset($detail->user->jumlahanak) && $detail->user->jumlahanak->isNotEmpty())
+                                @foreach ($detail->user->jumlahanak as $anak)
+                                        <div class="col-sm-2 text-left">Nama Anak</div>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static">: {{ $anak->nama_anak }}</p>
+                                        </div>
+                                        <div class="col-sm-2 text-left">Umur Anak</div>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static">: {{ $anak->umur }} Tahun</p>
+                                        </div>
+                                        <div class="col-sm-2 text-left">Tanggal Lahir Anak</div>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static">: {{ $anak->tanggal_lahir }}</p>
+                                        </div>
+                                @endforeach
+                            @endif
                             <div class="col-sm-2 text-left">Hobbies</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->hobbies  }}</p>
