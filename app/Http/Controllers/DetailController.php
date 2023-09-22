@@ -95,6 +95,8 @@ class DetailController extends Controller
             'number_of_children'   => 'required',
             'hobbies'   => 'required',
             'skills'   => 'required',
+            'status_pekerjaan' => 'required',
+            'tes_psikologi' => 'required',
         ]);
         $existingDetail = DetailPegawai::where('user_id', $request->user_id)->first();
         if($existingDetail){
@@ -133,13 +135,7 @@ class DetailController extends Controller
             $detail ->position = $request->position;
             $detail ->phone = $request->phone;
             $detail ->email = $request->email;
-            // Hitung masa kerja
-            // $hireDate = Carbon::parse($request->hire_date);
-            // $currentDate = Carbon::now();
-            // $lengthOfServiceMonths = $hireDate->diffInMonths($currentDate);
-            // $detail->length_of_service = ($lengthOfServiceMonths < 12) ? 1 : $lengthOfServiceMonths;
-            // $detail->hire_date = $request->hire_date;
-            // $detail->exit_date = $request->exit_date ?: null;
+
             $hireDate = Carbon::parse($request->hire_date);
             $exitDate = $request->exit_date ? Carbon::parse($request->exit_date) : Carbon::now();
             $lengthService = $hireDate->diff($exitDate);
@@ -156,9 +152,10 @@ class DetailController extends Controller
             $detail ->number_of_children = $request->number_of_children;
             $detail ->hobbies = $request->hobbies;
             $detail ->skills = $request->skills;
-            $detail -> status_pekerjaan = null;
-            $detail -> tes_psikologi = null;
+            $detail ->status_pekerjaan = $request->status_pekerjaan;
+            $detail ->tes_psikologi = $request->tes_psikologi;
             $detail ->save();
+            //beda database
             if ($request->has('nama_anak')) {
             $namaAnakArray = $request->nama_anak;
             $umurAnakArray = $request->umur_anak;
@@ -223,8 +220,8 @@ class DetailController extends Controller
             $detail ->number_of_children = $request->number_of_children;
             $detail ->hobbies = $request->hobbies;
             $detail ->skills = $request->skills;
-            $detail -> status_pekerjaan = null;
-            $detail -> tes_psikologi = null;
+            $detail ->status_pekerjaan = $request->status_pekerjaan;
+            $detail ->tes_psikologi = $request->tes_psikologi;
             $detail->save();
         
             return redirect()->back()->with('success', 'Terimakasih Sudah Update Profil');

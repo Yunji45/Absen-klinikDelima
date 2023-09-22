@@ -75,6 +75,14 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ isset($detail) && $detail->isNotEmpty() ? $detail->first()->position : 'Belum Ada' }}</p>
                             </div>
+                            <div class="col-sm-2 text-left">Status Pekerjaan</div>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">: {{ isset($detail) && $detail->isNotEmpty() ? $detail->first()->status_pekerjaan : 'Belum Ada' }}</p>
+                            </div>
+                            <div class="col-sm-2 text-left">Tes Psikologi</div>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">: {{ isset($detail) && $detail->isNotEmpty() ? $detail->first()->tes_psikologi : 'Belum Ada' }}</p>
+                            </div>
                             <div class="col-sm-2 text-left">No.Telp/HP</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ isset($detail) && $detail->isNotEmpty() ? $detail->first()->phone : 'Belum Ada' }}</p>
@@ -99,7 +107,7 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ isset($detail) && $detail->isNotEmpty() ? $detail->first()->exit_reason : 'Belum Ada' }}</p>
                             </div>
-                            <div class="col-sm-2 text-left">Status</div>
+                            <div class="col-sm-2 text-left">Status Pernikahan</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ isset($detail) && $detail->isNotEmpty() ? $detail->first()->marital_status : 'Belum Ada' }}</p>
                             </div>
@@ -259,6 +267,19 @@
                                 @error('position') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        <div class="form-group row" id="status_pekerjaan">
+                            <label for="status_pekerjaan" class="col-form-label col-sm-3">Status pekerjaan</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('status_pekerjaan') is-invalid @enderror" name="status_pekerjaan" id="status_pekerjaan">
+                                    <option value="" >Pilih</option>
+                                    <option value="Kontrak" >Kontrak</option>
+                                    <option value="Tetap" >Tetap</option>
+                                    <option value="Kontrak Jasa" >Kontrak Jasa</option>
+                                    <option value="Lepas Harian" >Lepas Harian</option>
+                                </select>
+                                @error('status_pekerjaan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                         <div class="form-group row" id="phone">
                             <label for="phone" class="col-form-label col-sm-3">No.Telepon/HP</label>
                             <div class="col-sm-9">
@@ -273,7 +294,13 @@
                                 @error('email') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
-
+                        <div class="form-group row" id="tes_psikologi">
+                            <label for="tes_psikologi" class="col-form-label col-sm-3">Tes Psikologi</label>
+                            <div class="col-sm-9">
+                                <input name="tes_psikologi" rows="4" class="form-control @error('tes_psikologi') is-invalid @enderror" required></input>
+                                @error('place_birth') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                         <div class="form-group row" id="hire_date">
                             <label for="hire_date" class="col-form-label col-sm-3">Mulai Bekerja</label>
                             <div class="col-sm-9">
@@ -296,12 +323,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="marital_status" class="col-form-label col-sm-3">Status</label>
+                            <label for="marital_status" class="col-form-label col-sm-3">Status Pernikahan</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('marital_status') is-invalid @enderror" name="marital_status" id="marital_status">
                                     <option value="Lajang" >Lajang</option>
                                     <option value="Menikah" >Menikah</option>
-                              </select>
+                                </select>
                                 @error('gender') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -333,7 +360,7 @@
                                 @error('skills') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div id="anak-anak">
+                        <!-- <div id="anak-anak">
                             <h2>Data Anak-Anak</h2>
                             <button type="button" id="tambah-anak">Tambah Anak</button>
                             <div class="anak">
@@ -346,7 +373,7 @@
                                 <label for="tanggal_lahir_anak[]">Tanggal Lahir Anak</label>
                                 <input type="date" name="tanggal_lahir_anak[]" required>
                             </div>
-                        </div>
+                        </div> -->
 
 
                     </div>
@@ -452,6 +479,19 @@
                                     @error('position') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+                            <div class="form-group row" id="status_pekerjaan">
+                                <label for="status_pekerjaan" class="col-form-label col-sm-3">Status pekerjaan</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control @error('status_pekerjaan') is-invalid @enderror" name="status_pekerjaan" id="status_pekerjaan" value="{{$detail->first()->status_pekerjaan}}">
+                                        <option value="" >Pilih</option>
+                                        <option value="Kontrak" >Kontrak</option>
+                                        <option value="Tetap" >Tetap</option>
+                                        <option value="Kontrak Jasa" >Kontrak Jasa</option>
+                                        <option value="Lepas Harian" >Lepas Harian</option>                                   
+                                    </select>
+                                    @error('status_pekerjaan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
                             <div class="form-group row" id="phone">
                                 <label for="phone" class="col-form-label col-sm-3">No.Telepon/HP</label>
                                 <div class="col-sm-9">
@@ -466,7 +506,13 @@
                                     @error('email') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-
+                            <div class="form-group row" id="tes_psikologi">
+                                <label for="tes_psikologi" class="col-form-label col-sm-3">Tes Psikologi</label>
+                                <div class="col-sm-9">
+                                    <input name="tes_psikologi" rows="4" class="form-control @error('tes_psikologi') is-invalid @enderror" required value="{{$detail->first()->tes_psikologi}}"></input>
+                                    @error('place_birth') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
                             <div class="form-group row" id="hire_date">
                                 <label for="hire_date" class="col-form-label col-sm-3">Mulai Bekerja</label>
                                 <div class="col-sm-9">
