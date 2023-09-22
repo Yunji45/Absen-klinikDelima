@@ -127,6 +127,26 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ isset($detail) && $detail->isNotEmpty() ? $detail->first()->skills : 'Belum Ada' }}</p>
                             </div>
+                            <!-- <div class="col-sm-2 text-left">Jumlah Anak</div>
+                            <div class="col-sm-10">
+                                <p class="form-control-static">: {{ isset($jumlahanak) && $jumlahanak->isNotEmpty() ? count($jumlahanak) : 'Belum Ada' }}</p>
+                            </div> -->
+                            @if (isset($jumlahanak) && $jumlahanak->isNotEmpty())
+                                @foreach ($jumlahanak as $anak)
+                                    <div class="col-sm-2 text-left">Nama Anak</div>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">: {{ $anak->nama_anak }}</p>
+                                    </div>
+                                    <div class="col-sm-2 text-left">Umur Anak</div>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">: {{ $anak->umur }} Tahun</p>
+                                    </div>
+                                    <div class="col-sm-2 text-left">Tanggal Lahir Anak</div>
+                                    <div class="col-sm-10">
+                                        <p class="form-control-static">: {{ $anak->tanggal_lahir }}</p>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <div class="text-center mb-3">
                             <h5>FILE PENDUKUNG</h5>
@@ -360,22 +380,32 @@
                                 @error('skills') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <!-- <div id="anak-anak">
-                            <h2>Data Anak-Anak</h2>
-                            <button type="button" id="tambah-anak">Tambah Anak</button>
-                            <div class="anak">
-                                <label for="nama_anak[]">Nama Anak</label>
-                                <input type="text" name="nama_anak[]" required>
-                                <label for="umur_anak[]">Umur Anak</label>
-                                <input type="text" name="umur_anak[]" required>
-                                <label for="anak_ke[]">Anak ke</label>
-                                <input type="text" name="anak_ke[]" required>
-                                <label for="tanggal_lahir_anak[]">Tanggal Lahir Anak</label>
-                                <input type="date" name="tanggal_lahir_anak[]" required>
+                        <div class="form-group row" id="anak-anak">
+                            <label for="nama_anak[]" class="col-form-label col-sm-3">Anak-Anak</label>
+                            <div class="col-sm-9">
+                                <button type="button" id="tambah-anak">Tambah Data Anak</button>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Anak</th>
+                                                    <th>Umur Anak</th>
+                                                    <th>Anak ke</th>
+                                                    <th>Tanggal Lahir Anak</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="anak">
+                                                    <td><input type="text" name="nama_anak[]"></td>
+                                                    <td><input type="text" name="umur_anak[]"></td>
+                                                    <td><input type="text" name="anak_ke[]"></td>
+                                                    <td><input type="date" name="tanggal_lahir_anak[]"></td>
+                                                </tr>
+                                            </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div> -->
-
-
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -572,6 +602,45 @@
                                     @error('skills') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+                            <!-- Form untuk mengedit data anak -->
+                            <div class="form-group row" id="anak-anak">
+                                <label for="nama_anak[]" class="col-form-label col-sm-3">Anak-Anak</label>
+                                <div class="col-sm-9">
+                                    <button type="button" id="update-anak">Tambah Data Anak</button>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Anak</th>
+                                                    <th>Umur Anak</th>
+                                                    <th>Anak ke</th>
+                                                    <th>Tanggal Lahir Anak</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if(count($jumlahanak) > 0)
+                                                    @foreach($jumlahanak as $key => $anak)
+                                                    <tr class="anak">
+                                                        <td><input type="text" name="nama_anak[]" value="{{$anak->nama_anak}}"></td>
+                                                        <td><input type="text" name="umur_anak[]" value="{{$anak->umur}}"></td>
+                                                        <td><input type="text" name="anak_ke[]" value="{{$anak->anak_ke}}"></td>
+                                                        <td><input type="date" name="tanggal_lahir_anak[]" value="{{$anak->tanggal_lahir}}"></td>
+                                                    </tr>
+                                                    @endforeach
+                                                @else
+                                                    <!-- Tampilkan satu baris kosong untuk menambah data anak baru -->
+                                                    <tr class="anak" style="display:none;">
+                                                        <td><input type="text" name="nama_anak[]"></td>
+                                                        <td><input type="text" name="umur_anak[]"></td>
+                                                        <td><input type="text" name="anak_ke[]"></td>
+                                                        <td><input type="date" name="tanggal_lahir_anak[]"></td>
+                                                    </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                         
@@ -618,23 +687,49 @@
     });
 </script>
 <script>
+    // document.getElementById('tambah-anak').addEventListener('click', function () {
+    //     var anakDiv = document.createElement('div');
+    //     anakDiv.classList.add('anak');
+
+    //     anakDiv.innerHTML = `
+    //         <label for="nama_anak[]">Nama Anak</label>
+    //         <input type="text" name="nama_anak[]" required>
+    //         <label for="umur_anak[]">Umur Anak</label>
+    //         <input type="text" name="umur_anak[]" required>
+    //         <label for="anak_ke[]">Anak ke</label>
+    //         <input type="text" name="anak_ke[]" required>
+    //         <label for="tanggal_lahir_anak[]">Tanggal Lahir Anak</label>
+    //         <input type="date" name="tanggal_lahir_anak[]" required>
+    //     `;
+
+    //     document.getElementById('anak-anak').appendChild(anakDiv);
+    // });
     document.getElementById('tambah-anak').addEventListener('click', function () {
-        var anakDiv = document.createElement('div');
-        anakDiv.classList.add('anak');
+    var tbody = document.querySelector('.table tbody'); // Temukan elemen tbody dalam tabel
+    var newRow = document.createElement('tr'); // Buat elemen baris baru
 
-        anakDiv.innerHTML = `
-            <label for="nama_anak[]">Nama Anak</label>
-            <input type="text" name="nama_anak[]" required>
-            <label for="umur_anak[]">Umur Anak</label>
-            <input type="text" name="umur_anak[]" required>
-            <label for="anak_ke[]">Anak ke</label>
-            <input type="text" name="anak_ke[]" required>
-            <label for="tanggal_lahir_anak[]">Tanggal Lahir Anak</label>
-            <input type="date" name="tanggal_lahir_anak[]" required>
-        `;
+    newRow.innerHTML = `
+        <td><input type="text" name="nama_anak[]" required></td>
+        <td><input type="text" name="umur_anak[]" required></td>
+        <td><input type="text" name="anak_ke[]" required></td>
+        <td><input type="date" name="tanggal_lahir_anak[]" required></td>
+    `;
 
-        document.getElementById('anak-anak').appendChild(anakDiv);
-    });
+    tbody.appendChild(newRow); // Tambahkan baris baru ke dalam tabel anak
+});
+</script>
+<script>
+    document.getElementById('update-anak').addEventListener('click', function () {
+    var tbody = document.querySelector('.table tbody'); // Temukan elemen tbody dalam tabel
+    var templateRow = tbody.querySelector('.anak[style="display:none;"]'); // Temukan baris template yang tersembunyi
+
+    // Klone baris template
+    var newRow = templateRow.cloneNode(true);
+    newRow.style.display = ''; // Tampilkan baris yang telah dikloning
+
+    tbody.appendChild(newRow); // Tambahkan baris baru ke dalam tabel anak
+});
+
 </script>
 
 @endpush

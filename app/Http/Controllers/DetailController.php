@@ -52,6 +52,7 @@ class DetailController extends Controller
         $existingDetail = DetailPegawai::where('user_id', Auth::user()->id)->first();
         $dokumen = DokumenUser::where('user_id', Auth::user()->id)->get();
         $sertifikat = SertifikatUser::where('user_id', Auth::user()->id)->get();
+        $jumlahanak = jumlahanak::where('user_id',Auth::user()->id)->get();
 
         // Inisialisasi $update dan $detail dengan null
         $update = null;
@@ -63,10 +64,10 @@ class DetailController extends Controller
         }
 
         if ($existingDetail) {
-            return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update'));
+            return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update','jumlahanak'));
         } else {
             // Jika detail pegawai belum ada, tampilkan modal update profil
-            return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update'))
+            return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update','jumlahanak'))
                 ->with('showUpdateModal', true);
         }
 
@@ -189,6 +190,7 @@ class DetailController extends Controller
     public function update(Request $request,$id)
     {
         $detail = DetailPegawai ::find($id);
+        $jumlahanak = Jumlahanak::find($id);
         if ($detail && $detail->user_id === Auth::user()->id) {
             // Simpan data yang diterima dari formulir ke model DetailPegawai
             $detail ->name = $request->name;
@@ -223,6 +225,29 @@ class DetailController extends Controller
             $detail ->status_pekerjaan = $request->status_pekerjaan;
             $detail ->tes_psikologi = $request->tes_psikologi;
             $detail->save();
+
+            if ($request->has('nama_anak')) {
+                $namaAnakArray = $request->nama_anak;
+                $umurAnakArray = $request->umur_anak;
+                $anakKeArray = $request->anak_ke;
+                $tanggalLahirAnakArray = $request->tanggal_lahir_anak;
+                // Hapus semua data anak-anak yang terkait dengan pegawai ini
+                JumlahAnak::where('user_id', Auth::user()->id)->delete();
+                // Kemudian, tambahkan data anak-anak yang baru dari formulir
+                foreach ($namaAnakArray as $key => $namaAnak) {
+                    if (!empty($namaAnak)) {
+                        $anak = new JumlahAnak();
+                        $anak->user_id = Auth::user()->id;
+                        $anak->nama_anak = $namaAnak;
+                        $anak->umur = $umurAnakArray[$key];
+                        $anak->anak_ke = $anakKeArray[$key];
+                        $anak->tanggal_lahir = $tanggalLahirAnakArray[$key];
+                        $anak->save();
+                    }
+                }
+            }
+        
+    
         
             return redirect()->back()->with('success', 'Terimakasih Sudah Update Profil');
         } else {
