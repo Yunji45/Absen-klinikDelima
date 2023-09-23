@@ -78,7 +78,7 @@
 
         <ul>
             <li>
-                <span style="display: inline-block; width: 145px;">Nomor Induk Personalia</span>
+                <span style="display: inline-block; width: 145px;">NIP</span>
                 :
                 {{$detail->user->nik}}</li>
             <li>
