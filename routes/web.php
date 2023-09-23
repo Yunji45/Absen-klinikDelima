@@ -35,6 +35,10 @@ use App\Http\Controllers\ErrorMas\ErrorController;
 Route::get('/face', function () {
     return view('api');
 });
+Route::get('/api', function () {
+    return view('testyu');
+});
+Route::get('/opencv',[FaceController::class,'index']);
 Route::get('/', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
 Route::post('/act-login', [AuthController::class,'login'])->name('auth.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
@@ -142,9 +146,4 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::get('/jadwal-shift-karyawan',[JadwalshiftController::class,'indexUser'])->name('jadwal.user');
     Route::get('/cari-jadwal-user', [JadwalshiftController::class,'cariJadwal'])->name('cari.jadwal.user');
 
-    Route::get('/api', function () {
-        return view('testyu');
-    });
-    Route::post('/compare-face', [FaceController::class,'compareFace']);
-    
 });

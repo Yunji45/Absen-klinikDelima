@@ -152,24 +152,6 @@
             <li>
                 <span style="display: inline-block; width: 145px;">Jumlah Anak</span>
                 :
-                {{$detail->number_of_children}}</li>
-            @if (isset($detail->user->jumlahanak) &&
-            $detail->user->jumlahanak->isNotEmpty()) @foreach ($detail->user->jumlahanak as
-            $anak)
-            <li>
-                <span style="display: inline-block; width: 145px;">Nama Anak</span>
-                :
-                {{$anak->nama_anak}}</li>
-            <li>
-                <span style="display: inline-block; width: 145px;">Umur Anak</span>
-                :
-                {{$anak->umur}}</li>
-            <li>
-                <span style="display: inline-block; width: 145px;">Tanggal Lahir</span>
-                :
-                {{$anak->tanggal_lahir}}</li>
-
-            @endforeach @endif
             <li>
                 <span style="display: inline-block; width: 145px;">Hobby</span>
                 :

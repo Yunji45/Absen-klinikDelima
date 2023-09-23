@@ -45,15 +45,15 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->place_birth }}, {{$detail->date_birth}}</p>
                             </div>
-                            <div class="col-sm-2 text-left">Gender</div>
+                            <div class="col-sm-2 text-left">Jenis kelamin</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->gender}}</p>
                             </div>
-                            <div class="col-sm-2 text-left">Religion</div>
+                            <div class="col-sm-2 text-left">Agama</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->religion }}</p>
                             </div>
-                            <div class="col-sm-2 text-left">Education</div>
+                            <div class="col-sm-2 text-left">Pendidikan Terakhir</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->education }}</p>
                             </div>
