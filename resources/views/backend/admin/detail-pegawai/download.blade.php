@@ -78,7 +78,7 @@
 
         <ul>
             <li>
-                <span style="display: inline-block; width: 145px;">NIK Pegawai</span>
+                <span style="display: inline-block; width: 145px;">Nomor Induk Personalia</span>
                 :
                 {{$detail->user->nik}}</li>
             <li>
