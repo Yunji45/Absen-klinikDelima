@@ -194,7 +194,7 @@ Absensi - Klinik Mitra Delima
                         <div class="table-responsive">
                             <table class="table table-sm">
                                 <tbody>
-                                    <tr><td>NIK</td><td>: {{ $user->nik }}</td></tr>
+                                    <tr><td>NIP</td><td>: {{ $user->nik }}</td></tr>
                                     <tr><td>Nama</td><td>: {{ $user->name }}</td></tr>
                                     <tr><td>Sebagai</td><td>: {{ $user->role }}</td></tr>
                                 </tbody>

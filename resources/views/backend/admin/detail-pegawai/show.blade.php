@@ -33,7 +33,7 @@
                             <h5>{{ $detail->name }}</h5>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-2 text-left">NIK</div>
+                            <div class="col-sm-2 text-left">NIP</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->user->nik }}</p>
                             </div>
