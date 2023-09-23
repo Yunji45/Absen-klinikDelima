@@ -401,15 +401,15 @@ class PresensiController extends Controller
         $tanggalSekarang = date('j'); // Tanggal hari ini (1-31)
         $bulanSekarang = date('F'); // Nama bulan saat ini (e.g., "September")
         // Cek alamat IP pengguna
-        $userIpAddress = request()->ip(); // Dapatkan alamat IP pengguna saat ini
-        $allowedIpAddress = config('absensi.ip_internet'); // Gantilah dengan alamat IP yang sesuai
+        // $userIpAddress = request()->ip(); // Dapatkan alamat IP pengguna saat ini
+        // $allowedIpAddress = config('absensi.ip_internet'); // Gantilah dengan alamat IP yang sesuai
 
-        if ($userIpAddress === $allowedIpAddress) {
-            return back()->with('success', 'Alamat IP Anda valid untuk melakukan absen.');
-        }else{
-            // return back()->with('error', 'Alamat IP Anda tidak valid untuk melakukan absen.');
-            return $userIpAddress;
-        }
+        // if ($userIpAddress === $allowedIpAddress) {
+        //     return back()->with('success', 'Alamat IP Anda valid untuk melakukan absen.');
+        // }else{
+        //     // return back()->with('error', 'Alamat IP Anda tidak valid untuk melakukan absen.');
+        //     return $userIpAddress;
+        // }
         $jadwal = jadwalterbaru::where('user_id', $user->id)
             ->where('masa_aktif', '<=', date('Y-m-d'))
             ->where('masa_akhir', '>=', date('Y-m-d'))
