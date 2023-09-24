@@ -102,6 +102,11 @@ class UserController extends Controller
                                 ->where('permohonan', 'tukar_jaga')
                                 ->where('status', 'approve')
                                 ->count();
+        $permohonan = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->where(function ($query) {
+                                    $query->where('keterangan', 'masuk')
+                                            ->orWhere('keterangan', 'telat');
+                                            })->count();       
+                        
 
         $totalJamTelat = 0;
         foreach ($kehadiran as $present) {
@@ -124,7 +129,7 @@ class UserController extends Controller
             }
         }
         // dd($tukarjaga);
-        return view('frontend.users.show',compact('user','presents','libur','masuk','telat','cuti','alpha','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni'));
+        return view('frontend.users.show',compact('user','presents','libur','masuk','telat','cuti','alpha','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan'));
 
     }
 

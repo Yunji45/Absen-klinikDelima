@@ -37,7 +37,7 @@ Ubah User - Klinik Mitra Delima
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-2"><label for="nik" class="float-right col-form-label">NIK</label></div>
+                            <div class="col-sm-2"><label for="nik" class="float-right col-form-label">NIP</label></div>
                             <div class="col-sm-10">
                                 <input type="text" onkeypress="return hanyaAngka(event)" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" value="{{ $user->nik }}">
                                 @error('nik') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror

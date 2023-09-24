@@ -11,7 +11,7 @@ Kehadiran - {{ config('app.name') }}
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Masuk</h5>
+                            <h5 class="card-title text-uppercase text-muted mb-0">On-time</h5>
                             <span class="h2 font-weight-bold mb-0">{{ $masuk }}</span>
                         </div>
                         <div class="col-auto">
@@ -131,7 +131,7 @@ Kehadiran - {{ config('app.name') }}
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Notif</h5>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Total hadir</h5>
                             <span class="h2 font-weight-bold mb-0">{{$permohonan}}</span>
                         </div>
                         <div class="col-auto">
@@ -196,8 +196,9 @@ Kehadiran - {{ config('app.name') }}
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>NIK</th>
+                                <th>NIP</th>
                                 <th>Nama</th>
+                                <th>Tanggal</th>
                                 <th>Keterangan</th>
                                 <th>Jam Masuk</th>
                                 <th>Jam Keluar</th>
@@ -217,6 +218,7 @@ Kehadiran - {{ config('app.name') }}
                                         <th>{{ $no++ }}.</th>
                                         <td><a href="{{ route('users.show',$present->user) }}">{{ $present->user->nik }}</a></td>
                                         <td>{{ $present->user->name }}</td>
+                                        <td>{{$present->tanggal}}</td>
                                         <td>{{ $present->keterangan }}</td>
                                         @if ($present->jam_masuk)
                                             <td>{{ date('H:i:s', strtotime($present->jam_masuk)) }}</td>

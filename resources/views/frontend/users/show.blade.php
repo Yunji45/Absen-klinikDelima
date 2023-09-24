@@ -41,7 +41,7 @@ Absensi - Klinik Mitra Delima
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Masuk</h5>
+                            <h5 class="card-title text-uppercase text-muted mb-0">On-time</h5>
                             <span class="h2 font-weight-bold mb-0">{{ $masuk }}</span>
                         </div>
                         <div class="col-auto">
@@ -51,7 +51,6 @@ Absensi - Klinik Mitra Delima
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Keterangan Masuk
                     </p>
                 </div>
             </div>
@@ -71,7 +70,6 @@ Absensi - Klinik Mitra Delima
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Telat {{ $totalJamTelat }} Jam bulan Ini
                     </p>
                 </div>
             </div>
@@ -91,7 +89,6 @@ Absensi - Klinik Mitra Delima
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Keterangan Cuti
                     </p>
                 </div>
             </div>
@@ -111,7 +108,6 @@ Absensi - Klinik Mitra Delima
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Keterangan Alpha
                     </p>
                 </div>
             </div>
@@ -132,7 +128,6 @@ Absensi - Klinik Mitra Delima
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Tukar Jaga
                     </p>
                 </div>
             </div>
@@ -152,7 +147,6 @@ Absensi - Klinik Mitra Delima
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Ganti Jaga
                     </p>
                 </div>
             </div>
@@ -172,11 +166,29 @@ Absensi - Klinik Mitra Delima
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        Total Lembur
                     </p>
                 </div>
             </div>
-        </div>        
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12" >
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Total Hadir</h5>
+                            <span class="h2 font-weight-bold mb-0">{{$permohonan}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                <i class="fas fa-thumbtack"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                    </p>
+                </div>
+            </div>
+        </div>                
     </div>
 @endsection
 

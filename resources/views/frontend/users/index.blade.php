@@ -55,7 +55,7 @@ Users Management - Klinik Mitra Delima
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>NIK</th>
+                                <th>NIP</th>
                                 <th>Nama</th>
                                 <th>Sebagai</th>
                                 <th>Saldo Cuti</th>
