@@ -28,7 +28,7 @@ class AuthController extends Controller
             //     return redirect()->intended('/customer');
             // }
         }else{
-            return redirect('/');
+            return redirect('/')->with('error','Mohon Periksa Kembali NIP dan Password Anda.');
         }
 
         // return redirect('/home');
