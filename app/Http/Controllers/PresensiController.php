@@ -62,7 +62,7 @@ class PresensiController extends Controller
             $presents->whereBetween('tanggal', [$request->start_date, $request->end_date]);
         }
 
-        $presents = $presents->orderBy('jam_masuk', 'desc')->get();
+        $presents = $presents->orderBy('tanggal', 'asc')->orderBy('jam_masuk', 'asc')->get();
 
         $masuk = presensi::query()
                         ->where('keterangan', 'Masuk')
