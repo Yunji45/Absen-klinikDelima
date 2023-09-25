@@ -242,7 +242,7 @@ class PresensiController extends Controller
                 $allowedIpAddress = config('absensi.ip_internet');
 
                 if ($userIpAddress !== $allowedIpAddress) {
-                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' . $userIpAddress . 'valid untuk melakukan absen.');
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda ' . $userIpAddress . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi TP-LINK_BB3588');
                 }
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i');
@@ -286,7 +286,7 @@ class PresensiController extends Controller
                 $allowedIpAddress = config('absensi.ip_internet');
 
                 if ($userIpAddress !== $allowedIpAddress) {
-                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda ' . $userIpAddress . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi TP-LINK_BB3588');
                 }
 
                 $currentDate = date('Y-m-d');
@@ -331,7 +331,7 @@ class PresensiController extends Controller
                 $allowedIpAddress = config('absensi.ip_internet');
 
                 if ($userIpAddress !== $allowedIpAddress) {
-                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda ' . $userIpAddress . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi TP-LINK_BB3588');
                 }
 
                 $currentDate = date('Y-m-d');
@@ -375,7 +375,7 @@ class PresensiController extends Controller
                 $allowedIpAddress = config('absensi.ip_internet');
 
                 if ($userIpAddress !== $allowedIpAddress) {
-                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda ' . $userIpAddress . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi TP-LINK_BB3588');
                 }
 
                 //tukar jaga
@@ -431,7 +431,7 @@ class PresensiController extends Controller
                 $allowedIpAddress = config('absensi.ip_internet');
 
                 if ($userIpAddress !== $allowedIpAddress) {
-                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda ' . $userIpAddress . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi TP-LINK_BB3588');
                 }
 
                 //ganti jaga
@@ -486,7 +486,7 @@ class PresensiController extends Controller
                 $allowedIpAddress = config('absensi.ip_internet');
 
                 if ($userIpAddress !== $allowedIpAddress) {
-                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda ' . $userIpAddress . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi TP-LINK_BB3588');
                 }
 
                 $user_id = $user->id;
@@ -536,10 +536,10 @@ class PresensiController extends Controller
                         return back()->with('error', 'Anda memiliki izin cuti untuk hari ini.');
                     }                            
             }else {
-                return redirect()->back()->with('error', 'Check-in tidak diizinkan untuk hari ini.');
+                return redirect()->back()->with('error', 'Absen tidak diizinkan untuk hari ini.');
             }
         } else {
-            return redirect()->back()->with('error', 'Jadwal tidak ditemukan.');
+            return redirect()->back()->with('error', 'Jadwal anda dihari ini tidak ditemukan.');
         }
     }
 

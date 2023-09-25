@@ -96,7 +96,7 @@
                             </div>
                             <div class="col-sm-2 text-left">Masa Bekerja</div>
                             <div class="col-sm-10">
-                                <p class="form-control-static">: {{ $detail->length_of_service }} Tahun</p>
+                                <p class="form-control-static">: {{ $detail->length_of_service }}</p>
                             </div>
                             <div class="col-sm-2 text-left">Akhir Bekerja</div>
                             <div class="col-sm-10">

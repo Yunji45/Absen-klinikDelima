@@ -16,7 +16,7 @@ Absensi - Klinik Mitra Delima
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-12 mb-2">
                 <div class="card shadow h-100">
                     <div class="card-body">
                         <form action="{{route('cari.presensi.peruser',$user)}}" class="mb-3" method="GET">
@@ -50,8 +50,6 @@ Absensi - Klinik Mitra Delima
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                    </p>
                 </div>
             </div>
         </div>
@@ -69,8 +67,6 @@ Absensi - Klinik Mitra Delima
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                    </p>
                 </div>
             </div>
         </div>
@@ -88,8 +84,6 @@ Absensi - Klinik Mitra Delima
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                    </p>
                 </div>
             </div>
         </div>
@@ -107,8 +101,6 @@ Absensi - Klinik Mitra Delima
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                    </p>
                 </div>
             </div>
         </div>
@@ -127,8 +119,6 @@ Absensi - Klinik Mitra Delima
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                    </p>
                 </div>
             </div>
         </div>
@@ -146,8 +136,6 @@ Absensi - Klinik Mitra Delima
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                    </p>
                 </div>
             </div>
         </div>        
@@ -165,8 +153,6 @@ Absensi - Klinik Mitra Delima
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                    </p>
                 </div>
             </div>
         </div>
@@ -184,8 +170,6 @@ Absensi - Klinik Mitra Delima
                             </div>
                         </div>
                     </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                    </p>
                 </div>
             </div>
         </div>                
