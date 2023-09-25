@@ -225,11 +225,8 @@ class PresensiController extends Controller
         // $userIpAddress = request()->ip(); // Dapatkan alamat IP pengguna saat ini
         // $allowedIpAddress = config('absensi.ip_internet'); // Gantilah dengan alamat IP yang sesuai
 
-        // if ($userIpAddress === $allowedIpAddress) {
-        //     return back()->with('success', 'Alamat IP Anda valid untuk melakukan absen.');
-        // }else{
-        //     // return back()->with('error', 'Alamat IP Anda tidak valid untuk melakukan absen.');
-        //     return $userIpAddress;
+        // if ($userIpAddress !== $allowedIpAddress) {
+        //     return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
         // }
         $jadwal = jadwalterbaru::where('user_id', $user->id)
             ->where('masa_aktif', '<=', date('Y-m-d'))
@@ -241,6 +238,12 @@ class PresensiController extends Controller
             $statusHariIni = $jadwal->$namaKolom;
             //absen SM
             if (in_array($statusHariIni, ['SM'])) {
+                $userIpAddress = request()->ip();
+                $allowedIpAddress = config('absensi.ip_internet');
+
+                if ($userIpAddress !== $allowedIpAddress) {
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                }
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i');
                 $user_id = $user->id;
@@ -279,6 +282,13 @@ class PresensiController extends Controller
                 return back()->with('success', 'Absen berhasil.');
             //absen PS
             }else if ($statusHariIni === 'PS') {
+                $userIpAddress = request()->ip();
+                $allowedIpAddress = config('absensi.ip_internet');
+
+                if ($userIpAddress !== $allowedIpAddress) {
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                }
+
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i');
                 $user_id = $user->id;
@@ -317,6 +327,13 @@ class PresensiController extends Controller
                 return back()->with('success', 'Absen berhasil.');
             //absen PM
             }else if ($statusHariIni === 'PM') {
+                $userIpAddress = request()->ip();
+                $allowedIpAddress = config('absensi.ip_internet');
+
+                if ($userIpAddress !== $allowedIpAddress) {
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                }
+
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i');
                 $user_id = $user->id;
@@ -354,6 +371,13 @@ class PresensiController extends Controller
                 Presensi::create($attendanceData);
                 return back()->with('success', 'Absen berhasil.');
             }else if ($statusHariIni === 'L1') {
+                $userIpAddress = request()->ip();
+                $allowedIpAddress = config('absensi.ip_internet');
+
+                if ($userIpAddress !== $allowedIpAddress) {
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                }
+
                 //tukar jaga
                 $user_id = $user->id;
                 $approvedRequest = rubahjadwal::where('user_id', $user_id)
@@ -403,6 +427,13 @@ class PresensiController extends Controller
                 Presensi::create($attendanceData);
                 return back()->with('success', 'Absen berhasil.');
             }else if($statusHariIni === 'L2'){
+                $userIpAddress = request()->ip();
+                $allowedIpAddress = config('absensi.ip_internet');
+
+                if ($userIpAddress !== $allowedIpAddress) {
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                }
+
                 //ganti jaga
                 $user_id = $user->id;
                 $approvedRequest = rubahjadwal::where('user_id', $user_id)
@@ -451,6 +482,13 @@ class PresensiController extends Controller
                 Presensi::create($attendanceData);
                 return back()->with('success', 'Absen berhasil.');
             }else if(in_array($statusHariIni, ['C', 'IJ'])){
+                $userIpAddress = request()->ip();
+                $allowedIpAddress = config('absensi.ip_internet');
+
+                if ($userIpAddress !== $allowedIpAddress) {
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                }
+
                 $user_id = $user->id;
 
                 // Check status izin cuti pengguna
