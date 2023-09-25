@@ -11,6 +11,17 @@ Detail User - Klinik Mitra Delima
                 <div class="card shadow h-100">
                     <div class="card-header">
                         <h5 class="m-0 pt-1 font-weight-bold float-left">Detail Pegawai</h5>
+                        <form class="float-right d-inline-block" action="" method="get">
+                            <button title="Download" type="submit" class="btn btn-sm btn-danger">
+                                <i class="fas fa-download">EXCEL</i>
+                            </button>
+                        </form>
+                        <form class="float-right d-inline-block" action="" method="get">
+                                <button title="Download" type="submit" class="btn btn-sm btn-success">
+                                    <i class="fas fa-download">PDF</i>
+                                </button>
+                        </form>
+
                     </div>
                     <div class="card-body">
                         <form action="" class="mb-3" method="get">

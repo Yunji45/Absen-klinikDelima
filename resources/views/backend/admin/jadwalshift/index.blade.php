@@ -45,13 +45,19 @@ tr:nth-child(even) {
                     <div class="card-header">
                         <h5 class="m-0 pt-1 font-weight-bold float-left">{{$title}}</h5>
                         <button title="Tambah Izin" type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#kehadiran">
-                                    <i class="fas fa-plus"></i>
+                                    <i class="fas fa-plus">ADD</i>
                                 </button>
+                        <form class="float-right d-inline-block" action="" method="get">
+                            <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
+                            <button title="Download" type="submit" class="btn btn-sm btn-danger">
+                                <i class="fas fa-download">EXCEL</i>
+                            </button>
+                        </form>
 
                         <form class="float-right d-inline-block" action="{{route('download.jadwal')}}" method="get">
                             <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
                             <button title="Download" type="submit" class="btn btn-sm btn-success">
-                                <i class="fas fa-download"></i>
+                                <i class="fas fa-download">PDF</i>
                             </button>
                         </form>
                     </div>

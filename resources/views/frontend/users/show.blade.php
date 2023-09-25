@@ -235,14 +235,20 @@ Absensi - Klinik Mitra Delima
                         @if ($libur == false)
                             @if (date('l') != 'Saturday' && date('l') != 'Sunday')
                                 <button title="Tambah Kehadiran" type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#kehadiran">
-                                    <i class="fas fa-plus"></i>
+                                    <i class="fas fa-plus">ADD</i>
                                 </button>
                             @endif
                         @endif
+                        <form class="float-right d-inline-block" action="" method="get">
+                            <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
+                            <button title="Download" type="submit" class="btn btn-sm btn-danger">
+                                <i class="fas fa-download">EXCEL</i>
+                            </button>
+                        </form>
                         <form class="float-right d-inline-block" action="{{route('download.peruser',$user)}}" method="get">
                             <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
                             <button title="Download" type="submit" class="btn btn-sm btn-success">
-                                <i class="fas fa-download"></i>
+                                <i class="fas fa-download">PDF</i>
                             </button>
                         </form>
                     </div>

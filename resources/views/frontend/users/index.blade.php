@@ -33,7 +33,7 @@ Users Management - Klinik Mitra Delima
         <div class="card shadow h-100">
             <div class="card-header">
                 <h5 class="m-0 pt-1 font-weight-bold float-left">Users Management</h5>
-                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right" title="Tambah User"><i class="fas fa-plus"></i></a>
+                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right" title="Tambah User"><i class="fas fa-plus"></i>ADD</a>
             </div>
             <div class="card-body">
                 <div class="row">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Kehadiran - {{ config('app.name') }}
+    Kehadiran - Klinik Mitra Delima
 @endsection
 
 @section('header')
@@ -154,9 +154,13 @@ Kehadiran - {{ config('app.name') }}
         <div class="card shadow h-100">
             <div class="card-header">
                 <h5 class="m-0 pt-1 font-weight-bold float-left">Kehadiran</h5>
+                <form class="float-right" action="" method="get">
+                    <input type="hidden" name="tanggal" value="{{ request('tanggal', date('Y-m-d')) }}">
+                    <button class="btn btn-sm btn-danger" type="submit" title="Download"><i class="fas fa-download">EXCEL</i></button>
+                </form>
                 <form class="float-right" action="{{ route('download.perday') }}" method="get">
                     <input type="hidden" name="tanggal" value="{{ request('tanggal', date('Y-m-d')) }}">
-                    <button class="btn btn-sm btn-primary" type="submit" title="Download"><i class="fas fa-download"></i></button>
+                    <button class="btn btn-sm btn-success" type="submit" title="Download"><i class="fas fa-download"></i>PDF</button>
                 </form>
             </div>
             <div class="card-body">
