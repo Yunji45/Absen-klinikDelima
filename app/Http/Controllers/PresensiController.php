@@ -242,7 +242,7 @@ class PresensiController extends Controller
                 $allowedIpAddress = config('absensi.ip_internet');
 
                 if ($userIpAddress !== $allowedIpAddress) {
-                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' .$userIpAddress. 'valid untuk melakukan absen.');
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda tidak' . $userIpAddress . 'valid untuk melakukan absen.');
                 }
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i');
