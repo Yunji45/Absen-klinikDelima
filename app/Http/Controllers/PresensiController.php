@@ -197,17 +197,17 @@ class PresensiController extends Controller
         $cuti = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('cuti')->count();
         $alpha = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('alpha')->count();
         $gantijaga = rubahjadwal::whereUserId(auth()->user()->id)
-                ->whereMonth('tanggal', $data[1])
-                ->whereYear('tanggal', $data[0])
-                ->where('status', 'approve')
-                ->where('permohonan', 'ganti_jaga')
-                ->count();
+                                ->whereMonth('tanggal', $data[1])
+                                ->whereYear('tanggal', $data[0])
+                                ->where('status', 'approve')
+                                ->where('permohonan', 'ganti_jaga')
+                                ->count();
         $tukarjaga = rubahjadwal::whereUserId(auth()->user()->id)
-                ->whereMonth('tanggal', $data[1])
-                ->whereYear('tanggal', $data[0])
-                ->where('status', 'approve')
-                ->where('permohonan', 'tukar_jaga')
-                ->count();
+                                ->whereMonth('tanggal', $data[1])
+                                ->whereYear('tanggal', $data[0])
+                                ->where('status', 'approve')
+                                ->where('permohonan', 'tukar_jaga')
+                                ->count();
         $permohonan = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->where(function ($query) {
                     $query->where('keterangan', 'masuk')
                             ->orWhere('keterangan', 'telat');
