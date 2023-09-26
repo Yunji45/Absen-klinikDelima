@@ -49,7 +49,6 @@ class RubahjadwalController extends Controller
     {
         $request->validate([
             'permohonan' => 'required',
-            'pengganti' => 'required',
             'tanggal' => 'required|date',
             'alasan' => 'required|string',
         ]);
@@ -77,7 +76,7 @@ class RubahjadwalController extends Controller
         $permohonan = [
             'user_id' => Auth()->user()->id,
             'permohonan' => $request->permohonan,
-            'pengganti' => $request->pengganti,
+            'pengganti' => $request->pengganti ?? null,
             'tanggal' => $request->tanggal,
             'alasan' => $request->alasan,
             'status' => 'pengajuan', 
@@ -152,11 +151,33 @@ class RubahjadwalController extends Controller
     public function VerifPermohonan($id)
     {
         $permohonan = rubahjadwal::find($id);
-        if($permohonan)
-        {
+        if ($permohonan) {
             $permohonan->update(['status' => 'approve']);
-            return redirect()->back()->with('success', 'Permohonan User Berhasil Di Setujui');
-        }else{
+
+            if ($permohonan->jenis_permohonan == 'lembur') {
+                // Mengubah status permohonan menjadi 'approve'
+                $permohonan->update(['status' => 'approve']);
+        
+                // Memanggil model jadwalterbarus untuk memperbarui jadwal
+                $jadwalterbarus = jadwalterbarus::where('user_id', $permohonan->user_id)->first();
+        
+                if ($jadwalterbarus) {
+                    // Memanggil metode updateJadwalLembur pada model jadwalterbarus
+                    $jadwalterbarus->updateJadwalLembur($permohonan->tanggal_pengajuan);
+                    
+                    // Mengubah jadwal saat ini menjadi 'LM'
+                    for ($i = 1; $i <= 31; $i++) {
+                        $namaKolom = 'j' . $i;
+                        $jadwalterbarus->$namaKolom = 'LM';
+                    }
+                    $jadwalterbarus->save();
+                }
+        
+                return redirect()->back()->with('success', 'Permohonan User Berhasil Di Setujui');
+            } else {
+                return redirect()->back()->with('error', 'Permohonan Tidak Di Setujui karena bukan jenis lembur');
+            }
+        } else {
             return redirect()->back()->with('error', 'Permohonan Tidak Di Setujui');
         }   
     }

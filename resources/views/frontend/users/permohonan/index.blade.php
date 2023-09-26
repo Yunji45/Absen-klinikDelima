@@ -101,6 +101,7 @@ Permohonan Jadwal - Klinik Mitra Delima
                                 <select class="form-control @error('permohonan') is-invalid @enderror" name="permohonan" id="permohonan">
                                     <option value="ganti_jaga">Ganti Jaga</option>
                                     <option value="tukar_jaga">Tukar Jaga</option>
+                                    <option value="lembur">Lembur</option>
                                 </select>
                                 @error('permohonan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
@@ -109,6 +110,7 @@ Permohonan Jadwal - Klinik Mitra Delima
                             <label for="pengganti" class="col-form-label col-sm-3">Pengganti</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('pengganti') is-invalid @enderror" name="pengganti" id="pengganti">
+                                    <option value="">Tidak Ada</option>
                                     @foreach ($user as $item)
                                     <option value="{{$item->name}}">{{$item->name}}</option>
                                     @endforeach
