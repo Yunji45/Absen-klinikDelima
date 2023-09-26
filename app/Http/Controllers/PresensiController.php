@@ -38,13 +38,17 @@ class PresensiController extends Controller
             ->where('permohonan', 'tukar_jaga')
             ->where('status', 'approve')
             ->count();
+        $lembur = rubahjadwal::where('tanggal', date('Y-m-d'))
+            ->where('permohonan', 'tukar_jaga')
+            ->where('status', 'approve')
+            ->count();
         // $permohonan = rubahjadwal::whereDate('tanggal', now()->format('Y-m-d'))->count();
         $permohonan = presensi::whereTanggal(date('Y-m-d'))->where(function ($query) {
             $query->where('keterangan', 'masuk')
                   ->orWhere('keterangan', 'telat');
         })->count();       
         // $rank = $presents->firstItem();
-        return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan'));
+        return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
     }
 
     public function search(Request $request)
@@ -116,6 +120,15 @@ class PresensiController extends Controller
                 return $query->whereBetween('tanggal', [$request->start_date, $request->end_date])->where('permohonan', 'tukar_jaga');
             })
             ->count();
+        $lembur = RubahJadwal::query()
+            ->where('status', 'approve')
+            ->when($request->filled('tanggal'), function ($query) use ($request) {
+                return $query->where('tanggal', $request->tanggal)->where('permohonan', 'lembur');
+            })
+            ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                return $query->whereBetween('tanggal', [$request->start_date, $request->end_date])->where('permohonan', 'lembur');
+            })
+            ->count();
 
         $permohonan = presensi::query()
                 ->when($request->filled('tanggal'), function ($query) use ($request) {
@@ -128,7 +141,7 @@ class PresensiController extends Controller
                         $query->where('keterangan', 'masuk')->orWhere('keterangan', 'telat');
                     })->whereBetween('tanggal', [$request->start_date, $request->end_date]);
                 })->count();
-        return view('backend.admin.index', compact('presents', 'masuk', 'telat', 'cuti', 'alpha', 'gantijaga', 'tukarjaga', 'permohonan'));
+        return view('backend.admin.index', compact('presents', 'masuk', 'telat', 'cuti', 'alpha', 'gantijaga', 'tukarjaga', 'permohonan','lembur'));
  
     }
 
@@ -156,6 +169,13 @@ class PresensiController extends Controller
                                 ->where('status', 'approve')
                                 ->where('permohonan', 'tukar_jaga')
                                 ->count();
+        $lembur = rubahjadwal::whereUserId($user->id)
+                                ->whereMonth('tanggal', $data[1])
+                                ->whereYear('tanggal', $data[0])
+                                ->where('status', 'approve')
+                                ->where('permohonan', 'lembur')
+                                ->count();
+
         $permohonan = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->where(function ($query) {
                                     $query->where('keterangan', 'masuk')
                                             ->orWhere('keterangan', 'telat');
@@ -182,7 +202,7 @@ class PresensiController extends Controller
         //     }
         // }
         // return view('frontend.users.show', compact('presents','user','masuk','telat','cuti','alpha','libur','totalJamTelat','gantijaga','tukarjaga','permohonan'));
-        return view('frontend.users.show', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan'));
+        return view('frontend.users.show', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur'));
         // return redirect()->back();
     }
 
@@ -209,11 +229,17 @@ class PresensiController extends Controller
                                 ->where('status', 'approve')
                                 ->where('permohonan', 'tukar_jaga')
                                 ->count();
+        $lembur = rubahjadwal::whereUserId(auth()->user()->id)
+                                ->whereMonth('tanggal', $data[1])
+                                ->whereYear('tanggal', $data[0])
+                                ->where('status', 'approve')
+                                ->where('permohonan', 'lembur')
+                                ->count();
         $permohonan = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->where(function ($query) {
                     $query->where('keterangan', 'masuk')
                             ->orWhere('keterangan', 'telat');
                             })->count();
-        return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan'));
+        return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
     }
 
     public function checkIn(Request $request)
@@ -610,13 +636,18 @@ class PresensiController extends Controller
                             ->whereYear('tanggal', date('Y'))
                             ->where('permohonan', 'tukar_jaga')
                             ->count();
+        $lembur = rubahjadwal::whereUserId(auth()->user()->id)
+                            ->whereMonth('tanggal', date('m'))
+                            ->whereYear('tanggal', date('Y'))
+                            ->where('permohonan', 'lembur')
+                            ->count();
         $permohonan = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->where(function ($query) {
             $query->where('keterangan', 'masuk')
                     ->orWhere('keterangan', 'telat');
                     })->count();       
                     
         // return $permohonan;
-        return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan'));
+        return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
     }
 
     /**

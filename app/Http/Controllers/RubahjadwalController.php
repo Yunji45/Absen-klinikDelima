@@ -148,37 +148,36 @@ class RubahjadwalController extends Controller
         return view ('backend.admin.permohonan.index',compact('title','permohonan'));
     }
 
-    public function VerifPermohonan($id)
+    public function VerifPermohonan(Request $request ,$id)
     {
         $permohonan = rubahjadwal::find($id);
-        if ($permohonan) {
-            $permohonan->update(['status' => 'approve']);
 
-            if ($permohonan->jenis_permohonan == 'lembur') {
+        if ($permohonan) {
+            if ($permohonan->permohonan == 'lembur') {
+                if ($permohonan->tanggal) {
+                    $jadwalterbarus = jadwalterbaru::where('user_id', $permohonan->user_id)->first();
+    
+                    if ($jadwalterbarus) {
+                        $namaKolom = 'j' . Carbon::parse($permohonan->tanggal)->format('d');
+                        $jadwalterbarus->$namaKolom = 'LL';
+                        $jadwalterbarus->save();
+                    }
+                }
+    
                 // Mengubah status permohonan menjadi 'approve'
                 $permohonan->update(['status' => 'approve']);
-        
-                // Memanggil model jadwalterbarus untuk memperbarui jadwal
-                $jadwalterbarus = jadwalterbarus::where('user_id', $permohonan->user_id)->first();
-        
-                if ($jadwalterbarus) {
-                    // Memanggil metode updateJadwalLembur pada model jadwalterbarus
-                    $jadwalterbarus->updateJadwalLembur($permohonan->tanggal_pengajuan);
-                    
-                    // Mengubah jadwal saat ini menjadi 'LM'
-                    for ($i = 1; $i <= 31; $i++) {
-                        $namaKolom = 'j' . $i;
-                        $jadwalterbarus->$namaKolom = 'LM';
-                    }
-                    $jadwalterbarus->save();
-                }
-        
+    
                 return redirect()->back()->with('success', 'Permohonan User Berhasil Di Setujui');
-            } else {
-                return redirect()->back()->with('error', 'Permohonan Tidak Di Setujui karena bukan jenis lembur');
+            } elseif ($permohonan->permohonan == 'ganti_jaga') {
+                $permohonan->update(['status' => 'approve']);
+                return redirect()->back()->with('success', 'Permohonan Ganti Jaga Berhasil Di Setujui');
+            }else if($permohonan->permohonan == 'tukar_jaga'){
+                $permohonan->update(['status' => 'approve']);
+                return redirect()->back()->with('success', 'Permohonan Tukar Jaga Berhasil Di Setujui');
             }
         } else {
             return redirect()->back()->with('error', 'Permohonan Tidak Di Setujui');
-        }   
+        }
+    
     }
 }

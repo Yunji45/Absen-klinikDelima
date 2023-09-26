@@ -145,7 +145,7 @@ Absensi - Klinik Mitra Delima
                     <div class="row">
                         <div class="col">
                             <h5 class="card-title text-uppercase text-muted mb-0">Lembur</h5>
-                            <span class="h2 font-weight-bold mb-0">0</span>
+                            <span class="h2 font-weight-bold mb-0">{{$lembur}}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -216,7 +216,7 @@ Absensi - Klinik Mitra Delima
                 <div class="card shadow h-100">
                     <div class="card-header">
                         <h5 class="m-0 pt-1 font-weight-bold float-left">Kehadiran</h5>
-                        @if ($libur == false)
+                        @if ($presents == false)
                             @if (date('l') != 'Saturday' && date('l') != 'Sunday')
                                 <button title="Tambah Kehadiran" type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#kehadiran">
                                     <i class="fas fa-plus">ADD</i>
@@ -246,6 +246,7 @@ Absensi - Klinik Mitra Delima
                                         <th>Jam Masuk</th>
                                         <th>Jam Keluar</th>
                                         <th>Total Jam</th>
+                                        <th>Total Lembur</th>
                                         <th>Opsi</th>
                                     </tr>
                                 </thead>

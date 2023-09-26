@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('masa_akhir')->nullable();
             for ($i = 1; $i <= 31; $i++) {
                 $namaKolom = 'j' . $i;
-                $table->enum($namaKolom, ['PS','PM', 'SM', 'L1', 'L2', 'C', 'IJ','LM','MM'])->nullable();
+                $table->enum($namaKolom, ['PS','PM', 'SM', 'L1', 'L2', 'C', 'IJ','LL','MM'])->nullable();
             }
             $table->timestamps();
         });

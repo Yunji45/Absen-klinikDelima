@@ -102,6 +102,12 @@ class UserController extends Controller
                                 ->where('permohonan', 'tukar_jaga')
                                 ->where('status', 'approve')
                                 ->count();
+        $lembur = rubahjadwal::whereUserId($user->id)
+                                ->whereMonth('tanggal', $bulanIni)
+                                ->whereYear('tanggal', $tahunIni)
+                                ->where('permohonan', 'lembur')
+                                ->where('status', 'approve')
+                                ->count();
         $permohonan = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->where(function ($query) {
                                     $query->where('keterangan', 'masuk')
                                             ->orWhere('keterangan', 'telat');
@@ -112,24 +118,24 @@ class UserController extends Controller
         foreach ($kehadiran as $present) {
             $totalJamTelat = $totalJamTelat + (\Carbon\Carbon::parse($present->jam_masuk)->diffInHours(\Carbon\Carbon::parse(config('absensi.jam_masuk'))));
         }
-        $url = 'https://kalenderindonesia.com/api/YZ35u6a7sFWN/libur/masehi/'.date('Y/m');
-        $kalender = file_get_contents($url);
-        $kalender = json_decode($kalender, true);
-        $libur = false;
-        $holiday = null;
-        if ($kalender['data'] != false) {
-            if ($kalender['data']['holiday']['data']) {
-                foreach ($kalender['data']['holiday']['data'] as $key => $value) {
-                    if ($value['date'] == date('Y-m-d')) {
-                        $holiday = $value['name'];
-                        $libur = true;
-                        break;
-                    }
-                }
-            }
-        }
+        // $url = 'https://kalenderindonesia.com/api/YZ35u6a7sFWN/libur/masehi/'.date('Y/m');
+        // $kalender = file_get_contents($url);
+        // $kalender = json_decode($kalender, true);
+        // $libur = false;
+        // $holiday = null;
+        // if ($kalender['data'] != false) {
+        //     if ($kalender['data']['holiday']['data']) {
+        //         foreach ($kalender['data']['holiday']['data'] as $key => $value) {
+        //             if ($value['date'] == date('Y-m-d')) {
+        //                 $holiday = $value['name'];
+        //                 $libur = true;
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
         // dd($tukarjaga);
-        return view('frontend.users.show',compact('user','presents','libur','masuk','telat','cuti','alpha','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan'));
+        return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
 
     }
 

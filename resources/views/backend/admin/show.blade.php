@@ -113,7 +113,7 @@
                     <div class="row">
                         <div class="col">
                             <h5 class="card-title text-uppercase text-muted mb-0">Lembur</h5>
-                            <span class="h2 font-weight-bold mb-0">0</span>
+                            <span class="h2 font-weight-bold mb-0">{{$lembur}}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -172,6 +172,7 @@
                                 <th>Jam Masuk</th>
                                 <th>Jam Keluar</th>
                                 <th>Total Jam</th>
+                                <th>Total Lembur</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -192,7 +193,7 @@
                                         @if($present->jam_keluar)
                                             <td>{{ date('H:i:s', strtotime($present->jam_keluar)) }}</td>
                                             <td>
-                                                @if (strtotime($present->jam_keluar) <= strtotime($present->jam_masuk))
+                                                <!-- @if (strtotime($present->jam_keluar) <= strtotime($present->jam_masuk))
                                                     {{ 21 - (\Carbon\Carbon::parse($present->jam_masuk)->diffInHours(\Carbon\Carbon::parse($present->jam_keluar))) }}
                                                 @else
                                                     @if (strtotime($present->jam_keluar) >= strtotime(config('absensi.jam_pulang') . ' +2 hours'))
@@ -200,9 +201,17 @@
                                                     @else
                                                         {{ (\Carbon\Carbon::parse($present->jam_masuk)->diffInHours(\Carbon\Carbon::parse($present->jam_keluar))) - 1 }}
                                                     @endif
-                                                @endif
+                                                @endif -->
+                                                @php
+                                                    $jamMasuk = \Carbon\Carbon::parse($present->jam_masuk);
+                                                    $jamKeluar = \Carbon\Carbon::parse($present->jam_keluar);
+                                                    $totalJam = $jamMasuk->diffInHours($jamKeluar);
+                                                @endphp
+                                                {{ $totalJam }}
                                             </td>
+                                            <td>-</td>
                                         @else
+                                            <td>-</td>
                                             <td>-</td>
                                             <td>-</td>
                                         @endif
