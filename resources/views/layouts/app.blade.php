@@ -137,8 +137,8 @@
                             </div>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="#" >
-                                <i class="fa fa-power-off text-danger"></i> Rubah IP Address
+                            <a class="nav-link" href="{{route('ip.index')}}" >
+                                <i class="fa fa-power-off text-danger"></i>Setting IP Address
                             </a>
                         </li>
 

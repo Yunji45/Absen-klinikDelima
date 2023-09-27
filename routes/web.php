@@ -14,6 +14,7 @@ use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\JadwalshiftController;
 use App\Http\Controllers\RubahjadwalController;
 use App\Http\Controllers\FaceController;
+use App\Http\Controllers\IPConfigController;
 
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
@@ -100,6 +101,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/data-permohonan',[RubahjadwalController::class,'indexAdmin'])->name('permohonan.index');
         Route::get('/Verifikasi/{id}/berhasil',[RubahjadwalController::class,'VerifPermohonan']);
         Route::get('/Reject/{id}/gagal',[RubahjadwalController::class,'destroy'])->name('permohonan.delete');
+
+        //rubahip
+        Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
+        Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');
     });
     //role pegawai
     Route::group(['roles' => 'pegawai'], function(){
