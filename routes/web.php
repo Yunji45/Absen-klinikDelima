@@ -15,6 +15,8 @@ use App\Http\Controllers\JadwalshiftController;
 use App\Http\Controllers\RubahjadwalController;
 use App\Http\Controllers\FaceController;
 use App\Http\Controllers\IPConfigController;
+use App\Http\Controllers\HelpITController;
+
 
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
@@ -150,5 +152,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::get('/download-jadwal',[JadwalshiftController::class,'jadwaldownload'])->name('download.jadwal');
     Route::get('/jadwal-shift-karyawan',[JadwalshiftController::class,'indexUser'])->name('jadwal.user');
     Route::get('/cari-jadwal-user', [JadwalshiftController::class,'cariJadwal'])->name('cari.jadwal.user');
+
+    //HelpIT
+    Route::get('/help-IT', [HelpITController::class,'index'])->name('help-IT');
 
 });
