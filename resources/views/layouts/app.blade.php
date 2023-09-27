@@ -136,6 +136,11 @@
                                 <!-- Tambahkan lebih banyak opsi dropdown sesuai kebutuhan -->
                             </div>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#" >
+                                <i class="fa fa-power-off text-danger"></i> Rubah IP Address
+                            </a>
+                        </li>
 
                     @else
                         @if (Request::segment(1) == 'daftar-hadir')
@@ -183,6 +188,11 @@
                     @endif
                             <i class="ni ni-key-25 text-danger"></i> Ganti Password
                         </a>
+                    </li>
+                    <li class="nav-item ">
+                            <a class="nav-link" href="#" >
+                                <i class="fa fa-question-circle text-primary"></i> Help IT
+                            </a>
                     </li>
                 </ul>
                 <hr class="my-3">

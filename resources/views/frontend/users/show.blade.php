@@ -216,13 +216,9 @@ Absensi - Klinik Mitra Delima
                 <div class="card shadow h-100">
                     <div class="card-header">
                         <h5 class="m-0 pt-1 font-weight-bold float-left">Kehadiran</h5>
-                        @if ($presents == false)
-                            @if (date('l') != 'Saturday' && date('l') != 'Sunday')
                                 <button title="Tambah Kehadiran" type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#kehadiran">
                                     <i class="fas fa-plus">ADD</i>
                                 </button>
-                            @endif
-                        @endif
                         <form class="float-right d-inline-block" action="" method="get">
                             <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
                             <button title="Download" type="submit" class="btn btn-sm btn-danger">
@@ -285,7 +281,49 @@ Absensi - Klinik Mitra Delima
                                                         {{ $totalJam }}
 
                                                     </td>
+                                                    <td>                
+                                                    @php
+                                                        // Mendapatkan data jadwalterbaru untuk hari ini
+                                                        $today = \Carbon\Carbon::now()->format('Y-m-d');
+                                                        $user_id = $present->user_id; // Menggunakan user_id dari $present
+
+                                                        $jadwal = \App\Models\Jadwalterbaru::where('user_id', $user_id)
+                                                            ->where('masa_aktif', '<=', $today)
+                                                            ->where('masa_akhir', '>=', $today)
+                                                            ->first();
+
+                                                        // Menginisialisasi hasil
+                                                        $result = '';
+                                                        $totalJamKerja = 0; // Inisialisasi totalJamKerja
+
+                                                        // Periksa apakah ada jadwal untuk hari ini
+                                                        if ($jadwal) {
+                                                            $namaKolom = 'j' . \Carbon\Carbon::now()->day; // Mendapatkan nama kolom sesuai dengan hari ini
+                                                            $jadwalterbaru = $jadwal->$namaKolom;
+
+                                                            if ($jadwalterbaru == 'LL') {
+                                                                // Jika jadwal adalah "LL" (Libur Lembur)
+                                                                $jamMasuk = \Carbon\Carbon::parse($present->jam_masuk);
+                                                                $jamKeluar = \Carbon\Carbon::parse($present->jam_keluar);
+                                                                $totalJamKerja = $jamMasuk->diffInHours($jamKeluar);
+
+                                                                if ($totalJamKerja > 9) {
+                                                                    $result = ($totalJamKerja - 9) . ' Jam';
+                                                                } 
+                                                            } else {
+                                                                $result = '0 Jam';
+                                                            }
+                                                        } else {
+                                                            // Tidak ada jadwal untuk hari ini
+                                                            $result = 'Tidak ada lembur hari ini';
+                                                        }
+                                                    @endphp
+
+                                                    {{ $result }}
+
+                                                    </td>
                                                 @else
+                                                    <td>-</td>
                                                     <td>-</td>
                                                     <td>-</td>
                                                 @endif
@@ -319,7 +357,7 @@ Absensi - Klinik Mitra Delima
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="post">
+                <form action="{{ route('kehadiran.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
@@ -364,8 +402,9 @@ Absensi - Klinik Mitra Delima
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="formUbahKehadiran" action="" method="post">
-                    @csrf @method('patch')
+                <form id="formUbahKehadiran" action="{{ route('ajax.get.kehadiran') }}" method="post">
+                    @csrf
+                    @method('patch')
                     <div class="modal-body">
                         <h5 class="mb-3" id="tanggal"></h5>
                         <input type="hidden" name="user_id" value="{{ $user->id }}">

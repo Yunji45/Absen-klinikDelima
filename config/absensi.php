@@ -2,6 +2,9 @@
 
 return [
     'ip_internet'    => env('IP_ADDRESS', '36.74.42.40'),
+    'ip_internet_ke2' => env('IP_ADDRESS', ''),
+    'ip_internet_ke3' => env('IP_ADDRESS', ''),
+
     'jam_masuk'     => env('JAM_MASUK', '00:00'),
     'jam_keluar'    => env('JAM_KELUAR', '24:00'),
 
@@ -17,3 +20,5 @@ return [
 ];
 //jam database berbeda dengan jam WIB
 //jam 01:00 berarti jam 08:00
+//user
+//user1234
