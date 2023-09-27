@@ -39,7 +39,7 @@ class PresensiController extends Controller
             ->where('status', 'approve')
             ->count();
         $lembur = rubahjadwal::where('tanggal', date('Y-m-d'))
-            ->where('permohonan', 'tukar_jaga')
+            ->where('permohonan', 'lembur')
             ->where('status', 'approve')
             ->count();
         // $permohonan = rubahjadwal::whereDate('tanggal', now()->format('Y-m-d'))->count();
