@@ -287,7 +287,7 @@ Absensi - Klinik Mitra Delima
                                                         $today = \Carbon\Carbon::now()->format('Y-m-d');
                                                         $user_id = $present->user_id; // Menggunakan user_id dari $present
 
-                                                        $jadwal = \App\Models\Jadwalterbaru::where('user_id', $user_id)
+                                                        $jadwal = \App\Models\jadwalterbaru::where('user_id', $user_id)
                                                             ->where('masa_aktif', '<=', $today)
                                                             ->where('masa_akhir', '>=', $today)
                                                             ->first();
