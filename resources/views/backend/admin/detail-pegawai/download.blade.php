@@ -94,7 +94,7 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Nama Lengkap</span>
-                <span style="display: inline-block; width: 145px;">: {{$detail->name}}</span>
+                <span style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->name))}}</span>
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Tempat Lahir</span>
