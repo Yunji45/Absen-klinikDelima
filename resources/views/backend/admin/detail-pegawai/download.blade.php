@@ -120,7 +120,7 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Program Pendidikan</span>
-                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->program_study)}}</span>
+                <span style="display: inline-block; width: 145px;">: {{ ucfirst(strtolower($detail->program_study)) }}</span>
                 
                 </li>
             <li>
