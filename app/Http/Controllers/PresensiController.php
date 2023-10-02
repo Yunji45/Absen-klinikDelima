@@ -271,17 +271,6 @@ class PresensiController extends Controller
                 if ($userIpAddress !== $allowedIpAddress) {
                     return back()->with('error', 'OOpppss !! Alamat IP Anda ' . $userIpAddress . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi TP-LINK_BB3588');
                 }
-                // $ipke2 = request()->ip();
-                // $accIpke2 = config('absensi.ip_internet_ke2');
-                // if($ipke2 !== $accIpke2){
-                //     return redirect()->back()->with('error','OOppss !! Alamat Ip Anda '. $ipke2 . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi Klinik Mitra Delima');
-                // }
-                // $ipke3 = request()->ip();
-                // $accIpke3 = config('absensi.ip_internet_ke3');
-                // if($ipke3 !== $accIpke3){
-                //     return redirect()->back()->with('error','OOppss !! Alamat Ip Anda '. $ipke3 . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi Klinik Mitra Delima');
-                // }
-
                 $currentDate = date('Y-m-d');
                 $currentTime = date('H:i');
                 $user_id = $user->id;
