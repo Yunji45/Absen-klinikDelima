@@ -16,7 +16,7 @@ Detail User - Klinik Mitra Delima
                                 <i class="fas fa-download">EXCEL</i>
                             </button>
                         </form>
-                        <form class="float-right d-inline-block" action="" method="get">
+                        <form class="float-right d-inline-block" action="{{route('download.admin.detail.index')}}" method="get">
                                 <button title="Download" type="submit" class="btn btn-sm btn-success">
                                     <i class="fas fa-download">PDF</i>
                                 </button>
@@ -24,17 +24,6 @@ Detail User - Klinik Mitra Delima
 
                     </div>
                     <div class="card-body">
-                        <form action="" class="mb-3" method="get">
-                            <div class="form-group row mb-3 ">
-                                <label for="bulan" class="col-form-label col-sm-2">Bulan</label>
-                                <div class="input-group col-sm-10">
-                                    <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan',date('Y-m')) }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit">Cari</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>

@@ -300,5 +300,11 @@ class DetailController extends Controller
         $pdf = PDF::loadView('backend.admin.detail-pegawai.download', $data);
         return $pdf->download('Profile-Pegawai.pdf');
     }
+    public function downloadindex()
+    {
+        $detail = DetailPegawai::all();
+        $pdf = PDF::loadView('backend.admin.detail-pegawai.downloadindex', compact('detail'));
+        return $pdf->download('Profile-Pegawai.pdf');
+    }
 
 }

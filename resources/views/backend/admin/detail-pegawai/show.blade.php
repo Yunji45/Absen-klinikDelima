@@ -118,22 +118,6 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->number_of_children  }}</p>
                             </div>
-                            @if (isset($detail->user->jumlahanak) && $detail->user->jumlahanak->isNotEmpty())
-                                @foreach ($detail->user->jumlahanak as $anak)
-                                        <div class="col-sm-2 text-left">Nama Anak</div>
-                                        <div class="col-sm-10">
-                                            <p class="form-control-static">: {{ $anak->nama_anak }}</p>
-                                        </div>
-                                        <div class="col-sm-2 text-left">Umur Anak</div>
-                                        <div class="col-sm-10">
-                                            <p class="form-control-static">: {{ $anak->umur }} Tahun</p>
-                                        </div>
-                                        <div class="col-sm-2 text-left">Tanggal Lahir Anak</div>
-                                        <div class="col-sm-10">
-                                            <p class="form-control-static">: {{ $anak->tanggal_lahir }}</p>
-                                        </div>
-                                @endforeach
-                            @endif
                             <div class="col-sm-2 text-left">Hobbies</div>
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->hobbies  }}</p>
@@ -142,6 +126,29 @@
                             <div class="col-sm-10">
                                 <p class="form-control-static">: {{ $detail->skills  }}</p>
                             </div>
+                            @if (isset($detail->user->jumlahanak) && $detail->user->jumlahanak->isNotEmpty())
+                                <div class="text-center">
+                                    <table style="border-collapse: collapse; width: 100%; margin: 0 auto;">
+                                        <thead>
+                                            <tr>
+                                                <th style="border: 1px solid #000; padding: 4px;">Nama Anak</th>
+                                                <th style="border: 1px solid #000; padding: 4px;">Umur Anak</th>
+                                                <th style="border: 1px solid #000; padding: 4px;">Tanggal Lahir Anak</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($detail->user->jumlahanak as $anak)
+                                            <tr>
+                                                <td style="border: 1px solid #000; padding: 4px;">{{ $anak->nama_anak }}</td>
+                                                <td style="border: 1px solid #000; padding: 4px;">{{ $anak->umur }} Tahun</td>
+                                                <td style="border: 1px solid #000; padding: 4px;">{{ $anak->tanggal_lahir }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+
                         </div>
                         <div class="text-center mb-3">
                             <h5>FILE PENDUKUNG</h5>

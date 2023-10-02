@@ -132,20 +132,26 @@
                                 <p class="form-control-static">: {{ isset($jumlahanak) && $jumlahanak->isNotEmpty() ? count($jumlahanak) : 'Belum Ada' }}</p>
                             </div> -->
                             @if (isset($jumlahanak) && $jumlahanak->isNotEmpty())
-                                @foreach ($jumlahanak as $anak)
-                                    <div class="col-sm-2 text-left">Nama Anak</div>
-                                    <div class="col-sm-10">
-                                        <p class="form-control-static">: {{ $anak->nama_anak }}</p>
-                                    </div>
-                                    <div class="col-sm-2 text-left">Umur Anak</div>
-                                    <div class="col-sm-10">
-                                        <p class="form-control-static">: {{ $anak->umur }} Tahun</p>
-                                    </div>
-                                    <div class="col-sm-2 text-left">Tanggal Lahir Anak</div>
-                                    <div class="col-sm-10">
-                                        <p class="form-control-static">: {{ $anak->tanggal_lahir }}</p>
-                                    </div>
-                                @endforeach
+                            <div class="text-center">
+                                    <table style="border-collapse: collapse; width: 100%; margin: 0 auto;">
+                                        <thead>
+                                            <tr>
+                                                <th style="border: 1px solid #000; padding: 4px;">Nama Anak</th>
+                                                <th style="border: 1px solid #000; padding: 4px;">Umur Anak</th>
+                                                <th style="border: 1px solid #000; padding: 4px;">Tanggal Lahir Anak</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($jumlahanak as $anak)
+                                            <tr>
+                                                <td style="border: 1px solid #000; padding: 4px;">{{ $anak->nama_anak }}</td>
+                                                <td style="border: 1px solid #000; padding: 4px;">{{ $anak->umur }} Tahun</td>
+                                                <td style="border: 1px solid #000; padding: 4px;">{{ $anak->tanggal_lahir }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             @endif
                         </div>
                         <div class="text-center mb-3">
@@ -498,7 +504,7 @@
                             <div class="form-group row" id="address">
                                 <label for="address" class="col-form-label col-sm-3">Alamat</label>
                                 <div class="col-sm-9">
-                                    <textarea name="address" rows="4" class="form-control @error('address') is-invalid @enderror" required value="{{$detail->first()->address}}"></textarea>
+                                    <textarea name="address" rows="4" class="form-control @error('address') is-invalid @enderror" required value="{{$detail->first()->address}}">{{$detail->first()->address}}</textarea>
                                     @error('address') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -662,8 +668,6 @@
             </div>
         </div>
     </div>
-  
-
 
 @endsection
 @push('scripts')
@@ -685,6 +689,16 @@
             }
         }
     });
+    $('#update-anak').on('click', function() {
+            var tbody = $('.table tbody');
+            var templateRow = tbody.find('.anak:hidden');
+
+            var newRow = templateRow.clone();
+            newRow.show();
+
+            tbody.append(newRow);
+        });
+
 </script>
 <script>
     // document.getElementById('tambah-anak').addEventListener('click', function () {

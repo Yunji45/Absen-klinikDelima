@@ -5,7 +5,7 @@
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            integrity="sha364-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ764/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
         <style type="text/css">
             @page {
@@ -71,21 +71,21 @@
     </head>
     <body>
         <center>
-            <h5>Data Profil Pegawai</h4>
+            <h5>Data Profil Pegawai</h5>
             <h6>
                 <a target="_blank" href="https://klinikmitradelima.com/">www.klinimitrakdelima.com</a>
             </h6>
         </center>
         <hr class="separator">
         <!-- Garis pemisah -->
-        <div class="text-center mb-3">
+        <!-- <div class="text-center mb-3">
             <img
                 id="image"
                 src="{{asset(Storage::url($detail->user->foto)) }}"
                 alt="{{ $detail->user->foto }}"
                 class="profile-picture"
                 >
-        </div>
+        </div> -->
 
         <ul>
             <li>
@@ -186,6 +186,30 @@
                 <span style="display: inline-block; width: 145px;">: {{ucwords($detail->skills)}}</span>
                 
                 </li>
+            <li>
+            @if (isset($detail->user->jumlahanak) && $detail->user->jumlahanak->isNotEmpty())
+                                <div class="text-center">
+                                    <table style="border-collapse: collapse; width: 80%;">
+                                        <thead>
+                                            <tr>
+                                                <th style="border: 1px solid #000; padding: 6px;">Nama Anak</th>
+                                                <th style="border: 1px solid #000; padding: 6px;">Umur Anak</th>
+                                                <th style="border: 1px solid #000; padding: 6px;">Tanggal Lahir Anak</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($detail->user->jumlahanak as $anak)
+                                            <tr>
+                                                <td style="border: 1px solid #000; padding: 6px;">{{ $anak->nama_anak }}</td>
+                                                <td style="border: 1px solid #000; padding: 6px;">{{ $anak->umur }} Tahun</td>
+                                                <td style="border: 1px solid #000; padding: 6px;">{{ $anak->tanggal_lahir }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+            </li>
         </ul>
     </body>
 </html>
