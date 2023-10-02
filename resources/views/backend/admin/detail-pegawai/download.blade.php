@@ -94,7 +94,7 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Nama Lengkap</span>
-                <span style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->name))}}</span>
+                <span class="no-wrap" style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->name))}}</span>
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Tempat Lahir</span>
@@ -120,7 +120,7 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Program Pendidikan</span>
-                <span style="display: inline-block; width: 145px;">: {{ ucfirst(strtolower($detail->program_study)) }}</span>
+                <span class="no-wrap" style="display: inline-block; width: 145px;">: {{ ucfirst(strtolower($detail->program_study)) }}</span>
                 
                 </li>
             <li>
