@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'ip_internet'    => env('IP_ADDRESS', '180.252.31.220'),
+    'ip_internet'    => env('IP_ADDRESS', '180.252.24.206'),
     'ip_internet_ke2' => env('IP_ADDRESS', ''),
     'ip_internet_ke3' => env('IP_ADDRESS', ''),
 
