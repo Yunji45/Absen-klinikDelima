@@ -295,7 +295,9 @@ class DetailController extends Controller
     public function downdetail($id)
     {
         $detail =DetailPegawai::find($id);
-        $pdf = PDF::loadView('backend.admin.detail-pegawai.download', compact('detail'));
+        $imageUrl = asset('storage/foto-profil/' . $detail->user->foto);
+        $data = compact('detail', 'imageUrl');
+        $pdf = PDF::loadView('backend.admin.detail-pegawai.download', $data);
         return $pdf->download('Profile-Pegawai.pdf');
     }
 

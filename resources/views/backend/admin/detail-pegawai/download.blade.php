@@ -64,6 +64,9 @@
                 margin-bottom: 10px;
                 /* Jarak antara konten dan judul berikutnya */
             }
+            .no-wrap {
+        white-space: nowrap;
+    }
         </style>
     </head>
     <body>
@@ -75,91 +78,114 @@
         </center>
         <hr class="separator">
         <!-- Garis pemisah -->
+        <div class="text-center mb-3">
+            <img
+                id="image"
+                src="{{asset(Storage::url($detail->user->foto)) }}"
+                alt="{{ $detail->user->foto }}"
+                class="profile-picture"
+                >
+        </div>
 
         <ul>
             <li>
                 <span style="display: inline-block; width: 145px;">NIP</span>
-                :
-                {{$detail->user->nik}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->user->nik}}</span>:
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Nama Lengkap</span>
-                :
-                {{$detail->name}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->name}}</span>
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Tempat Lahir</span>
-                :
-                {{$detail->place_birth}}</li>
+                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->place_birth)}}</span>
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Tanggal Lahir</span>
-                :
-                {{$detail->date_birth}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->date_birth}}</span>
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Jenis Kelamin</span>
-                :
-                {{$detail->gender}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->gender}}</span>
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Agama</span>
-                :
-                {{$detail->religion}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->religion}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Pendidikan</span>
-                :
-                {{$detail->education}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->education}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Program Pendidikan</span>
-                :
-                {{$detail->program_study}}</li>
+                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->program_study)}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Alamat</span>
-                :
-                {{$detail->address}}</li>
+                <span class="no-wrap" style="display: inline-block; width: 145px;">: {{ucwords($detail->address)}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Jabatan</span>
-                :
-                {{$detail->position}}</li>
+                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->position)}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Status</span>
-                :
-                {{$detail->status_pekerjaan}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->status_pekerjaan}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Tes Psikologi</span>
-                :
-                {{$detail->tes_psikologi}}</li>
+                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->tes_psikologi)}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">No Telp/Hp</span>
-                :
-                {{$detail->phone}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->phone}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Email</span>
-                :
-                {{$detail->email}}</li>
+                <span class="no-wrap" style="display: inline-block; width: 145px;">: {{$detail->email}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Mulai Bekerja</span>
-                :
-                {{$detail->hire_date}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->hire_date}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Masa Bekerja</span>
-                :
-                {{$detail->length_of_service}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->length_of_service}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Status Pernikahan</span>
-                :
-                {{$detail->marital_status}}</li>
+                <span style="display: inline-block; width: 145px;">: {{$detail->marital_status}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Nama Suami/Istri</span>
-                :
-                {{$detail->spouse_name}}</li>
+                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->spouse_name)}}</span>
+                
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Jumlah Anak</span>
-                :
+                <span style="display: inline-block; width: 145px;">: {{$detail->number_of_children}}</span>
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Hobby</span>
-                :
-                {{$detail->hobbies}}</li>
+                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->hobbies)}}</span>
+                </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Keahlian</span>
-                :
-                {{$detail->skills}}</li>
+                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->skills)}}</span>
+                
+                </li>
         </ul>
     </body>
 </html>
