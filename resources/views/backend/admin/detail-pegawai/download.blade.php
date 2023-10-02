@@ -98,7 +98,7 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Tempat Lahir</span>
-                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->place_birth)}}</span>
+                <span style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->place_birth))}}</span>
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Tanggal Lahir</span>
@@ -125,12 +125,12 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Alamat</span>
-                <span class="no-wrap" style="display: inline-block; width: 145px;">: {{ucwords($detail->address)}}</span>
+                <span class="no-wrap" style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->address))}}</span>
                 
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Jabatan</span>
-                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->position)}}</span>
+                <span style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->position))}}</span>
                 
                 </li>
             <li>
@@ -140,7 +140,7 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Tes Psikologi</span>
-                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->tes_psikologi)}}</span>
+                <span style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->tes_psikologi))}}</span>
                 
                 </li>
             <li>
@@ -170,7 +170,7 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Nama Suami/Istri</span>
-                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->spouse_name)}}</span>
+                <span style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->spouse_name))}}</span>
                 
                 </li>
             <li>
@@ -179,11 +179,11 @@
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Hobby</span>
-                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->hobbies)}}</span>
+                <span style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->hobbies))}}</span>
                 </li>
             <li>
                 <span style="display: inline-block; width: 145px;">Keahlian</span>
-                <span style="display: inline-block; width: 145px;">: {{ucwords($detail->skills)}}</span>
+                <span style="display: inline-block; width: 145px;">: {{ucfirst(strtolower($detail->skills))}}</span>
                 
                 </li>
             <li>
