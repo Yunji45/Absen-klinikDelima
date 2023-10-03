@@ -20,17 +20,6 @@ Hapus Dokumen - Klinik Mitra Delima
                         </form>
                     </div>
                     <div class="card-body">
-                        <form action="" class="mb-3" method="get">
-                            <div class="form-group row mb-3 ">
-                                <label for="bulan" class="col-form-label col-sm-2">Bulan</label>
-                                <div class="input-group col-sm-10">
-                                    <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan',date('Y-m')) }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit">Cari</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -48,7 +37,7 @@ Hapus Dokumen - Klinik Mitra Delima
                                     <td>{{$item->name}}</td>
                                     <td>{{ $item->jumlah_dokumen }}</td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-danger" title="{{$title}}"
+                                        <a href="/delete.dokumen/$item->id" class="btn btn-sm btn-danger" title="{{$title}}"
                                         onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen pengguna ini?')">
                                         <i class="fas fa-trash"> Hapus Dokumen</i>
                                         </a>
