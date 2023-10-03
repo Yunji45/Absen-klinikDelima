@@ -158,7 +158,8 @@ class RubahjadwalController extends Controller
                     $jadwalterbarus = jadwalterbaru::where('user_id', $permohonan->user_id)->first();
     
                     if ($jadwalterbarus) {
-                        $namaKolom = 'j' . Carbon::parse($permohonan->tanggal)->format('d');
+                        $namaKolom = 'j' . ltrim(Carbon::parse($permohonan->tanggal)->format('d'), '0');
+                        // $namaKolom = 'j' . Carbon::parse($permohonan->tanggal)->format('d');
                         $jadwalterbarus->$namaKolom = 'LL';
                         $jadwalterbarus->save();
                     }
