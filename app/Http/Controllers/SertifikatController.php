@@ -123,7 +123,6 @@ class SertifikatController extends Controller
     {
         try {
             $sertifikat = SertifikatUser::find($id);
-    
             if ($sertifikat) {
                 $path = 'public/sertifikat_pegawai/' . $sertifikat->user->name . '/' . $sertifikat->filename;
                 Storage::delete($path);
