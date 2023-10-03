@@ -90,7 +90,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
 
         //dokumen
         Route::get('/dokumen-pegawai',[DokumenController::class,'admDokumen'])->name('adm.dokumen');
-        Route::get('/delete-dokumen/{id}',[DokumenController::class,'destroy']);
+        Route::get('/delete-dokumen/{id}',[DokumenController::class,'destroy'])->name('delete.dokumen');
+        //sertiifkat
+        Route::get('/sertifikat-pegawai',[SertifikatController::class,'admsertifikat'])->name('adm.sertifikat');
+        Route::get('/delete-sertifikat/{id}',[DokumenController::class,'destroy'])->name('delete.sertifikat');
 
         //JadwalShift
         Route::get('/jadwal-shift',[JadwalshiftController::class,'index'])->name('jadwal.shift');

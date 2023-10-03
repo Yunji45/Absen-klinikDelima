@@ -121,6 +121,21 @@ class DokumenController extends Controller
     public function destroy($id)
     {
         try {
+            $dokumen = DokumenUser::find($id);
+    
+            if ($dokumen) {
+                $path = 'public/dok_pegawai/' . $dokumen->user->name . '/' . $dokumen->filename;
+                Storage::delete($path);
+                $dokumen->delete();
+                return redirect()->back()->with('success', 'Dokumen pengguna berhasil dihapus dari database dan storage.');
+            } else {
+                return redirect()->back()->with('error', 'Dokumen tidak ditemukan.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menghapus dokumen pengguna.');
+        }
+    
+        // try {
             // $data = DokumenUser::join('users', 'dokumen_users.user_id', '=', 'users.id')
             // ->select('users.id', 'users.name', DB::raw('COUNT(*) as jumlah_dokumen'))
             // ->groupBy('users.id', 'users.name')
@@ -134,19 +149,19 @@ class DokumenController extends Controller
             //         $dokumen->delete();
             //     }
             // }
-            $dokumenToDelete = DokumenUser::where('user_id', $user->id)->get();
+        //     $dokumenToDelete = DokumenUser::where('user_id', $user->id)->get();
 
-            foreach ($dokumenToDelete as $dokumen) {
-                $path = 'public/dok_pegawai/' . $user->name . '/' . $dokumen->filename;
-                Storage::delete($path);
+        //     foreach ($dokumenToDelete as $dokumen) {
+        //         $path = 'public/dok_pegawai/' . $user->name . '/' . $dokumen->filename;
+        //         Storage::delete($path);
     
-                $dokumen->delete();
-            }
+        //         $dokumen->delete();
+        //     }
     
-            return redirect('/dokumen-pegawai')->with('success', 'Data pengguna berhasil dihapus.');
-        } catch (\Exception $e) {
-            return redirect('/dokumen-pegawai')->with('error', 'Gagal menghapus data pengguna.');
-        }
+        //     return redirect('/dokumen-pegawai')->with('success', 'Dokumen pengguna berhasil dihapus dari database dan storage.');
+        // } catch (\Exception $e) {
+        //     return redirect('/dokumen-pegawai')->with('error', 'Gagal menghapus data pengguna.');
+        // }
         
     }
 
@@ -157,10 +172,11 @@ class DokumenController extends Controller
         //                     ->select('users.name', DB::raw('COUNT(*) as jumlah_dokumen'))
         //                     ->groupBy('users.name')
         //                     ->get();
-        $data = User::select('users.name', DB::raw('COUNT(dokumen_users.id) as jumlah_dokumen'))
-            ->leftJoin('dokumen_users', 'users.id', '=', 'dokumen_users.user_id')
-            ->groupBy('users.name')
-            ->get();
+        // $data = User::select('users.name', DB::raw('COUNT(dokumen_users.id) as jumlah_dokumen'))
+        //     ->leftJoin('dokumen_users', 'users.id', '=', 'dokumen_users.user_id')
+        //     ->groupBy('users.name')
+        //     ->get();
+        $data = DokumenUser::all();
 
         // return $data;
         return view ('backend.admin.dokumen.dokumen',compact('title','data'));

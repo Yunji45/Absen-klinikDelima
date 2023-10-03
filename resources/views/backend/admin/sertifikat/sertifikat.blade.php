@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Hapus Dokumen - Klinik Mitra Delima
+Hapus Sertifikat - Klinik Mitra Delima
 @endsection
 @section('content')
 <div class="container">
@@ -26,7 +26,7 @@ Hapus Dokumen - Klinik Mitra Delima
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
-                                        <th>Nama Dokumen</th>
+                                        <th>Nama Sertifikat</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -37,8 +37,8 @@ Hapus Dokumen - Klinik Mitra Delima
                                     <td>{{$item->user->name}}</td>
                                     <td>{{ $item->filename }}</td>
                                     <td>
-                                        <a href="{{route('delete.dokumen', $item->id)}}" class="btn btn-sm btn-danger" title="{{$title}}"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen pengguna ini?')">
+                                        <a href="{{route('delete.sertifikat', $item->id)}}" class="btn btn-sm btn-danger" title="{{$title}}"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus sertifikat pengguna ini?')">
                                         <i class="fas fa-trash"> Hapus Dokumen</i>
                                         </a>
                                     </td>

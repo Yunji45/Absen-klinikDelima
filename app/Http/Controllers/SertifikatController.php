@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SertifikatUser;
+use App\Models\User;
 use Auth;
 use File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class SertifikatController extends Controller
 {
@@ -117,7 +121,28 @@ class SertifikatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $sertifikat = SertifikatUser::find($id);
+    
+            if ($sertifikat) {
+                $path = 'public/sertifikat_pegawai/' . $sertifikat->user->name . '/' . $sertifikat->filename;
+                Storage::delete($path);
+                $sertifikat->delete();
+                return redirect()->back()->with('success', 'Sertifikat pengguna berhasil dihapus dari database dan storage.');
+            } else {
+                return redirect()->back()->with('error', 'Sertifikat tidak ditemukan.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menghapus sertifikat pengguna.');
+        }
+
+    }
+
+    public function admsertifikat()
+    {
+        $title = 'Sertifikat Pegawai';
+        $data = SertifikatUser::all();
+        return view('backend.admin.sertifikat.sertifikat',compact('data','title'));
     }
 
 }
