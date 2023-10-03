@@ -190,7 +190,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                            <a class="nav-link" href="{{route('help-IT')}}" >
+                            <a class="nav-link" href="/Chat" >
                                 <i class="fa fa-question-circle text-primary"></i> Help IT
                             </a>
                     </li>
