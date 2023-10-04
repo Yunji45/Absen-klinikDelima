@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\jadwal;
 use App\Models\jadwalterbaru;
+use App\Models\rubahjadwal;
 use App\Models\shift;
 use App\Models\User;
 use PDF;
+use Auth;
 
 class JadwalshiftController extends Controller
 {
@@ -28,8 +30,27 @@ class JadwalshiftController extends Controller
         $data = jadwalterbaru::whereYear('masa_aktif', $tahun)
                     ->whereMonth('masa_aktif', $bulan)
                     ->get();    
+
+                    $permohonan = rubahjadwal::whereIn('status', ['pengajuan','approve'])
+                    ->where('user_id', Auth::id())
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                    $backgroundClass = '';
+
+                    foreach ($permohonan as $item) {
+                        if ($item->status === 'approve') {
+                            if ($item->permohonan == 'ganti_jaga') {
+                                $backgroundClass = 'bg-merah';
+                            } elseif ($item->permohonan == 'tukar_jaga') {
+                                $backgroundClass = 'bg-hijau';
+                            }
+                            // Jika status adalah 'approve', maka $backgroundClass akan diubah sesuai permohonan.
+                            // Jika status bukan 'approve', maka $backgroundClass akan tetap seperti variabel default.
+                        }
+                    }
         // return $user;        
-        return view ('backend.admin.jadwalshift.index',compact('title','data','user','bulan','tahun'));
+        return view ('backend.admin.jadwalshift.index',compact('title','data','user','bulan','tahun','backgroundClass','permohonan'));
     }
 
     public function indexUser()
@@ -239,8 +260,6 @@ class JadwalshiftController extends Controller
         $title = 'Jadwal Shift';
         $user = User::all();
         $bulan = $request->input('bulan');
-        
-        // Lakukan pencarian berdasarkan bulan di sini, contohnya menggunakan Eloquent
         $data = jadwalterbaru::where('masa_aktif', '>=', $bulan . '-01')
                         ->where('masa_akhir', '<=', $bulan . '-31')
                         ->get();
