@@ -103,13 +103,6 @@
 
       <div class="panels-container">
         <div class="panel left-panel">
-        <div class="content">
-            <h3>New here ?</h3>
-            <button class="btn transparent" id="sign-up-btn">
-              Sign up
-            </button>
-          </div>
-
           <img src="{{asset('argon/logo.png')}}" class="image" alt="" />
         </div>
         <div class="panel right-panel">
