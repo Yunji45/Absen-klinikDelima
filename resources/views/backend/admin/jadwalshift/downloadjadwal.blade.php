@@ -12,12 +12,13 @@
     <style type="text/css">
     table tr td,
     table tr th {
-        font-size: 9pt;
+        font-size: 8pt;
+        padding: 2px; /* Atur padding sel */
     }
 
     @media print {
         table {
-            width: 100%; /* Membuat tabel memanjang sepanjang halaman saat dicetak */
+            width: 80%; /* Membuat tabel memanjang sepanjang halaman saat dicetak */
         }
     }
 </style>
@@ -71,43 +72,43 @@ tr:nth-child(even) {
                             </tr>
                             @php $no =1; @endphp @if($data->isEmpty())
                             <tr>
-                                <td colspan="34" style="text-align: center; font-size: 14px;">Tidak ada data yang tersedia</td>
+                                <td colspan="34" style="text-align: center; font-size: 9px;">Tidak ada data yang tersedia</td>
                             </tr>
                             @else @foreach ($data as $item)
                             <tr>
-                                <td style="text-align: center; font-size: 14px;">{{$no++}}.</td>
+                                <td style="text-align: center; font-size: 9px;">{{$no++}}.</td>
                                 <td style="text-align: center; font-size: 9px;">{{$item->user->name}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j1}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j2}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j3}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j4}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j5}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j6}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j7}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j8}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j9}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j10}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j11}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j12}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j13}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j14}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j15}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j16}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j17}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j18}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j19}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j20}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j21}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j22}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j23}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j24}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j25}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j26}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j27}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j28}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j29}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j30}}</td>
-                                <td style="text-align: center; font-size: 14px;">{{$item->j31}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j1}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j2}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j3}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j4}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j5}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j6}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j7}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j8}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j9}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j10}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j11}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j12}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j13}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j9}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j15}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j16}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j17}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j18}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j19}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j20}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j21}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j22}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j23}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j24}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j25}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j26}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j27}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j28}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j29}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j30}}</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->j31}}</td>
                             </tr>
                             @endforeach @endif
 

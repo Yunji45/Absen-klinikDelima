@@ -220,7 +220,7 @@ form.sign-in-form {
   width: 100%;
   transition: transform 1.1s ease-in-out;
   transition-delay: 0.4s;
-  margin-top: -50px; /* Ubah nilai negatif sesuai dengan seberapa jauh Anda ingin menggeser elemen ke atas */
+  /* margin-top: -10px; Ubah nilai negatif sesuai dengan seberapa jauh Anda ingin menggeser elemen ke atas */
   margin-left: 10px; /* Ubah nilai positif sesuai dengan seberapa jauh Anda ingin menggeser elemen ke kanan */
 
 }
