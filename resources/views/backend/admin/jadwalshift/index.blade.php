@@ -120,7 +120,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j1 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j1 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 1)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j1}}</span>
@@ -152,7 +152,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j2 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j2 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 2)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j2}}</span>
@@ -184,7 +184,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j3 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j3 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 3)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j3}}</span>
@@ -216,7 +216,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j4 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j4 === 'L1'))
+                                        @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 4)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j4}}</span>
@@ -248,7 +248,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j5 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j5 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 5)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j5}}</span>
@@ -280,7 +280,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j6 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j6 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 6)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j6}}</span>
@@ -312,7 +312,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j7 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j7 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 7)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j7}}</span>
@@ -344,7 +344,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j8 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j8 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 8)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j8}}</span>
@@ -376,7 +376,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j9 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j9 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 9)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j9}}</span>
@@ -408,7 +408,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j10 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j10 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 10)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j10}}</span>
@@ -440,7 +440,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j11 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j11 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 11)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j11}}</span>
@@ -472,7 +472,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j12 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j12 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 12)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j12}}</span>
@@ -504,7 +504,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j13 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j13 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 13)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j13}}</span>
@@ -536,7 +536,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j14 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j14 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 14)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j14}}</span>
@@ -568,7 +568,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j15 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j15 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 15)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j15}}</span>
@@ -600,7 +600,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j16 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j16 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 16)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j16}}</span>
@@ -632,7 +632,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j17 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j17 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 17)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j17}}</span>
@@ -664,7 +664,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j18 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j18 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 18)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j18}}</span>
@@ -696,7 +696,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j19 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j19 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 19)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j19}}</span>
@@ -728,7 +728,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j20 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j20 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 20)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j20}}</span>
@@ -760,7 +760,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j21 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j21 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 21)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j21}}</span>
@@ -792,7 +792,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j22 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j22 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 22)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j22}}</span>
@@ -824,7 +824,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j23 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j23 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 23)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j23}}</span>
@@ -856,7 +856,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j24 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j24 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 24)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j24}}</span>
@@ -888,7 +888,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j25 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j25 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 25)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j25}}</span>
@@ -920,7 +920,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j26 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j26 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 26)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j26}}</span>
@@ -952,7 +952,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j27 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j27 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 27)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j27}}</span>
@@ -984,7 +984,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j28 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j28 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 28)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j28}}</span>
@@ -1016,7 +1016,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j29 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j29 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 29)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j29}}</span>
@@ -1048,7 +1048,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j30 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j30 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 30)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j30}}</span>
@@ -1080,7 +1080,7 @@ tr:nth-child(even) {
                                     @endphp
 
                                     @if ($permohonan->status === 'approve')
-                                        @if (($permohonan->permohonan === 'ganti_jaga' && $item->j31 === 'L2') || ($permohonan->permohonan === 'tukar_jaga' && $item->j31 === 'L1'))
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
                                             @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 31)
                                                 @if ($permohonan->permohonan === 'ganti_jaga')
                                                     <span class="bg-merah">{{$item->j31}}</span>
