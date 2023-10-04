@@ -43,7 +43,14 @@ tr:nth-child(even) {
 .bg-transparan {
     background-color: transparent;
 }
+.Note {
+    margin-bottom: -20px; /* Atur jarak bawah sesuai kebutuhan Anda */
+}
 
+p {
+    font-size: 12px;
+    font-style: italic;
+}
 
 
 /* Tambahkan gaya lain yang Anda inginkan di sini */
@@ -86,6 +93,12 @@ tr:nth-child(even) {
                                 </div>
                             </div>
                         </form>
+                        <div class="Note">
+                            <p>*** Note ***</p>
+                        </div>
+                        <div class="Note">
+                            <p>Hijau = Tukar Jaga & Merah = Ganti Jaga</p>
+                        </div>
                         <div class="table-container">
                         <table border="1" style="text-align: center;">
                             <tr>
