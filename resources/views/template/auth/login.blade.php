@@ -105,7 +105,6 @@
         <div class="panel left-panel">
         <div class="content">
             <h3>New here ?</h3>
-            <p>Silahkan Daftarkan Diri Untuk Kebutuhan Anda.</p>
             <button class="btn transparent" id="sign-up-btn">
               Sign up
             </button>
@@ -116,9 +115,6 @@
         <div class="panel right-panel">
           <div class="content">
             <h3>One of us ?</h3>
-            <p>
-              Silahkan Login Jika Sudah Mempunyai Akun.
-            </p>
             <button class="btn transparent" id="sign-in-btn">
               Sign in
             </button>
