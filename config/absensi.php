@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'ip_internet'    => env('IP_ADDRESS', '180.252.24.206'),
+    'ip_internet'    => env('IP_ADDRESS', '36.81.234.173'),
     'ip_internet_ke2' => env('IP_ADDRESS', ''),
     'ip_internet_ke3' => env('IP_ADDRESS', ''),
 
@@ -18,6 +18,7 @@ return [
     'jam_keluar_PM'  => env('JAM_KELUAR_PM', '22:00'),
 
 ];
+//180.252.24.206
 // <?php return array (
 //     'ip_internet' => '1.1.1.1',
 //     'ip_internet_ke2' => '',
