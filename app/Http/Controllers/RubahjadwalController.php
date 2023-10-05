@@ -155,13 +155,18 @@ class RubahjadwalController extends Controller
         if ($permohonan) {
             if ($permohonan->permohonan == 'lembur') {
                 if ($permohonan->tanggal) {
-                    $jadwalterbarus = jadwalterbaru::where('user_id', $permohonan->user_id)->first();
+                    $jadwalterbarus = jadwalterbaru::where('user_id', $permohonan->user_id)->get();
     
-                    if ($jadwalterbarus) {
+                    // if ($jadwalterbarus) {
+                    //     $namaKolom = 'j' . ltrim(Carbon::parse($permohonan->tanggal)->format('d'), '0');
+                    //     // $namaKolom = 'j' . Carbon::parse($permohonan->tanggal)->format('d');
+                    //     $jadwalterbarus->$namaKolom = 'LL';
+                    //     $jadwalterbarus->save();
+                    // }
+                    foreach ($jadwalterbarus as $barisJadwal) {
                         $namaKolom = 'j' . ltrim(Carbon::parse($permohonan->tanggal)->format('d'), '0');
-                        // $namaKolom = 'j' . Carbon::parse($permohonan->tanggal)->format('d');
-                        $jadwalterbarus->$namaKolom = 'LL';
-                        $jadwalterbarus->save();
+                        $barisJadwal->$namaKolom = 'LL';
+                        $barisJadwal->save();
                     }
                 }
     
