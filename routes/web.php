@@ -16,6 +16,7 @@ use App\Http\Controllers\RubahjadwalController;
 use App\Http\Controllers\FaceController;
 use App\Http\Controllers\IPConfigController;
 use App\Http\Controllers\HelpITController;
+use App\Http\Controllers\PenggajianController;
 
 
 //Error Bro
@@ -107,6 +108,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/data-permohonan',[RubahjadwalController::class,'indexAdmin'])->name('permohonan.index');
         Route::get('/Verifikasi/{id}/berhasil',[RubahjadwalController::class,'VerifPermohonan']);
         Route::get('/Reject/{id}/gagal',[RubahjadwalController::class,'destroy'])->name('permohonan.delete');
+
+        //penggajian
+        Route::get('/index-persentase', [PenggajianController::class,'index'])->name('gaji.adm');
+        Route::post('/index-gaji-save', [PenggajianController::class,'store'])->name('gaji.save');
+        Route::get('/index-gaji/{id}', [PenggajianController::class,'destroy'])->name('gaji.delete');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

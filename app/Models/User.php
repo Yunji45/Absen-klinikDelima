@@ -93,4 +93,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(JumlahAnak::class);
     }
+
+    public function gaji()
+    {
+        return $this->hasMany(gajian::class);
+    }
 }

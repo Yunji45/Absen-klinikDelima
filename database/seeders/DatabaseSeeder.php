@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             // KerjatSeeder::class,
             // PresensiSeeder::class,
             // testCutiSeeder::class,
+            GajiSeeder::class,
         ]);
     }
 }

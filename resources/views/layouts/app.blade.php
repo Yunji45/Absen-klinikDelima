@@ -142,6 +142,11 @@
                                 <i class="fa fa-power-off text-danger"></i>Setting IP Address
                             </a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('gaji.adm')}}" >
+                                <i class="fa fa-power-off text-danger"></i>Gaji
+                            </a>
+                        </li>
 
                     @else
                         @if (Request::segment(1) == 'daftar-hadir')
