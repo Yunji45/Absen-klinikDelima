@@ -281,8 +281,8 @@
                 <div class="row align-items-center justify-content-xl-between">
                     <div class="col-xl-6">
                         <div class="copyright text-center text-xl-left text-muted">
-                            © {{ date('Y')}} Developed By <a href="https://lovely-rabanadas-9fc482.netlify.app" class="font-weight-bold ml-1"
-                                target="_lank">Klinik Delima</a> Theme By <a href=""
+                            © {{ date('Y')}} Developed By <a href="https://klinikmitradelima.com/" class="font-weight-bold ml-1"
+                                target="_lank">Klinik Delima</a> Theme By <a href="https://portofolio-ihya.netlify.app/"
                                 class="font-weight-bold ml-1" target="_blank">JSTechno</a>
                         </div>
                     </div>

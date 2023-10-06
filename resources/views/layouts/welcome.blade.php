@@ -75,7 +75,7 @@
     <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
         <div class="container px-4">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <h1 class="text-white">Mitra Delima</h1>
+                <h1 class="text-light">Mitra Delima</h1>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,8 +105,8 @@
                     @if (auth()->user()->role == "admin")
                         <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link nav-link-icon">
-                                <i class="ni ni-circle-08"></i>
-                                <span class="nav-link-inner--text">Management User</span>
+                                <i class="ni ni-circle-08 text-light"></i>
+                                <span class="nav-link-inner--text text-light">User</span>
                             </a>
                         </li>
                     @endif
@@ -116,22 +116,22 @@
                         @else
                             <a class="nav-link nav-link-icon" href="{{route('daftar-hadir')}}">
                         @endif
-                            <i class="ni ni-check-bold"></i>
-                            <span class="nav-link-inner--text">Kehadiran</span>
+                            <i class="ni ni-check-bold text-light"></i>
+                            <span class="nav-link-inner--text text-light">Kehadiran</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link nav-link-icon" href="{{route('profil')}}">
-                            <i class="ni ni-single-02"></i>
-                            <span class="nav-link-inner--text">Profil</span>
+                            <i class="ni ni-single-02 text-light"></i>
+                            <span class="nav-link-inner--text text-light" >Profil</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link nav-link-icon" href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="ni ni-user-run"></i>
-                            <span class="nav-link-inner--text">Keluar</span>
+                            <i class="ni ni-user-run text-light"></i>
+                            <span class="nav-link-inner--text text-light">Keluar</span>
                         </a>
 
                         <form id="logout-form" action="{{ route('auth.logout') }}" method="GET" style="display: none;">
@@ -163,7 +163,7 @@
                                 <span>T</span>
                                 <span>A</span>
                             </h1>
-                            <p class="text-lead text-light">Klinik Mitra Delima, Sistem Informasi Terintegrasi</p>
+                            <p class="text-lead text-white">Klinik Mitra Delima, Sistem Informasi Terintegrasi</p>
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
         <div class="container mt--9 pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
-                    <div class="card bg-secondary shadow border-0">
+                    <div class="card bg-gradient-orange shadow border-0">
                         <div class="card-body px-lg-5 py-lg-5">
                             @if (session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -207,7 +207,7 @@
             <div class="container">
                 <div class="copyright text-center">
                     © {{ date('Y')}} Developed By <a href="https://klinikmitradelima.com/" class="font-weight-bold ml-1"
-                                target="_lank">Klinik Mitra Delima</a> Theme By <a href="https://lovely-rabanadas-9fc482.netlify.app/"
+                                target="_lank">Klinik Mitra Delima</a> Theme By <a href="https://portofolio-ihya.netlify.app/"
                                 class="font-weight-bold ml-1" target="_blank">JSTechno</a>
                 </div>
             </div>
