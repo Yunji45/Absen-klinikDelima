@@ -168,4 +168,45 @@ class PenggajianController extends Controller
             return redirect()->back()->with('error','Data Gagal Untuk Di Hapus.');
         }
     }
+
+    public function indexUMR()
+    {
+        $title = 'Setting UMR';
+        $data = UMKaryawan::all();
+        return view ('backend.admin.gaji.umr-index',compact('title','data'));
+    }
+
+    public function saveUMR(Request $request)
+    {
+        $request->validate([
+            'name'=>'required',
+            'UMK' => 'numeric',
+        ]);
+
+        $umr = new UMKaryawan;
+        $umr -> name = $request->name;
+        $umr -> UMK = $request->UMK;
+        $data = $request->UMK;
+        $hasil_data = round($data);
+        $hasil_rupiah_data = "Rp." . number_format($hasil_data, 0, ',', '.');
+        $umr->Rp = $hasil_rupiah_data;
+        $umr ->save();
+        // return $umr;
+        if($umr){
+            return redirect()->back()->with('success','Data Berhasil Disimpan.');
+        }else{
+            return redirect()->back()->with('error', 'Input UMR hanya dengan Angka, Tidak Dengan Karakter');
+        }
+    }
+
+    public function hapusUMR($id)
+    {
+        $data = UMKarwayan::find($id);
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+        $data->delete();
+        return redirect()->back()->with('success', 'Data Berhasil Dihapus.');
+    }
+    
 }

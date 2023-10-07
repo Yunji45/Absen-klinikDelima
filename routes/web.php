@@ -113,6 +113,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/index-persentase', [PenggajianController::class,'index'])->name('gaji.adm');
         Route::post('/index-gaji-save', [PenggajianController::class,'store'])->name('gaji.save');
         Route::get('/index-gaji/{id}', [PenggajianController::class,'destroy'])->name('gaji.delete');
+        Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');
+        Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
+        Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

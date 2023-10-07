@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Permohonan izin - Klinik Mitra Delima
+    Gaji - Klinik Mitra Delima
 @endsection
 @section('content')
 <div class="container">
