@@ -44,6 +44,7 @@
                                         <th>Gaji Final</th>
                                         <th>Pendidikan</th>
                                         <th>UMR</th>
+                                        <th>Masa Kerja(0=< 1Th || 1=> 1Th )</th>
                                         <th>Persentase</th>
                                         <th>THP</th>
                                         <th>(80%)</th>
@@ -62,6 +63,7 @@
                                     <td>{{ $item->Gaji_akhir }}</td>
                                     <td>{{ $item->pendidikan }}</td>
                                     <td>{{ $item->UMR->Rp }}</td>
+                                    <td>{{ $item->Masa_kerja }}</td>
                                     <td>{{ $item->index }}</td>
                                     <td>{{ $item->THP }}</td>
                                     <td>{{ $item->Gaji }}</td>
