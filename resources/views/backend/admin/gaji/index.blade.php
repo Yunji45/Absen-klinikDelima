@@ -60,15 +60,15 @@
                                     <td>{{$no++}}.</td>
                                     <td>{{$item->user->name}}</td>
                                     <td>{{ $item->pendidikan }}</td>
-                                    <td>{{ 'Rp.' . number_format($item->Gaji_akhir, 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format(floatval($item->Gaji_akhir), 0, ',', '.') }}</td>
                                     <td>{{ $item->UMR->Rp }}</td>
                                     <td>{{ $item->Masa_kerja }}</td>
                                     <td>{{ $item->index }}%</td>
-                                    <td>{{ 'Rp.' . number_format($item->THP, 0, ',', '.') }}</td>
-                                    <td>{{ 'Rp.' . number_format($item->Gaji, 0, ',', '.') }}</td>
-                                    <td>{{ 'Rp.' . number_format($item->Ach, 0, ',', '.') }}</td>
-                                    <td>{{ 'Rp.' . number_format($item->Bonus ?? '0', 0, ',', '.') }}</td>
-                                    <td>{{ 'Rp.' . number_format($item->Potongan ?? '0', 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format(floatval($item->THP), 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format(floatval($item->Gaji), 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format(floatval($item->Ach), 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format(floatval($item->Bonus ?? '0'), 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format(floatval($item->Potongan ?? '0'), 0, ',', '.') }}</td>
                                     <td>{{ $item->bulan }}</td>
                                     <td>
                                         <a href="{{route('gaji.delete',$item->id)}}" class="btn btn-sm btn-danger" title="{{$title}}"
