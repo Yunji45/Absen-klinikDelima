@@ -23,11 +23,11 @@
                         </form>
                     </div>
                     <div class="card-body">
-                        <form action="" class="mb-3" method="get">
+                        <form action="{{route('cari.gaji')}}" class="mb-3" method="get">
                             <div class="form-group row mb-3 ">
                                 <label for="bulan" class="col-form-label col-sm-2">Bulan</label>
                                 <div class="input-group col-sm-10">
-                                    <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan',date('Y-m')) }}">
+                                <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan', date('Y-m')) }}" min="1900-01" max="{{ date('Y-m') }}">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-primary" type="submit">Cari</button>
                                     </div>
@@ -40,17 +40,17 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
-                                        <th>Date</th>
-                                        <th>Gaji Final</th>
                                         <th>Pendidikan</th>
+                                        <th>Gaji Final</th>
                                         <th>UMR</th>
-                                        <th>Masa Kerja(0=< 1Th || 1=> 1Th )</th>
+                                        <th>Masa Kerja</th>
                                         <th>Persentase</th>
                                         <th>THP</th>
                                         <th>(80%)</th>
                                         <th>(20%)</th>
                                         <th>Bonus</th>
                                         <th>Potongan</th>
+                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -59,17 +59,17 @@
                                 <tr>
                                     <td>{{$no++}}.</td>
                                     <td>{{$item->user->name}}</td>
-                                    <td>{{ $item->bulan }}</td>
-                                    <td>{{ $item->Gaji_akhir }}</td>
                                     <td>{{ $item->pendidikan }}</td>
+                                    <td>{{ 'Rp.' . number_format($item->Gaji_akhir, 0, ',', '.') }}</td>
                                     <td>{{ $item->UMR->Rp }}</td>
                                     <td>{{ $item->Masa_kerja }}</td>
-                                    <td>{{ $item->index }}</td>
-                                    <td>{{ $item->THP }}</td>
-                                    <td>{{ $item->Gaji }}</td>
-                                    <td>{{ $item->Ach }}</td>
-                                    <td>{{ $item->Bonus ?? '0'}}</td>
-                                    <td>{{ $item->Potongan ?? '0' }}</td>
+                                    <td>{{ $item->index }}%</td>
+                                    <td>{{ 'Rp.' . number_format($item->THP, 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format($item->Gaji, 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format($item->Ach, 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format($item->Bonus ?? '0', 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp.' . number_format($item->Potongan ?? '0', 0, ',', '.') }}</td>
+                                    <td>{{ $item->bulan }}</td>
                                     <td>
                                         <a href="{{route('gaji.delete',$item->id)}}" class="btn btn-sm btn-danger" title="{{$title}}"
                                         onclick="return confirm('Apakah Anda yakin ingin menghapus dokumen pengguna ini?')">
@@ -168,15 +168,23 @@
                             <label for="index" class="col-form-label col-sm-3">Persentase</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('index') is-invalid @enderror" name="index" id="index">
+                                    <option value="">Pilih</option>
+                                    <option value="500">5.0</option>
+                                    <option value="400">4.0</option>
+                                    <option value="300">3.0</option>
+                                    <option value="190">1.9</option>
                                     <option value="180">1.8</option>
                                     <option value="170">1.7</option>
+                                    <option value="160">1.6</option>
                                     <option value="150">1.5</option>
                                     <option value="140">1.4</option>
                                     <option value="130">1.3</option>
+                                    <option value="120">1.2</option>
                                     <option value="110">1.1</option>
                                     <option value="100">1.0</option>
                                     <option value="90">0.9</option>
-                                    <option value="300">3.0</option>
+                                    <option value="80">0.8</option>
+                                    <option value="70">0.7</option>
                                 </select>
                                 @error('index') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
@@ -189,6 +197,13 @@
                                     <option value="1">Diatas 1 tahun</option>
                                 </select>
                                 @error('Masa_kerja') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="Potongan">
+                            <label for="Potongan" class="col-form-label col-sm-3">Potongan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="Potongan" id="Potongan" class="form-control @error('name') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada potongan" required>
+                                @error('Potongan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>

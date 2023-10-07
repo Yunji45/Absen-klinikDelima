@@ -20,10 +20,15 @@ class PenggajianController extends Controller
     public function index()
     {
         $title = 'Penggajian';
-        $gaji = gajian::all();
+        $bulan = date('m');
+        $tahun = date('Y');
+        // $gaji = gajian::all();
+        $gaji = gajian::whereYear('bulan', $tahun)
+        ->whereMonth('bulan', $bulan)
+        ->get();    
         $data = User::all();
         $umr = UMKaryawan::all();
-        return view('backend.admin.gaji.index',compact('title','gaji','data','umr'));
+        return view('backend.admin.gaji.index',compact('title','gaji','data','umr','tahun','bulan'));
         // $data = 2021657;
         // $persen = '180';
         // $perkalian = (($data * $persen) / 100);
@@ -32,6 +37,31 @@ class PenggajianController extends Controller
         // $hasil_rupiah = "Rp " . number_format($hasil_bulat, 0, ',', '.');
         // return $hasil_rupiah;
     }
+
+    public function cari(Request $request)
+    {
+        $title = 'Penggajian';
+        $tahun = substr($request->bulan, 0, 4); // Ambil tahun dari input bulan
+        $bulanInput = substr($request->bulan, 5, 2); // Ambil bulan dari input bulan    
+        $data = User::all();
+        $umr = UMKaryawan::all();
+        // $bulan = $request->input('bulan');
+        // $gaji = gajian::where('bulan', '>=', $bulan . '-01')
+        //                 ->get();
+                
+        // return view ('backend.admin.gaji.index',compact('gaji','title','data','umr'));
+        if (preg_match('/^(0[1-9]|1[0-2])$/', $bulanInput)) {
+            $gaji = gajian::whereYear('bulan', $tahun)
+                ->whereMonth('bulan', $bulanInput)
+                ->get();
+            return view('backend.admin.gaji.index', compact('gaji', 'title', 'tahun', 'bulanInput','data','umr'));
+        } else {
+            // Format bulan tidak sesuai, mungkin Anda ingin menangani ini sesuai kebutuhan Anda.
+            return redirect()->back()->with('error', 'Format bulan tidak valid.');
+        }
+    
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -60,6 +90,7 @@ class PenggajianController extends Controller
             'umr_id' => 'required',
             'index' => 'required',
             'Masa_kerja' => 'required',
+            'Potongan' => 'numeric',
         ]);
         $bulanYangDicari = $request->bulan; 
         $tahun = date('Y'); 
@@ -76,38 +107,31 @@ class PenggajianController extends Controller
         $umk = UMKaryawan::where('id', $umr_id)->value('UMK');
         // Perhitungan THP
         $thp = ($umk * $request->index) / 100;
-        $hasil_thp = round($thp);
-        $hasil_rupiah_thp = "Rp." . number_format($hasil_thp, 0, ',', '.');
-        $gaji->THP = $hasil_rupiah_thp;
+        $gaji->THP =$thp;
         
         // Perhitungan Gaji 80 %
         $gaji_80 = ($thp * 80) / 100;
-        $hasil_Gaji = round($gaji_80);
-        $hasil_rupiah_Gaji = "Rp." . number_format($hasil_Gaji, 0, ',', '.');
-        $gaji->Gaji = $hasil_rupiah_Gaji;
+        $gaji->Gaji = $gaji_80;
         
         // Perhitungan Insentif 20%
         $insentif = ($thp * 20) / 100;
-        $hasil_insentif = round($insentif);
-        $hasil_rupiah_insentif = "Rp." . number_format($hasil_insentif, 0, ',', '.');
-        $gaji->Ach = $hasil_rupiah_insentif;
+        $gaji->Ach = $insentif;
         
         $gaji->Bonus = null;
         $gaji->Masa_kerja = $request->Masa_kerja;
         
         // Perhitungan Gaji Akhir
         if ($request->Masa_kerja == 1) {
-            $gaji->Gaji_akhir = $hasil_rupiah_Gaji;
+            $gaji->Gaji_akhir = $gaji_80 - $request->Potongan;
         } elseif ($request->Masa_kerja == 0) {
             $masa = $gaji_80 * 0.8;
-            $hasil_masa = round($masa);
-            $hasil_rupiah_masa = "Rp." . number_format($hasil_masa, 0, ',', '.');
-            $gaji->Gaji_akhir = $hasil_rupiah_masa;
+            $gaji->Gaji_akhir = $masa - $request->Potongan;
         } else {
             $gaji->Gaji_akhir = null;
         }
         
-        $gaji->Potongan = null;
+        $potongan = ($gaji->Gaji_akhir - $request->Potongan);
+        $gaji->Potongan = $request->Potongan;
         
         $gaji->save();
         // return $gaji;
