@@ -98,4 +98,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(gajian::class);
     }
+
+    public function kpi()
+    {
+        return $this->hasMany(kpi::class);
+    }
 }
