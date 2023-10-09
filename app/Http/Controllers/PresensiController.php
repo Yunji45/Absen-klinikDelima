@@ -679,29 +679,6 @@ class PresensiController extends Controller
 
     public function update(Request $request, presensi $kehadiran)
     {
-        //     $data = $request->validate([
-        //         'keterangan'    => ['required']
-        //     ]);
-
-        //     if ($request->jam_keluar) {
-        //         $data['jam_keluar'] = $request->jam_keluar;
-        //     }
-
-        //     if ($request->keterangan == 'Masuk' || $request->keterangan == 'Telat') {
-        //         $data['jam_masuk'] = $request->jam_masuk;
-        //         if (strtotime($data['jam_masuk']) >= strtotime(config('absensi.jam_masuk') .' -1 hours') && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_masuk'))) {
-        //             $data['keterangan'] = 'Masuk';
-        //         } else if (strtotime($data['jam_masuk']) > strtotime(config('absensi.jam_masuk')) && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_pulang'))) {
-        //             $data['keterangan'] = 'Telat';
-        //         } else {
-        //             $data['keterangan'] = 'Alpha';
-        //         }
-        //     } else {
-        //         $data['jam_masuk'] = null;
-        //         $data['jam_keluar'] = null;
-        //     }
-        //     $kehadiran->update($data);
-        // return redirect()->back()->with('success', 'Kehadiran tanggal "'.date('l, d F Y',strtotime($kehadiran->tanggal)).'" berhasil diubah');
         $data = $request->validate([
             'keterangan' => ['required', 'in:Alpha,Masuk,Telat,Sakit,Cuti'],
             'jam_masuk' => ['nullable', 'date_format:H:i'],
@@ -727,6 +704,7 @@ class PresensiController extends Controller
         return redirect()->back()->with('success', 'Kehadiran tanggal "' . date('l, d F Y', strtotime($kehadiran->tanggal)) . '" berhasil diubah');
     
     }
+    
 
     public function excelUser(Request $request, User $user)
     {
