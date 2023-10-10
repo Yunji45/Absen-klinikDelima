@@ -48,7 +48,7 @@
                                         <th>THP</th>
                                         <th>(80%)</th>
                                         <th>(20%)</th>
-                                        <th>Bonus</th>
+                                        <th>Tambahan</th>
                                         <th>Potongan</th>
                                         <th>Date</th>
                                         <th>Action</th>
@@ -204,6 +204,13 @@
                             <div class="col-sm-9">
                                 <input type="text" name="Potongan" id="Potongan" class="form-control @error('name') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada potongan" required>
                                 @error('Potongan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="Bonus">
+                            <label for="Bonus" class="col-form-label col-sm-3">Tambahan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="Bonus" id="Bonus" class="form-control @error('Bonus') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada potongan tambahan" required>
+                                @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>

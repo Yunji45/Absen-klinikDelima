@@ -116,22 +116,29 @@ class PenggajianController extends Controller
         // Perhitungan Insentif 20%
         $insentif = ($thp * 20) / 100;
         $gaji->Ach = $insentif;
-        
-        $gaji->Bonus = null;
         $gaji->Masa_kerja = $request->Masa_kerja;
         
         // Perhitungan Gaji Akhir
+        // if ($request->Masa_kerja == 1) {
+        //     $gaji->Gaji_akhir = $gaji_80 - $request->Potongan;
+        // } elseif ($request->Masa_kerja == 0) {
+        //     $masa = $gaji_80 * 0.8;
+        //     $gaji->Gaji_akhir = $masa - $request->Potongan;
+        // } else {
+        //     $gaji->Gaji_akhir = null;
+        // }
         if ($request->Masa_kerja == 1) {
-            $gaji->Gaji_akhir = $gaji_80 - $request->Potongan;
+            $total_potongan_bonus = $request->Potongan - $request->Bonus;
+            $gaji->Gaji_akhir = $gaji_80 - $total_potongan_bonus;
         } elseif ($request->Masa_kerja == 0) {
             $masa = $gaji_80 * 0.8;
-            $gaji->Gaji_akhir = $masa - $request->Potongan;
+            $total_potongan_bonus = $request->Potongan - $request->Bonus;
+            $gaji->Gaji_akhir = $masa - $total_potongan_bonus;
         } else {
             $gaji->Gaji_akhir = null;
-        }
-        
-        $potongan = ($gaji->Gaji_akhir - $request->Potongan);
+        }        
         $gaji->Potongan = $request->Potongan;
+        $gaji->Bonus = $request->Bonus;
         
         $gaji->save();
         // return $gaji;

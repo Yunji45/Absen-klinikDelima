@@ -47,17 +47,17 @@
         <div class="main-wrapper">
             <div class="navbar-bg"></div>
             <!-- Navbar -->
-            @include('layout.admin.navbar')
+            @include('template.layout.app.navbar')
 
             <!-- Sidebar -->
-            @include('layout.admin.side')
+            @include('template.layout.app.side')
 
             <!-- Main Content -->
             <div class="main-content">
                 @yield('dashboard')
                 @yield('tabel')
             </div>
-            @include('layout.admin.footer')
+            @include('template.layout.app.footer')
         </div>
     </div>
 

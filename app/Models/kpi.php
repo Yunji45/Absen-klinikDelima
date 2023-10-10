@@ -34,6 +34,10 @@ class kpi extends Model
         'kolaboratif',
         'absen',
         'total',
+        'total_kinerja',
+        'ket',
+        'bulan'
+
     ];
 
     public function user()

@@ -18,6 +18,8 @@ use App\Http\Controllers\IPConfigController;
 use App\Http\Controllers\HelpITController;
 use App\Http\Controllers\PenggajianController;
 
+use App\Http\Controllers\Backend\KpiController;
+
 
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
@@ -117,6 +119,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
         Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
         Route::get('/cari-gaji', [PenggajianController::class,'cari'])->name('cari.gaji');
+
+        Route::get('/KPI',[KpiController::class,'index'])->name('kpi.index');
+        Route::get('/KPI-create',[KpiController::class,'create'])->name('kpi.tambah');
+        Route::post('/KPI-save',[KpiController::class,'store'])->name('kpi.save');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
