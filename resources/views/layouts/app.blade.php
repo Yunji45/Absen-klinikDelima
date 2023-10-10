@@ -149,7 +149,7 @@
                             <div class="dropdown-menu" aria-labelledby="konfirmasiDropdown">
                                 <a class="dropdown-item" href="{{ route('gaji.adm') }}">Gaji</a>
                                 <a class="dropdown-item" href="{{route('gaji.indexUMR')}}">Setup UMR</a>
-                                <a class="dropdown-item" href="">Bonus</a>
+                                <a class="dropdown-item" href="{{route('kpi.index')}}">Insentif</a>
                             </div>
                         </li>
 
