@@ -103,6 +103,7 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
                                     </select>
                                     @error('j1')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -125,6 +126,7 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
                                     </select>
                                     @error('j2')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -147,6 +149,7 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
                                     </select>
                                     @error('j3')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -169,6 +172,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j4')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -191,6 +196,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j5')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -213,6 +220,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j6')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -235,6 +244,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j7')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -257,6 +268,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j8')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -279,6 +292,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j9')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -301,6 +316,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j10')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -323,6 +340,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j11')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -345,6 +364,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j1')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -367,6 +388,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j13')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -389,6 +412,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j14')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -411,6 +436,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j15')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -433,6 +460,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j16')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -455,6 +484,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j17')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -477,6 +508,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j18')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -499,6 +532,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j19')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -521,6 +556,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j20')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -543,6 +580,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j21')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -565,6 +604,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j22')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -587,6 +628,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j23')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -609,6 +652,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j24')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -631,6 +676,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j25')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -653,6 +700,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j26')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -675,6 +724,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j27')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -697,6 +748,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j20')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -719,6 +772,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j29')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -741,6 +796,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j30')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -763,6 +820,8 @@ Jadwal Shift - Klinik Mitra Delima
                                         <option value="L2">L2</option>
                                         <option value="C">C</option>
                                         <option value="IJ">IJ</option>
+                                        <option value="LL">LL</option>
+
                                     </select>
                                     @error('j31')
                                     <span class="invalid-feedback" role="alert">{{ $message }}</span>

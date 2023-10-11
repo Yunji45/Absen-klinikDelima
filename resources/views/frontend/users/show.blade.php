@@ -331,6 +331,9 @@ Absensi - Klinik Mitra Delima
                                                     <button id="btnUbahKehadiran" data-id="{{ $present->id }}" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ubahKehadiran">
                                                         <i class="far fa-edit"></i>
                                                     </button>
+                                                    <a href="{{ route('kehadiran.delete', $present->id) }}" type="button" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data presensi ini?')">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -362,6 +365,14 @@ Absensi - Klinik Mitra Delima
                     <div class="modal-body">
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <div class="form-group row" id="tanggal">
+                            <label for="jam_masuk" class="col-form-label col-sm-3">Tanggal</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror">
+                                @error('tanggal') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="keterangan" class="col-form-label col-sm-3">Keterangan</label>
                             <div class="col-sm-9">
@@ -382,6 +393,14 @@ Absensi - Klinik Mitra Delima
                                 @error('jam_masuk') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        <div class="form-group row" id="jamKeluar">
+                            <label for="jam_keluar" class="col-form-label col-sm-3">Jam Keluar</label>
+                            <div class="col-sm-9">
+                                <input type="time" name="jam_keluar" id="ubah_jam_keluar" class="form-control @error('jam_keluar') is-invalid @enderror">
+                                @error('jam_keluar') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -453,8 +472,10 @@ Absensi - Klinik Mitra Delima
             $('#keterangan').on('change',function(){
                 if ($(this).val() == 'Masuk' || $(this).val() == 'Telat') {
                     $('#jamMasuk').show();
+                    $('#jamKeluar').show();
                 } else {
                     $('#jamMasuk').hide();
+                    $('#jamKeluar').hide();
                 }
             });
             $('#btnUbahKehadiran').on('click',function(){
@@ -511,3 +532,27 @@ Absensi - Klinik Mitra Delima
         });
     </script>
 @endpush
+<!-- @push('script')
+<script>
+    $('.btnUbahKehadiran').on('click', function(){
+    const id = $(this).data('id'); // Mengambil ID dari tombol yang diklik
+    const tanggal = $(this).data('tanggal'); // Mengambil tanggal dari tombol yang diklik
+    const keterangan = $(this).data('keterangan'); // Mengambil keterangan dari tombol yang diklik
+    const jamMasuk = $(this).data('jam-masuk'); // Mengambil jam masuk dari tombol yang diklik
+
+    // Mengisi formulir dengan data yang sesuai
+    $('#presensi_id').val(id);
+    $('#tanggal').html(tanggal);
+    $('#ubah_keterangan').val(keterangan);
+    $('#ubah_jam_masuk').val(jamMasuk);
+
+    // Tampilkan atau sembunyikan input jam masuk berdasarkan keterangan
+    if (keterangan === 'Masuk' || keterangan === 'Telat') {
+        $('#jamMasuk').show();
+    } else {
+        $('#jamMasuk').hide();
+    }
+});
+
+</script>
+@endpush -->

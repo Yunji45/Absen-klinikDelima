@@ -605,15 +605,23 @@ class PresensiController extends Controller
      */
     public function store(Request $request)
     {
-        $present = presensi::whereUserId($request->user_id)->whereTanggal(date('Y-m-d'))->first();
+        // $present = presensi::whereUserId($request->user_id)->whereTanggal(date('Y-m-d'))->first();
+        $present = presensi::where('user_id', $request->user_id)
+                   ->where('tanggal', $request->tanggal)
+                   ->first();
         if ($present) {
-            return redirect()->back()->with('error','Absensi hari ini telah terisi');
+            return redirect()->back()->with('error','Absensi di tanggal tersebut telah terisi');
         }
         $data = $request->validate([
+            'tanggal' => 'required',
             'keterangan'    => ['required'],
-            'user_id'    => ['required']
+            'user_id'    => ['required'],
+            'jam_masuk' => ['nullable', 'date_format:H:i'],
+            'jam_keluar' => ['nullable', 'date_format:H:i'],
+
         ]);
-        $data['tanggal'] = date('Y-m-d');
+        // $data['tanggal'] = date('Y-m-d');
+        $data['tanggal'] = $request->tanggal;
         if ($request->keterangan == 'Masuk' || $request->keterangan == 'Telat') {
             $data['jam_masuk'] = $request->jam_masuk;
             if (strtotime($data['jam_masuk']) >= strtotime(config('absensi.jam_masuk') .' -1 hours') && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_masuk'))) {
@@ -684,7 +692,7 @@ class PresensiController extends Controller
             'jam_masuk' => ['nullable', 'date_format:H:i'],
             'jam_keluar' => ['nullable', 'date_format:H:i'],
         ]);
-    
+        // $data['tanggal'] = $request->tanggal;
         if ($data['keterangan'] === 'Masuk' || $data['keterangan'] === 'Telat') {
             // Jika keterangan adalah "Masuk" atau "Telat", dan jam_masuk diisi
             if ($request->jam_masuk) {
@@ -739,5 +747,16 @@ class PresensiController extends Controller
         $pdf = PDF::loadView('frontend.users.userpresensi', compact('presents', 'user'));
         return $pdf->download('Presensi-per-user.pdf');
     }
-
+    public function delete($id)
+    {
+        // Cari presensi berdasarkan $id
+        $present = presensi::find($id);
+        // Periksa apakah presensi ditemukan
+        if (!$present) {
+            return redirect()->back()->with('error', 'Data presensi tidak ditemukan');
+        }
+        // Hapus presensi jika ditemukan
+        $present->delete();
+        return redirect()->back()->with('success', 'Data presensi berhasil dihapus.');
+    }        
 }
