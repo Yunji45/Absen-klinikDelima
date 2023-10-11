@@ -11,11 +11,14 @@
                 <div class="card shadow h-100">
                     <div class="card-header">
                         <h5 class="m-0 pt-1 font-weight-bold float-left">Konfirmasi Izin</h5>
+                        <button title="Tambah Izin" type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#kehadiran">
+                                    <i class="fas fa-plus">ADD</i>
+                                </button>
 
                         <form class="float-right d-inline-block" action="" method="get">
                             <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
                             <button title="Download" type="submit" class="btn btn-sm btn-success">
-                                <i class="fas fa-download"></i>
+                                <i class="fas fa-download">PDF</i>
                             </button>
                         </form>
                     </div>
@@ -31,9 +34,6 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="mb-3">
-                            <h5 class="m-0 pt-1 font-weight-bold float-left">Konfirmasi Izin</h5>
-                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -79,6 +79,76 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="kehadiranLabel">Form Pengajuan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('data.izin.adm') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
+                        <div class="form-group row">
+                            <label for="user_id" class="col-form-label col-sm-3">Nama</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
+                                    @foreach($user as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('user_id') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="keterangan" class="col-form-label col-sm-3">Jenis </label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('jenis_izin') is-invalid @enderror" name="jenis_izin" id="jenis_izin">
+                                    <option value="sakit">Sakit</option>
+                                    <option value="izin">Izin</option>
+                                    <option value="cuti_tahunan">Cuti Tahunan</option>
+                                    <option value="cuti_bersama">Cuti Bersama</option>
+                                    <option value="cuti_besar">Cuti Besar</option>
+                                    <option value="cuti_melahirkan">Cuti Melahirkan</option>
+                                </select>
+                                @error('keterangan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="tanggal_mulai">
+                            <label for="tanggal_mulai" class="col-form-label col-sm-3">Mulai</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal_mulai" id="tanggal_mulai" class="form-control @error('tanggal_mulai') is-invalid @enderror">
+                                @error('tanggal_mulai') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="tanggal_berakhir">
+                            <label for="tanggal_berakhir" class="col-form-label col-sm-3">Berakhir</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal_berakhir" id="tanggal_berakhir" class="form-control @error('tanggal_berakhir') is-invalid @enderror">
+                                @error('tanggal_berakhir') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="alasan">
+                            <label for="alasan" class="col-form-label col-sm-3">Alasan</label>
+                            <div class="col-sm-9">
+                                <textarea name="alasan" rows="4" class="form-control @error('tanggal_berakhir') is-invalid @enderror" required></textarea>
+                                @error('alasan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

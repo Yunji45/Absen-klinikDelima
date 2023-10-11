@@ -19,10 +19,11 @@ class CutiController extends Controller
     public function index()
     {
         $title = 'Pengajuan Cuti';
+        $user = User::all();
         $cuti = cuti::whereIn('status', ['pengajuan', 'approve'])
         ->orderBy('created_at', 'desc') 
         ->get();
-        return view('backend.admin.izin.index',compact('title','cuti'));
+        return view('backend.admin.izin.index',compact('title','cuti','user'));
         // return $cuti;
     }
 
@@ -75,6 +76,51 @@ class CutiController extends Controller
 
         $cutiData = [
             'user_id' => Auth()->user()->id,
+            'jenis_izin' => $request->jenis_izin,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_berakhir' => $request->tanggal_berakhir,
+            'alasan' => $request->alasan,
+            'status' => 'pengajuan', 
+        ];
+
+        cuti::create($cutiData);
+        // return $cutiData;
+        return redirect()->back()->with('success', 'Berhasil di ajukan.');
+    }
+
+    public function storeAdm(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'jenis_izin' => 'required',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
+            'alasan' => 'required|string',
+        ]);
+        $user_id = $request->input('user_id');
+
+        $existingCuti = cuti::where('user_id', $user_id)
+            ->where('status', 'pengajuan')
+           ->first();
+
+        if ($existingCuti) {
+            return redirect()->back()->with('error', 'User tersebut tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
+        }
+
+        $izinSebelumnya = cuti::where('user_id', $user_id)
+            ->where(function ($query) use ($request) {
+                $query->where('tanggal_mulai', '<=', $request->tanggal_berakhir)
+                    ->where('tanggal_berakhir', '>=', $request->tanggal_mulai);
+            })
+            ->first();
+
+        if ($izinSebelumnya) {
+            return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan User untuk izin sebelumnya.');
+        }
+
+
+        $cutiData = [
+            'user_id' => $request->user_id,
             'jenis_izin' => $request->jenis_izin,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_berakhir' => $request->tanggal_berakhir,

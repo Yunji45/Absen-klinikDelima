@@ -142,10 +142,11 @@ class RubahjadwalController extends Controller
     public function indexAdmin()
     {
         $title = 'Permohonan Jadwal';
+        $user = User::all();
         $permohonan = rubahjadwal::whereIn('status', ['pengajuan', 'approve'])
         ->orderBy('created_at', 'desc') 
         ->get();
-        return view ('backend.admin.permohonan.index',compact('title','permohonan'));
+        return view ('backend.admin.permohonan.index',compact('title','permohonan','user'));
     }
 
     public function VerifPermohonan(Request $request ,$id)
@@ -185,5 +186,45 @@ class RubahjadwalController extends Controller
             return redirect()->back()->with('error', 'Permohonan Tidak Di Setujui');
         }
     
+    }
+
+    public function storeAdm(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'permohonan' => 'required',
+            'tanggal' => 'required|date',
+            'alasan' => 'required|string',
+        ]);
+        $user_id = $request->input('user_id');
+
+        $existingCuti = rubahjadwal::where('user_id', $user_id)
+            ->where('status', 'pengajuan')
+           ->first();
+
+        if ($existingCuti) {
+            return redirect()->back()->with('error', 'User tersebut tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
+        }
+
+        $izinSebelumnya = rubahjadwal::where('user_id', $user_id)
+            ->where(function ($query) use ($request) {
+                $query->where('tanggal', '<=', $request->tanggal);
+            })
+            ->first();
+
+        if ($izinSebelumnya) {
+            return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan User untuk izin sebelumnya.');
+        }
+
+
+        $permohonan = new rubahjadwal;
+        $permohonan -> user_id = $request->user_id;
+        $permohonan -> permohonan = $request->permohonan;
+        $permohonan -> tanggal = $request->tanggal;
+        $permohonan -> alasan = $request->alasan;
+        $permohonan -> status = 'pengajuan';
+        $permohonan ->save();
+        // return $permohonan;
+        return redirect()->back()->with('success', 'Berhasil di ajukan.');
     }
 }

@@ -81,6 +81,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
 
         //cuti-backend
         Route::get('/data-izin',[CutiController::class,'index'])->name('konfirmasi.izin');
+        Route::post('/data-izin/save',[CutiController::class,'storeAdm'])->name('data.izin.adm');
         Route::get('/izin-form',[CutiController::class,'create'])->name('data.cuti');
         Route::get('/VerifikasiIzin/{id}/berhasil',[CutiController::class,'VerifikasiCuti']);
         Route::get('/RejectIzin/{id}/gagal',[CutiController::class,'RejectCuti'])->name('delete.izin.cuti');
@@ -109,6 +110,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
 
         //rubah jadwal
         Route::get('/data-permohonan',[RubahjadwalController::class,'indexAdmin'])->name('permohonan.index');
+        Route::post('/data-permohonan-create',[RubahjadwalController::class,'storeAdm'])->name('permohonan.save.adm');
         Route::get('/Verifikasi/{id}/berhasil',[RubahjadwalController::class,'VerifPermohonan']);
         Route::get('/Reject/{id}/gagal',[RubahjadwalController::class,'destroy'])->name('permohonan.delete');
 

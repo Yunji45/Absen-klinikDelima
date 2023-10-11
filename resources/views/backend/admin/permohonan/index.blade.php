@@ -11,11 +11,13 @@ Permohonan Jadwal - Klinik Mitra Delima
                 <div class="card shadow h-100">
                     <div class="card-header">
                         <h5 class="m-0 pt-1 font-weight-bold float-left">Konfirmasi Permohonan</h5>
-
+                                <button title="Tambah Izin" type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#kehadiran">
+                                    <i class="fas fa-plus">ADD</i>
+                                </button>
                         <form class="float-right d-inline-block" action="" method="get">
                             <input type="hidden" name="bulan" value="{{ request('bulan',date('Y-m')) }}">
                             <button title="Download" type="submit" class="btn btn-sm btn-success">
-                                <i class="fas fa-download"></i>
+                                <i class="fas fa-download">PDF</i>
                             </button>
                         </form>
                     </div>
@@ -77,6 +79,77 @@ Permohonan Jadwal - Klinik Mitra Delima
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="kehadiranLabel">Form Permohonan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('permohonan.save.adm')}}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
+                        <div class="form-group row">
+                            <label for="user_id" class="col-form-label col-sm-3">Nama</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
+                                    @foreach($user as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('user_id') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="permohonan" class="col-form-label col-sm-3">Jenis Permohonan</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('permohonan') is-invalid @enderror" name="permohonan" id="permohonan">
+                                    <option value="ganti_jaga">Ganti Jaga</option>
+                                    <option value="tukar_jaga">Tukar Jaga</option>
+                                    <option value="lembur">Lembur</option>
+                                </select>
+                                @error('permohonan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="pengganti" class="col-form-label col-sm-3">Pengganti</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('pengganti') is-invalid @enderror" name="pengganti" id="pengganti">
+                                    <option value="">Tidak Ada</option>
+                                    @foreach ($user as $item)
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('pengganti') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="tanggal">
+                            <label for="tanggal" class="col-form-label col-sm-3">Pada Tanggal</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror">
+                                @error('tanggal') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="alasan">
+                            <label for="alasan" class="col-form-label col-sm-3">Alasan</label>
+                            <div class="col-sm-9">
+                                <textarea name="alasan" rows="4" class="form-control @error('tanggal_berakhir') is-invalid @enderror" required></textarea>
+                                @error('alasan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
