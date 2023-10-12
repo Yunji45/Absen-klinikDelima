@@ -122,6 +122,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
         Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
         Route::get('/cari-gaji', [PenggajianController::class,'cari'])->name('cari.gaji');
+        Route::post('/index-gaji-update/{id}',[PenggajianController::class,'update'])->name('gaji.update');
 
         Route::get('/KPI',[KpiController::class,'index'])->name('kpi.index');
         Route::get('/KPI-create',[KpiController::class,'create'])->name('kpi.tambah');

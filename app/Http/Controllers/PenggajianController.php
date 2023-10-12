@@ -88,7 +88,6 @@ class PenggajianController extends Controller
             'bulan' => 'required',
             'pendidikan' => 'required',
             'umr_id' => 'required',
-            'index' => 'required',
             'Masa_kerja' => 'required',
             'Potongan' => 'numeric',
         ]);
@@ -100,13 +99,35 @@ class PenggajianController extends Controller
         $gaji->user_id = $request->user_id;
         $gaji->bulan = $tanggalBulan;
         $gaji->pendidikan = $request->pendidikan;
+        if ($request->pendidikan == 'Dokter'){
+            $gaji->index = 300;
+        }elseif ($request->pendidikan == 'S1 Profesi'){
+            $gaji->index = 180;
+        }elseif($request->pendidikan == 'S1 Kesehatan Non Profesi'){
+            $gaji->index = 170;
+        }elseif($request->pendidikan == 'S1 Non Kesehatan'){
+            $gaji->index = 150;
+        }elseif($request->pendidikan == 'D3 Kesehatan'){
+            $gaji->index = 140;
+        }elseif($request->pendidikan == 'D3 Non Kesehatan'){
+            $gaji->index = 130;
+        }elseif($request->pendidikan == 'SMK Kesehatan'){
+            $gaji->index= 110;
+        }elseif($request->pendidikan == 'SLTA Non Kesehatan'){
+            $gaji->index = 100;
+        }elseif($request->pendidikan == 'Dibawah SLTA'){
+            $gaji->index = 90;
+        }else{
+            $gaji->index =null;
+        }
+
         $gaji->umr_id = $request->umr_id;
-        $gaji->index = $request->index;
+        // $gaji->index = $request->index;
         // Mengambil nilai UMK berdasarkan umr_id
         $umr_id = $request->umr_id;
         $umk = UMKaryawan::where('id', $umr_id)->value('UMK');
         // Perhitungan THP
-        $thp = ($umk * $request->index) / 100;
+        $thp = ($umk * $gaji->index) / 100;
         $gaji->THP =$thp;
         
         // Perhitungan Gaji 80 %
@@ -180,7 +201,84 @@ class PenggajianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $bulanYangDicari = $request->bulan; 
+        $tahun = date('Y'); 
+        $tanggalBulan = $tahun . '-' . $bulanYangDicari . '-01';
+
+        $gaji = gajian::find($id);
+        $gaji->user_id = $request->user_id;
+        $gaji->bulan = $tanggalBulan;
+        $gaji->pendidikan = $request->pendidikan;
+        if ($request->pendidikan == 'Dokter'){
+            $gaji->index = 300;
+        }elseif ($request->pendidikan == 'S1 Profesi'){
+            $gaji->index = 180;
+        }elseif($request->pendidikan == 'S1 Kesehatan Non Profesi'){
+            $gaji->index = 170;
+        }elseif($request->pendidikan == 'S1 Non Kesehatan'){
+            $gaji->index = 150;
+        }elseif($request->pendidikan == 'D3 Kesehatan'){
+            $gaji->index = 140;
+        }elseif($request->pendidikan == 'D3 Non Kesehatan'){
+            $gaji->index = 130;
+        }elseif($request->pendidikan == 'SMK Kesehatan'){
+            $gaji->index= 110;
+        }elseif($request->pendidikan == 'SLTA Non Kesehatan'){
+            $gaji->index = 100;
+        }elseif($request->pendidikan == 'Dibawah SLTA'){
+            $gaji->index = 90;
+        }else{
+            $gaji->index =null;
+        }
+
+        $gaji->umr_id = $request->umr_id;
+        // $gaji->index = $request->index;
+        // Mengambil nilai UMK berdasarkan umr_id
+        $umr_id = $request->umr_id;
+        $umk = UMKaryawan::where('id', $umr_id)->value('UMK');
+        // Perhitungan THP
+        $thp = ($umk * $gaji->index) / 100;
+        $gaji->THP =$thp;
+        
+        // Perhitungan Gaji 80 %
+        $gaji_80 = ($thp * 80) / 100;
+        $gaji->Gaji = $gaji_80;
+        
+        // Perhitungan Insentif 20%
+        $insentif = ($thp * 20) / 100;
+        $gaji->Ach = $insentif;
+        $gaji->Masa_kerja = $request->Masa_kerja;
+        
+        // Perhitungan Gaji Akhir
+        // if ($request->Masa_kerja == 1) {
+        //     $gaji->Gaji_akhir = $gaji_80 - $request->Potongan;
+        // } elseif ($request->Masa_kerja == 0) {
+        //     $masa = $gaji_80 * 0.8;
+        //     $gaji->Gaji_akhir = $masa - $request->Potongan;
+        // } else {
+        //     $gaji->Gaji_akhir = null;
+        // }
+        if ($request->Masa_kerja == 1) {
+            $total_potongan_bonus = $request->Potongan - $request->Bonus;
+            $gaji->Gaji_akhir = $gaji_80 - $total_potongan_bonus;
+        } elseif ($request->Masa_kerja == 0) {
+            $masa = $gaji_80 * 0.8;
+            $total_potongan_bonus = $request->Potongan - $request->Bonus;
+            $gaji->Gaji_akhir = $masa - $total_potongan_bonus;
+        } else {
+            $gaji->Gaji_akhir = null;
+        }        
+        $gaji->Potongan = $request->Potongan;
+        $gaji->Bonus = $request->Bonus;
+        
+        $gaji->save();
+        // return $gaji;
+        if($gaji){
+            return redirect()->back()->with('success','Data Berhasil Di Simpan.');
+        }else{
+            return redirect()->back()->with('error','Data Gagal Untuk Di Simpan.');
+        }
+
     }
 
     /**

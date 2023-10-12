@@ -72,7 +72,7 @@
                     <div class="modal-body">
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
                         <div class="form-group row" id="name">
-                            <label for="jam_masuk" class="col-form-label col-sm-3">Nama</label>
+                            <label for="jam_masuk" class="col-form-label col-sm-3">Tahun</label>
                             <div class="col-sm-9">
                                 <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror">
                                 @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror

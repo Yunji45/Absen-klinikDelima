@@ -1,4 +1,4 @@
-<div class="main-sidebar">
+<div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="index.html">Mitra Delima</a>
@@ -8,23 +8,41 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="active">
-                <a class="nav-link" href="{{route('home')}}">
-                    <i class="fas fa-fire"></i>
+            <li>
+                <a class="nav-link" href="{{route('kpi.index')}}">
+                    <i class="far fa-square"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-
             <li class="menu-header">SDM</li>
             @if (auth()->user()->role == 'admin')
-            <li class="active">
-                <a class="nav-link" href="{{route('kpi.index')}}">
-                    <i class="far fa-address-card"></i>
-                    <span>KPI</span>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-columns"></i>
+                    <span>Salary Pegawai</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="">Gaji</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('kpi.index')}}">KPI</a>
+                    </li>
+                </ul>
+            </li>
+            @endif
+            <li>
+                <a class="nav-link" href="">
+                    <i class="far fa-square"></i>
+                    <span>Blank Page</span>
                 </a>
             </li>
-        
-            @endif
+            <li>
+                <a class="nav-link" href="">
+                    <i class="fas fa-pencil-ruler"></i>
+                    <span>Credits</span>
+                </a>
+            </li>
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
@@ -32,7 +50,7 @@
                 href="{{route('home')}}"
                 class="btn btn-primary btn-lg btn-block btn-icon-split">
                 <i class="fas fa-rocket"></i>
-                Logout
+                Documentation
             </a>
         </div>
     </aside>
