@@ -34,6 +34,7 @@ class KpiController extends Controller
 
         $kpi = new kpi;
         $kpi ->user_id = 1;
+        // $kpi->div = $request->div;
         $kpi ->div = 'Software Enginer';
         //request input
         $daftarValue = $request->input('daftar', []);
@@ -122,7 +123,19 @@ class KpiController extends Controller
         $kpi ->bulan =now();
         $kpi ->save();
         // return $kpi;
-        return redirect('/KPI');
+        if ($kpi){
+            return redirect('/KPI')->with('success', 'Data Berhasil di Tambahkan');
+        }else{
+            return redirect()->back()->with('error', 'Data Gagal di Tambahkan');
+        }
+        // return redirect('/KPI')->with('success', 'Data Berhasil di Tambahkan');
 
+    }
+
+    public function destroy($id)
+    {
+        $kpi = kpi::find($id);
+        $kpi->delete();
+        return redirect()->back()->with('success','Data Berhasil di Hapus');
     }
 }

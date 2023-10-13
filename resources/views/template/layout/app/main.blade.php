@@ -41,34 +41,7 @@
             <div class="navbar-bg"></div>
             <!-- Navbar -->
             @include('template.layout.app.navbar')
-
-                @if (session('success'))
-                <div class="alert alert-success alert-dismissible show fade" role="alert">
-                    <div class="alert-body">
-                        <button class="close" data-dismiss="alert">
-                            <span>&times;</span>
-                        </button>
-                        {{ session('success') }}
-                    </div>
-                </div>
-                @endif @if (session('error'))
-                <div class="alert alert-danger alert-dismissible show fade" role="alert">
-                    <div class="alert-body">
-                        <button class="close" data-dismiss="alert">
-                            <span>&times;</span>
-                        </button>
-                        {{ session('error') }}
-                    </div>
-                </div>
-                @endif            
-                @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                <ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
-                </div>
-                @endif
-
+            @include('sweetalert::alert')
             <!-- Sidebar -->
             @include('template.layout.app.side')
 
@@ -99,6 +72,7 @@
 
   <!-- Page Specific JS File -->
   <script src="{{asset('stisla/dist/assets/js/page/index-0.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/js/page/bootstrap-modal.js')}}"></script>
   <!-- Template JS File -->
   <script src="{{asset('stisla/dist/assets/js/scripts.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/custom.js')}}"></script>

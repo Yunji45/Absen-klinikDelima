@@ -18,17 +18,5 @@ return [
     'jam_keluar_PM'  => env('JAM_KELUAR_PM', '22:00'),
 
 ];
-//180.252.24.206
-// <?php return array (
-//     'ip_internet' => '1.1.1.1',
-//     'ip_internet_ke2' => '',
-//     'ip_internet_ke3' => '',
-//     'jam_masuk' => '00:00',
-//     'jam_keluar' => '24:00',
-//     'jam_masuk_PS' => '07:00',
-//     'jam_keluar_PS' => '16:00',
-//     'jam_masuk_SM' => '16:00',
-//     'jam_keluar_SM' => '07:00',
-//     'jam_masuk_PM' => '07:00',
-//     'jam_keluar_PM' => '22:00',
-//   );
+//36.74.44.163
+//36.78.245.150

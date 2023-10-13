@@ -23,7 +23,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="nav-link" href="">Gaji</a>
+                        <a class="nav-link" href="{{route('gaji.adm')}}">Gaji</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{route('kpi.index')}}">KPI</a>

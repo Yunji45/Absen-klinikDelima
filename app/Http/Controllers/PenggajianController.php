@@ -19,7 +19,7 @@ class PenggajianController extends Controller
      */
     public function index()
     {
-        $title = 'Penggajian';
+        $title = 'Payroll';
         $bulan = date('m');
         $tahun = date('Y');
         // $gaji = gajian::all();
@@ -28,14 +28,7 @@ class PenggajianController extends Controller
         ->get();    
         $data = User::all();
         $umr = UMKaryawan::all();
-        return view('backend.admin.gaji.index',compact('title','gaji','data','umr','tahun','bulan'));
-        // $data = 2021657;
-        // $persen = '180';
-        // $perkalian = (($data * $persen) / 100);
-        // $del = ($perkalian * 80 ) / 100;
-        // $hasil_bulat = round($del);
-        // $hasil_rupiah = "Rp " . number_format($hasil_bulat, 0, ',', '.');
-        // return $hasil_rupiah;
+        return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','tahun','bulan'));
     }
 
     public function cari(Request $request)
@@ -70,9 +63,10 @@ class PenggajianController extends Controller
      */
     public function create()
     {
-        // $data = User::all();
-        // $umr = UMKaryawan::all();
-        // return view ('backend.admin.gaji.create',compact('data','umr'));
+        $title = 'Payroll';
+        $data = User::all();
+        $umr = UMKaryawan::all();
+        return view ('template.backend.admin.gaji.create',compact('data','umr','title'));
     }
 
     /**
@@ -122,7 +116,6 @@ class PenggajianController extends Controller
         }
 
         $gaji->umr_id = $request->umr_id;
-        // $gaji->index = $request->index;
         // Mengambil nilai UMK berdasarkan umr_id
         $umr_id = $request->umr_id;
         $umk = UMKaryawan::where('id', $umr_id)->value('UMK');
@@ -139,15 +132,6 @@ class PenggajianController extends Controller
         $gaji->Ach = $insentif;
         $gaji->Masa_kerja = $request->Masa_kerja;
         
-        // Perhitungan Gaji Akhir
-        // if ($request->Masa_kerja == 1) {
-        //     $gaji->Gaji_akhir = $gaji_80 - $request->Potongan;
-        // } elseif ($request->Masa_kerja == 0) {
-        //     $masa = $gaji_80 * 0.8;
-        //     $gaji->Gaji_akhir = $masa - $request->Potongan;
-        // } else {
-        //     $gaji->Gaji_akhir = null;
-        // }
         if ($request->Masa_kerja == 1) {
             $total_potongan_bonus = $request->Potongan - $request->Bonus;
             $gaji->Gaji_akhir = $gaji_80 - $total_potongan_bonus;
@@ -164,7 +148,7 @@ class PenggajianController extends Controller
         $gaji->save();
         // return $gaji;
         if($gaji){
-            return redirect()->back()->with('success','Data Berhasil Di Simpan.');
+            return redirect('/index-persentase')->with('success','Data Berhasil Di Simpan.');
         }else{
             return redirect()->back()->with('error','Data Gagal Untuk Di Simpan.');
         }
@@ -189,7 +173,11 @@ class PenggajianController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Edit Payroll';
+        $data = User::all();
+        $umr = UMKaryawan::all();
+        $gaji = gajian::find($id);
+        return view('template.backend.admin.gaji.edit',compact('title','data','umr','gaji'))->with('success','Data Berhasil di Temukan');
     }
 
     /**
@@ -330,7 +318,7 @@ class PenggajianController extends Controller
 
     public function hapusUMR($id)
     {
-        $data = UMKarwayan::find($id);
+        $data = gajian::find($id);
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan.');
         }

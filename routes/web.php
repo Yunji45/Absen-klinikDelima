@@ -116,17 +116,21 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
 
         //penggajian
         Route::get('/index-persentase', [PenggajianController::class,'index'])->name('gaji.adm');
+        Route::get('/index-gaji-create',[PenggajianController::class,'create'])->name('gaji.create');
         Route::post('/index-gaji-save', [PenggajianController::class,'store'])->name('gaji.save');
         Route::get('/index-gaji/{id}', [PenggajianController::class,'destroy'])->name('gaji.delete');
+        Route::get('/index-gaji-edit/{id}', [PenggajianController::class,'edit'])->name('gaji.edit');
         Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');
         Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
         Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
         Route::get('/cari-gaji', [PenggajianController::class,'cari'])->name('cari.gaji');
         Route::post('/index-gaji-update/{id}',[PenggajianController::class,'update'])->name('gaji.update');
 
+        //KPI
         Route::get('/KPI',[KpiController::class,'index'])->name('kpi.index');
         Route::get('/KPI-create',[KpiController::class,'create'])->name('kpi.tambah');
         Route::post('/KPI-save',[KpiController::class,'store'])->name('kpi.save');
+        Route::get('/KPI-delete/{id}',[KpiController::class,'destroy'])->name('kpi.delete');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

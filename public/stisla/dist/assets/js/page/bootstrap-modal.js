@@ -43,7 +43,7 @@ $("#modal-4").fireModal({
 });
 
 $("#modal-5").fireModal({
-  title: 'Login',
+  title: 'Tambah Data',
   body: $("#modal-login-part"),
   footerClass: 'bg-whitesmoke',
   autoFocus: false,
