@@ -20,22 +20,23 @@ class KpiController extends Controller
     public function create()
     {
         $title = 'Tambah KPI';
-        return view('template.backend.admin.kpi.create',compact('title'));
+        $user = User::all();
+        return view('template.backend.admin.kpi.create',compact('title','user'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            // 'user_id' =>'required',
-            // 'div' => 'required',
+            'user_id' =>'required',
+            'div' => 'required',
             // 'daftar' => 'required',
             // 'poli' => 'required'
         ]);
 
         $kpi = new kpi;
-        $kpi ->user_id = 1;
-        // $kpi->div = $request->div;
-        $kpi ->div = 'Software Enginer';
+        $kpi ->user_id = $request->user_id;
+        $kpi->div = $request->div;
+        // $kpi ->div = 'Software Enginer';
         //request input
         $daftarValue = $request->input('daftar', []);
         $poliValue = $request->input('poli', []);

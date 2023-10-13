@@ -17,13 +17,13 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-body">
-                    <form action="{{ route('gaji.save') }}" method="post">
+                    <form action="{{route('gaji.update',$gaji->id)}}" method="post">
                         @csrf
                         <div class="form-group row">
                             <label for="bulan" class="col-form-label col-sm-3">Bulan</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('bulan') is-invalid @enderror" name="bulan" id="bulan">
-                                    <option value="">Pilih</option>
+                                    <option value="{{ date('m', strtotime($gaji->bulan)) }}">{{$gaji->bulan}}</option>
                                     <option value="01">January</option>
                                     <option value="02">February</option>
                                     <option value="03">Maret</option>
@@ -44,6 +44,7 @@
                             <label for="user_id" class="col-form-label col-sm-3">Nama</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
+                                    <option value="{{$gaji->user->id}}">{{$gaji->user->name}}</option>
                                     @foreach ($data as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
@@ -55,7 +56,7 @@
                             <label for="pendidikan" class="col-form-label col-sm-3">Pendidikan</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('pendidikan') is-invalid @enderror" name="pendidikan" id="pendidikan">
-                                    <option value="">Pilih</option>
+                                    <option value="{{$gaji->pendidikan}}">{{$gaji->pendidikan}}</option>
                                     <option value="Dokter">Dokter Umum</option>
                                     <option value="S1 Profesi">S1 Profesi</option>
                                     <option value="S1 Kesehatan Non Profesi">S1 Kesehatan Non Profesi</option>
@@ -73,7 +74,7 @@
                             <label for="umr_id" class="col-form-label col-sm-3">UMR</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('umr_id') is-invalid @enderror" name="umr_id" id="umr_id">
-                                    <option value="">Pilih</option>
+                                    <option value="{{$gaji->umr->id}}">{{$gaji->umr->Rp}}</option>
                                     @foreach ($umr as $gaji)
                                     <option value="{{ $gaji->id }}">{{ $gaji->name }}/{{$gaji->Rp}}</option>
                                     @endforeach
@@ -85,8 +86,8 @@
                             <label for="Masa_kerja" class="col-form-label col-sm-3">Masa Kerja</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('Masa_kerja') is-invalid @enderror" name="Masa_kerja" id="Masa_kerja">
-                                    <option value="0">Dibawah 1 tahun</option>
-                                    <option value="1">Diatas 1 tahun</option>
+                                    <option value="0" {{ old('Masa_kerja', $gaji->Masa_kerja) == 0 ? 'selected' : '' }}>Dibawah 1 tahun</option>
+                                    <option value="1" {{ old('Masa_kerja', $gaji->Masa_kerja) == 1 ? 'selected' : '' }}>Diatas 1 tahun</option>
                                 </select>
                                 @error('Masa_kerja') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
@@ -94,14 +95,14 @@
                         <div class="form-group row" id="Potongan">
                             <label for="Potongan" class="col-form-label col-sm-3">Potongan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="Potongan" id="Potongan" class="form-control @error('name') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada potongan" required>
+                                <input type="text" class="form-control @error('Potongan') is-invalid @enderror" name="Potongan" value="{{ old('Potongan', $gaji->Potongan) }}" placeholder="Masukkan 0 jika tidak ada potongan" required>
                                 @error('Potongan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group row" id="Bonus">
                             <label for="Bonus" class="col-form-label col-sm-3">Tambahan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="Bonus" id="Bonus" class="form-control @error('Bonus') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada tambahan" required>
+                                <input type="text" name="Bonus" id="Bonus" class="form-control @error('Bonus') is-invalid @enderror" value="{{ old('Bonus',$gaji->Bonus) }}" placeholder="Masukkan 0 jika tidak ada Tambahan" required>
                                 @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>

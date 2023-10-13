@@ -262,7 +262,7 @@ class PenggajianController extends Controller
         $gaji->save();
         // return $gaji;
         if($gaji){
-            return redirect()->back()->with('success','Data Berhasil Di Simpan.');
+            return redirect('/index-persentase')->with('success','Data Berhasil Di Update.');
         }else{
             return redirect()->back()->with('error','Data Gagal Untuk Di Simpan.');
         }

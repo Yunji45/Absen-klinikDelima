@@ -16,7 +16,6 @@ return [
     
     'jam_masuk_PM'  => env('JAM_MASUK_PM', '07:00'),
     'jam_keluar_PM'  => env('JAM_KELUAR_PM', '22:00'),
-
 ];
 //36.74.44.163
 //36.78.245.150

@@ -16,14 +16,13 @@
                 <div class="card">
                   <div class="card-header">
                     <h4>{{$title}} Table</h4>
-                    <div class="card-header-form">
-                      <div class="buttons">
-                      <a href="{{route('gaji.create')}}" class="btn btn-primary"><i class="fa fa-plus"> Add</i></a>
-                      <a href="" class="btn btn-danger" ><i class="fa fa-download"> PDF</i></a>
-                      <a href="" class="btn btn-success" ><i class="fa fa-download"> Excel</i></a>
-                    </div>
-
-                    </div>
+                      <div class="card-header-form">
+                        <div class="buttons">
+                          <a href="{{route('gaji.create')}}" class="btn btn-primary"><i class="fa fa-plus"> Add</i></a>
+                          <a href="" class="btn btn-danger" ><i class="fa fa-download"> PDF</i></a>
+                          <a href="" class="btn btn-success" ><i class="fa fa-download"> Excel</i></a>
+                        </div>
+                      </div>
                   </div>
                   <div class="card-body p-0">
                     <div class="table-responsive">
@@ -49,7 +48,7 @@
                         @endphp
                         @foreach ($gaji as $item)
                         <tr>
-                          <td class="text-center">{{$no++}}</td>
+                          <td class="text-center">{{$no++}}.</td>
                           <td class="text-center">{{$item->user->name}}</td>
                           <td class="text-center">{{$item->pendidikan}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Gaji_akhir), 0, ',', '.')}}</td>
