@@ -19,7 +19,7 @@ class KpiController extends Controller
     }
 
     public function create()
-    {
+    {        
         $title = 'Tambah KPI';
         $user = User::all();
         return view('template.backend.admin.kpi.create',compact('title','user'));
@@ -119,17 +119,33 @@ class KpiController extends Controller
         // $kpi ->absen = $totalabsen;
         //ambil data id User
         $user_id = $request->user_id;
-        // Menghitung total jumlah masuk berdasarkan user_id
+        $data = explode('-', $request->bulan); // Memisahkan string bulan menjadi array
+        $bulan = $data[1]; // Bulan
+        $tahun = $data[0]; // Tahun
+        
         $totalMasuk = Presensi::where('user_id', $user_id)
-        ->where('keterangan', 'Masuk')
-        ->count();
-        // Menghitung total "Telat" berdasarkan user_id
+            ->where('keterangan', 'Masuk')
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->count();
+        
         $totalTelat = Presensi::where('user_id', $user_id)
             ->where('keterangan', 'Telat')
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
             ->count();
+        
+        $total = $totalMasuk + $totalTelat;
+        $kpi->bulan = $request->bulan;
+
+        // $totalMasuk = Presensi::where('user_id', $user_id)
+        // ->where('keterangan', 'Masuk')
+        // ->count();
+        // $totalTelat = Presensi::where('user_id', $user_id)
+        //     ->where('keterangan', 'Telat')
+        //     ->count();
+        // $kpi ->bulan = $request->bulan;
         $totalabsen = ($totalMasuk + $totalTelat);
-    
-        // Menyimpan total jumlah masuk ke dalam $kpi->absen
         $kpi->absen = $totalabsen;
 
         $kpi->total = 
@@ -154,7 +170,7 @@ class KpiController extends Controller
         } else {
             $kpi->ket = 'Dibawah';
         }
-        $kpi ->bulan = $request->bulan;
+        // $kpi ->bulan = $request->bulan;
         $kpi ->save();
         // return $kpi;
         if ($kpi){

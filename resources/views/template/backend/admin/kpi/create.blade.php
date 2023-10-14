@@ -41,14 +41,18 @@
                               class="form-control @error('jabatan') is-invalid @enderror"
                               name="jabatan"
                               id="jabatan">
-                              <option value="GENERAL MANAGER">GENERAL MANAGER</option>
-                              <option value="MANDIV.SUMBERDAYA">MANDIV.SUMBERDAYA</option>
-                              <option value="MANDIV.LAYANAN">MANDIV.LAYANAN</option>
-                              <option value="DIV.PERSALINAN">DIV.PERSALINAN</option>
-                              <option value="DIV.POLI KLINIK">DIV.POLI KLINIK</option>
-                              <option value="DIV.EMERGENCY">DIV.EMERGENCY</option>
-                              <option value="DIV.RAWAT INAP">DIV.RAWAT INAP</option>
-                              <option value="DIV.NUTRISIONIS">DIV.NUTRISIONIS</option>
+                              <option value="DOKTER">DOKTER</option>
+                              <option value="PERAWAT">PERAWAT</option>
+                              <option value="BIDAN">BIDAN</option>
+                              <option value="NUTRISIONIS">NUTRISIONIS</option>
+                              <option value="PELAKSANA GIZI">PELAKSANA GIZI</option>
+                              <option value="ADMIN">ADMIN</option>
+                              <option value="APOTEKER">APOTEKER</option>
+                              <option value="ASISTEN APOTEKER">ASISTEN APOTEKER</option>
+                              <option value="ANALIS">ANALIS</option>
+                              <option value="TENAGA K3">TENAGA K3</option>
+                              <option value="SECURITY">SECURITY</option>
+                              <option value="PROGRAMMER">Programmer</option>
                           </select>
                           @error('jabatan')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -77,7 +81,7 @@
                               <option value="ADM BPJS & REKAM MEDIS">ADM BPJS & REKAM MEDIS</option>
                               <option value="SUBDIV.LOGISTIK">SUBDIV.LOGISTIK</option>
                               <option value="SUBDIV.K3">SUBDIV.K3</option>
-                              <option value="contoh">contoh</option>
+                              <option value="Software Enginer">Software Enginer</option>
                           </select>
                           @error('div')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
@@ -114,14 +118,17 @@
                               class="form-control @error('jabatan') is-invalid @enderror"
                               name="jabatan_atasan"
                               id="jabatan_atasan">
-                              <option value="GENERAL MANAGER">GENERAL MANAGER</option>
-                              <option value="MANDIV.SUMBERDAYA">MANDIV.SUMBERDAYA</option>
-                              <option value="MANDIV.LAYANAN">MANDIV.LAYANAN</option>
-                              <option value="DIV.PERSALINAN">DIV.PERSALINAN</option>
-                              <option value="DIV.POLI KLINIK">DIV.POLI KLINIK</option>
-                              <option value="DIV.EMERGENCY">DIV.EMERGENCY</option>
-                              <option value="DIV.RAWAT INAP">DIV.RAWAT INAP</option>
-                              <option value="DIV.NUTRISIONIS">DIV.NUTRISIONIS</option>
+                              <option value="DOKTER">DOKTER</option>
+                              <option value="PERAWAT">PERAWAT</option>
+                              <option value="BIDAN">BIDAN</option>
+                              <option value="NUTRISIONIS">NUTRISIONIS</option>
+                              <option value="PELAKSANA GIZI">PELAKSANA GIZI</option>
+                              <option value="ADMIN">ADMIN</option>
+                              <option value="APOTEKER">APOTEKER</option>
+                              <option value="ASISTEN APOTEKER">ASISTEN APOTEKER</option>
+                              <option value="ANALIS">ANALIS</option>
+                              <option value="TENAGA K3">TENAGA K3</option>
+                              <option value="SECURITY">SECURITY</option>
                           </select>
                           @error('jabatan')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>

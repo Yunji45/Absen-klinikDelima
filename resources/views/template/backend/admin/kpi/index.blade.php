@@ -22,11 +22,11 @@
                                     <i class="fa fa-plus">
                                         Add</i>
                                 </a>
-                                <a href="{{route('kpi.tambah')}}" class="btn btn-danger">
+                                <a href="" class="btn btn-danger">
                                     <i class="fa fa-download">
                                         PDF</i>
                                 </a>
-                                <a href="{{route('kpi.tambah')}}" class="btn btn-success">
+                                <a href="" class="btn btn-success">
                                     <i class="fa fa-download">
                                         Excel</i>
                                 </a>
@@ -40,6 +40,7 @@
                                 <tr>
                                     <th scope="col" class="text-center">No</th>
                                     <th scope="col" class="text-center">Nama</th>
+                                    <th scope="col" class="text-center">Jabatan</th>
                                     <th scope="col" class="text-center">Divisi</th>
                                     <th scope="col" class="text-center">Target</th>
                                     <th scope="col" class="text-center">Capaian Target</th>
@@ -48,20 +49,21 @@
                                     <th scope="col" class="text-center">Nilai Total</th>
                                     <th scope="col" class="text-center">Nilai Kinerja</th>
                                     <th scope="col" class="text-center">Ekspektasi Kinerja</th>
-                                    <th scope="col" class="text-center">Atasan</th>
+                                    <th scope="col" class="text-center">Atasan Yang Menilai</th>
                                     <th scope="col" class="text-center">Periode</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                                 @php $no =1; @endphp @foreach ($kpi as $item)
                                 <tr>
-                                    <td class="text-center">{{$no++}}</td>
+                                    <td class="text-center">{{$no++}}.</td>
                                     <td class="text-center">{{$item->user->name}}</td>
+                                    <td class="text-center">{{$item->jabatan}}</td>
                                     <td class="text-center">{{$item->div}}</td>
                                     <td class="text-center">{{$item->target}}</td>
                                     <td class="text-center">{{$item->daftar + $item->poli + $item->farmasi + $item->kasir + $item->care + $item->bpjs +$item->rawat+$item->khitan+$item->persalinan+$item->lab+$item->umum+$item->visit }}</td>
                                     <td class="text-center">{{$item->layanan+$item->akuntan+$item->kompeten+$item->harmonis+$item->loyal+$item->adaptif+$item->kolaboratif}}</td>
                                     <td class="text-center">{{$item->absen}}</td>
-                                    <td class="text-center">{{ $item->total }}</td>
+                                    <td class="text-center">{{$item->total}}</td>
                                     <td class="text-center">{{$item->total_kinerja}}</td>
                                     <td class="text-center">{{$item->ket}}</td>
                                     <td class="text-center">{{$item->nama_atasan}}</td>
@@ -69,7 +71,7 @@
                                     <td>
                                         <a
                                             href=""
-                                            onclick="return confirm('Yakin akan dihapus?')"
+                                            onclick="return confirm('Yakin akan diedit?')"
                                             class="btn btn-success btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
