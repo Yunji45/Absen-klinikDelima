@@ -17,8 +17,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->date('bulan')->nullable;
+            $table->date('bulan')->nullable();
+            $table->integer('target')->nullable();
             $table->string('div')->nullable();
+            $table->string('jabatan')->nullable();
+            $table->string('nama_atasan')->nullable();
+            $table->string('div_atasan')->nullable();
+            $table->string('jabatan_atasan')->nullable();
             $table->integer('daftar')->nullable();
             $table->integer('poli')->nullable();
             $table->integer('farmasi')->nullable();

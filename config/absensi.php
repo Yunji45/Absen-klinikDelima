@@ -1,10 +1,8 @@
 <?php
 
 return [
-    'ip_internet'    => env('IP_ADDRESS', '36.78.245.150'),
-    'ip_internet_ke2' => env('IP_ADDRESS', ''),
-    'ip_internet_ke3' => env('IP_ADDRESS', ''),
-
+    'ip_internet'    => env('IP_ADDRESS', '36.75.211.122'),
+    
     'jam_masuk'     => env('JAM_MASUK', '00:00'),
     'jam_keluar'    => env('JAM_KELUAR', '24:00'),
 
@@ -19,3 +17,14 @@ return [
 ];
 //36.74.44.163
 //36.78.245.150
+// <?php return array (
+//     'ip_internet' => '36.78.245.1503',
+//     'jam_masuk' => '00:00',
+//     'jam_keluar' => '24:00',
+//     'jam_masuk_PS' => '07:00',
+//     'jam_keluar_PS' => '16:00',
+//     'jam_masuk_SM' => '16:00',
+//     'jam_keluar_SM' => '07:00',
+//     'jam_masuk_PM' => '07:00',
+//     'jam_keluar_PM' => '22:00',
+//   );

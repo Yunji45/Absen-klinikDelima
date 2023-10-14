@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/fontawesome/css/all.min.css')}}">
 
     <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/jqvmap/dist/jqvmap.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/weather-icon/css/weather-icons.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/weather-icon/css/weather-icons-wind.min.css')}}">
@@ -63,6 +64,7 @@
     <script src="{{asset('stisla/dist/assets/js/stisla.js')}}"></script>
   
   <!-- JS Libraies -->
+  <script src="{{asset('stisla/dist/assets/modules/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/simple-weather/jquery.simpleWeather.min.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/chart.min.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/jqvmap/dist/jquery.vmap.min.js')}}"></script>

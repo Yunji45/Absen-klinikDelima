@@ -14,26 +14,34 @@ class IPConfigController extends Controller
     public function update(Request $request)
     {
         //hampir
-        // $newIP = $request->input('ip');
-        // config(['absensi.ip_internet' => $newIP]);
-        // $path = config_path('absensi.php');
-        // file_put_contents($path, '<?php return ' . var_export(config('absensi'), true) . ';');    
         $newIP = $request->input('ip');
-
-        // Menggunakan env() untuk mengambil nilai IP_ADDRESS dari variabel lingkungan
-        $currentIP = env('IP_ADDRESS');
-    
-        // Mengganti nilai IP_ADDRESS dengan nilai baru jika nilai baru tersedia
-        if (!empty($newIP)) {
-            $currentIP = $newIP;
-    
-            // Menyimpan nilai IP_ADDRESS dalam variabel lingkungan
-            // Ini akan memperbarui nilai IP_ADDRESS yang digunakan dalam aplikasi
-            // Catatan: Nilai ini akan efektif hanya dalam konteks permintaan saat ini,
-            // dan akan kembali ke nilai aslinya setelah permintaan selesai.
-            config(['app.ip_address' => $currentIP]);
-        }
+        config(['absensi.ip_internet' => $newIP]);
+        $path = config_path('absensi.php');
+        file_put_contents($path, '<?php return ' . var_export(config('absensi'), true) . ';');    
     
         return redirect('/home')->with('success', 'Alamat IP berhasil diubah.');
+        // Menggabungkan konfigurasi ke dalam sebuah array
+// $configArray = [
+//     'ip_internet'    => env('IP_ADDRESS', '36.78.245.150'),
+
+//     'jam_masuk'     => env('JAM_MASUK', '00:00'),
+//     'jam_keluar'    => env('JAM_KELUAR', '24:00'),
+
+//     'jam_masuk_PS'  => env('JAM_MASUK_PS', '07:00'),
+//     'jam_keluar_PS'  => env('JAM_KELUAR_PS', '16:00'),
+
+//     'jam_masuk_SM'  => env('JAM_MASUK_SM', '16:00'),
+//     'jam_keluar_SM'  => env('JAM_KELUAR_SM', '07:00'),
+
+//     'jam_masuk_PM'  => env('JAM_MASUK_PM', '07:00'),
+//     'jam_keluar_PM'  => env('JAM_KELUAR_PM', '22:00'),
+// ];
+
+// // Mengonversi array konfigurasi ke dalam format teks yang sesuai
+// $configText = '<?php return ' . var_export($configArray, true) . ';';
+
+// // Menyimpan hasil konversi ke dalam file konfigurasi
+// file_put_contents($path, $configText);
+
     }
 }

@@ -35,6 +35,25 @@
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror
                       </div>
+                      <label for="div" class="col-form-label col-sm-3">Jabatan Pegawai</label>
+                      <div class="col-sm-8">
+                          <select
+                              class="form-control @error('jabatan') is-invalid @enderror"
+                              name="jabatan"
+                              id="jabatan">
+                              <option value="GENERAL MANAGER">GENERAL MANAGER</option>
+                              <option value="MANDIV.SUMBERDAYA">MANDIV.SUMBERDAYA</option>
+                              <option value="MANDIV.LAYANAN">MANDIV.LAYANAN</option>
+                              <option value="DIV.PERSALINAN">DIV.PERSALINAN</option>
+                              <option value="DIV.POLI KLINIK">DIV.POLI KLINIK</option>
+                              <option value="DIV.EMERGENCY">DIV.EMERGENCY</option>
+                              <option value="DIV.RAWAT INAP">DIV.RAWAT INAP</option>
+                              <option value="DIV.NUTRISIONIS">DIV.NUTRISIONIS</option>
+                          </select>
+                          @error('jabatan')
+                          <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                          @enderror
+                      </div>
                       <label for="div" class="col-form-label col-sm-3">Divisi Pegawai</label>
                       <div class="col-sm-8">
                           <select
@@ -64,21 +83,47 @@
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror
                       </div>
-
+                      <label for="div" class="col-form-label col-sm-3">Target</label>
+                      <div class="col-sm-8" >
+                      <input type="number" name="target" id="target" class="form-control @error('target') is-invalid @enderror">
+                          @error('target')
+                          <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                          @enderror
+                      </div>
                   </div>
+
                   <div class="form-group col-md-5 col-12">
                   <p class="text-start col-sm-6" > <strong>ATASAN YANG MENILAI</strong></p>
-                      <label for="bulan" class="col-form-label col-sm-6">Nama Atasan</label>
+                      <label for="nama_atasan" class="col-form-label col-sm-6">Nama Atasan</label>
                       <div class="col-sm-12">
                           <select
-                              class="form-control @error('bulan') is-invalid @enderror"
-                              name="bulan"
-                              id="bulan">
+                              class="form-control @error('nama_atasan') is-invalid @enderror"
+                              name="nama_atasan"
+                              id="nama_atasan">
                               @foreach($user as $item)
                               <option value="{{$item->name}}">{{$item->name}}</option>
                               @endforeach
                           </select>
-                          @error('bulan')
+                          @error('nama_atasan')
+                          <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                          @enderror
+                      </div>
+                      <label for="div" class="col-form-label col-sm-6">Jabatan Atasan</label>
+                      <div class="col-sm-12">
+                          <select
+                              class="form-control @error('jabatan') is-invalid @enderror"
+                              name="jabatan_atasan"
+                              id="jabatan_atasan">
+                              <option value="GENERAL MANAGER">GENERAL MANAGER</option>
+                              <option value="MANDIV.SUMBERDAYA">MANDIV.SUMBERDAYA</option>
+                              <option value="MANDIV.LAYANAN">MANDIV.LAYANAN</option>
+                              <option value="DIV.PERSALINAN">DIV.PERSALINAN</option>
+                              <option value="DIV.POLI KLINIK">DIV.POLI KLINIK</option>
+                              <option value="DIV.EMERGENCY">DIV.EMERGENCY</option>
+                              <option value="DIV.RAWAT INAP">DIV.RAWAT INAP</option>
+                              <option value="DIV.NUTRISIONIS">DIV.NUTRISIONIS</option>
+                          </select>
+                          @error('jabatan')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror
                       </div>
@@ -86,8 +131,8 @@
                       <div class="col-sm-12">
                           <select
                               class="form-control @error('bulan') is-invalid @enderror"
-                              name="bulan"
-                              id="bulan">
+                              name="div_atasan"
+                              id="div_atasan">
                               <option value="GENERAL MANAGER">GENERAL MANAGER</option>
                               <option value="MANDIV.SUMBERDAYA">MANDIV.SUMBERDAYA</option>
                               <option value="MANDIV.LAYANAN">MANDIV.LAYANAN</option>
@@ -107,6 +152,21 @@
                               <option value="SUBDIV.K3">SUBDIV.K3</option>
                               <option value="contoh">contoh</option>
                           </select>
+                          @error('div_atasan')
+                          <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                          @enderror
+                      </div>
+                      <label for="div" class="col-form-label col-sm-6">Periode</label>
+                      <div class="col-sm-12" >
+                      <input type="text" name="bulan" id="bulan" class="form-control datepicker @error('bulan') is-invalid @enderror">
+                          @error('bulan')
+                          <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                          @enderror
+                      </div>
+
+                      <label for="div" class="col-form-label col-sm-6">Periode</label>
+                      <div class="col-sm-12" >
+                      <input type="text" name="" id="" class="form-control daterange @error('bulan') is-invalid @enderror">
                           @error('bulan')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror

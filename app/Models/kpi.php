@@ -12,6 +12,11 @@ class kpi extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'user_id',
+        'target',
+        'jabatan',
+        'nama_atasan',
+        'div_atasan',
+        'jabatan_atasan',
         'div',
         'daftar',
         'poli',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\kpi;
 use App\Models\User;
+use App\Models\presensi;
 
 class KpiController extends Controller
 {
@@ -28,14 +29,24 @@ class KpiController extends Controller
     {
         $request->validate([
             'user_id' =>'required',
+            'jabatan' => 'required',
             'div' => 'required',
+            'nama_atasan' => 'required',
+            'div_atasan' => 'required',
+            'jabatan_atasan' => 'required',
+            'target' => 'required',
             // 'daftar' => 'required',
             // 'poli' => 'required'
         ]);
 
         $kpi = new kpi;
         $kpi ->user_id = $request->user_id;
+        $kpi ->jabatan = $request->jabatan;
         $kpi->div = $request->div;
+        $kpi->nama_atasan = $request->nama_atasan;
+        $kpi->jabatan_atasan = $request->jabatan_atasan;
+        $kpi->div_atasan = $request->div_atasan;
+        $kpi->target = $request->target;
         // $kpi ->div = 'Software Enginer';
         //request input
         $daftarValue = $request->input('daftar', []);
@@ -105,7 +116,22 @@ class KpiController extends Controller
         $kpi ->loyal = $totalloyal;
         $kpi ->adaptif = $totaladaptif;
         $kpi ->kolaboratif = $totalkolaboratif;
-        $kpi ->absen = $totalabsen;
+        // $kpi ->absen = $totalabsen;
+        //ambil data id User
+        $user_id = $request->user_id;
+        // Menghitung total jumlah masuk berdasarkan user_id
+        $totalMasuk = Presensi::where('user_id', $user_id)
+        ->where('keterangan', 'Masuk')
+        ->count();
+        // Menghitung total "Telat" berdasarkan user_id
+        $totalTelat = Presensi::where('user_id', $user_id)
+            ->where('keterangan', 'Telat')
+            ->count();
+        $totalabsen = ($totalMasuk + $totalTelat);
+    
+        // Menyimpan total jumlah masuk ke dalam $kpi->absen
+        $kpi->absen = $totalabsen;
+
         $kpi->total = 
         $totaldaftar + $totalpoli + $totalfarmsai + $totalkasir +
         $totalcare + $totalbpjs + $totalkhitan + $totalrawat +
@@ -118,10 +144,17 @@ class KpiController extends Controller
         $totalcare + $totalbpjs + $totalkhitan + $totalrawat +
         $totalpersalinan + $totallab + $totalumum + $totalvisit +
         $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
-        $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen)/10;
+        $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen)/$request->target;
 
-        $kpi ->ket = 'melampaui';
-        $kpi ->bulan =now();
+        // $kpi ->ket = 'melampaui';
+        if ($kpi->total_kinerja / $request->target == 1) {
+            $kpi->ket = 'Sesuai';
+        } elseif ($kpi->total_kinerja / $request->target > 1) {
+            $kpi->ket = 'Melampaui';
+        } else {
+            $kpi->ket = 'Dibawah';
+        }
+        $kpi ->bulan = $request->bulan;
         $kpi ->save();
         // return $kpi;
         if ($kpi){
