@@ -137,11 +137,11 @@
                                 <!-- Tambahkan lebih banyak opsi dropdown sesuai kebutuhan -->
                             </div>
                         </li>
-                        <!-- <li class="nav-item ">
+                        <li class="nav-item ">
                             <a class="nav-link" href="{{route('ip.index')}}" >
                                 <i class="fa fa-power-off text-danger"></i>Setting IP Address
                             </a>
-                        </li> -->
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="konfirmasiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ni ni-credit-card text-success"></i> Salary Pegawai
