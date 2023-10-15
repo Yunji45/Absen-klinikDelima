@@ -22,6 +22,25 @@ class KpiController extends Controller
 
     public function create()
     {                
+        // $user_id = 8;
+        // $data = explode('-', 2023-10-02); // Memisahkan string bulan menjadi array
+        // $bulan = $data[1]; // Bulan
+        // $tahun = $data[0]; // Tahun
+        
+        // $totalMasuk = Presensi::where('user_id', $user_id)
+        //     ->where('keterangan', 'Masuk')
+        //     ->whereMonth('tanggal', $bulan)
+        //     ->whereYear('tanggal', $tahun)
+        //     ->count();
+        
+        // $totalTelat = Presensi::where('user_id', $user_id)
+        //     ->where('keterangan', 'Telat')
+        //     ->whereMonth('tanggal', $bulan)
+        //     ->whereYear('tanggal', $tahun)
+        //     ->count();
+        //     $totalabsen = ($totalMasuk + $totalTelat);
+        //     return $totalabsen;
+
                                                           
         $title = 'Tambah KPI';
         $user = User::all();
@@ -131,7 +150,7 @@ class KpiController extends Controller
             ->whereMonth('tanggal', $bulan)
             ->whereYear('tanggal', $tahun)
             ->count();
-        
+    
         $totalTelat = Presensi::where('user_id', $user_id)
             ->where('keterangan', 'Telat')
             ->whereMonth('tanggal', $bulan)
@@ -154,7 +173,9 @@ class KpiController extends Controller
             }
 
         session(['psTotal' => $psTotal]);
-        
+        if (!$psTotal){
+            return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
+        }
         $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
         if($totalabsen > 1){
             $kpi->absen =3;
@@ -181,14 +202,14 @@ class KpiController extends Controller
         $totalcare + $totalbpjs + $totalkhitan + $totalrawat +
         $totalpersalinan + $totallab + $totalumum + $totalvisit +
         $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
-        $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen;
+        $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen;
 
         $kpi->total_kinerja = 
         ($totaldaftar + $totalpoli + $totalfarmsai + $totalkasir +
         $totalcare + $totalbpjs + $totalkhitan + $totalrawat +
         $totalpersalinan + $totallab + $totalumum + $totalvisit +
         $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
-        $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen)/$request->target;
+        $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$request->target;
 
         // $kpi ->ket = 'melampaui';
         if ($kpi->total_kinerja / $request->target == 1) {
@@ -200,7 +221,7 @@ class KpiController extends Controller
         }
         // $kpi ->bulan = $request->bulan;
         $kpi ->save();
-        // return $kpi;
+        // return $totalabsen;
         if ($kpi){
             return redirect('/KPI')->with('success', 'Data Berhasil di Tambahkan');
         }else{

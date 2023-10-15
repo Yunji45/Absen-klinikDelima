@@ -62,6 +62,8 @@
                                     <option value="S1 Kesehatan Non Profesi">S1 Kesehatan Non Profesi</option>
                                     <option value="S1 Non Kesehatan">S1 Non Kesehatan </option>
                                     <option value="D3 Kesehatan">D3 Kesehatan</option>
+                                    <option value="D3 Kebidanan">D3 Kebidanan</option>
+                                    <option value="D3 Keperawatan">D3 Keperawatan</option>
                                     <option value="D3 Non Kesehatan">D3 Non Kesehatan</option>
                                     <option value="SMK Kesehatan">SMK Kesehatan</option>
                                     <option value="SLTA Non Kesehatan">SMK/SLTA Non Kesehatan</option>
@@ -69,7 +71,33 @@
                                 </select>
                                 @error('bulan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
-                        </div>           
+                        </div>      
+                        <div class="form-group row">
+                            <label for="index" class="col-form-label col-sm-3">Index THP</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('pendidikan') is-invalid @enderror" name="index" id="index">
+                                    <option value="{{$gaji->index}}">{{$gaji->index}}</option>
+                                    <option value="500">5.0</option>
+                                    <option value="400">4.0</option>
+                                    <option value="300">3.0</option>
+                                    <option value="200">2.0</option>
+                                    <option value="190">1.9</option>
+                                    <option value="180">1.8</option>
+                                    <option value="170">1.7</option>
+                                    <option value="160">1.6</option>
+                                    <option value="150">1.5</option>
+                                    <option value="140">1.4</option>
+                                    <option value="130">1.3</option>
+                                    <option value="120">1.2</option>
+                                    <option value="110">1.1</option>
+                                    <option value="100">1.0</option>
+                                    <option value="90">0.9</option>
+                                    <option value="80">0.8</option>
+                                    <option value="70">0.7</option>
+                                </select>
+                                @error('bulan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>                
                         <div class="form-group row">
                             <label for="umr_id" class="col-form-label col-sm-3">UMR</label>
                             <div class="col-sm-9">

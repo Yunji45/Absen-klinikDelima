@@ -31,17 +31,50 @@ class AbsensiCron extends Command
     {
         // return Command::SUCCESS;
         // Ambil semua pengguna yang memiliki jadwal PM, SM, atau PS di jadwalterbaru
+        // $usersWithSchedule = jadwalterbaru::where(function ($query) {
+        //     $query->where('j' . date('j'), 'PM')
+        //           ->orWhere('j' . date('j'), 'SM')
+        //           ->orWhere('j' . date('j'), 'PS');
+        // })->get();
+
+        // foreach ($usersWithSchedule as $userWithSchedule) {
+        //     $currentDate = date('Y-m-d');
+        //     $currentTime = date('H:i');
+        //     $user_id = $userWithSchedule->user_id;
+
+        //     $existingAttendance = presensi::where('user_id', $user_id)
+        //         ->where('tanggal', $currentDate)
+        //         ->first();
+
+        //     if (!$existingAttendance) {
+        //         $attendanceData = [
+        //             'user_id' => $user_id,
+        //             'keterangan' => 'Alpha',
+        //             'tanggal' => $currentDate,
+        //             'jam_masuk' => null,
+        //             'jam_keluar' => null,
+        //         ];
+
+        //         presensi::create($attendanceData);
+        //         $this->info('Absen otomatis berhasil untuk pengguna dengan ID ' . $user_id);
+        //     }
+        // }
+
+        // $this->info('Proses absen otomatis selesai.');
+
+        // Ambil semua pengguna yang memiliki jadwal PM, SM, atau PS di jadwalterbaru
         $usersWithSchedule = jadwalterbaru::where(function ($query) {
-            $query->where('j' . date('j'), 'PM')
-                  ->orWhere('j' . date('j'), 'SM')
-                  ->orWhere('j' . date('j'), 'PS');
+            $currentDay = date('j');
+            $currentDaySchedule = ['PM', 'SM', 'PS'];
+            $query->where('j' . $currentDay, $currentDaySchedule[0])
+                ->orWhere('j' . $currentDay, $currentDaySchedule[1])
+                ->orWhere('j' . $currentDay, $currentDaySchedule[2]);
         })->get();
 
         foreach ($usersWithSchedule as $userWithSchedule) {
             $currentDate = date('Y-m-d');
             $currentTime = date('H:i');
             $user_id = $userWithSchedule->user_id;
-
             // Periksa apakah pengguna sudah absen hari ini
             $existingAttendance = presensi::where('user_id', $user_id)
                 ->where('tanggal', $currentDate)
@@ -64,4 +97,6 @@ class AbsensiCron extends Command
 
         $this->info('Proses absen otomatis selesai.');
     }
+
+    
 }

@@ -64,7 +64,7 @@
                                     <td class="text-center">{{$item->layanan+$item->akuntan+$item->kompeten+$item->harmonis+$item->loyal+$item->adaptif+$item->kolaboratif}}</td>
                                     <td class="text-center">{{$item->absen}}</td>
                                     <td class="text-center">{{$item->total}}</td>
-                                    <td class="text-center">{{$item->total_kinerja}}</td>
+                                    <td class="text-center">{{ number_format($item->total_kinerja, 2) }}</td>
                                     <td class="text-center">{{$item->ket}}</td>
                                     <td class="text-center">{{$item->nama_atasan}}</td>
                                     <td class="text-center">{{$item->bulan}}</td>

@@ -121,11 +121,13 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/index-gaji/{id}', [PenggajianController::class,'destroy'])->name('gaji.delete');
         Route::get('/index-gaji-edit/{id}', [PenggajianController::class,'edit'])->name('gaji.edit');
         Route::post('/index-gaji-update/{id}',[PenggajianController::class,'update'])->name('gaji.update');
-        Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');
-        Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
-        Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
         Route::get('/cari-gaji', [PenggajianController::class,'cari'])->name('cari.gaji');
         Route::post('/index-gaji-update/{id}',[PenggajianController::class,'update'])->name('gaji.update');
+        //UMR 
+        Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');
+        Route::get('/index-UMR-create',[PenggajianController::class,'createUMR'])->name('gaji.umr.create');
+        Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
+        Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
 
         //KPI
         Route::get('/KPI',[KpiController::class,'index'])->name('kpi.index');

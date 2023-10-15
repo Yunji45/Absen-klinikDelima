@@ -72,7 +72,7 @@
                         <a class="nav-link" href="{{route('kpi.index')}}">KPI</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="">Setup UMR</a>
+                        <a class="nav-link" href="{{route('gaji.indexUMR')}}">Setup UMR</a>
                     </li>
                 </ul>
             </li>

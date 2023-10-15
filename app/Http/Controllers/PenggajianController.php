@@ -84,6 +84,7 @@ class PenggajianController extends Controller
             'umr_id' => 'required',
             'Masa_kerja' => 'required',
             'Potongan' => 'numeric',
+            'index' => 'required'
         ]);
         $bulanYangDicari = $request->bulan; 
         $tahun = date('Y'); 
@@ -93,34 +94,35 @@ class PenggajianController extends Controller
         $gaji->user_id = $request->user_id;
         $gaji->bulan = $tanggalBulan;
         $gaji->pendidikan = $request->pendidikan;
-        if ($request->pendidikan == 'Dokter'){
-            $gaji->index = 300;
-        }elseif ($request->pendidikan == 'S1 Profesi'){
-            $gaji->index = 180;
-        }elseif($request->pendidikan == 'S1 Kesehatan Non Profesi'){
-            $gaji->index = 170;
-        }elseif($request->pendidikan == 'S1 Non Kesehatan'){
-            $gaji->index = 150;
-        }elseif($request->pendidikan == 'D3 Kesehatan'){
-            $gaji->index = 140;
-        }elseif($request->pendidikan == 'D3 Non Kesehatan'){
-            $gaji->index = 130;
-        }elseif($request->pendidikan == 'SMK Kesehatan'){
-            $gaji->index= 110;
-        }elseif($request->pendidikan == 'SLTA Non Kesehatan'){
-            $gaji->index = 100;
-        }elseif($request->pendidikan == 'Dibawah SLTA'){
-            $gaji->index = 90;
-        }else{
-            $gaji->index =null;
-        }
+        $gaji->index = $request->index;
+        // if ($request->pendidikan == 'Dokter'){
+        //     $gaji->index = 300;
+        // }elseif ($request->pendidikan == 'S1 Profesi'){
+        //     $gaji->index = 180;
+        // }elseif($request->pendidikan == 'S1 Kesehatan Non Profesi'){
+        //     $gaji->index = 170;
+        // }elseif($request->pendidikan == 'S1 Non Kesehatan'){
+        //     $gaji->index = 150;
+        // }elseif($request->pendidikan == 'D3 Kesehatan'){
+        //     $gaji->index = 140;
+        // }elseif($request->pendidikan == 'D3 Non Kesehatan'){
+        //     $gaji->index = 130;
+        // }elseif($request->pendidikan == 'SMK Kesehatan'){
+        //     $gaji->index= 110;
+        // }elseif($request->pendidikan == 'SLTA Non Kesehatan'){
+        //     $gaji->index = 100;
+        // }elseif($request->pendidikan == 'Dibawah SLTA'){
+        //     $gaji->index = 90;
+        // }else{
+        //     $gaji->index =null;
+        // }
 
         $gaji->umr_id = $request->umr_id;
         // Mengambil nilai UMK berdasarkan umr_id
         $umr_id = $request->umr_id;
         $umk = UMKaryawan::where('id', $umr_id)->value('UMK');
         // Perhitungan THP
-        $thp = ($umk * $gaji->index) / 100;
+        $thp = ($umk * $request->index) / 100;
         $gaji->THP =$thp;
         
         // Perhitungan Gaji 80 %
@@ -197,27 +199,28 @@ class PenggajianController extends Controller
         $gaji->user_id = $request->user_id;
         $gaji->bulan = $tanggalBulan;
         $gaji->pendidikan = $request->pendidikan;
-        if ($request->pendidikan == 'Dokter'){
-            $gaji->index = 300;
-        }elseif ($request->pendidikan == 'S1 Profesi'){
-            $gaji->index = 180;
-        }elseif($request->pendidikan == 'S1 Kesehatan Non Profesi'){
-            $gaji->index = 170;
-        }elseif($request->pendidikan == 'S1 Non Kesehatan'){
-            $gaji->index = 150;
-        }elseif($request->pendidikan == 'D3 Kesehatan'){
-            $gaji->index = 140;
-        }elseif($request->pendidikan == 'D3 Non Kesehatan'){
-            $gaji->index = 130;
-        }elseif($request->pendidikan == 'SMK Kesehatan'){
-            $gaji->index= 110;
-        }elseif($request->pendidikan == 'SLTA Non Kesehatan'){
-            $gaji->index = 100;
-        }elseif($request->pendidikan == 'Dibawah SLTA'){
-            $gaji->index = 90;
-        }else{
-            $gaji->index =null;
-        }
+        $gaji->index = $request->index;
+        // if ($request->pendidikan == 'Dokter'){
+        //     $gaji->index = 300;
+        // }elseif ($request->pendidikan == 'S1 Profesi'){
+        //     $gaji->index = 180;
+        // }elseif($request->pendidikan == 'S1 Kesehatan Non Profesi'){
+        //     $gaji->index = 170;
+        // }elseif($request->pendidikan == 'S1 Non Kesehatan'){
+        //     $gaji->index = 150;
+        // }elseif($request->pendidikan == 'D3 Kesehatan'){
+        //     $gaji->index = 140;
+        // }elseif($request->pendidikan == 'D3 Non Kesehatan'){
+        //     $gaji->index = 130;
+        // }elseif($request->pendidikan == 'SMK Kesehatan'){
+        //     $gaji->index= 110;
+        // }elseif($request->pendidikan == 'SLTA Non Kesehatan'){
+        //     $gaji->index = 100;
+        // }elseif($request->pendidikan == 'Dibawah SLTA'){
+        //     $gaji->index = 90;
+        // }else{
+        //     $gaji->index =null;
+        // }
 
         $gaji->umr_id = $request->umr_id;
         // $gaji->index = $request->index;
@@ -225,7 +228,7 @@ class PenggajianController extends Controller
         $umr_id = $request->umr_id;
         $umk = UMKaryawan::where('id', $umr_id)->value('UMK');
         // Perhitungan THP
-        $thp = ($umk * $gaji->index) / 100;
+        $thp = ($umk * $request->index) / 100;
         $gaji->THP =$thp;
         
         // Perhitungan Gaji 80 %
@@ -290,7 +293,13 @@ class PenggajianController extends Controller
     {
         $title = 'Setting UMR';
         $data = UMKaryawan::all();
-        return view ('backend.admin.gaji.umr-index',compact('title','data'));
+        return view ('template.backend.admin.gaji.umr',compact('title','data'));
+    }
+
+    public function createUMR()
+    {
+        $title = 'Setting UMR';
+        return view('template.backend.admin.gaji.create-umr',compact('title'));
     }
 
     public function saveUMR(Request $request)
@@ -310,7 +319,7 @@ class PenggajianController extends Controller
         $umr ->save();
         // return $umr;
         if($umr){
-            return redirect()->back()->with('success','Data Berhasil Disimpan.');
+            return redirect('/index-UMR')->with('success','Data Berhasil Disimpan.');
         }else{
             return redirect()->back()->with('error', 'Input UMR hanya dengan Angka, Tidak Dengan Karakter');
         }
@@ -318,7 +327,7 @@ class PenggajianController extends Controller
 
     public function hapusUMR($id)
     {
-        $data = gajian::find($id);
+        $data = UMKaryawan::find($id);
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan.');
         }

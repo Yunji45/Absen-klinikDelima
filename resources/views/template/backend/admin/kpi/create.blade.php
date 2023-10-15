@@ -171,13 +171,13 @@
                           @enderror
                       </div>
 
-                      <label for="div" class="col-form-label col-sm-6">Periode</label>
+                      <!-- <label for="div" class="col-form-label col-sm-6">Periode</label>
                       <div class="col-sm-12" >
                       <input type="text" name="" id="" class="form-control daterange @error('bulan') is-invalid @enderror">
                           @error('bulan')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror
-                      </div>
+                      </div> -->
 
                   </div>
               </div>
@@ -364,10 +364,10 @@
                 <tr>
                   <td class="text-center"><strong>C.</strong></td>
                   <td class="text-center"><strong>Kehadiran/Absen</strong></td>
-                  <td class="text-center"><input type="checkbox" name="absen[]" value="0" /></td>
-                  <td class="text-center"><input type="checkbox" name="absen[]" value="1" /></td>
-                  <td class="text-center"><input type="checkbox" name="absen[]" value="2" /></td>
-                  <td class="text-center"><input type="checkbox" name="absen[]" value="3" /></td>
+                  <td class="text-center"></td>
+                  <td class="text-center"></td>
+                  <td class="text-center"></td>
+                  <td class="text-center"></td>
                 </tr>
 
                 <!-- Add more rows as needed -->
