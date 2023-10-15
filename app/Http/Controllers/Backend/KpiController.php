@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\kpi;
 use App\Models\User;
+use App\Models\jadwalterbaru;
 use App\Models\presensi;
+use DB;
 
 class KpiController extends Controller
 {
@@ -19,7 +21,8 @@ class KpiController extends Controller
     }
 
     public function create()
-    {        
+    {                
+                                                          
         $title = 'Tambah KPI';
         $user = User::all();
         return view('template.backend.admin.kpi.create',compact('title','user'));
@@ -134,8 +137,35 @@ class KpiController extends Controller
             ->whereMonth('tanggal', $bulan)
             ->whereYear('tanggal', $tahun)
             ->count();
+            //hitung jadwal
+        $psTotal = 0;
+            for ($day = 1; $day <= 31; $day++) {
+                $column = 'j' . $day;
+                
+                $psCount = jadwalterbaru::where('user_id', $user_id)
+                    ->where(function ($query) use ($column) {
+                        $query->whereIn($column, ['PS', 'SM', 'PM']);
+                    })
+                    ->whereMonth('masa_aktif', $bulan)
+                    ->whereYear('masa_aktif', $tahun)        
+                    ->count();
+            
+                $psTotal += $psCount;
+            }
+
+        session(['psTotal' => $psTotal]);
         
-        $total = $totalMasuk + $totalTelat;
+        $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+        if($totalabsen > 1){
+            $kpi->absen =3;
+        }elseif($totalabsen == 1 ){
+            $kpi->absen = 2;
+        }elseif($totalabsen < 1){
+            $kpi->absen =1;
+        }else{
+            $kpi->absen = null;
+        }
+        // $kpi->absen = $totalabsen;
         $kpi->bulan = $request->bulan;
 
         // $totalMasuk = Presensi::where('user_id', $user_id)
@@ -145,8 +175,6 @@ class KpiController extends Controller
         //     ->where('keterangan', 'Telat')
         //     ->count();
         // $kpi ->bulan = $request->bulan;
-        $totalabsen = ($totalMasuk + $totalTelat);
-        $kpi->absen = $totalabsen;
 
         $kpi->total = 
         $totaldaftar + $totalpoli + $totalfarmsai + $totalkasir +

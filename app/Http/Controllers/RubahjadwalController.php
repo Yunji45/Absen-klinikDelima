@@ -87,9 +87,7 @@ class RubahjadwalController extends Controller
         if ($izinSebelumnya) {
             return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan oleh pengguna untuk izin sebelumnya.');
         }
-
-
-
+        
         $permohonan = [
             'user_id' => Auth()->user()->id,
             'permohonan' => $request->permohonan,
@@ -275,7 +273,7 @@ class RubahjadwalController extends Controller
         $permohonan = new RubahJadwal;
         $permohonan->user_id = $user_id;
         $permohonan->permohonan = $request->permohonan;
-        $permohonan->pengganti = $request->pengganti;
+        $permohonan->pengganti = $request->pengganti ?? null;
         $permohonan->tanggal = $request->tanggal;
         $permohonan->alasan = $request->alasan;
         $permohonan->status = 'pengajuan';
