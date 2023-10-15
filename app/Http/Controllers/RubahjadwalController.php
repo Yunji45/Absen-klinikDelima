@@ -54,23 +54,40 @@ class RubahjadwalController extends Controller
         ]);
         $user_id = auth()->user()->id;
 
-        $existingCuti = rubahjadwal::where('user_id', $user_id)
-            ->where('status', 'pengajuan')
-           ->first();
+        // $existingCuti = rubahjadwal::where('user_id', $user_id)
+        //     ->where('status', 'pengajuan')
+        //    ->first();
+
+        // if ($existingCuti) {
+        //     return redirect()->back()->with('error', 'Anda tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
+        // }
+
+        // $izinSebelumnya = rubahjadwal::where('user_id', $user_id)
+        //     ->where(function ($query) use ($request) {
+        //         $query->where('tanggal', '<=', $request->tanggal);
+        //     })
+        //     ->first();
+
+        // if ($izinSebelumnya) {
+        //     return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan untuk izin sebelumnya.');
+        // }
+        $existingCuti = RubahJadwal::where('user_id', $user_id)
+        ->where('status', 'pengajuan')
+        ->first();
 
         if ($existingCuti) {
-            return redirect()->back()->with('error', 'Anda tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
+            return redirect()->back()->with('error', 'User tersebut tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
         }
 
-        $izinSebelumnya = rubahjadwal::where('user_id', $user_id)
-            ->where(function ($query) use ($request) {
-                $query->where('tanggal', '<=', $request->tanggal);
-            })
+        $izinSebelumnya = RubahJadwal::where('user_id', $user_id)
+            ->where('tanggal', $request->tanggal)
+            ->where('status', 'pengajuan') // Hanya mempertimbangkan permintaan yang masih tertunda
             ->first();
 
         if ($izinSebelumnya) {
-            return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan untuk izin sebelumnya.');
+            return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan oleh pengguna untuk izin sebelumnya.');
         }
+
 
 
         $permohonan = [
@@ -188,6 +205,45 @@ class RubahjadwalController extends Controller
     
     }
 
+    // public function storeAdm(Request $request)
+    // {
+    //     $request->validate([
+    //         'user_id' => 'required',
+    //         'permohonan' => 'required',
+    //         'tanggal' => 'required|date',
+    //         'alasan' => 'required|string',
+    //     ]);
+    //     $user_id = $request->input('user_id');
+
+    //     $existingCuti = rubahjadwal::where('user_id', $user_id)
+    //         ->where('status', 'pengajuan')
+    //        ->first();
+
+    //     if ($existingCuti) {
+    //         return redirect()->back()->with('error', 'User tersebut tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
+    //     }
+
+    //     $izinSebelumnya = rubahjadwal::where('user_id', $user_id)
+    //         ->where(function ($query) use ($request) {
+    //             $query->where('tanggal', '<=', $request->tanggal);
+    //         })
+    //         ->first();
+
+    //     if ($izinSebelumnya) {
+    //         return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan User untuk izin sebelumnya.');
+    //     }
+
+
+    //     $permohonan = new rubahjadwal;
+    //     $permohonan -> user_id = $request->user_id;
+    //     $permohonan -> permohonan = $request->permohonan;
+    //     $permohonan -> tanggal = $request->tanggal;
+    //     $permohonan -> alasan = $request->alasan;
+    //     $permohonan -> status = 'pengajuan';
+    //     $permohonan ->save();
+    //     // return $permohonan;
+    //     return redirect()->back()->with('success', 'Berhasil di ajukan.');
+    // }
     public function storeAdm(Request $request)
     {
         $request->validate([
@@ -196,35 +252,36 @@ class RubahjadwalController extends Controller
             'tanggal' => 'required|date',
             'alasan' => 'required|string',
         ]);
+
         $user_id = $request->input('user_id');
 
-        $existingCuti = rubahjadwal::where('user_id', $user_id)
+        $existingCuti = RubahJadwal::where('user_id', $user_id)
             ->where('status', 'pengajuan')
-           ->first();
+            ->first();
 
         if ($existingCuti) {
             return redirect()->back()->with('error', 'User tersebut tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
         }
 
-        $izinSebelumnya = rubahjadwal::where('user_id', $user_id)
-            ->where(function ($query) use ($request) {
-                $query->where('tanggal', '<=', $request->tanggal);
-            })
+        $izinSebelumnya = RubahJadwal::where('user_id', $user_id)
+            ->where('tanggal', $request->tanggal)
+            ->where('status', 'pengajuan') // Hanya mempertimbangkan permintaan yang masih tertunda
             ->first();
 
         if ($izinSebelumnya) {
-            return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan User untuk izin sebelumnya.');
+            return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan oleh pengguna untuk izin sebelumnya.');
         }
 
+        $permohonan = new RubahJadwal;
+        $permohonan->user_id = $user_id;
+        $permohonan->permohonan = $request->permohonan;
+        $permohonan->pengganti = $request->pengganti;
+        $permohonan->tanggal = $request->tanggal;
+        $permohonan->alasan = $request->alasan;
+        $permohonan->status = 'pengajuan';
+        $permohonan->save();
 
-        $permohonan = new rubahjadwal;
-        $permohonan -> user_id = $request->user_id;
-        $permohonan -> permohonan = $request->permohonan;
-        $permohonan -> tanggal = $request->tanggal;
-        $permohonan -> alasan = $request->alasan;
-        $permohonan -> status = 'pengajuan';
-        $permohonan ->save();
-        // return $permohonan;
-        return redirect()->back()->with('success', 'Berhasil di ajukan.');
+        return redirect()->back()->with('success', 'Berhasil diajukan.');
     }
+
 }
