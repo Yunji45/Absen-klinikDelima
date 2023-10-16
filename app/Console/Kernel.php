@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('absen:otomatis')
-        ->dailyAt('18:00');
+        ->dailyAt('11:00');
         // ->everyMinute();
 
    }
