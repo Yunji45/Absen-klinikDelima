@@ -91,4 +91,24 @@
             @endif
         @endif
     </div>
+    <script type="text/javascript">
+const audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    audio.play();
+  });
+});
+
+</script>
+<script type="text/javascript">
+const audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+
+function playAudio() {
+  audio.play();
+}
+</script>
+
+
 @endsection
