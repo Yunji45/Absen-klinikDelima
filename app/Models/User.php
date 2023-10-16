@@ -50,57 +50,64 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //presensi
     public function presensi()
     {
         return $this->hasMany(presensi::class);
     }
-
+    //cuti
     public function cuti ()
     {
         return $this->hasMany(cuti::class);
     }
-
+    //detail pegawai
     public function detailpegawai ()
     {
         return $this->hasOne(DetailPegawai::class);
     }
-
+    //dokumen pegawai
     public function dokumen()
     {
         return $this->hasMany(DokumenUser::class);
     }
-
+    //sertifikat pegawai
     public function sertifikat()
     {
         return $this->hasMany(SertifikatUser::class);
     }
-
+    //jadwal pegawai
     public function jadwal()
     {
         return $this->hasMany(jadwal::class);
     }
+    //jadwal pegawai yang di pakai
     public function jadwalterbaru()
     {
         return $this->hasMany(jadwalterbaru::class);
     }
-
+    //perubahan jadwal
     public function permohonan()
     {
         return $this->hasMany(rubahjadwal::class);
     }
-
+    //jumlah anak pegawai
     public function jumlahanak()
     {
         return $this->hasMany(JumlahAnak::class);
     }
-
+    //gaji pegawai
     public function gaji()
     {
         return $this->hasMany(gajian::class);
     }
-
+    //key performance indikator pegawai
     public function kpi()
     {
         return $this->hasMany(kpi::class);
+    }
+    //target key performace indikator pegawai
+    public function targetkpi()
+    {
+        return $this->hasMany(targetkpi::class);
     }
 }
