@@ -29,7 +29,7 @@ class Controller extends BaseController
                 }
                 $html .= "</ul>";
 
-                Alert::html('Error during the creation!', $html, 'error');
+                Alert::html('Peringatan !!', $html, 'error');
             }
 
             return $next($request);

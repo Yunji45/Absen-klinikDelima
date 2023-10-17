@@ -18,7 +18,7 @@
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
                             <div class="buttons">
-                                <a href="{{route('kpi.tambah')}}" class="btn btn-primary">
+                                <a href="{{route('kpi.form.create')}}" class="btn btn-primary">
                                     <i class="fa fa-plus">
                                         Add</i>
                                 </a>

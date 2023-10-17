@@ -193,7 +193,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <!-- <tr>
                   <td><strong>A.</strong></td>
                   <td><strong style="text-decoration: underline;">Capaian Target</strong></td>
                   <td></td>
@@ -296,7 +296,7 @@
                   <td class="text-center"><input type="checkbox" name="visit[]" value="1" /></td>
                   <td class="text-center"><input type="checkbox" name="visit[]" value="2" /></td>
                   <td class="text-center"><input type="checkbox" name="visit[]" value="3" /></td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td><strong>B.</strong></td>
                   <td><strong style="text-decoration: underline;">Perilaku</strong></td>

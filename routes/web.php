@@ -128,13 +128,17 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/index-UMR-create',[PenggajianController::class,'createUMR'])->name('gaji.umr.create');
         Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
         Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
-
         //KPI
         Route::get('/KPI',[KpiController::class,'index'])->name('kpi.index');
         Route::get('/KPI-create',[KpiController::class,'create'])->name('kpi.tambah');
         Route::post('/KPI-save',[KpiController::class,'store'])->name('kpi.save');
         Route::get('/KPI-delete/{id}',[KpiController::class,'destroy'])->name('kpi.delete');
-
+        //Target KPI
+        Route::get('/KPI/form-target',[KpiController::class,'createTarget'])->name('kpi.form.create');
+        Route::post('/KPI/form-target/save',[KpiController::class,'storeTarget'])->name('kpi.form.save');
+        //Insentif KPI
+        Route::get('/Insentif-KPI',[KpiController::class,'indexInsentifKpi'])->name('insentif.kpi');
+        Route::post('/Insentif-KPI/save',[KpiController::class,'storeInsentifKpi'])->name('insentif.kpi.save');
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');
