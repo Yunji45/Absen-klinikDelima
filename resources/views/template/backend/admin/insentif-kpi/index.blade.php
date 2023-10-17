@@ -32,9 +32,10 @@
                           <th scope="col" class="text-center">No</th>
                           <th scope="col" class="text-center">Nama</th>
                           <th scope="col" class="text-center">Omset Bulan Ini</th>
-                          <th scope="col" class="text-center">Total Insentif</th>
                           <th scope="col" class="text-center">Total Skor</th>
+                          <th scope="col" class="text-center">Total Insentif</th>
                           <th scope="col" class="text-center">Index Rupiah</th>
+                          <th scope="col" class="text-center">Poin User</th>
                           <th scope="col" class="text-center">Insentif Yang Di Terima</th>
                           <th scope="col" class="text-center">Date</th>
                           <th scope="col" class="text-center">Action</th>
@@ -47,13 +48,14 @@
                           <td class="text-center">{{$no++}}.</td>
                           <td class="text-center">{{$item->user->name}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->omset), 0, ',', '.')}}</td>
-                          <td class="text-center">{{'Rp.' . number_format(floatval($item->total_insentif), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->total_poin}}</td>
+                          <td class="text-center">{{'Rp.' . number_format(floatval($item->total_insentif), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->index_rupiah), 0, ',', '.')}}</td>
+                          <td class="text-center">{{$item->poin_user}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->insentif_final), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->bulan}}</td>
                           <td>
-                            <a href="" 
+                            <a href="{{route('insentif.kpi.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
                             class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                         </td>                        
@@ -104,6 +106,13 @@
                             <div class="col-sm-9">
                                 <input type="number" name="omset" id="omset" class="form-control @error('name') is-invalid @enderror">
                                 @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="name">
+                            <label for="jam_masuk" class="col-form-label col-sm-3">Poin User</label>
+                            <div class="col-sm-9">
+                                <input type="number" name="poin_user" id="poin_user" class="form-control @error('name') is-invalid @enderror">
+                                @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group row" id="UMK">

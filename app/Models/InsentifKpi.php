@@ -18,6 +18,7 @@ class InsentifKpi extends Model
         'total_insentif',
         'index_rupiah',
         'insentif_final',
+        'poin_user',
     ];
 
     public function user()

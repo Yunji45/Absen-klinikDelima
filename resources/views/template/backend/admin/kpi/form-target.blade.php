@@ -2,7 +2,7 @@
 @section('tabel')
 <section class="section">
   <div class="section-header">
-    <h1>{{$title}}</h1>
+    <h1>KPI Achievement Objectives</h1>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
       <div class="breadcrumb-item">{{$title}}</div>
@@ -20,13 +20,13 @@
               @csrf
               <div class="row">
                   <div class="form-group col-md-7 col-12">
-                    <p class="text-start col-sm-6"> <strong>PEGAWAI YANG DI NILAI</strong></p>
                       <label for="user_id" class="col-form-label col-sm-3">Nama Pegawai</label>
                       <div class="col-sm-8">
                           <select
                               class="form-control @error('user_id') is-invalid @enderror"
                               name="user_id"
                               id="user_id">
+                              <option value="">pilih</option>
                               @foreach($user as $item)
                               <option value="{{$item->id}}">{{$item->name}}</option>
                               @endforeach
@@ -35,14 +35,17 @@
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror
                       </div>
-                      <label for="div" class="col-form-label col-sm-3">Periode</label>
-                      <div class="col-sm-8" >
+                  </div>
+                  <div class="form-group col-md-5 col-12">
+                      <label for="div" class="col-form-label col-sm-6">Periode</label>
+                      <div class="col-sm-12" >
                       <input type="text" name="bulan" id="bulan" class="form-control datepicker @error('bulan') is-invalid @enderror">
                           @error('bulan')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror
                       </div>
                   </div>
+
               </div>
 
               <thead>

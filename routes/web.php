@@ -19,6 +19,7 @@ use App\Http\Controllers\HelpITController;
 use App\Http\Controllers\PenggajianController;
 
 use App\Http\Controllers\Backend\KpiController;
+use App\Http\Controllers\Backend\DashboardController;
 
 
 //Error Bro
@@ -58,6 +59,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     
     //role admin
     Route::group(['roles' => 'admin'], function(){
+        //Dashboard
+        Route::get('/statis',[DashboardController::class,'index'])->name('dash.admin');
         //user-backend
         Route::get('/users/cari', [UserController::class,'search'])->name('users.search');
         Route::patch('/users/password/{user}', [UserController::class,'password'])->name('users.password');
@@ -139,6 +142,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         //Insentif KPI
         Route::get('/Insentif-KPI',[KpiController::class,'indexInsentifKpi'])->name('insentif.kpi');
         Route::post('/Insentif-KPI/save',[KpiController::class,'storeInsentifKpi'])->name('insentif.kpi.save');
+        Route::get('/Insentif-KPI/delete/{id}',[KpiController::class,'hapusInsentifKpi'])->name('insentif.kpi.delete');
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');

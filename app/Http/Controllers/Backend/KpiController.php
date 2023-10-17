@@ -639,12 +639,13 @@ class KpiController extends Controller
             'total_poin' => 'required',
             'omset' => 'required',
             'total_insentif' => 'required',
-
+            'poin_user' => 'required',
         ],[
             'user_id.required' => 'User Tidak Boleh Kosong',
             'total_poin.required' => 'Total Poin Tidak Boleh Kosong',
             'omset.required' => 'Omset Tidak Boleh Kosong',
             'total_insentif' => 'Total Insentif Yang Akan Dibagikan tidak boleh kosong',
+            'poin_user' => 'Poin User Tidak Boleh Kosong',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -658,11 +659,25 @@ class KpiController extends Controller
         $insentif ->total_poin = $request->total_poin;
         $insentif ->omset = $request->omset;
         $insentif ->total_insentif = $request->total_insentif;
+        $insentif ->poin_user = $request->poin_user;
         $index_rupiah = $request->total_insentif / $request->total_poin;
         $insentif->index_rupiah = round($index_rupiah, 2);
-        $insentif->insentif_final = round($index_rupiah * 23, 2);
+        $insentif->insentif_final = round($index_rupiah * $request->poin_user, 2);
         $insentif -> save();
         return redirect()->back()->with('success','Data Insentif Berhasil Disimpan.');
         // return $insentif;
+    }
+
+    public function hapusInsentifKpi($id)
+    {
+        $insentif = InsentifKpi::find($id);
+    
+        if (!$insentif) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
+    
+        $insentif->delete();
+    
+        return redirect()->back()->with('success', 'Data berhasil dihapus.');
     }
 }

@@ -17,6 +17,8 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/jqvmap/dist/jqvmap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/weather-icon/css/weather-icons.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/weather-icon/css/weather-icons-wind.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/summernote/summernote-bs4.css')}}">

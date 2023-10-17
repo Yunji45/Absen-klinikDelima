@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('total_insentif')->nullable();
             $table->integer('index_rupiah')->nullable();
             $table->integer('insentif_final')->nullable();
+            $table->integer('poin_user')->nullable();
             $table->timestamps();
         });
     }

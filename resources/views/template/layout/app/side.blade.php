@@ -7,11 +7,16 @@
             <a href="index.html">MD</a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Dashboard</li>
+            <li class="menu-header">Beranda</li>
             <li>
-                <a class="nav-link" href="{{route('kpi.index')}}">
+                
+                <a class="nav-link" href="{{route('dash.admin')}}">
                     <i class="fa fa-palette"></i>
                     <span>Dashboard</span>
+                </a>
+                <a class="nav-link" href="{{route('kpi.index')}}">
+                    <i class="fa fa-palette"></i>
+                    <span>Beranda</span>
                 </a>
             </li>
             <li class="menu-header">SDM</li>
@@ -66,9 +71,6 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="nav-link" href="{{route('gaji.adm')}}">Gaji</a>
-                    </li>
-                    <li>
                         <a class="nav-link" href="{{route('kpi.index')}}">KPI</a>
                     </li>
                     <li>
@@ -76,6 +78,9 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{route('gaji.indexUMR')}}">Setup UMR</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('gaji.adm')}}">Gaji</a>
                     </li>
                 </ul>
             </li>

@@ -51,6 +51,7 @@
                                     <th scope="col" class="text-center">Ekspektasi Kinerja</th>
                                     <th scope="col" class="text-center">Atasan Yang Menilai</th>
                                     <th scope="col" class="text-center">Periode</th>
+                                    <th scope="col" class="text-center">Lihat</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                                 @php $no =1; @endphp @foreach ($kpi as $item)
@@ -69,18 +70,15 @@
                                     <td class="text-center">{{$item->nama_atasan}}</td>
                                     <td class="text-center">{{$item->bulan}}</td>
                                     <td>
-                                        <a
-                                            href=""
-                                            onclick="return confirm('Yakin akan diedit?')"
-                                            class="btn btn-success btn-sm">
-                                            <i class="fas fa-edit"></i>
+                                        <a href="" onclick="return confirm('Yakin akan diedit?')" class="btn btn-info btn-sm" style="margin-right: 10px;">
+                                            <i class="fas fa-eye"> Lihat</i>
                                         </a>
-                                        <a
-                                            href="{{route('kpi.delete',$item->id)}}"
-                                            onclick="return confirm('Yakin akan dihapus?')"
-                                            class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash-alt"></i>
+                                    </td>
+                                    <td>
+                                    <a href="{{ route('kpi.delete', $item->id) }}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash-alt"> Delete</i>
                                         </a>
+
                                     </td>
                                 </tr>
                                 @endforeach
