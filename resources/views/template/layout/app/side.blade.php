@@ -67,15 +67,26 @@
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-columns"></i>
-                    <span>Salary Pegawai</span>
+                    <span>KPI</span>
                 </a>
                 <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="{{route('kpi.datakinerja')}}">Data Kinerja KPI</a>
+                    </li>
                     <li>
                         <a class="nav-link" href="{{route('kpi.index')}}">KPI</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{route('insentif.kpi')}}">Insentif KPI</a>
                     </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-columns"></i>
+                    <span>Salary Pegawai</span>
+                </a>
+                <ul class="dropdown-menu">
                     <li>
                         <a class="nav-link" href="{{route('gaji.indexUMR')}}">Setup UMR</a>
                     </li>

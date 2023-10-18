@@ -377,11 +377,11 @@ Absensi - Klinik Mitra Delima
                             <label for="keterangan" class="col-form-label col-sm-3">Keterangan</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" id="keterangan">
-                                    <option value="Alpha" {{ old('keterangan') == 'Alpha' ? 'selected':'' }}>Alpha</option>
-                                    <option value="Masuk" {{ old('keterangan') == 'Masuk' ? 'selected':'' }}>Masuk</option>
-                                    <option value="Telat" {{ old('keterangan') == 'Telat' ? 'selected':'' }}>Telat</option>
-                                    <option value="Sakit" {{ old('keterangan') == 'Sakit' ? 'selected':'' }}>Sakit</option>
-                                    <option value="Cuti" {{ old('keterangan') == 'Cuti' ? 'selected':'' }}>Cuti</option>
+                                    <option value="Alpha">Alpha</option>
+                                    <option value="Masuk">Masuk</option>
+                                    <option value="Telat">Telat</option>
+                                    <option value="Sakit">Sakit</option>
+                                    <option value="Cuti">Cuti</option>
                                 </select>
                                 @error('keterangan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>

@@ -306,6 +306,12 @@ class KpiController extends Controller
 
 
     // Masuk Zona Target KPI
+    public function indexTargetKpi()
+    {
+        $title = 'Data Kinerja';
+        $target = targetkpi::all();
+        return view ('template.backend.admin.data-kpi.index',compact('title','target'));
+    }
     public function createTarget()
     {
         $title = 'Target Capaian KPI';

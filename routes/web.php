@@ -137,6 +137,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/KPI-save',[KpiController::class,'store'])->name('kpi.save');
         Route::get('/KPI-delete/{id}',[KpiController::class,'destroy'])->name('kpi.delete');
         //Target KPI
+        Route::get('/KPI/Data-Kinerja', [KpiController::class,'indexTargetKpi'])->name('kpi.datakinerja');
         Route::get('/KPI/form-target',[KpiController::class,'createTarget'])->name('kpi.form.create');
         Route::post('/KPI/form-target/save',[KpiController::class,'storeTarget'])->name('kpi.form.save');
         //Insentif KPI
