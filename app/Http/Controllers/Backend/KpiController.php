@@ -375,7 +375,7 @@ class KpiController extends Controller
                 ->withInput();
         }
         //store
-        $target = new TargetKpi();
+        $target = new targetkpi();
         $target->user_id = $request->user_id;
         $target->target_id = $request->target_id;
         $target->bulan = $request->bulan;
@@ -606,7 +606,7 @@ class KpiController extends Controller
 
     public function hapusTargetKpi($id)
     {
-        $delete = TargetKpi::find($id);
+        $delete = targetkpi::find($id);
         $delete -> delete();
         if($delete){
             return redirect()->back()->with('success', 'Data Kinerja Berhasil Dihapus.');
