@@ -19,6 +19,7 @@ use App\Http\Controllers\HelpITController;
 use App\Http\Controllers\PenggajianController;
 
 use App\Http\Controllers\Backend\KpiController;
+use App\Http\Controllers\Backend\TargetKPIController;
 use App\Http\Controllers\Backend\DashboardController;
 
 
@@ -65,7 +66,6 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/users/cari', [UserController::class,'search'])->name('users.search');
         Route::patch('/users/password/{user}', [UserController::class,'password'])->name('users.password');
         Route::resource('/users', UserController::class);
-
         //kehadiran-backend
         Route::get('/kehadiran', [PresensiController::class,'index'])->name('kehadiran.index');
         Route::get('/kehadiran/cari', [PresensiController::class,'search'])->name('kehadiran.search');
@@ -131,15 +131,21 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/index-UMR-create',[PenggajianController::class,'createUMR'])->name('gaji.umr.create');
         Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
         Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
+        //Target KPI
+        Route::get('/TargetKPI',[TargetKPIController::class,'index'])->name('target.kpi');
+        Route::get('/TargetKPI/create',[TargetKPIController::class,'create'])->name('target.kpi.create');
+        Route::post('/TargetKPI/save',[TargetKPIController::class,'store'])->name('target.kpi.save');
+        Route::get('/TargetKPI/delete/{id}',[TargetKPIController::class,'destroy'])->name('target.kpi.delete');
         //KPI
         Route::get('/KPI',[KpiController::class,'index'])->name('kpi.index');
         Route::get('/KPI-create',[KpiController::class,'create'])->name('kpi.tambah');
         Route::post('/KPI-save',[KpiController::class,'store'])->name('kpi.save');
         Route::get('/KPI-delete/{id}',[KpiController::class,'destroy'])->name('kpi.delete');
-        //Target KPI
+        //Realisasi KPI
         Route::get('/KPI/Data-Kinerja', [KpiController::class,'indexTargetKpi'])->name('kpi.datakinerja');
         Route::get('/KPI/form-target',[KpiController::class,'createTarget'])->name('kpi.form.create');
         Route::post('/KPI/form-target/save',[KpiController::class,'storeTarget'])->name('kpi.form.save');
+        Route::get('/KPI/form-delete/{id}',[KpiController::class,'hapusTargetKpi'])->name('kpi.form.delete');
         //Insentif KPI
         Route::get('/Insentif-KPI',[KpiController::class,'indexInsentifKpi'])->name('insentif.kpi');
         Route::post('/Insentif-KPI/save',[KpiController::class,'storeInsentifKpi'])->name('insentif.kpi.save');

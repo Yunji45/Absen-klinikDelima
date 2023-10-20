@@ -8,7 +8,8 @@ use App\Models\kpi;
 use App\Models\User;
 use App\Models\jadwalterbaru;
 use App\Models\presensi;
-use App\Models\targetkpi;
+use App\Models\TargetKpi;
+use App\Models\AchKpi;
 use App\Models\InsentifKpi;
 use Illuminate\Support\Facades\Validator;
 use DB;
@@ -308,71 +309,62 @@ class KpiController extends Controller
     // Masuk Zona Target KPI
     public function indexTargetKpi()
     {
-        $title = 'Data Kinerja';
-        $target = targetkpi::all();
+        $title = 'Realisasi Kinerja KPI';
+        $target = TargetKpi::all();
         return view ('template.backend.admin.data-kpi.index',compact('title','target'));
     }
     public function createTarget()
     {
-        $title = 'Target Capaian KPI';
+        // $target_id = 1;
+        // $startDate = '2023-08-07'; // Tanggal awal yang Anda cari
+        // $endDate = '2023-08-07'; // Tanggal akhir yang Anda cari
+        
+        // $targetData = AchKpi::where(function ($query) use ($startDate, $endDate) {
+        //     $query->where('start_date', '<=', $endDate) // Memastikan start_date kurang dari atau sama dengan end_date yang Anda cari
+        //           ->where('end_date', '>=', $startDate); // Memastikan end_date lebih besar dari atau sama dengan start_date yang Anda cari
+        // })
+        // ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+        // ->first();
+        
+        // return $targetData;
+        $title = 'Realiasasi Kinerja KPI';
+        $ach = AchKpi::all();
         $user = User::all();
-        return view('template.backend.admin.kpi.form-target',compact('title','user'));
+        return view('template.backend.admin.kpi.form-target',compact('title','user','ach'));
     }
     public function storeTarget(Request $request)
     {
         $validator=Validator::make($request -> all(),[
             'user_id' => 'required',
+            'target_id' => 'required',
             'bulan' => 'required',
-            't_daftar' => 'required',
             'r_daftar' => 'required',
-            't_poli' => 'required',
             'r_poli' => 'required',
-            't_farmasi' => 'required',
             'r_farmasi' => 'required',
-            't_kasir' => 'required',
             'r_kasir' => 'required',
-            't_care' => 'required',
             'r_care' => 'required',
-            't_khitan' => 'required',
             'r_khitan' => 'required',
-            't_rawat' => 'required',
             'r_rawat' => 'required',
-            't_salin' => 'required',
             'r_salin' => 'required',
-            't_lab' => 'required',
             'r_lab' => 'required',
-            't_bpjs' => 'required',
             'r_bpjs' => 'required',
-            't_umum' => 'required',
             'r_umum' => 'required',
-            't_visit' => 'required',
             'r_visit' => 'required',
         ],[
             'user_id.required' => 'Kolom user_id wajib diisi.',
+            'target_id.required' => 'Kolom Target_id wajib diisi.',
             'bulan.required' => 'Kolom bulan wajib diisi.',
-            't_daftar.required' => 'Kolom t_daftar wajib diisi.',
             'r_daftar.required' => 'Kolom r_daftar wajib diisi.',
-            't_poli.required' => 'Kolom t_poli wajib diisi.',
             'r_poli.required' => 'Kolom r_poli wajib diisi.',
-            't_farmasi.required' => 'Kolom t_farmasi wajib diisi.',
             'r_farmasi.required' => 'Kolom r_farmasi wajib diisi.',
-            't_kasir.required' => 'Kolom t_kasir wajib diisi.',
             'r_kasir.required' => 'Kolom r_kasir wajib diisi.',
-            't_care.required' => 'Kolom t_care wajib diisi.',
             'r_care.required' => 'Kolom r_care wajib diisi.',
-            't_khitan.required' => 'Kolom t_khitan wajib diisi.',
             'r_khitan.required' => 'Kolom r_khitan wajib diisi.',
-            't_rawat.required' => 'Kolom t_rawat wajib diisi.',
             'r_rawat.required' => 'Kolom r_rawat wajib diisi.',
-            't_salin.required' => 'Kolom t_salin wajib diisi.',
             'r_salin.required' => 'Kolom r_salin wajib diisi.',
-            't_lab.required' => 'Kolom t_lab wajib diisi.',
             'r_lab.required' => 'Kolom r_lab wajib diisi.',
-            't_bpjs.required' => 'Kolom t_bpjs wajib diisi.',
             'r_bpjs.required' => 'Kolom r_bpjs wajib diisi.',
-            't_umum.required' => 'Kolom t_umum wajib diisi.',
             'r_umum.required' => 'Kolom r_umum wajib diisi.',
-            't_visit.required' => 'Kolom t_visit wajib diisi.',
             'r_visit.required' => 'Kolom r_visit wajib diisi.',
             
         ]);
@@ -382,257 +374,251 @@ class KpiController extends Controller
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
-        $target = new targetkpi();
+        //store
+        $target = new TargetKpi();
         $target->user_id = $request->user_id;
+        $target->target_id = $request->target_id;
         $target->bulan = $request->bulan;
 
-        $target->t_daftar = $request->t_daftar;
-        $target->r_daftar = $request->r_daftar;
-        if ($request->t_daftar != 0) {
-            $totaldaftar = $request->r_daftar / $request->t_daftar;
+        $target_id = $request->target_id;
+        $startDate = $request->bulan;
+        $endDate = $request->bulan; 
+        
+        $targetData = AchKpi::where(function ($query) use ($startDate, $endDate) {
+            $query->where('start_date', '<=', $endDate) // Memastikan start_date kurang dari atau sama dengan end_date yang Anda cari
+                  ->where('end_date', '>=', $startDate); // Memastikan end_date lebih besar dari atau sama dengan start_date yang Anda cari
+        })
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+        ->first();
 
-            if ($totaldaftar > 1) {
-                $target->c_daftar = 3;
-            } elseif ($totaldaftar == 1) {
-                $target->c_daftar = 2;
-            } elseif ($totaldaftar < 1 && $totaldaftar >= 0) {
-                $target->c_daftar = 1;
+        if($targetData){
+            //daftar
+            $target->r_daftar = $request->r_daftar;
+            if ($targetData->daftar != 0) {
+                $totaldaftar = $request->r_daftar / $targetData->daftar;
+    
+                if ($totaldaftar > 1) {
+                    $target->c_daftar = 3;
+                } elseif ($totaldaftar == 1) {
+                    $target->c_daftar = 2;
+                } elseif ($totaldaftar < 1 && $totaldaftar >= 0) {
+                    $target->c_daftar = 1;
+                } else {
+                    $target->c_daftar = 0;
+                }
             } else {
                 $target->c_daftar = 0;
-            }
-        } else {
-            $target->c_daftar = 0;
-        }
-
-        $target->t_poli = $request->t_poli;
-        $target->r_poli = $request->r_poli;
+            }    
+            //poli
+            $target->r_poli = $request->r_poli;
         
-        if ($request->t_poli != 0) {
-            $totalpoli = $request->r_poli / $request->t_poli;
-            
-            if ($totalpoli > 1) {
-                $target->c_poli = 3;
-            } elseif ($totalpoli == 1) {
-                $target->c_poli = 2;
-            } elseif ($totalpoli < 1 && $totalpoli >= 0) {
-                $target->c_poli = 1;
+            if ($targetData->poli != 0) {
+                $totalpoli = $request->r_poli / $targetData->poli;
+                
+                if ($totalpoli > 1) {
+                    $target->c_poli = 3;
+                } elseif ($totalpoli == 1) {
+                    $target->c_poli = 2;
+                } elseif ($totalpoli < 1 && $totalpoli >= 0) {
+                    $target->c_poli = 1;
+                } else {
+                    $target->c_poli = 0;
+                }
             } else {
                 $target->c_poli = 0;
-            }
-        } else {
-            $target->c_poli = 0;
-        }
-        
-        $target->t_farmasi = $request->t_farmasi;
-        $target->r_farmasi = $request->r_farmasi;
-        if ($request->t_farmasi != 0) {
-            $totalfarmasi = $request->r_farmasi / $request->t_farmasi;
-            
-            if ($totalfarmasi > 1) {
-                $target->c_farmasi = 3;
-            } elseif ($totalfarmasi == 1) {
-                $target->c_farmasi = 2;
-            } elseif ($totalfarmasi < 1 && $totalfarmasi >= 0) {
-                $target->c_farmasi = 1;
+            }    
+            //farmasi
+            $target->r_farmasi = $request->r_farmasi;
+            if ($targetData->farmasi != 0) {
+                $totalfarmasi = $request->r_farmasi / $targetData->farmasi;
+                
+                if ($totalfarmasi > 1) {
+                    $target->c_farmasi = 3;
+                } elseif ($totalfarmasi == 1) {
+                    $target->c_farmasi = 2;
+                } elseif ($totalfarmasi < 1 && $totalfarmasi >= 0) {
+                    $target->c_farmasi = 1;
+                } else {
+                    $target->c_farmasi = 0;
+                }
             } else {
                 $target->c_farmasi = 0;
-            }
-        } else {
-            $target->c_farmasi = 0;
-        }
-        
-        $target->t_kasir = $request->t_kasir;
-        $target->r_kasir = $request->r_kasir;
-        if ($request->t_kasir != 0) {
-            $totalkasir = $request->r_kasir / $request->t_kasir;
-        
-            if ($totalkasir > 1) {
-                $target->c_kasir = 3;
-            } elseif ($totalkasir == 1) {
-                $target->c_kasir = 2;
-            } elseif ($totalkasir < 1 && $totalkasir >= 0) {
-                $target->c_kasir = 1;
+            }    
+            //kasir
+            $target->r_kasir = $request->r_kasir;
+            if ($targetData->kasir != 0) {
+                $totalkasir = $request->r_kasir / $targetData->kasir;
+            
+                if ($totalkasir > 1) {
+                    $target->c_kasir = 3;
+                } elseif ($totalkasir == 1) {
+                    $target->c_kasir = 2;
+                } elseif ($totalkasir < 1 && $totalkasir >= 0) {
+                    $target->c_kasir = 1;
+                } else {
+                    $target->c_kasir = 0;
+                }
             } else {
                 $target->c_kasir = 0;
-            }
-        } else {
-            $target->c_kasir = 0;
-        }
-        
-        $target->t_care = $request->t_care;
-        $target->r_care = $request->r_care;
-        if ($request->t_care != 0) {
-            $totalcare = $request->r_care / $request->t_care;
-            if ($totalcare > 1) {
-                $target->c_care = 3;
-            } elseif ($totalcare == 1) {
-                $target->c_care = 2;
-            } elseif ($totalcare < 1 && $totalcare >= 0) {
-                $target->c_care = 1;
+            }    
+            //home care
+            $target->r_care = $request->r_care;
+            if ($targetData->care != 0) {
+                $totalcare = $request->r_care / $targetData->care;
+                if ($totalcare > 1) {
+                    $target->c_care = 3;
+                } elseif ($totalcare == 1) {
+                    $target->c_care = 2;
+                } elseif ($totalcare < 1 && $totalcare >= 0) {
+                    $target->c_care = 1;
+                } else {
+                    $target->c_care = 0;
+                }
             } else {
                 $target->c_care = 0;
             }
-        } else {
-            $target->c_care = 0;
-        }
-        
-        $target->t_khitan = $request->t_khitan;
-        $target->r_khitan = $request->r_khitan;
-        
-        if ($request->t_khitan != 0) {
-            $totalkhitan = $request->r_khitan / $request->t_khitan;
-        
-            if ($totalkhitan > 1) {
-                $target->c_khitan = 3;
-            } elseif ($totalkhitan == 1) {
-                $target->c_khitan = 2;
-            } elseif ($totalkhitan < 1 && $totalkhitan >= 0) {
-                $target->c_khitan = 1;
+            //khitan
+            $target->r_khitan = $request->r_khitan;
+            if ($targetData->khitan != 0) {
+                $totalkhitan = $request->r_khitan / $targetData->khitan;
+            
+                if ($totalkhitan > 1) {
+                    $target->c_khitan = 3;
+                } elseif ($totalkhitan == 1) {
+                    $target->c_khitan = 2;
+                } elseif ($totalkhitan < 1 && $totalkhitan >= 0) {
+                    $target->c_khitan = 1;
+                } else {
+                    $target->c_khitan = 0;
+                }
             } else {
                 $target->c_khitan = 0;
-            }
-        } else {
-            $target->c_khitan = 0;
-        }
-        
-        $target->t_rawat = $request->t_rawat;
-        $target->r_rawat = $request->r_rawat;
-        
-        if ($request->t_rawat != 0) {
-            $totalrawat = $request->r_rawat / $request->t_rawat;
-        
-            if ($totalrawat > 1) {
-                $target->c_rawat = 3;
-            } elseif ($totalrawat == 1) {
-                $target->c_rawat = 2;
-            } elseif ($totalrawat < 1 && $totalrawat >= 0) {
-                $target->c_rawat = 1;
+            }    
+            //rawat inap 
+            $target->r_rawat = $request->r_rawat;        
+            if ($targetData->rawat != 0) {
+                $totalrawat = $request->r_rawat / $targetData->rawat;
+            
+                if ($totalrawat > 1) {
+                    $target->c_rawat = 3;
+                } elseif ($totalrawat == 1) {
+                    $target->c_rawat = 2;
+                } elseif ($totalrawat < 1 && $totalrawat >= 0) {
+                    $target->c_rawat = 1;
+                } else {
+                    $target->c_rawat = 0;
+                }
             } else {
                 $target->c_rawat = 0;
-            }
-        } else {
-            $target->c_rawat = 0;
-        }
-        
-        $target->t_salin = $request->t_salin;
-        $target->r_salin = $request->r_salin;
-        
-        if ($request->t_salin != 0) {
-            $totalsalin = $request->r_salin / $request->t_salin;
-        
-            if ($totalsalin > 1) {
-                $target->c_salin = 3;
-            } elseif ($totalsalin == 1) {
-                $target->c_salin = 2;
-            } elseif ($totalsalin < 1 && $totalsalin >= 0) {
-                $target->c_salin = 1;
+            }    
+            //persalinan
+            $target->r_salin = $request->r_salin;
+            if ($targetData->salin != 0) {
+                $totalsalin = $request->r_salin / $targetData->salin;
+            
+                if ($totalsalin > 1) {
+                    $target->c_salin = 3;
+                } elseif ($totalsalin == 1) {
+                    $target->c_salin = 2;
+                } elseif ($totalsalin < 1 && $totalsalin >= 0) {
+                    $target->c_salin = 1;
+                } else {
+                    $target->c_salin = 0;
+                }
             } else {
                 $target->c_salin = 0;
             }
-        } else {
-            $target->c_salin = 0;
-        }
-        
-        $target->t_lab = $request->t_lab;
-        $target->r_lab = $request->r_lab;
-        if ($request->t_lab != 0) {
-            $totallab = $request->r_lab / $request->t_lab;
-        
-            if ($totallab > 1) {
-                $target->c_lab = 3;
-            } elseif ($totallab == 1) {
-                $target->c_lab = 2;
-            } elseif ($totallab < 1 && $totallab >= 0) {
-                $target->c_lab = 1;
+            //lab
+            $target->r_lab = $request->r_lab;
+            if ($targetData->lab != 0) {
+                $totallab = $request->r_lab / $targetData->lab;
+            
+                if ($totallab > 1) {
+                    $target->c_lab = 3;
+                } elseif ($totallab == 1) {
+                    $target->c_lab = 2;
+                } elseif ($totallab < 1 && $totallab >= 0) {
+                    $target->c_lab = 1;
+                } else {
+                    $target->c_lab = 0;
+                }
             } else {
                 $target->c_lab = 0;
-            }
-        } else {
-            $target->c_lab = 0;
-        }
-        
-        $target->t_bpjs = $request->t_bpjs;
-        $target->r_bpjs = $request->r_bpjs;
-        
-        if ($request->t_bpjs != 0) {
-            $totalbpjs = $request->r_bpjs / $request->t_bpjs;
-        
-            if ($totalbpjs == 1) {
-                $target->c_bpjs = 2;
-            } elseif ($totalbpjs < 1 && $totalbpjs >= 0) {
-                $target->c_bpjs = 1;
+            }    
+            //bpjs
+            $target->r_bpjs = $request->r_bpjs;
+            if ($targetData->bpjs != 0) {
+                $totalbpjs = $request->r_bpjs / $targetData->bpjs;
+            
+                if ($totalbpjs == 1) {
+                    $target->c_bpjs = 2;
+                } elseif ($totalbpjs < 1 && $totalbpjs >= 0) {
+                    $target->c_bpjs = 1;
+                } else {
+                    $target->c_bpjs = 0;
+                }
             } else {
                 $target->c_bpjs = 0;
-            }
-        } else {
-            $target->c_bpjs = 0;
-        }        
-
-        $target->t_umum = $request->t_umum;
-        $target->r_umum = $request->r_umum;
-        if ($request->t_umum != 0) {
-            $totalumum = $request->r_umum / $request->t_umum;
-        
-            if ($totalumum > 1) {
-                $target->c_umum = 3;
-            } elseif ($totalumum == 1) {
-                $target->c_umum = 2;
-            } elseif ($totalumum < 1 && $totalumum >= 0) {
-                $target->c_umum = 1;
+            }        
+            //umum
+            $target->r_umum = $request->r_umum;
+            if ($targetData->umum != 0) {
+                $totalumum = $request->r_umum / $targetData->umum;
+            
+                if ($totalumum > 1) {
+                    $target->c_umum = 3;
+                } elseif ($totalumum == 1) {
+                    $target->c_umum = 2;
+                } elseif ($totalumum < 1 && $totalumum >= 0) {
+                    $target->c_umum = 1;
+                } else {
+                    $target->c_umum = 0;
+                }
             } else {
                 $target->c_umum = 0;
-            }
-        } else {
-            $target->c_umum = 0;
-        }      
-
-        $target->t_visit = $request->t_visit;
-        $target->r_visit = $request->r_visit;
-
-        if ($request->t_visit != 0) {
-            $totalvisit = $request->r_visit / $request->t_visit;
-
-            if ($totalvisit > 1) {
-                $target->c_visit = 3;
-            } elseif ($totalvisit == 1) {
-                $target->c_visit = 2;
-            } elseif ($totalvisit < 1 && $totalvisit >= 0) {
-                $target->c_visit = 1;
+            }      
+            //visit
+            $target->r_visit = $request->r_visit;
+            if ($targetData->visit != 0) {
+                $totalvisit = $request->r_visit / $targetData->visit;
+    
+                if ($totalvisit > 1) {
+                    $target->c_visit = 3;
+                } elseif ($totalvisit == 1) {
+                    $target->c_visit = 2;
+                } elseif ($totalvisit < 1 && $totalvisit >= 0) {
+                    $target->c_visit = 1;
+                } else {
+                    $target->c_visit = 0;
+                }
             } else {
                 $target->c_visit = 0;
-            }
-        } else {
-            $target->c_visit = 0;
+            }    
+            $target->save();
+            // return $target;
+            return redirect('/KPI/Data-Kinerja')->with('success','Silahkan isi data selanjutnya');    
+    
+        }else{
+            //handle request
+            return redirect()->back()->with('error', 'Data Target Ditemukan.');
         }
+    }
 
-        $target->t_absen = null;
-        $target->r_absen = null;
-        $target->c_absen = null;
-        // if ($request->t_absen != 0) {
-        //     $totalabsen = $request->r_absen / $request->t_absen;
-        
-        //     if ($totalabsen > 1) {
-        //         $target->c_absen = 3;
-        //     } elseif ($totalabsen == 1) {
-        //         $target->c_absen = 2;
-        //     } elseif ($totalabsen < 1 && $totalabsen >= 0) {
-        //         $target->c_absen = 1;
-        //     } else {
-        //         $target->c_absen = 0;
-        //     }
-        // } else {
-        //     $target->c_absen = 0;
-        // }                
-        $target->save();
-        // return $target;
-        return redirect('/KPI-create')->with('success','Silahkan isi data selanjutnya');
-
+    public function hapusTargetKpi($id)
+    {
+        $delete = TargetKpi::find($id);
+        $delete -> delete();
+        if($delete){
+            return redirect()->back()->with('success', 'Data Kinerja Berhasil Dihapus.');
+        }else{
+            return redirect()->back()->with('error','Data Kinerja Gagal Untuk Dihapus.');
+        }
     }
 
     //zona Insentif KPI
     public function indexInsentifKpi()
     {
-        $title = 'Insentif KPI';
+        $title = 'Insentif Kinerja KPI';
         $user = User::all();
         $insentif = InsentifKpi::all();
         return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user'));

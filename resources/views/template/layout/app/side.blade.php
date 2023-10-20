@@ -71,10 +71,13 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="nav-link" href="{{route('kpi.datakinerja')}}">Data Kinerja KPI</a>
+                        <a class="nav-link" href="{{route('target.kpi')}}">Target KPI</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{route('kpi.index')}}">KPI</a>
+                        <a class="nav-link" href="{{route('kpi.datakinerja')}}">Realisasi KPI</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('kpi.index')}}">Data Kinerja KPI</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{route('insentif.kpi')}}">Insentif KPI</a>

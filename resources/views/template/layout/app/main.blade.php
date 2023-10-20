@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/weather-icon/css/weather-icons.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/weather-icon/css/weather-icons-wind.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/summernote/summernote-bs4.css')}}">
+    <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/jquery-selectric/selectric.css')}}">
 
     <!-- Template CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -77,6 +79,8 @@
   <script src="{{asset('stisla/dist/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/summernote/summernote-bs4.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/chocolat/dist/js/jquery.chocolat.min.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/modules/select2/dist/js/select2.full.min.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/modules/jquery-selectric/jquery.selectric.min.js')}}"></script>
 
   <!-- Page Specific JS File -->
   <script src="{{asset('stisla/dist/assets/js/page/index-0.js')}}"></script>

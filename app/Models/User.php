@@ -108,7 +108,7 @@ class User extends Authenticatable
     //target key performace indikator pegawai
     public function targetkpi()
     {
-        return $this->hasMany(targetkpi::class);
+        return $this->hasMany(TargetKpi::class);
     }
     //insentif KPI
     public function InsentifKpi()

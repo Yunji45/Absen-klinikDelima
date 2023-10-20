@@ -73,7 +73,7 @@
                                     <td class="text-center">{{$item->c_visit}}</td>
                                     <td class="text-center">{{$item->bulan}}</td>
                                     <td>
-                                    <a href="" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                    <a href="{{route('kpi.form.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Delete</i>
                                         </a>
 
