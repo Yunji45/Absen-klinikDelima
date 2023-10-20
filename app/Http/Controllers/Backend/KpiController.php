@@ -310,7 +310,7 @@ class KpiController extends Controller
     public function indexTargetKpi()
     {
         $title = 'Realisasi Kinerja KPI';
-        $target = TargetKpi::all();
+        $target = targetkpi::all();
         return view ('template.backend.admin.data-kpi.index',compact('title','target'));
     }
     public function createTarget()
