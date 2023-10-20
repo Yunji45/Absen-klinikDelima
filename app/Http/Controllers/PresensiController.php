@@ -395,6 +395,49 @@ class PresensiController extends Controller
 
                 Presensi::create($attendanceData);
                 return back()->with('success', 'Absen berhasil.');
+            }else if ($statusHariIni === 'LL') {
+                $userIpAddress = request()->ip();
+                $allowedIpAddress = config('absensi.ip_internet');
+
+                if ($userIpAddress !== $allowedIpAddress) {
+                    return back()->with('error', 'OOpppss !! Alamat IP Anda ' . $userIpAddress . ' tidak valid untuk melakukan absen. Silahkan hubungkan internet anda ke wifi TP-LINK_BB3588');
+                }
+                $currentDate = date('Y-m-d');
+                $currentTime = date('H:i');
+                $user_id = $user->id;
+                $attendanceStatus = 'Telat';
+                $jam_masuk = strtotime($currentTime);
+                $jam_masuk_config = strtotime(config('absensi.jam_masuk_PM'));
+                $jam_keluar_config = strtotime(config('absensi.jam_keluar_PM'));
+                if ($jam_masuk >= ($jam_masuk_config - 7200) && $jam_masuk <= $jam_masuk_config) {
+                    $attendanceStatus = 'Masuk';
+                } else if ($jam_masuk > $jam_masuk_config && $jam_masuk <= $jam_keluar_config) {
+                    $attendanceStatus = 'Telat';
+                }
+
+                $existingAttendance = presensi::where('user_id', $user_id)
+                    ->where('tanggal', $currentDate)
+                    ->first();
+
+                if ($existingAttendance) {
+                    if ($existingAttendance->keterangan == 'Alpha') {
+                        $existingAttendance->update(['keterangan' => $attendanceStatus]);
+                        return back()->with('success', 'Absen berhasil');
+                    } else {
+                        return back()->with('error', 'Absen gagal');
+                    }
+                }
+
+                $attendanceData = [
+                    'user_id' => $user_id,
+                    'keterangan' => $attendanceStatus,
+                    'tanggal' => $currentDate,
+                    'jam_masuk' => $currentTime,
+                    'jam_keluar' => null,
+                ];
+
+                Presensi::create($attendanceData);
+                return back()->with('success', 'Absen berhasil.');
             }else if ($statusHariIni === 'L1') {
                 $userIpAddress = request()->ip();
                 $allowedIpAddress = config('absensi.ip_internet');
