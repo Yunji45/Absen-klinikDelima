@@ -8,7 +8,7 @@ use App\Models\kpi;
 use App\Models\User;
 use App\Models\jadwalterbaru;
 use App\Models\presensi;
-use App\Models\TargetKpi;
+use App\Models\targetkpi;
 use App\Models\AchKpi;
 use App\Models\InsentifKpi;
 use Illuminate\Support\Facades\Validator;
