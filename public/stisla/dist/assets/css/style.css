@@ -1519,7 +1519,7 @@ h6 .badge {
   width: 100%;
   height: 115px;
   /* background-color: #6777ef; */
-  background-color: #e92b2b;
+  background-color: #71ec73;
   z-index: -1; }
 
 .navbar {
@@ -2324,7 +2324,7 @@ pre {
   height: 100%;
   width: 250px;
   /* background-color: #fff; */
-  background-color: #df3210;
+  background-color: #13a506;
   z-index: 880;
   left: 0; }
 
@@ -2625,7 +2625,7 @@ body.layout-3 .main-footer {
       width: 100%;
       letter-spacing: .3px;
       /* color: #868e96; */
-      color: #07ea6a;
+      color: #ebf0ee;
       text-decoration: none; }
       .main-sidebar .sidebar-menu li a .badge {
         float: right;
@@ -2672,7 +2672,7 @@ body.layout-3 .main-footer {
       background-color: transparent; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
         /* color: #868e96; */
-        color: #0ee472;
+        color: #e20c0c;
         height: 35px;
         padding-left: 65px;
         font-weight: 400; }

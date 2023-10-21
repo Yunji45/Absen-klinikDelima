@@ -28,6 +28,8 @@ class TargetKpi extends Model
         'c_khitan',
         'r_rawat',
         'c_rawat',
+        'r_bpjs',
+        'c_bpjs',
         'r_salin',
         'c_salin',
         'r_lab',

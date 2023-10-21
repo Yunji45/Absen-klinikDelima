@@ -70,9 +70,9 @@
                     <span>KPI</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
+                    <!-- <li>
                         <a class="nav-link" href="{{route('coba')}}">Coba Input Multiple User</a>
-                    </li>
+                    </li> -->
 
                     <li>
                         <a class="nav-link" href="{{route('target.kpi')}}">Target KPI</a>
@@ -82,9 +82,6 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{route('kpi.index')}}">Data Kinerja KPI</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{{route('insentif.kpi')}}">Insentif KPI</a>
                     </li>
                 </ul>
             </li>
@@ -99,6 +96,9 @@
                     </li>
                     <li>
                         <a class="nav-link" href="{{route('gaji.adm')}}">Gaji</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('insentif.kpi')}}">Insentif</a>
                     </li>
                 </ul>
             </li>

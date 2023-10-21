@@ -95,33 +95,34 @@
                             </div>
                         </div>
                         <div class="form-group row" id="name">
-                            <label for="jam_masuk" class="col-form-label col-sm-3">Poin</label>
+                            <label for="jam_masuk" class="col-form-label col-sm-3">Total Skor Bulan Ini</label>
                             <div class="col-sm-9">
                                 <input type="number" name="total_poin" id="total_poin" class="form-control @error('name') is-invalid @enderror">
                                 @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group row" id="UMK">
-                            <label for="UMK" class="col-form-label col-sm-3">Omset</label>
+                            <label for="UMK" class="col-form-label col-sm-3">Omset Klinik</label>
                             <div class="col-sm-9">
                                 <input type="number" name="omset" id="omset" class="form-control @error('name') is-invalid @enderror">
                                 @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div class="form-group row" id="name">
-                            <label for="jam_masuk" class="col-form-label col-sm-3">Poin User</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="poin_user" id="poin_user" class="form-control @error('name') is-invalid @enderror">
-                                @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
                         <div class="form-group row" id="UMK">
-                            <label for="UMK" class="col-form-label col-sm-3">Total Insentif</label>
+                            <label for="UMK" class="col-form-label col-sm-3">Uang Yang Dibagikan</label>
                             <div class="col-sm-9">
                                 <input type="number" name="total_insentif" id="total_insentif" class="form-control @error('name') is-invalid @enderror">
                                 @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        <div class="form-group row" id="name">
+                            <label for="jam_masuk" class="col-form-label col-sm-3">Nilai Total User</label>
+                            <div class="col-sm-9">
+                                <input type="number" name="poin_user" id="poin_user" class="form-control @error('name') is-invalid @enderror">
+                                @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Simpan</button>
