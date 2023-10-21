@@ -71,6 +71,10 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
+                        <a class="nav-link" href="{{route('coba')}}">Coba Input Multiple User</a>
+                    </li>
+
+                    <li>
                         <a class="nav-link" href="{{route('target.kpi')}}">Target KPI</a>
                     </li>
                     <li>

@@ -12,7 +12,8 @@ use App\Models\targetkpi;
 use App\Models\AchKpi;
 use App\Models\InsentifKpi;
 use Illuminate\Support\Facades\Validator;
-use DB;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 class KpiController extends Controller
 {
@@ -615,6 +616,107 @@ class KpiController extends Controller
         }
     }
 
+    public function insertmultiple()
+    {
+        $title = 'coba multiple';
+        $user = User::all();
+        $ach = AchKpi::all();
+        return view ('template.backend.admin.data-kpi.coba',compact('title','user','ach'));
+    }
+    public function coba(Request $request)
+    {
+            // $this->validate($request, [
+            //     'user_id' => 'required|array',
+            //     'user_id.*' => 'exists:users,id', // Validasi bahwa user_id adalah ID yang valid di tabel users
+            //     'target_id' => 'required', // Gantilah "target_table" sesuai nama tabel target yang sesuai
+            // ]);
+    
+            // // Ambil data yang dipilih dari formulir
+            // $selectedUsers = $request->input('user_id');
+            // $targetId = $request->input('target_id');
+        
+            // // Simpan data ke dalam tabel target_kpis (atau tabel sesuai yang Anda gunakan)
+            // foreach ($selectedUsers as $userId) {
+            //     $data = [
+            //         'user_id' => $userId,
+            //         'target_id' => $targetId, // Gunakan target_id yang diterima dari formulir
+            //         // Sisipkan kolom-kolom lain sesuai kebutuhan
+            //     ];
+    
+            //     // Lakukan operasi insert untuk setiap user_id
+            //     targetkpi::create($data);
+            // }
+    
+            // return redirect()->back()->with('success', 'Data berhasil disimpan.');
+            $target->bulan = $request->bulan;
+            $target_id = $request->target_id;
+            $startDate = $request->bulan;
+            $endDate = $request->bulan;
+
+            // Pencarian data target dari tabel AchKpi
+            $targetData = AchKpi::where(function ($query) use ($startDate, $endDate) {
+                $query->where('start_date', '<=', $endDate)
+                    ->where('end_date', '>=', $startDate);
+            })
+            ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+            ->first();
+
+            if ($targetData) {
+                // Lakukan pengisian nilai c_* dan operasi insert dalam loop foreach
+                foreach ($selectedUsers as $userId) {
+                    $data = [
+                        'user_id' => $userId,
+                        'target_id' => $target_id,
+                        'bulan' => $request->bulan,
+                        'r_daftar' => $request->r_daftar,
+                        'r_poli' => $request->r_poli,
+                        'r_farmasi' => $request->r_farmasi,
+                        'r_kasir' => $request->r_kasir,
+                        'r_care' => $request->r_care,
+                        'r_khitan' => $request->r_khitan,
+                        'r_rawat' => $request->r_rawat,
+                        'r_salin' => $request->r_salin,
+                        'r_lab' => $request->r_lab,
+                        'r_bpjs' => $request->r_bpjs,
+                        'r_umum' => $request->r_umum,
+                        'r_visit' => $request->r_visit,
+                    ];
+
+                    // Proses pengecekan dan pengisian nilai c_*
+                    $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit'];
+                    foreach ($columns as $column) {
+                        $r_column = 'r_' . $column;
+                        $c_column = 'c_' . $column;
+
+                        if ($targetData->$column != 0) {
+                            $total = $request->$r_column / $targetData->$column;
+                            if ($total > 1) {
+                                $data[$c_column] = 3;
+                            } elseif ($total == 1) {
+                                $data[$c_column] = 2;
+                            } elseif ($total < 1 && $total >= 0) {
+                                $data[$c_column] = 1;
+                            } else {
+                                $data[$c_column] = 0;
+                            }
+                        } else {
+                            $data[$c_column] = 0;
+                        }
+                    }
+
+                    // Lakukan operasi insert untuk setiap user_id
+                    targetkpi::create($data);
+                }
+
+                // Setelah loop selesai, Anda dapat mengarahkan pengguna ke halaman berikutnya
+                return redirect('/KPI/Data-Kinerja')->with('success','Silahkan isi data selanjutnya');
+            } else {
+                //handle request jika $targetData tidak ditemukan
+                return redirect()->back()->with('error', 'Data Target Ditemukan.');
+            }
+
+    }
+        
     //zona Insentif KPI
     public function indexInsentifKpi()
     {
