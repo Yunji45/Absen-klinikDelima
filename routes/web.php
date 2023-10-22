@@ -131,6 +131,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/index-UMR-create',[PenggajianController::class,'createUMR'])->name('gaji.umr.create');
         Route::post('/index-UMR-save', [PenggajianController::class,'saveUMR'])->name('gaji.UMR.save');
         Route::get('/index-UMR-delete/{id}',[PenggajianController::class,'hapusUMR'])->name('gaji.UMR.delete');
+        //Setup Omset Insentif
+        Route::get('/setup-insentif',[TargetKPIController::class,'indexOmset'])->name('setup.insentif');
+        Route::post('/setup-insentif/save',[TargetKPIController::class,'storeOmset'])->name('setup.insentif.save');
+        Route::get('/setup-insentif/delete/{id}',[TargetKPIController::class,'hapusOmset'])->name('setup.insentif.delete');
         //Target KPI
         Route::get('/TargetKPI',[TargetKPIController::class,'index'])->name('target.kpi');
         Route::get('/TargetKPI/create',[TargetKPIController::class,'create'])->name('target.kpi.create');
@@ -143,11 +147,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/KPI-delete/{id}',[KpiController::class,'destroy'])->name('kpi.delete');
         //Realisasi KPI
         Route::get('/KPI/Data-Kinerja', [KpiController::class,'indexTargetKpi'])->name('kpi.datakinerja');
-
         Route::get('/coba', [KpiController::class,'insertmultiple'])->name('coba');
         Route::post('coba-save', [KpiController::class,'coba'])->name('coba.save');    
-
-
         Route::get('/KPI/form-target',[KpiController::class,'createTarget'])->name('kpi.form.create');
         Route::post('/KPI/form-target/save',[KpiController::class,'storeTarget'])->name('kpi.form.save');
         Route::get('/KPI/form-delete/{id}',[KpiController::class,'hapusTargetKpi'])->name('kpi.form.delete');

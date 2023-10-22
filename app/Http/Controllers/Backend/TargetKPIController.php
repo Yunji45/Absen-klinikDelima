@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AchKpi;
 use App\Models\User;
+use App\Models\OmsetKlinik;
 use Illuminate\Support\Facades\Validator;
 
 class TargetKPIController extends Controller
@@ -158,5 +159,49 @@ class TargetKPIController extends Controller
     public function setItemTarget()
     {
 
+    }
+
+    public function indexOmset()
+    {
+        $title = 'Performance Klinik';
+        $omset = OmsetKlinik::all();
+        return view ('template.backend.admin.omset.index',compact('title','omset'));
+    }
+
+    public function storeOmset(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'bulan' => 'required',
+            'omset' => 'required',
+            'skor' => 'required',
+            'index' => 'required',
+        ],[
+            'omset.required' => 'Omset Tidak Boleh Kosong',
+            'index.required' => 'Index Presentase Tidak Boleh Kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+        $omset = new OmsetKlinik;
+        $omset ->bulan = $request->bulan;
+        $omset ->omset = $request->omset;
+        $omset ->index = $request->index;
+        $omset ->skor = $request->skor;
+        $persen = ($request->omset * $request->index) / 100;
+        $omset ->total_insentif = round($persen, 2);
+        $index_rupiah = $persen / $request->skor;
+        $omset -> index_rupiah = round($index_rupiah, 2);
+        $omset -> save();
+        return redirect()->back()->with('success','Omset Bulan ini Berhasil Ditambahkan');
+
+    }
+
+    public function hapusOmset($id)
+    {
+        $omset = OmsetKlinik::find($id);
+        $omset -> delete();
+        return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
 }

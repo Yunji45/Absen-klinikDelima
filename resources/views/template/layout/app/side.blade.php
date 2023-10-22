@@ -95,6 +95,9 @@
                         <a class="nav-link" href="{{route('gaji.indexUMR')}}">Setup UMR</a>
                     </li>
                     <li>
+                        <a class="nav-link" href="{{route('setup.insentif')}}">Setup Insentif</a>
+                    </li>
+                    <li>
                         <a class="nav-link" href="{{route('gaji.adm')}}">Gaji</a>
                     </li>
                     <li>
