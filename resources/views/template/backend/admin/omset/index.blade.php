@@ -83,24 +83,24 @@
                                 @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div class="form-group row" id="name">
+                        <!-- <div class="form-group row" id="name">
                             <label for="jam_masuk" class="col-form-label col-sm-3">Total Skor Bulan Ini</label>
                             <div class="col-sm-9">
                                 <input type="number" name="skor" id="skor" class="form-control @error('skor') is-invalid @enderror">
                                 @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row" id="UMK">
                             <label for="UMK" class="col-form-label col-sm-3">Omset Klinik</label>
                             <div class="col-sm-9">
-                                <input type="number" name="omset" id="omset" class="form-control @error('name') is-invalid @enderror">
+                                <input type="number" name="omset" id="omset" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Omset Perbulan">
                                 @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group row" id="UMK">
                             <label for="UMK" class="col-form-label col-sm-3">Index</label>
                             <div class="col-sm-9">
-                                <input type="number" name="index" id="index" class="form-control @error('name') is-invalid @enderror">
+                                <input type="number" name="index" id="index" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Bilangan Desimal Untuk Persen">
                                 @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>

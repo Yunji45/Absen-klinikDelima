@@ -26,16 +26,34 @@
                       </div>
                   </div>
                   <div class="card-body p-0">
+                  <div class="table-responsive">
+                      <table class="table table-bordered table-dark">
+                      <caption>Data Pendapatan Klinik</caption>
+                      <tr>
+                          <th scope="col" class="text-center">Omset Bulan Ini :</th>
+                          <th scope="col" class="text-center">Skor Klinik Bulan Ini :</th>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="text-center bg-warning">{{'Rp.' . number_format(floatval($poin->omset), 0, ',', '.')}}</td>
+                            <td scope="col" class="text-center bg-warning">{{$poin->skor}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="col" class="text-center">Total Uang Yang Dibagikan :</th>
+                          <th scope="col" class="text-center">Index Rupiah Bulan ini :</th>
+                        </tr>
+                        <tr>
+                            <td scope="col" class="text-center bg-warning">{{'Rp.' . number_format(floatval($poin->total_insentif), 0, ',', '.')}}</td>
+                            <td scope="col" class="text-center bg-warning">{{'Rp.' . number_format(floatval($poin->index_rupiah), 0, ',', '.')}}</td>
+                        </tr>
+                      </table>
+                    </div>
                     <div class="table-responsive">
                       <table class="table table-striped">
+                      <caption>Data Insentif Pegawai</caption>
                       <tr>
                           <th scope="col" class="text-center">No</th>
                           <th scope="col" class="text-center">Nama</th>
-                          <th scope="col" class="text-center">Omset Bulan Ini</th>
-                          <th scope="col" class="text-center">Total Skor</th>
-                          <th scope="col" class="text-center">Total Insentif</th>
-                          <th scope="col" class="text-center">Index Rupiah</th>
-                          <th scope="col" class="text-center">Poin User</th>
+                          <th scope="col" class="text-center">Poin</th>
                           <th scope="col" class="text-center">Insentif Yang Di Terima</th>
                           <th scope="col" class="text-center">Date</th>
                           <th scope="col" class="text-center">Action</th>
@@ -47,10 +65,6 @@
                         <tr>
                           <td class="text-center">{{$no++}}.</td>
                           <td class="text-center">{{$item->user->name}}</td>
-                          <td class="text-center">{{'Rp.' . number_format(floatval($item->omset), 0, ',', '.')}}</td>
-                          <td class="text-center">{{$item->total_poin}}</td>
-                          <td class="text-center">{{'Rp.' . number_format(floatval($item->total_insentif), 0, ',', '.')}}</td>
-                          <td class="text-center">{{'Rp.' . number_format(floatval($item->index_rupiah), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->poin_user}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->insentif_final), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->bulan}}</td>
@@ -95,30 +109,9 @@
                             </div>
                         </div>
                         <div class="form-group row" id="name">
-                            <label for="jam_masuk" class="col-form-label col-sm-3">Total Skor Bulan Ini</label>
+                            <label for="jam_masuk" class="col-form-label col-sm-3">Bulan</label>
                             <div class="col-sm-9">
-                                <input type="number" name="total_poin" id="total_poin" class="form-control @error('name') is-invalid @enderror">
-                                @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row" id="UMK">
-                            <label for="UMK" class="col-form-label col-sm-3">Omset Klinik</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="omset" id="omset" class="form-control @error('name') is-invalid @enderror">
-                                @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row" id="UMK">
-                            <label for="UMK" class="col-form-label col-sm-3">Uang Yang Dibagikan</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="total_insentif" id="total_insentif" class="form-control @error('name') is-invalid @enderror">
-                                @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row" id="name">
-                            <label for="jam_masuk" class="col-form-label col-sm-3">Nilai Total User</label>
-                            <div class="col-sm-9">
-                                <input type="number" name="poin_user" id="poin_user" class="form-control @error('name') is-invalid @enderror">
+                                <input type="date" name="bulan" id="bulan" class="form-control @error('name') is-invalid @enderror">
                                 @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>

@@ -11,6 +11,8 @@ use App\Models\presensi;
 use App\Models\targetkpi;
 use App\Models\AchKpi;
 use App\Models\InsentifKpi;
+use App\Models\OmsetKlinik;
+use App\Models\rubahjadwal;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +21,19 @@ class KpiController extends Controller
 {
     public function index ()
     {
+        // $user_id = 28;
+        // $data = explode('-', '2023-10-11'); // Memisahkan string bulan menjadi array
+        // $bulan = $data[1]; // Bulan
+        // $tahun = $data[0]; // Tahun
+
+        // $lembur = rubahjadwal::where('user_id', $user_id)
+        // ->where('permohonan', 'lembur')
+        // ->where('status', 'approve')
+        // ->whereMonth('tanggal', $bulan)
+        // ->whereYear('tanggal', $tahun)
+        // ->count();
+        // return $lembur;
+
         $title = 'KPI';
         $kpi = kpi::all();
         $user = User::all();
@@ -209,19 +224,27 @@ class KpiController extends Controller
         // $data = explode('-', $request->bulan); // Memisahkan string bulan menjadi array
         // $bulan = $data[1]; // Bulan
         // $tahun = $data[0]; // Tahun
-        
+        //hitung masuk
         $totalMasuk = Presensi::where('user_id', $user_id)
             ->where('keterangan', 'Masuk')
             ->whereMonth('tanggal', $bulan)
             ->whereYear('tanggal', $tahun)
             ->count();
-    
+        //hitung telat
         $totalTelat = Presensi::where('user_id', $user_id)
             ->where('keterangan', 'Telat')
             ->whereMonth('tanggal', $bulan)
             ->whereYear('tanggal', $tahun)
             ->count();
-            //hitung jadwal
+        //hitung lembur
+        $lembur = rubahjadwal::where('user_id', $user_id)
+                            ->where('permohonan', 'lembur')
+                            ->where('status', 'approve')
+                            ->whereMonth('tanggal', $bulan)
+                            ->whereYear('tanggal', $tahun)
+                            ->count();
+
+        //hitung jadwal
         $psTotal = 0;
             for ($day = 1; $day <= 31; $day++) {
                 $column = 'j' . $day;
@@ -242,14 +265,14 @@ class KpiController extends Controller
             return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
         }
         $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
-        if($totalabsen > 1){
+        if($totalabsen == 1 && $lembur > 1){
             $kpi->absen =3;
         }elseif($totalabsen == 1 ){
             $kpi->absen = 2;
         }elseif($totalabsen < 1){
             $kpi->absen =1;
         }else{
-            $kpi->absen = null;
+            $kpi->absen = 0;
         }
         // $kpi->absen = $totalabsen;
         $kpi->bulan = $request->bulan;
@@ -316,7 +339,8 @@ class KpiController extends Controller
     }
     public function createTarget()
     {
-        // $target_id = 1;
+        // return $targetData;
+
         // $startDate = '2023-08-07'; // Tanggal awal yang Anda cari
         // $endDate = '2023-08-07'; // Tanggal akhir yang Anda cari
         
@@ -326,12 +350,29 @@ class KpiController extends Controller
         // })
         // ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
         // ->first();
+        // return $targetData;
         
         // return $targetData;
         $title = 'Realiasasi Kinerja KPI';
         $ach = AchKpi::all();
         $user = User::all();
-        return view('template.backend.admin.kpi.form-target',compact('title','user','ach'));
+        // Mendapatkan bulan dan tahun saat ini
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+        $startDate = $currentYear . '-' . $currentMonth . '-01';
+        $endDate = $currentYear . '-' . $currentMonth . '-31';
+
+        $target = AchKpi::where(function ($query) use ($startDate, $endDate) {
+            $query->where('start_date', '<=', $endDate)
+                ->where('end_date', '>=', $startDate);
+        })
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+        ->first();
+        if (!$target){
+            return redirect('/TargetKPI')->with('error','Data Target Belum Ada');
+        }
+
+        return view('template.backend.admin.kpi.form-target',compact('title','user','ach','target'));
     }
     public function storeTarget(Request $request)
     {
@@ -545,25 +586,39 @@ class KpiController extends Controller
     public function indexInsentifKpi()
     {
         $title = 'Insentif Kinerja KPI';
-        $user = User::all();
-        $insentif = InsentifKpi::all();
-        return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user'));
+        // $data = explode('-', '2023-10-02');
+        // $bulan = $data[1]; 
+        // $tahun = $data[0]; 
+        $bulanTahunSekarang = date('Y-m'); // Format: YYYY-MM
+        $bulan = date('m'); // Mendapatkan bulan saat ini (format: 01-12)
+        $tahun = date('Y'); // Mendapatkan tahun saat ini (format: YYYY)
+
+        $poin = OmsetKlinik::whereMonth('bulan', $bulan)
+        ->whereYear('bulan', $tahun)
+        ->select('omset','skor','index_rupiah','total_insentif')
+        ->first();
+        if ($poin) {
+            // Data poin ditemukan, lanjutkan dengan tindakan yang diperlukan
+            $user = User::all();
+            $insentif = InsentifKpi::all();
+        } else {
+            // Data poin tidak ditemukan, tampilkan peringatan
+            return redirect('/setup-insentif')->with('error', 'Setup Omset Bulan Ini Terlebih Dahulu.');
+        }
+        
+        // $user = User::all();
+        // $insentif = InsentifKpi::all();
+        return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user','poin'));
     }
 
     public function storeInsentifKpi(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'user_id' => 'required',
-            'total_poin' => 'required',
-            'omset' => 'required',
-            'total_insentif' => 'required',
-            'poin_user' => 'required',
+            'bulan' => 'required',
         ],[
             'user_id.required' => 'User Tidak Boleh Kosong',
-            'total_poin.required' => 'Total Poin Tidak Boleh Kosong',
-            'omset.required' => 'Omset Tidak Boleh Kosong',
-            'total_insentif' => 'Total Insentif Yang Akan Dibagikan tidak boleh kosong',
-            'poin_user' => 'Poin User Tidak Boleh Kosong',
+            'bulan' => 'Poin User Tidak Boleh Kosong',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -573,15 +628,42 @@ class KpiController extends Controller
 
         $insentif = new InsentifKpi;
         $insentif ->user_id = $request->user_id;
-        $insentif ->bulan = now();
-        $insentif ->total_poin = $request->total_poin;
-        $insentif ->omset = $request->omset;
-        $insentif ->total_insentif = $request->total_insentif;
-        $insentif ->poin_user = $request->poin_user;
-        $index_rupiah = $request->total_insentif / $request->total_poin;
-        $insentif->index_rupiah = round($index_rupiah, 2);
-        $insentif->insentif_final = round($index_rupiah * $request->poin_user, 2);
-        $insentif -> save();
+        $insentif ->bulan = $request->bulan;
+        //mendapatkan nilai Omset
+        $user_id = $request->user_id;
+        $data = explode('-', $request->bulan);
+        $bulan = $data[1]; // Bulan
+        $tahun = $data[0]; // Tahun
+
+        $poin = OmsetKlinik::whereMonth('bulan', $bulan)
+        ->whereYear('bulan', $tahun)
+        ->select('omset','skor','index_rupiah','total_insentif')
+        ->first();
+
+        $insentif ->total_poin = $poin->skor;
+        $insentif ->omset = $poin->omset;
+        $insentif ->total_insentif = $poin->total_insentif;
+        //mendapatkan poin user
+        $poin_user = kpi::where('user_id', $user_id)
+                                ->whereMonth('bulan', $bulan)
+                                ->whereYear('bulan', $tahun)
+                                ->select('total')
+                                ->first();
+    
+        if ($poin_user) {
+            $insentif->poin_user = $poin_user->total;
+            $index_rupiah = $poin->total_insentif / $poin->skor;
+            $insentif->index_rupiah = round($index_rupiah, 2);
+            $insentif->insentif_final = round($index_rupiah * $poin_user->total, 2);
+            $insentif->save();
+        }else{
+            return redirect()->back()->with('error','Poin KPI '. User::find($user_id)->name . ' Tidak ada');
+        }
+        // $insentif ->poin_user = $poin_user->total;
+        // $index_rupiah = $poin->total_insentif / $poin->skor;
+        // $insentif->index_rupiah = round($index_rupiah, 2);
+        // $insentif->insentif_final = round($index_rupiah * $poin_user->total, 2);
+        // $insentif -> save();
         return redirect()->back()->with('success','Data Insentif Berhasil Disimpan.');
         // return $insentif;
     }

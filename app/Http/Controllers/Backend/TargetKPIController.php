@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AchKpi;
 use App\Models\User;
+use App\Models\kpi;
 use App\Models\OmsetKlinik;
+use App\Models\TargetKpi;
 use Illuminate\Support\Facades\Validator;
 
 class TargetKPIController extends Controller
@@ -79,6 +81,17 @@ class TargetKPIController extends Controller
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
+        $newStartDate = $request->start_date;
+        $newEndDate = $request->end_date;
+        // Memeriksa apakah periode sudah digunakan sebelumnya
+        $existingTarget = AchKpi::where(function ($query) use ($newStartDate, $newEndDate) {
+            $query->where('start_date', '<=', $newEndDate)
+                ->where('end_date', '>=', $newStartDate);
+        })->first();
+        if ($existingTarget) {
+            return redirect()->back()->with('error', 'Periode tanggal dan tahun ini sudah digunakan sebelumnya.');
+        }
+
         $target = new AchKpi;
         $target -> name = $request->name;
         $target -> start_date = $request->start_date;
@@ -148,12 +161,15 @@ class TargetKPIController extends Controller
     public function destroy($id)
     {
         $ach = AchKpi::find($id);
-        $ach -> delete();
-        if($ach){
-            return redirect()->back()->with('success','Data Target Berhasil Dihapus.');
-        }else{
-            return redirect()->back()->with('error','Data Target Gagal dihapus.');
+        // Periksa apakah data target sedang digunakan di tabel lain
+        if (!$ach) {
+            return redirect()->back()->with('error', 'Data Target tidak ditemukan.');
         }
+        if (TargetKpi::where('target_id', $ach->id)->exists()) {
+            return redirect()->back()->with('error', 'Data Target tidak dapat dihapus karena sedang digunakan di Realisasi KPI.');
+        }
+        $ach->delete();
+        return redirect()->back()->with('success', 'Data Target Berhasil Dihapus.');
     }
 
     public function setItemTarget()
@@ -163,6 +179,20 @@ class TargetKPIController extends Controller
 
     public function indexOmset()
     {
+        // $data = explode('-', '2023-10-02');
+        // $bulan = $data[1]; 
+        // $tahun = $data[0]; 
+        // $jumlah = 0;
+
+        // $poin = kpi::whereMonth('bulan', $bulan)
+        // ->whereYear('bulan', $tahun)
+        // ->select('total')
+        // ->get();
+        // foreach ($poin as $data) {
+        //     $jumlah += $data->total;
+        // }
+        // return $jumlah;
+
         $title = 'Performance Klinik';
         $omset = OmsetKlinik::all();
         return view ('template.backend.admin.omset.index',compact('title','omset'));
@@ -173,7 +203,7 @@ class TargetKPIController extends Controller
         $validator = Validator::make($request->all(),[
             'bulan' => 'required',
             'omset' => 'required',
-            'skor' => 'required',
+            // 'skor' => 'required',
             'index' => 'required',
         ],[
             'omset.required' => 'Omset Tidak Boleh Kosong',
@@ -188,10 +218,23 @@ class TargetKPIController extends Controller
         $omset ->bulan = $request->bulan;
         $omset ->omset = $request->omset;
         $omset ->index = $request->index;
-        $omset ->skor = $request->skor;
+        //mendapatkan skor keseluruhan
+        $data = explode('-', $request->bulan);
+        $bulan = $data[1]; 
+        $tahun = $data[0]; 
+        $jumlah = 0;
+
+        $poin = kpi::whereMonth('bulan', $bulan)
+                    ->whereYear('bulan', $tahun)
+                    ->select('total')
+                    ->get();
+        foreach ($poin as $data) {
+            $jumlah += $data->total;
+        }
+        $omset ->skor = $jumlah;
         $persen = ($request->omset * $request->index) / 100;
         $omset ->total_insentif = round($persen, 2);
-        $index_rupiah = $persen / $request->skor;
+        $index_rupiah = $persen / $jumlah;
         $omset -> index_rupiah = round($index_rupiah, 2);
         $omset -> save();
         return redirect()->back()->with('success','Omset Bulan ini Berhasil Ditambahkan');

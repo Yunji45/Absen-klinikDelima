@@ -82,6 +82,7 @@
                 <tr>
                   <th class="text-center">NO</th>
                   <th class="text-center">ASPEK KINERJA</th>
+                  <th class="text-center">TARGET</th>
                   <th class="text-center">REALISASI</th>
                 </tr>
               </thead>
@@ -94,61 +95,73 @@
                 <tr>
                   <td class="text-center">1.</td>
                   <td class="text-center">Pendaftaran</td>
+                  <td class="text-center">{{$target->daftar}}</td>
                   <td class="text-center"><input type="number" name="r_daftar" id="r_daftar"></td>
                 </tr>
                 <tr>
                   <td class="text-center">2.</td>
                   <td class="text-center">Pemerikasaan Poli</td>
+                  <td class="text-center">{{$target->poli}}</td>
                   <td class="text-center"><input type="number" name="r_poli"id="r_poli"></td>
                 </tr>
                 <tr>
                   <td class="text-center">3.</td>
                   <td class="text-center">Farmasi</td>
+                  <td class="text-center">{{$target->farmasi}}</td>
                   <td class="text-center"><input type="number" name="r_farmasi"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">4.</td>
                   <td class="text-center">Kasir</td>
+                  <td class="text-center">{{$target->kasir}}</td>
                   <td class="text-center"><input type="number" name="r_kasir"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">5.</td>
                   <td class="text-center">Home Care</td>
+                  <td class="text-center">{{$target->care}}</td>
                   <td class="text-center"><input type="number" name="r_care"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">6.</td>
                   <td class="text-center">BPJS</td>
+                  <td class="text-center">{{$target->bpjs}}</td>
                   <td class="text-center"><input type="number" name="r_bpjs"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">7.</td>
                   <td class="text-center">Khitanan</td>
+                  <td class="text-center">{{$target->khitan}}</td>
                   <td class="text-center"><input type="number" name="r_khitan"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">8.</td>
                   <td class="text-center">Rawat Inap</td>
+                  <td class="text-center">{{$target->rawat}}</td>
                   <td class="text-center"><input type="number" name="r_rawat"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">9.</td>
                   <td class="text-center">Persalinan</td>
+                  <td class="text-center">{{$target->salin}}</td>
                   <td class="text-center"><input type="number" name="r_salin"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">10.</td>
                   <td class="text-center">Laboratorium</td>
+                  <td class="text-center">{{$target->lab}}</td>
                   <td class="text-center"><input type="number" name="r_lab"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">11.</td>
                   <td class="text-center">Umum</td>
+                  <td class="text-center">{{$target->umum}}</td>
                   <td class="text-center"><input type="number" name="r_umum"/></td>
                 </tr>
                 <tr>
                   <td class="text-center">12.</td>
                   <td class="text-center">Visite Dokter</td>
+                  <td class="text-center">{{$target->visit}}</td>
                   <td class="text-center"><input type="number" name="r_visit"/></td>
                 </tr>
                 <!-- Add more rows as needed -->
