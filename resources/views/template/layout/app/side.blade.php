@@ -11,11 +11,11 @@
             <li>
                 
                 <a class="nav-link" href="{{route('dash.admin')}}">
-                    <i class="fa fa-palette"></i>
+                    <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
                 <a class="nav-link" href="{{route('kpi.index')}}">
-                    <i class="fa fa-palette"></i>
+                    <i class="fas fa-palette"></i>
                     <span>Beranda</span>
                 </a>
             </li>
@@ -23,19 +23,19 @@
             @if (auth()->user()->role == 'admin')
             <li>
                 <a class="nav-link" href="">
-                    <i class="fa fa-user"></i>
+                    <i class="fas fa-check"></i>
                     <span>Kehadiran</span>
                 </a>
             </li>
             <li>
                 <a class="nav-link" href="">
-                    <i class="far fa-square"></i>
+                    <i class="far fa-user"></i>
                     <span>Manage User</span>
                 </a>
             </li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-columns"></i>
+                    <i class="fas fa-cogs"></i>
                     <span>Pengaturan Jaga</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -52,7 +52,7 @@
             </li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-columns"></i>
+                    <i class="fas fa-list"></i>
                     <span>Informasi Pegawai</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -66,7 +66,7 @@
             </li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-columns"></i>
+                    <i class="fas fa-handshake"></i>
                     <span>KPI</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -87,7 +87,7 @@
             </li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-columns"></i>
+                    <i class="fas fa-money-bill"></i>
                     <span>Salary Pegawai</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -115,13 +115,13 @@
             <li class="menu-header">HELP IT</li>
             <li>
                 <a class="nav-link" href="">
-                    <i class="fas fa-pencil-ruler"></i>
-                    <span>Documentasi API</span>
+                    <i class="fas fa-code"></i>
+                    <span>Dokumentasi API</span>
                 </a>
             </li>
             <li>
                 <a class="nav-link" href="">
-                    <i class="fas fa-pencil-ruler"></i>
+                    <i class="fas fa-comments"></i>
                     <span>Help IT</span>
                 </a>
             </li>
