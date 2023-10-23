@@ -92,8 +92,8 @@ Absensi - Klinik Mitra Delima
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Alpha</h5>
-                            <span class="h2 font-weight-bold mb-0">{{ $alpha }}</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Izin</h5>
+                            <span class="h2 font-weight-bold mb-0">{{ $izin }}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -382,6 +382,7 @@ Absensi - Klinik Mitra Delima
                                     <option value="Telat">Telat</option>
                                     <option value="Sakit">Sakit</option>
                                     <option value="Cuti">Cuti</option>
+                                    <option value="Izin">Izin</option>
                                 </select>
                                 @error('keterangan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
@@ -427,6 +428,13 @@ Absensi - Klinik Mitra Delima
                     <div class="modal-body">
                         <h5 class="mb-3" id="tanggal"></h5>
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <div class="form-group row" id="tanggal">
+                            <label for="jam_masuk" class="col-form-label col-sm-3">Tanggal</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror">
+                                @error('tanggal') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="ubah_keterangan" class="col-form-label col-sm-3">Keterangan</label>
                             <div class="col-sm-9">
@@ -436,6 +444,7 @@ Absensi - Klinik Mitra Delima
                                     <option value="Telat" {{ old('keterangan') == 'Telat' ? 'selected':'' }}>Telat</option>
                                     <option value="Sakit" {{ old('keterangan') == 'Sakit' ? 'selected':'' }}>Sakit</option>
                                     <option value="Cuti" {{ old('keterangan') == 'Cuti' ? 'selected':'' }}>Cuti</option>
+                                    <option value="Izin" {{ old('keterangan') == 'Cuti' ? 'selected':'' }}>Izin</option>
                                 </select>
                                 @error('keterangan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>

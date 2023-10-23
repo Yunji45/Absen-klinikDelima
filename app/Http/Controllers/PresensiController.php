@@ -674,6 +674,8 @@ class PresensiController extends Controller
             } else {
                 $data['keterangan'] = 'Alpha';
             }
+        }elseif($request->keterangan == 'Izin'){
+            $data['keterangan'] = 'Izin';
         }
         presensi::create($data);
         return redirect()->back()->with('success','Kehadiran berhasil ditambahkan');
@@ -731,21 +733,21 @@ class PresensiController extends Controller
     public function update(Request $request, presensi $kehadiran)
     {
         $data = $request->validate([
-            'keterangan' => ['required', 'in:Alpha,Masuk,Telat,Sakit,Cuti'],
+            'tanggal' => 'required',
+            'keterangan' => ['required'],
             'jam_masuk' => ['nullable', 'date_format:H:i'],
             'jam_keluar' => ['nullable', 'date_format:H:i'],
         ]);
-        // $data['tanggal'] = $request->tanggal;
         if ($data['keterangan'] === 'Masuk' || $data['keterangan'] === 'Telat') {
-            // Jika keterangan adalah "Masuk" atau "Telat", dan jam_masuk diisi
+            $data['tanggal'] = $request->tanggal;
             if ($request->jam_masuk) {
                 $data['jam_masuk'] = $request->jam_masuk;
             } else {
-                // Jika jam_masuk tidak diisi, tetapkan keterangan ke "Alpha"
                 $data['keterangan'] = 'Alpha';
             }
+        }elseif($data['keterangan']=== 'Izin'){
+            $data['keterangan'] = 'Izin';
         } else {
-            // Jika keterangan bukan "Masuk" atau "Telat", atur jam_masuk dan jam_keluar ke null
             $data['jam_masuk'] = null;
             $data['jam_keluar'] = null;
         }

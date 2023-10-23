@@ -42,16 +42,41 @@ class KpiController extends Controller
 
     public function create()
     {                   
-        // $user_id = 1;
+        // $user_id = 15;
         // $data = explode('-', '2023-10-02'); // Memisahkan string bulan menjadi array
         // $bulan = $data[1]; // Bulan
         // $tahun = $data[0]; // Tahun
         
-        // $totalMasuk = Presensi::where('user_id', $user_id)
-        //     ->where('keterangan', 'Masuk')
-        //     ->whereMonth('tanggal', $bulan)
-        //     ->whereYear('tanggal', $tahun)
-        //     ->count();
+        // $ceklis = TargetKpi::where('user_id', $user_id)
+        //     ->whereMonth('bulan', $bulan)
+        //     ->whereYear('bulan', $tahun)
+        //     ->select('c_daftar','c_poli','c_farmasi','c_kasir','c_care','c_bpjs','c_khitan','c_rawat','c_salin','c_lab','c_umum','c_visit')
+        //     ->first();
+        // $kpi = kpi::where('user_id', $user_id)
+        //     ->whereMonth('bulan', $bulan)
+        //     ->whereYear('bulan', $tahun)
+        //     ->select('daftar','poli','farmasi','kasir','care','bpjs','khitan','rawat','persalinan','lab','umum','visit',
+        //             'layanan','akuntan','kompeten','harmonis','loyal','adaptif','kolaboratif','absen')
+        //     ->first();
+
+        // $jumlah = 0;
+        // $jumkpi = 0;
+        // if ($ceklis) {
+        //     foreach ($ceklis->toArray() as $key => $value) {
+        //         if ($value != 0) {
+        //             $jumlah++;
+        //         }
+        //     }
+        // }
+        // if ($kpi) {
+        //     foreach ($kpi->toArray() as $key => $value) {
+        //         if ($value != 0) {
+        //             $jumkpi++;
+        //         }
+        //     }
+        // }
+
+        // return $jumlah + $jumkpi;
         
         // $totalTelat = Presensi::where('user_id', $user_id)
         //     ->where('keterangan', 'Telat')
@@ -86,7 +111,7 @@ class KpiController extends Controller
             'nama_atasan' => 'required',
             'div_atasan' => 'required',
             'jabatan_atasan' => 'required',
-            'target' => 'required',
+            'target' => 'required'
         ],[
             'user_id.required' => 'Kolom user_id wajib diisi.',
             'jabatan.required' => 'Kolom jabatan wajib diisi.',
@@ -94,7 +119,7 @@ class KpiController extends Controller
             'nama_atasan.required' => 'Kolom nama_atasan wajib diisi.',
             'div_atasan.required' => 'Kolom div_atasan wajib diisi.',
             'jabatan_atasan.required' => 'Kolom jabatan_atasan wajib diisi.',
-            'target.required' => 'Kolom target wajib diisi.',        
+            'target.required' => 'Kolom target wajib diisi.',
         ]);
 
         if ($validator->fails()) {
@@ -194,6 +219,34 @@ class KpiController extends Controller
             $kpi->umum = 0;
             $kpi->visit = 0;
         }
+        //mencari ceklist
+        // $kpiData = kpi::where('user_id', $user_id)
+        // ->whereMonth('bulan', $bulan)
+        // ->whereYear('bulan', $tahun)
+        // ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'persalinan', 'lab', 'umum', 'visit', 'layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif', 'absen')
+        // ->first();
+        // if ($kpiData) {
+        //     // Pengaturan properti $kpi berdasarkan $kpiData
+        //     $kpi->daftar = $kpiData->daftar;
+        //     $kpi->poli = $kpiData->poli;
+        //     $kpi->farmasi = $kpiData->farmasi;
+        //     $kpi->kasir = $kpiData->kasir;
+        //     $kpi->bpjs = $kpiData->bpjs;
+        //     $kpi->care = $kpiData->care;
+        //     $kpi->khitan = $kpiData->khitan;
+        //     $kpi->rawat = $kpiData->rawat;
+        //     $kpi->persalinan = $kpiData->persalinan;
+        //     $kpi->lab = $kpiData->lab;
+        //     $kpi->umum = $kpiData->umum;
+        //     $kpi->visit = $kpiData->visit;
+        // }
+        
+        // // Menghitung jumlah non-nol dari properti $kpi
+        // $jumlahkpi = count(array_filter($kpi->toArray(), function ($value) {
+        //     return $value != 0;
+        // }));
+        // $ceklist = $jumlahkpi;        
+        // $kpi->target = $ceklist;        
                                 
         // $kpi->daftar = $targetdaftar;
         // $kpi->poli = $targetpoli;
@@ -276,19 +329,7 @@ class KpiController extends Controller
         }
         // $kpi->absen = $totalabsen;
         $kpi->bulan = $request->bulan;
-
-        // $totalMasuk = Presensi::where('user_id', $user_id)
-        // ->where('keterangan', 'Masuk')
-        // ->count();
-        // $totalTelat = Presensi::where('user_id', $user_id)
-        //     ->where('keterangan', 'Telat')
-        //     ->count();
-        // $kpi ->bulan = $request->bulan;
-
         $kpi->total = 
-        // $totaldaftar + $totalpoli + $totalfarmsai + $totalkasir +
-        // $totalcare + $totalbpjs + $totalkhitan + $totalrawat +
-        // $totalpersalinan + $totallab + $totalumum + $totalvisit +
         $kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
         $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
         $kpi->lab + $kpi->umum + $kpi->visit +

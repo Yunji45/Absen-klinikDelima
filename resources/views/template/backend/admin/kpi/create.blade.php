@@ -184,12 +184,12 @@
 
               <thead>
                 <tr>
-                  <th class="text-center">NO</th>
-                  <th class="text-center">ASPEK KINERJA</th>
-                  <th class="text-center">(0)</th>
-                  <th class="text-center">(1)</th>
-                  <th class="text-center">(2)</th>
-                  <th class="text-center">(3)</th>
+                  <th class="text-center bg-info">NO</th>
+                  <th class="text-center bg-info">ASPEK KINERJA</th>
+                  <th class="text-center bg-info">(0)</th>
+                  <th class="text-center bg-info">(1)</th>
+                  <th class="text-center bg-info">(2)</th>
+                  <th class="text-center bg-info">(3)</th>
                 </tr>
               </thead>
               <tbody>

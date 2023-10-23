@@ -88,6 +88,7 @@ class UserController extends Controller
         $telat = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('telat')->count();
         $cuti = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('cuti')->count();
         $alpha = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('alpha')->count();
+        $izin = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('izin')->count();
         $kehadiran = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('telat')->get();
         $gantijaga = rubahjadwal::whereUserId($user->id)
                                 ->whereMonth('tanggal', $bulanIni)
@@ -134,7 +135,7 @@ class UserController extends Controller
         //     }
         // }
         // dd($tukarjaga);
-        return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
+        return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
 
     }
 
