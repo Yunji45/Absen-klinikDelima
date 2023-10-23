@@ -8,7 +8,7 @@ use App\Models\AchKpi;
 use App\Models\User;
 use App\Models\kpi;
 use App\Models\OmsetKlinik;
-use App\Models\TargetKpi;
+use App\Models\targetkpi;
 use Illuminate\Support\Facades\Validator;
 
 class TargetKPIController extends Controller
@@ -165,7 +165,7 @@ class TargetKPIController extends Controller
         if (!$ach) {
             return redirect()->back()->with('error', 'Data Target tidak ditemukan.');
         }
-        if (TargetKpi::where('target_id', $ach->id)->exists()) {
+        if (targetkpi::where('target_id', $ach->id)->exists()) {
             return redirect()->back()->with('error', 'Data Target tidak dapat dihapus karena sedang digunakan di Realisasi KPI.');
         }
         $ach->delete();
