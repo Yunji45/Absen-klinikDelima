@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\jadwalterbaru;
 use App\Models\presensi;
+use App\Models\cuti;
 
 class AbsensiCron extends Command
 {
@@ -84,6 +85,11 @@ class AbsensiCron extends Command
             $existingAttendance = presensi::where('user_id', $user_id)
                 ->where('tanggal', $currentDate)
                 ->first();
+            $cuti = cuti::where('user_id', $user_id)
+                ->where('tanggal_mulai', '<=', $currentDate)
+                ->where('tanggal_berakhir', '>=', $currentDate)
+                ->where('status', 'approve')
+                ->first();        
         
             if (!$existingAttendance) {
                 // Periksa apakah jadwal pengguna adalah 'L1' atau 'L2'
@@ -91,10 +97,25 @@ class AbsensiCron extends Command
                 $userSchedule = $userWithSchedule->$schedule;
         
                 if ($userSchedule !== 'L1' && $userSchedule !== 'L2') {
+                    //periksa cuti 
+                    if($cuti){
+                        $jenisIzin = $cuti->jenis_izin;
+                        if ($jenisIzin=='cuti_tahunan'||$jenisIzin=='cuti_bersama'||$jenisIzin=='cuti_melahirkan'||$jenisIzin=='cuti_besar') {
+                            $keterangan = 'Cuti';
+                        }elseif($jenisIzin=='sakit'){
+                            $keterangan = 'Sakit';
+                        }elseif($jenisIzin=='izin'){
+                            $keterangan= 'Izin';
+                        } else {
+                            $keterangan = 'Alpha';
+                        } 
+                    }else{
+                        $keterangan= 'Alpha';
+                    }
                     // Lakukan absen otomatis jika belum absen
                     $attendanceData = [
                         'user_id' => $user_id,
-                        'keterangan' => 'Alpha',
+                        'keterangan' => $keterangan,
                         'tanggal' => $currentDate,
                         'jam_masuk' => null,
                         'jam_keluar' => null,
