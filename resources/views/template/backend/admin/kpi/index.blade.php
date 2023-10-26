@@ -42,7 +42,7 @@
                                     <th scope="col" class="text-center">Nama</th>
                                     <th scope="col" class="text-center">Jabatan</th>
                                     <th scope="col" class="text-center">Divisi</th>
-                                    <th scope="col" class="text-center">Target</th>
+                                    <th scope="col" class="text-center">Jumlah Ceklis</th>
                                     <th scope="col" class="text-center">Capaian Target</th>
                                     <th scope="col" class="text-center">Perilaku</th>
                                     <th scope="col" class="text-center">Absensi</th>
@@ -70,7 +70,7 @@
                                     <td class="text-center">{{$item->nama_atasan}}</td>
                                     <td class="text-center">{{$item->bulan}}</td>
                                     <td>
-                                        <a href="" onclick="return confirm('Yakin akan diedit?')" class="btn btn-info btn-sm" style="margin-right: 10px;">
+                                        <a href="{{route('kpi.view',$item->id)}}" class="btn btn-info btn-sm" style="margin-right: 10px;">
                                             <i class="fas fa-eye"> Lihat</i>
                                         </a>
                                     </td>

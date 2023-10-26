@@ -16,6 +16,7 @@ use App\Models\rubahjadwal;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class KpiController extends Controller
 {
@@ -720,5 +721,68 @@ class KpiController extends Controller
         $insentif->delete();
     
         return redirect()->back()->with('success', 'Data berhasil dihapus.');
+    }
+
+    //zona view detail KPI
+    public function indexViewKpi($id)
+    {
+        $title = 'View Detail KPI';
+        $kpi = Kpi::find($id);
+
+        if ($kpi) {
+            $user = User::find($kpi->user_id);
+            if ($user) {
+                $targetkpi = targetkpi::where('user_id', $user->id)
+                    ->select('r_daftar', 'r_poli', 'r_farmasi', 'r_kasir','r_care','r_bpjs','r_khitan',
+                    'r_rawat','r_salin','r_lab','r_umum','r_visit','target_id','bulan')
+                    ->first();
+                    $data = explode('-', $targetkpi->bulan); // Memisahkan string bulan menjadi array
+                    $bulan = $data[1]; // Bulan
+                    $tahun = $data[0]; // Tahun    
+                    $totalMasuk = Presensi::where('user_id', $user->id)
+                    ->where('keterangan', 'Masuk')
+                    ->whereMonth('tanggal', $bulan)
+                    ->whereYear('tanggal', $tahun)
+                    ->count();
+                    $totalTelat = Presensi::where('user_id', $user->id)
+                        ->where('keterangan', 'Telat')
+                        ->whereMonth('tanggal', $bulan)
+                        ->whereYear('tanggal', $tahun)
+                        ->count();
+                    $totalkehadiran = $totalMasuk + $totalTelat;
+                
+                    $psTotal = 0;
+                    for ($day = 1; $day <= 31; $day++) {
+                        $column = 'j' . $day;
+                        
+                        $psCount = jadwalterbaru::where('user_id', $user->id)
+                            ->where(function ($query) use ($column) {
+                                $query->whereIn($column, ['PS', 'SM', 'PM']);
+                            })
+                            ->whereMonth('masa_aktif', $bulan)
+                            ->whereYear('masa_aktif', $tahun)        
+                            ->count();
+                    
+                        $psTotal += $psCount;
+                    }
+
+        
+                if ($targetkpi) {
+                    $target_id = $targetkpi->target_id;
+                    $ach = AchKpi::where('id', $target_id)
+                        ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
+                            'rawat', 'salin', 'lab', 'umum', 'visit')
+                        ->first();
+                } else {
+                    // Targetkpi tidak ditemukan
+                }
+            } else {
+                // User tidak ditemukan
+            }
+        } else {
+            // Kpi tidak ditemukan
+        }
+        // return $psTotal;
+        return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran'));
     }
 }
