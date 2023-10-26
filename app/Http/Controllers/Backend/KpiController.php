@@ -726,8 +726,9 @@ class KpiController extends Controller
     //zona view detail KPI
     public function indexViewKpi($id)
     {
-        $title = 'View Detail KPI';
         $kpi = Kpi::find($id);
+        $user = User::find($kpi->user_id);
+        $title = 'View Detail KPI ('.$user->name.')';
 
         if ($kpi) {
             $user = User::find($kpi->user_id);
