@@ -36,9 +36,28 @@ class KpiController extends Controller
         // return $lembur;
 
         $title = 'KPI';
-        $kpi = kpi::all();
+        // $kpi = kpi::all();
         $user = User::all();
+        $bulan = date('m');
+        $tahun = date('Y');
+        $kpi = kpi::whereYear('bulan', $tahun)
+        ->whereMonth('bulan', $bulan)
+        ->get();    
+
         return view ('template.backend.admin.kpi.index',compact('title','kpi'));
+    }
+
+    public function SearchKpi(Request $request)
+    {
+        $title = 'KPI';
+        $user = User::all();
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+    
+        $kpi = kpi::whereBetween('bulan', [$startDate, $endDate])->get();
+    
+        return view ('template.backend.admin.kpi.index',compact('title','kpi','bulan'));
     }
 
     public function create()

@@ -9,6 +9,20 @@
             <div class="breadcrumb-item">{{$title}}</div>
         </div>
     </div>
+    <div class="section-header">
+        <a href="{{route('kpi.form.create')}}" class="btn btn-primary">
+            <i class="fa fa-plus">
+                Add</i>
+        </a>
+        <a href="" class="btn btn-danger">
+            <i class="fa fa-download">
+                PDF</i>
+        </a>
+        <a href="" class="btn btn-success">
+            <i class="fa fa-download">
+                Excel</i>
+        </a>
+    </div>
 
     <div class="section-body">
         <div class="row">
@@ -17,22 +31,18 @@
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
-                            <div class="buttons">
-                                <a href="{{route('kpi.form.create')}}" class="btn btn-primary">
-                                    <i class="fa fa-plus">
-                                        Add</i>
-                                </a>
-                                <a href="" class="btn btn-danger">
-                                    <i class="fa fa-download">
-                                        PDF</i>
-                                </a>
-                                <a href="" class="btn btn-success">
-                                    <i class="fa fa-download">
-                                        Excel</i>
-                                </a>
-                            </div>
-
+                            <form action="" method="POST">
+                                @csrf
+                                <div class="input-group">
+                                <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                                </div>
+                            </form>
+                            
                         </div>
+
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">

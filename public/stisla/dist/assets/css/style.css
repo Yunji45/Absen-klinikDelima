@@ -1519,7 +1519,7 @@ h6 .badge {
   width: 100%;
   height: 115px;
   /* background-color: #6777ef; */
-  background-color: #71ec73;
+  background-color: #45e029;
   z-index: -1; }
 
 .navbar {
@@ -2324,7 +2324,7 @@ pre {
   height: 100%;
   width: 250px;
   /* background-color: #fff; */
-  background-color: #13a506;
+  background-color: #45e029;
   z-index: 880;
   left: 0; }
 
@@ -2640,7 +2640,7 @@ body.layout-3 .main-footer {
         width: 100%; }
       .main-sidebar .sidebar-menu li a:hover {
         /* background-color: #fcfcfd; } */
-        background-color: #34cf68; }
+        background-color: #6dee56; }
     .main-sidebar .sidebar-menu li.active a {
       color: #6777ef;
       font-weight: 600;
@@ -2672,7 +2672,7 @@ body.layout-3 .main-footer {
       background-color: transparent; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
         /* color: #868e96; */
-        color: #e20c0c;
+        color: #FFE9A0;
         height: 35px;
         padding-left: 65px;
         font-weight: 400; }
