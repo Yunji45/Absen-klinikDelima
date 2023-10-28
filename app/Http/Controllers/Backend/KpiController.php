@@ -761,6 +761,37 @@ class KpiController extends Controller
                     ->select('r_daftar', 'r_poli', 'r_farmasi', 'r_kasir','r_care','r_bpjs','r_khitan',
                     'r_rawat','r_salin','r_lab','r_umum','r_visit','target_id','bulan')
                     ->first();
+                    // $data = explode('-', $targetkpi->bulan); // Memisahkan string bulan menjadi array
+                    // $bulan = $data[1]; // Bulan
+                    // $tahun = $data[0]; // Tahun    
+                    // $totalMasuk = Presensi::where('user_id', $user->id)
+                    // ->where('keterangan', 'Masuk')
+                    // ->whereMonth('tanggal', $bulan)
+                    // ->whereYear('tanggal', $tahun)
+                    // ->count();
+                    // $totalTelat = Presensi::where('user_id', $user->id)
+                    //     ->where('keterangan', 'Telat')
+                    //     ->whereMonth('tanggal', $bulan)
+                    //     ->whereYear('tanggal', $tahun)
+                    //     ->count();
+                    // $totalkehadiran = $totalMasuk + $totalTelat;
+                
+                    // $psTotal = 0;
+                    // for ($day = 1; $day <= 31; $day++) {
+                    //     $column = 'j' . $day;
+                        
+                    //     $psCount = jadwalterbaru::where('user_id', $user->id)
+                    //         ->where(function ($query) use ($column) {
+                    //             $query->whereIn($column, ['PS', 'SM', 'PM']);
+                    //         })
+                    //         ->whereMonth('masa_aktif', $bulan)
+                    //         ->whereYear('masa_aktif', $tahun)        
+                    //         ->count();
+                    
+                    //     $psTotal += $psCount;
+                    // }
+        
+                if ($targetkpi) {
                     $data = explode('-', $targetkpi->bulan); // Memisahkan string bulan menjadi array
                     $bulan = $data[1]; // Bulan
                     $tahun = $data[0]; // Tahun    
@@ -790,8 +821,7 @@ class KpiController extends Controller
                     
                         $psTotal += $psCount;
                     }
-        
-                if ($targetkpi) {
+
                     $target_id = $targetkpi->target_id;
                     $ach = AchKpi::where('id', $target_id)
                         ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
