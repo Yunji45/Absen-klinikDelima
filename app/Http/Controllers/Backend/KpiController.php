@@ -305,10 +305,10 @@ class KpiController extends Controller
                                 ->whereMonth('bulan', $bulan)
                                 ->whereYear('bulan', $tahun)
                                 ->first();
-        $insentifKpi = InsentifKpi::whereMonth('bulan', $bulan)
+        $omset = OmsetKlinik::whereMonth('bulan', $bulan)
                                     ->whereYear('bulan', $tahun)
                                     ->first();
-        if ($insentifKpi) {
+        if ($omset) {
             return redirect()->back()->with('error', 'Performance Unit Pada Periode ' . $request->bulan . ' Sudah Final.');
         }
                                 
