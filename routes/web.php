@@ -126,6 +126,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/index-gaji-update/{id}',[PenggajianController::class,'update'])->name('gaji.update');
         Route::get('/cari-gaji', [PenggajianController::class,'cari'])->name('cari.gaji');
         Route::post('/index-gaji-update/{id}',[PenggajianController::class,'update'])->name('gaji.update');
+        Route::get('/Payroll-search',[PenggajianController::class,'SearchPayroll'])->name('gaji.search');
         //UMR 
         Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');
         Route::get('/index-UMR-create',[PenggajianController::class,'createUMR'])->name('gaji.umr.create');

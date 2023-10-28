@@ -25,10 +25,25 @@ class PenggajianController extends Controller
         // $gaji = gajian::all();
         $gaji = gajian::whereYear('bulan', $tahun)
         ->whereMonth('bulan', $bulan)
+        ->orderBy('created_at', 'desc')
         ->get();    
         $data = User::all();
         $umr = UMKaryawan::all();
         return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','tahun','bulan'));
+    }
+
+    public function SearchPayroll(Request $request)
+    {
+        $title = 'Payroll';
+        $data = User::all();
+        $umr = UMKaryawan::all();
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+    
+        $gaji = gajian::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
+        return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','bulan'));
+
     }
 
     public function cari(Request $request)
