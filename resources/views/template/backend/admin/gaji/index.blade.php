@@ -65,7 +65,7 @@
                             <a href="{{route('gaji.edit',$item->id)}}" 
                             onclick="return confirm('Yakin akan edit data ?')" 
                             class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
-                            <a href="{{route('gaji.UMR.delete',$item->id)}}" 
+                            <a href="{{route('gaji.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
                             class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                         </td>                        
