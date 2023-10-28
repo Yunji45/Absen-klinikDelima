@@ -865,6 +865,6 @@ class KpiController extends Controller
             return redirect()->back()->with('error','Ada Masalah Di Backend.');
         }
         // return $psTotal;
-        return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
+        return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','psTotal','totalkehadiran','type'));
     }
 }
