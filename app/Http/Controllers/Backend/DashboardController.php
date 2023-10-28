@@ -10,6 +10,7 @@ class DashboardController extends Controller
     public function index()
     {
         $title = 'Dashboard';
-        return view('template.backend.admin.dashboard.index',compact('title'));
+        $type = 'dashboard';
+        return view('template.backend.admin.dashboard.index',compact('title','type'));
     }
 }

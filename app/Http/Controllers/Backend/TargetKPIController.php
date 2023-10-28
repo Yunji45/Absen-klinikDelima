@@ -21,9 +21,10 @@ class TargetKPIController extends Controller
     public function index()
     {
         $title = 'Target KPI';
+        $type = 'kpi';
         $target = AchKpi::all();
         $user = User::all();
-        return view('template.backend.admin.target-kpi.index',compact('title','target','user'));
+        return view('template.backend.admin.target-kpi.index',compact('title','target','user','type'));
     }
 
     /**
@@ -194,8 +195,9 @@ class TargetKPIController extends Controller
         // return $jumlah;
 
         $title = 'Performance Klinik';
+        $type = 'gaji';
         $omset = OmsetKlinik::all();
-        return view ('template.backend.admin.omset.index',compact('title','omset'));
+        return view ('template.backend.admin.omset.index',compact('title','omset','type'));
     }
 
     public function storeOmset(Request $request)

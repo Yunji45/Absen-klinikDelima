@@ -36,7 +36,7 @@ class KpiController extends Controller
         // return $lembur;
 
         $title = 'KPI';
-        // $kpi = kpi::all();
+        $type = 'kpi';
         $user = User::all();
         $bulan = date('m');
         $tahun = date('Y');
@@ -44,7 +44,7 @@ class KpiController extends Controller
         ->whereMonth('bulan', $bulan)
         ->get();    
 
-        return view ('template.backend.admin.kpi.index',compact('title','kpi'));
+        return view ('template.backend.admin.kpi.index',compact('title','kpi','type'));
     }
 
     public function SearchKpi(Request $request)
@@ -395,8 +395,9 @@ class KpiController extends Controller
     public function indexTargetKpi()
     {
         $title = 'Realisasi Kinerja KPI';
+        $type = 'kpi';
         $target = targetkpi::all();
-        return view ('template.backend.admin.data-kpi.index',compact('title','target'));
+        return view ('template.backend.admin.data-kpi.index',compact('title','target','type'));
     }
     public function createTarget()
     {
@@ -647,6 +648,7 @@ class KpiController extends Controller
     public function indexInsentifKpi()
     {
         $title = 'Insentif Kinerja KPI';
+        $type = 'gaji';
         // $data = explode('-', '2023-10-02');
         // $bulan = $data[1]; 
         // $tahun = $data[0]; 
@@ -669,7 +671,7 @@ class KpiController extends Controller
         
         // $user = User::all();
         // $insentif = InsentifKpi::all();
-        return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user','poin'));
+        return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user','poin','type'));
     }
 
     public function storeInsentifKpi(Request $request)

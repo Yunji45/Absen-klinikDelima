@@ -8,16 +8,18 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Beranda</li>
-            <li>
-                
+            <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('dash.admin')}}">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
-                <a class="nav-link" href="{{route('kpi.index')}}">
+            </li>
+            <li>
+                <a class="nav-link" href="">
                     <i class="fas fa-palette"></i>
                     <span>Beranda</span>
                 </a>
+
             </li>
             <li class="menu-header">SDM</li>
             @if (auth()->user()->role == 'admin')
@@ -64,7 +66,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="nav-item dropdown {{ $type === 'kpi' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-handshake"></i>
                     <span>KPI</span>
@@ -74,30 +76,30 @@
                         <a class="nav-link" href="{{route('coba')}}">Coba Input Multiple User</a>
                     </li> -->
 
-                    <li>
+                    <li class="{{ Request::is('index') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('target.kpi')}}">Target KPI</a>
                     </li>
-                    <li>
+                    <li class="{{ Request::is('index') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('kpi.datakinerja')}}">Realisasi KPI</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="{{route('kpi.index')}}">Data Kinerja KPI</a>
+                    <li class="{{ Request::is('index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('kpi.index')}}">Evaluasi Kinerja KPI</a>
                     </li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="nav-item dropdown {{ $type === 'gaji' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-money-bill"></i>
                     <span>Salary Pegawai</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
+                    <li class="{{ Request::is('gaji.indexUMR') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('gaji.indexUMR')}}">Setup UMR</a>
                     </li>
-                    <li>
+                    <li class="{{ Request::is('setup.insentif') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('setup.insentif')}}">Setup Insentif</a>
                     </li>
-                    <li>
+                    <li class="{{ Request::is('index') ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('gaji.adm')}}">Gaji</a>
                     </li>
                     <li>

@@ -22,6 +22,7 @@ class PenggajianController extends Controller
         $title = 'Payroll';
         $bulan = date('m');
         $tahun = date('Y');
+        $type = 'gaji';
         // $gaji = gajian::all();
         $gaji = gajian::whereYear('bulan', $tahun)
         ->whereMonth('bulan', $bulan)
@@ -29,7 +30,7 @@ class PenggajianController extends Controller
         ->get();    
         $data = User::all();
         $umr = UMKaryawan::all();
-        return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','tahun','bulan'));
+        return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','tahun','bulan','type'));
     }
 
     public function SearchPayroll(Request $request)
@@ -307,8 +308,9 @@ class PenggajianController extends Controller
     public function indexUMR()
     {
         $title = 'Setting UMR';
+        $type = 'gaji';
         $data = UMKaryawan::all();
-        return view ('template.backend.admin.gaji.umr',compact('title','data'));
+        return view ('template.backend.admin.gaji.umr',compact('title','data','type'));
     }
 
     public function createUMR()
