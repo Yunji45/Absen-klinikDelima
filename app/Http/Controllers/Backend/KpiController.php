@@ -790,7 +790,6 @@ class KpiController extends Controller
                     
                         $psTotal += $psCount;
                     }
-
         
                 if ($targetkpi) {
                     $target_id = $targetkpi->target_id;
@@ -800,12 +799,14 @@ class KpiController extends Controller
                         ->first();
                 } else {
                     // Targetkpi tidak ditemukan
+                    return redirect()->back()->with('error','Ada Masalah Di Backend.');
                 }
             } else {
-                // User tidak ditemukan
+                return redirect()->back()->with('error','Ada Masalah Di Backend.');
             }
         } else {
             // Kpi tidak ditemukan
+            return redirect()->back()->with('error','Ada Masalah Di Backend.');
         }
         // return $psTotal;
         return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
