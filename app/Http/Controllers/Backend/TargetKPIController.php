@@ -35,7 +35,8 @@ class TargetKPIController extends Controller
     public function create()
     {
         $title = 'Target KPI';
-        return view('template.backend.admin.target-kpi.create',compact('title'));
+        $type = 'kpi';
+        return view('template.backend.admin.target-kpi.create',compact('title','type'));
     }
 
     /**

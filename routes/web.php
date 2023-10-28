@@ -22,6 +22,8 @@ use App\Http\Controllers\Backend\KpiController;
 use App\Http\Controllers\Backend\TargetKPIController;
 use App\Http\Controllers\Backend\DashboardController;
 
+use App\Http\Controllers\API\DokumentasiController;
+
 
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
@@ -60,6 +62,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     
     //role admin
     Route::group(['roles' => 'admin'], function(){
+        //Dok API
+        Route::get('/Dokumentasi-API',[DokumentasiController::class,'index'])->name('dok.api');
         //Dashboard
         Route::get('/statis',[DashboardController::class,'index'])->name('dash.admin');
         //user-backend

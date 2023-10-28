@@ -118,8 +118,9 @@ class KpiController extends Controller
         //                 ->pluck('r_daftar');
         //     return $tes;                            
         $title = 'Tambah KPI';
+        $type = 'kpi';
         $user = User::all();
-        return view('template.backend.admin.kpi.create',compact('title','user'));
+        return view('template.backend.admin.kpi.create',compact('title','user','type'));
     }
 
     public function store(Request $request)
@@ -416,6 +417,7 @@ class KpiController extends Controller
         
         // return $targetData;
         $title = 'Realiasasi Kinerja KPI';
+        $type = 'kpi';
         $ach = AchKpi::all();
         $user = User::all();
         // Mendapatkan bulan dan tahun saat ini
@@ -434,7 +436,7 @@ class KpiController extends Controller
             return redirect('/TargetKPI')->with('error','Data Target Belum Ada');
         }
 
-        return view('template.backend.admin.kpi.form-target',compact('title','user','ach','target'));
+        return view('template.backend.admin.kpi.form-target',compact('title','user','ach','target','type'));
     }
     public function storeTarget(Request $request)
     {
@@ -749,6 +751,7 @@ class KpiController extends Controller
     {
         $kpi = Kpi::find($id);
         $user = User::find($kpi->user_id);
+        $type = 'kpi';
         $title = 'View Detail KPI ('.$user->name.')';
 
         if ($kpi) {
@@ -805,6 +808,6 @@ class KpiController extends Controller
             // Kpi tidak ditemukan
         }
         // return $psTotal;
-        return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran'));
+        return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
     }
 }
