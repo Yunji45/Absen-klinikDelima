@@ -818,8 +818,9 @@ class KpiController extends Controller
         $type = 'kpi';
         $title = 'View Detail KPI ('.$user->name.')';
 
-        $ach = null; // Inisialisasi awal variabel $ach
-        $psTotal = 0; // Inisialisasi awal variabel $psTotal
+        $ach = null; 
+        $psTotal = 0;
+        $totalkehadiran= 0;
 
         if ($kpi) {
             $user = User::find($kpi->user_id);
