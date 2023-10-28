@@ -148,7 +148,6 @@ class KpiController extends Controller
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
-
         $kpi = new kpi;
         $kpi ->user_id = $request->user_id;
         $kpi ->jabatan = $request->jabatan;
@@ -157,20 +156,6 @@ class KpiController extends Controller
         $kpi->jabatan_atasan = $request->jabatan_atasan;
         $kpi->div_atasan = $request->div_atasan;
         $kpi->target = $request->target;
-        // $kpi ->div = 'Software Enginer';
-        //request input
-        // $daftarValue = $request->input('daftar', []);
-        // $poliValue = $request->input('poli', []);
-        // $farmasiValue = $request->input('farmasi', []);
-        // $kasirValue = $request->input('kasir', []);
-        // $careValue = $request->input('care', []);
-        // $bpjsValue = $request->input('bpjs', []);
-        // $khitanValue = $request->input('khitan', []);
-        // $rawatValue = $request->input('rawat', []);
-        // $persalinanValue = $request->input('persalinan', []);
-        // $labValue = $request->input('lab', []);
-        // $umumValue = $request->input('umum', []);
-        // $visitValue = $request->input('visit', []);
         $layananValue = $request->input('layanan', []);
         $akuntanValue = $request->input('akuntan', []);
         $kompetenValue = $request->input('kompeten', []);
@@ -180,19 +165,6 @@ class KpiController extends Controller
         $kolaboratifValue = $request->input('kolaboratif', []);
         $absenValue = $request->input('absen', []);
         
-        //total
-        // $totaldaftar = !empty($daftarValue) ? array_sum($daftarValue) : 0;
-        // $totalpoli = !empty($poliValue) ? array_sum($poliValue) : 0;
-        // $totalfarmsai = !empty($farmasiValue) ? array_sum($farmasiValue) : 0;
-        // $totalkasir = !empty($kasirValue) ? array_sum($kasirValue) : 0;
-        // $totalcare = !empty($careValue) ? array_sum($careValue) : 0;
-        // $totalbpjs = !empty($bpjsValue) ? array_sum($bpjsValue) : 0;
-        // $totalkhitan = !empty($khitanValue) ? array_sum($khitanValue) : 0;
-        // $totalrawat = !empty($rawatValue) ? array_sum($rawatValue) : 0;
-        // $totalpersalinan = !empty($persalinanValue) ? array_sum($persalinanValue) : 0;
-        // $totallab = !empty($labValue) ? array_sum($labValue) : 0;
-        // $totalumum = !empty($umumValue) ? array_sum($umumValue) : 0;
-        // $totalvisit = !empty($visitValue) ? array_sum($visitValue) : 0;
         $totallayanan = !empty($layananValue) ? array_sum($layananValue) : 0;
         $totalakuntan = !empty($akuntanValue) ? array_sum($akuntanValue) : 0;
         $totalkompeten = !empty($kompetenValue) ? array_sum($kompetenValue) : 0;
@@ -240,50 +212,6 @@ class KpiController extends Controller
             $kpi->umum = 0;
             $kpi->visit = 0;
         }
-        //mencari ceklist
-        // $kpiData = kpi::where('user_id', $user_id)
-        // ->whereMonth('bulan', $bulan)
-        // ->whereYear('bulan', $tahun)
-        // ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'persalinan', 'lab', 'umum', 'visit', 'layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif', 'absen')
-        // ->first();
-        // if ($kpiData) {
-        //     // Pengaturan properti $kpi berdasarkan $kpiData
-        //     $kpi->daftar = $kpiData->daftar;
-        //     $kpi->poli = $kpiData->poli;
-        //     $kpi->farmasi = $kpiData->farmasi;
-        //     $kpi->kasir = $kpiData->kasir;
-        //     $kpi->bpjs = $kpiData->bpjs;
-        //     $kpi->care = $kpiData->care;
-        //     $kpi->khitan = $kpiData->khitan;
-        //     $kpi->rawat = $kpiData->rawat;
-        //     $kpi->persalinan = $kpiData->persalinan;
-        //     $kpi->lab = $kpiData->lab;
-        //     $kpi->umum = $kpiData->umum;
-        //     $kpi->visit = $kpiData->visit;
-        // }
-        
-        // // Menghitung jumlah non-nol dari properti $kpi
-        // $jumlahkpi = count(array_filter($kpi->toArray(), function ($value) {
-        //     return $value != 0;
-        // }));
-        // $ceklist = $jumlahkpi;        
-        // $kpi->target = $ceklist;        
-                                
-        // $kpi->daftar = $targetdaftar;
-        // $kpi->poli = $targetpoli;
-        // $kpi ->farmasi = $totalfarmsai;
-        // $kpi ->kasir = $totalkasir;
-
-        // $kpi ->care = $totalcare;
-        // $kpi ->bpjs = $totalbpjs;
-        // $kpi ->khitan = $totalkhitan;
-        // $kpi ->rawat = $totalrawat;
-
-        // $kpi ->persalinan = $totalpersalinan;
-        // $kpi ->lab = $totallab;
-        // $kpi ->umum = $totalumum;
-        // $kpi ->visit = $totalvisit;
-
         $kpi ->layanan = $totallayanan;
         $kpi ->akuntan = $totalakuntan;
         $kpi ->kompeten = $totalkompeten;
@@ -373,15 +301,23 @@ class KpiController extends Controller
             $kpi->ket = 'Dibawah';
         }
         // $kpi ->bulan = $request->bulan;
-        $kpi ->save();
-        // return $totalabsen;
-        if ($kpi){
-            return redirect('/KPI')->with('success', 'Data Berhasil di Tambahkan');
-        }else{
-            return redirect()->back()->with('error', 'Data Gagal di Tambahkan');
+        $realisasi = targetkpi::where('user_id', $user_id)
+                                ->whereMonth('bulan', $bulan)
+                                ->whereYear('bulan', $tahun)
+                                ->first();
+        $insentifKpi = InsentifKpi::whereMonth('bulan', $bulan)
+                                    ->whereYear('bulan', $tahun)
+                                    ->first();
+        if ($insentifKpi) {
+            return redirect()->back()->with('error', 'Performance Unit Pada Periode ' . $request->bulan . ' Sudah Final.');
         }
-        // return redirect('/KPI')->with('success', 'Data Berhasil di Tambahkan');
-
+                                
+        if ($realisasi){
+            $kpi->save();
+        }else{
+            return redirect()->back()->with('error','Realisasi User Pada Periode '. $request->bulan .' Ini Belum Ada.');
+        }
+        return redirect('/KPI')->with('success', 'Data Berhasil di Tambahkan');
     }
 
     public function destroy($id)
