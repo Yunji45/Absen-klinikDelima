@@ -81,9 +81,10 @@ class PenggajianController extends Controller
     public function create()
     {
         $title = 'Payroll';
+        $type = 'gaji';
         $data = User::all();
         $umr = UMKaryawan::all();
-        return view ('template.backend.admin.gaji.create',compact('data','umr','title'));
+        return view ('template.backend.admin.gaji.create',compact('data','umr','title','type'));
     }
 
     /**
