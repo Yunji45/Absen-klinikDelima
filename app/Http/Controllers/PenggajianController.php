@@ -198,7 +198,7 @@ class PenggajianController extends Controller
         $data = User::all();
         $umr = UMKaryawan::all();
         $gaji = gajian::find($id);
-        return view('template.backend.admin.gaji.edit',compact('title','data','umr','gaji'))->with('success','Data Berhasil di Temukan');
+        return view('template.backend.admin.gaji.edit',compact('title','data','umr','gaji','type'))->with('success','Data Berhasil di Temukan');
     }
 
     /**
