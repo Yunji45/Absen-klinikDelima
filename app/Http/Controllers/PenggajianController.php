@@ -194,6 +194,7 @@ class PenggajianController extends Controller
     public function edit($id)
     {
         $title = 'Edit Payroll';
+        $type = 'gaji';
         $data = User::all();
         $umr = UMKaryawan::all();
         $gaji = gajian::find($id);
