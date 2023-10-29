@@ -165,6 +165,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/Insentif-KPI',[KpiController::class,'indexInsentifKpi'])->name('insentif.kpi');
         Route::post('/Insentif-KPI/save',[KpiController::class,'storeInsentifKpi'])->name('insentif.kpi.save');
         Route::get('/Insentif-KPI/delete/{id}',[KpiController::class,'hapusInsentifKpi'])->name('insentif.kpi.delete');
+        Route::get('/Search-insentif-kpi',[KpiController::class,'SearchInsentifKpi'])->name('search.insentif.kpi');
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');

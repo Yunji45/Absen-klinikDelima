@@ -590,28 +590,52 @@ class KpiController extends Controller
     {
         $title = 'Insentif Kinerja KPI';
         $type = 'gaji';
-        // $data = explode('-', '2023-10-02');
-        // $bulan = $data[1]; 
-        // $tahun = $data[0]; 
-        $bulanTahunSekarang = date('Y-m'); // Format: YYYY-MM
-        $bulan = date('m'); // Mendapatkan bulan saat ini (format: 01-12)
-        $tahun = date('Y'); // Mendapatkan tahun saat ini (format: YYYY)
+        $bulanTahunSekarang = date('Y-m');
+        $bulan = date('m'); 
+        $tahun = date('Y'); 
 
         $poin = OmsetKlinik::whereMonth('bulan', $bulan)
         ->whereYear('bulan', $tahun)
         ->select('omset','skor','index_rupiah','total_insentif')
         ->first();
         if ($poin) {
-            // Data poin ditemukan, lanjutkan dengan tindakan yang diperlukan
             $user = User::all();
-            $insentif = InsentifKpi::all();
+            // $insentif = InsentifKpi::all();
+            $insentif = InsentifKpi::whereYear('bulan', $tahun)
+            ->whereMonth('bulan', $bulan)
+            ->orderBy('created_at', 'desc')
+            ->get();    
         } else {
-            // Data poin tidak ditemukan, tampilkan peringatan
             return redirect('/setup-insentif')->with('error', 'Setup Omset Bulan Ini Terlebih Dahulu.');
         }
         
-        // $user = User::all();
-        // $insentif = InsentifKpi::all();
+        return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user','poin','type'));
+    }
+
+    public function SearchInsentifKpi(Request $request)
+    {
+        $title = 'Insentif Kinerja KPI';
+        $type = 'gaji';
+        $bulanTahunSekarang = date('Y-m');
+        $waktu = date('m'); 
+        $tahun = date('Y'); 
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+
+        $poin = OmsetKlinik::whereBetween('bulan', [$startDate, $endDate])->first();
+        // $poin = OmsetKlinik::whereMonth('bulan', $waktu)
+        // ->whereYear('bulan', $tahun)
+        // ->select('omset','skor','index_rupiah','total_insentif')
+        // ->first();
+        if ($poin) {
+            $user = User::all();
+            // $insentif = InsentifKpi::all();
+            $insentif = InsentifKpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
+        } else {
+            return redirect('/setup-insentif')->with('error', 'Setup Omset Bulan Ini Terlebih Dahulu.');
+        }
+        
         return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user','poin','type'));
     }
 
