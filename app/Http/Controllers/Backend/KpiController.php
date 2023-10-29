@@ -22,19 +22,6 @@ class KpiController extends Controller
 {
     public function index ()
     {
-        // $user_id = 28;
-        // $data = explode('-', '2023-10-11'); // Memisahkan string bulan menjadi array
-        // $bulan = $data[1]; // Bulan
-        // $tahun = $data[0]; // Tahun
-
-        // $lembur = rubahjadwal::where('user_id', $user_id)
-        // ->where('permohonan', 'lembur')
-        // ->where('status', 'approve')
-        // ->whereMonth('tanggal', $bulan)
-        // ->whereYear('tanggal', $tahun)
-        // ->count();
-        // return $lembur;
-
         $title = 'KPI';
         $type = 'kpi';
         $user = User::all();
@@ -42,6 +29,7 @@ class KpiController extends Controller
         $tahun = date('Y');
         $kpi = kpi::whereYear('bulan', $tahun)
         ->whereMonth('bulan', $bulan)
+        ->orderBy('created_at', 'desc')
         ->get();    
 
         return view ('template.backend.admin.kpi.index',compact('title','kpi','type'));
@@ -50,14 +38,15 @@ class KpiController extends Controller
     public function SearchKpi(Request $request)
     {
         $title = 'KPI';
+        $type = 'kpi';
         $user = User::all();
         $bulan = $request->input('bulan');
         $startDate = $bulan . '-01';
         $endDate = $bulan . '-31';
     
-        $kpi = kpi::whereBetween('bulan', [$startDate, $endDate])->get();
+        $kpi = kpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
     
-        return view ('template.backend.admin.kpi.index',compact('title','kpi','bulan'));
+        return view ('template.backend.admin.kpi.index',compact('title','kpi','bulan','type'));
     }
 
     public function create()
@@ -333,7 +322,24 @@ class KpiController extends Controller
     {
         $title = 'Realisasi Kinerja KPI';
         $type = 'kpi';
-        $target = targetkpi::all();
+        // $target = targetkpi::all();
+        $bulan = date('m');
+        $tahun = date('Y');
+        $target = targetkpi::whereYear('bulan',$tahun)
+                            ->whereMonth('bulan',$bulan)
+                            ->orderBy('created_at','desc')
+                            ->get();
+        return view ('template.backend.admin.data-kpi.index',compact('title','target','type'));
+    }
+
+    public function SearchRealisasi(Request $request)
+    {
+        $title = 'Realisasi Kinerja KPI';
+        $type = 'kpi';
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+        $target = targetkpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
         return view ('template.backend.admin.data-kpi.index',compact('title','target','type'));
     }
     public function createTarget()
@@ -448,7 +454,6 @@ class KpiController extends Controller
                         $data[$c_column] = 0;
                     }                        
                 }
-                //pengecekan data user pada bulan yang sama
                 $existingData = targetkpi::where('user_id', $userId)
                                         ->where('bulan', $request->bulan)
                                         ->first();
@@ -458,11 +463,9 @@ class KpiController extends Controller
                 }else {
                     return redirect()->back()->with('error','Data User Pada Bulan Ini sudah Ada.');
                 }   
-                // Lakukan operasi insert untuk setiap user_id
                 // targetkpi::create($data);
             }
 
-            // Setelah loop selesai, Anda dapat mengarahkan pengguna ke halaman berikutnya
             return redirect('/KPI/Data-Kinerja')->with('success','Terimakasih , Data Realiasasi Berhasil Disimpan');
         } else {
             //handle request jika $targetData tidak ditemukan
@@ -683,70 +686,6 @@ class KpiController extends Controller
     }
 
     //zona view detail KPI
-    // public function indexViewKpi($id)
-    // {
-    //     $kpi = Kpi::find($id);
-    //     $user = User::find($kpi->user_id);
-    //     $type = 'kpi';
-    //     $title = 'View Detail KPI ('.$user->name.')';
-
-    //     if ($kpi) {
-    //         $user = User::find($kpi->user_id);
-    //         if ($user) {
-    //             $targetkpi = targetkpi::where('user_id', $user->id)
-    //                 ->select('r_daftar', 'r_poli', 'r_farmasi', 'r_kasir','r_care','r_bpjs','r_khitan',
-    //                 'r_rawat','r_salin','r_lab','r_umum','r_visit','target_id','bulan')
-    //                 ->first();
-    //                 $data = explode('-', $targetkpi->bulan); // Memisahkan string bulan menjadi array
-    //                 $bulan = $data[1]; // Bulan
-    //                 $tahun = $data[0]; // Tahun    
-    //                 $totalMasuk = Presensi::where('user_id', $user->id)
-    //                 ->where('keterangan', 'Masuk')
-    //                 ->whereMonth('tanggal', $bulan)
-    //                 ->whereYear('tanggal', $tahun)
-    //                 ->count();
-    //                 $totalTelat = Presensi::where('user_id', $user->id)
-    //                     ->where('keterangan', 'Telat')
-    //                     ->whereMonth('tanggal', $bulan)
-    //                     ->whereYear('tanggal', $tahun)
-    //                     ->count();
-    //                 $totalkehadiran = $totalMasuk + $totalTelat;
-                
-    //                 $psTotal = 0;
-    //                 for ($day = 1; $day <= 31; $day++) {
-    //                     $column = 'j' . $day;
-                        
-    //                     $psCount = jadwalterbaru::where('user_id', $user->id)
-    //                         ->where(function ($query) use ($column) {
-    //                             $query->whereIn($column, ['PS', 'SM', 'PM']);
-    //                         })
-    //                         ->whereMonth('masa_aktif', $bulan)
-    //                         ->whereYear('masa_aktif', $tahun)        
-    //                         ->count();
-                    
-    //                     $psTotal += $psCount;
-    //                 }
-        
-    //             if ($targetkpi) {
-    //                 $target_id = $targetkpi->target_id;
-    //                 $ach = AchKpi::where('id', $target_id)
-    //                     ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
-    //                         'rawat', 'salin', 'lab', 'umum', 'visit')
-    //                     ->first();
-    //             } else {
-    //                 // Targetkpi tidak ditemukan
-    //                 return redirect()->back()->with('error','Ada Masalah Di Backend.');
-    //             }
-    //         } else {
-    //             return redirect()->back()->with('error','Ada Masalah Di Backend.');
-    //         } 
-    //     } else {
-    //         // Kpi tidak ditemukan
-    //         return redirect()->back()->with('error','Ada Masalah Di Backend.');
-    //     }
-    //     // return $psTotal;
-    //     return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
-    // }
     public function indexViewKpi($id)
     {
         $kpi = Kpi::find($id);
@@ -773,7 +712,6 @@ class KpiController extends Controller
                         $bulan = $data[1];
                         $tahun = $data[0];
 
-                        // Selanjutnya, Anda dapat melanjutkan dengan query database dan perhitungan Anda.
                         $totalMasuk = Presensi::where('user_id', $user->id)
                             ->where('keterangan', 'Masuk')
                             ->whereMonth('tanggal', $bulan)
@@ -812,17 +750,16 @@ class KpiController extends Controller
                             return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
                         }
                     } else {
-                        // Lakukan sesuatu jika kolom 'bulan' dalam $targetkpi bernilai NULL.
+                        return redirect()->back()->with('error','Data Periode KPI Tidak Ditemukan.');
                     }
                 } else {
-                    // Lakukan sesuatu jika tidak ada data targetkpi yang ditemukan sesuai kriteria 'user_id'.
+                    return redirect()->back()->with('error','Data Realisasi KPI Tidak Ditemukan.');
                 }
             } else {
-                // Lakukan sesuatu jika $user bernilai NULL atau tidak ada data user yang ditemukan.
+                return redirect()->back()->with('error','Data KPI User NULL atau Tidak Ada.');
             }            
         } else {
-            // Kpi tidak ditemukan
-            return redirect()->back()->with('error','Ada Masalah Di Backend.');
+            return redirect()->back()->with('error','Data KPI Tidak Ditemukan.');
         }
 
         // return $psTotal;

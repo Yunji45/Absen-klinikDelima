@@ -31,7 +31,7 @@
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
-                            <form action="" method="POST">
+                            <form action="{{route('search.realisasi')}}" method="get">
                                 @csrf
                                 <div class="input-group">
                                 <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
@@ -42,7 +42,6 @@
                             </form>
                             
                         </div>
-
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">

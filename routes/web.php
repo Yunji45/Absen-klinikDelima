@@ -140,6 +140,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/setup-insentif',[TargetKPIController::class,'indexOmset'])->name('setup.insentif');
         Route::post('/setup-insentif/save',[TargetKPIController::class,'storeOmset'])->name('setup.insentif.save');
         Route::get('/setup-insentif/delete/{id}',[TargetKPIController::class,'hapusOmset'])->name('setup.insentif.delete');
+        Route::get('/Search-omset',[TargetKPIController::class,'SearchOmset'])->name('search.omset');
         //Target KPI
         Route::get('/TargetKPI',[TargetKPIController::class,'index'])->name('target.kpi');
         Route::get('/TargetKPI/create',[TargetKPIController::class,'create'])->name('target.kpi.create');
@@ -159,6 +160,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::get('/KPI/form-target',[KpiController::class,'createTarget'])->name('kpi.form.create');
         Route::post('/KPI/form-target/save',[KpiController::class,'storeTarget'])->name('kpi.form.save');
         Route::get('/KPI/form-delete/{id}',[KpiController::class,'hapusTargetKpi'])->name('kpi.form.delete');
+        Route::get('/Search-realisasi',[KpiController::class,'SearchRealisasi'])->name('search.realisasi');
         //Insentif KPI
         Route::get('/Insentif-KPI',[KpiController::class,'indexInsentifKpi'])->name('insentif.kpi');
         Route::post('/Insentif-KPI/save',[KpiController::class,'storeInsentifKpi'])->name('insentif.kpi.save');

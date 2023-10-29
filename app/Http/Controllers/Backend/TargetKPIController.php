@@ -174,11 +174,6 @@ class TargetKPIController extends Controller
         return redirect()->back()->with('success', 'Data Target Berhasil Dihapus.');
     }
 
-    public function setItemTarget()
-    {
-
-    }
-
     public function indexOmset()
     {
         // $data = explode('-', '2023-10-02');
@@ -197,10 +192,25 @@ class TargetKPIController extends Controller
 
         $title = 'Performance Klinik';
         $type = 'gaji';
-        $omset = OmsetKlinik::all();
+        // $omset = OmsetKlinik::all();
+        $bulan = date('m');
+        $tahun = date('Y');
+        $omset = OmsetKlinik::whereYear('bulan', $tahun)
+        ->whereMonth('bulan', $bulan)
+        ->orderBy('created_at', 'desc')
+        ->get();
         return view ('template.backend.admin.omset.index',compact('title','omset','type'));
     }
-
+    public function SearchOmset(Request $request)
+    {
+        $title = 'Performance Klinik';
+        $type = 'gaji';
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+        $omset = OmsetKlinik::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
+        return view ('template.backend.admin.omset.index',compact('title','omset','type'));
+    }
     public function storeOmset(Request $request)
     {
         $validator = Validator::make($request->all(),[
