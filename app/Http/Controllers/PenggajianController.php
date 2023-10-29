@@ -28,9 +28,11 @@ class PenggajianController extends Controller
         ->whereMonth('bulan', $bulan)
         ->orderBy('created_at', 'desc')
         ->get();    
+        $total = gajian::whereYear('bulan',$tahun)->whereMonth('bulan',$bulan)->sum('Gaji_akhir');        
         $data = User::all();
         $umr = UMKaryawan::all();
-        return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','tahun','bulan','type'));
+        // return $total;
+        return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','tahun','bulan','type','total'));
     }
 
     public function SearchPayroll(Request $request)
@@ -44,7 +46,8 @@ class PenggajianController extends Controller
         $endDate = $bulan . '-31';
     
         $gaji = gajian::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
-        return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','bulan','type'));
+        $total = gajian::whereBetween('bulan',[$startDate, $endDate])->sum('Gaji_akhir');
+        return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','bulan','type','total'));
 
     }
 
@@ -55,11 +58,6 @@ class PenggajianController extends Controller
         $bulanInput = substr($request->bulan, 5, 2); // Ambil bulan dari input bulan    
         $data = User::all();
         $umr = UMKaryawan::all();
-        // $bulan = $request->input('bulan');
-        // $gaji = gajian::where('bulan', '>=', $bulan . '-01')
-        //                 ->get();
-                
-        // return view ('backend.admin.gaji.index',compact('gaji','title','data','umr'));
         if (preg_match('/^(0[1-9]|1[0-2])$/', $bulanInput)) {
             $gaji = gajian::whereYear('bulan', $tahun)
                 ->whereMonth('bulan', $bulanInput)

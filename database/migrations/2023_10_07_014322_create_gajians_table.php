@@ -29,6 +29,9 @@ return new class extends Migration
             $table->string('Masa_kerja')->nullable();
             $table->string('Gaji_akhir')->nullable();
             $table->string('Potongan')->nullable();
+            $table->string('status_admin')->nullable();
+            $table->string('status_penerima')->nullable();
+            $table->string('penyesuaian')->nullable();
             $table->timestamps();
         });
     }

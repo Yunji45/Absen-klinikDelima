@@ -22,6 +22,9 @@
                   <i class="fa fa-download">
                       Excel</i>
               </a>
+              <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item" style="font-size:16px; font-weight:bold;">Total Gaji : {{'Rp.' . number_format(floatval($total), 0, ',', '.')}}</a></div>
+              </div>
           </div>
 
 
