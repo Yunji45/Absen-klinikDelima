@@ -60,8 +60,11 @@
                           <th scope="col" class="text-center">THP</th>
                           <th scope="col" class="text-center">(80%)</th>
                           <th scope="col" class="text-center">(20%)</th>
+                          <th scope="col" class="text-center">Penyesuaian</th>
                           <th scope="col" class="text-center">Tambahan</th>
                           <th scope="col" class="text-center">Potongan</th>
+                          <th scope="col" class="text-center">Invoices Transfer</th>
+                          <th scope="col" class="text-center">Invoices Penerima</th>
                           <th scope="col" class="text-center">Date</th>
                           <th scope="col" class="text-center">Action</th>
                         </tr>
@@ -75,23 +78,48 @@
                           <td class="text-center">{{$item->pendidikan}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Gaji_akhir), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->UMR->Rp}}</td>
-                          <td class="text-center">{{$item->Masa_kerja}}</td>
+                          <td class="text-center">{{$item->user->detailpegawai->length_of_service}}</td>
                           <td class="text-center">{{$item->index}}%</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->THP), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Gaji), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Ach), 0, ',', '.')}}</td>
+                          <td class="text-center">{{$item->penyesuaian}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Bonus ?? '0'), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Potongan ?? '0'), 0, ',', '.')}}</td>
+                          <td class="text-center">
+                            <a
+                                href="{{ $item->status_admin == 'completed' ? '#' : '/Payroll-confirm/' . $item->id }}"
+                                onclick="return @if ($item->status_admin == 'completed') confirm('Sudah completed Mas/Mba !!') @else true @endif"
+                                class="btn btn-sm @if ($item->status_admin == 'completed') bg-primary @else btn-danger @endif">
+                                @if ($item->status_admin == 'completed')
+                                <strong style="color: white;">completed</strong>
+                                @else
+                                <strong>Pending</strong>
+                                @endif
+                            </a>
+                          </td>
+                          <td class="text-center">
+                            <a
+                                href="{{ $item->status_penerima == 'success' ? '#' : '/Payroll-confirm-penerima/' . $item->id }}"
+                                onclick="return @if ($item->status_penerima == 'success') confirm('Sudah Success Mas/Mba !!') @else true @endif"
+                                class="btn btn-sm @if ($item->status_penerima == 'success') bg-warning @else btn-danger @endif">
+                                @if ($item->status_penerima == 'success')
+                                <strong style="color: white;">success</strong>
+                                @else
+                                <strong>Pending</strong>
+                                @endif
+                            </a>
+                          </td>
                           <td class="text-center">{{$item->bulan}}</td>
                           <td>
                             <a href="{{route('gaji.edit',$item->id)}}" 
                             onclick="return confirm('Yakin akan edit data ?')" 
-                            class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                            class="btn btn-success btn-sm"><i class="fas fa-edit"></i>Edit</a>
                             <a href="{{route('gaji.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
-                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                        </td>                        
-                    </tr>
+                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Hapus</a>
+                          </td>                        
+                        </tr>
                         @endforeach
                       </table>
                     </div>

@@ -22,6 +22,9 @@ class gajian extends Model
         'Masa_kerja',
         'Gaji_akhir',
         'Potongan',
+        'status_admin',
+        'status_penerima',
+        'penyesuaian',
     ];
 
     public function user()

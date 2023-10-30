@@ -162,6 +162,9 @@ class PenggajianController extends Controller
         }        
         $gaji->Potongan = $request->Potongan;
         $gaji->Bonus = $request->Bonus;
+        $gaji->penyesuaian = 0;
+        $gaji->status_admin = 'Pending';
+        $gaji->status_penerima = 'Pending';
         
         $gaji->save();
         // return $gaji;
@@ -278,6 +281,9 @@ class PenggajianController extends Controller
         }        
         $gaji->Potongan = $request->Potongan;
         $gaji->Bonus = $request->Bonus;
+        $gaji->status_admin = 'Pending';
+        $gaji->status_penerima = 'Pending';
+        $gaji->penyesuaian =0;
         
         $gaji->save();
         // return $gaji;
@@ -305,7 +311,30 @@ class PenggajianController extends Controller
             return redirect()->back()->with('error','Data Gagal Untuk Di Hapus.');
         }
     }
+    
+    public function ConfirmTransfer(Request $request ,$id)
+    {
+        $gaji = gajian::find($id);
+        if($gaji->status_admin == 'Pending'){
+            $gaji->update(['status_admin' => 'completed']);
+            return redirect()->back()->with('success','Transfer Berhasil Dilakukan');
+        }else{
+            return redirect()->back()->with('error','Transfer Gagal Untuk Dilakukan.');
+        }
+    }
+    
+    public function ConfirmPenerima(Request $request,$id)
+    {
+        $gaji = gajian::find($id);
+        if($gaji->status_penerima == 'Pending'){
+            $gaji->update(['status_penerima' => 'success']);
+            return redirect()->back()->with('success','Transfer Berhasil Dikonfirmasi');
+        }else{
+            return redirect()->back()->with('error','Transfer Gagal Untuk Dikonfirmasi.');
+        }
+    }
 
+    //zona UMR
     public function indexUMR()
     {
         $title = 'Setting UMR';
