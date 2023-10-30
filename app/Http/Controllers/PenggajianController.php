@@ -100,6 +100,7 @@ class PenggajianController extends Controller
             'umr_id' => 'required',
             'Masa_kerja' => 'required',
             'Potongan' => 'numeric',
+            'penyesuaian' => 'required',
             'index' => 'required'
         ]);
         $bulanYangDicari = $request->bulan; 
@@ -111,27 +112,6 @@ class PenggajianController extends Controller
         $gaji->bulan = $tanggalBulan;
         $gaji->pendidikan = $request->pendidikan;
         $gaji->index = $request->index;
-        // if ($request->pendidikan == 'Dokter'){
-        //     $gaji->index = 300;
-        // }elseif ($request->pendidikan == 'S1 Profesi'){
-        //     $gaji->index = 180;
-        // }elseif($request->pendidikan == 'S1 Kesehatan Non Profesi'){
-        //     $gaji->index = 170;
-        // }elseif($request->pendidikan == 'S1 Non Kesehatan'){
-        //     $gaji->index = 150;
-        // }elseif($request->pendidikan == 'D3 Kesehatan'){
-        //     $gaji->index = 140;
-        // }elseif($request->pendidikan == 'D3 Non Kesehatan'){
-        //     $gaji->index = 130;
-        // }elseif($request->pendidikan == 'SMK Kesehatan'){
-        //     $gaji->index= 110;
-        // }elseif($request->pendidikan == 'SLTA Non Kesehatan'){
-        //     $gaji->index = 100;
-        // }elseif($request->pendidikan == 'Dibawah SLTA'){
-        //     $gaji->index = 90;
-        // }else{
-        //     $gaji->index =null;
-        // }
 
         $gaji->umr_id = $request->umr_id;
         // Mengambil nilai UMK berdasarkan umr_id
@@ -149,22 +129,30 @@ class PenggajianController extends Controller
         $insentif = ($thp * 20) / 100;
         $gaji->Ach = $insentif;
         $gaji->Masa_kerja = $request->Masa_kerja;
-        
+
+        $gaji->Potongan = $request->Potongan;
+        $gaji->Bonus = $request->Bonus;
+        $gaji->penyesuaian = $request->penyesuaian;
+        $gaji->status_admin = 'Pending';
+        $gaji->status_penerima = 'Pending';
+
         if ($request->Masa_kerja == 1) {
             $total_potongan_bonus = $request->Potongan - $request->Bonus;
-            $gaji->Gaji_akhir = $gaji_80 - $total_potongan_bonus;
+            $gaji_akhir = $gaji_80 - $total_potongan_bonus + $request->penyesuaian;
+            $gaji->Gaji_akhir = max($gaji_akhir, 0);
         } elseif ($request->Masa_kerja == 0) {
             $masa = $gaji_80 * 0.8;
             $total_potongan_bonus = $request->Potongan - $request->Bonus;
-            $gaji->Gaji_akhir = $masa - $total_potongan_bonus;
+            $gaji_akhir = $masa - $total_potongan_bonus + $request->penyesuaian;
+            $gaji->Gaji_akhir = max($gaji_akhir, 0);
         } else {
             $gaji->Gaji_akhir = null;
         }        
-        $gaji->Potongan = $request->Potongan;
-        $gaji->Bonus = $request->Bonus;
-        $gaji->penyesuaian = 0;
-        $gaji->status_admin = 'Pending';
-        $gaji->status_penerima = 'Pending';
+        // $gaji->Potongan = $request->Potongan;
+        // $gaji->Bonus = $request->Bonus;
+        // $gaji->penyesuaian = 0;
+        // $gaji->status_admin = 'Pending';
+        // $gaji->status_penerima = 'Pending';
         
         $gaji->save();
         // return $gaji;
@@ -220,27 +208,6 @@ class PenggajianController extends Controller
         $gaji->bulan = $tanggalBulan;
         $gaji->pendidikan = $request->pendidikan;
         $gaji->index = $request->index;
-        // if ($request->pendidikan == 'Dokter'){
-        //     $gaji->index = 300;
-        // }elseif ($request->pendidikan == 'S1 Profesi'){
-        //     $gaji->index = 180;
-        // }elseif($request->pendidikan == 'S1 Kesehatan Non Profesi'){
-        //     $gaji->index = 170;
-        // }elseif($request->pendidikan == 'S1 Non Kesehatan'){
-        //     $gaji->index = 150;
-        // }elseif($request->pendidikan == 'D3 Kesehatan'){
-        //     $gaji->index = 140;
-        // }elseif($request->pendidikan == 'D3 Non Kesehatan'){
-        //     $gaji->index = 130;
-        // }elseif($request->pendidikan == 'SMK Kesehatan'){
-        //     $gaji->index= 110;
-        // }elseif($request->pendidikan == 'SLTA Non Kesehatan'){
-        //     $gaji->index = 100;
-        // }elseif($request->pendidikan == 'Dibawah SLTA'){
-        //     $gaji->index = 90;
-        // }else{
-        //     $gaji->index =null;
-        // }
 
         $gaji->umr_id = $request->umr_id;
         // $gaji->index = $request->index;
@@ -269,21 +236,31 @@ class PenggajianController extends Controller
         // } else {
         //     $gaji->Gaji_akhir = null;
         // }
-        if ($request->Masa_kerja == 1) {
-            $total_potongan_bonus = $request->Potongan - $request->Bonus;
-            $gaji->Gaji_akhir = $gaji_80 - $total_potongan_bonus;
-        } elseif ($request->Masa_kerja == 0) {
-            $masa = $gaji_80 * 0.8;
-            $total_potongan_bonus = $request->Potongan - $request->Bonus;
-            $gaji->Gaji_akhir = $masa - $total_potongan_bonus;
-        } else {
-            $gaji->Gaji_akhir = null;
-        }        
         $gaji->Potongan = $request->Potongan;
         $gaji->Bonus = $request->Bonus;
         $gaji->status_admin = 'Pending';
         $gaji->status_penerima = 'Pending';
-        $gaji->penyesuaian =0;
+        $gaji->penyesuaian = $request->penyesuaian;
+
+        if ($request->Masa_kerja == 1) {
+            $total_potongan_bonus = $request->Potongan - $request->Bonus;
+            $gaji_akhir = $gaji_80 - $total_potongan_bonus + $request->penyesuaian;
+            $gaji->Gaji_akhir = max($gaji_akhir, 0);
+
+        } elseif ($request->Masa_kerja == 0) {
+            $masa = $gaji_80 * 0.8;
+            $total_potongan_bonus = $request->Potongan - $request->Bonus;
+            $gaji_akhir = $masa - $total_potongan_bonus + $request->penyesuaian;
+            $gaji->Gaji_akhir = max($gaji_akhir, 0);
+            
+        } else {
+            $gaji->Gaji_akhir = null;
+        }        
+        // $gaji->Potongan = $request->Potongan;
+        // $gaji->Bonus = $request->Bonus;
+        // $gaji->status_admin = 'Pending';
+        // $gaji->status_penerima = 'Pending';
+        // $gaji->penyesuaian =0;
         
         $gaji->save();
         // return $gaji;

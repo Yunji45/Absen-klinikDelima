@@ -119,6 +119,13 @@
                                 @error('Masa_kerja') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        <div class="form-group row" id="penyesuaian">
+                            <label for="Potongan" class="col-form-label col-sm-3">Penyesuaian</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="penyesuaian" id="penyesuaian" class="form-control @error('penyesuaian') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada penyesuaian" required>
+                                @error('penyesuaian') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                         <div class="form-group row" id="Potongan">
                             <label for="Potongan" class="col-form-label col-sm-3">Potongan</label>
                             <div class="col-sm-9">

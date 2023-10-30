@@ -10,10 +10,18 @@
             </div>
           </div>
           <div class="section-header">
-              <a href="{{route('gaji.create')}}" class="btn btn-primary">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-plus"></i> Add
+              </button>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="{{ route('gaji.create') }}">Add Normal</a>
+                  <a class="dropdown-item" href="#">Add Instan</a>
+              </div>
+
+              <!-- <a href="{{route('gaji.create')}}" class="btn btn-primary">
                   <i class="fa fa-plus">
                       Add</i>
-              </a>
+              </a> -->
               <a href="" class="btn btn-danger">
                   <i class="fa fa-download">
                       PDF</i>
@@ -56,7 +64,8 @@
                           <th scope="col" class="text-center">Gaji</th>
                           <th scope="col" class="text-center">UMR</th>
                           <th scope="col" class="text-center">Masa Kerja</th>
-                          <th scope="col" class="text-center">Indexs</th>
+                          <th scope="col" class="text-center">Index Kerja</th>
+                          <th scope="col" class="text-center">Presentase</th>
                           <th scope="col" class="text-center">THP</th>
                           <th scope="col" class="text-center">(80%)</th>
                           <th scope="col" class="text-center">(20%)</th>
@@ -79,11 +88,12 @@
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Gaji_akhir), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->UMR->Rp}}</td>
                           <td class="text-center">{{$item->user->detailpegawai->length_of_service ?? 0}}</td>
+                          <td class="text-center">{{$item->Masa_kerja}}</td>
                           <td class="text-center">{{$item->index}}%</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->THP), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Gaji), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Ach), 0, ',', '.')}}</td>
-                          <td class="text-center">{{$item->penyesuaian}}</td>
+                          <td class="text-center">{{'Rp.' . number_format(floatval($item->penyesuaian), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Bonus ?? '0'), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Potongan ?? '0'), 0, ',', '.')}}</td>
                           <td class="text-center">
