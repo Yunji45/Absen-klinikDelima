@@ -78,7 +78,7 @@
                           <td class="text-center">{{$item->pendidikan}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Gaji_akhir), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->UMR->Rp}}</td>
-                          <td class="text-center">{{$item->user->detailpegawai->length_of_service}}</td>
+                          <td class="text-center">{{$item->user->detailpegawai->length_of_service ?? 0}}</td>
                           <td class="text-center">{{$item->index}}%</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->THP), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->Gaji), 0, ',', '.')}}</td>
@@ -90,7 +90,7 @@
                             <a
                                 href="{{ $item->status_admin == 'completed' ? '#' : '/Payroll-confirm/' . $item->id }}"
                                 onclick="return @if ($item->status_admin == 'completed') confirm('Sudah completed Mas/Mba !!') @else true @endif"
-                                class="btn btn-sm @if ($item->status_admin == 'completed') bg-primary @else btn-danger @endif">
+                                class="btn btn-sm @if ($item->status_admin == 'completed') bg-primary @else btn-info @endif">
                                 @if ($item->status_admin == 'completed')
                                 <strong style="color: white;">completed</strong>
                                 @else
