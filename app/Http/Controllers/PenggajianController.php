@@ -500,7 +500,7 @@ class PenggajianController extends Controller
                         ->whereMonth('bulan', $bulan)
                         ->first();    
                         // return $gaji;
-        return view ('frontend.users.gaji.index',compact('title','gaji'));
+        return view ('frontend.users.gaji.gaji',compact('title','gaji'));
     }
 
     //zona UMR
