@@ -15,7 +15,7 @@
               </button>
               <div class="dropdown-menu">
                   <a class="dropdown-item" href="{{ route('gaji.create') }}">Add Normal</a>
-                  <a class="dropdown-item" href="#">Add Instan</a>
+                  <a class="dropdown-item" href="{{route('multiple.gaji.create')}}">Add Multiple</a>
               </div>
 
               <!-- <a href="{{route('gaji.create')}}" class="btn btn-primary">
