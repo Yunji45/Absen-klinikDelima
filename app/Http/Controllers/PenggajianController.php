@@ -423,8 +423,8 @@ class PenggajianController extends Controller
         $tahun = date('Y');
         $tanggalBulan = $tahun . '-' . $selectedBulan . '-01';
 
-        $startDate = '2023-10-01';
-        $endDate = '2023-10-31';
+        $startDate = '2023-11-01';
+        $endDate = '2023-11-31';
 
         foreach ($selectedUsers as $usersId) {
             $tempData = gajian::where('user_id', $usersId)
