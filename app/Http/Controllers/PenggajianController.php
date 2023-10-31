@@ -500,6 +500,9 @@ class PenggajianController extends Controller
                         ->whereMonth('bulan', $bulan)
                         ->first();    
                         // return $gaji;
+        if(!$gaji){
+            return redirect()->back()->with('error','Mohon maaf, Slip Gaji Anda pada periode sekarang belum ada.');
+        }
         return view ('frontend.users.gaji.gaji',compact('title','gaji'));
     }
 
