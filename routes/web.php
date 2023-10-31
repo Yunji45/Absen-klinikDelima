@@ -132,7 +132,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         Route::post('/index-gaji-update/{id}',[PenggajianController::class,'update'])->name('gaji.update');
         Route::get('/Payroll-search',[PenggajianController::class,'SearchPayroll'])->name('gaji.search');
         Route::get('/Payroll-confirm/{id}',[PenggajianController::class,'ConfirmTransfer'])->name('gaji.confirm.transfer');
-        Route::get('/Payroll-confirm-penerima/{id}',[PenggajianController::class,'ConfirmPenerima'])->name('gaji.confirm.penerima');
+        // Route::get('/Payroll-confirm-penerima/{id}',[PenggajianController::class,'ConfirmPenerima'])->name('gaji.confirm.penerima');
         Route::get('/Payroll-multiple',[PenggajianController::class,'CreateMultipleGaji'])->name('multiple.gaji.create');
         Route::post('/Payroll-save/multiple',[PenggajianController::class,'StoreMultipleGaji'])->name('multiple.gaji.save');
         //UMR 
@@ -187,6 +187,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         //rubah-jadwal
         Route::get('/permohonan-jadwal',[RubahjadwalController::class,'index'])->name('permohonan.jadwal.user');
         Route::post('/permohonan-save',[RubahjadwalController::class,'store'])->name('permohonan.save');
+
+        Route::get('/Gaji-pegawai',[PenggajianController::class,'IndexGajiPegawai'])->name('gaji.pegawai');
     });
 
     // ATUR IP ADDRESS DISINI
@@ -218,7 +220,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
     Route::get('/download-jadwal',[JadwalshiftController::class,'jadwaldownload'])->name('download.jadwal');
     Route::get('/jadwal-shift-karyawan',[JadwalshiftController::class,'indexUser'])->name('jadwal.user');
     Route::get('/cari-jadwal-user', [JadwalshiftController::class,'cariJadwal'])->name('cari.jadwal.user');
-
+    //gaji penerima 
+    Route::get('/Payroll-confirm-penerima/{id}',[PenggajianController::class,'ConfirmPenerima'])->name('gaji.confirm.penerima');
     //HelpIT
     Route::get('/help-IT', [HelpITController::class,'index'])->name('help-IT');
 

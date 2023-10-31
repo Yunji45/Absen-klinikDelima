@@ -487,6 +487,21 @@ class PenggajianController extends Controller
         return redirect()->back()->with('success', 'Data Gaji Pegawai Berhasil Disimpan.');
     }
 
+    //zona pegawai
+    public function IndexGajiPegawai()
+    {
+        $title = 'Gaji Karyawan';
+        $bulan = date('m');
+        $tahun = date('Y');
+        $user = Auth::user()->id;
+        // $gaji = gajian::all();
+        $gaji = gajian::where('user_id',$user)
+                        ->whereYear('bulan', $tahun)
+                        ->whereMonth('bulan', $bulan)
+                        ->first();    
+                        // return $gaji;
+        return view ('frontend.users.gaji.index',compact('title','gaji'));
+    }
 
     //zona UMR
     public function indexUMR()

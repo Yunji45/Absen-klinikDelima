@@ -176,6 +176,11 @@
                                 <a class="dropdown-item" href="{{ route('permohonan.jadwal.user') }}">Rubah Jadwal</a>
                             </div>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('gaji.pegawai')}}" >
+                                <i class="fa fa-credit-card text-danger"></i>Gaji
+                            </a>
+                        </li>
                     @endif
 
 
