@@ -45,7 +45,7 @@
                                 <tr>
                                     <td>{{$gaji->user->name}}</td>
                                     <td>{{$gaji->pendidikan}}</td>
-                                    <td>{{$gaji->user->detailpegawai->length_of_service}}</td>
+                                    <td>{{$gaji->user->detailpegawai->length_of_service ?? 0}}</td>
                                     <td >{{'Rp.' . number_format(floatval($gaji->Gaji_akhir ?? '0'), 0, ',', '.')}}</td>
                                     <td>
                                         <a
