@@ -54,14 +54,14 @@ Route::post('/act-login', [AuthController::class,'login'])->name('auth.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 Route::get('/home',[HomeController::class,'index'])->name('home');
 
-Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(){
+Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,evaluator']], function(){
     Route::get('/ganti-password', [UserController::class,'gantipassword'])->name('ganti-password');
     Route::patch('/update-password/{user}', [UserController::class,'updatePassword'])->name('update-password');
     Route::get('/profil',[UserController::class,'profil'])->name('profil');
     Route::patch('/update-profil/{user}', [UserController::class,'updateProfil'])->name('update-profil');
     
     //role admin
-    Route::group(['roles' => 'admin'], function(){
+    Route::group(['roles' => 'admin,hrd,keuangan,evaluator'], function(){
         //Dok API
         Route::get('/Dokumentasi-API',[DokumentasiController::class,'index'])->name('dok.api');
         //Dashboard
@@ -148,6 +148,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai']], function(
         //Target KPI
         Route::get('/TargetKPI',[TargetKPIController::class,'index'])->name('target.kpi');
         Route::get('/TargetKPI/create',[TargetKPIController::class,'create'])->name('target.kpi.create');
+        Route::get('/TargetKPI/edit/{id}',[TargetKPIController::class,'edit'])->name('target.kpi.edit');
+        Route::post('/TargetKPI/update/{id}',[TargetKPIController::class,'update'])->name('target.kpi.update');
         Route::post('/TargetKPI/save',[TargetKPIController::class,'store'])->name('target.kpi.save');
         Route::get('/TargetKPI/delete/{id}',[TargetKPIController::class,'destroy'])->name('target.kpi.delete');
         //KPI

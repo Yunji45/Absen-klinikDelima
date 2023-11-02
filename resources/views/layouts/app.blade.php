@@ -178,10 +178,43 @@
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="{{route('gaji.pegawai')}}" >
-                                <i class="fa fa-credit-card text-danger"></i>Gaji
+                                <i class="fa fa-credit-card text-danger"></i>Slip Gaji
                             </a>
                         </li>
                     @endif
+                    @if(auth()->user()->role == 'keuangan')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="konfirmasiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ni ni-credit-card text-success"></i> Salary Pegawai
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="konfirmasiDropdown">
+                                <a class="dropdown-item" href="{{ route('gaji.adm') }}">Gaji</a>
+                                <a class="dropdown-item" href="{{route('gaji.indexUMR')}}">Setup UMR</a>
+                                <a class="dropdown-item" href="{{route('kpi.index')}}">Insentif</a>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('gaji.pegawai')}}" >
+                                <i class="fa fa-credit-card text-danger"></i>Slip Gaji
+                            </a>
+                        </li>
+
+                    @endif
+                    @if(auth()->user()->role == 'evaluator')
+                    <li class="nav-item ">
+                            <a class="nav-link" href="{{route('target.kpi')}}" >
+                                <i class="fa fa-suitcase text-success"></i> Evaluasi Karwayan
+                            </a>
+                    </li>
+                    <li class="nav-item ">
+                            <a class="nav-link" href="{{route('gaji.pegawai')}}" >
+                                <i class="fa fa-credit-card text-danger"></i>Slip Gaji
+                            </a>
+                        </li>
+
+
+                    @endif
+
 
 
                     @if (Request::segment(1) == 'profil')

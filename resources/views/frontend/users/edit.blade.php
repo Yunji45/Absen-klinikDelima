@@ -64,6 +64,9 @@ Ubah User - Klinik Mitra Delima
                                     <option value="">Pilih</option>
                                     <option value="admin" {{ old('role',$user->role_id) == 1 ? 'selected' : '' }}>Admin</option>
                                     <option value="pegawai" {{ old('role',$user->role_id) == 2 ? 'selected' : '' }}>Pegawai</option>
+                                    <option value="evaluator" {{ old('role',$user->role_id) == 1 ? 'selected' : '' }}>Evaluator</option>
+                                    <option value="hrd" {{ old('role',$user->role_id) == 2 ? 'selected' : '' }}>HRD</option>
+                                    <option value="keuangan" {{ old('role',$user->role_id) == 1 ? 'selected' : '' }}>Keuangan</option>
                                 </select>
                                 @error('role') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>

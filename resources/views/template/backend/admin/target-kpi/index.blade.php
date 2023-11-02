@@ -64,10 +64,14 @@
                           <td class="text-center">{{$item->umum}}</td>
                           <td class="text-center">{{$item->visit}}</td>
                           <td>
+                          <a href="{{route('target.kpi.edit',$item->id)}}" 
+                            onclick="return confirm('Yakin akan edit Data ?')" 
+                            class="btn btn-success btn-sm"><i class="fas fa-edit"></i>Edit</a>
+
                             <a href="{{route('target.kpi.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
-                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                        </td>                        
+                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Hapus</a>
+                          </td>      
                     </tr>
                         @endforeach
                       </table>

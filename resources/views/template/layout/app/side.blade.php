@@ -114,6 +114,52 @@
                 </a>
             </li>
             @endif
+            @if(auth()->user()->role == 'keuangan')
+            <li class="nav-item dropdown {{ $type === 'gaji' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-money-bill"></i>
+                    <span>Salary Pegawai</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Route::currentRouteName() === 'gaji.indexUMR' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('gaji.indexUMR')}}">Setup UMR</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'setup.insentif' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('setup.insentif')}}">Setup Insentif</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'gaji.adm' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('gaji.adm')}}">Gaji</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'insentif.kpi' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('insentif.kpi')}}">Insentif</a>
+                    </li>
+                </ul>
+            </li>
+            @endif
+            @if(auth()->user()->role == 'evaluator')
+            <li class="nav-item dropdown {{ $type === 'kpi' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-handshake"></i>
+                    <span>KPI</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- <li>
+                        <a class="nav-link" href="{{route('coba')}}">Coba Input Multiple User</a>
+                    </li> -->
+
+                    <li class="{{ Route::currentRouteName() === 'target.kpi' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('target.kpi')}}">Target KPI</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'kpi.datakinerja' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('kpi.datakinerja')}}">Realisasi KPI</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'kpi.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('kpi.index')}}">Evaluasi Kinerja KPI</a>
+                    </li>
+                </ul>
+            </li>
+            @endif
+
             <li class="menu-header">HELP IT</li>
             <li>
                 <a class="nav-link" href="{{route('dok.api')}}">

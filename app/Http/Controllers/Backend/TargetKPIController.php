@@ -139,7 +139,11 @@ class TargetKPIController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Target KPI';
+        $type = 'kpi';
+        $target = AchKpi::find($id);
+        $user = User::all();
+        return view('template.backend.admin.target-kpi.edit',compact('title','target','user','type'));
     }
 
     /**
@@ -151,7 +155,41 @@ class TargetKPIController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $newStartDate = $request->start_date;
+        // $newEndDate = $request->end_date;
+        // // Memeriksa apakah periode sudah digunakan sebelumnya
+        // $existingTarget = AchKpi::where(function ($query) use ($newStartDate, $newEndDate) {
+        //     $query->where('start_date', '<=', $newEndDate)
+        //         ->where('end_date', '>=', $newStartDate);
+        // })->first();
+        // if ($existingTarget) {
+        //     return redirect()->back()->with('error', 'Periode tanggal dan tahun ini sudah digunakan sebelumnya.');
+        // }
+
+        $target = AchKpi::find($id);
+        $target -> name = $request->name;
+        $target -> start_date = $request->start_date;
+        $target -> end_date = $request->end_date;
+        $target -> daftar = $request->daftar;
+        $target -> poli = $request->poli;
+        $target -> farmasi = $request->farmasi;
+        $target -> kasir = $request->kasir;
+        $target -> care = $request->care;
+        $target -> bpjs = $request->bpjs;
+        $target -> khitan = $request->khitan;
+        $target -> rawat = $request->rawat;
+        $target -> salin = $request->salin;
+        $target -> lab = $request->lab;
+        $target -> umum = $request->visit;
+        $target -> visit = $request->visit;
+        $target -> tambah1 = null;
+        $target -> tambah2 = null;
+        $target -> tambah3 = null;
+        $target -> tambah4 = null;
+        $target -> tambah5 = null;
+        $target -> save();
+        // return $target;
+        return redirect('/TargetKPI')->with('success','Data Target Berhasil Diupdate.');
     }
 
     /**
