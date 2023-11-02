@@ -82,8 +82,11 @@
                                     <td class="text-center">{{$item->c_visit}}</td>
                                     <td class="text-center">{{$item->bulan}}</td>
                                     <td>
+                                    <a href="{{route('kpi.form.edit',$item->id)}}" onclick="return confirm('Yakin akan edit Data?')" class="btn btn-success btn-sm">
+                                            <i class="fas fa-edit"> Edit</i>
+                                        </a>
                                     <a href="{{route('kpi.form.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash-alt"> Delete</i>
+                                            <i class="fas fa-trash-alt"> Hapus</i>
                                         </a>
 
                                     </td>

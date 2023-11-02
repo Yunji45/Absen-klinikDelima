@@ -473,6 +473,101 @@ class KpiController extends Controller
         }
     }
 
+    public function editTarget($id)
+    {
+        $title = 'Realiasasi Kinerja KPI';
+        $type = 'kpi';
+        $ach = AchKpi::all();
+        $realisasi = targetkpi::find($id);
+        $targetId = $ach->where('id', $realisasi->target_id)->pluck('name')->first();
+        $user = User::all();
+        // Mendapatkan bulan dan tahun saat ini
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+        $startDate = $currentYear . '-' . $currentMonth . '-01';
+        $endDate = $currentYear . '-' . $currentMonth . '-31';
+
+        $target = AchKpi::where(function ($query) use ($startDate, $endDate) {
+            $query->where('start_date', '<=', $endDate)
+                ->where('end_date', '>=', $startDate);
+        })
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+        ->first();
+        if (!$target){
+            return redirect('/TargetKPI')->with('error','Data Target Belum Ada');
+        }
+        return view('template.backend.admin.data-kpi.edit',compact('title','user','ach','target','type','realisasi','targetId'));
+
+    }
+
+    public function updateTarget(Request $request ,$id)
+    {
+        $selectedUsers = $request->user_id;
+        $targetId = $request->target_id;
+        $startDate = $request->bulan;
+        $endDate = $request->bulan;
+        $targetData = AchKpi::where(function ($query) use ($startDate, $endDate) {
+            $query->where('start_date', '<=', $endDate)
+                ->where('end_date', '>=', $startDate);
+        })
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+        ->first();
+        if ($targetData) {
+            $realisasi = targetkpi::find($id);
+            $realisasi -> user_id = $selectedUsers;
+            $realisasi -> target_id = $targetId;
+            $realisasi -> bulan = $request->bulan;
+            $realisasi -> r_daftar = $request->r_daftar;
+            $realisasi -> r_poli = $request->r_poli;
+            $realisasi -> r_farmasi = $request->r_farmasi;
+            $realisasi -> r_kasir = $request->r_kasir;
+            $realisasi -> r_care = $request->r_care;
+            $realisasi -> r_khitan = $request->r_khitan;
+            $realisasi -> r_rawat = $request->r_rawat;
+            $realisasi -> r_salin = $request->r_salin;
+            $realisasi -> r_lab = $request->r_lab;
+            $realisasi -> r_bpjs = $request->r_bpjs;
+            $realisasi -> r_umum = $request->r_umum;
+            $realisasi -> r_visit = $request->r_visit;
+
+            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit'];
+
+            foreach ($columns as $column) {
+                $r_column = 'r_' . $column;
+                $c_column = 'c_' . $column;
+
+                if ($request->$r_column === null) {
+                    $realisasi->$r_column = 0;
+                    $realisasi->$c_column = 0;
+                } elseif ($targetData->$column != 0) {
+                    $total = $request->$r_column / $targetData->$column;
+                    if ($total > 1) {
+                        $realisasi->$c_column = 3; // Melebihi target
+                    } elseif ($total == 1) {
+                        $realisasi->$c_column = 2; // Tepat sesuai target
+                    } elseif ($total < 1) {
+                        $realisasi->$c_column = 1; // Kurang dari target
+                    } elseif ($total >= 0) {
+                        $realisasi->$c_column = 0; // Nilai non-negatif
+                    } else {
+                        // Handling untuk kasus lain (opsional)
+                    }
+                } else {
+                    $realisasi->$c_column = 0;
+                }
+            }
+
+
+            $realisasi->save();
+
+            return redirect('/KPI/Data-Kinerja')->with('success','Terimakasih , Data Realiasasi Berhasil Diupdate.');
+        } else {
+            //handle request jika $targetData tidak ditemukan
+            return redirect()->back()->with('error', 'Data Target Pada Periode Tersebut Tidak Ditemukan.');
+        }
+
+    }
+
     public function hapusTargetKpi($id)
     {
         $delete = targetkpi::find($id);
