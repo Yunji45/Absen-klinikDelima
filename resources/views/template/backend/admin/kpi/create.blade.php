@@ -89,7 +89,7 @@
                       </div>
                       <label for="div" class="col-form-label col-sm-3">Jumlah Ceklist</label>
                       <div class="col-sm-8" >
-                      <input type="number" name="target" id="target" class="form-control @error('target') is-invalid @enderror">
+                      <input type="number" name="target" id="target" class="form-control @error('target') is-invalid @enderror" placeholder="jangan di isi. biarkan saja !!">
                           @error('target')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror

@@ -49,7 +49,7 @@
                       <table class="table table-bordered table-dark">
                       <caption>Data Pendapatan Klinik</caption>
                       <tr>
-                          <th scope="col" class="text-center">Omset Bulan Ini :</th>
+                          <th scope="col" class="text-center">Omset Bulan Lalu :</th>
                           <th scope="col" class="text-center">Skor Klinik Bulan Ini :</th>
                         </tr>
                         <tr>
@@ -58,7 +58,7 @@
                         </tr>
                         <tr>
                           <th scope="col" class="text-center">Total Uang Yang Dibagikan :</th>
-                          <th scope="col" class="text-center">Index Rupiah Bulan ini :</th>
+                          <th scope="col" class="text-center">Index Rupiah Bulan Lalu :</th>
                         </tr>
                         <tr>
                             <td scope="col" class="text-center bg-warning">{{'Rp.' . number_format(floatval($poin->total_insentif), 0, ',', '.')}}</td>
