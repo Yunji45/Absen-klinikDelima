@@ -22,6 +22,7 @@ class JadwalshiftController extends Controller
     {
         $title = 'Jadwal Shift';
         // $data = jadwal::all();
+        $type = 'jadwal';
         $user = User::all();
         $bulan = date('m');
         $tahun = date('Y');
@@ -50,7 +51,7 @@ class JadwalshiftController extends Controller
                         }
                     }
         // return $user;        
-        return view ('backend.admin.jadwalshift.index',compact('title','data','user','bulan','tahun','backgroundClass','permohonan'));
+        return view ('template.backend.admin.jadwal.index',compact('title','data','user','bulan','tahun','backgroundClass','permohonan','type'));
     }
 
     public function indexUser()
@@ -258,13 +259,14 @@ class JadwalshiftController extends Controller
     public function cari(Request $request)
     {
         $title = 'Jadwal Shift';
+        $type= 'jadwal';
         $user = User::all();
         $bulan = $request->input('bulan');
         $data = jadwalterbaru::where('masa_aktif', '>=', $bulan . '-01')
                         ->where('masa_akhir', '<=', $bulan . '-31')
                         ->get();
                 
-        return view ('backend.admin.jadwalshift.index',compact('data','title','user'));
+        return view ('template.backend.admin.jadwal.index',compact('data','title','user','type'));
     }
 
     public function cariJadwal(Request $request)

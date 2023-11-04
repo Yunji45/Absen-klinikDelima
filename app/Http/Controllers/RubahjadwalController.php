@@ -157,11 +157,12 @@ class RubahjadwalController extends Controller
     public function indexAdmin()
     {
         $title = 'Permohonan Jadwal';
+        $type = 'jadwal';
         $user = User::all();
         $permohonan = rubahjadwal::whereIn('status', ['pengajuan', 'approve'])
         ->orderBy('created_at', 'desc') 
         ->get();
-        return view ('backend.admin.permohonan.index',compact('title','permohonan','user'));
+        return view ('template.backend.admin.permohonan.index',compact('title','permohonan','user','type'));
     }
 
     public function VerifPermohonan(Request $request ,$id)

@@ -35,20 +35,20 @@
                     <span>Manage User</span>
                 </a>
             </li>
-            <li class="dropdown">
+            <li class="nav-item dropdown {{ $type === 'jadwal' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-cogs"></i>
                     <span>Pengaturan Jaga</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="">Jadwal Jaga</a>
+                    <li class="{{ Route::currentRouteName() === 'jadwal.shift' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('jadwal.shift')}}">Jadwal Jaga</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="">Permohonan Izin</a>
+                    <li class="{{ Route::currentRouteName() === 'konfirmasi.izin' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('konfirmasi.izin')}}">Permohonan Izin</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="">Perubahan Jaga</a>
+                    <li class="{{ Route::currentRouteName() === 'permohonan.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('permohonan.index')}}">Perubahan Jaga</a>
                     </li>
                 </ul>
             </li>
@@ -180,7 +180,7 @@
                 href="{{route('home')}}"
                 class="btn btn-primary btn-lg btn-block btn-icon-split">
                 <i class="fas fa-rocket"></i>
-                Documentation
+                Home
             </a>
         </div>
     </aside>

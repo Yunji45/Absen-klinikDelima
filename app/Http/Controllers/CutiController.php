@@ -18,12 +18,29 @@ class CutiController extends Controller
      */
     public function index()
     {
-        $title = 'Pengajuan Cuti';
+        $title = 'Permohonan Izin';
+        $type = 'jadwal';
         $user = User::all();
-        $cuti = cuti::whereIn('status', ['pengajuan', 'approve'])
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+        $startDate = $currentYear . '-' . $currentMonth . '-01';
+        $endDate = $currentYear . '-' . $currentMonth . '-31';
+
+        $cuti = cuti::where(function ($query) use ($startDate, $endDate) {
+            $query->where('tanggal_mulai', '<=', $endDate)
+                ->where('tanggal_berakhir', '>=', $startDate);
+        })
+        ->whereIn('status', ['pengajuan', 'approve'])
         ->orderBy('created_at', 'desc') 
         ->get();
-        return view('backend.admin.izin.index',compact('title','cuti','user'));
+        // $cuti = cuti::where(function (query) use ($startDate, $endDate) {
+        //     $query->where('start_date', '<=', $endDate)
+        //     ->where('end_date', '>=', $startDate);
+        // })
+        // ->whereIn('status', ['pengajuan', 'approve'])
+        // ->orderBy('created_at', 'desc') 
+        // ->get();
+        return view('template.backend.admin.permohonan.izin.index',compact('title','cuti','user','type'));
         // return $cuti;
     }
 
