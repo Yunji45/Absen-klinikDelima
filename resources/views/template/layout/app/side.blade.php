@@ -52,14 +52,14 @@
                     </li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="nav-item dropdown {{ $type === 'detail-user' ? 'active' : '' }}"">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
                     <span>Informasi Pegawai</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="">Detail Pegawai</a>
+                    <li class="{{ Route::currentRouteName() === 'detail.pegawai.admin' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('detail.pegawai.admin')}}">Detail Pegawai</a>
                     </li>
                     <li>
                         <a class="nav-link" href="">Dokumen</a>

@@ -104,7 +104,7 @@
                                 @if ($item->status_admin == 'completed')
                                 <strong style="color: white;">completed</strong>
                                 @else
-                                <strong>Pending</strong>
+                                <strong>Process</strong>
                                 @endif
                             </a>
                           </td>
