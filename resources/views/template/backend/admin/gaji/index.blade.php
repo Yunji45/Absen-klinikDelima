@@ -135,6 +135,44 @@
                     </div>
                   </div>
                 </div>
+                <nav>
+                    <ul class="pagination justify-content-end">
+                        <!-- Tombol Sebelumnya -->
+                        @if ($gaji->onFirstPage())
+                        <li class="page-item disabled">
+                            <span class="page-link">Sebelumnya</span>
+                        </li>
+                        @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $gaji->previousPageUrl() }}">Sebelumnya</a>
+                        </li>
+                        @endif
+
+                        <!-- Tautan Halaman -->
+                        @for ($i = 1; $i <= $gaji->lastPage(); $i++)
+                            @if ($i == $gaji->currentPage())
+                            <li class="page-item active">
+                                <span class="page-link">{{ $i }}</span>
+                            </li>
+                            @else
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $gaji->url($i) }}">{{ $i }}</a>
+                            </li>
+                            @endif
+                        @endfor
+
+                        <!-- Tombol Selanjutnya -->
+                        @if ($gaji->hasMorePages())
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $gaji->nextPageUrl() }}">Selanjutnya</a>
+                        </li>
+                        @else
+                        <li class="page-item disabled">
+                            <span class="page-link">Selanjutnya</span>
+                        </li>
+                        @endif
+                    </ul>
+                </nav>
               </div>
             </div>
           </div>
