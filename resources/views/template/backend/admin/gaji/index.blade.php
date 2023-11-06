@@ -78,7 +78,7 @@
                           <th scope="col" class="text-center">Action</th>
                         </tr>
                         @php
-                        $no =1;
+                        $no =$gaji->firstItem();
                         @endphp
                         @foreach ($gaji as $item)
                         <tr>
