@@ -77,17 +77,12 @@
                             <div class="col-sm-9">
                                 <select class="form-control @error('pendidikan') is-invalid @enderror" name="index" id="index">
                                     <option value="{{$gaji->index}}">{{$gaji->index}}</option>
+                                    <option value="1000">10.0</option>
+                                    <option value="900">9.0</option>
+                                    <option value="800">8.0</option>
+                                    <option value="700">7.0</option>
+                                    <option value="600">6.0</option>
                                     <option value="500">5.0</option>
-                                    <option value="0">Batas 4.0</option>
-                                    <option value="490">4.9</option>
-                                    <option value="480">4.8</option>
-                                    <option value="470">4.7</option>
-                                    <option value="460">4.6</option>
-                                    <option value="450">4.5</option>
-                                    <option value="440">4.4</option>
-                                    <option value="430">4.3</option>
-                                    <option value="420">4.2</option>
-                                    <option value="410">4.1</option>
                                     <option value="400">4.0</option>
                                     <option value="0">Batas 3.0</option>
                                     <option value="390">3.9</option>
