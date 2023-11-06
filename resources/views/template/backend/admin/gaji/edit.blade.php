@@ -78,8 +78,29 @@
                                 <select class="form-control @error('pendidikan') is-invalid @enderror" name="index" id="index">
                                     <option value="{{$gaji->index}}">{{$gaji->index}}</option>
                                     <option value="500">5.0</option>
+                                    <option value="0">Batas 4.0</option>
+                                    <option value="490">4.9</option>
+                                    <option value="480">4.8</option>
+                                    <option value="470">4.7</option>
+                                    <option value="460">4.6</option>
+                                    <option value="450">4.5</option>
+                                    <option value="440">4.4</option>
+                                    <option value="430">4.3</option>
+                                    <option value="420">4.2</option>
+                                    <option value="410">4.1</option>
                                     <option value="400">4.0</option>
+                                    <option value="0">Batas 3.0</option>
+                                    <option value="390">3.9</option>
+                                    <option value="380">3.8</option>
+                                    <option value="370">3.7</option>
+                                    <option value="360">3.6</option>
+                                    <option value="350">3.5</option>
+                                    <option value="340">3.4</option>
+                                    <option value="330">3.3</option>
+                                    <option value="320">3.2</option>
+                                    <option value="310">3.1</option>
                                     <option value="300">3.0</option>
+                                    <option value="0">Batas 2.0</option>
                                     <option value="200">2.0</option>
                                     <option value="190">1.9</option>
                                     <option value="180">1.8</option>
@@ -90,6 +111,7 @@
                                     <option value="130">1.3</option>
                                     <option value="120">1.2</option>
                                     <option value="110">1.1</option>
+                                    <option value="0">Batas 1.0</option>
                                     <option value="100">1.0</option>
                                     <option value="90">0.9</option>
                                     <option value="80">0.8</option>
