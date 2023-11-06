@@ -245,11 +245,11 @@ class PenggajianController extends Controller
 
         if ($request->Masa_kerja == 1) {
             $total_potongan_bonus = $request->Potongan - $request->Bonus;
-            $gaji_akhir = $thp - $total_potongan_bonus + $request->penyesuaian;
+            $gaji_akhir = $gaji_80 - $total_potongan_bonus + $request->penyesuaian;
             $gaji->Gaji_akhir = max($gaji_akhir, 0);
 
         } elseif ($request->Masa_kerja == 0) {
-            $masa = $gaji_80;
+            $masa = $gaji_80 * 0.8;
             $total_potongan_bonus = $request->Potongan - $request->Bonus;
             $gaji_akhir = $masa - $total_potongan_bonus + $request->penyesuaian;
             $gaji->Gaji_akhir = max($gaji_akhir, 0);
