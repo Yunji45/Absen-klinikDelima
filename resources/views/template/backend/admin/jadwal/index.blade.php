@@ -21,14 +21,18 @@
             <i class="fa fa-download">
                 Excel</i>
         </a>
-        <div class="input-group" style="width: 200px;">
-            <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
-            <div class="input-group-append">
-            <div class="input-group-append">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-            </div>
+        <div class="section-header-breadcrumb">
+
+            <div class="input-group" style="width: 200px;">
+                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
+                <div class="input-group-append">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                </div>
             </div>
         </div>
+
     </div>
     
     <div class="section-body">
