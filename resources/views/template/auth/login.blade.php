@@ -11,6 +11,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.7/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="{{asset('auth-login/style.css')}}" />
     <title>Login - Klinik Mitra Delima</title>
+    <style>
+      .alert-success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.alert-error {
+    background-color: #f44336;
+    color: white;
+}
+
+.alert-info {
+    background-color: #2196F3;
+    color: white;
+}
+
+    </style>
   </head>
   <body>
     <div class="container">
@@ -19,6 +36,12 @@
           <form action="{{ route('auth.login') }}" method="POST" class="sign-in-form">
           @csrf
         @method('POST')
+
+        @if(session('error'))
+            <div class="alert alert-error">
+                {!! session('error') !!}
+            </div>
+        @endif
 
           <h1 class="rainbow-letters">
                                 <span>R</span>
