@@ -18,7 +18,7 @@ class AuthController extends Controller
     {
         $cek_login = $request->only('nik', 'password');
         if(Auth::attempt($cek_login)) {
-            return redirect()->intended('/home')->with('success','PERHATIAN !!! Jika Masih Ada Yang Tidak Valid Mengenai Masa Kerja ,Mohon Update Kembali Untuk Data Detail Profil Terbaru. TERIMAKASIH =)');
+            return redirect()->intended('/home')->with('success','INFORMASI PENTING !!! Perhitungan ABSEN = Absen Masuk VS Jadwal Masuk ,bukan Alpha VS Absen Masuk. TERIMAKASIH :=)');
             // $role = Auth::user()->role;
             // if ($role == 'admin'){
             //     return redirect()->intended('/dashboard');
@@ -37,6 +37,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect()->route('auth.index')->with('Success', 'Terimakasih Sudah Absen');
+        return redirect()->route('auth.index')->with('success', 'Terimakasih Sudah Absen');
     }
 }

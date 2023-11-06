@@ -140,11 +140,11 @@
                         <!-- Tombol Sebelumnya -->
                         @if ($gaji->onFirstPage())
                         <li class="page-item disabled">
-                            <span class="page-link">Sebelumnya</span>
+                            <span class="page-link"> <i class='fas fa-angle-double-left'></i> Sebelumnya</span>
                         </li>
                         @else
                         <li class="page-item">
-                            <a class="page-link" href="{{ $gaji->previousPageUrl() . '&bulan=' . $bulan }}">Sebelumnya</a>
+                            <a class="page-link" href="{{ $gaji->previousPageUrl() . '&bulan=' . $bulan }}"><i class='fas fa-angle-double-left'></i> Sebelumnya</a>
                         </li>
                         @endif
 
@@ -170,11 +170,11 @@
                         <!-- Tombol Selanjutnya -->
                         @if ($gaji->hasMorePages())
                         <li class="page-item">
-                            <a class="page-link" href="{{ $gaji->nextPageUrl() . '&bulan=' . $bulan }}">Selanjutnya</a>
+                            <a class="page-link" href="{{ $gaji->nextPageUrl() . '&bulan=' . $bulan }}">Selanjutnya <i class='fas fa-angle-double-right'></i></a>
                         </li>
                         @else
                         <li class="page-item disabled">
-                            <span class="page-link">Selanjutnya</span>
+                            <span class="page-link">Selanjutnya <i class='fas fa-angle-double-right'></i></span>
                         </li>
                         @endif
                     </ul>

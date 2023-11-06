@@ -7,6 +7,8 @@
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.7/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="{{asset('auth-login/style.css')}}" />
     <title>Login - Klinik Mitra Delima</title>
   </head>
