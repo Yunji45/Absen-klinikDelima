@@ -28,7 +28,7 @@ class PenggajianController extends Controller
         $gaji = gajian::whereYear('bulan', $tahun)
         ->whereMonth('bulan', $bulan)
         ->orderBy('created_at', 'desc')
-        ->paginate(6);    
+        ->paginate(10);    
         $total = gajian::whereYear('bulan',$tahun)->whereMonth('bulan',$bulan)->sum('Gaji_akhir');        
         $data = User::all();
         $umr = UMKaryawan::all();
@@ -46,7 +46,7 @@ class PenggajianController extends Controller
         $startDate = $bulan . '-01';
         $endDate = $bulan . '-31';
     
-        $gaji = gajian::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->paginate(6);
+        $gaji = gajian::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->paginate(10);
         $total = gajian::whereBetween('bulan',[$startDate, $endDate])->sum('Gaji_akhir');
         return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','bulan','type','total'));
 
