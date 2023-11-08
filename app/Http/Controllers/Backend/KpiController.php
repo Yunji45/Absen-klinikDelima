@@ -540,19 +540,55 @@ class KpiController extends Controller
     }
 
 
-    // Masuk Zona Target KPI
+    // Masuk Zona Realisasi KPI
     public function indexTargetKpi()
     {
         $title = 'Realisasi Kinerja KPI';
         $type = 'kpi';
-        // $target = targetkpi::all();
+
+        // $startDate = '2023-10-01';
+        // $endDate = '2023-10-31';
+        // $userIds = targetkpi::where('bulan', '>=', $startDate)
+        //     ->where('bulan', '<=', $endDate)
+        //     ->pluck('user_id');
+        // $realisasiData = [];
+        // foreach ($userIds as $userId) {
+        //     $realisasi = targetkpi::where('user_id', $userId)
+        //     ->where('bulan', '>=', $startDate)
+        //     ->where('bulan', '<=', $endDate)
+        //     ->select(
+        //         'r_daftar', 'r_poli', 'r_farmasi', 'r_kasir', 'r_care', 'r_bpjs',
+        //         'r_khitan', 'r_rawat', 'r_salin', 'r_lab', 'r_umum', 'r_visit'
+        //     )
+        //     ->first();
+        //     if ($realisasi) {
+        //         $realisasiData[] = [
+        //             'user_id' => $userId,
+        //             'r_daftar' => $realisasi->r_daftar,
+        //             'r_poli' => $realisasi->r_poli,
+        //             'r_farmasi' => $realisasi->r_farmasi,
+        //             'r_kasir' => $realisasi->r_kasir,
+        //             'r_care' => $realisasi->r_care,
+        //             'r_bpjs' => $realisasi->r_bpjs,
+        //             'r_khitan' => $realisasi->r_khitan,
+        //             'r_rawat' => $realisasi->r_rawat,
+        //             'r_salin' => $realisasi->r_salin,
+        //             'r_lab' => $realisasi->r_lab,
+        //             'r_umum' => $realisasi->r_umum,
+        //             'r_visit' => $realisasi->r_visit,
+        //         ];
+        //     }
+        // }
+        // return $realisasiData;
+        
         $bulan = date('m');
         $tahun = date('Y');
+        $ach = AchKpi::all();
         $target = targetkpi::whereYear('bulan',$tahun)
                             ->whereMonth('bulan',$bulan)
                             ->orderBy('created_at','desc')
                             ->get();
-        return view ('template.backend.admin.data-kpi.index',compact('title','target','type'));
+        return view ('template.backend.admin.data-kpi.index',compact('title','target','type','ach'));
     }
 
     public function SearchRealisasi(Request $request)
@@ -603,6 +639,123 @@ class KpiController extends Controller
 
         return view('template.backend.admin.kpi.form-target',compact('title','user','ach','target','type'));
     }
+
+    public function storeRealisasiMultiple(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'target_id' => 'required',
+            'bulan' => 'required',
+            'bulantarget' => 'required',
+        ], [
+            'target_id.required' => 'Kolom Target_id wajib diisi.',
+            // 'bulan.required' => 'Kolom bulan wajib diisi.',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+        $target_awal = $request->bulan;
+        $target_akhir = $request->bulan;
+        $startDate = $request->bulantarget;
+        $endDate = $request->bulantarget;
+        $tahun = date('Y'); 
+        $tanggalawal = $tahun . '-' . $startDate . '-01';
+        $tanggalakhir = $tahun . '-' . $endDate . '-31';
+
+        $userIds = targetkpi::where('bulan', '>=', $tanggalawal)
+            ->where('bulan', '<=', $tanggalakhir)
+            ->pluck('user_id');
+        $data = [];
+
+        $targetData = AchKpi::where(function ($query) use ($target_awal, $target_akhir) {
+            $query->where('start_date', '<=', $target_akhir)
+                  ->where('end_date', '>=', $target_awal);
+        })
+            ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+            ->first();
+
+        if ($targetData) {
+            foreach ($userIds as $user) {
+                $realisasi = targetkpi::where('user_id', $user)
+                ->where('bulan', '>=', $tanggalawal)
+                ->where('bulan', '<=', $tanggalakhir)
+                ->select(
+                    'r_daftar', 'r_poli', 'r_farmasi', 'r_kasir', 'r_care', 'r_bpjs',
+                    'r_khitan', 'r_rawat', 'r_salin', 'r_lab', 'r_umum', 'r_visit'
+                )
+                ->first();
+
+                if ($realisasi) {
+                    $rowData = [
+                        'user_id' => $user,
+                        'target_id' => $request->target_id,
+                        'bulan' => $request->bulan,
+                        'r_daftar' => $realisasi->r_daftar,
+                        'r_poli' => $realisasi->r_poli,
+                        'r_farmasi' => $realisasi->r_farmasi,
+                        'r_kasir' => $realisasi->r_kasir,
+                        'r_care' => $realisasi->r_care,
+                        'r_bpjs' => $realisasi->r_bpjs,
+                        'r_khitan' => $realisasi->r_khitan,
+                        'r_rawat' => $realisasi->r_rawat,
+                        'r_salin' => $realisasi->r_salin,
+                        'r_lab' => $realisasi->r_lab,
+                        'r_umum' => $realisasi->r_umum,
+                        'r_visit' => $realisasi->r_visit,
+                        // 'created_at' => now(),
+                        // 'update_at' => now(),
+                    ];
+                    $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit'];
+
+                    foreach ($columns as $column) {
+                        $r_column = 'r_' . $column;
+                        $c_column = 'c_' . $column;
+                    
+                        if ($realisasi->$r_column === null || $realisasi->$r_column === 0) {
+                            $rowData[$r_column] = 0;
+                            $rowData[$c_column] = 0;
+                        } elseif ($targetData->$column != 0) {
+                            $total = $realisasi->$r_column / $targetData->$column;
+                    
+                            if ($total > 1) {
+                                $rowData[$c_column] = 3;
+                            } elseif ($total == 1) {
+                                $rowData[$c_column] = 2;
+                            } elseif ($total < 1) {
+                                $rowData[$c_column] = 1;
+                            }elseif ($total === 0) { 
+                                $rowData[$c_column] = 0;
+                            } elseif ($total >= 0 || $total === null) {
+                                $rowData[$c_column] = 0;
+                            } else {
+                                // Handling untuk kasus lain (opsional)
+                            }
+                        } else {
+                            $rowData[$c_column] = 0;
+                        }
+                    }
+                    
+                    $data[] = $rowData;    
+                    // return $data;
+                    // return redirect()->back()->with('success', 'Data Realisasi Berhasil Disimpan.');
+                }
+            }
+            if (!empty($data)) {
+                targetkpi::insert($data);
+                // return $data;
+                return redirect()->back()->with('success', 'Terimakasih, Data Realisasi Berhasil Disimpan.');
+            }
+            // return redirect()->back()->with('success', 'Terimakasih, Data Realisasi Berhasil Disimpan di Bulan November.');
+        } else {
+            // Handle request jika $targetData tidak ditemukan
+            return redirect()->back()->with('error', 'Data Target Pada Periode Tersebut Tidak Ditemukan.');
+        }
+
+    
+    }
+        
     public function storeTarget(Request $request)
     {
         $validator=Validator::make($request -> all(),[

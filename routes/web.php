@@ -169,6 +169,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/KPI/form-edit/{id}',[KpiController::class,'editTarget'])->name('kpi.form.edit');
         Route::post('/KPI/form-update/{id}',[KpiController::class,'updateTarget'])->name('kpi.form.update');
         Route::get('/Search-realisasi',[KpiController::class,'SearchRealisasi'])->name('search.realisasi');
+
+        Route::post('/multiple-realisasi/save',[KpiController::class,'storeRealisasiMultiple'])->name('kpi.realisasi.multiple');
         //Insentif KPI
         Route::get('/Insentif-KPI',[KpiController::class,'indexInsentifKpi'])->name('insentif.kpi');
         Route::post('/Insentif-KPI/save',[KpiController::class,'storeInsentifKpi'])->name('insentif.kpi.save');
