@@ -159,6 +159,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/KPI-delete/{id}',[KpiController::class,'destroy'])->name('kpi.delete');
         Route::get('/KPI-view/{id}',[KpiController::class,'indexViewKpi'])->name('kpi.view');
         Route::get('/Search-kpi',[KpiController::class,'SearchKpi'])->name('search.kpi');
+        Route::post('/KPI-multiple',[KpiController::class,'storeKpiMultiple'])->name('kpi.multiple');
         //Realisasi KPI
         Route::get('/KPI/Data-Kinerja', [KpiController::class,'indexTargetKpi'])->name('kpi.datakinerja');
         Route::get('/coba', [KpiController::class,'insertmultiple'])->name('coba');

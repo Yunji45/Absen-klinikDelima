@@ -50,266 +50,231 @@ class KpiController extends Controller
     }
 
     public function create()
-    {                   
-        // $user_id = 15;
-        // $data = explode('-', '2023-10-02'); // Memisahkan string bulan menjadi array
-        // $bulan = $data[1]; // Bulan
-        // $tahun = $data[0]; // Tahun
-        
-        // $ceklis = TargetKpi::where('user_id', $user_id)
-        //     ->whereMonth('bulan', $bulan)
-        //     ->whereYear('bulan', $tahun)
-        //     ->select('c_daftar','c_poli','c_farmasi','c_kasir','c_care','c_bpjs','c_khitan','c_rawat','c_salin','c_lab','c_umum','c_visit')
-        //     ->first();
-        // $kpi = kpi::where('user_id', $user_id)
-        //     ->whereMonth('bulan', $bulan)
-        //     ->whereYear('bulan', $tahun)
-        //     ->select('daftar','poli','farmasi','kasir','care','bpjs','khitan','rawat','persalinan','lab','umum','visit',
-        //             'layanan','akuntan','kompeten','harmonis','loyal','adaptif','kolaboratif','absen')
-        //     ->first();
-
-        // $jumlah = 0;
-        // $jumkpi = 0;
-        // if ($ceklis) {
-        //     foreach ($ceklis->toArray() as $key => $value) {
-        //         if ($value != 0) {
-        //             $jumlah++;
-        //         }
-        //     }
-        // }
-        // if ($kpi) {
-        //     foreach ($kpi->toArray() as $key => $value) {
-        //         if ($value != 0) {
-        //             $jumkpi++;
-        //         }
-        //     }
-        // }
-
-        // return $jumlah ;
-        
-        // $totalTelat = Presensi::where('user_id', $user_id)
-        //     ->where('keterangan', 'Telat')
-        //     ->whereMonth('tanggal', $bulan)
-        //     ->whereYear('tanggal', $tahun)
-        //     ->count();
-        //     $totalabsen = ($totalMasuk + $totalTelat);
-        //     return $totalabsen;
-    //     $targetData = targetkpi::where('user_id', $user_id)
-                                // ->whereMonth('bulan', $bulan)
-                                // ->whereYear('bulan', $tahun)
-                                // ->select('c_daftar', 'c_poli')
-                                // ->first();
-                                // return $targetData;
-
-        // $tes = targetkpi::where('user_id', $user_id)
-        //                 ->whereMonth('bulan', $bulan)
-        //                 ->whereYear('bulan', $tahun)
-        //                 ->pluck('r_daftar');
-        //     return $tes;          
+    {         
         $title = 'Tambah KPI';
         $type = 'kpi';
         $user = User::all();
         return view('template.backend.admin.kpi.create',compact('title','user','type'));
     }
 
-    public function storeGagal(Request $request)
+    public function storeKpiMultiple(Request $request)
     {
-        $validator= Validator::make($request->all(),[
-            'user_id' =>'required',
-            'jabatan' => 'required',
-            'div' => 'required',
-            'nama_atasan' => 'required',
-            'div_atasan' => 'required',
-            'jabatan_atasan' => 'required',
-            // 'target' => 'required'
-        ],[
-            'user_id.required' => 'Kolom user_id wajib diisi.',
-            'jabatan.required' => 'Kolom jabatan wajib diisi.',
-            'div.required' => 'Kolom div wajib diisi.',
-            'nama_atasan.required' => 'Kolom nama_atasan wajib diisi.',
-            'div_atasan.required' => 'Kolom div_atasan wajib diisi.',
-            'jabatan_atasan.required' => 'Kolom jabatan_atasan wajib diisi.',
-            // 'target.required' => 'Kolom target wajib diisi.',
+        $validator = Validator::make($request->all(), [
+            'bulan' => 'required',
+            'bulantarget' => 'required',
+            'bulanreal' => 'required',
+        ], [
+            'bulan.required' => 'kolom bulan wajib di isi',
         ]);
-
+    
         if ($validator->fails()) {
             return redirect()->back()
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
-        $kpi = new kpi;
-        $kpi ->user_id = $request->user_id;
-        $kpi ->jabatan = $request->jabatan;
-        $kpi->div = $request->div;
-        $kpi->nama_atasan = $request->nama_atasan;
-        $kpi->jabatan_atasan = $request->jabatan_atasan;
-        $kpi->div_atasan = $request->div_atasan;
-        // $kpi->target = $request->target;
+    
+        $target_awal = $request->bulanreal;
+        $target_akhir = $request->bulanreal;
+        $startDate = $request->bulantarget;
+        $endDate = $request->bulantarget;
+        $tahun = date('Y');
+        $tanggalawal = $tahun . '-' . $startDate . '-01';
+        $tanggalakhir = $tahun . '-' . $endDate . '-31';
+        $targetawal = $tahun . '-' . $target_awal . '-01';
+        $targetakhir = $tahun . '-' . $target_akhir . '-31';
 
-        $layananValue = $request->input('layanan', []);
-        $akuntanValue = $request->input('akuntan', []);
-        $kompetenValue = $request->input('kompeten', []);
-        $harmonisValue = $request->input('harmonis', []);
-        $loyalValue = $request->input('loyal', []);
-        $adaptifValue = $request->input('adaptif', []);
-        $kolaboratifValue = $request->input('kolaboratif', []);
-        $absenValue = $request->input('absen', []);
-        
-        $totallayanan = !empty($layananValue) ? array_sum($layananValue) : 0;
-        $totalakuntan = !empty($akuntanValue) ? array_sum($akuntanValue) : 0;
-        $totalkompeten = !empty($kompetenValue) ? array_sum($kompetenValue) : 0;
-        $totalharmonis = !empty($harmonisValue) ? array_sum($harmonisValue) : 0;
-        $totalloyal = !empty($loyalValue) ? array_sum($loyalValue) : 0;
-        $totaladaptif = !empty($adaptifValue) ? array_sum($adaptifValue) : 0;
-        $totalkolaboratif = !empty($kolaboratifValue) ? array_sum($kolaboratifValue) : 0;
-        $totalabsen = !empty($absenValue) ? array_sum($absenValue) : 0;
-
-        //save
-        $user_id = $request->user_id;
         $data = explode('-', $request->bulan); // Memisahkan string bulan menjadi array
         $bulan = $data[1]; // Bulan
-        $tahun = $data[0]; // Tahun
+        $tahun = $data[0]; // Tahun        
 
-        $targetData = targetkpi::where('user_id', $user_id)
-                                ->whereMonth('bulan', $bulan)
-                                ->whereYear('bulan', $tahun)
-                                ->select('c_daftar', 'c_poli','c_farmasi','c_bpjs','c_kasir','c_care','c_khitan','c_rawat','c_salin','c_lab','c_umum','c_visit')
-                                ->first();
-        if ($targetData) {
-            $kpi->daftar = $targetData->c_daftar;
-            $kpi->poli = $targetData->c_poli;
-            $kpi->farmasi = $targetData->c_farmasi;
-            $kpi->kasir = $targetData->c_kasir;
-            $kpi->bpjs = $targetData->c_bpjs;
-            $kpi->care = $targetData->c_care;
-            $kpi->khitan = $targetData->c_khitan;
-            $kpi->rawat = $targetData->c_rawat;
-            $kpi->persalinan = $targetData->c_salin;
-            $kpi->lab = $targetData->c_lab;
-            $kpi->umum = $targetData->c_umum;
-            $kpi->visit = $targetData->c_visit;
-        } else {
-            $kpi->daftar = 0;
-            $kpi->poli = 0;
-            $kpi->farmasi = 0;
-            $kpi->kasir = 0;
-            $kpi->bpjs = 0;
-            $kpi->care = 0;
-            $kpi->khitan = 0;
-            $kpi->rawat = 0;
-            $kpi->persalinan = 0;
-            $kpi->lab = 0;
-            $kpi->umum = 0;
-            $kpi->visit = 0;
+    
+        $userIds = kpi::where('bulan', '>=', $tanggalawal)
+            ->where('bulan', '<=', $tanggalakhir)
+            ->pluck('user_id');
+    
+        if ($userIds->isEmpty()) {
+            return redirect()->back()->with('error', 'Data KPI Tidak Ditemukan.');
         }
-        $kpi ->layanan = $totallayanan;
-        $kpi ->akuntan = $totalakuntan;
-        $kpi ->kompeten = $totalkompeten;
-        $kpi ->harmonis = $totalharmonis;
-
-        $kpi ->loyal = $totalloyal;
-        $kpi ->adaptif = $totaladaptif;
-        $kpi ->kolaboratif = $totalkolaboratif;
-        // $kpi ->absen = $totalabsen;
-        //ambil data id User
-        // $user_id = $request->user_id;
-        // $data = explode('-', $request->bulan); // Memisahkan string bulan menjadi array
-        // $bulan = $data[1]; // Bulan
-        // $tahun = $data[0]; // Tahun
-        //hitung masuk
-        $totalMasuk = Presensi::where('user_id', $user_id)
-            ->where('keterangan', 'Masuk')
-            ->whereMonth('tanggal', $bulan)
-            ->whereYear('tanggal', $tahun)
-            ->count();
-        //hitung telat
-        $totalTelat = Presensi::where('user_id', $user_id)
-            ->where('keterangan', 'Telat')
-            ->whereMonth('tanggal', $bulan)
-            ->whereYear('tanggal', $tahun)
-            ->count();
-        //hitung lembur
-        $lembur = rubahjadwal::where('user_id', $user_id)
-                            ->where('permohonan', 'lembur')
-                            ->where('status', 'approve')
-                            ->whereMonth('tanggal', $bulan)
-                            ->whereYear('tanggal', $tahun)
-                            ->count();
-
-        //hitung jadwal
-        $psTotal = 0;
-            for ($day = 1; $day <= 31; $day++) {
-                $column = 'j' . $day;
-                
-                $psCount = jadwalterbaru::where('user_id', $user_id)
-                    ->where(function ($query) use ($column) {
-                        $query->whereIn($column, ['PS', 'SM', 'PM']);
-                    })
-                    ->whereMonth('masa_aktif', $bulan)
-                    ->whereYear('masa_aktif', $tahun)        
-                    ->count();
+    
+        $data = [];
+        $usersWithoutRealization = [];
+        foreach ($userIds as $user) {
+            $targetData = targetkpi::where('user_id', $user)
+                ->where('bulan', '>=', $targetawal)
+                ->where('bulan', '<=', $targetakhir)
+                ->select('user_id', 'c_daftar', 'c_poli', 'c_farmasi', 'c_bpjs', 'c_kasir', 'c_care', 'c_khitan', 'c_rawat', 'c_salin', 'c_lab', 'c_umum', 'c_visit')
+                ->first();
+    
+            $kpi = kpi::where('user_id', $user)
+                ->where('bulan', '>=', $tanggalawal)
+                ->where('bulan', '<=', $tanggalakhir)
+                ->select('div', 'jabatan', 'nama_atasan', 'div_atasan', 'jabatan_atasan', 'daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'persalinan', 'lab', 'umum', 'visit', 'layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif', 'absen')
+                ->first();
+    
+            if ($kpi && $targetData) {
+                // $totalMasuk = Presensi::where('user_id', $user)
+                // ->where('keterangan', 'Masuk')
+                // ->whereMonth('tanggal', $bulan)
+                // ->whereYear('tanggal', $tahun)
+                // ->count();
+                // //hitung telat
+                // $totalTelat = Presensi::where('user_id', $user)
+                //     ->where('keterangan', 'Telat')
+                //     ->whereMonth('tanggal', $bulan)
+                //     ->whereYear('tanggal', $tahun)
+                //     ->count();
+                // //hitung lembur
+                // $lembur = rubahjadwal::where('user_id', $user)
+                //                     ->where('permohonan', 'lembur')
+                //                     ->where('status', 'approve')
+                //                     ->whereMonth('tanggal', $bulan)
+                //                     ->whereYear('tanggal', $tahun)
+                //                     ->count();
+        
+                // //hitung jadwal
+                // $psTotal = 0;
+                //     for ($day = 1; $day <= 31; $day++) {
+                //         $column = 'j' . $day;
+                        
+                //         $psCount = jadwalterbaru::where('user_id', $user)
+                //             ->where(function ($query) use ($column) {
+                //                 $query->whereIn($column, ['PS', 'SM', 'PM']);
+                //             })
+                //             ->whereMonth('masa_aktif', $bulan)
+                //             ->whereYear('masa_aktif', $tahun)        
+                //             ->count();
+                    
+                //         $psTotal += $psCount;
+                //     }
+        
+                // session(['psTotal' => $psTotal]);
+                // $userDataabsen = User::find($user);
+                // if ($userDataabsen) {
+                //     $usersWithoutabsen[] = $userDataabsen->name;
+                // }
+                // if (!$psTotal){
+                //     $error_message = 'Data Absen Tidak Ada Pada Bulan Ini untuk pengguna: ' . implode(', ', $usersWithoutabsen);
+                //     return redirect()->back()->with('error', $error_message);        
+                //     // return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
+                // }
+                // $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+                // if($totalabsen == 1 && $lembur > 1){
+                //     $kpi->absen =3;
+                // }elseif($totalabsen == 1 ){
+                //     $kpi->absen = 2;
+                // }elseif($totalabsen < 1){
+                //     $kpi->absen =1;
+                // }else{
+                //     $kpi->absen = 0;
+                // }
+        
+                $jumlahNonZero = count(array_filter([
+                    $kpi->daftar,
+                    $kpi->poli,
+                    $kpi->farmasi,
+                    $kpi->kasir,
+                    $kpi->bpjs,
+                    $kpi->care,
+                    $kpi->khitan,
+                    $kpi->rawat,
+                    $kpi->persalinan,
+                    $kpi->lab,
+                    $kpi->umum,
+                    $kpi->visit,
+                    $kpi->layanan,
+                    $kpi->akuntan,
+                    $kpi->kompeten,
+                    $kpi->harmonis,
+                    $kpi->loyal,
+                    $kpi->adaptif,
+                    $kpi->kolaboratif,
+                    $kpi->absen,
+                ], function ($value) {
+                    return $value != 0;
+                }));
+                $total =
+                ($kpi->daftar ?? 0) + ($kpi->poli ?? 0) + ($kpi->farmasi ?? 0) +
+                ($kpi->kasir ?? 0) + ($kpi->care ?? 0) + ($kpi->bpjs ?? 0) +
+                ($kpi->khitan ?? 0) + ($kpi->rawat ?? 0) + ($kpi->persalinan ?? 0) +
+                ($kpi->lab ?? 0) + ($kpi->umum ?? 0) + ($kpi->visit ?? 0) +
+                ($kpi->layanan ?? 0) + ($kpi->akuntan ?? 0) + ($kpi->kompeten ?? 0) +
+                ($kpi->harmonis ?? 0) + ($kpi->loyal ?? 0) + ($kpi->adaptif ?? 0) +
+                ($kpi->kolaboratif ?? 0) + ($kpi->absen ?? 0);
+                // if (in_array(null, [
+                //     $kpi->daftar, $kpi->poli, $kpi->farmasi, $kpi->kasir, $kpi->care,
+                //     $kpi->bpjs, $kpi->khitan, $kpi->rawat, $kpi->persalinan,
+                //     $kpi->lab, $kpi->umum, $kpi->visit,
+                //     $kpi->layanan, $kpi->akuntan, $kpi->kompeten, $kpi->harmonis,
+                //     $kpi->loyal, $kpi->adaptif, $kpi->kolaboratif, $kpi->absen
+                // ])) {
+                //     // Tambahkan penanganan kesalahan sesuai kebutuhan
+                //     return redirect()->back()->with('error', 'Data tidak valid untuk perhitungan.');
+                // }
             
-                $psTotal += $psCount;
+                $rowData= [
+                    'user_id' => $user,
+                    'bulan' => $request->bulan,
+                    'target' => $jumlahNonZero,
+                    'div' => $kpi->div,
+                    'jabatan' => $kpi->jabatan,
+                    'nama_atasan' => $kpi->nama_atasan,
+                    'div_atasan' => $kpi->div_atasan,
+                    'jabatan_atasan' => $kpi->jabatan_atasan,
+                    'daftar' => $targetData->c_daftar,
+                    'poli' => $targetData->c_poli,
+                    'farmasi' => $targetData->c_farmasi,
+                    'kasir' => $targetData->c_kasir,
+                    'care' => $targetData->c_care,
+                    'bpjs' => $targetData->c_bpjs,
+                    'khitan' => $targetData->c_khitan,
+                    'rawat' => $targetData->c_rawat,
+                    'persalinan' => $targetData->c_salin,
+                    'lab' => $targetData->c_lab,
+                    'umum' => $targetData->c_umum,
+                    'visit' => $targetData->c_visit,
+                    'layanan' => $kpi->layanan,
+                    'akuntan' => $kpi->akuntan,
+                    'kompeten' => $kpi->kompeten,
+                    'harmonis' => $kpi->harmonis,
+                    'loyal' => $kpi->loyal,
+                    'adaptif' => $kpi->adaptif,
+                    'kolaboratif' => $kpi->kolaboratif,
+                    'absen' => 2,
+                    'total' => $total,
+                    'total_kinerja' => 1,
+                    'ket' => 'dibawah',
+                ];
+    
+                $data[] = $rowData;
+            }else{
+                // return redirect()->back()->with('error','Data Realisasi Tidak Ada Pada Bulan Ini.');
+                $userData = User::find($user);
+                if ($userData) {
+                    $usersWithoutRealization[] = $userData->name;
+                }
             }
-
-        session(['psTotal' => $psTotal]);
-        if (!$psTotal){
-            return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
         }
-        $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
-        if($totalabsen == 1 && $lembur > 1){
-            $kpi->absen =3;
-        }elseif($totalabsen == 1 ){
-            $kpi->absen = 2;
-        }elseif($totalabsen < 1){
-            $kpi->absen =1;
-        }else{
-            $kpi->absen = 0;
+        if (!empty($usersWithoutRealization)) {
+            $error_message = 'Data Realisasi Tidak Ada Pada Bulan Ini untuk pengguna: ' . implode(', ', $usersWithoutRealization);
+            return redirect()->back()->with('error', $error_message);
         }
-        // $kpi->absen = $totalabsen;
-        $totalabsen = $kpi->absen;
-        $kpi->bulan = $request->bulan;
-        $kpi->total = 
-        $kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
-        $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
-        $kpi->lab + $kpi->umum + $kpi->visit +
-        $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
-        $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen;
-
-        $kpi->total_kinerja = 
-        ($kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
-        $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
-        $kpi->lab + $kpi->umum + $kpi->visit +
-        $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
-        $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$kpi->target;
-
-        // $kpi ->ket = 'melampaui';
-        if ($kpi->total_kinerja / $request->target == 1) {
-            $kpi->ket = 'Sesuai';
-        } elseif ($kpi->total_kinerja / $request->target > 1) {
-            $kpi->ket = 'Melampaui';
-        } else {
-            $kpi->ket = 'Dibawah';
+        // return $data;    
+        if (!empty($data)) {
+            $existingData = kpi::whereIn('user_id', $userIds)
+            ->where('bulan', $request->bulan)
+            ->exists();
+    
+            if ($existingData) {
+                return redirect()->back()->with('error', 'Data Evaluasi untuk bulan ini sudah ada. Tidak dapat menyimpan data ganda.');
+            }
+            // kpi::insert($data);
+            return $data;
+            // return redirect()->back()->with('success', 'Terimakasih, Data Realisasi Berhasil Disimpan.');
         }
-        // $kpi ->bulan = $request->bulan;
-        $realisasi = targetkpi::where('user_id', $user_id)
-                                ->whereMonth('bulan', $bulan)
-                                ->whereYear('bulan', $tahun)
-                                ->first();
-        $omset = OmsetKlinik::whereMonth('bulan', $bulan)
-                                    ->whereYear('bulan', $tahun)
-                                    ->first();
-        if ($omset) {
-            return redirect()->back()->with('error', 'Performance Unit Pada Periode ' . $request->bulan . ' Sudah Final.');
-        }
-                                
-        if ($realisasi){
-            $kpi->save();
-        }else{
-            return redirect()->back()->with('error','Realisasi User Pada Periode '. $request->bulan .' Ini Belum Ada.');
-        }
-        return redirect('/KPI')->with('success', 'Data Berhasil di Tambahkan');
+    
+    
     }
+            
     public function store(Request $request)
     {
         $validator= Validator::make($request->all(),[
