@@ -7,7 +7,7 @@ use App\Models\gajian;
 use App\Models\User;
 use App\Models\UMKaryawan;
 use App\Models\kpi;
-use App\Models\insentifKpi;
+use App\Models\InsentifKpi;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use PDF;
@@ -519,7 +519,7 @@ class PenggajianController extends Controller
                         ->whereYear('bulan', $tahun)
                         ->whereMonth('bulan', $bulan)
                         ->first();    
-        $gaji = insentifKpi::where('user_id',$user)
+        $gaji = InsentifKpi::where('user_id',$user)
                         ->whereYear('bulan', $tahun)
                         ->whereMonth('bulan', $bulan)
                         ->first();    
