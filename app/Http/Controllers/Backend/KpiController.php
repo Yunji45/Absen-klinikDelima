@@ -112,61 +112,61 @@ class KpiController extends Controller
                 ->first();
     
             if ($kpi && $targetData) {
-                // $totalMasuk = Presensi::where('user_id', $user)
-                // ->where('keterangan', 'Masuk')
-                // ->whereMonth('tanggal', $bulan)
-                // ->whereYear('tanggal', $tahun)
-                // ->count();
-                // //hitung telat
-                // $totalTelat = Presensi::where('user_id', $user)
-                //     ->where('keterangan', 'Telat')
-                //     ->whereMonth('tanggal', $bulan)
-                //     ->whereYear('tanggal', $tahun)
-                //     ->count();
-                // //hitung lembur
-                // $lembur = rubahjadwal::where('user_id', $user)
-                //                     ->where('permohonan', 'lembur')
-                //                     ->where('status', 'approve')
-                //                     ->whereMonth('tanggal', $bulan)
-                //                     ->whereYear('tanggal', $tahun)
-                //                     ->count();
+                $totalMasuk = Presensi::where('user_id', $user)
+                ->where('keterangan', 'Masuk')
+                ->whereMonth('tanggal', $bulan)
+                ->whereYear('tanggal', $tahun)
+                ->count();
+                //hitung telat
+                $totalTelat = Presensi::where('user_id', $user)
+                    ->where('keterangan', 'Telat')
+                    ->whereMonth('tanggal', $bulan)
+                    ->whereYear('tanggal', $tahun)
+                    ->count();
+                //hitung lembur
+                $lembur = rubahjadwal::where('user_id', $user)
+                                    ->where('permohonan', 'lembur')
+                                    ->where('status', 'approve')
+                                    ->whereMonth('tanggal', $bulan)
+                                    ->whereYear('tanggal', $tahun)
+                                    ->count();
         
-                // //hitung jadwal
-                // $psTotal = 0;
-                //     for ($day = 1; $day <= 31; $day++) {
-                //         $column = 'j' . $day;
+                //hitung jadwal
+                $psTotal = 0;
+                    for ($day = 1; $day <= 31; $day++) {
+                        $column = 'j' . $day;
                         
-                //         $psCount = jadwalterbaru::where('user_id', $user)
-                //             ->where(function ($query) use ($column) {
-                //                 $query->whereIn($column, ['PS', 'SM', 'PM']);
-                //             })
-                //             ->whereMonth('masa_aktif', $bulan)
-                //             ->whereYear('masa_aktif', $tahun)        
-                //             ->count();
+                        $psCount = jadwalterbaru::where('user_id', $user)
+                            ->where(function ($query) use ($column) {
+                                $query->whereIn($column, ['PS', 'SM', 'PM']);
+                            })
+                            ->whereMonth('masa_aktif', $bulan)
+                            ->whereYear('masa_aktif', $tahun)        
+                            ->count();
                     
-                //         $psTotal += $psCount;
-                //     }
+                        $psTotal += $psCount;
+                    }
         
-                // session(['psTotal' => $psTotal]);
-                // $userDataabsen = User::find($user);
-                // if ($userDataabsen) {
-                //     $usersWithoutabsen[] = $userDataabsen->name;
-                // }
-                // if (!$psTotal){
-                //     $error_message = 'Data Absen Tidak Ada Pada Bulan Ini untuk pengguna: ' . implode(', ', $usersWithoutabsen);
-                //     return redirect()->back()->with('error', $error_message);        
-                //     // return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
-                // }
-                // $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
-                // if($totalabsen == 1 && $lembur > 1){
-                //     $kpi->absen =3;
-                // }elseif($totalabsen == 1 ){
-                //     $kpi->absen = 2;
-                // }elseif($totalabsen < 1){
-                //     $kpi->absen =1;
-                // }else{
-                //     $kpi->absen = 0;
-                // }
+                session(['psTotal' => $psTotal]);
+                $userDataabsen = User::find($user);
+                if ($userDataabsen) {
+                    $usersWithoutabsen[] = $userDataabsen->name;
+                }
+                if (!$psTotal){
+                    $error_message = 'Data Absen Tidak Ada Pada Bulan Ini untuk pengguna: ' . implode(', ', $usersWithoutabsen);
+                    return redirect()->back()->with('error', $error_message);        
+                    // return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
+                }
+                $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+                if($totalabsen == 1 && $lembur > 1){
+                    $kpi->absen =3;
+                }elseif($totalabsen == 1 ){
+                    $kpi->absen = 2;
+                }elseif($totalabsen < 1){
+                    $kpi->absen =1;
+                }else{
+                    $kpi->absen = 0;
+                }
         
                 $jumlahNonZero = count(array_filter([
                     $kpi->daftar,
@@ -193,24 +193,24 @@ class KpiController extends Controller
                     return $value != 0;
                 }));
                 $total =
-                ($kpi->daftar ?? 0) + ($kpi->poli ?? 0) + ($kpi->farmasi ?? 0) +
-                ($kpi->kasir ?? 0) + ($kpi->care ?? 0) + ($kpi->bpjs ?? 0) +
-                ($kpi->khitan ?? 0) + ($kpi->rawat ?? 0) + ($kpi->persalinan ?? 0) +
-                ($kpi->lab ?? 0) + ($kpi->umum ?? 0) + ($kpi->visit ?? 0) +
-                ($kpi->layanan ?? 0) + ($kpi->akuntan ?? 0) + ($kpi->kompeten ?? 0) +
-                ($kpi->harmonis ?? 0) + ($kpi->loyal ?? 0) + ($kpi->adaptif ?? 0) +
-                ($kpi->kolaboratif ?? 0) + ($kpi->absen ?? 0);
-                // if (in_array(null, [
-                //     $kpi->daftar, $kpi->poli, $kpi->farmasi, $kpi->kasir, $kpi->care,
-                //     $kpi->bpjs, $kpi->khitan, $kpi->rawat, $kpi->persalinan,
-                //     $kpi->lab, $kpi->umum, $kpi->visit,
-                //     $kpi->layanan, $kpi->akuntan, $kpi->kompeten, $kpi->harmonis,
-                //     $kpi->loyal, $kpi->adaptif, $kpi->kolaboratif, $kpi->absen
-                // ])) {
-                //     // Tambahkan penanganan kesalahan sesuai kebutuhan
-                //     return redirect()->back()->with('error', 'Data tidak valid untuk perhitungan.');
-                // }
-            
+                    ($kpi->daftar ?? 0) + ($kpi->poli ?? 0) + ($kpi->farmasi ?? 0) +
+                    ($kpi->kasir ?? 0) + ($kpi->care ?? 0) + ($kpi->bpjs ?? 0) +
+                    ($kpi->khitan ?? 0) + ($kpi->rawat ?? 0) + ($kpi->persalinan ?? 0) +
+                    ($kpi->lab ?? 0) + ($kpi->umum ?? 0) + ($kpi->visit ?? 0) +
+                    ($kpi->layanan ?? 0) + ($kpi->akuntan ?? 0) + ($kpi->kompeten ?? 0) +
+                    ($kpi->harmonis ?? 0) + ($kpi->loyal ?? 0) + ($kpi->adaptif ?? 0) +
+                    ($kpi->kolaboratif ?? 0) + ($kpi->absen ?? 0) + 1;
+
+                $total_kinerja = 0; // Default value jika $kpi->target adalah 0
+                $total_kinerja = $total / $jumlahNonZero;
+                    if ($total_kinerja == 1) {
+                        $ket = 'Sesuai';
+                    } elseif ($total_kinerja >= 1) {
+                        $ket = 'Melampaui';
+                    } else {
+                        $ket = 'Dibawah';
+                    }
+                
                 $rowData= [
                     'user_id' => $user,
                     'bulan' => $request->bulan,
@@ -239,10 +239,10 @@ class KpiController extends Controller
                     'loyal' => $kpi->loyal,
                     'adaptif' => $kpi->adaptif,
                     'kolaboratif' => $kpi->kolaboratif,
-                    'absen' => 2,
+                    'absen' => $kpi->absen,
                     'total' => $total,
-                    'total_kinerja' => 1,
-                    'ket' => 'dibawah',
+                    'total_kinerja' => $total_kinerja,
+                    'ket' => $ket,
                 ];
     
                 $data[] = $rowData;
@@ -267,12 +267,10 @@ class KpiController extends Controller
             if ($existingData) {
                 return redirect()->back()->with('error', 'Data Evaluasi untuk bulan ini sudah ada. Tidak dapat menyimpan data ganda.');
             }
-            // kpi::insert($data);
-            return $data;
-            // return redirect()->back()->with('success', 'Terimakasih, Data Realisasi Berhasil Disimpan.');
+            kpi::insert($data);
+            // return $data;
+            return redirect()->back()->with('success', 'Terimakasih, Data Realisasi Berhasil Disimpan.');
         }
-    
-    
     }
             
     public function store(Request $request)
@@ -563,8 +561,9 @@ class KpiController extends Controller
         $bulan = $request->input('bulan');
         $startDate = $bulan . '-01';
         $endDate = $bulan . '-31';
+        $ach = AchKpi::all();
         $target = targetkpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
-        return view ('template.backend.admin.data-kpi.index',compact('title','target','type'));
+        return view ('template.backend.admin.data-kpi.index',compact('title','target','type','ach'));
     }
     public function createTarget()
     {
