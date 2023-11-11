@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <td>Poin Kinerja</td>
-                            <td>{{$kinerja->total_kinerja}}</td>
+                            <td>{{ number_format($kinerja->total_kinerja, 2) }}</td>
                         </tr>
                         <tr>
                             <td>Performa Kinerja</td>
