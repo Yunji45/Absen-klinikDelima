@@ -176,18 +176,28 @@
                                 <a class="dropdown-item" href="{{ route('permohonan.jadwal.user') }}">Rubah Jadwal</a>
                             </div>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="{{route('gaji.pegawai')}}" >
-                                <i class="fa fa-credit-card text-danger"></i>Slip Gaji
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-credit-card text-danger"></i> Salary
                             </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="{{ route('insentif.pegawai') }}" >
-                                <i class="fa fa-credit-card text-info"></i>Slip Insentif
-                            </a>
+                            <div class="dropdown-menu" aria-labelledby="permohonanDropdown">
+                                <a class="dropdown-item" href="{{route('gaji.pegawai')}}">Gaji</a>
+                                <a class="dropdown-item" href="{{ route('insentif.pegawai') }}">Insentif</a>
+                            </div>
                         </li>
                     @endif
                     @if(auth()->user()->role == 'keuangan')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ni ni-settings text-success"></i> Pengaturan Jaga
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="permohonanDropdown">
+                                <a class="dropdown-item" href="{{ route('jadwal.user') }}">Jadwal Jaga</a>
+                                <a class="dropdown-item" href="{{ route('index.izin.user') }}">Permohonan Izin</a>
+                                <a class="dropdown-item" href="{{ route('permohonan.jadwal.user') }}">Rubah Jadwal</a>
+                            </div>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="konfirmasiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ni ni-credit-card text-success"></i> Salary Pegawai
@@ -198,23 +208,42 @@
                                 <a class="dropdown-item" href="{{route('kpi.index')}}">Insentif</a>
                             </div>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="{{route('gaji.pegawai')}}" >
-                                <i class="fa fa-credit-card text-danger"></i>Slip Gaji
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-credit-card text-danger"></i> Salary
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="permohonanDropdown">
+                                <a class="dropdown-item" href="{{route('gaji.pegawai')}}">Gaji</a>
+                                <a class="dropdown-item" href="{{ route('insentif.pegawai') }}">Insentif</a>
+                            </div>
                         </li>
 
                     @endif
                     @if(auth()->user()->role == 'evaluator')
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="ni ni-settings text-success"></i> Pengaturan Jaga
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="permohonanDropdown">
+                                <a class="dropdown-item" href="{{ route('jadwal.user') }}">Jadwal Jaga</a>
+                                <a class="dropdown-item" href="{{ route('index.izin.user') }}">Permohonan Izin</a>
+                                <a class="dropdown-item" href="{{ route('permohonan.jadwal.user') }}">Rubah Jadwal</a>
+                            </div>
+                        </li>
+
                     <li class="nav-item ">
                             <a class="nav-link" href="{{route('target.kpi')}}" >
                                 <i class="fa fa-suitcase text-success"></i> Evaluasi Karwayan
                             </a>
                     </li>
-                    <li class="nav-item ">
-                            <a class="nav-link" href="{{route('gaji.pegawai')}}" >
-                                <i class="fa fa-credit-card text-danger"></i>Slip Gaji
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-credit-card text-danger"></i> Salary
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="permohonanDropdown">
+                                <a class="dropdown-item" href="{{route('gaji.pegawai')}}">Gaji</a>
+                                <a class="dropdown-item" href="{{ route('insentif.pegawai') }}">Insentif</a>
+                            </div>
                         </li>
 
 
