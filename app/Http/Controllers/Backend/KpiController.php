@@ -535,40 +535,25 @@ class KpiController extends Controller
         $title = 'Realisasi Kinerja KPI';
         $type = 'kpi';
 
-        // $startDate = '2023-10-01';
-        // $endDate = '2023-10-31';
-        // $userIds = targetkpi::where('bulan', '>=', $startDate)
-        //     ->where('bulan', '<=', $endDate)
-        //     ->pluck('user_id');
-        // $realisasiData = [];
-        // foreach ($userIds as $userId) {
-        //     $realisasi = targetkpi::where('user_id', $userId)
-        //     ->where('bulan', '>=', $startDate)
-        //     ->where('bulan', '<=', $endDate)
-        //     ->select(
-        //         'r_daftar', 'r_poli', 'r_farmasi', 'r_kasir', 'r_care', 'r_bpjs',
-        //         'r_khitan', 'r_rawat', 'r_salin', 'r_lab', 'r_umum', 'r_visit'
-        //     )
-        //     ->first();
-        //     if ($realisasi) {
-        //         $realisasiData[] = [
-        //             'user_id' => $userId,
-        //             'r_daftar' => $realisasi->r_daftar,
-        //             'r_poli' => $realisasi->r_poli,
-        //             'r_farmasi' => $realisasi->r_farmasi,
-        //             'r_kasir' => $realisasi->r_kasir,
-        //             'r_care' => $realisasi->r_care,
-        //             'r_bpjs' => $realisasi->r_bpjs,
-        //             'r_khitan' => $realisasi->r_khitan,
-        //             'r_rawat' => $realisasi->r_rawat,
-        //             'r_salin' => $realisasi->r_salin,
-        //             'r_lab' => $realisasi->r_lab,
-        //             'r_umum' => $realisasi->r_umum,
-        //             'r_visit' => $realisasi->r_visit,
-        //         ];
-        //     }
+        // $month = date('m');
+        // $tahun = date('Y');
+        // $tanggalawal = $tahun . '-' . $month . '-01';
+        // $tanggalakhir = $tahun . '-' . $month . '-31';
+        
+        // $userIds = targetkpi::where('bulan', '>=', $tanggalawal)
+        // ->where('bulan', '<=', $tanggalakhir)
+        // ->pluck('user_id');
+
+        // if ($userIds->isEmpty()) {
+        //     return redirect()->back()->with('error', 'Data KPI Tidak Ditemukan.');
         // }
-        // return $realisasiData;
+        // $targetData = AchKpi::where(function ($query) use ($tanggalawal, $tanggalakhir) {
+        //     $query->where('start_date', '<=', $tanggalakhir)
+        //           ->where('end_date', '>=', $tanggalawal);
+        // })
+        //     ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+        //     ->first();
+        // return $realisasi;
         
         $bulan = date('m');
         $tahun = date('Y');

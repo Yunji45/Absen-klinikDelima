@@ -21,6 +21,7 @@ use App\Http\Controllers\PenggajianController;
 use App\Http\Controllers\Backend\KpiController;
 use App\Http\Controllers\Backend\TargetKPIController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\UpdatePoinKPIController;
 
 use App\Http\Controllers\API\DokumentasiController;
 
@@ -161,6 +162,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/KPI-view/{id}',[KpiController::class,'indexViewKpi'])->name('kpi.view');
         Route::get('/Search-kpi',[KpiController::class,'SearchKpi'])->name('search.kpi');
         Route::post('/KPI-multiple',[KpiController::class,'storeKpiMultiple'])->name('kpi.multiple');
+        Route::post('/KPI-multiple/update',[UpdatePoinKPIController::class,'updateEvaluasi'])->name('kpi.update.multiple');
         //Realisasi KPI
         Route::get('/KPI/Data-Kinerja', [KpiController::class,'indexTargetKpi'])->name('kpi.datakinerja');
         Route::get('/coba', [KpiController::class,'insertmultiple'])->name('coba');
@@ -173,6 +175,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/Search-realisasi',[KpiController::class,'SearchRealisasi'])->name('search.realisasi');
 
         Route::post('/multiple-realisasi/save',[KpiController::class,'storeRealisasiMultiple'])->name('kpi.realisasi.multiple');
+        Route::post('/multiple-update/save',[UpdatePoinKPIController::class,'updateRealisasi'])->name('kpi.multiple.update');
         //Insentif KPI
         Route::get('/Insentif-KPI',[KpiController::class,'indexInsentifKpi'])->name('insentif.kpi');
         Route::post('/Insentif-KPI/save',[KpiController::class,'storeInsentifKpi'])->name('insentif.kpi.save');
