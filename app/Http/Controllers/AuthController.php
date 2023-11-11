@@ -18,7 +18,7 @@ class AuthController extends Controller
     {
         $cek_login = $request->only('nik', 'password');
         if(Auth::attempt($cek_login)) {
-            return redirect()->intended('/home')->with('success', 'INFORMASI PENTING !!! Perhitungan ABSEN = (Absen Masuk vs Jadwal Masuk), bukan (Alpha vs Absen Masuk). TERIMAKASIH :=)');
+            return redirect()->intended('/home')->with('success', 'INFORMASI GEMBIRA !!! Kami Informasikan Kepada Seluruh Pegawai Klinik Mitra Delima, Silahkan Cek Slip Insentif Bulan Ini. Jika Terdapat Masalah Mohon Informasikan Kpd Pihak Informatic Enginerr. TERIMAKASIH :=)');
             // $role = Auth::user()->role;
             // if ($role == 'admin'){
             //     return redirect()->intended('/dashboard');

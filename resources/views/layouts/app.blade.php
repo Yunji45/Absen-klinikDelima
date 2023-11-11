@@ -176,11 +176,20 @@
                                 <a class="dropdown-item" href="{{ route('permohonan.jadwal.user') }}">Rubah Jadwal</a>
                             </div>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-credit-card text-danger"></i> Salary
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="permohonanDropdown">
+                                <a class="dropdown-item" href="{{route('gaji.pegawai')}}">Gaji</a>
+                                <a class="dropdown-item" href="{{ route('insentif.pegawai') }}">Insentif</a>
+                            </div>
+                        </li>
+                        <!-- <li class="nav-item ">
                             <a class="nav-link" href="{{route('gaji.pegawai')}}" >
                                 <i class="fa fa-credit-card text-danger"></i>Slip Gaji
                             </a>
-                        </li>
+                        </li> -->
                     @endif
                     @if(auth()->user()->role == 'keuangan')
                         <li class="nav-item dropdown">

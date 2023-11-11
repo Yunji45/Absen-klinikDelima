@@ -200,6 +200,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/permohonan-save',[RubahjadwalController::class,'store'])->name('permohonan.save');
 
         Route::get('/Gaji-pegawai',[PenggajianController::class,'IndexGajiPegawai'])->name('gaji.pegawai');
+        Route::get('/Insentif-pegawai',[PenggajianController::class,'insentifPegawai'])->name('insentif.pegawai');
     });
 
     // ATUR IP ADDRESS DISINI

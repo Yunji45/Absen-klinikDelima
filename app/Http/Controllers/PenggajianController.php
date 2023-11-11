@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\gajian;
 use App\Models\User;
 use App\Models\UMKaryawan;
+use App\Models\kpi;
+use App\Models\insentifKpi;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use PDF;
@@ -504,6 +506,29 @@ class PenggajianController extends Controller
             return redirect()->back()->with('error','Mohon maaf, Slip Gaji Anda pada periode sekarang belum ada.');
         }
         return view ('frontend.users.gaji.gaji',compact('title','gaji'));
+    }
+
+    public function insentifPegawai()
+    {
+        $title = 'Insentif Karyawan';
+        $bulanTahunSekarang = date('Y-m');
+        $bulan = date('m', strtotime('last month')); 
+        $tahun = date('Y', strtotime('last month')); 
+        $user = Auth::user()->id;
+        $kinerja = kpi::where('user_id', $user)
+                        ->whereYear('bulan', $tahun)
+                        ->whereMonth('bulan', $bulan)
+                        ->first();    
+        $gaji = insentifKpi::where('user_id',$user)
+                        ->whereYear('bulan', $tahun)
+                        ->whereMonth('bulan', $bulan)
+                        ->first();    
+                        // return $gaji;
+        if(!$gaji){
+            return redirect()->back()->with('error','Mohon maaf, Slip Insentif Anda pada periode sekarang belum ada.');
+        }
+        return view ('frontend.users.gaji.insentif',compact('title','gaji','kinerja'));
+
     }
 
     //zona UMR
