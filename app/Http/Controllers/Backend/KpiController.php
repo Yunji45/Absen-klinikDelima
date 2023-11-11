@@ -57,6 +57,15 @@ class KpiController extends Controller
         return view('template.backend.admin.kpi.create',compact('title','user','type'));
     }
 
+    public function edit($id)
+    {
+        $title = 'Edit Evaluasi';
+        $type = 'kpi';
+        $kpi = kpi::find($id);
+        $user = User::all();
+        return view('template.backend.admin.kpi.edit',compact('title','user','type','kpi'));
+    }
+
     public function storeKpiMultiple(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -494,6 +503,23 @@ class KpiController extends Controller
         return redirect('/KPI')->with('success', 'Data Berhasil di Tambahkan');
     }
 
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'user_id' => 'required',
+            'div' => 'required',
+            'bulan' => 'required',
+        ],[
+            'user_id.required' => 'User ID tidak boleh kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+        //belum selesai
+   }
 
     public function destroy($id)
     {

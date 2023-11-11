@@ -109,10 +109,12 @@
                                         </a>
                                     </td>
                                     <td>
-                                    <a href="{{ route('kpi.delete', $item->id) }}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash-alt"> Delete</i>
+                                    <a href="{ route('kpi.edit', $item->id) }}" class="btn btn-success btn-sm">
+                                            <i class="fas fa-edit"> Edit</i>
                                         </a>
-
+                                    <a href="{{ route('kpi.delete', $item->id) }}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash-alt"> Hapus</i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

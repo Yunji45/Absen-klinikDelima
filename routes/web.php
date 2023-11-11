@@ -155,6 +155,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         //KPI
         Route::get('/KPI',[KpiController::class,'index'])->name('kpi.index');
         Route::get('/KPI-create',[KpiController::class,'create'])->name('kpi.tambah');
+        Route::get('/KPI-edit/{id}',[KpiController::class,'edit'])->name('kpi.edit');
         Route::post('/KPI-save',[KpiController::class,'store'])->name('kpi.save');
         Route::get('/KPI-delete/{id}',[KpiController::class,'destroy'])->name('kpi.delete');
         Route::get('/KPI-view/{id}',[KpiController::class,'indexViewKpi'])->name('kpi.view');
