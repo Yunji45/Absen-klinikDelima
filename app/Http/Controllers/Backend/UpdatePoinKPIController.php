@@ -318,4 +318,17 @@ class UpdatePoinKPIController extends Controller
             return redirect()->back()->with('error', 'Maaf, Data Evaluasi Gagal Diupdate.');
         }
     }
+
+    public function updatePoinInsentif(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'bulan' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+        
+    }
 }
