@@ -161,7 +161,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="bulan" class="col-form-label col-sm-3">Simpan Data Evaluasi Bulan</label>
+                            <label for="bulan" class="col-form-label col-sm-3">Ambil Data Evaluasi Bulan</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('bulan') is-invalid @enderror" name="bulanreal" id="bulanreal">
                                     <option value="">Pilih</option>
