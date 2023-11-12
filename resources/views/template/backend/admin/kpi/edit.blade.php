@@ -16,7 +16,7 @@
       <div class="col-12">
         <div class="card">
           <table class="table table-sm table-bordered table-white text-center">
-            <form method="post" action="{{ route('kpi.save') }}">
+            <form method="post" action="{{route('kpi.update',$kpi->id)}}">
               @csrf
               <div class="row">
                   <div class="form-group col-md-7 col-12">
@@ -27,6 +27,7 @@
                               class="form-control @error('user_id') is-invalid @enderror"
                               name="user_id"
                               id="user_id">
+                              <option value="{{$kpi->user_id}}">{{$kpi->user->name}}</option>
                               @foreach($user as $item)
                               <option value="{{$item->id}}">{{$item->name}}</option>
                               @endforeach
@@ -41,6 +42,7 @@
                               class="form-control @error('jabatan') is-invalid @enderror"
                               name="jabatan"
                               id="jabatan">
+                              <option value="{{$kpi->jabatan}}">{{$kpi->jabatan}}</option>
                               <option value="DOKTER">DOKTER</option>
                               <option value="PERAWAT">PERAWAT</option>
                               <option value="BIDAN">BIDAN</option>
@@ -64,6 +66,7 @@
                               class="form-control @error('div') is-invalid @enderror"
                               name="div"
                               id="div">
+                              <option value="{{$kpi->div}}">{{$kpi->div}}</option>
                               <option value="GENERAL MANAGER">GENERAL MANAGER</option>
                               <option value="MANDIV.SUMBERDAYA">MANDIV.SUMBERDAYA</option>
                               <option value="MANDIV.LAYANAN">MANDIV.LAYANAN</option>
@@ -104,6 +107,7 @@
                               class="form-control @error('nama_atasan') is-invalid @enderror"
                               name="nama_atasan"
                               id="nama_atasan">
+                              <option value="{{$kpi->nama_atasan}}">{{$kpi->nama_atasan}}</option>
                               @foreach($user as $item)
                               <option value="{{$item->name}}">{{$item->name}}</option>
                               @endforeach
@@ -118,6 +122,7 @@
                               class="form-control @error('jabatan') is-invalid @enderror"
                               name="jabatan_atasan"
                               id="jabatan_atasan">
+                              <option value="{{$kpi->jabatan_atasan}}">{{$kpi->jabatan_atasan}}</option>
                               <option value="DOKTER">DOKTER</option>
                               <option value="PERAWAT">PERAWAT</option>
                               <option value="BIDAN">BIDAN</option>
@@ -140,6 +145,7 @@
                               class="form-control @error('bulan') is-invalid @enderror"
                               name="div_atasan"
                               id="div_atasan">
+                              <option value="{{$kpi->div_atasan}}">{{$kpi->div_atasan}}</option>
                               <option value="GENERAL MANAGER">GENERAL MANAGER</option>
                               <option value="MANDIV.SUMBERDAYA">MANDIV.SUMBERDAYA</option>
                               <option value="MANDIV.LAYANAN">MANDIV.LAYANAN</option>
@@ -165,7 +171,7 @@
                       </div>
                       <label for="div" class="col-form-label col-sm-6">Periode</label>
                       <div class="col-sm-12" >
-                      <input type="text" name="bulan" id="bulan" class="form-control datepicker @error('bulan') is-invalid @enderror">
+                      <input type="text" name="bulan" id="bulan" value="{{ old('bulan', $kpi->bulan) }}" class="form-control datepicker @error('bulan') is-invalid @enderror">
                           @error('bulan')
                           <span class="invalid-feedback" role="alert">{{ $message }}</span>
                           @enderror

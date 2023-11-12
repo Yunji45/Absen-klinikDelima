@@ -213,8 +213,29 @@ class UpdatePoinKPIController extends Controller
                 ], function ($value) {
                     return $value != 0;
                 }));
-                $total =$kpi->daftar+$kpi->kompeten;
-
+                $jumlahTotal = array_sum([
+                    $targetData->c_daftar,
+                    $targetData->c_poli,
+                    $targetData->c_farmasi,
+                    $targetData->c_kasir,
+                    $targetData->c_care,
+                    $targetData->c_bpjs,
+                    $targetData->c_khitan,
+                    $targetData->c_rawat,
+                    $targetData->c_salin,
+                    $targetData->c_lab,
+                    $targetData->c_umum,
+                    $targetData->c_visit,
+                    $kpi->layanan,
+                    $kpi->akuntan,
+                    $kpi->kompeten,
+                    $kpi->harmonis,
+                    $kpi->loyal,
+                    $kpi->adaptif,
+                    $kpi->kolaboratif,
+                    $kpi->absen,
+                ]);                                
+                $total = $jumlahTotal;
                     // ($kpi->daftar ?? 0) + ($kpi->poli ?? 0) + ($kpi->farmasi ?? 0) +
                     // ($kpi->kasir ?? 0) + ($kpi->care ?? 0) + ($kpi->bpjs ?? 0) +
                     // ($kpi->khitan ?? 0) + ($kpi->rawat ?? 0) + ($kpi->persalinan ?? 0) +
@@ -222,7 +243,6 @@ class UpdatePoinKPIController extends Controller
                     // ($kpi->layanan ?? 0) + ($kpi->akuntan ?? 0) + ($kpi->kompeten ?? 0) +
                     // ($kpi->harmonis ?? 0) + ($kpi->loyal ?? 0) + ($kpi->adaptif ?? 0) +
                     // ($kpi->kolaboratif ?? 0) + ($kpi->absen ?? 0);
-
                 $total_kinerja = 0; // Default value jika $kpi->target adalah 0
                 $total_kinerja = $total / $jumlahNonZero;
                     if ($total_kinerja == 1) {
@@ -281,8 +301,21 @@ class UpdatePoinKPIController extends Controller
         }
         // return $data;    
         if (!empty($data)) {
-            return $data;
+            foreach ($data as $rowData) {
+                $userId = $rowData['user_id'];
+
+                kpi::where('user_id', $userId)
+                    ->where('bulan', '>=', $bulanawal)
+                    ->where('bulan', '<=', $bulanakhir)
+                    ->update($rowData);
+            }
+
+            return redirect()->back()->with('success', 'Terimakasih, Data Evaluasi Berhasil Diupdate.');
+
+            // return $data;
             // return redirect()->back()->with('success', 'Terimakasih, Data Realisasi Berhasil Disimpan.');
+        }else{
+            return redirect()->back()->with('error', 'Maaf, Data Evaluasi Gagal Diupdate.');
         }
     }
 }
