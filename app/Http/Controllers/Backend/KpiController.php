@@ -1225,57 +1225,6 @@ class KpiController extends Controller
     //zona Insentif KPI
     public function indexInsentifKpi()
     {
-        $target_awal = 11;
-        $target_akhir = 11;
-        $startDate = 10;
-        $endDate = 10;
-        $tahun = date('Y'); 
-        $tanggalawal = $tahun . '-' . $startDate . '-01';
-        $tanggalakhir = $tahun . '-' . $endDate . '-31';
-        $omsetawal = $tahun . '-' . $target_awal . '-01';
-        $omsetakhir = $tahun . '-' . $target_akhir . '-31';
-
-        $userIds = InsentifKpi::where('bulan', '>=', $tanggalawal)
-                            ->where('bulan', '<=', $tanggalakhir)
-                            ->pluck('user_id');
-        $data = [];
-        $targetData = OmsetKlinik::where(function ($query) use ($omsetawal, $omsetakhir) {
-            $query->where('bulan', '<=', $omsetakhir)
-                  ->where('bulan', '>=', $omsetawal);
-        })
-            ->select('omset','skor','index','index_rupiah','total_insentif')
-            ->first();
-        if($targetData){
-            foreach($userIds as $user){
-                $targetInsentif = InsentifKpi::where('user_id',$user)
-                ->where('bulan', '>=', $tanggalawal)
-                ->where('bulan', '<=', $tanggalakhir)
-                ->select('user_id','bulan','omset','total_poin','total_insentif','index_rupiah','insentif_final','poin_user')
-                ->first();
-                $poin_user = kpi::where('user_id', $user)
-                ->where('bulan', '>=', $omsetawal)
-                ->where('bulan', '<=', $omsetakhir)
-                ->select('total')
-                ->first();
-
-                // $data[] = $targetInsentif;
-                if($targetInsentif && $poin_user){
-                    $rowData = [
-                        'user_id' => $user,
-                        'bulan' => '2023-11-15',
-                        'omset' => $targetData->omset,
-                        'total_poin' => $targetData->skor,
-                        'total_insentif' => $targetData->total_insentif,
-                        'index_rupiah' => $targetData->index_rupiah,
-                        'insentif_final' => $poin_user->total * $targetData->index_rupiah,
-                        'poin_user' => $poin_user->total,
-                        
-                    ];
-                }
-                $data[] = $rowData;
-            }
-        }
-        return $data;
 
         $title = 'Insentif Kinerja KPI';
         $type = 'gaji';
@@ -1298,7 +1247,7 @@ class KpiController extends Controller
             return redirect('/setup-insentif')->with('error', 'Setup Omset Bulan Ini Terlebih Dahulu.');
         }
         
-        // return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user','poin','type'));
+        return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user','poin','type'));
     }
 
     public function SearchInsentifKpi(Request $request)
@@ -1401,27 +1350,56 @@ class KpiController extends Controller
         $tahun = date('Y'); 
         $tanggalawal = $tahun . '-' . $startDate . '-01';
         $tanggalakhir = $tahun . '-' . $endDate . '-31';
+        $omsetawal = $tahun . '-' . $target_awal . '-01';
+        $omsetakhir = $tahun . '-' . $target_akhir . '-31';
 
         $userIds = InsentifKpi::where('bulan', '>=', $tanggalawal)
                             ->where('bulan', '<=', $tanggalakhir)
                             ->pluck('user_id');
         $data = [];
-        $targetData = omset::where(function ($query) use ($target_awal, $target_akhir) {
-            $query->where('start_date', '<=', $target_akhir)
-                  ->where('end_date', '>=', $target_awal);
+        $targetData = OmsetKlinik::where(function ($query) use ($omsetawal, $omsetakhir) {
+            $query->where('bulan', '<=', $omsetakhir)
+                  ->where('bulan', '>=', $omsetawal);
         })
-            ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+            ->select('omset','skor','index','index_rupiah','total_insentif')
             ->first();
         if($targetData){
             foreach($userIds as $user){
                 $targetInsentif = InsentifKpi::where('user_id',$user)
-                                            ->where('bulan', '>=', $tanggalawal)
-                                            ->where('bulan', '<=', $tanggalakhir)
-                                            ->select('user_id','bulan','omset','total_poin','total_insentif','index_rupiah','insentif_final','poin_user')
-                                            ->first();
+                ->where('bulan', '>=', $tanggalawal)
+                ->where('bulan', '<=', $tanggalakhir)
+                ->select('user_id','bulan','omset','total_poin','total_insentif','index_rupiah','insentif_final','poin_user')
+                ->first();
+                $poin_user = kpi::where('user_id', $user)
+                ->where('bulan', '>=', $omsetawal)
+                ->where('bulan', '<=', $omsetakhir)
+                ->select('total')
+                ->first();
 
+                // $data[] = $targetInsentif;
+                if($targetInsentif && $poin_user){
+                    $rowData = [
+                        'user_id' => $user,
+                        'bulan' => '2023-11-15',
+                        'omset' => $targetData->omset,
+                        'total_poin' => $targetData->skor,
+                        'total_insentif' => $targetData->total_insentif,
+                        'index_rupiah' => $targetData->index_rupiah,
+                        'insentif_final' => $poin_user->total * $targetData->index_rupiah,
+                        'poin_user' => $poin_user->total,
+                        
+                    ];
+                }
+                $data[] = $rowData;
             }
-        }        
+        }
+        if (!empty($data)) {
+            InsentifKpi::insert($data);
+            // return $data;
+            return redirect()->back()->with('success', 'Terimakasih, Data Insentif Berhasil Disimpan.');
+        }else{
+            return redirect()->back()->with('error','Maaf, Data Insentif Gagal Di simpan.');
+        }
     }
 
     public function hapusInsentifKpi($id)

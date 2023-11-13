@@ -321,14 +321,94 @@ class UpdatePoinKPIController extends Controller
 
     public function updatePoinInsentif(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'bulan' => 'required',
+        ], [
+            'bulan.required' => 'kolom bulan wajib di isi',
         ]);
+    
         if ($validator->fails()) {
             return redirect()->back()
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
-        
+    
+        //hanya berlaku untuk poin evaluasi
+        $month = date('m');
+        $tahun = date('Y');
+        $tanggalawal = $tahun . '-' . $month . '-01';
+        $tanggalakhir = $tahun . '-' . $month . '-31';
+        //hanya berlaku untuk insentif
+        $bulan = $request->bulan;
+        $bulanawal = $tahun . '-' . $bulan . '-01';
+        $bulanakhir = $tahun . '-' . $bulan . '-31';
+
+        $userIds = InsentifKpi::where('bulan', '>=', $bulanawal)
+            ->where('bulan', '<=', $bulanakhir)
+            ->pluck('user_id');
+    
+        if ($userIds->isEmpty()) {
+            return redirect()->back()->with('error', 'Data KPI Tidak Ditemukan.');
+        }
+    
+        $data = [];
+        $usersWithoutRealization = [];
+        foreach ($userIds as $user) {
+            $targetData = kpi::where('user_id', $user)
+                ->where('bulan', '>=', $tanggalawal)
+                ->where('bulan', '<=', $tanggalakhir)
+                ->select('user_id', 'total')
+                ->first();
+    
+            $kpi = InsentifKpi::where('user_id', $user)
+                ->where('bulan', '>=', $bulanawal)
+                ->where('bulan', '<=', $bulanakhir)
+                ->select('user_id','bulan','omset','total_poin','total_insentif','index_rupiah','insentif_final','poin_user')
+                ->first();
+            $omset = OmsetKlinik::where('bulan', '>=', $bulanawal)
+                ->where('bulan', '<=', $bulanakhir)
+                ->select('omset','index_rupiah','skor','index','total_insentif')
+                ->first();
+    
+            if ($kpi && $targetData && $omset ) {
+                $rowData = [
+                    'user_id' => $user,
+                    'bulan' => $kpi->bulan,
+                    'omset' => $omset -> omset,
+                    'total_poin' => $omset -> skor,
+                    'total_insentif' => $omset -> total_insentif,
+                    'index_rupiah' => $omset -> index_rupiah,
+                    'insentif_final' => $targetData->total * $omset->index_rupiah,
+                    'poin_user' => $targetData->total,
+                ];
+                $data[] = $rowData;
+            }else{
+                // return redirect()->back()->with('error','Data Realisasi Tidak Ada Pada Bulan Ini.');
+                $userData = User::find($user);
+                if ($userData) {
+                    $usersWithoutRealization[] = $userData->name;
+                }
+            }
+        }
+        if (!empty($usersWithoutRealization)) {
+            $error_message = 'Data Realisasi Tidak Ada Pada Bulan Terpilih untuk pengguna: ' . implode(', ', $usersWithoutRealization);
+            return redirect()->back()->with('error', $error_message);
+        }
+        // return $data;    
+        if (!empty($data)) {
+            // return $data;
+            foreach ($data as $rowData) {
+                $userId = $rowData['user_id'];
+
+                InsentifKpi::where('user_id', $userId)
+                    ->where('bulan', '>=', $bulanawal)
+                    ->where('bulan', '<=', $bulanakhir)
+                    ->update($rowData);
+            }
+
+            return redirect()->back()->with('success', 'Terimakasih, Data Evaluasi Berhasil Diupdate.');
+        }else{
+            return redirect()->back()->with('error', 'Maaf, Data Insentif Gagal Diupdate.');
+        }
     }
 }
