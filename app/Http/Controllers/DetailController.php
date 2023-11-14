@@ -268,7 +268,7 @@ class DetailController extends Controller
         $title = 'Detail Pegawai';
         $type = 'detail-user';
         $data = DetailPegawai::all();
-        return view ('template.backend.admin.detail-user.index',compact('title','data','type'));
+        return view ('backend.admin.detail-pegawai.index',compact('title','data','type'));
     }
 
     public function delete($id)
