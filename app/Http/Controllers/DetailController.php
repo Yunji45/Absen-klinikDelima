@@ -268,7 +268,7 @@ class DetailController extends Controller
         $title = 'Detail Pegawai';
         $type = 'detail-user';
         $data = DetailPegawai::all();
-        return view ('backend.admin.detail-pegawai.index',compact('title','data','type'));
+        return view ('template.backend.admin.detail-user.index',compact('title','data','type'));
     }
 
     public function delete($id)
@@ -279,7 +279,8 @@ class DetailController extends Controller
     }
     public function show($id)
     {
-        $title = 'INFORMASI KARYAWAN';
+        $title = 'BIODATA PEGAWAI';
+        $type = 'detail-user';
         $data = User::all();
         // if (!$data) {
         //     return redirect()->route('route_name_for_error_page');
@@ -290,7 +291,7 @@ class DetailController extends Controller
         $post = DetailPegawai::whereId($id)->first();
         $jumlahanak = JumlahAnak::where('user_id')->get();
         // return $detail->user->foto;
-        return view ('backend.admin.detail-pegawai.show',compact('title','data','detail','dokumen','post','sertifikat','jumlahanak'));
+        return view ('template.backend.admin.detail-user.show-detail',compact('title','data','detail','dokumen','post','sertifikat','jumlahanak','type'));
     }
 
     public function downdetail($id)

@@ -65,10 +65,10 @@
                                     <td scope="col" class="text-center">{{$item->position}}</td>
                                     <td scope="col" class="text-center">{{$item->phone}}</td>
                                     <td>
-                                    <a href="" onclick="return confirm('Yakin akan edit Data?')" class="btn btn-info btn-sm">
+                                    <a href="{{route('detail.info.admin',$item->id)}}" onclick="return confirm('Yakin akan ingin melihat Data?')" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"> Lihat</i>
                                         </a>
-                                    <a href="" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                    <a href="{{route('delete.pegawai.admin',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
                                         </a>
 
