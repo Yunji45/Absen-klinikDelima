@@ -18,15 +18,19 @@ class AuthController extends Controller
     {
         $cek_login = $request->only('nik', 'password');
         if(Auth::attempt($cek_login)) {
-            return redirect()->intended('/home')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
-            // $role = Auth::user()->role;
-            // if ($role == 'admin'){
-            //     return redirect()->intended('/dashboard');
-            // }elseif ($role == 'kasir'){
-            //     return redirect()->intended('/dashboard');
-            // }elseif ($role == 'customer'){
-            //     return redirect()->intended('/customer');
-            // }
+            // return redirect()->intended('/home')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+            $role = Auth::user()->role;
+            if ($role == 'admin'){
+                return redirect()->intended('/statis')->with('success', 'Selamat Datang !! Silahkan Lakukan Analysa Performa.');
+            }elseif ($role == 'keuangan'){
+                return redirect()->intended('/home')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+            }elseif ($role == 'pegawai'){
+                return redirect()->intended('/home')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+            }elseif($role == 'evaluator'){
+                return redirect()->intended('/home')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+            }elseif($role == 'hrd'){
+                return redirect()->intended('/home')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+            }
         }else{
             return redirect('/')->with('error','ERORR !! Mohon Periksa Kembali NIP dan Password Anda.');
         }

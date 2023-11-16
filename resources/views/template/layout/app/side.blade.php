@@ -8,29 +8,24 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Beranda</li>
-            <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
+            @if (auth()->user()->role == 'admin')
+            <li class="nav-item dropdown {{ $type === 'dashboard' ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('dash.admin')}}">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li>
-                <a class="nav-link" href="">
-                    <i class="fas fa-palette"></i>
-                    <span>Beranda</span>
-                </a>
-
-            </li>
+            @endif
             <li class="menu-header">SDM</li>
             @if (auth()->user()->role == 'admin')
-            <li>
-                <a class="nav-link" href="">
+            <li class="nav-item dropdown {{ $type === 'presensi' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('kehadiran.index') }}">
                     <i class="fas fa-check"></i>
                     <span>Kehadiran</span>
                 </a>
             </li>
-            <li>
-                <a class="nav-link" href="">
+            <li class="nav-item dropdown {{ $type === 'users' ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('users.index')}}">
                     <i class="far fa-user"></i>
                     <span>Manage User</span>
                 </a>
@@ -108,9 +103,9 @@
                 </ul>
             </li>
             <li>
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{route('ip.index')}}">
                     <i class="far fa-square"></i>
-                    <span>Blank Page</span>
+                    <span>Setting IP Address</span>
                 </a>
             </li>
             @endif

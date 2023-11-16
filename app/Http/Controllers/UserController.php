@@ -21,10 +21,14 @@ class UserController extends Controller
      */
     public function index()
     {
+        $title = 'User';
+        $type = 'users';
         // $users = User::paginate(5);
         $users = User::all();
+        $admin = User::where('role','admin')->count();
+        $pegawai = User::where('role',['pegawai','keuangan','evaluator'])->count();
         // $rank = $users->firstItem();
-        return view('frontend.users.index', compact('users'));
+        return view('template.backend.admin.manage-user.index', compact('users','title','type','admin','pegawai'));
     
     }
 

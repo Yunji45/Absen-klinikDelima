@@ -24,6 +24,8 @@ class PresensiController extends Controller
      */
     public function index()
     {
+        $title = 'Absensi';
+        $type = 'presensi';
         // $presents = presensi::whereTanggal(date('Y-m-d'))->orderBy('jam_masuk','desc')->paginate(6);
         $presents = presensi::whereTanggal(date('Y-m-d'))->orderBy('jam_masuk','desc')->get();
         $masuk = presensi::whereTanggal(date('Y-m-d'))->whereKeterangan('masuk')->count();
@@ -48,7 +50,8 @@ class PresensiController extends Controller
                   ->orWhere('keterangan', 'telat');
         })->count();       
         // $rank = $presents->firstItem();
-        return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
+        return view('template.backend.admin.absen.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur','title','type'));
+        // return view('backend.admin.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur','title','type'));
     }
 
     public function search(Request $request)
@@ -58,6 +61,9 @@ class PresensiController extends Controller
             'start_date' => ['nullable', 'date'],
             'end_date' => ['nullable','date']
         ]);
+        $title = 'Absensi';
+        $type = 'presensi';
+
         $presents = Presensi::query();
 
         if ($request->filled('tanggal')) {
@@ -141,7 +147,8 @@ class PresensiController extends Controller
                         $query->where('keterangan', 'masuk')->orWhere('keterangan', 'telat');
                     })->whereBetween('tanggal', [$request->start_date, $request->end_date]);
                 })->count();
-        return view('backend.admin.index', compact('presents', 'masuk', 'telat', 'cuti', 'alpha', 'gantijaga', 'tukarjaga', 'permohonan','lembur'));
+        // return view('backend.admin.index', compact('presents', 'masuk', 'telat', 'cuti', 'alpha', 'gantijaga', 'tukarjaga', 'permohonan','lembur'));
+        return view('template.backend.admin.absen.index', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur','title','type'));
  
     }
 
