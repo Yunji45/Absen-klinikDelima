@@ -105,7 +105,7 @@ $(".sparkline-bar").sparkline(sparkline_values_bar, {
 //   }
 // });
 
-var ctx = document.getElementById("myChart2").getContext('2d');
+var ctx = document.getElementById("myChart6").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
@@ -114,8 +114,8 @@ var myChart = new Chart(ctx, {
       label: 'Statistics',
       data: [460, 458, 330, 502, 430, 610, 488],
       borderWidth: 2,
-      backgroundColor: 'rgba(254,86,83,.7)',
-      borderColor: 'rgba(254,86,83,.7)',
+      backgroundColor: 'rgba(255, 165, 0, 0.7)',
+      borderColor: 'rgba(255, 165, 0, 0.7)',
       borderWidth: 2.5,
       pointBackgroundColor: '#ffffff',
       pointRadius: 4
@@ -123,9 +123,9 @@ var myChart = new Chart(ctx, {
       label: 'Statistics',
       data: [550, 558, 390, 562, 490, 670, 538],
       borderWidth: 2,
-      backgroundColor: 'rgba(63,82,227,.8)',
-      borderColor: 'transparent',
-      borderWidth: 0,
+      backgroundColor: 'rgba(0, 128, 0, 0.7)',
+      borderColor: 'rgba(0, 128, 0, 0.7)',
+    borderWidth: 0,
       pointBackgroundColor: '#999',
       pointRadius: 4
     }]

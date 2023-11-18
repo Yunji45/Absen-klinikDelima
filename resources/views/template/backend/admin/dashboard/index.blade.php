@@ -6,44 +6,44 @@
             <h1>Dashboard</h1>
           </div>
           <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                   <i class="far fa-user"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Admin</h4>
+                    <h4>Jumlah Pegawai</h4>
                   </div>
                   <div class="card-body">
-                    10
+                    34
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-danger">
                   <i class="far fa-newspaper"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>News</h4>
+                    <h4>Pegawai Baru Bulan Ini</h4>
                   </div>
                   <div class="card-body">
-                    42
+                    5
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-warning">
                   <i class="far fa-file"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Reports</h4>
+                    <h4>Jumlah Pasien Rawat Inap</h4>
                   </div>
                   <div class="card-body">
                     1,201
@@ -51,27 +51,12 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-              <div class="card card-statistic-1">
-                <div class="card-icon bg-success">
-                  <i class="fas fa-circle"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Online Users</h4>
-                  </div>
-                  <div class="card-body">
-                    47
-                  </div>
-                </div>
-              </div>
-            </div>                  
           </div>
           <div class="row">
             <div class="col-lg-8 col-md-12 col-12 col-sm-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Statistics</h4>
+                  <h4>Statistics Tenaga Kesehatan</h4>
                   <div class="card-header-action">
                     <div class="btn-group">
                       <a href="#" class="btn btn-primary">Week</a>
@@ -109,7 +94,7 @@
             <div class="col-lg-4 col-md-12 col-12 col-sm-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Recent Activities</h4>
+                  <h4>User Activities</h4>
                 </div>
                 <div class="card-body">             
                   <ul class="list-unstyled list-unstyled-border">
@@ -117,7 +102,7 @@
                       <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-1.png" alt="avatar">
                       <div class="media-body">
                         <div class="float-right text-primary">Now</div>
-                        <div class="media-title">Farhan A Mujib</div>
+                        <div class="media-title">Data Dummy 1</div>
                         <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
                       </div>
                     </li>
@@ -125,7 +110,7 @@
                       <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-2.png" alt="avatar">
                       <div class="media-body">
                         <div class="float-right">12m</div>
-                        <div class="media-title">Ujang Maman</div>
+                        <div class="media-title">Data Dummy 2</div>
                         <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
                       </div>
                     </li>
@@ -133,7 +118,7 @@
                       <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-3.png" alt="avatar">
                       <div class="media-body">
                         <div class="float-right">17m</div>
-                        <div class="media-title">Rizal Fakhri</div>
+                        <div class="media-title"> Data Dummy 3</div>
                         <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
                       </div>
                     </li>
@@ -141,7 +126,7 @@
                       <img class="mr-3 rounded-circle" width="50" src="assets/img/avatar/avatar-4.png" alt="avatar">
                       <div class="media-body">
                         <div class="float-right">21m</div>
-                        <div class="media-title">Alfa Zulkarnain</div>
+                        <div class="media-title">Data Dummy 4</div>
                         <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
                       </div>
                     </li>
@@ -154,6 +139,123 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Statistics Jenis Kelamin</h4>
+                    <div class="card-header-action">
+                      <a href="#" class="btn active">Week</a>
+                      <a href="#" class="btn">Month</a>
+                      <a href="#" class="btn">Year</a>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="myChart2" height="180"></canvas>
+                    <div class="statistic-details mt-1">
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</div>
+                        <div class="detail-value">$243</div>
+                        <div class="detail-name">Today</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 23%</div>
+                        <div class="detail-value">$2,902</div>
+                        <div class="detail-name">This Week</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>9%</div>
+                        <div class="detail-value">$12,821</div>
+                        <div class="detail-name">This Month</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 19%</div>
+                        <div class="detail-value">$92,142</div>
+                        <div class="detail-name">This Year</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Statistics Pendidikan</h4>
+                    <div class="card-header-action">
+                      <a href="#" class="btn active">Week</a>
+                      <a href="#" class="btn">Month</a>
+                      <a href="#" class="btn">Year</a>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="myChart6" height="180"></canvas>
+                    <div class="statistic-details mt-1">
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</div>
+                        <div class="detail-value">$243</div>
+                        <div class="detail-name">Today</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 23%</div>
+                        <div class="detail-value">$2,902</div>
+                        <div class="detail-name">This Week</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>9%</div>
+                        <div class="detail-value">$12,821</div>
+                        <div class="detail-name">This Month</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 19%</div>
+                        <div class="detail-value">$92,142</div>
+                        <div class="detail-name">This Year</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Statistics Kepegawaian</h4>
+                    <div class="card-header-action">
+                      <a href="#" class="btn active">Week</a>
+                      <a href="#" class="btn">Month</a>
+                      <a href="#" class="btn">Year</a>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="myChart7" height="180"></canvas>
+                    <div class="statistic-details mt-1">
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</div>
+                        <div class="detail-value">$243</div>
+                        <div class="detail-name">Today</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 23%</div>
+                        <div class="detail-value">$2,902</div>
+                        <div class="detail-name">This Week</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>9%</div>
+                        <div class="detail-value">$12,821</div>
+                        <div class="detail-name">This Month</div>
+                      </div>
+                      <div class="statistic-details-item">
+                        <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 19%</div>
+                        <div class="detail-value">$92,142</div>
+                        <div class="detail-name">This Year</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
           <div class="row">
             <div class="col-lg-6 col-md-12 col-12 col-sm-12">

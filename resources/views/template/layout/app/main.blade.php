@@ -18,6 +18,7 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/jqvmap/dist/jqvmap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/flag-icon-css/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/modules/weather-icon/css/weather-icons.min.css')}}">
@@ -83,8 +84,13 @@
   <script src="{{asset('stisla/dist/assets/modules/chocolat/dist/js/jquery.chocolat.min.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/select2/dist/js/select2.full.min.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/jquery-selectric/jquery.selectric.min.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/modules/jquery.sparkline.min.js')}}"></script>
 
   <!-- Page Specific JS File -->
+  <script src="{{asset('stisla/dist/assets/js/page/components-statistic.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/js/page/components-pendidikan.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/js/page/components-pegawai.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/index-0.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/bootstrap-modal.js')}}"></script>
   <!-- Template JS File -->
