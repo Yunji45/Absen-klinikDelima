@@ -91,7 +91,7 @@
   <script src="{{asset('stisla/dist/assets/js/page/components-statistic.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pendidikan.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pegawai.js')}}"></script>
-  <script src="{{asset('stisla/dist/assets/js/page/index-0.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/js/page/components-pie.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/bootstrap-modal.js')}}"></script>
   <!-- Template JS File -->
   <script src="{{asset('stisla/dist/assets/js/scripts.js')}}"></script>
