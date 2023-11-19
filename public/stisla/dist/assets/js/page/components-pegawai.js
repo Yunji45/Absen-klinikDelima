@@ -48,70 +48,13 @@ $(".sparkline-bar").sparkline(sparkline_values_bar, {
 });
 
 
-// var ctx = document.getElementById("myChart").getContext('2d');
-// var myChart = new Chart(ctx, {
-//   type: 'line',
-//   data: {
-//     labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-//     datasets: [{
-//       label: 'Statistics',
-//       data: [460, 458, 330, 502, 430, 610, 488],
-//       borderWidth: 2,
-//       backgroundColor: 'rgba(63,82,227,.8)',
-//       borderWidth: 0,
-//       borderColor: 'transparent',
-//       pointBorderWidth: 0,
-//       pointRadius: 3.5,
-//       pointBackgroundColor: 'transparent',
-//       pointHoverBackgroundColor: 'rgba(63,82,227,.8)',
-//     },{
-//       label: 'Statistics',
-//       data: [390, 600, 390, 280, 600, 430, 638],
-//       borderWidth: 2,
-//       backgroundColor: 'rgba(254,86,83,.7)',
-//       borderWidth: 0,
-//       borderColor: 'transparent',
-//       pointBorderWidth: 0 ,
-//       pointRadius: 3.5,
-//       pointBackgroundColor: 'transparent',
-//       pointHoverBackgroundColor: 'rgba(254,86,83,.8)',
-//     }]
-//   },
-//   options: {
-//     legend: {
-//       display: false
-//     },
-//     scales: {
-//       yAxes: [{
-//         gridLines: {
-//           drawBorder: false,
-//           color: '#f2f2f2',
-//         },
-//         ticks: {
-//           beginAtZero: true,
-//           stepSize: 200,
-//           callback: function(value, index, values) {
-//             return '$' + value;
-//           }
-//         }
-//       }],
-//       xAxes: [{
-//         gridLines: {
-//           display: false,
-//           tickMarkLength: 15,
-//         }
-//       }]
-//     },
-//   }
-// });
-
 var ctx = document.getElementById("myChart7").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    labels: ["2023", "2024", "2025", "2026", "2027", "2028", "2029"],
     datasets: [{
-      label: 'Statistics',
+      label: 'Tetap',
       data: [460, 458, 330, 502, 430, 610, 488],
       borderWidth: 2,
       backgroundColor: 'rgba(128, 0, 128, 0.7)',
@@ -120,12 +63,12 @@ var myChart = new Chart(ctx, {
       pointBackgroundColor: '#ffffff',
       pointRadius: 4
     },{
-      label: 'Statistics',
+      label: 'Kontrak',
       data: [550, 558, 390, 562, 490, 670, 538],
       borderWidth: 2,
       backgroundColor: 'rgba(255, 182, 193, 0.7)',
       borderColor: 'rgba(255, 182, 193, 0.7)',
-            borderWidth: 0,
+      borderWidth: 0,
       pointBackgroundColor: '#999',
       pointRadius: 4
     }]

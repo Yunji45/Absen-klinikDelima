@@ -9,8 +9,8 @@ var myChart = new Chart(statistics_chart, {
     datasets: [{
       label: 'Statistics',
       data: [2, 3, 9, 1, 2, 2, 1],
-      borderWidth: 5,
-      borderColor: '#6777ef',
+      // borderWidth: 5,
+      // borderColor: '#6777ef',
       backgroundColor: ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink'], // Warna untuk setiap sektor pada pie chart
       pointBackgroundColor: '#fff',
       pointBorderColor: '#6777ef',
