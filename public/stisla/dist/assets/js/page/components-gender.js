@@ -48,91 +48,37 @@ $(".sparkline-bar").sparkline(sparkline_values_bar, {
 });
 
 
-// var ctx = document.getElementById("myChart").getContext('2d');
-// var myChart = new Chart(ctx, {
-//   type: 'line',
-//   data: {
-//     labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-//     datasets: [{
-//       label: 'Statistics',
-//       data: [460, 458, 330, 502, 430, 610, 488],
-//       borderWidth: 2,
-//       backgroundColor: 'rgba(63,82,227,.8)',
-//       borderWidth: 0,
-//       borderColor: 'transparent',
-//       pointBorderWidth: 0,
-//       pointRadius: 3.5,
-//       pointBackgroundColor: 'transparent',
-//       pointHoverBackgroundColor: 'rgba(63,82,227,.8)',
-//     },{
-//       label: 'Statistics',
-//       data: [390, 600, 390, 280, 600, 430, 638],
-//       borderWidth: 2,
-//       backgroundColor: 'rgba(254,86,83,.7)',
-//       borderWidth: 0,
-//       borderColor: 'transparent',
-//       pointBorderWidth: 0 ,
-//       pointRadius: 3.5,
-//       pointBackgroundColor: 'transparent',
-//       pointHoverBackgroundColor: 'rgba(254,86,83,.8)',
-//     }]
-//   },
-//   options: {
-//     legend: {
-//       display: false
-//     },
-//     scales: {
-//       yAxes: [{
-//         gridLines: {
-//           drawBorder: false,
-//           color: '#f2f2f2',
-//         },
-//         ticks: {
-//           beginAtZero: true,
-//           stepSize: 200,
-//           callback: function(value, index, values) {
-//             return '$' + value;
-//           }
-//         }
-//       }],
-//       xAxes: [{
-//         gridLines: {
-//           display: false,
-//           tickMarkLength: 15,
-//         }
-//       }]
-//     },
-//   }
-// });
-
 var ctx = document.getElementById("myChart10").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    datasets: [{
-      label: 'Statistics',
-      data: [460, 458, 330, 502, 430, 610, 488],
-      borderWidth: 2,
-      backgroundColor: 'rgba(254,86,83,.7)',
-      borderColor: 'rgba(254,86,83,.7)',
-      borderWidth: 2.5,
-      pointBackgroundColor: '#ffffff',
-      pointRadius: 4
-    },{
-      label: 'Statistics',
-      data: [550, 558, 390, 562, 490, 670, 538],
-      borderWidth: 2,
-      backgroundColor: 'rgba(63,82,227,.8)',
-      borderColor: 'rgba(0, 128, 0, 0.7)',
-    borderWidth: 0,
-      pointBackgroundColor: '#999',
-      pointRadius: 4
-    }]
+    labels: ["2018", "2019", "2020", "2022", "2023", "2024", "2025"],
+    datasets: [
+      {
+        label: 'Male',
+        data: [460, 458, 330, 502, 430, 100, 50],
+        borderWidth: 2,
+        backgroundColor: 'rgba(254,86,83,.7)',
+        borderColor: 'rgba(254,86,83,.7)',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#ffffff',
+        pointRadius: 4
+      },
+      {
+        label: 'Female',
+        data: [550, 558, 390, 562, 490, 30, 40],
+        borderWidth: 2,
+        backgroundColor: 'rgba(63,82,227,.8)',
+        borderColor: 'rgba(0, 128, 0, 0.7)',
+        borderWidth: 0,
+        pointBackgroundColor: '#999',
+        pointRadius: 4
+      }
+    ]
   },
   options: {
     legend: {
-      display: false
+      display: true, // You might want to display the legend to show which color corresponds to which gender
     },
     scales: {
       yAxes: [{
@@ -153,6 +99,7 @@ var myChart = new Chart(ctx, {
     },
   }
 });
+
 
 var ctx = document.getElementById("myChart3").getContext('2d');
 var myChart = new Chart(ctx, {
