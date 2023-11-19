@@ -88,7 +88,7 @@
   <script src="{{asset('stisla/dist/assets/modules/jquery.sparkline.min.js')}}"></script>
 
   <!-- Page Specific JS File -->
-  <script src="{{asset('stisla/dist/assets/js/page/components-statistic.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/js/page/components-gender.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pendidikan.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pegawai.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pie.js')}}"></script>

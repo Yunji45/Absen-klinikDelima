@@ -152,7 +152,7 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    <canvas id="myChart2" height="180"></canvas>
+                    <canvas id="myChart10" height="180"></canvas>
                     <div class="statistic-details mt-1">
                       <div class="statistic-details-item">
                         <div class="text-small text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</div>
