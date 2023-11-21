@@ -6,9 +6,9 @@
             <h1>Dashboard</h1>
           </div>
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-12 col-md-6 col-sm-6 col-12 text-center">
               <div class="card card-statistic-1">
-                <div class="card-icon bg-primary">
+                <div class="card-icon bg-primary text-center">
                   <i class="far fa-user"></i>
                 </div>
                 <div class="card-wrap">
@@ -21,7 +21,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+            <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-danger">
                   <i class="far fa-newspaper"></i>
@@ -35,7 +35,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="col-lg-6 col-md-12 col-12 col-sm-12">
