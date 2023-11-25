@@ -718,8 +718,7 @@ class KpiController extends Controller
         $kpi->delete();
         return redirect()->back()->with('success','Data Berhasil di Hapus');
     }
-
-
+    
     // Masuk Zona Realisasi KPI
     public function indexTargetKpi()
     {

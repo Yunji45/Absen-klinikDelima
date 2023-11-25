@@ -60,62 +60,62 @@
                 <tr>
                   <td class="text-center">1.</td>
                   <td class="text-center">Pendaftaran</td>
-                  <td class="text-center"><input type="number" name="daftar" id="daftar" value="{{ old('daftar', $target->daftar) }}"></td>
+                  <td class="text-center"><input type="number" name="daftar" id="daftar" value="{{ old('daftar', $target->daftar === 0 ? null : $target->daftar) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">2.</td>
                   <td class="text-center">Pemerikasaan Poli</td>
-                  <td class="text-center"><input type="number" name="poli" id="poli" value="{{ old('poli', $target->poli) }}"></td>
+                  <td class="text-center"><input type="number" name="poli" id="poli" value="{{ old('poli', $target->poli === 0 ? null : $target->poli) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">3.</td>
                   <td class="text-center">Farmasi</td>
-                  <td class="text-center"><input type="number" name="farmasi" value="{{ old('farmasi', $target->farmasi) }}"></td>
+                  <td class="text-center"><input type="number" name="farmasi" value="{{ old('farmasi', $target->farmasi === 0 ? null : $target->farmasi) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">4.</td>
                   <td class="text-center">Kasir</td>
-                  <td class="text-center"><input type="number" name="kasir" value="{{ old('kasir', $target->kasir) }}"></td>
+                  <td class="text-center"><input type="number" name="kasir" value="{{ old('kasir', $target->kasir === 0 ? null : $target->kasir) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">5.</td>
                   <td class="text-center">Home Care</td>
-                  <td class="text-center"><input type="number" name="care" value="{{ old('kasir', $target->kasir) }}"></td>
+                  <td class="text-center"><input type="number" name="care" value="{{ old('care', $target->care === 0 ? null : $target->care) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">6.</td>
                   <td class="text-center">BPJS</td>
-                  <td class="text-center"><input type="number" name="bpjs" value="{{ old('kasir', $target->kasir) }}"></td>
+                  <td class="text-center"><input type="number" name="bpjs" value="{{ old('bpjs', $target->bpjs === 0 ? null : $target->bpjs) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">7.</td>
                   <td class="text-center">Khitanan</td>
-                  <td class="text-center"><input type="number" name="khitan" value="{{ old('khitan', $target->khitan) }}"></td>
+                  <td class="text-center"><input type="number" name="khitan" value="{{ old('khitan', $target->khitan === 0 ? null : $target->khitan) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">8.</td>
                   <td class="text-center">Rawat Inap</td>
-                  <td class="text-center"><input type="number" name="rawat" value="{{ old('rawat', $target->rawat) }}"></td>
+                  <td class="text-center"><input type="number" name="rawat" value="{{ old('rawat', $target->rawat === 0 ? null : $target->rawat) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">9.</td>
                   <td class="text-center">Persalinan</td>
-                  <td class="text-center"><input type="number" name="salin" value="{{ old('salin', $target->salin) }}"></td>
+                  <td class="text-center"><input type="number" name="salin" value="{{ old('salin', $target->salin === 0 ? null : $target->salin) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">10.</td>
                   <td class="text-center">Laboratorium</td>
-                  <td class="text-center"><input type="number" name="lab" value="{{ old('lab', $target->lab) }}"></td>
+                  <td class="text-center"><input type="number" name="lab" value="{{ old('lab', $target->lab === 0 ? null : $target->lab) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">11.</td>
                   <td class="text-center">Umum</td>
-                  <td class="text-center"><input type="number" name="umum" value="{{ old('umum', $target->umum) }}"></td>
+                  <td class="text-center"><input type="number" name="umum" value="{{ old('umum', $target->umum === 0 ? null : $target->umum) }}"></td>
                 </tr>
                 <tr>
                   <td class="text-center">12.</td>
                   <td class="text-center">Visite Dokter</td>
-                  <td class="text-center"><input type="number" name="visit" value="{{ old('visit', $target->visit) }}"></td>
+                  <td class="text-center"><input type="number" name="visit" value="{{ old('visit', $target->visit === 0 ? null : $target->visit) }}"></td>
                 </tr>
                 <!-- Add more rows as needed -->
               </tbody>
