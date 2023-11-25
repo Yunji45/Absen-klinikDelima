@@ -180,7 +180,7 @@ class TargetKPIController extends Controller
         $target -> rawat = $request->rawat;
         $target -> salin = $request->salin;
         $target -> lab = $request->lab;
-        $target -> umum = $request->visit;
+        $target -> umum = $request->umum;
         $target -> visit = $request->visit;
         $target -> tambah1 = null;
         $target -> tambah2 = null;
