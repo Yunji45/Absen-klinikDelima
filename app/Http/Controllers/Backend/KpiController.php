@@ -680,7 +680,7 @@ class KpiController extends Controller
         ($kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
         $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
         $kpi->lab + $kpi->umum + $kpi->visit +
-        $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
+        $totallayanan + $totalakuntan + $totalkompetena + $totalharmonis +
         $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$kpi->target;
 
         // $kpi ->ket = 'melampaui';
@@ -718,7 +718,7 @@ class KpiController extends Controller
         $kpi->delete();
         return redirect()->back()->with('success','Data Berhasil di Hapus');
     }
-    
+
     // Masuk Zona Realisasi KPI
     public function indexTargetKpi()
     {
@@ -1077,7 +1077,7 @@ class KpiController extends Controller
                 $r_column = 'r_' . $column;
                 $c_column = 'c_' . $column;
 
-                if ($request->$r_column === null) {
+                if ($request->$r_column === null || $request->$r_column == 0) {
                     $realisasi->$r_column = 0;
                     $realisasi->$c_column = 0;
                 } elseif ($targetData->$column != 0) {
@@ -1494,5 +1494,4 @@ class KpiController extends Controller
         // return $psTotal;
         return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
     }
-
 }
