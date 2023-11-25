@@ -115,4 +115,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(InsentifKpi::class);
     }
+
+    //jasa medis
+    public function JasaMedis()
+    {
+        return $this->hasMany(JasaMedis::class);
+    }
 }

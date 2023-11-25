@@ -22,7 +22,9 @@ use App\Http\Controllers\Backend\KpiController;
 use App\Http\Controllers\Backend\TargetKPIController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UpdatePoinKPIController;
-
+use App\Http\Controllers\Backend\OprJasaMedisController;
+use App\Http\Controllers\Backend\JasaMedisController;
+//dokumentasi API (application programming interface)
 use App\Http\Controllers\API\DokumentasiController;
 
 
@@ -184,6 +186,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/Search-insentif-kpi',[KpiController::class,'SearchInsentifKpi'])->name('search.insentif.kpi');
         Route::post('/Insentif-KPI/multiple',[KpiController::class,'storeMultipleInsentifKpi'])->name('insentif.save.multiple');
         Route::post('/Insentif-KPI/multiple-update',[UpdatePoinKPIController::class,'updatePoinInsentif'])->name('insentif.update.multiple');
+
+        //Target Jasa Medis
+        Route::get('/Jasa-Medis',[JasaMedisController::class,'index'])->name('target.jasa.medis');
+        Route::post('Jasa-Medis/Save',[JasaMedisController::class,'store'])->name('target.jasa.medis.save');
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

@@ -47,7 +47,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown {{ $type === 'detail-user' ? 'active' : '' }}"">
+            <li class="nav-item dropdown {{ $type === 'detail-user' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
                     <span>Informasi Pegawai</span>
@@ -58,6 +58,20 @@
                     </li>
                     <li>
                         <a class="nav-link" href="">Dokumen</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ $type === 'jasamedis' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-list"></i>
+                    <span>Jasa Medis</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Route::currentRouteName() === 'target.jasa.medis' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('target.jasa.medis')}}">Rekam Tarif Jasa Medis</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Riwayat Jasa Medis</a>
                     </li>
                 </ul>
             </li>
