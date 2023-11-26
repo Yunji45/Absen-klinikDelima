@@ -36,7 +36,7 @@
             <i class="fa fa-download">
                 Excel</i>
         </a>
-        <a href="" class="btn btn-warning" data-toggle="modal" data-target="#kehadiran">
+        <a href="" class="btn btn-warning" data-toggle="modal" data-target="#update">
             <i class="fa fa-refresh fa-spin">
                 </i> Update Realisasi
         </a>
@@ -205,7 +205,7 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('kpi.multiple.update') }}" method="post">
+                <form action="{{ route('kpi.update.multiple') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
