@@ -51,6 +51,19 @@ class KpiController extends Controller
 
     public function create()
     {         
+        // $user_id = 10;
+        // $data = explode('-', '2023-11-15'); // Memisahkan string bulan menjadi array
+        // $bulan = $data[1]; // Bulan
+        // $tahun = $data[0]; // Tahun
+
+        // $totalMasuk = Presensi::where('user_id', $user_id)
+        // ->where('keterangan', 'Masuk')
+        // ->whereMonth('tanggal', $bulan)
+        // ->whereYear('tanggal', $tahun)
+        // ->count();
+
+        // return $targetData;
+
         $title = 'Tambah KPI';
         $type = 'kpi';
         $user = User::all();
@@ -127,11 +140,11 @@ class KpiController extends Controller
                 ->whereYear('tanggal', $tahun)
                 ->count();
                 //hitung telat
-                $totalTelat = Presensi::where('user_id', $user)
-                    ->where('keterangan', 'Telat')
-                    ->whereMonth('tanggal', $bulan)
-                    ->whereYear('tanggal', $tahun)
-                    ->count();
+                // $totalTelat = Presensi::where('user_id', $user)
+                //     ->where('keterangan', 'Telat')
+                //     ->whereMonth('tanggal', $bulan)
+                //     ->whereYear('tanggal', $tahun)
+                //     ->count();
                 //hitung lembur
                 $lembur = rubahjadwal::where('user_id', $user)
                                     ->where('permohonan', 'lembur')
@@ -166,7 +179,8 @@ class KpiController extends Controller
                     return redirect()->back()->with('error', $error_message);        
                     // return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
                 }
-                $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+                // $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+                $totalabsen = $totalMasuk /$psTotal;
                 if($totalabsen == 1 && $lembur > 1){
                     $kpi->absen =3;
                 }elseif($totalabsen == 1 ){
@@ -387,11 +401,11 @@ class KpiController extends Controller
             ->whereYear('tanggal', $tahun)
             ->count();
         //hitung telat
-        $totalTelat = Presensi::where('user_id', $user_id)
-            ->where('keterangan', 'Telat')
-            ->whereMonth('tanggal', $bulan)
-            ->whereYear('tanggal', $tahun)
-            ->count();
+        // $totalTelat = Presensi::where('user_id', $user_id)
+        //     ->where('keterangan', 'Telat')
+        //     ->whereMonth('tanggal', $bulan)
+        //     ->whereYear('tanggal', $tahun)
+        //     ->count();
         //hitung lembur
         $lembur = rubahjadwal::where('user_id', $user_id)
                             ->where('permohonan', 'lembur')
@@ -420,7 +434,8 @@ class KpiController extends Controller
         if (!$psTotal){
             return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
         }
-        $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+        // $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+        $totalabsen = $totalMasuk /$psTotal;
         if($totalabsen == 1 && $lembur > 1){
             $kpi->absen =3;
         }elseif($totalabsen == 1 ){
@@ -495,7 +510,15 @@ class KpiController extends Controller
         }
                                 
         if ($realisasi){
-            $kpi->save();
+            $datakpi = kpi::where('user_id', $user_id)
+                            ->whereMonth('bulan', $bulan)
+                            ->whereYear('bulan', $tahun)
+                            ->first();
+            if($datakpi){
+                return redirect()->back()->with('error', 'kpi user tersebut Sudah Ada.');
+            }else{
+                $kpi->save();
+            }          
             // return $kpi;
         }else{
             return redirect()->back()->with('error','Realisasi User Pada Periode '. $request->bulan .' Ini Belum Ada.');
