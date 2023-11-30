@@ -18,6 +18,7 @@ use App\Http\Controllers\IPConfigController;
 use App\Http\Controllers\HelpITController;
 use App\Http\Controllers\PenggajianController;
 
+use App\Http\Controllers\Backend\BiznetController;
 use App\Http\Controllers\Backend\KpiController;
 use App\Http\Controllers\Backend\TargetKPIController;
 use App\Http\Controllers\Backend\DashboardController;
@@ -51,6 +52,8 @@ Route::get('/face', function () {
 Route::get('/api', function () {
     return view('testyu');
 });
+Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
+Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
 Route::get('/opencv',[FaceController::class,'index']);
 Route::get('/', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
 Route::post('/act-login', [AuthController::class,'login'])->name('auth.login');
