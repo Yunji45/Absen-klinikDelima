@@ -703,7 +703,7 @@ class KpiController extends Controller
         ($kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
         $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
         $kpi->lab + $kpi->umum + $kpi->visit +
-        $totallayanan + $totalakuntan + $totalkompetena + $totalharmonis +
+        $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
         $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$kpi->target;
 
         // $kpi ->ket = 'melampaui';
