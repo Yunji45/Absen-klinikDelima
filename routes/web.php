@@ -52,8 +52,8 @@ Route::get('/face', function () {
 Route::get('/api', function () {
     return view('testyu');
 });
-Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
-Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
+// Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
+// Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
 Route::get('/opencv',[FaceController::class,'index']);
 Route::get('/', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
 Route::post('/act-login', [AuthController::class,'login'])->name('auth.login');
@@ -61,6 +61,9 @@ Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 Route::get('/home',[HomeController::class,'index'])->name('home');
 
 Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,evaluator']], function(){
+    Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
+    Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
+
     Route::get('/ganti-password', [UserController::class,'gantipassword'])->name('ganti-password');
     Route::patch('/update-password/{user}', [UserController::class,'updatePassword'])->name('update-password');
     Route::get('/profil',[UserController::class,'profil'])->name('profil');
