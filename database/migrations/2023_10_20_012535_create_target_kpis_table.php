@@ -44,6 +44,7 @@ return new class extends Migration
             $table->integer('c_umum')->nullable();
             $table->integer('r_visit')->nullable();
             $table->integer('c_visit')->nullable();
+            $table->integer('usg')->nullable();
             $table->timestamps();
         });
     }

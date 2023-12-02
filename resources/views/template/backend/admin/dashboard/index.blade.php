@@ -16,7 +16,7 @@
                     <h4>Jumlah Pegawai</h4>
                   </div>
                   <div class="card-body">
-                    34
+                    {{$JumPegawai}}
                   </div>
                 </div>
               </div>

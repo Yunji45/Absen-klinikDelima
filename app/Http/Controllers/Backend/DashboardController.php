@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -11,6 +12,8 @@ class DashboardController extends Controller
     {
         $title = 'Dashboard';
         $type = 'dashboard';
-        return view('template.backend.admin.dashboard.index',compact('title','type'));
+        $JumPegawai = User::whereIn('role',['pegawai','keuangan','evaluator','hrd'])->count();
+        return view('template.backend.admin.dashboard.index',compact('title','type','JumPegawai'));
+        // return $JumPegawai;
     }
 }
