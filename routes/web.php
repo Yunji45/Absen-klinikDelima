@@ -68,18 +68,15 @@ Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 // });
 
 // Rute untuk halaman home
-// Route::middleware(['auth', 'verified_face'])->group(function () {
-//     Route::get('/home', [HomeController::class, 'index'])->name('home');
-// });
+Route::middleware(['auth', 'verified_face'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
 
 
 Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,evaluator']], function(){
     Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
     Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
     // Route::get('/home',[HomeController::class,'index'])->name('home');
-    Route::middleware(['auth', VerifyFaceMiddleware::class])->group(function () {
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
-    });
     
 
     Route::get('/ganti-password', [UserController::class,'gantipassword'])->name('ganti-password');
