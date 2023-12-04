@@ -16,17 +16,13 @@ class VerifiedFaceMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Contoh logika verifikasi wajah sederhana
-        $isFaceVerified = true; // Ganti dengan logika verifikasi sesuai kebutuhan
+        $isFaceVerified = true;
 
-        // Jika wajah terverifikasi, lanjutkan ke rute yang diminta
-        if ($isFaceVerified) {
-            // return $next($request);
-            return redirect('/home')->with('success','Data Wajah Berhasil Teridentifikasi, Silahkan lanjutkan Presensi.');
-
-        } else {
-            // Jika wajah tidak terverifikasi, redirect atau berikan respons sesuai kebutuhan
-            return redirect('/biznet')->with('error', 'Anda harus melewati verifikasi wajah terlebih dahulu.');
+        if (!$isFaceVerified) {
+            // Jika verifikasi wajah tidak berhasil, arahkan ke /biznet
+            return redirect('/biznet')->with('error', 'Anda harus melewati verifikasi wajah di /biznet terlebih dahulu.');
         }
+
+        return $next($request);
     }
 }
