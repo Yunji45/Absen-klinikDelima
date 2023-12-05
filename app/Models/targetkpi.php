@@ -38,6 +38,7 @@ class TargetKpi extends Model
         'c_umum',
         'r_visit',
         'c_visit',
+        'usg',
     ];
 
     public function user()

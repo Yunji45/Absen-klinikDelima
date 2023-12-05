@@ -164,6 +164,12 @@
                   <td class="text-center">{{$target->visit}}</td>
                   <td class="text-center"><input type="number" name="r_visit"/></td>
                 </tr>
+                <tr>
+                  <td class="text-center">13.</td>
+                  <td class="text-center">USG</td>
+                  <td class="text-center">0</td>
+                  <td class="text-center"><input type="number" name="usg"/></td>
+                </tr>
                 <!-- Add more rows as needed -->
               </tbody>
             </table>

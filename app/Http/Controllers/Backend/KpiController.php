@@ -357,7 +357,7 @@ class KpiController extends Controller
         $targetData = targetkpi::where('user_id', $user_id)
                                 ->whereMonth('bulan', $bulan)
                                 ->whereYear('bulan', $tahun)
-                                ->select('c_daftar', 'c_poli','c_farmasi','c_bpjs','c_kasir','c_care','c_khitan','c_rawat','c_salin','c_lab','c_umum','c_visit')
+                                ->select('c_daftar', 'c_poli','c_farmasi','c_bpjs','c_kasir','c_care','c_khitan','c_rawat','c_salin','c_lab','c_umum','c_visit','usg')
                                 ->first();
         if ($targetData) {
             $kpi->daftar = $targetData->c_daftar;
@@ -372,6 +372,7 @@ class KpiController extends Controller
             $kpi->lab = $targetData->c_lab;
             $kpi->umum = $targetData->c_umum;
             $kpi->visit = $targetData->c_visit;
+            $kpi->usg = $targetData->usg;
         } else {
             $kpi->daftar = 0;
             $kpi->poli = 0;
@@ -385,6 +386,7 @@ class KpiController extends Controller
             $kpi->lab = 0;
             $kpi->umum = 0;
             $kpi->visit = 0;
+            $kpi->usg = 0;
         }
         $kpi ->layanan = $totallayanan;
         $kpi ->akuntan = $totalakuntan;
@@ -448,12 +450,12 @@ class KpiController extends Controller
         // $kpi->absen = $totalabsen;
         $totalabsen = $kpi->absen;
         $kpi->bulan = $request->bulan;
-        $kpi->total = 
-        $kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
-        $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
-        $kpi->lab + $kpi->umum + $kpi->visit +
-        $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
-        $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen;
+        // $kpi->total = 
+        // $kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
+        // $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
+        // $kpi->lab + $kpi->umum + $kpi->visit + $kpi->usg +
+        // $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
+        // $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen;
 
         $jumlahNonZero = count(array_filter([
             $kpi->daftar,
@@ -476,16 +478,24 @@ class KpiController extends Controller
             $kpi->adaptif,
             $kpi->kolaboratif,
             $kpi->absen,
+            $kpi->usg,
         ], function ($value) {
             return $value != 0;
         }));
         
         $kpi->target = $jumlahNonZero;
+
+        $kpi->total = 
+        $kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
+        $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
+        $kpi->lab + $kpi->umum + $kpi->visit + $kpi->usg +
+        $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
+        $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen;
         
         $kpi->total_kinerja = 
         ($kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
         $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
-        $kpi->lab + $kpi->umum + $kpi->visit +
+        $kpi->lab + $kpi->umum + $kpi->visit + $kpi->usg +
         $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
         $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$kpi->target;
 
@@ -969,7 +979,7 @@ class KpiController extends Controller
             $query->where('start_date', '<=', $endDate)
                 ->where('end_date', '>=', $startDate);
         })
-        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'khitan', 'rawat', 'lab', 'umum', 'visit')
         ->first();
         if ($targetData) {
             // Lakukan pengisian nilai c_* dan operasi insert dalam loop foreach
@@ -983,17 +993,20 @@ class KpiController extends Controller
                     'r_farmasi' => $request->r_farmasi,
                     'r_kasir' => $request->r_kasir,
                     'r_care' => $request->r_care,
+                    'c_care' => $request->r_care,
                     'r_khitan' => $request->r_khitan,
                     'r_rawat' => $request->r_rawat,
                     'r_salin' => $request->r_salin,
+                    'c_salin' => $request->r_salin,
                     'r_lab' => $request->r_lab,
                     'r_bpjs' => $request->r_bpjs,
                     'r_umum' => $request->r_umum,
                     'r_visit' => $request->r_visit,
+                    'usg' => $request->usg,
                 ];
 
                 // Proses pengecekan dan pengisian nilai c_*
-                $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care','khitan', 'rawat', 'salin', 'lab', 'umum', 'visit'];
+                $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'khitan', 'rawat', 'lab', 'umum', 'visit'];
                 foreach ($columns as $column) {
                     $r_column = 'r_' . $column;
                     $c_column = 'c_' . $column;
@@ -1074,7 +1087,7 @@ class KpiController extends Controller
             $query->where('start_date', '<=', $endDate)
                 ->where('end_date', '>=', $startDate);
         })
-        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'khitan', 'rawat', 'lab', 'umum', 'visit')
         ->first();
         if ($targetData) {
             $realisasi = targetkpi::find($id);
@@ -1086,15 +1099,18 @@ class KpiController extends Controller
             $realisasi -> r_farmasi = $request->r_farmasi;
             $realisasi -> r_kasir = $request->r_kasir;
             $realisasi -> r_care = $request->r_care;
+            $realisasi -> c_care = $request->r_care;
             $realisasi -> r_khitan = $request->r_khitan;
             $realisasi -> r_rawat = $request->r_rawat;
             $realisasi -> r_salin = $request->r_salin;
+            $realisasi -> c_salin = $request->r_salin;
             $realisasi -> r_lab = $request->r_lab;
             $realisasi -> r_bpjs = $request->r_bpjs;
             $realisasi -> r_umum = $request->r_umum;
             $realisasi -> r_visit = $request->r_visit;
+            $realisasi -> usg = $request->usg;
 
-            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit'];
+            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'khitan', 'rawat', 'lab', 'umum', 'visit'];
 
             foreach ($columns as $column) {
                 $r_column = 'r_' . $column;

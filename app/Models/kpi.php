@@ -41,7 +41,8 @@ class kpi extends Model
         'total',
         'total_kinerja',
         'ket',
-        'bulan'
+        'bulan',
+        'usg'
 
     ];
 

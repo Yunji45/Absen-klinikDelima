@@ -89,6 +89,7 @@
                                     <th scope="col" class="text-center">Persalinan</th>
                                     <th scope="col" class="text-center">Laboratorium</th>
                                     <th scope="col" class="text-center">Umum</th>
+                                    <th scope="col" class="text-center">USG</th>
                                     <th scope="col" class="text-center">Visite Dokter</th>
                                     <th scope="col" class="text-center">Date</th>
                                     <th scope="col" class="text-center">Action</th>
@@ -108,6 +109,7 @@
                                     <td class="text-center">{{$item->c_salin}}</td>
                                     <td class="text-center">{{$item->c_lab}}</td>
                                     <td class="text-center">{{$item->c_umum}}</td>
+                                    <td class="text-center">{{$item->usg}}</td>
                                     <td class="text-center">{{$item->c_visit}}</td>
                                     <td class="text-center">{{$item->bulan}}</td>
                                     <td>

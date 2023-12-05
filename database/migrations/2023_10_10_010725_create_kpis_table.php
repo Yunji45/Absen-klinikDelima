@@ -42,6 +42,7 @@ return new class extends Migration
             $table->integer('harmonis')->nullable();
             $table->integer('loyal')->nullable();
             $table->integer('adaptif')->nullable();
+            $table->integer('usg')->nullable();
             $table->integer('kolaboratif')->nullable();
             $table->integer('absen')->nullable();
             $table->integer('total')->nullable();

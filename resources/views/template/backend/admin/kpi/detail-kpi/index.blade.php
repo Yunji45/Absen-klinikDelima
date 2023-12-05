@@ -136,62 +136,70 @@
                                 </tr>
                                 <tr>
                                     <td scope="col" class="text-center">12.</td>
+                                    <td scope="col" class="text-center">USG</td>
+                                    <td scope="col" class="text-center">-</td>
+                                    <td scope="col" class="text-center">{{$kpi->usg}}</td>
+                                    <td scope="col" class="text-center">{{$kpi->usg}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td scope="col" class="text-center">13.</td>
                                     <td scope="col" class="text-center">Visite Dokter</td>
                                     <td scope="col" class="text-center">{{$ach->visit}}</td>
                                     <td scope="col" class="text-center">{{$targetkpi->r_visit}}</td>
                                     <td scope="col" class="text-center">{{$kpi->visit}}</td>
                                 </tr>
                                 <tr>
-                                    <td scope="col" class="text-center">13.</td>
+                                    <td scope="col" class="text-center">14.</td>
                                     <td scope="col" class="text-center">Orientasi Pelayanan</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">{{$kpi->layanan}}</td>
                                 </tr>
                                 <tr>
-                                    <td scope="col" class="text-center">14.</td>
+                                    <td scope="col" class="text-center">15.</td>
                                     <td scope="col" class="text-center">Akuntabel</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">{{$kpi->akuntan}}</td>
                                 </tr>
                                 <tr>
-                                    <td scope="col" class="text-center">15.</td>
+                                    <td scope="col" class="text-center">16.</td>
                                     <td scope="col" class="text-center">Kompeten</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">{{$kpi->kompeten}}</td>
                                 </tr>
                                 <tr>
-                                    <td scope="col" class="text-center">16.</td>
+                                    <td scope="col" class="text-center">17.</td>
                                     <td scope="col" class="text-center">Harmonis</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">{{$kpi->harmonis}}</td>
                                 </tr>
                                 <tr>
-                                    <td scope="col" class="text-center">17.</td>
+                                    <td scope="col" class="text-center">18.</td>
                                     <td scope="col" class="text-center">Loyal</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">{{$kpi->loyal}}</td>
                                 </tr>
                                 <tr>
-                                    <td scope="col" class="text-center">18.</td>
+                                    <td scope="col" class="text-center">19.</td>
                                     <td scope="col" class="text-center">Adaptif</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">{{$kpi->adaptif}}</td>
                                 </tr>
                                 <tr>
-                                    <td scope="col" class="text-center">19.</td>
+                                    <td scope="col" class="text-center">20.</td>
                                     <td scope="col" class="text-center">Kolaboratif</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">-</td>
                                     <td scope="col" class="text-center">{{$kpi->kolaboratif}}</td>
                                 </tr>
                                 <tr>
-                                    <td scope="col" class="text-center">20.</td>
+                                    <td scope="col" class="text-center">21.</td>
                                     <td scope="col" class="text-center">Absensi</td>
                                     <td scope="col" class="text-center">{{$psTotal}}</td>
                                     <td scope="col" class="text-center">{{$totalkehadiran}}</td>
