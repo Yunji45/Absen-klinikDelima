@@ -16,7 +16,7 @@ class VerifiedFaceMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $isFaceVerified = false;
+        $isFaceVerified = true;
 
         if (!$isFaceVerified) {
             // Jika verifikasi wajah tidak berhasil, arahkan ke /biznet
