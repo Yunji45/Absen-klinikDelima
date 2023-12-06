@@ -110,7 +110,7 @@ class KpiController extends Controller
         $tahun = $data[0]; // Tahun        
 
     
-        $userIds = kpi::where('bulan', '>=', $tanggalawal)
+        $userIds = targetkpi::where('bulan', '>=', $tanggalawal)
             ->where('bulan', '<=', $tanggalakhir)
             ->pluck('user_id');
     
@@ -124,7 +124,7 @@ class KpiController extends Controller
             $targetData = targetkpi::where('user_id', $user)
                 ->where('bulan', '>=', $targetawal)
                 ->where('bulan', '<=', $targetakhir)
-                ->select('user_id', 'c_daftar', 'c_poli', 'c_farmasi', 'c_bpjs', 'c_kasir', 'c_care', 'c_khitan', 'c_rawat', 'c_salin', 'c_lab', 'c_umum', 'c_visit')
+                ->select('user_id', 'c_daftar', 'c_poli', 'c_farmasi', 'c_bpjs', 'c_kasir', 'c_care', 'c_khitan', 'c_rawat', 'c_salin', 'c_lab', 'c_umum', 'c_visit','usg')
                 ->first();
     
             $kpi = kpi::where('user_id', $user)
