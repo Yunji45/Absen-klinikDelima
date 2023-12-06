@@ -485,24 +485,25 @@ class KpiController extends Controller
         
         $kpi->target = $jumlahNonZero;
 
-        $kpi->total = 
-        $kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
-        $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
-        $kpi->lab + $kpi->umum + $kpi->visit + $kpi->usg +
+        $kpi->total =
+        $targetData->c_daftar + $targetData->c_poli + $targetData->c_farmasi + $targetData->c_kasir +
+        $targetData->c_bpjs + $targetData->c_khitan + $targetData->c_rawat + $targetData->c_salin +
+        $targetData->c_lab + $targetData->c_umum + $targetData->c_visit + $targetData->usg + $targetData->c_care +
+    
         $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
         $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen;
-        
+            
         $kpi->total_kinerja = 
-        ($kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
-        $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
-        $kpi->lab + $kpi->umum + $kpi->visit + $kpi->usg +
+        ($targetData->c_daftar + $targetData->c_poli + $targetData->c_farmasi + $targetData->c_kasir +
+        $targetData->c_bpjs + $targetData->c_khitan + $targetData->c_rawat + $targetData->c_salin +
+        $targetData->c_lab + $targetData->c_umum + $targetData->c_visit + $targetData->usg + $targetData->c_care +
         $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
-        $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$kpi->target;
+        $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen)/$jumlahNonZero;
 
         // $kpi ->ket = 'melampaui';
-        if ($kpi->total_kinerja / $kpi->target == 1) {
+        if ($kpi->total_kinerja === $jumlahNonZero) {
             $kpi->ket = 'Sesuai';
-        } elseif ($kpi->total_kinerja / $kpi->target > 1) {
+        } elseif ($kpi->total_kinerja > $jumlahNonZero) {
             $kpi->ket = 'Melampaui';
         } else {
             $kpi->ket = 'Dibawah';
@@ -518,7 +519,7 @@ class KpiController extends Controller
         if ($omset) {
             return redirect()->back()->with('error', 'Performance Unit Pada Periode ' . $request->bulan . ' Sudah Final.');
         }
-                                
+        // return $kpi->total_kinerja;         
         if ($realisasi){
             $datakpi = kpi::where('user_id', $user_id)
                             ->whereMonth('bulan', $bulan)

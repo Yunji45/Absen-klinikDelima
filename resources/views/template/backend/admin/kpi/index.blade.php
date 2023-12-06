@@ -96,7 +96,7 @@
                                     <td class="text-center">{{$item->user->name}}</td>
                                     <td class="text-center">{{$item->div}}</td>
                                     <td class="text-center">{{$item->target}}</td>
-                                    <td class="text-center">{{$item->daftar + $item->poli + $item->farmasi + $item->kasir + $item->care + $item->bpjs +$item->rawat+$item->khitan+$item->persalinan+$item->lab+$item->umum+$item->visit }}</td>
+                                    <td class="text-center">{{$item->daftar + $item->poli + $item->farmasi + $item->kasir + $item->care + $item->bpjs +$item->rawat+$item->khitan+$item->persalinan+$item->lab+$item->umum+$item->visit+$item->usg }}</td>
                                     <td class="text-center">{{$item->layanan+$item->akuntan+$item->kompeten+$item->harmonis+$item->loyal+$item->adaptif+$item->kolaboratif}}</td>
                                     <td class="text-center">{{$item->absen}}</td>
                                     <td class="text-center">{{$item->total}}</td>
