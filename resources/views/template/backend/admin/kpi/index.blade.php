@@ -160,7 +160,7 @@
                                 @error('bulan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="bulan" class="col-form-label col-sm-3">Ambil Data Realisasi Bulan</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('bulan') is-invalid @enderror" name="bulanreal" id="bulanreal">
@@ -180,7 +180,7 @@
                                 </select>
                                 @error('bulan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group row" id="UMK">
                             <label for="UMK" class="col-form-label col-sm-3">Simpan Evaluasi Bulan</label>
                             <div class="col-sm-8">

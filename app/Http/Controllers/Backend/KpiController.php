@@ -22,6 +22,18 @@ class KpiController extends Controller
 {
     public function index ()
     {
+        // $user = '10';
+        // $tahun = date('Y');
+        // $tanggalawal = '2023' . '-' . '11' . '-01';
+        // $tanggalakhir = '2023' . '-' . '11' . '-31';
+
+        // $targetData = targetkpi::where('user_id', $user)
+        // ->where('bulan', '>=', $tanggalawal)
+        // ->where('bulan', '<=', $tanggalakhir)
+        // ->select('user_id', 'c_daftar', 'c_poli', 'c_farmasi', 'c_bpjs', 'c_kasir', 'c_care', 'c_khitan', 'c_rawat', 'c_salin', 'c_lab', 'c_umum', 'c_visit','usg')
+        // ->first();
+        // return $targetData;
+
         $title = 'KPI';
         $type = 'kpi';
         $user = User::all();
@@ -84,7 +96,7 @@ class KpiController extends Controller
         $validator = Validator::make($request->all(), [
             'bulan' => 'required',
             'bulantarget' => 'required',
-            'bulanreal' => 'required',
+            // 'bulanreal' => 'required',
         ], [
             'bulan.required' => 'kolom bulan wajib di isi',
         ]);
@@ -105,7 +117,7 @@ class KpiController extends Controller
         $targetawal = $tahun . '-' . $target_awal . '-01';
         $targetakhir = $tahun . '-' . $target_akhir . '-31';
 
-        $data = explode('-', $request->bulan); // Memisahkan string bulan menjadi array
+        $data = explode('-', '2023-11-15'); // Memisahkan string bulan menjadi array
         $bulan = $data[1]; // Bulan
         $tahun = $data[0]; // Tahun        
 
@@ -115,25 +127,25 @@ class KpiController extends Controller
             ->pluck('user_id');
     
         if ($userIds->isEmpty()) {
-            return redirect()->back()->with('error', 'Data KPI Tidak Ditemukan.');
+            return redirect()->back()->with('error', 'Data Ralisasi Tidak Ditemukan.');
         }
     
         $data = [];
         $usersWithoutRealization = [];
         foreach ($userIds as $user) {
             $targetData = targetkpi::where('user_id', $user)
-                ->where('bulan', '>=', $targetawal)
-                ->where('bulan', '<=', $targetakhir)
+                ->where('bulan', '>=', $tanggalawal)
+                ->where('bulan', '<=', $tanggalakhir)
                 ->select('user_id', 'c_daftar', 'c_poli', 'c_farmasi', 'c_bpjs', 'c_kasir', 'c_care', 'c_khitan', 'c_rawat', 'c_salin', 'c_lab', 'c_umum', 'c_visit','usg')
                 ->first();
     
-            $kpi = kpi::where('user_id', $user)
-                ->where('bulan', '>=', $tanggalawal)
-                ->where('bulan', '<=', $tanggalakhir)
-                ->select('div', 'jabatan', 'nama_atasan', 'div_atasan', 'jabatan_atasan', 'daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'persalinan', 'lab', 'umum', 'visit', 'layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif', 'absen')
-                ->first();
+            // $kpi = kpi::where('user_id', $user)
+            //     ->where('bulan', '>=', $tanggalawal)
+            //     ->where('bulan', '<=', $tanggalakhir)
+            //     ->select('div', 'jabatan', 'nama_atasan', 'div_atasan', 'jabatan_atasan', 'daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'persalinan', 'lab', 'umum', 'visit', 'layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif', 'absen')
+            //     ->first();
     
-            if ($kpi && $targetData) {
+            if ($targetData) {
                 $totalMasuk = Presensi::where('user_id', $user)
                 ->where('keterangan', 'Masuk')
                 ->whereMonth('tanggal', $bulan)
@@ -162,8 +174,10 @@ class KpiController extends Controller
                             ->where(function ($query) use ($column) {
                                 $query->whereIn($column, ['PS', 'SM', 'PM']);
                             })
-                            ->whereMonth('masa_aktif', $bulan)
-                            ->whereYear('masa_aktif', $tahun)        
+                            ->where('masa_aktif', '>=', $tanggalawal)
+                            ->where('masa_aktif', '<=', $tanggalakhir)            
+                            // ->whereMonth('masa_aktif', $bulan)
+                            // ->whereYear('masa_aktif', $tahun)        
                             ->count();
                     
                         $psTotal += $psCount;
@@ -182,53 +196,55 @@ class KpiController extends Controller
                 // $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
                 $totalabsen = $totalMasuk /$psTotal;
                 if($totalabsen == 1 && $lembur > 1){
-                    $kpi->absen =3;
+                    $absen =3;
                 }elseif($totalabsen == 1 ){
-                    $kpi->absen = 2;
+                    $absen = 2;
                 }elseif($totalabsen < 1){
-                    $kpi->absen =1;
+                    $absen =1;
                 }else{
-                    $kpi->absen = 0;
+                    $absen = 0;
                 }
         
                 $jumlahNonZero = count(array_filter([
-                    $kpi->daftar,
-                    $kpi->poli,
-                    $kpi->farmasi,
-                    $kpi->kasir,
-                    $kpi->bpjs,
-                    $kpi->care,
-                    $kpi->khitan,
-                    $kpi->rawat,
-                    $kpi->persalinan,
-                    $kpi->lab,
-                    $kpi->umum,
-                    $kpi->visit,
-                    $kpi->layanan,
-                    $kpi->akuntan,
-                    $kpi->kompeten,
-                    $kpi->harmonis,
-                    $kpi->loyal,
-                    $kpi->adaptif,
-                    $kpi->kolaboratif,
-                    $kpi->absen,
+                    $targetData->c_daftar,
+                    $targetData->c_poli,
+                    $targetData->c_farmasi,
+                    $targetData->c_kasir,
+                    $targetData->c_bpjs,
+                    $targetData->c_care,
+                    $targetData->c_khitan,
+                    $targetData->c_rawat,
+                    $targetData->c_salin,
+                    $targetData->c_lab,
+                    $targetData->c_umum,
+                    $targetData->c_visit,
+                    $targetData->usg,
+                    // $kpi->layanan,
+                    // $kpi->akuntan,
+                    // $kpi->kompeten,
+                    // $kpi->harmonis,
+                    // $kpi->loyal,
+                    // $kpi->adaptif,
+                    // $kpi->kolaboratif,
+                    // $kpi->absen,
+                    // $kpi->usg,
                 ], function ($value) {
                     return $value != 0;
                 }));
                 $total =
-                    ($kpi->daftar ?? 0) + ($kpi->poli ?? 0) + ($kpi->farmasi ?? 0) +
-                    ($kpi->kasir ?? 0) + ($kpi->care ?? 0) + ($kpi->bpjs ?? 0) +
-                    ($kpi->khitan ?? 0) + ($kpi->rawat ?? 0) + ($kpi->persalinan ?? 0) +
-                    ($kpi->lab ?? 0) + ($kpi->umum ?? 0) + ($kpi->visit ?? 0) +
-                    ($kpi->layanan ?? 0) + ($kpi->akuntan ?? 0) + ($kpi->kompeten ?? 0) +
-                    ($kpi->harmonis ?? 0) + ($kpi->loyal ?? 0) + ($kpi->adaptif ?? 0) +
-                    ($kpi->kolaboratif ?? 0) + ($kpi->absen ?? 0) + 1;
+                    ($targetData->c_daftar ?? 0) + ($targetData->c_poli ?? 0) + ($targetData->c_farmasi ?? 0) +
+                    ($targetData->c_kasir ?? 0) + ($targetData->c_care ?? 0) + ($targetData->c_bpjs ?? 0) +
+                    ($targetData->c_khitan ?? 0) + ($targetData->c_rawat ?? 0) + ($targetData->c_salin ?? 0) +
+                    ($targetData->c_lab ?? 0) + ($targetData->c_umum ?? 0) + ($targetData->c_visit ?? 0) + ($targetData->usg ?? 0);
+                    // ($kpi->layanan ?? 0) + ($kpi->akuntan ?? 0) + ($kpi->kompeten ?? 0) +
+                    // ($kpi->harmonis ?? 0) + ($kpi->loyal ?? 0) + ($kpi->adaptif ?? 0) +
+                    // ($kpi->kolaboratif ?? 0) + ($kpi->absen ?? 0) + 1;
 
                 $total_kinerja = 0; // Default value jika $kpi->target adalah 0
                 $total_kinerja = $total / $jumlahNonZero;
-                    if ($total_kinerja == 1) {
+                    if ($total_kinerja === $jumlahNonZero) {
                         $ket = 'Sesuai';
-                    } elseif ($total_kinerja >= 1) {
+                    } elseif ($total_kinerja > $jumlahNonZero) {
                         $ket = 'Melampaui';
                     } else {
                         $ket = 'Dibawah';
@@ -238,11 +254,11 @@ class KpiController extends Controller
                     'user_id' => $user,
                     'bulan' => $request->bulan,
                     'target' => $jumlahNonZero,
-                    'div' => $kpi->div,
-                    'jabatan' => $kpi->jabatan,
-                    'nama_atasan' => $kpi->nama_atasan,
-                    'div_atasan' => $kpi->div_atasan,
-                    'jabatan_atasan' => $kpi->jabatan_atasan,
+                    'div' => null,
+                    'jabatan' => null,
+                    'nama_atasan' => null,
+                    'div_atasan' => null,
+                    'jabatan_atasan' => null,
                     'daftar' => $targetData->c_daftar,
                     'poli' => $targetData->c_poli,
                     'farmasi' => $targetData->c_farmasi,
@@ -255,17 +271,18 @@ class KpiController extends Controller
                     'lab' => $targetData->c_lab,
                     'umum' => $targetData->c_umum,
                     'visit' => $targetData->c_visit,
-                    'layanan' => $kpi->layanan,
-                    'akuntan' => $kpi->akuntan,
-                    'kompeten' => $kpi->kompeten,
-                    'harmonis' => $kpi->harmonis,
-                    'loyal' => $kpi->loyal,
-                    'adaptif' => $kpi->adaptif,
-                    'kolaboratif' => $kpi->kolaboratif,
-                    'absen' => $kpi->absen,
+                    'layanan' => null,
+                    'akuntan' => null,
+                    'kompeten' => null,
+                    'harmonis' => null,
+                    'loyal' => null,
+                    'adaptif' => null,
+                    'kolaboratif' => null,
+                    'absen' => $absen,
                     'total' => $total,
                     'total_kinerja' => $total_kinerja,
                     'ket' => $ket,
+                    'usg' => $targetData->usg,
                 ];
     
                 $data[] = $rowData;

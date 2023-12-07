@@ -21,6 +21,7 @@ class HomeController extends Controller
     public function __constract()
     {
         $this->middleware('auth');
+        // $this->middleware('verified_face');
     }
     public function index(Request $request)
     {
