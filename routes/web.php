@@ -68,7 +68,7 @@ Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 // });
 
 // Rute untuk halaman home
-Route::middleware(['auth', 'verified_face'])->group(function () {
+Route::middleware(['web','auth', 'verified_face'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
