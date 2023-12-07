@@ -226,6 +226,7 @@ class UpdatePoinKPIController extends Controller
                     $targetData->c_lab,
                     $targetData->c_umum,
                     $targetData->c_visit,
+                    $targetData->usg,
                     $kpi->layanan,
                     $kpi->akuntan,
                     $kpi->kompeten,
