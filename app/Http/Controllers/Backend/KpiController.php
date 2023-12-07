@@ -603,7 +603,7 @@ class KpiController extends Controller
         $targetData = targetkpi::where('user_id', $user_id)
                                 ->whereMonth('bulan', $bulan)
                                 ->whereYear('bulan', $tahun)
-                                ->select('c_daftar', 'c_poli','c_farmasi','c_bpjs','c_kasir','c_care','c_khitan','c_rawat','c_salin','c_lab','c_umum','c_visit')
+                                ->select('c_daftar', 'c_poli','c_farmasi','c_bpjs','c_kasir','c_care','c_khitan','c_rawat','c_salin','c_lab','c_umum','c_visit','usg')
                                 ->first();
         if ($targetData) {
             $kpi->daftar = $targetData->c_daftar;
@@ -694,11 +694,18 @@ class KpiController extends Controller
         $totalabsen = $kpi->absen;
         $kpi->bulan = $request->bulan;
         $kpi->total = 
-        $kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
-        $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
-        $kpi->lab + $kpi->umum + $kpi->visit +
+        $targetData->c_daftar + $targetData->c_poli + $targetData->c_farmasi + $targetData->c_kasir +
+        $targetData->c_bpjs + $targetData->c_khitan + $targetData->c_rawat + $targetData->c_salin +
+        $targetData->c_lab + $targetData->c_umum + $targetData->c_visit + $targetData->usg + $targetData->c_care +
+    
         $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
         $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen;
+
+        // $kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
+        // $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
+        // $kpi->lab + $kpi->umum + $kpi->visit + $kpi->usg + $kpi->absen+
+        // $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
+        // $totalloyal + $totaladaptif + $totalkolaboratif + $totalabsen;
 
         $jumlahNonZero = count(array_filter([
             $kpi->daftar,

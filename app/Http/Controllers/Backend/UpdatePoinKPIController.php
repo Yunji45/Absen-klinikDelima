@@ -177,15 +177,15 @@ class UpdatePoinKPIController extends Controller
         $usersWithoutRealization = [];
         foreach ($userIds as $user) {
             $targetData = targetkpi::where('user_id', $user)
-                ->where('bulan', '>=', $tanggalawal)
-                ->where('bulan', '<=', $tanggalakhir)
-                ->select('user_id', 'c_daftar', 'c_poli', 'c_farmasi', 'c_bpjs', 'c_kasir', 'c_care', 'c_khitan', 'c_rawat', 'c_salin', 'c_lab', 'c_umum', 'c_visit')
+                ->where('bulan', '>=', $bulanawal)
+                ->where('bulan', '<=', $bulanakhir)
+                ->select('user_id', 'c_daftar', 'c_poli', 'c_farmasi', 'c_bpjs', 'c_kasir', 'c_care', 'c_khitan', 'c_rawat', 'c_salin', 'c_lab', 'c_umum', 'c_visit','usg')
                 ->first();
     
             $kpi = kpi::where('user_id', $user)
                 ->where('bulan', '>=', $bulanawal)
                 ->where('bulan', '<=', $bulanakhir)
-                ->select('bulan','div', 'jabatan', 'nama_atasan', 'div_atasan', 'jabatan_atasan', 'daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'persalinan', 'lab', 'umum', 'visit', 'layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif', 'absen')
+                ->select('bulan','div', 'jabatan', 'nama_atasan', 'div_atasan', 'jabatan_atasan', 'daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'persalinan', 'lab', 'umum', 'visit', 'layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif', 'absen','usg')
                 ->first();
     
             if ($kpi && $targetData) {
