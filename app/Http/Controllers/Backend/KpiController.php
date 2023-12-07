@@ -1409,7 +1409,7 @@ class KpiController extends Controller
         $omsetawal = $tahun . '-' . $target_awal . '-01';
         $omsetakhir = $tahun . '-' . $target_akhir . '-31';
 
-        $userIds = InsentifKpi::where('bulan', '>=', $tanggalawal)
+        $userIds = kpi::where('bulan', '>=', $tanggalawal)
                             ->where('bulan', '<=', $tanggalakhir)
                             ->pluck('user_id');
         $data = [];
@@ -1421,11 +1421,11 @@ class KpiController extends Controller
             ->first();
         if($targetData){
             foreach($userIds as $user){
-                $targetInsentif = InsentifKpi::where('user_id',$user)
-                ->where('bulan', '>=', $tanggalawal)
-                ->where('bulan', '<=', $tanggalakhir)
-                ->select('user_id','bulan','omset','total_poin','total_insentif','index_rupiah','insentif_final','poin_user')
-                ->first();
+                // $targetInsentif = InsentifKpi::where('user_id',$user)
+                // ->where('bulan', '>=', $tanggalawal)
+                // ->where('bulan', '<=', $tanggalakhir)
+                // ->select('user_id','bulan','omset','total_poin','total_insentif','index_rupiah','insentif_final','poin_user')
+                // ->first();
                 $poin_user = kpi::where('user_id', $user)
                 ->where('bulan', '>=', $omsetawal)
                 ->where('bulan', '<=', $omsetakhir)
@@ -1433,10 +1433,10 @@ class KpiController extends Controller
                 ->first();
 
                 // $data[] = $targetInsentif;
-                if($targetInsentif && $poin_user){
+                if($poin_user){
                     $rowData = [
                         'user_id' => $user,
-                        'bulan' => '2023-11-15',
+                        'bulan' => $omsetawal,
                         'omset' => $targetData->omset,
                         'total_poin' => $targetData->skor,
                         'total_insentif' => $targetData->total_insentif,

@@ -355,8 +355,8 @@ class UpdatePoinKPIController extends Controller
         $usersWithoutRealization = [];
         foreach ($userIds as $user) {
             $targetData = kpi::where('user_id', $user)
-                ->where('bulan', '>=', $tanggalawal)
-                ->where('bulan', '<=', $tanggalakhir)
+                ->where('bulan', '>=', $bulanawal)
+                ->where('bulan', '<=', $bulanakhir)
                 ->select('user_id', 'total')
                 ->first();
     
@@ -373,7 +373,7 @@ class UpdatePoinKPIController extends Controller
             if ($kpi && $targetData && $omset ) {
                 $rowData = [
                     'user_id' => $user,
-                    'bulan' => $kpi->bulan,
+                    'bulan' => $bulanawal,
                     'omset' => $omset -> omset,
                     'total_poin' => $omset -> skor,
                     'total_insentif' => $omset -> total_insentif,
@@ -396,17 +396,17 @@ class UpdatePoinKPIController extends Controller
         }
         // return $data;    
         if (!empty($data)) {
-            // return $data;
-            foreach ($data as $rowData) {
-                $userId = $rowData['user_id'];
+            return $data;
+            // foreach ($data as $rowData) {
+            //     $userId = $rowData['user_id'];
 
-                InsentifKpi::where('user_id', $userId)
-                    ->where('bulan', '>=', $bulanawal)
-                    ->where('bulan', '<=', $bulanakhir)
-                    ->update($rowData);
-            }
+            //     InsentifKpi::where('user_id', $userId)
+            //         ->where('bulan', '>=', $bulanawal)
+            //         ->where('bulan', '<=', $bulanakhir)
+            //         ->update($rowData);
+            // }
 
-            return redirect()->back()->with('success', 'Terimakasih, Data Evaluasi Berhasil Diupdate.');
+            // return redirect()->back()->with('success', 'Terimakasih, Data Evaluasi Berhasil Diupdate.');
         }else{
             return redirect()->back()->with('error', 'Maaf, Data Insentif Gagal Diupdate.');
         }
