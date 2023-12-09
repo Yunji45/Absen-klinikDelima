@@ -149,6 +149,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/data-permohonan-create',[RubahjadwalController::class,'storeAdm'])->name('permohonan.save.adm');
         Route::get('/Verifikasi/{id}/berhasil',[RubahjadwalController::class,'VerifPermohonan']);
         Route::get('/Reject/{id}/gagal',[RubahjadwalController::class,'destroy'])->name('permohonan.delete');
+        Route::get('/data-rubahjadwal/periode' ,[RubahjadwalController::class,'searchRubahJadwal'])->name('search.rubahjadwal');
 
         //penggajian
         Route::get('/index-persentase', [PenggajianController::class,'index'])->name('gaji.adm');

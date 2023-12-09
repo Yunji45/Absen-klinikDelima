@@ -159,10 +159,45 @@ class RubahjadwalController extends Controller
         $title = 'Permohonan Jadwal';
         $type = 'jadwal';
         $user = User::all();
-        $permohonan = rubahjadwal::whereIn('status', ['pengajuan', 'approve'])
+        // $permohonan = rubahjadwal::whereIn('status', ['pengajuan', 'approve'])
+        // ->orderBy('created_at', 'desc') 
+        // ->get();
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+        $startDate = $currentYear . '-' . $currentMonth . '-01';
+        $endDate = $currentYear . '-' . $currentMonth . '-31';
+
+        $permohonan = rubahjadwal::where(function ($query) use ($startDate, $endDate) {
+            $query->where('tanggal', '<=', $endDate)
+                ->where('tanggal', '>=', $startDate);
+        })
+        ->whereIn('status', ['pengajuan', 'approve'])
         ->orderBy('created_at', 'desc') 
         ->get();
+
+
         return view ('template.backend.admin.permohonan.index',compact('title','permohonan','user','type'));
+    }
+
+    public function searchRubahJadwal(Request $request)
+    {
+        $title = 'Permohonan Jadwal';
+        $type = 'jadwal';
+        $user = User::all();
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+    
+        $permohonan = rubahjadwal::where(function ($query) use ($startDate, $endDate) {
+            $query->where('tanggal', '<=', $endDate)
+                ->where('tanggal', '>=', $startDate);
+        })
+        ->whereIn('status', ['pengajuan', 'approve'])
+        ->orderBy('created_at', 'desc') 
+        ->get();
+    
+        return view ('template.backend.admin.permohonan.index',compact('title','permohonan','bulan','type','user'));
+
     }
 
     public function VerifPermohonan(Request $request ,$id)
@@ -204,45 +239,6 @@ class RubahjadwalController extends Controller
     
     }
 
-    // public function storeAdm(Request $request)
-    // {
-    //     $request->validate([
-    //         'user_id' => 'required',
-    //         'permohonan' => 'required',
-    //         'tanggal' => 'required|date',
-    //         'alasan' => 'required|string',
-    //     ]);
-    //     $user_id = $request->input('user_id');
-
-    //     $existingCuti = rubahjadwal::where('user_id', $user_id)
-    //         ->where('status', 'pengajuan')
-    //        ->first();
-
-    //     if ($existingCuti) {
-    //         return redirect()->back()->with('error', 'User tersebut tidak dapat mengajukan izin baru selama pengajuan izin sebelumnya masih berlangsung atau belum disetujui.');
-    //     }
-
-    //     $izinSebelumnya = rubahjadwal::where('user_id', $user_id)
-    //         ->where(function ($query) use ($request) {
-    //             $query->where('tanggal', '<=', $request->tanggal);
-    //         })
-    //         ->first();
-
-    //     if ($izinSebelumnya) {
-    //         return redirect()->back()->with('error', 'Tanggal yang Anda pilih telah digunakan User untuk izin sebelumnya.');
-    //     }
-
-
-    //     $permohonan = new rubahjadwal;
-    //     $permohonan -> user_id = $request->user_id;
-    //     $permohonan -> permohonan = $request->permohonan;
-    //     $permohonan -> tanggal = $request->tanggal;
-    //     $permohonan -> alasan = $request->alasan;
-    //     $permohonan -> status = 'pengajuan';
-    //     $permohonan ->save();
-    //     // return $permohonan;
-    //     return redirect()->back()->with('success', 'Berhasil di ajukan.');
-    // }
     public function storeAdm(Request $request)
     {
         $request->validate([

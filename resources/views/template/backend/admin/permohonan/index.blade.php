@@ -30,7 +30,7 @@
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
-                            <form action="{{route('search.kpi')}}" method="get">
+                            <form action="{{route('search.rubahjadwal')}}" method="get">
                                 @csrf
                                 <div class="input-group">
                                 <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
