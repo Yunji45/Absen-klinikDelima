@@ -44,6 +44,27 @@ class CutiController extends Controller
         // return $cuti;
     }
 
+    public function searchCuti (Request $request)
+    {
+        $title = 'Permohonan Izin';
+        $type = 'jadwal';
+        $user = User::all();
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+    
+        $cuti = cuti::where(function ($query) use ($startDate, $endDate) {
+            $query->where('tanggal_mulai', '<=', $endDate)
+                ->where('tanggal_berakhir', '>=', $startDate);
+        })
+        ->whereIn('status', ['pengajuan', 'approve'])
+        ->orderBy('created_at', 'desc') 
+        ->get();
+    
+        return view ('template.backend.admin.permohonan.izin.index',compact('title','cuti','bulan','type','user'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
