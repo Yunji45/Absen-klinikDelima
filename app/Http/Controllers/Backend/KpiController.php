@@ -1155,8 +1155,6 @@ class KpiController extends Controller
                 $realisasi -> c_salin = 3;
             }
 
-
-
             $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit'];
 
             foreach ($columns as $column) {
@@ -1183,10 +1181,7 @@ class KpiController extends Controller
                     $realisasi->$c_column = 0;
                 }
             }
-
-
             $realisasi->save();
-
             return redirect('/KPI/Data-Kinerja')->with('success','Terimakasih , Data Realiasasi Berhasil Diupdate.');
         } else {
             //handle request jika $targetData tidak ditemukan
