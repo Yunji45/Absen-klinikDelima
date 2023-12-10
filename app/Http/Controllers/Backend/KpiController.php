@@ -1018,8 +1018,9 @@ class KpiController extends Controller
                     'r_farmasi' => $request->r_farmasi,
                     'r_kasir' => $request->r_kasir,
                     'r_care' => $request->r_care,
-                    'c_care' => $request->r_care,
+                    'c_care' => 3,
                     'r_khitan' => $request->r_khitan,
+                    'c_khitan' => 3,
                     'r_rawat' => $request->r_rawat,
                     'r_salin' => $request->r_salin,
                     'c_salin' => $request->r_salin,
@@ -1030,8 +1031,9 @@ class KpiController extends Controller
                     'usg' => $request->usg,
                 ];
 
+                //home care khitan usg berapapun angka poin nya 3
                 // Proses pengecekan dan pengisian nilai c_*
-                $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'khitan', 'rawat', 'lab', 'umum', 'visit'];
+                $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir','rawat', 'lab', 'umum', 'visit'];
                 foreach ($columns as $column) {
                     $r_column = 'r_' . $column;
                     $c_column = 'c_' . $column;
