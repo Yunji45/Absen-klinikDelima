@@ -1030,7 +1030,6 @@ class KpiController extends Controller
                     'r_visit' => $request->r_visit,
                     'usg' => $request->usg,
                 ];
-
                 //home care khitan usg berapapun angka poin nya 3
                 // Proses pengecekan dan pengisian nilai c_*
                 $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir','rawat', 'lab', 'umum', 'visit'];
@@ -1114,7 +1113,7 @@ class KpiController extends Controller
             $query->where('start_date', '<=', $endDate)
                 ->where('end_date', '>=', $startDate);
         })
-        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'khitan', 'rawat', 'lab', 'umum', 'visit')
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit')
         ->first();
         if ($targetData) {
             $realisasi = targetkpi::find($id);
@@ -1126,8 +1125,9 @@ class KpiController extends Controller
             $realisasi -> r_farmasi = $request->r_farmasi;
             $realisasi -> r_kasir = $request->r_kasir;
             $realisasi -> r_care = $request->r_care;
-            $realisasi -> c_care = $request->r_care;
+            $realisasi -> c_care = 3;
             $realisasi -> r_khitan = $request->r_khitan;
+            $realisasi -> c_khitan = 3;
             $realisasi -> r_rawat = $request->r_rawat;
             $realisasi -> r_salin = $request->r_salin;
             $realisasi -> c_salin = $request->r_salin;
@@ -1137,7 +1137,7 @@ class KpiController extends Controller
             $realisasi -> r_visit = $request->r_visit;
             $realisasi -> usg = $request->usg;
 
-            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'khitan', 'rawat', 'lab', 'umum', 'visit'];
+            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit'];
 
             foreach ($columns as $column) {
                 $r_column = 'r_' . $column;
