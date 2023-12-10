@@ -67,6 +67,10 @@
                             <a href="{{route('setup.insentif.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
                             class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+
+                            <a href="{{route('edit.omset',$item->id)}}" 
+                            class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+
                         </td>                        
                     </tr>
                         @endforeach

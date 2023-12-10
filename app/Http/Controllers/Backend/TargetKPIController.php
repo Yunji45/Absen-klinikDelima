@@ -298,4 +298,60 @@ class TargetKPIController extends Controller
         $omset -> delete();
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
+
+    public function updateOmset(Request $request ,$id)
+    {
+        $validator = Validator::make($request->all(),[
+            'bulan' => 'required',
+            'omset' => 'required',
+            // 'skor' => 'required',
+            'index' => 'required',
+        ],[
+            'omset.required' => 'Omset Tidak Boleh Kosong',
+            'index.required' => 'Index Presentase Tidak Boleh Kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+        $omset = OmsetKlinik::find($id);
+        $omset ->bulan = $request->bulan;
+        $omset ->omset = $request->omset;
+        $omset ->index = $request->index;
+        //mendapatkan skor keseluruhan
+        $data = explode('-', $request->bulan);
+        $bulan = $data[1]; 
+        $tahun = $data[0]; 
+        $jumlah = 0;
+
+        $poin = kpi::whereMonth('bulan', $bulan)
+                    ->whereYear('bulan', $tahun)
+                    ->select('total')
+                    ->get();
+        foreach ($poin as $data) {
+            $jumlah += $data->total;
+        }
+        $omset ->skor = $jumlah;
+        $persen = ($request->omset * $request->index) / 100;
+        $omset ->total_insentif = round($persen, 2);
+        $index_rupiah = $persen / $jumlah;
+        $omset -> index_rupiah = round($index_rupiah, 2);
+        $omset -> save();
+        return redirect('/setup-insentif')->with('success','Data berhasil di update');
+        // return redirect()->back()->with('success','Omset Bulan ini Berhasil Ditambahkan');
+
+    }
+
+    public function editOmset($id)
+    {
+        $title = 'Performance Klinik';
+        $type = 'gaji';
+        // $omset = OmsetKlinik::all();
+        $bulan = date('m');
+        $tahun = date('Y');
+        $omset = OmsetKlinik::find($id);
+        return view ('template.backend.admin.omset.edit',compact('title','omset','type'));
+
+    }
 }

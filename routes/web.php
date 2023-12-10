@@ -175,6 +175,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/setup-insentif/save',[TargetKPIController::class,'storeOmset'])->name('setup.insentif.save');
         Route::get('/setup-insentif/delete/{id}',[TargetKPIController::class,'hapusOmset'])->name('setup.insentif.delete');
         Route::get('/Search-omset',[TargetKPIController::class,'SearchOmset'])->name('search.omset');
+        Route::post('/update/omset/{id}',[TargetKPIController::class,'updateOmset'])->name('update.omset');
+        Route::get('/omset/edit/{id}',[TargetKPIController::class,'editOmset'])->name('edit.omset');
         //Target KPI
         Route::get('/TargetKPI',[TargetKPIController::class,'index'])->name('target.kpi');
         Route::get('/TargetKPI/create',[TargetKPIController::class,'create'])->name('target.kpi.create');
