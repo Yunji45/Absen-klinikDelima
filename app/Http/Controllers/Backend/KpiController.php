@@ -1130,7 +1130,7 @@ class KpiController extends Controller
             $realisasi -> c_khitan = 3;
             $realisasi -> r_rawat = $request->r_rawat;
             $realisasi -> r_salin = $request->r_salin;
-            $realisasi -> c_salin = $request->r_salin;
+            $realisasi -> c_salin = 3;
             $realisasi -> r_lab = $request->r_lab;
             $realisasi -> r_bpjs = $request->r_bpjs;
             $realisasi -> r_umum = $request->r_umum;
