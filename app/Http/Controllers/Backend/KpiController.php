@@ -1125,17 +1125,37 @@ class KpiController extends Controller
             $realisasi -> r_farmasi = $request->r_farmasi;
             $realisasi -> r_kasir = $request->r_kasir;
             $realisasi -> r_care = $request->r_care;
-            $realisasi -> c_care = 3;
+            // $realisasi -> c_care = 3;
             $realisasi -> r_khitan = $request->r_khitan;
-            $realisasi -> c_khitan = 3;
+            // $realisasi -> c_khitan = 3;
             $realisasi -> r_rawat = $request->r_rawat;
             $realisasi -> r_salin = $request->r_salin;
-            $realisasi -> c_salin = 3;
+            // $realisasi -> c_salin = 3;
             $realisasi -> r_lab = $request->r_lab;
             $realisasi -> r_bpjs = $request->r_bpjs;
             $realisasi -> r_umum = $request->r_umum;
             $realisasi -> r_visit = $request->r_visit;
             $realisasi -> usg = $request->usg;
+
+            if ($request->r_khitan == 0 || $request->r_khitan == null){
+                $realisasi -> c_khitan = 0;
+            }else{
+                $realisasi -> c_khitan = 3;
+            }
+
+            if ($request->r_care == 0 || $request->r_care == null){
+                $realisasi -> c_care = 0;
+            }else{
+                $realisasi -> c_care = 3;
+            }
+            
+            if ($request->r_salin == 0 || $request->r_salin == null){
+                $realisasi -> c_salin = 0;
+            }else{
+                $realisasi -> c_salin = 3;
+            }
+
+
 
             $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit'];
 
