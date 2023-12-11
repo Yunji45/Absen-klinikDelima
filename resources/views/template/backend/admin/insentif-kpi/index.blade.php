@@ -40,6 +40,11 @@
                 <i class="fa fa-refresh fa-spin">
                     </i> Update Evaluasi
             </a>
+            <a href="" class="btn btn-danger" data-toggle="modal" data-target="#hapusdata">
+                <i class="fas fa-trash-alt">
+                    </i> Hapus Semua Data
+            </a>
+
 
           </div>
 
@@ -105,10 +110,10 @@
                           <td class="text-center">{{$item->poin_user}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->insentif_final), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->bulan}}</td>
-                          <td>
+                          <td class="text-center">
                             <a href="{{route('insentif.kpi.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
-                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"> Hapus</i></a>
                         </td>                        
                     </tr>
                         @endforeach
@@ -239,6 +244,48 @@
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
                         <div class="form-group row">
                             <label for="bulan" class="col-form-label col-sm-3">Update Data Bulan</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('bulan') is-invalid @enderror" name="bulan" id="bulan">
+                                    <option value="">Pilih</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">Maret</option>
+                                    <option value="04">April</option>
+                                    <option value="05">Mei</option>
+                                    <option value="06">Juni</option>
+                                    <option value="07">Juli</option>
+                                    <option value="08">Agustus</option>
+                                    <option value="09">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                                @error('bulan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="hapusdata" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="kehadiranLabel"> Hapus {{$title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('delete.all.insentif') }}" method="get">
+                    @csrf
+                    <div class="modal-body">
+                        <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
+                        <div class="form-group row">
+                            <label for="bulan" class="col-form-label col-sm-3">Hapus Data Bulan</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('bulan') is-invalid @enderror" name="bulan" id="bulan">
                                     <option value="">Pilih</option>

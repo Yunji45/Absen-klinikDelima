@@ -295,6 +295,9 @@ class TargetKPIController extends Controller
     public function hapusOmset($id)
     {
         $omset = OmsetKlinik::find($id);
+        if (!$omset) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }    
         $omset -> delete();
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }

@@ -215,6 +215,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/Search-insentif-kpi',[KpiController::class,'SearchInsentifKpi'])->name('search.insentif.kpi');
         Route::post('/Insentif-KPI/multiple',[KpiController::class,'storeMultipleInsentifKpi'])->name('insentif.save.multiple');
         Route::post('/Insentif-KPI/multiple-update',[UpdatePoinKPIController::class,'updatePoinInsentif'])->name('insentif.update.multiple');
+        Route::get('/delete-all-insentif', [KpiController::class, 'deleteAllInsentif'])->name('delete.all.insentif');
 
         //Target Jasa Medis
         Route::get('/Jasa-Medis',[JasaMedisController::class,'index'])->name('target.jasa.medis');

@@ -397,17 +397,17 @@ class UpdatePoinKPIController extends Controller
         }
         // return $data;    
         if (!empty($data)) {
-            return $data;
-            // foreach ($data as $rowData) {
-            //     $userId = $rowData['user_id'];
+            // return $data;
+            foreach ($data as $rowData) {
+                $userId = $rowData['user_id'];
 
-            //     InsentifKpi::where('user_id', $userId)
-            //         ->where('bulan', '>=', $bulanawal)
-            //         ->where('bulan', '<=', $bulanakhir)
-            //         ->update($rowData);
-            // }
+                InsentifKpi::where('user_id', $userId)
+                    ->where('bulan', '>=', $bulanawal)
+                    ->where('bulan', '<=', $bulanakhir)
+                    ->update($rowData);
+            }
 
-            // return redirect()->back()->with('success', 'Terimakasih, Data Evaluasi Berhasil Diupdate.');
+            return redirect()->back()->with('success', 'Terimakasih, Data Evaluasi Berhasil Diupdate.');
         }else{
             return redirect()->back()->with('error', 'Maaf, Data Insentif Gagal Diupdate.');
         }

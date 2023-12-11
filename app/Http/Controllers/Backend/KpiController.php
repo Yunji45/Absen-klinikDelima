@@ -1495,6 +1495,32 @@ class KpiController extends Controller
         return redirect()->back()->with('success', 'Data berhasil dihapus.');
     }
 
+    public function deleteAllInsentif(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'bulan' => 'required',
+        ], [
+            'bulan.required' => 'Bulan tidak boleh kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $target_awal = $request->bulan;
+        $tahun = date('Y');
+        $awal = $tahun . '-' . $target_awal . '-01';
+        $akhir = $tahun . '-' . $target_awal . '-31';
+        $deletedRows = InsentifKpi::whereBetween('bulan', [$awal, $akhir])->delete();
+
+        if ($deletedRows > 0) {
+            return redirect()->back()->with('success', 'Semua Data Pada Bulan Tersebut berhasil dihapus.');
+        } else {
+            return redirect()->back()->with('error', 'Tidak ada data yang ditemukan untuk dihapus pada bulan tersebut.');
+        }
+    
+        // InsentifKpi::whereBetween('bulan', [$awal, $akhir])->delete();
+        // return redirect()->back()->with('success', 'Semua Data Pada Bulan Tersebut berhasil dihapus.');
+    }
+
     //zona view detail KPI
     public function indexViewKpi($id)
     {
