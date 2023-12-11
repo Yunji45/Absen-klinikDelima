@@ -63,13 +63,13 @@
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->total_insentif), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->index_rupiah), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->bulan}}</td>
-                          <td>
+                          <td class="text-center">
                             <a href="{{route('setup.insentif.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
-                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Hapus</a>
 
                             <a href="{{route('edit.omset',$item->id)}}" 
-                            class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                            class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Edit</a>
 
                         </td>                        
                     </tr>
