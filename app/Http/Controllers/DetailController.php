@@ -322,7 +322,7 @@ class DetailController extends Controller
             return redirect('/detail-pegawai')->with('success', 'Terimakasih Sudah Update Biodata Pegawai');
         } else {
             // Handle kesalahan atau pesan jika pengguna tidak diizinkan mengupdate detail pegawai ini
-            return redirect()->back()->with('error', 'Anda tidak diizinkan mengupdate detail pegawai ini');
+            return redirect()->back()->with('error', 'Maaf ,tidak diizinkan mengupdate detail pegawai ini');
         }
 
     }

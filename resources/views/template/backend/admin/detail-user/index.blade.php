@@ -48,6 +48,7 @@
                                     <th scope="col" class="text-center">Agama</th>
                                     <th scope="col" class="text-center">Jabatan</th>
                                     <th scope="col" class="text-center">No Hp</th>
+                                    <th scope="col" class="text-center">Terakhir Update</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                                 @php $no =1; @endphp @foreach ($data as $item)
@@ -60,6 +61,7 @@
                                     <td scope="col" class="text-center">{{$item->religion}}</td>
                                     <td scope="col" class="text-center">{{$item->position}}</td>
                                     <td scope="col" class="text-center">{{$item->phone}}</td>
+                                    <td scope="col" class="text-center">{{ $item->updated_at->format('d-m-Y') }}</td>
                                     <td>
                                     <a href="{{route('detail.info.admin',$item->id)}}" onclick="return confirm('Yakin akan ingin melihat Data?')" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"> Lihat</i>

@@ -78,7 +78,7 @@
                       <h6 class="mb-0">TTL</h6>
                     </div>
                     <div class="col-sm-9 text-dark">
-                        : {{ $detail->place_birth }}, {{$detail->date_birth}}
+                        : {{ $detail->place_birth }}, {{ Carbon\Carbon::parse($detail->date_birth)->format('d-m-Y') }}
                     </div>
                   </div>
                   <hr>
