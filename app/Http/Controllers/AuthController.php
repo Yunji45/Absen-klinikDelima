@@ -23,13 +23,13 @@ class AuthController extends Controller
             if ($role == 'admin'){
                 return redirect()->intended('/statis')->with('success', 'Selamat Datang !! Silahkan Lakukan Analysa Performa.');
             }elseif ($role == 'keuangan'){
-                return redirect()->intended('/biznet')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+                return redirect()->intended('/daftar-hadir')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi Di Menu Home.');
             }elseif ($role == 'pegawai'){
-                return redirect()->intended('/biznet')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+                return redirect()->intended('/daftar-hadir')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi Di Menu Home.');
             }elseif($role == 'evaluator'){
-                return redirect()->intended('/biznet')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+                return redirect()->intended('/daftar-hadir')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi Di Menu Home.');
             }elseif($role == 'hrd'){
-                return redirect()->intended('/biznet')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
+                return redirect()->intended('/daftar-hadir')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi Di Menu Home.');
             }
         }else{
             return redirect('/')->with('error','ERORR !! Mohon Periksa Kembali NIP dan Password Anda.');
