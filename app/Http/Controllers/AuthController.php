@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Rules\LoginRule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -41,6 +41,7 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
+        Session::forget('face_verification_result');
         return redirect()->route('auth.index')->with('success', 'Terimakasih Sudah Absen');
     }
 }

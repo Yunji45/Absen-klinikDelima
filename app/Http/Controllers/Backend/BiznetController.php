@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Helper\Biznet;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class BiznetController extends Controller
 {
@@ -49,6 +50,8 @@ class BiznetController extends Controller
 
         // Panggil fungsi identify dari helper Biznet
         $result = Biznet::identify($image);
+
+        session(['face_verification_result' => $result]);
 
         // Periksa apakah hasil identifikasi memiliki user_name
         if (isset($result['risetai']['return'][0]['user_name'])) {
