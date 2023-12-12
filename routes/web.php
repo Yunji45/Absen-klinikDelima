@@ -126,6 +126,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/detail-pegawai',[DetailController::class,'indexAdm'])->name('detail.pegawai.admin');
         Route::get('/hapus-info-pegawai/{id}',[DetailController::class,'delete'])->name('delete.pegawai.admin');
         Route::get('/detail-informasi/{id}',[DetailController::class,'show'])->name('detail.info.admin');
+        Route::get('/detail-edit/{id}',[DetailController::class,'edit'])->name('detail.edit.admin');
+        Route::post('/detail-update/{id}',[DetailController::class,'updateDetailAdmin'])->name('detail.update.admin');
         Route::get('/download-detail/{id}',[DetailController::class,'downdetail'])->name('download.detail.admin');
         Route::get('/download-index',[DetailController::class,'downloadindex'])->name('download.admin.detail.index');
 

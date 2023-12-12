@@ -10,10 +10,6 @@
         </div>
     </div>
     <div class="section-header">
-        <a href="" class="btn btn-primary">
-            <i class="fa fa-plus">
-                Add</i>
-        </a>
         <a href="" class="btn btn-danger">
             <i class="fa fa-download">
                 PDF</i>
@@ -68,6 +64,10 @@
                                     <a href="{{route('detail.info.admin',$item->id)}}" onclick="return confirm('Yakin akan ingin melihat Data?')" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"> Lihat</i>
                                         </a>
+                                        <a href="{{route('detail.edit.admin',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">
+                                            <i class="fas fa-edit"> Edit</i>
+                                        </a>
+
                                     <a href="{{route('delete.pegawai.admin',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
                                         </a>

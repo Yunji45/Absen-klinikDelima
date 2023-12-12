@@ -249,8 +249,6 @@
 
                     @endif
 
-
-
                     @if (Request::segment(1) == 'profil')
                         <li class="nav-item active">
                         <a class="nav-link active" href="{{ route('profil') }}">

@@ -185,7 +185,11 @@ class DetailController extends Controller
 
     public function edit ($id)
     {
-        //
+        $title = 'Detail Pegawai';
+        $type = 'detail-user';
+        $data = DetailPegawai::find($id);
+        return view('template.backend.admin.detail-user.edit',compact('title','type','data'));
+
     }
 
     public function update(Request $request,$id)
@@ -292,6 +296,35 @@ class DetailController extends Controller
         $jumlahanak = JumlahAnak::where('user_id')->get();
         // return $detail->user->foto;
         return view ('template.backend.admin.detail-user.show-detail',compact('title','data','detail','dokumen','post','sertifikat','jumlahanak','type'));
+    }
+
+    public function updateDetailAdmin(Request $request,$id)
+    {
+        $detail = DetailPegawai ::find($id);
+        if ($detail ) {
+            // Simpan data yang diterima dari formulir ke model DetailPegawai
+            $detail ->name = $request->name;
+            $detail ->education = $request->education;
+            $detail ->position = $request->position;
+            $hireDate = Carbon::parse($request->hire_date);
+            $exitDate = $request->exit_date ? Carbon::parse($request->exit_date) : Carbon::now();
+            $lengthService = $hireDate->diff($exitDate);
+            $years = $lengthService->y;
+            $month = $lengthService->m;
+            $lamakerja = $years . ' tahun ' . $month . ' bulan';
+            $detail->length_of_service = $lamakerja;
+            $detail->hire_date = $hireDate->toDateString();
+            $detail->exit_date = $exitDate->toDateString();
+            $detail->exit_reason = $request->exit_reason ?: null;
+            $detail ->status_pekerjaan = $request->status_pekerjaan;
+            // return $detail;
+            $detail->save();
+            return redirect('/detail-pegawai')->with('success', 'Terimakasih Sudah Update Biodata Pegawai');
+        } else {
+            // Handle kesalahan atau pesan jika pengguna tidak diizinkan mengupdate detail pegawai ini
+            return redirect()->back()->with('error', 'Anda tidak diizinkan mengupdate detail pegawai ini');
+        }
+
     }
 
     public function downdetail($id)
