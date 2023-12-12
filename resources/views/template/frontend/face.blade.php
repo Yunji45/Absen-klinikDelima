@@ -12,8 +12,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-secondary text-white text-center">Hayoo Identifikasi Wajah Dulu Ya !!</div>
-
+                <div class="card-header bg-secondary text-white text-center">
+                    Mau Kemana ?? Buru-buru amat bro !!<br>
+                    Ayoo Identifikasi Wajah Dulu Ya !!
+                </div>
                 <div class="card-body">
                     <form action="{{ route('biznet.identify') }}" method="post" enctype="multipart/form-data">
                         @csrf
