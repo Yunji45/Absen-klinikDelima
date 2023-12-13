@@ -19,7 +19,7 @@ class IPConfigController extends Controller
         $path = config_path('absensi.php');
         file_put_contents($path, '<?php return ' . var_export(config('absensi'), true) . ';');    
     
-        return redirect('/home')->with('success', 'Alamat IP berhasil diubah.');
+        return redirect('/statis')->with('success', 'Alamat IP berhasil diubah.');
         // Menggabungkan konfigurasi ke dalam sebuah array
 // $configArray = [
 //     'ip_internet'    => env('IP_ADDRESS', '36.78.245.150'),
