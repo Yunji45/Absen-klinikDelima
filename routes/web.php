@@ -76,18 +76,8 @@ Route::middleware(['web','auth', 'verified_face'])->group(function () {
 
 
 Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,evaluator']], function(){
-    Route::get('/api-nakes',[StatistikController::class,'StatistikNakes']);
-    Route::get('/api-non-nakes',[StatistikController::class,'StatistikNonNakes']);
-    Route::get('/api-gender',[StatistikController::class,'StatistikGender']);
-
     Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
     Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
-    // Route::get('/home',[HomeController::class,'index'])->name('home');
-    // Route::middleware(['auth', 'verified_face'])->group(function () {
-    //     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    // });
-    
-    
 
     Route::get('/ganti-password', [UserController::class,'gantipassword'])->name('ganti-password');
     Route::patch('/update-password/{user}', [UserController::class,'updatePassword'])->name('update-password');

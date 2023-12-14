@@ -19,5 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-    // Route::get('/api', [StatistikController::class, 'StatistikNakes']);
-
+//API NAKES DASHBOARD
+Route::get('/api-nakes',[StatistikController::class,'StatistikNakes']);
+Route::get('/api-non-nakes',[StatistikController::class,'StatistikNonNakes']);
+Route::get('/api-gender',[StatistikController::class,'StatistikGender']);
+Route::get('/api-pekerjaan',[StatistikController::class,'StatistikStatusPekerjaan']);
+Route::get('/api-education',[StatistikController::class,'StatistikEducation']);
