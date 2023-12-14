@@ -71,30 +71,10 @@ class StatistikController extends Controller
 
     public function StatistikGender()
     {
-        // $perempuan = DetailPegawai::where('gender','Perempuan')->count();
-        // $laki_laki = DetailPegawai::where('gender','Laki-Laki')->count();
-        // $gender = [
-        //     'Perempuan' => $perempuan,
-        //     'Laki-Laki' => $laki_laki,
-        // ];
-        // if ($gender) {
-        //     return response()->json([
-        //         'data' => $gender,
-        //         'status' => 'success',
-        //         'message' => 'Operasi berhasil dilakukan',
-        //     ],200);
-        // } else {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => 'Terjadi kesalahan dalam melakukan operasi',
-        //     ],401);
-        // }    
         $genderByYear = DB::table('detail_pegawais')
         ->selectRaw('date_format(created_at, "%Y") as year, gender, count(*) as count')
         ->groupBy('year', 'gender')
         ->get();
-
-        // Mengelompokkan data berdasarkan tahun dan jenis kelamin
         $genderData = [];
         foreach ($genderByYear as $data) {
             $year = $data->year;
@@ -123,23 +103,34 @@ class StatistikController extends Controller
 
     public function StatistikStatusPekerjaan()
     {
-        $tetap = DetailPegawai::where('status_pekerjaan','TETAP')->count();
-        $kontrak = DetailPegawai::where('status_pekerjaan','KONTRAK')->count();
-        $status = [
-            'KONTRAK' => $kontrak,
-            'TETAP' => $tetap,
-        ];
-        if ($status) {
+        $statusPekerjaanByYear = DB::table('detail_pegawais')
+                                ->selectRaw('date_format(created_at, "%Y") as year, status_pekerjaan, count(*) as count')
+                                ->whereIn('status_pekerjaan', ['KONTRAK', 'TETAP'])
+                                ->groupBy('year', 'status_pekerjaan')
+                                ->get();
+        $statusPekerjaanData = [];
+        foreach ($statusPekerjaanByYear as $data) {
+            $year = $data->year;
+            $status_pekerjaan = strtoupper($data->status_pekerjaan);
+            $count = $data->count;
+        
+            if (!isset($statusPekerjaanData[$year])) {
+                $statusPekerjaanData[$year] = ['KONTRAK' => 0, 'TETAP' => 0];
+            }
+            $statusPekerjaanData[$year][$status_pekerjaan] += $count;
+        }
+        
+        if ($statusPekerjaanData) {
             return response()->json([
-                'data' => $status,
+                'data' => $statusPekerjaanData,
                 'status' => 'success',
                 'message' => 'Operasi berhasil dilakukan',
-            ],200);
+            ], 200);
         } else {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Terjadi kesalahan dalam melakukan operasi',
-            ],401);
+            ], 401);
         }
     }
 

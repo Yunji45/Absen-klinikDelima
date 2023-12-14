@@ -155,63 +155,63 @@
                 </div>
                 <div class="card-body">
                   <div class="mb-4">
-                    <div class="text-small float-right font-weight-bold text-muted">21</div>
+                    <div class="text-small float-right font-weight-bold text-muted">{{$S2}}</div>
                     <div class="font-weight-bold mb-1">S2</div>
-                    <div class="progress" data-height="3">
-                      <div class="progress-bar" role="progressbar" data-width="10%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" data-height="8">
+                      <div class="progress-bar" role="progressbar" data-width="{{$S2}}%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>                          
                   </div>
 
                   <div class="mb-4">
-                    <div class="text-small float-right font-weight-bold text-muted">1,880</div>
+                    <div class="text-small float-right font-weight-bold text-muted">{{$S1_Nakes}}</div>
                     <div class="font-weight-bold mb-1">S1 Kesehatan</div>
-                    <div class="progress" data-height="3">
-                      <div class="progress-bar" role="progressbar" data-width="67%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" data-height="8">
+                      <div class="progress-bar" role="progressbar" data-width="{{$S1_Nakes}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
 
                   <div class="mb-4">
-                    <div class="text-small float-right font-weight-bold text-muted">1,521</div>
+                    <div class="text-small float-right font-weight-bold text-muted">{{$S1_NonNakes}}</div>
                     <div class="font-weight-bold mb-1">S1 Non Kesehatan</div>
-                    <div class="progress" data-height="3">
-                      <div class="progress-bar" role="progressbar" data-width="58%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" data-height="8">
+                      <div class="progress-bar" role="progressbar" data-width="{{$S1_NonNakes}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
 
                   <div class="mb-4">
-                    <div class="text-small float-right font-weight-bold text-muted">884</div>
+                    <div class="text-small float-right font-weight-bold text-muted">{{$D3_Nakes}}</div>
                     <div class="font-weight-bold mb-1">D3 Kesehatan</div>
-                    <div class="progress" data-height="3">
-                      <div class="progress-bar" role="progressbar" data-width="36%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" data-height="8">
+                      <div class="progress-bar" role="progressbar" data-width="{{$D3_Nakes}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
 
                   <div class="mb-4">
-                    <div class="text-small float-right font-weight-bold text-muted">473</div>
+                    <div class="text-small float-right font-weight-bold text-muted">{{$D3_NonNakes}}</div>
                     <div class="font-weight-bold mb-1">D3 Non Kesehatan</div>
-                    <div class="progress" data-height="3">
-                      <div class="progress-bar" role="progressbar" data-width="28%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" data-height="8">
+                      <div class="progress-bar" role="progressbar" data-width="{{$D3_NonNakes}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="mb-4">
-                    <div class="text-small float-right font-weight-bold text-muted">418</div>
+                    <div class="text-small float-right font-weight-bold text-muted">{{$SLTA_Nakes}}</div>
                     <div class="font-weight-bold mb-1">SLTA Kesehatan</div>
-                    <div class="progress" data-height="3">
-                      <div class="progress-bar" role="progressbar" data-width="20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" data-height="8">
+                      <div class="progress-bar" role="progressbar" data-width="{{$SLTA_Nakes}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="mb-4">
-                    <div class="text-small float-right font-weight-bold text-muted">418</div>
+                    <div class="text-small float-right font-weight-bold text-muted">{{$SLTA_NonNakes}}</div>
                     <div class="font-weight-bold mb-1">SLTA Non Kesehatan</div>
-                    <div class="progress" data-height="3">
-                      <div class="progress-bar" role="progressbar" data-width="20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" data-height="8">
+                      <div class="progress-bar" role="progressbar" data-width="{{$SLTA_NonNakes}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                   <div class="mb-4">
-                    <div class="text-small float-right font-weight-bold text-muted">418</div>
+                    <div class="text-small float-right font-weight-bold text-muted">{{$Dibawah_SLTA}}</div>
                     <div class="font-weight-bold mb-1">Dibawah SLTA</div>
-                    <div class="progress" data-height="3">
-                      <div class="progress-bar" role="progressbar" data-width="20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress" data-height="8">
+                      <div class="progress-bar" role="progressbar" data-width="{{$Dibawah_SLTA}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
