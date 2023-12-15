@@ -217,7 +217,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
 
         //Target Jasa Medis
         Route::get('/Jasa-Medis',[JasaMedisController::class,'index'])->name('target.jasa.medis');
-        Route::post('Jasa-Medis/Save',[JasaMedisController::class,'store'])->name('target.jasa.medis.save');
+        Route::post('/Jasa-Medis/save',[JasaMedisController::class,'store'])->name('target.jasa.medis.save');
+        Route::get('/Jasa-Medis/edit/{id}',[JasaMedisController::class,'edit'])->name('target.jasa.medis.edit');
+        Route::get('/Jasa-Medis/delete/{id}',[JasaMedisController::class,'destroy'])->name('target.jasa.medis.delete');
+        Route::post('/Jasa-Medis/update/{id}',[JasaMedisController::class,'update'])->name('target.jasa.medis.update');
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

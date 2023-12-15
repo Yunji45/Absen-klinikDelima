@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\OprJasaMedis;
 use App\Models\JasaMedis;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class JasaMedisController extends Controller
 {
@@ -31,7 +32,7 @@ class JasaMedisController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -42,7 +43,41 @@ class JasaMedisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'nama_standar_opr' => 'required',
+            'jenis_layanan' => 'required',
+            'jenis_jasa' => 'required',
+            'tarif_jasa' => 'required',
+
+        ],[
+            'nama_standar_opr.required' => 'Nama Tidak Boleh Kosong',
+            'jenis_layanan.required' => 'Jenis Layanan Tidak Boleh Kosong',
+            'jenis_jasa.required' => 'Jenis Jasa Tidak Boleh Kosong',
+            'tarif_jasa.required' => 'Tarif Jasa Tidak Boleh Kosong',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+        $jasa = new JasaMedis;
+        $jasa -> nama_standar_opr = $request->nama_standar_opr;
+        $jasa -> start_date = $request->start_date;
+        $jasa -> end_date = $request->end_date;
+        $jasa -> jenis_layanan = $request->jenis_layanan;
+        $jasa -> jenis_jasa = $request->jenis_jasa;
+        $jasa -> tarif_jasa = $request->tarif_jasa;
+
+        $jasa -> save();
+        if($jasa){
+            return redirect()->back()->with('success','Jenis Jasa Berhasil Ditambahkan.');
+        }else{
+            return redirect()->back()->with('error','Jenis Jasa Gagal Ditambahkan.');
+        }
+
+        // return $jasa;
     }
 
     /**
@@ -64,7 +99,10 @@ class JasaMedisController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Tarif Dasar Jasa Medis';
+        $type = 'jasamedis';
+        $jasa = JasaMedis::find($id);
+        return view('template.backend.admin.jasamedis.target.edit',compact('title','type','jasa'));
     }
 
     /**
@@ -76,7 +114,20 @@ class JasaMedisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jasa = JasaMedis::find($id);
+        $jasa -> nama_standar_opr = $request->nama_standar_opr;
+        $jasa -> start_date = $request->start_date;
+        $jasa -> end_date = $request->end_date;
+        $jasa -> jenis_layanan = $request->jenis_layanan;
+        $jasa -> jenis_jasa = $request->jenis_jasa;
+        $jasa -> tarif_jasa = $request->tarif_jasa;
+        // return $jasa;
+        $jasa -> save();
+        if($jasa){
+            return redirect('/Jasa-Medis')->with('success','Data Tarif Jasa Medis Berhasil Diupdate.');
+        }else{
+            return redirect()->back()->with('error','Data Tarif Gagal Diupdate');
+        }
     }
 
     /**
@@ -87,6 +138,8 @@ class JasaMedisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jasa = JasaMedis::find($id);
+        $jasa -> delete();
+        return redirect()->back()->with('success','Data Tarif Jasa Medis Berhasil Dihapus.');
     }
 }
