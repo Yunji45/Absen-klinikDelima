@@ -93,7 +93,7 @@
         </div>
     </div>
 </section>
-<div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
+        <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -156,6 +156,7 @@
                 </form>
             </div>
         </div>
+    </div>
 
 <script>
     function myFunction() {

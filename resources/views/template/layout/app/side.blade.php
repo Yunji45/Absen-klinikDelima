@@ -70,8 +70,8 @@
                     <li class="{{ Route::currentRouteName() === 'target.jasa.medis' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('target.jasa.medis')}}">Rekam Tarif Jasa Medis</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="">Riwayat Jasa Medis</a>
+                    <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('opr.medis')}}">Riwayat Jasa Medis</a>
                     </li>
                 </ul>
             </li>
