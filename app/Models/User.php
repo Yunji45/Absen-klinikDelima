@@ -119,6 +119,6 @@ class User extends Authenticatable
     //jasa medis
     public function JasaMedis()
     {
-        return $this->hasMany(JasaMedis::class);
+        return $this->hasMany(OprJasaMedis::class);
     }
 }

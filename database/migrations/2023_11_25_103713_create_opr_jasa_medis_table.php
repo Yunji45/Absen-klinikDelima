@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('opr_jasa_medis', function (Blueprint $table) {
             $table->id();
             $table->string('No_RM')->nullable();
+            $table->date('bulan')->nullable();
             $table->unsignedBigInteger('target_id');
             $table->foreign('target_id')->references('id')->on('jasa_medis');
             $table->string('nama_pasien')->nullable();

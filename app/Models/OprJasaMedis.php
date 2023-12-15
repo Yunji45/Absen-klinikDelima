@@ -12,6 +12,7 @@ class OprJasaMedis extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'No_RM',
+        'bulan',
         'target_id',
         'nama_pasien',
         'jenis_layanan',
@@ -24,5 +25,10 @@ class OprJasaMedis extends Model
     public function jasamedis()
     {
         return $this->belongsTo(JasaMedis::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

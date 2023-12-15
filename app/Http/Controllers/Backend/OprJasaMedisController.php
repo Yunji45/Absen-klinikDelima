@@ -17,6 +17,11 @@ class OprJasaMedisController extends Controller
      */
     public function index()
     {
+        $title = 'Operasional Jasa Medis';
+        $type = 'oprmedis';
+        $opr = OprJasaMedis::all();
+
+        return view ('template.backend.admin.jasamedis.opr.index',compact('title','type','opr'));
     }
 
     /**

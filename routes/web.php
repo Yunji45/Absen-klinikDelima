@@ -221,6 +221,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/Jasa-Medis/edit/{id}',[JasaMedisController::class,'edit'])->name('target.jasa.medis.edit');
         Route::get('/Jasa-Medis/delete/{id}',[JasaMedisController::class,'destroy'])->name('target.jasa.medis.delete');
         Route::post('/Jasa-Medis/update/{id}',[JasaMedisController::class,'update'])->name('target.jasa.medis.update');
+
+        //OPR Jasa Medis
+        Route::get('/opr-medis',[OprJasaMedisController::class,'index'])->name('opr.medis');
+        
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
