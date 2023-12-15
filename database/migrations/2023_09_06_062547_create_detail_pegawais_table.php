@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('date_birth')->nullable();
             $table->enum('gender',['Laki-Laki','Perempuan'])->nullable();
             $table->enum('religion',['Islam','Kristen','Hindu','Buddha','Konghucu'])->nullable();
-            $table->enum('education',['SMK/SMA','D3/S1','S2','S3'])->nullable();
+            $table->string('education')->nullable();
             $table->string('program_study')->nullable();
             $table->text('address')->nullable();
             $table->string('position')->nullable();
