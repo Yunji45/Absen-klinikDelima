@@ -5,16 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Identifikasi Wajah</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+body {
+            background-color: #000000; /* Warna hitam */
+            color: #ffffff; /* Warna teks putih untuk kontras */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn-capture {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-capture:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-identify {
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-identify:hover {
+            background-color: #218838;
+        }
+
+        .result-box {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-secondary text-white text-center">
-                    Mau Kemana ?? Buru-buru amat bro !!<br>
-                    Ayoo Identifikasi Wajah Dulu Ya !!
+                <div class="card-header">
+                    <h4>FACE RECOGNITION</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('biznet.identify') }}" method="post" enctype="multipart/form-data">
@@ -24,19 +84,18 @@
                             <div class="input-group">
                                 <video id="video" class="img-fluid" autoplay></video>
                                 <canvas id="canvas" style="display:none"></canvas>
-                                <!-- Menambahkan elemen untuk menampilkan gambar yang diambil -->
                                 <img id="capturedImage" class="img-fluid" style="display:none" alt="Captured Image">
                                 <div class="input-group-append">
-                                    <button type="button" class="btn btn-outline-secondary" id="captureButton">Ambil Foto</button>
+                                    <button type="button" class="btn btn-capture" id="captureButton">Ambil Wajah</button>
                                 </div>
                             </div>
                         </div>
                         <textarea id="base64image" name="base64image" style="display:none"></textarea>
-                        <button type="submit" class="btn btn-primary ml-auto">Identifikasi</button>
+                        <button type="submit" class="btn btn-identify btn-block">Identifikasi</button>
                     </form>
 
                     @if (isset($result))
-                        <div class="mt-3">
+                        <div class="result-box mt-3">
                             <h5>Hasil Identifikasi:</h5>
                             <pre>{{ json_encode($result, JSON_PRETTY_PRINT) }}</pre>
                         </div>
@@ -67,15 +126,12 @@
             });
 
         captureButton.addEventListener('click', function () {
-            // Ambil gambar dari video dan konversi ke base64
             const context = canvas.getContext('2d');
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const imageData = canvas.toDataURL('image/png');
 
-            // Set nilai textarea dengan data gambar dalam format base64
             document.getElementById('base64image').value = imageData;
 
-            // Tampilkan gambar yang diambil
             capturedImage.src = imageData;
             capturedImage.style.display = 'block';
         });

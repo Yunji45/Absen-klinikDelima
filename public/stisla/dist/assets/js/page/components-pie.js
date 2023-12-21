@@ -27,7 +27,7 @@
 "use strict";
 
 // Mendapatkan elemen canvas
-var statistics_chart = document.getElementById("myChart9").getContext('2d');
+var statistics_chart = document.getElementById("myChart200").getContext('2d');
 
 // Melakukan permintaan ke API untuk mendapatkan data
 fetch('http://localhost:8000/api/api-nakes') // Ganti URL dengan URL API sebenarnya

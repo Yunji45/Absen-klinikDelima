@@ -50,7 +50,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <canvas id="myChart9" height="182"></canvas>
+                  <canvas id="myChart200" height="182"></canvas>
                 </div>
               </div>
             </div>
@@ -220,10 +220,12 @@
           </div>
 
         </section>
-          <!-- <script src="{{asset('stisla/dist/assets/js/page/components-gender.js')}}"></script>
+        <link rel="stylesheet" href="{{asset('stisla/dist/assets/css/components.css')}}">
+
+          <script src="{{asset('stisla/dist/assets/js/page/components-gender.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pendidikan.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pegawai.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pie.js')}}"></script>
-  <script src="{{asset('stisla/dist/assets/js/page/components-pie1.js')}}"></script> -->
+  <script src="{{asset('stisla/dist/assets/js/page/components-pie1.js')}}"></script>
 
 @endsection

@@ -219,7 +219,7 @@ fetchData('http://localhost:8000/api/api-pekerjaan') // Ganti dengan URL API yan
 
 // Fungsi untuk memperbarui chart pekerjaan
 function updatePekerjaanChart(years, kontrakData, tetapData) {
-  var ctx = document.getElementById("myChart10").getContext('2d');
+  var ctx = document.getElementById("myChart7").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
