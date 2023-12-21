@@ -28,7 +28,7 @@
                 <i class="fa fa-plus">
                     Add</i>
             </a> -->
-            <a href="" class="btn btn-danger">
+            <a href="{{route('download.insentif.kpi')}}" class="btn btn-danger">
                 <i class="fa fa-download">
                     </i> Pdf
             </a>

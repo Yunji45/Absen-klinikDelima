@@ -1357,6 +1357,22 @@ class KpiController extends Controller
         return view ('template.backend.admin.insentif-kpi.index',compact('title','insentif','user','poin','type'));
     }
 
+    public function DownloadInsentif(Request $request)
+    {
+        $title = 'Insentif Kinerja KPI';
+        $type = 'gaji';
+
+        $data = InsentifKpi::whereMonth('bulan', '11')
+            ->whereYear('bulan', '2023')
+            ->orderBy('bulan', 'asc')
+            ->get();
+        // $data = InsentifKpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
+        // return response()->json(['data' => $data]);
+        // $data = jadwal::all();
+        $pdf = PDF::loadview('template.backend.admin.insentif-kpi.download',['data'=>$data]);
+        return $pdf->download('Insentif-KPI');            
+    }
+
     public function storeInsentifKpi(Request $request)
     {
         $validator = Validator::make($request->all(),[
