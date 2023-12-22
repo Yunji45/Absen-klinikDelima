@@ -18,7 +18,7 @@ class OprJasaMedis extends Model
         'jenis_layanan',
         'jenis_jasa',
         'tarif_jasa',
-        'nama_petugas',
+        'user_id',
         'ceklis_tindakan',
     ];
 

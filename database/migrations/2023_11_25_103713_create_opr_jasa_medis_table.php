@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('jenis_layanan')->nullable();
             $table->string('jenis_jasa')->nullable();
             $table->integer('tarif_jasa')->nullable();
-            $table->unsignedBigInteger('nama_petugas');
-            $table->foreign('nama_petugas')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('ceklis_tindakan')->nullable();//enum ya atau tidak
             $table->timestamps();
         });

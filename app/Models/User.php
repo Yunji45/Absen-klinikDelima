@@ -116,7 +116,7 @@ class User extends Authenticatable
         return $this->hasMany(InsentifKpi::class);
     }
 
-    //jasa medis
+    //opr jasa medis
     public function JasaMedis()
     {
         return $this->hasMany(OprJasaMedis::class);

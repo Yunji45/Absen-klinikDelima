@@ -69,7 +69,7 @@
                                     <td scope="col" class="text-center">{{$item->jenis_layanan}}</td>
                                     <td scope="col" class="text-center">{{$item->jenis_jasa}}</td>
                                     <td scope="col" class="text-center">{{$item->tarif_jasa}}</td>
-                                    <td scope="col" class="text-center">
+                                    <td scope="col" class="text-center"> 
                                     @if ($item && $item->user)
         {{ $item->user->name }}
     @else

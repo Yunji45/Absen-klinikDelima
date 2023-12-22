@@ -19,11 +19,6 @@ class JasaMedis extends Model
         'tarif_jasa',
     ];
 
-    public function user ()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function opr()
     {
         return $this->hasMany(OprJasaMedis::class);

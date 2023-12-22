@@ -20,8 +20,9 @@ class OprJasaMedisController extends Controller
         $title = 'Daftar Tugas Jasa Medis';
         $type = 'jasamedis';
         $opr = OprJasaMedis::all();
+        $user = User::all();
 
-        return view ('template.backend.admin.jasamedis.opr.index',compact('title','type','opr'));
+        return view ('template.backend.admin.jasamedis.opr.index',compact('title','type','opr','user'));
     }
 
     /**
