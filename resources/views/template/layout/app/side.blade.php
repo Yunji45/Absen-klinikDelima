@@ -64,7 +64,7 @@
             <li class="nav-item dropdown {{ $type === 'jasamedis' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
-                    <span>Jasa Medis</span>
+                    <span>Jasa Medis & Care</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Route::currentRouteName() === 'target.jasa.medis' ? 'active' : '' }}">
@@ -72,6 +72,9 @@
                     </li>
                     <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('opr.medis')}}">Riwayat Jasa Medis</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('opr.medis')}}">Home Care</a>
                     </li>
                 </ul>
             </li>
