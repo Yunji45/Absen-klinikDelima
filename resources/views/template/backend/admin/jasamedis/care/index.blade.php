@@ -80,20 +80,20 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('opr.medis.save')}}" method="post">
+                    <form action="{{route('home.care.save')}}" method="post">
                         @csrf
                         <div class="modal-body">
                             <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
 
                             <div class="form-group row" id="name">
-                                <label for="jam_masuk" class="col-form-label col-sm-3">Bulan</label>
+                                <label for="bulan" class="col-form-label col-sm-3">Bulan</label>
                                 <div class="col-sm-9">
-                                    <input type="date" name="bulan" id="bulan" class="form-control @error('name') is-invalid @enderror">
-                                    @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                    <input type="date" name="bulan" id="bulan" class="form-control @error('bulan') is-invalid @enderror">
+                                    @error('bulan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
-                                <label for="UMK" class="col-form-label col-sm-3">Nama Petugas</label>
+                                <label for="user_id" class="col-form-label col-sm-3">Nama Petugas</label>
                                 <div class="col-sm-9">
                                     <select name="user_id" id="user_id" class="form-control @error('user_id') is-invalid @enderror">
                                         <option value="" selected disabled>Pilih Nama Petugas</option>
@@ -105,43 +105,51 @@
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
-                                <label for="UMK" class="col-form-label col-sm-3">No RM</label>
+                                <label for="No_RM" class="col-form-label col-sm-3">No HC</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="No_RM" id="No_RM" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan No RM">
-                                    @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                    <input type="text" name="No_HC" id="No_HC" class="form-control @error('No_HC') is-invalid @enderror" placeholder="Masukkan No HC">
+                                    @error('No_HC') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
-                                <label for="UMK" class="col-form-label col-sm-3">Nama Pasien</label>
+                                <label for="nama_pasien" class="col-form-label col-sm-3">Nama Pasien</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="nama_pasien" id="nama_pasien" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Nama Pasien">
-                                    @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                    <input type="text" name="nama_pasien" id="nama_pasien" class="form-control @error('nama_pasien') is-invalid @enderror" placeholder="Masukkan Nama Pasien">
+                                    @error('nama_pasien') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
-                                <label for="UMK" class="col-form-label col-sm-3">Jenis Layanan</label>
+                                <label for="foto" class="col-form-label col-sm-3">Foto</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="jenis_layanan" id="jenis_layanan" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Jenis Layanan">
-                                    @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                    <input type="file" name="foto" id="foto" class="form-control-file @error('foto') is-invalid @enderror">
+                                    @error('foto') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
-                                <label for="UMK" class="col-form-label col-sm-3">Jenis Jasa</label>
+                                <label for="jenis_layanan" class="col-form-label col-sm-3">Jenis Layanan</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="jenis_jasa" id="jenis_jasa" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Jenis Jasa">
-                                    @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                    <input type="text" name="jenis_layanan" id="jenis_layanan" class="form-control @error('jenis_layanan') is-invalid @enderror" placeholder="Masukkan Jenis Layanan">
+                                    @error('jenis_layanan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
-                                <label for="UMK" class="col-form-label col-sm-3">Tarif Jasa</label>
+                                <label for="jenis_jasa" class="col-form-label col-sm-3">Jenis Jasa</label>
                                 <div class="col-sm-9">
-                                    <input type="number" name="tarif_jasa" id="tarif_jasa" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Tarif Jasa">
-                                    @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                    <input type="text" name="jenis_jasa" id="jenis_jasa" class="form-control @error('jenis_jasa') is-invalid @enderror" placeholder="Masukkan Jenis Jasa">
+                                    @error('jenis_jasa') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+                            <div class="form-group row" id="UMK">
+                                <label for="tarif_jasa" class="col-form-label col-sm-3">Tarif Jasa</label>
+                                <div class="col-sm-9">
+                                    <input type="number" name="tarif_jasa" id="tarif_jasa" class="form-control @error('tarif_jasa') is-invalid @enderror" placeholder="Masukkan Tarif Jasa">
+                                    @error('tarif_jasa') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
                 </div>
