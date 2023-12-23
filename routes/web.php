@@ -25,6 +25,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UpdatePoinKPIController;
 use App\Http\Controllers\Backend\OprJasaMedisController;
 use App\Http\Controllers\Backend\JasaMedisController;
+use App\Http\Controllers\Backend\HomeCareController;
 //dokumentasi API (application programming interface)
 use App\Http\Controllers\API\DokumentasiController;
 use App\Http\Controllers\Api\StatistikController;
@@ -230,6 +231,14 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/opr-medis/update/{id}',[OprJasaMedisController::class,'update'])->name('opr.medis.update');
         Route::get('/opr-medis/delete/{id}',[OprJasaMedisController::class,'destroy'])->name('opr.medis.delete');
         Route::get('/opr-medis/tindakan/{id}',[OprJasaMedisController::class,'CeklisTindakanMedis'])->name('opr.medis.ceklis');
+
+        //Home Care
+        Route::get('/home-care',[HomeCareController::class,'index'])->name('home.care');
+        Route::post('/home-care/save',[HomeCareController::class,'store'])->name('home.care.save');
+        Route::get('/home-care/edit/{id}',[HomeCareController::class,'edit'])->name('home.care.edit');
+        Route::post('/home-care/update/{id}',[HomeCareController::class,'update'])->name('home.care.update');
+        Route::get('/home-care/delete/{id}',[HomeCareController::class,'destroy'])->name('home.care.delete');
+        
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

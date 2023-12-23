@@ -121,4 +121,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(OprJasaMedis::class);
     }
+
+    //Home Care
+    public function care()
+    {
+        $this->hasMany(HomeCare::class);
+    }
 }

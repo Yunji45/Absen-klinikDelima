@@ -73,8 +73,8 @@
                     <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('opr.medis')}}">Riwayat Jasa Medis</a>
                     </li>
-                    <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('opr.medis')}}">Home Care</a>
+                    <li class="{{ Route::currentRouteName() === 'home.care' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('home.care')}}">Home Care</a>
                     </li>
                 </ul>
             </li>
