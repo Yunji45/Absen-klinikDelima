@@ -50,43 +50,51 @@
                             <table class="table table-striped" id="myTable">
                                 <tr>
                                     <th scope="col" class="text-center">No</th>
-                                    <th scope="col" class="text-center">Bulan</th>
+                                    <th scope="col" class="text-center">Nama Petugas</th>
                                     <th scope="col" class="text-center">No_RM</th>
-                                    <th scope="col" class="text-center">Nama_Pasien</th>
-                                    <th scope="col" class="text-center">Jenis_Layanan</th>
-                                    <th scope="col" class="text-center">Jenis_Jasa</th>
-                                    <th scope="col" class="text-center">Tarif_Jasa</th>
-                                    <th scope="col" class="text-center">Nama_Petugas</th>
-                                    <th scope="col" class="text-center">Ceklis_Tindakan</th>
+                                    <th scope="col" class="text-center">Nama Pasien</th>
+                                    <th scope="col" class="text-center">Jenis Layanan</th>
+                                    <th scope="col" class="text-center">Jenis Jasa</th>
+                                    <th scope="col" class="text-center">Tarif Jasa</th>
+                                    <th scope="col" class="text-center">Tanggal</th>
+                                    <th scope="col" class="text-center">Ceklis Tindakan</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
-                                @php $no =1; @endphp @foreach ($opr as $item)
+                                @php $no =1; @endphp 
+                                @foreach ($opr as $item)
                                 <tr>
                                     <td class="text-center">{{$no++}}.</td>
-                                    <td class="text-center">{{$item->bulan}}</td>
+                                    <td scope="col" class="text-center"> 
+                                    @if ($item && $item->user)
+                                        {{ $item->user->name }}
+                                    @else
+                                        User not available
+                                    @endif
+                                    </td>
                                     <td scope="col" class="text-center">{{$item->No_RM}}</td>
                                     <td scope="col" class="text-center">{{$item->nama_pasien}}</td>
                                     <td scope="col" class="text-center">{{$item->jenis_layanan}}</td>
                                     <td scope="col" class="text-center">{{$item->jenis_jasa}}</td>
-                                    <td scope="col" class="text-center">{{$item->tarif_jasa}}</td>
-                                    <td scope="col" class="text-center"> 
-                                    @if ($item && $item->user)
-        {{ $item->user->name }}
-    @else
-        User not available
-    @endif
-
-                                    </td>
-                                    <td scope="col" class="text-center">{{ $item->ceklis_tindakan}}</td>
-                                    <td>
-                                    <a href="{{route('detail.info.admin',$item->id)}}" onclick="return confirm('Yakin akan ingin melihat Data?')" class="btn btn-info btn-sm">
-                                            <i class="fas fa-eye"> Lihat</i>
+                                    <td scope="col" class="text-center">{{'Rp.' . number_format(floatval($item->tarif_jasa), 0, ',', '.')}}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($item->bulan)) }}</td>
+                                    <td scope="col" class="text-center">
+                                    <a
+                                            href="{{ $item->ceklis_tindakan == 'Ya' ? '#' : '/opr-medis/tindakan/' . $item->id }}"
+                                            onclick="return @if ($item->ceklis_tindakan == 'Ya') confirm('Sudah completed Mas/Mba !!') @else true @endif"
+                                            class="btn btn-sm @if ($item->ceklis_tindakan == 'Ya') bg-primary @else btn-warning @endif">
+                                            @if ($item->ceklis_tindakan == 'Ya')
+                                            <strong style="color: white;">Sudah</strong>
+                                            @else
+                                            <strong>Ceklis</strong>
+                                            @endif
                                         </a>
-                                        <a href="{{route('detail.edit.admin',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">
+                                    </td>
+                                    <td>
+                                        <a href="{{route('opr.medis.edit',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">
                                             <i class="fas fa-edit"> Edit</i>
                                         </a>
 
-                                    <a href="{{route('delete.pegawai.admin',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                    <a href="{{route('opr.medis.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
                                         </a>
 
@@ -111,7 +119,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="" method="post">
+                    <form action="{{route('opr.medis.save')}}" method="post">
                         @csrf
                         <div class="modal-body">
                             <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
@@ -121,6 +129,18 @@
                                 <div class="col-sm-9">
                                     <input type="date" name="bulan" id="bulan" class="form-control @error('name') is-invalid @enderror">
                                     @error('name') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row" id="UMK">
+                                <label for="UMK" class="col-form-label col-sm-3">Nama Petugas</label>
+                                <div class="col-sm-9">
+                                    <select name="user_id" id="user_id" class="form-control @error('user_id') is-invalid @enderror">
+                                        <option value="" selected disabled>Pilih Nama Petugas</option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('user_id') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
@@ -155,13 +175,6 @@
                                 <label for="UMK" class="col-form-label col-sm-3">Tarif Jasa</label>
                                 <div class="col-sm-9">
                                     <input type="number" name="tarif_jasa" id="tarif_jasa" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Tarif Jasa">
-                                    @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row" id="UMK">
-                                <label for="UMK" class="col-form-label col-sm-3">Nama Petugas</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="nama_petugas" id="nama_petugas" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan No RM">
                                     @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>

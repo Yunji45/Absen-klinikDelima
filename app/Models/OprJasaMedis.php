@@ -13,7 +13,7 @@ class OprJasaMedis extends Model
     protected $fillable = [
         'No_RM',
         'bulan',
-        'target_id',
+        // 'target_id',
         'nama_pasien',
         'jenis_layanan',
         'jenis_jasa',

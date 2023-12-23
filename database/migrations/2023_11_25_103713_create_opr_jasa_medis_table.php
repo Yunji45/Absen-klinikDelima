@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('No_RM')->nullable();
             $table->date('bulan')->nullable();
-            $table->unsignedBigInteger('target_id');
-            $table->foreign('target_id')->references('id')->on('jasa_medis');
+            // $table->unsignedBigInteger('target_id');
+            // $table->foreign('target_id')->references('id')->on('jasa_medis');
             $table->string('nama_pasien')->nullable();
             $table->string('jenis_layanan')->nullable();
             $table->string('jenis_jasa')->nullable();
