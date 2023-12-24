@@ -198,18 +198,24 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="gambarModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="gambarModalLabel{{ $item->id }}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <img src="{{ asset('storage/homecare/' . $item->foto) }}" class="img-fluid" alt="Foto">
+        @if (isset($item) && $item && $item->foto)
+    <div class="modal fade" id="gambarModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="gambarModalLabel{{ $item->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{{ asset('storage/homecare/' . $item->foto) }}" class="img-fluid" alt="Foto">
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div> -->
             </div>
-            <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div> -->
         </div>
     </div>
-</div>
+@else
+    <!-- Tampilkan pesan atau elemen lain jika tidak ada data atau foto -->
+    <p scope="col" class="text-center">Tidak ada data atau foto tersedia untuk ditampilkan.</p>
+@endif
+
 
 
 
