@@ -50,6 +50,8 @@
                     <div class="card-body p-0">
                         <div class="table-responsive">
                             <table class="table table-striped" id="myTable">
+                                <caption>** Klik Foto Untuk Melihat Bukti</caption>
+
                                 <tr>
                                     <th scope="col" class="text-center">No</th>
                                     <th scope="col" class="text-center">Nama Petugas</th>
