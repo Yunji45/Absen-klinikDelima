@@ -125,6 +125,6 @@ class User extends Authenticatable
     //Home Care
     public function care()
     {
-        $this->hasMany(HomeCare::class);
+        return $this->hasMany(HomeCare::class);
     }
 }

@@ -1,4 +1,6 @@
 @extends('template.layout.app.main') @section('tabel')
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
 <section class="section">
     <div class="section-header">
         <h1>{{$title}}</h1>
@@ -61,7 +63,48 @@
                                     <th scope="col" class="text-center">Ceklis Tindakan</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
-                                
+                                @php $no =1; @endphp 
+                                @foreach ($care as $item)
+                                <tr>
+                                    <td class="text-center">{{$no++}}.</td>
+                                    <td scope="col" class="text-center"> 
+                                        {{ $item->user->name }}
+                                    </td>
+                                    <td scope="col" class="text-center">{{$item->No_HC}}</td>
+                                    <td scope="col" class="text-center">{{$item->nama_pasien}}</td>
+                                    <td scope="col" class="text-center">
+                                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#gambarModal{{ $item->id }}">
+                                            <img src="{{ asset('storage/homecare/' . $item->foto) }}" alt="Foto" style="width: 30px; height: 30px;">
+                                        </button>
+                                    </td>
+                                    <td scope="col" class="text-center">{{$item->jenis_layanan}}</td>
+                                    <td scope="col" class="text-center">{{$item->jenis_jasa}}</td>
+                                    <td scope="col" class="text-center">{{'Rp.' . number_format(floatval($item->tarif_jasa), 0, ',', '.')}}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($item->bulan)) }}</td>
+                                    <td scope="col" class="text-center">
+                                    <a
+                                            href="{{ $item->ceklis_tindakan == 'Ya' ? '#' : '/opr-medis/tindakan/' . $item->id }}"
+                                            onclick="return @if ($item->ceklis_tindakan == 'Ya') confirm('Sudah completed Mas/Mba !!') @else true @endif"
+                                            class="btn btn-sm @if ($item->ceklis_tindakan == 'Ya') bg-primary @else btn-warning @endif">
+                                            @if ($item->ceklis_tindakan == 'Ya')
+                                            <strong style="color: white;">Sudah</strong>
+                                            @else
+                                            <strong>Ceklis</strong>
+                                            @endif
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('opr.medis.edit',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">
+                                            <i class="fas fa-edit"> Edit</i>
+                                        </a>
+
+                                    <a href="{{route('opr.medis.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash-alt"> Hapus</i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                @endforeach
 
                             </table>
                         </div>
@@ -155,6 +198,19 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="gambarModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="gambarModalLabel{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="{{ asset('storage/homecare/' . $item->foto) }}" class="img-fluid" alt="Foto">
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -179,6 +235,9 @@
     }
     }
 </script>
+<!-- Bootstrap JS (Gunakan CDN atau tambahkan sendiri) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <style>
 .card-body {
