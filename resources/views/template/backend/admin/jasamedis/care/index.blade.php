@@ -80,7 +80,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('home.care.save')}}" method="post">
+                    <form action="{{route('home.care.save')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
@@ -121,7 +121,7 @@
                             <div class="form-group row" id="UMK">
                                 <label for="foto" class="col-form-label col-sm-3">Foto</label>
                                 <div class="col-sm-9">
-                                    <input type="file" name="foto" id="foto" class="form-control-file @error('foto') is-invalid @enderror">
+                                    <input type="file" name="foto" id="foto" class="form-control-file @error('foto') is-invalid @enderror" required>
                                     @error('foto') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
