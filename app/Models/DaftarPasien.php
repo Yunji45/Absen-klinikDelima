@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KategoriJasaMedis extends Model
+class DaftarPasien extends Model
 {
     use HasFactory;
-    protected $table = 'kategori_jasa_medis';
+    protected $table = 'daftar_pasiens';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'jenis_layanan',
-        'jenis_jasa',
-        'tarif_jasa',
+        'nama_pasien',
+        'No_RM',
+        'jenis_kelamin',
+        'alamat',
+        'bulan',
     ];
 
-    public function OprKategori()
+    public function OprJasa()
     {
         return $this->hasMany(OperasionalJasa::class);
     }

@@ -241,7 +241,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/home-care/delete/{id}',[HomeCareController::class,'destroy'])->name('home.care.delete');
 
         //Kategori Jasa Layanan
-        Route::get('/kategori-jasa',[KategoriJasaController::class,'index'])->name('ketegori.jasa');
+        Route::get('/kategori-jasa',[KategoriJasaController::class,'index'])->name('kategori.jasa');
         Route::post('/kategori-jasa/save',[KategoriJasaController::class,'store'])->name('kategori.jasa.save');
         Route::get('/kategori-jasa/edit/{id}',[KategoriJasaController::class,'edit'])->name('kategori.jasa.edit');
         Route::post('/kategori-jasa/update/{id}',[KategoriJasaController::class,'update'])->name('kategori.jasa.update');

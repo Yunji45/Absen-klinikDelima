@@ -18,6 +18,7 @@ class KategoriJasaController extends Controller
     {
         $title = 'Kategori Jasa Layanan';
         $type = 'jasamedis';
+        $kategori = KategoriJasaMedis::all();
         return view ('template.backend.admin.jasamedis.kategori.index',compact('title','type','kategori'));
     }
 

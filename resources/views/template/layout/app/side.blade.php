@@ -70,11 +70,14 @@
                     <!-- <li class="{{ Route::currentRouteName() === 'target.jasa.medis' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('target.jasa.medis')}}">Rekam Tarif Jasa Medis</a>
                     </li> -->
-                    <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
+                    <!-- <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('opr.medis')}}">Riwayat Jasa Medis</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'home.care' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('home.care')}}">Home Care</a>
+                    </li> -->
+                    <li class="{{ Route::currentRouteName() === 'kategori.jasa' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('kategori.jasa')}}">Setting Kategory</a>
                     </li>
                 </ul>
             </li>
