@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\KategoriJasaMedis;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
+use App\Exports\KategoriJasaExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\KategoriJasaImport;
+
 
 class KategoriJasaController extends Controller
 {
@@ -119,5 +125,33 @@ class KategoriJasaController extends Controller
         $kategori = KategoriJasaMedis::find($id);
         $kategori -> delete();
         return redirect()->back()->with('success','Data Layanan Berhasil Dihapus.');
+    }
+
+    public function exportKategori()
+	{
+		return Excel::download(new KategoriJasaExport, 'kategori.xlsx');
+	}
+
+    public function importKategori(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        // membuat nama file unik
+        $nama_file = $file->hashName();
+        //temporary file
+        $path = $file->storeAs('public/kategori/',$nama_file);
+        // import data
+        $import = Excel::import(new KategoriJasaImport(), storage_path('app/public/kategori/'.$nama_file));
+        //remove from server
+        Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->route('kategori.jasa')->with('success', 'Data Berhasil Diimport!');
+        } else {
+            //redirect
+            return redirect()->route('kategori.jasa')->with('error', 'Data Gagal Diimport!');
+        }
     }
 }

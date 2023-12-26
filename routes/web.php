@@ -246,7 +246,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/kategori-jasa/edit/{id}',[KategoriJasaController::class,'edit'])->name('kategori.jasa.edit');
         Route::post('/kategori-jasa/update/{id}',[KategoriJasaController::class,'update'])->name('kategori.jasa.update');
         Route::get('/kategori-jasa/delete/{id}',[KategoriJasaController::class,'destroy'])->name('kategori.jasa.delete');
-        
+        Route::get('/kategori-jasa/export',[KategoriJasaController::class,'exportKategori'])->name('kategori.jasa.excel');
+        Route::post('/kategori-jasa/import',[KategoriJasaController::class,'importKategori'])->name('kategori.jasa.import');
+
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
