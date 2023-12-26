@@ -27,6 +27,7 @@ use App\Http\Controllers\Backend\OprJasaMedisController;
 use App\Http\Controllers\Backend\JasaMedisController;
 use App\Http\Controllers\Backend\HomeCareController;
 use App\Http\Controllers\Backend\KategoriJasaController;
+use App\Http\Controllers\Backend\DaftarPasienController;
 //dokumentasi API (application programming interface)
 use App\Http\Controllers\API\DokumentasiController;
 use App\Http\Controllers\Api\StatistikController;
@@ -249,7 +250,15 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/kategori-jasa/export',[KategoriJasaController::class,'exportKategori'])->name('kategori.jasa.excel');
         Route::post('/kategori-jasa/import',[KategoriJasaController::class,'importKategori'])->name('kategori.jasa.import');
 
-        
+        //Daftar Pasien
+        Route::get('/daftar-pasien',[DaftarPasienController::class,'index'])->name('daftar.pasien');
+        Route::post('/daftar-pasien/save',[DaftarPasienController::class,'store'])->name('daftar.pasien.save');
+        Route::get('/daftar-pasien/edit/{id}',[DaftarPasienController::class,'edit'])->name('daftar.pasien.edit');
+        Route::post('/daftar-pasien/update/{id}',[DaftarPasienController::class,'update'])->name('daftar.pasien.update');
+        Route::get('/daftar-pasien/delete/{id}',[DaftarPasienController::class,'destroy'])->name('daftar.pasien.delete');
+        Route::get('/daftar-pasien/export',[DaftarPasienController::class,'ExportDaftarPasien'])->name('daftar.pasien.excel');
+        Route::post('/daftar-pasien/import',[DaftarPasienController::class,'ImportDaftarPasien'])->name('daftar.pasien.import');
+
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');
