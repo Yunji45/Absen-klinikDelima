@@ -82,6 +82,9 @@
                     <li class="{{ Route::currentRouteName() === 'daftar.pasien' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('daftar.pasien')}}">Daftar Pasien</a>
                     </li>
+                    <li class="{{ Route::currentRouteName() === 'daftar.pasien' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('daftar.pasien')}}">Daftar Tugas Jasa Medis</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item dropdown {{ $type === 'kpi' ? 'active' : '' }}">
