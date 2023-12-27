@@ -19,18 +19,18 @@ class OperasionalJasa extends Model
         'ceklis'
     ];
 
-    public function kategori()
+    public function medis()
     {
-        return $this->belongsTo(KategoriJasaMedis::class);
+        return $this->belongsTo(KategoriJasaMedis::class,'layanan_id');
     }
 
     public function pasien()
     {
-        return $this->belongsTo(DaftarPasien::class);
+        return $this->belongsTo(DaftarPasien::class,'pasien_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 }

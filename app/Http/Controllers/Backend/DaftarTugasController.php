@@ -103,7 +103,7 @@ class DaftarTugasController extends Controller
         $pasien = DaftarPasien::all();
         $kategori = KategoriJasaMedis::all();
         $tugas = OperasionalJasa::find($id);
-        return view ('template.backend.admin.jasamedis.daftar-tugas.index',compact('title','type','pasien','users','tugas','kategori'));
+        return view ('template.backend.admin.jasamedis.daftar-tugas.edit',compact('title','type','pasien','users','tugas','kategori'));
     }
 
     /**
@@ -126,7 +126,7 @@ class DaftarTugasController extends Controller
         $tugas->ceklis = 'Tidak';
         // return $tugas;
         $tugas -> save();
-        return redirect()->back()->with('success','Daftar Tugas Layanan Berhasil Disimpan.');
+        return redirect()->route('daftar.tugas')->with('success','Daftar Tugas Layanan Berhasil Diupdate.');
     }
 
     /**

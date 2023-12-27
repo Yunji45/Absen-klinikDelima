@@ -64,18 +64,24 @@
                                 <tr>
                                     <td class="text-center">{{$no++}}.</td>
                                     <td scope="col" class="text-center">{{$item->user->name}}</td>
-                                    <td scope="col" class="text-center">{{$item->kategori->jenis_jasa}}</td>
+                                    <td scope="col" class="text-center">
+                                    @if ($item->medis)
+                                        {{$item->medis->jenis_layanan}}
+                                    @else
+                                        Tidak Ada Data
+                                    @endif
+                                    </td>
                                     <td scope="col" class="text-center">{{$item->pasien->nama_pasien}}</td>
                                     <td scope="col" class="text-center">{{$item->pasien->jenis_kelamin}}</td>
                                     <td scope="col" class="text-center">{{$item->tarif_jasa}}</td>
                                     <td scope="col" class="text-center">{{$item->ceklis}}</td>
                                     <td scope="col" class="text-center">{{$item->bulan}}</td>
                                     <td scope="col" class="text-center">
-                                        <a href="{{route('daftar.pasien.edit',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">
+                                        <a href="{{route('daftar.tugas.edit',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">
                                             <i class="fas fa-edit"> Edit</i>
                                         </a>
 
-                                    <a href="{{route('daftar.pasien.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                    <a href="{{route('daftar.tugas.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
                                         </a>
 

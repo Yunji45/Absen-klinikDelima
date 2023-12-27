@@ -18,6 +18,6 @@ class KategoriJasaMedis extends Model
 
     public function OprKategori()
     {
-        return $this->hasMany(OperasionalJasa::class);
+        return $this->hasMany(OperasionalJasa::class,'layanan_id');
     }
 }

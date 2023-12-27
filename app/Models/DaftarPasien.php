@@ -20,6 +20,6 @@ class DaftarPasien extends Model
 
     public function OprJasa()
     {
-        return $this->hasMany(OperasionalJasa::class);
+        return $this->hasMany(OperasionalJasa::class,'pasien_id');
     }
 }

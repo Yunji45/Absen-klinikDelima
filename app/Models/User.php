@@ -131,6 +131,6 @@ class User extends Authenticatable
     //daftar tugas
     public function tugas()
     {
-        return $this->hasMany(OperasionalJasa::class);
+        return $this->hasMany(OperasionalJasa::class,'user_id');
     }
 }
