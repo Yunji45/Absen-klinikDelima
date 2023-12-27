@@ -21,12 +21,13 @@ class DaftarTugasController extends Controller
      */
     public function index()
     {
-        $title = 'Daftar Tugas Layanan';
+        $title = 'Jadwal Tugas Layanan';
         $type = 'jasamedis';
         $users = User::all();
         $pasien = DaftarPasien::all();
         $kategori = KategoriJasaMedis::all();
-        $tugas = OperasionalJasa::all();
+        $tugas = OperasionalJasa::where('ceklis','Tidak')->orderBy('created_at','desc')->get();
+        // $tugas = OperasionalJasa::all();
         return view ('template.backend.admin.jasamedis.daftar-tugas.index',compact('title','type','pasien','users','tugas','kategori'));
     }
 
@@ -97,7 +98,7 @@ class DaftarTugasController extends Controller
      */
     public function edit($id)
     {
-        $title = 'Daftar Tugas Layanan';
+        $title = 'Jadwal Tugas Layanan';
         $type = 'jasamedis';
         $users = User::all();
         $pasien = DaftarPasien::all();
@@ -140,5 +141,25 @@ class DaftarTugasController extends Controller
         $tugas = OperasionalJasa::find($id);
         $tugas -> delete();
         return redirect()->back()->with('success','Daftar Tugas Layanan Berhasil Dihapus.');
+    }
+
+    public function CeklisJasaMedis(Request $request,$id)
+    {
+        $tugas = OperasionalJasa::find($id);
+        if($tugas->ceklis == 'Tidak'){
+            $tugas->update(['ceklis' => 'Ya']);
+            return redirect()->back()->with('success','Tindakan Medis Dikonfirmasi');
+        }else{
+            return redirect()->back()->with('error','Tindakan Medis Gagal Untuk Dikonfirmasi.');
+        }
+    }
+
+    public function RiwayatTugas()
+    {
+        $title = 'Riwayat Tugas Layanan';
+        $type = 'jasamedis';
+        $tugas = OperasionalJasa::where('ceklis','Ya')->orderBy('updated_at','desc')->get();
+        // $tugas = OperasionalJasa::all();
+        return view ('template.backend.admin.jasamedis.daftar-tugas.riwayat',compact('title','type','tugas'));
     }
 }

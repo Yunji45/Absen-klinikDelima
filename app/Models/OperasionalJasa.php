@@ -10,7 +10,7 @@ class OperasionalJasa extends Model
     use HasFactory;
     protected $table = 'operasional_jasas';
     protected $primaryKey = 'id';
-    protected $fillble = [
+    protected $fillable = [
         'user_id',
         'layanan_id',
         'pasien_id',

@@ -19,14 +19,16 @@
             <i class="fa fa-download">
                 </i> PDF
         </a>
-        <a href="" class="btn btn-warning" data-toggle="modal" data-target="#import">
-            <i class="fa fa-download">
-                </i> Import Excel
-        </a>
         <a href="{{route('daftar.pasien.excel')}}" class="btn btn-success">
             <i class="fa fa-download">
                 </i> Eksport Excel
         </a>
+        <div class="section-header-breadcrumb">
+                <a href="{{route('daftar.tugas.riwayat')}}" class="btn btn-primary">
+                    <i class="fas fa-search">
+                        </i> History Tugas
+                </a>
+            </div>
     </div>
 
     <div class="section-body">
@@ -74,7 +76,18 @@
                                     <td scope="col" class="text-center">{{$item->pasien->nama_pasien}}</td>
                                     <td scope="col" class="text-center">{{$item->pasien->jenis_kelamin}}</td>
                                     <td scope="col" class="text-center">{{$item->tarif_jasa}}</td>
-                                    <td scope="col" class="text-center">{{$item->ceklis}}</td>
+                                    <td scope="col" class="text-center">
+                                    <a
+                                            href="{{ $item->ceklis == 'Ya' ? '#' : '/daftar-tugas/ceklis/' . $item->id }}"
+                                            onclick="return @if ($item->ceklis == 'Ya') confirm('Sudah completed Mas/Mba !!') @else true @endif"
+                                            class="btn btn-sm @if ($item->ceklis == 'Ya') bg-primary @else btn-warning @endif">
+                                            @if ($item->ceklis == 'Ya')
+                                            <strong style="color: white;">Sudah</strong>
+                                            @else
+                                            <strong>Ceklis</strong>
+                                            @endif
+                                        </a>
+                                    </td>
                                     <td scope="col" class="text-center">{{$item->bulan}}</td>
                                     <td scope="col" class="text-center">
                                         <a href="{{route('daftar.tugas.edit',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">

@@ -266,6 +266,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/daftar-tugas/edit/{id}',[DaftarTugasController::class,'edit'])->name('daftar.tugas.edit');
         Route::post('/daftar-tugas/update/{id}',[DaftarTugasController::class,'update'])->name('daftar.tugas.update');
         Route::get('/daftar-tugas/delete/{id}',[DaftarTugasController::class,'destroy'])->name('daftar.tugas.delete');
+        Route::get('/daftar-tugas/ceklis/{id}',[DaftarTugasController::class,'CeklisJasaMedis'])->name('daftar.tugas.ceklis');
+        Route::get('/daftar-tugas/riwayat',[DaftarTugasController::class,'RiwayatTugas'])->name('daftar.tugas.riwayat');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
