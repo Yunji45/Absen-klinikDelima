@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('pasien_id')->references('id')->on('daftar_pasiens');
             $table->integer('tarif_jasa')->nullable();
             $table->date('bulan')->nullable();
+            $table->string('ceklis')->nullable();
             $table->timestamps();
         });
     }

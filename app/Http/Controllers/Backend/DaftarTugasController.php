@@ -1,0 +1,144 @@
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\DaftarPasien;
+use App\Models\KategoriJasaMedis;
+use App\Models\OperasionalJasa;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
+
+class DaftarTugasController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $title = 'Daftar Tugas Layanan';
+        $type = 'jasamedis';
+        $users = User::all();
+        $pasien = DaftarPasien::all();
+        $kategori = KategoriJasaMedis::all();
+        $tugas = OperasionalJasa::all();
+        return view ('template.backend.admin.jasamedis.daftar-tugas.index',compact('title','type','pasien','users','tugas','kategori'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'user_id' => 'required',
+            'layanan_id' => 'required',
+            'pasien_id' => 'required',
+
+        ],[
+            'user_id.required' => 'Nama Petugas Tidak Boleh Kosong',
+            'layanan_id.required' => 'Jenis Layanan Tidak Boleh Kosong',
+            'pasien_id.required' => 'Pasien Tidak Boleh Kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+        $tugas = new OperasionalJasa;
+        $tugas -> bulan =$request->bulan;
+        $tugas -> user_id = $request->user_id;
+        $tugas -> pasien_id = $request->pasien_id;
+        $tugas -> layanan_id = $request->layanan_id;
+        //mengambil nilai request layanan
+        $layanan = KategoriJasaMedis::find($request->layanan_id);
+        $tugas->tarif_jasa = $layanan->tarif_jasa;
+        $tugas->ceklis = 'Tidak';
+        // return $tugas;
+        $tugas -> save();
+        return redirect()->back()->with('success','Daftar Tugas Layanan Berhasil Disimpan.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $title = 'Daftar Tugas Layanan';
+        $type = 'jasamedis';
+        $users = User::all();
+        $pasien = DaftarPasien::all();
+        $kategori = KategoriJasaMedis::all();
+        $tugas = OperasionalJasa::find($id);
+        return view ('template.backend.admin.jasamedis.daftar-tugas.index',compact('title','type','pasien','users','tugas','kategori'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $tugas = OperasionalJasa::find($id);
+        $tugas -> bulan =$request->bulan;
+        $tugas -> user_id = $request->user_id;
+        $tugas -> pasien_id = $request->pasien_id;
+        $tugas -> layanan_id = $request->layanan_id;
+        //mengambil nilai request layanan
+        $layanan = KategoriJasaMedis::find($request->layanan_id);
+        $tugas->tarif_jasa = $layanan->tarif_jasa;
+        $tugas->ceklis = 'Tidak';
+        // return $tugas;
+        $tugas -> save();
+        return redirect()->back()->with('success','Daftar Tugas Layanan Berhasil Disimpan.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $tugas = OperasionalJasa::find($id);
+        $tugas -> delete();
+        return redirect()->back()->with('success','Daftar Tugas Layanan Berhasil Dihapus.');
+    }
+}

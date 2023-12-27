@@ -15,7 +15,8 @@ class OperasionalJasa extends Model
         'layanan_id',
         'pasien_id',
         'bulan',
-        'tarif_jasa'
+        'tarif_jasa',
+        'ceklis'
     ];
 
     public function kategori()
@@ -26,5 +27,10 @@ class OperasionalJasa extends Model
     public function pasien()
     {
         return $this->belongsTo(DaftarPasien::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

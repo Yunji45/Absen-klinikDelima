@@ -127,4 +127,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(HomeCare::class);
     }
+
+    //daftar tugas
+    public function tugas()
+    {
+        return $this->hasMany(OperasionalJasa::class);
+    }
 }
