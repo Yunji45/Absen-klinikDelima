@@ -23,7 +23,7 @@ class DaftarPasienController extends Controller
     {
         $title = 'Daftar Data Pasien';
         $type = 'jasamedis';
-        $pasien = DaftarPasien::all();
+        $pasien = DaftarPasien::orderBy('created_at','desc')->get();
         return view ('template.backend.admin.jasamedis.pasien.index',compact('title','type','pasien'));
     }
 

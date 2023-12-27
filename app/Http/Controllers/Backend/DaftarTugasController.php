@@ -23,8 +23,9 @@ class DaftarTugasController extends Controller
     {
         $title = 'Jadwal Tugas Layanan';
         $type = 'jasamedis';
-        $users = User::all();
-        $pasien = DaftarPasien::all();
+        $users = User::whereIn('role',['evaluator','pegawai','keuangan','hrd'])->get();
+        $pasien = DaftarPasien::orderBy('created_at','desc')->get();
+        // $pasien = DaftarPasien::all();
         $kategori = KategoriJasaMedis::all();
         $tugas = OperasionalJasa::where('ceklis','Tidak')->orderBy('created_at','desc')->get();
         // $tugas = OperasionalJasa::all();
