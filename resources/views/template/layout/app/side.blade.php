@@ -87,6 +87,21 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ $type === 'tasklist' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-list"></i>
+                    <span>Todo List Jasa Medis</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.index')}}">List Tugas</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.index')}}">History Tugas</a>
+                    </li>
+                   
+                </ul>
+            </li>
             <li class="nav-item dropdown {{ $type === 'kpi' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-handshake"></i>

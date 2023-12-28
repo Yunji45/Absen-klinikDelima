@@ -29,6 +29,8 @@ use App\Http\Controllers\Backend\HomeCareController;
 use App\Http\Controllers\Backend\KategoriJasaController;
 use App\Http\Controllers\Backend\DaftarPasienController;
 use App\Http\Controllers\Backend\DaftarTugasController;
+
+use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 //dokumentasi API (application programming interface)
 use App\Http\Controllers\API\DokumentasiController;
 use App\Http\Controllers\Api\StatistikController;
@@ -268,6 +270,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/daftar-tugas/delete/{id}',[DaftarTugasController::class,'destroy'])->name('daftar.tugas.delete');
         Route::get('/daftar-tugas/ceklis/{id}',[DaftarTugasController::class,'CeklisJasaMedis'])->name('daftar.tugas.ceklis');
         Route::get('/daftar-tugas/riwayat',[DaftarTugasController::class,'RiwayatTugas'])->name('daftar.tugas.riwayat');
+
+        //task list jasa medis
+        Route::get('/task-list',[TasklistJasaMedisController::class,'index'])->name('task.list.index');
+        
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
