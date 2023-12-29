@@ -273,7 +273,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
 
         //task list jasa medis
         Route::get('/task-list',[TasklistJasaMedisController::class,'index'])->name('task.list.index');
-        
+        Route::get('/task-list/history',[TasklistJasaMedisController::class,'HistoryTask'])->name('task.list.history');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

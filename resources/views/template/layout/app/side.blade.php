@@ -96,8 +96,8 @@
                     <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('task.list.index')}}">List Tugas</a>
                     </li>
-                    <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('task.list.index')}}">History Tugas</a>
+                    <li class="{{ Route::currentRouteName() === 'task.list.history' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.history')}}">History Tugas</a>
                     </li>
                    
                 </ul>

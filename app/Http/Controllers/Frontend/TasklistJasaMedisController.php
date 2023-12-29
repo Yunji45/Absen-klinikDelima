@@ -21,10 +21,10 @@ class TasklistJasaMedisController extends Controller
 
     public function HistoryTask()
     {
-        $title = 'Todo List Jasa Medis';
+        $title = 'History Jasa Medis';
         $type = 'tasklist';
         $tugas = OperasionalJasa::where('user_id',Auth::user()->id)->where('ceklis','Ya')->get();
         // return $tugas;
-        return view('template.frontend.jasa-medis.index',compact('title','type','tugas'));
+        return view('template.frontend.jasa-medis.history',compact('title','type','tugas'));
     }
 }
