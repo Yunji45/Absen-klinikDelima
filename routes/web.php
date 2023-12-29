@@ -31,6 +31,7 @@ use App\Http\Controllers\Backend\DaftarPasienController;
 use App\Http\Controllers\Backend\DaftarTugasController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
+use App\Http\Controllers\Frontend\ContentController;
 //dokumentasi API (application programming interface)
 use App\Http\Controllers\API\DokumentasiController;
 use App\Http\Controllers\Api\StatistikController;
@@ -53,19 +54,20 @@ use App\Http\Middleware\VerifyFaceMiddleware; // Pastikan untuk mengimpor middle
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/maintenance', function () {
+    return view('welcome');
+});
 Route::get('/face', function () {
     return view('api');
 });
 Route::get('/api', function () {
     return view('testyu');
 });
+Route::get('/',[ContentController::class,'home'])->name('frontend');
 // Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
 // Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
 Route::get('/opencv',[FaceController::class,'index']);
-Route::get('/', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
+Route::get('/login', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
 Route::post('/act-login', [AuthController::class,'login'])->name('auth.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 // Route::get('/home',[HomeController::class,'index'])->name('home');
