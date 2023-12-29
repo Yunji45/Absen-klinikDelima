@@ -14,7 +14,7 @@ class TasklistJasaMedisController extends Controller
     {
         $title = 'Todo List Jasa Medis';
         $type = 'tasklist';
-        $tugas = OperasionalJasa::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->get();
+        $tugas = OperasionalJasa::where('user_id',Auth::user()->id)->where('ceklis','Tidak')->orderBy('created_at','desc')->get();
         // return $tugas;
         return view('template.frontend.jasa-medis.index',compact('title','type','tugas'));
     }
@@ -24,7 +24,11 @@ class TasklistJasaMedisController extends Controller
         $title = 'History Jasa Medis';
         $type = 'tasklist';
         $tugas = OperasionalJasa::where('user_id',Auth::user()->id)->where('ceklis','Ya')->get();
-        // return $tugas;
-        return view('template.frontend.jasa-medis.history',compact('title','type','tugas'));
+        $pending = OperasionalJasa::where('user_id',Auth::user()->id)->where('ceklis','Tidak')->count();
+        $complete = OperasionalJasa::where('user_id',Auth::user()->id)->where('ceklis','Ya')->count();
+        $totaljasa = OperasionalJasa::where('user_id',Auth::user()->id)->sum('tarif_jasa');
+        $jumlah = OperasionalJasa::where('user_id',Auth::user()->id)->count();
+        // return $totaljasa;
+        return view('template.frontend.jasa-medis.history',compact('title','type','tugas','jumlah','pending','complete','totaljasa'));
     }
 }

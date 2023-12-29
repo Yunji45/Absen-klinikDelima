@@ -36,15 +36,15 @@
                   </div>
                   <div class="card-stats-items">
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">24</div>
+                      <div class="card-stats-item-count">{{$jumlah}}</div>
+                      <div class="card-stats-item-label">Total Task</div>
+                    </div>
+                    <div class="card-stats-item">
+                      <div class="card-stats-item-count">{{$pending}}</div>
                       <div class="card-stats-item-label">Pending</div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count">12</div>
-                      <div class="card-stats-item-label">Shipping</div>
-                    </div>
-                    <div class="card-stats-item">
-                      <div class="card-stats-item-count">23</div>
+                      <div class="card-stats-item-count">{{$complete}}</div>
                       <div class="card-stats-item-label">Completed</div>
                     </div>
                   </div>
@@ -57,7 +57,7 @@
                     <h4>Balance</h4>
                   </div>
                   <div class="card-body">
-                    $187,13
+                    ${{$totaljasa}}
                   </div>
                 </div>
               </div>
@@ -72,6 +72,7 @@
                 </div>
                 <div class="card-body">             
                   <ul class="list-unstyled list-unstyled-border">
+                    @foreach($tugas as $item)
                     <li class="media">
                       <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="cbx-2" checked="">
@@ -79,11 +80,12 @@
                       </div>
                       <div class="media-body">
                         <div class="badge badge-pill badge-success mb-1 float-right">Completed</div>
-                        <h6 class="media-title">Add a new component</h6>
+                        <h6 class="media-title">{{$item->medis->jenis_layanan}}</h6>
                         <div class="text-small text-muted">Serj Tankian <div class="bullet"></div> 4 Min</div>
                         <div class="text-small text-muted">Serj Tankian <div class="bullet"></div> 4 Min</div>
                       </div>
                     </li>
+                    @endforeach
                   </ul>
                 </div>
               </div>
