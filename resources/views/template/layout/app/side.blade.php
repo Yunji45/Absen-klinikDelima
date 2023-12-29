@@ -64,7 +64,7 @@
             <li class="nav-item dropdown {{ $type === 'jasamedis' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
-                    <span>Jasa Medis & Care</span>
+                    <span>Jasa Medis / Tindakan</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- <li class="{{ Route::currentRouteName() === 'target.jasa.medis' ? 'active' : '' }}">
@@ -94,10 +94,10 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('task.list.index')}}">List Tugas</a>
+                        <a class="nav-link" href="{{route('task.list.index')}}">Ceklis Layanan Pasien</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'task.list.history' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('task.list.history')}}">History Tugas</a>
+                        <a class="nav-link" href="{{route('task.list.history')}}">Rekap Jasa Medis / Layanan</a>
                     </li>
                    
                 </ul>
