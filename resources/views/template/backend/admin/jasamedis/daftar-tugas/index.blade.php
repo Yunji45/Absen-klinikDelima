@@ -75,7 +75,7 @@
                                     </td>
                                     <td scope="col" class="text-center">{{$item->pasien->nama_pasien}}</td>
                                     <td scope="col" class="text-center">{{$item->pasien->jenis_kelamin}}</td>
-                                    <td scope="col" class="text-center">{{$item->tarif_jasa}}</td>
+                                    <td scope="col" class="text-center">{{'Rp.' . number_format(floatval($item->tarif_jasa), 0, ',', '.')}}</td>
                                     <td scope="col" class="text-center">
                                     <a
                                             href="{{ $item->ceklis == 'Ya' ? '#' : '/daftar-tugas/ceklis/' . $item->id }}"

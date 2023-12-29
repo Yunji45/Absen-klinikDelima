@@ -57,7 +57,7 @@
                     <h4>Balance</h4>
                   </div>
                   <div class="card-body">
-                    ${{$totaljasa}}
+                    {{'Rp. ' . number_format(floatval($totaljasa), 0, ',', '.')}}
                   </div>
                 </div>
               </div>
@@ -65,9 +65,9 @@
             <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                  <h4 class="d-inline">History</h4>
+                  <h4 class="d-inline">Rekap Jasa Medis / Layanan</h4>
                   <div class="card-header-action">
-                    <a href="#" class="btn btn-primary">View All</a>
+                    <a href="#" class="btn btn-primary">History All</a>
                   </div>
                 </div>
                 <div class="card-body">             
@@ -81,8 +81,8 @@
                       <div class="media-body">
                         <div class="badge badge-pill badge-success mb-1 float-right">Completed</div>
                         <h6 class="media-title">{{$item->medis->jenis_layanan}}</h6>
-                        <div class="text-small text-muted">Serj Tankian <div class="bullet"></div> 4 Min</div>
-                        <div class="text-small text-muted">Serj Tankian <div class="bullet"></div> 4 Min</div>
+                        <div class="text-small text-muted">{{$item->pasien->No_RM}} <div class="bullet"></div> {{$item->pasien->nama_pasien}}</div>
+                        <div class="text-small text-muted">{{$item->ceklis}} <div class="bullet"></div> {{$item->updated_at}}</div>
                       </div>
                     </li>
                     @endforeach

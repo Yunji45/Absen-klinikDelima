@@ -90,14 +90,14 @@
             <li class="nav-item dropdown {{ $type === 'tasklist' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
-                    <span>Jasa Medis & Layanan</span>
+                    <span>Jasa Medis / Layanan</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('task.list.index')}}">Ceklis Layanan Pasien</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'task.list.history' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('task.list.history')}}">Rekap Jasa Medis / Layanan</a>
+                        <a class="nav-link" href="{{route('task.list.history')}}">Rekap Jasa Medis</a>
                     </li>
                    
                 </ul>
@@ -171,6 +171,21 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ $type === 'tasklist' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-list"></i>
+                    <span>Jasa Medis / Layanan</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.index')}}">Ceklis Layanan Pasien</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'task.list.history' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.history')}}">Rekap Jasa Medis</a>
+                    </li>
+                   
+                </ul>
+            </li>
             @endif
             @if(auth()->user()->role == 'evaluator')
             <li class="nav-item dropdown {{ $type === 'kpi' ? 'active' : '' }}">
@@ -192,6 +207,21 @@
                     <li class="{{ Route::currentRouteName() === 'kpi.index' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('kpi.index')}}">Evaluasi Kinerja KPI</a>
                     </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ $type === 'tasklist' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-list"></i>
+                    <span>Jasa Medis / Layanan</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.index')}}">Ceklis Layanan Pasien</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'task.list.history' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.history')}}">Rekap Jasa Medis</a>
+                    </li>
+                   
                 </ul>
             </li>
             @endif

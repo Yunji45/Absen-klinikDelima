@@ -42,6 +42,7 @@ class AuthController extends Controller
     {
         auth()->logout();
         Session::forget('face_verification_result');
-        return redirect()->route('auth.index')->with('success', 'Terimakasih Sudah Absen');
+        return redirect()->route('frontend')->with('success', 'Terimakasih Sudah Absen');
+        // return redirect()->route('auth.index')->with('success', 'Terimakasih Sudah Absen');
     }
 }

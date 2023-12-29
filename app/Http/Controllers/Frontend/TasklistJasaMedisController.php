@@ -21,7 +21,7 @@ class TasklistJasaMedisController extends Controller
 
     public function HistoryTask()
     {
-        $title = 'History Jasa Medis';
+        $title = 'Rekap Jasa Medis / Layanan';
         $type = 'tasklist';
         $tugas = OperasionalJasa::where('user_id',Auth::user()->id)->where('ceklis','Ya')->get();
         $pending = OperasionalJasa::where('user_id',Auth::user()->id)->where('ceklis','Tidak')->count();
