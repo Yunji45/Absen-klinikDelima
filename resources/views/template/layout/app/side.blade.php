@@ -225,6 +225,37 @@
                 </ul>
             </li>
             @endif
+            @if (auth()->user()->role == 'pegawai')
+            <li class="nav-item dropdown {{ $type === 'tasklist' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-list"></i>
+                    <span>Jasa Medis / Layanan</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Route::currentRouteName() === 'task.list.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.index')}}">Ceklis Layanan Pasien</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'task.list.history' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('task.list.history')}}">Rekap Jasa Medis</a>
+                    </li>
+                   
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ $type === 'jasamedis' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-list"></i>
+                    <span>Jasa Medis / Tindakan</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Route::currentRouteName() === 'daftar.pasien' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('daftar.pasien')}}">Daftar Pasien</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'daftar.tugas' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('daftar.tugas')}}">Daftar Tugas Jasa Medis</a>
+                    </li>
+                </ul>
+            </li>
+            @endif
 
             <li class="menu-header">HELP IT</li>
             <li>
@@ -243,7 +274,7 @@
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a
-                href="{{route('home')}}"
+                href="{{route('daftar-hadir')}}"
                 class="btn btn-primary btn-lg btn-block btn-icon-split">
                 <i class="fas fa-rocket"></i>
                 Home

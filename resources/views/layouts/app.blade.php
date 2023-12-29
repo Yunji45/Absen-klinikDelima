@@ -176,6 +176,16 @@
                                 <a class="dropdown-item" href="{{ route('permohonan.jadwal.user') }}">Rubah Jadwal</a>
                             </div>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('daftar.pasien')}}" >
+                                <i class="fa fa-suitcase text-success"></i> Jasa Medis / Tindakan
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('task.list.index')}}" >
+                                <i class="fa fa-suitcase text-success"></i> Jasa Medis & Layanan
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-credit-card text-danger"></i> Salary
@@ -208,6 +218,11 @@
                                 <a class="dropdown-item" href="{{route('kpi.index')}}">Insentif</a>
                             </div>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('task.list.index')}}" >
+                                <i class="fa fa-suitcase text-success"></i> Jasa Medis & Layanan
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="permohonanDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-credit-card text-danger"></i> Salary
@@ -234,6 +249,11 @@
                     <li class="nav-item ">
                             <a class="nav-link" href="{{route('target.kpi')}}" >
                                 <i class="fa fa-suitcase text-success"></i> Evaluasi Karwayan
+                            </a>
+                    </li>
+                    <li class="nav-item ">
+                            <a class="nav-link" href="{{route('task.list.index')}}" >
+                                <i class="fa fa-suitcase text-success"></i> Jasa Medis & Layanan
                             </a>
                     </li>
                     <li class="nav-item dropdown">
