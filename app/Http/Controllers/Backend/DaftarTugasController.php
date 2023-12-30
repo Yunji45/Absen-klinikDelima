@@ -160,7 +160,30 @@ class DaftarTugasController extends Controller
         $title = 'Riwayat Tugas Layanan';
         $type = 'jasamedis';
         $tugas = OperasionalJasa::where('ceklis','Ya')->orderBy('updated_at','desc')->get();
-        // $tugas = OperasionalJasa::all();
-        return view ('template.backend.admin.jasamedis.daftar-tugas.riwayat',compact('title','type','tugas'));
+        $uniqueUserIds = OperasionalJasa::where('ceklis', 'Ya')->pluck('user_id')->unique();
+        $history = [];
+        foreach ($uniqueUserIds as $userId) {
+            $userHistory = OperasionalJasa::where('user_id', $userId)
+                ->where('ceklis', 'Ya')
+                ->select('user_id','bulan')
+                ->first();
+
+            if ($userHistory) {
+                $history[] = $userHistory;
+            }
+        }
+        // return $history;
+        return view ('template.backend.admin.jasamedis.daftar-tugas.riwayat',compact('title','type','tugas','history'));
+    }
+
+    public function DetailRiwayatTugas(Request $request,$user_id)
+    {
+        $title = 'Detail Riwayat Tugas Layanan';
+        $type = 'jasamedis';
+        $history = OperasionalJasa::where('user_id', $user_id)
+        ->where('ceklis', 'Ya')
+        ->get();
+        // return $history;
+        return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history'));
     }
 }

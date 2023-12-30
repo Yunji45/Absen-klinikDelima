@@ -50,40 +50,18 @@
                                 <tr>
                                     <th scope="col" class="text-center">No</th>
                                     <th scope="col" class="text-center">Nama Petugas</th>
-                                    <th scope="col" class="text-center">Jenis Layanan</th>
-                                    <th scope="col" class="text-center">Nama Pasien</th>
-                                    <th scope="col" class="text-center">Jenis Kelamin</th>
-                                    <th scope="col" class="text-center">Tarif Jasa</th>
-                                    <th scope="col" class="text-center">Ceklis Tindakan</th>
                                     <th scope="col" class="text-center">Date</th>
-                                    <th scope="col" class="text-center">Action</th>
+                                    <th scope="col" class="text-center">Detail</th>
                                 </tr>
                                 @php $no =1; @endphp 
-                                @foreach ($tugas as $item)
+                                @foreach ($history as $item)
                                 <tr>
                                     <td class="text-center">{{$no++}}.</td>
                                     <td scope="col" class="text-center">{{$item->user->name}}</td>
+                                    <td scope="col" class="text-center">{{ date('F Y', strtotime($item->bulan)) }}</td>
                                     <td scope="col" class="text-center">
-                                    @if ($item->medis)
-                                        {{$item->medis->jenis_layanan}}
-                                    @else
-                                        Tidak Ada Data
-                                    @endif
-                                    </td>
-                                    <td scope="col" class="text-center">{{$item->pasien->nama_pasien}}</td>
-                                    <td scope="col" class="text-center">{{$item->pasien->jenis_kelamin}}</td>
-                                    <td scope="col" class="text-center">{{$item->tarif_jasa}}</td>
-                                    <td scope="col" class="text-center">
-                                        {{$item->ceklis}}
-                                    </td>
-                                    <td scope="col" class="text-center">{{$item->bulan}}</td>
-                                    <td scope="col" class="text-center">
-                                        <a href="{{route('daftar.tugas.edit',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">
-                                            <i class="fas fa-edit"> Edit</i>
-                                        </a>
-
-                                    <a href="{{route('daftar.tugas.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash-alt"> Hapus</i>
+                                        <a href="{{route('daftar.tugas.detail',$item->user_id)}}" onclick="return confirm('Yakin akan melihat Detail ?')" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"> Detail</i>
                                         </a>
 
                                     </td>
