@@ -10,8 +10,9 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="mitradelima/assets/img/favicon.png" rel="icon">
-  <link href="mitradelima/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="mitradelima/assets/img/logo-klinik.png" rel="icon">
+  <link href="mitradelima/assets/img/logo-klinik.png" rel="apple-touch-icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -55,8 +56,10 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-
-      <a href="{{route('frontend')}}" class="logo me-auto"><img src="mitradelima/assets/img/logo.png" alt=""></a>
+      <a href="{{ route('frontend') }}" class="logo me-auto">
+          <img src="{{ asset('mitradelima/assets/img/logo-klinik.png') }}" alt="" class="img-fluid" style="width: 500px; height: 500px;">
+      </a>
+      <!-- <a href="{{route('frontend')}}" class="logo me-auto"><img src="{{asset('mitradelima/assets/img/logo-klinik.png')}}" alt=""></a> -->
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
