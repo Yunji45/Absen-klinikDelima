@@ -87,7 +87,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown {{ $type === 'tasklist' ? 'active' : '' }}">
+            <!-- <li class="nav-item dropdown {{ $type === 'tasklist' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
                     <span>Jasa Medis / Layanan</span>
@@ -101,7 +101,7 @@
                     </li>
                    
                 </ul>
-            </li>
+            </li> -->
             <li class="nav-item dropdown {{ $type === 'kpi' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-handshake"></i>
