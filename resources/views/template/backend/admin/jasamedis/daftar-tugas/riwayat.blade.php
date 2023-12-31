@@ -61,7 +61,7 @@
                                     <td scope="col" class="text-center">{{ date('F Y', strtotime($item->bulan)) }}</td>
                                     <td scope="col" class="text-center">
                                         <a href="{{route('daftar.tugas.detail',$item->user_id)}}" onclick="return confirm('Yakin akan melihat Detail ?')" class="btn btn-info btn-sm">
-                                            <i class="fas fa-eye"> Detail</i>
+                                            <i class="fas fa-eye"> Detail Tugas</i>
                                         </a>
 
                                     </td>

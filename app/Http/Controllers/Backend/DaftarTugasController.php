@@ -183,7 +183,13 @@ class DaftarTugasController extends Controller
         $history = OperasionalJasa::where('user_id', $user_id)
         ->where('ceklis', 'Ya')
         ->get();
+        $pending = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Tidak')->count();
+        $complete = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Ya')->count();
+        $totaljasa = OperasionalJasa::where('user_id',$user_id)->sum('tarif_jasa');
+        $jumlah = OperasionalJasa::where('user_id',$user_id)->count();
+
         // return $history;
-        return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history'));
+        return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history','pending','complete','jumlah','totaljasa'));
     }
+
 }
