@@ -29,7 +29,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="card-icon shadow-primary bg-primary">
+                <div class="card-icon shadow-primary bg-success">
                   <i class="fas fa-dollar-sign"></i>
                 </div>
                 <div class="card-wrap">
@@ -47,10 +47,10 @@
                 <div class="card-header">
                   <h4 class="d-inline"> Detail Rekap Jasa Medis / Layanan</h4>
                   <div class="card-header-action">
-                    <a href="{{route('daftar.tugas.riwayat')}}" class="btn btn-primary">Back</a>
+                    <a href="{{route('daftar.tugas.riwayat')}}" class="btn btn-danger">Back</a>
                   </div>
                   <div class="card-header-action">
-                    <a href="{{route('daftar.tugas.riwayat')}}" class="btn btn-primary">Search Periode</a>
+                    <a href="" class="btn btn-primary">Search Periode</a>
                   </div>
                 </div>
                 <div class="card-body">             
@@ -77,11 +77,11 @@
                                     <td scope="col" class="text-center">{{$item->medis->jenis_jasa}}</td>
                                     <td scope="col" class="text-center">{{$item->pasien->nama_pasien}}</td>
                                     <td scope="col" class="text-center">{{'Rp.' . number_format(floatval($item->tarif_jasa), 0, ',', '.')}}</td>
-                                    <td scope="col" class="text-center">{{ date('F Y', strtotime($item->bulan)) }}</td>
+                                    <td scope="col" class="text-center">{{ date('F Y', strtotime($item->created_at)) }}</td>
                                     <td scope="col" class="text-center">{{ date('F Y', strtotime($item->updated_at)) }}</td>
                                     <td><div class="badge badge-pill badge-success mb-1 float-right">Completed</div></td>
                                     <td scope="col" class="text-center">
-                                        <a href="" onclick="return confirm('Yakin akan menghapus Data ?')" class="btn btn-danger btn-sm">
+                                        <a href="{{route('daftar.tugas.delete.user',$item->user_id)}}" onclick="return confirm('Yakin akan menghapus Data ?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash"> Hapus</i>
                                         </a>
 

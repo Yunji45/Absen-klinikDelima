@@ -57,7 +57,9 @@
                                     <th scope="col" class="text-center">Nama Pasien</th>
                                     <th scope="col" class="text-center">Jenis Kelamin</th>
                                     <th scope="col" class="text-center">Tarif Jasa</th>
+                                    @if(auth()->user()->role == 'admin')
                                     <th scope="col" class="text-center">Ceklis Tindakan</th>
+                                    @endif
                                     <th scope="col" class="text-center">Date</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
@@ -76,6 +78,7 @@
                                     <td scope="col" class="text-center">{{$item->pasien->nama_pasien}}</td>
                                     <td scope="col" class="text-center">{{$item->pasien->jenis_kelamin}}</td>
                                     <td scope="col" class="text-center">{{'Rp.' . number_format(floatval($item->tarif_jasa), 0, ',', '.')}}</td>
+                                    @if(auth()->user()->role == 'admin')
                                     <td scope="col" class="text-center">
                                     <a
                                             href="{{ $item->ceklis == 'Ya' ? '#' : '/daftar-tugas/ceklis/' . $item->id }}"
@@ -88,6 +91,7 @@
                                             @endif
                                         </a>
                                     </td>
+                                    @endif
                                     <td scope="col" class="text-center">{{$item->bulan}}</td>
                                     <td scope="col" class="text-center">
                                         <a href="{{route('daftar.tugas.edit',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">

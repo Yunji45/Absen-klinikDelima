@@ -182,14 +182,25 @@ class DaftarTugasController extends Controller
         $type = 'jasamedis';
         $history = OperasionalJasa::where('user_id', $user_id)
         ->where('ceklis', 'Ya')
+        ->orderBy('updated_at')
         ->get();
         $pending = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Tidak')->count();
         $complete = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Ya')->count();
         $totaljasa = OperasionalJasa::where('user_id',$user_id)->sum('tarif_jasa');
         $jumlah = OperasionalJasa::where('user_id',$user_id)->count();
-
         // return $history;
         return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history','pending','complete','jumlah','totaljasa'));
+    }
+
+    public function Delete($user_id)
+    {
+        $tugas = OperasionalJasa::where('user_id', $user_id)->first();
+        if($tugas){
+            $tugas ->delete();
+            return redirect()->back()->with('success','Data Riwayat Berhasil Dihapus.');
+        }else{
+            return redirect()->back()->with('error','Data Riwayat Gagal Dihapus.');
+        }
     }
 
 }
