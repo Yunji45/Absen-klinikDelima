@@ -47,11 +47,17 @@
                 <div class="card-header">
                   <h4 class="d-inline"> Detail Rekap Jasa Medis / Layanan</h4>
                   <div class="card-header-action">
-                    <a href="{{route('daftar.tugas.riwayat')}}" class="btn btn-danger">Back</a>
+                    <a href="{{route('daftar.tugas.riwayat')}}" class="btn btn-danger"><i class="fas fa-arrow-left"> Back</i></a>
                   </div>
-                  <div class="card-header-action">
-                    <a href="" class="btn btn-primary">Search Periode</a>
-                  </div>
+                  <div class="card-header-form">
+                                <div class="input-group">
+                                <input type="date" class="form-control" placeholder="Search By Nama">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                                </div>
+                            
+                        </div>
                 </div>
                 <div class="card-body">             
                   <div class="table-responsive">

@@ -163,7 +163,7 @@
                                     <select name="layanan_id" id="layanan_id" class="form-control @error('user_id') is-invalid @enderror">
                                         <option value="" selected disabled>Pilih Tugas Layanan</option>
                                         @foreach ($kategori as $kategoris)
-                                            <option value="{{ $kategoris->id }}">{{ $kategoris->jenis_layanan }}</option>
+                                            <option value="{{ $kategoris->id }}">{{ $kategoris->jenis_layanan }} / {{ $kategoris->jenis_jasa }}</option>
                                         @endforeach
                                     </select>
                                     @error('user_id') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
