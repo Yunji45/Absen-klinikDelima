@@ -171,8 +171,7 @@ h6 {
 }
 
 #header .logo img {
-  /* max-height: 40px; */
-  max-height: 60px;
+    max-height: 50px; /* Atur tinggi maksimum logo */
 }
 
 /**
