@@ -15,7 +15,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
       <a href="{{ route('frontend') }}" class="logo me-auto">
-          <img src="{{ asset('mitradelima/assets/img/logo-klinik.png') }}" alt="" class="img-fluid">
+          <img src="{{ asset('mitradelima/assets/img/logo-klasik.png') }}" alt="" class="img-fluid">
       </a>
       <!-- <a href="{{route('frontend')}}" class="logo me-auto"><img src="{{asset('mitradelima/assets/img/logo-klinik.png')}}" alt=""></a> -->
       <!-- Uncomment below if you prefer to use an image logo -->

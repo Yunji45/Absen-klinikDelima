@@ -10,7 +10,8 @@ use App\Models\KategoriJasaMedis;
 use App\Models\OperasionalJasa;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-
+use Carbon\Carbon;
+use Auth;
 
 class DaftarTugasController extends Controller
 {
@@ -176,22 +177,6 @@ class DaftarTugasController extends Controller
         return view ('template.backend.admin.jasamedis.daftar-tugas.riwayat',compact('title','type','tugas','history'));
     }
 
-    public function DetailRiwayatTugas(Request $request,$user_id)
-    {
-        $title = 'Detail Riwayat Tugas Layanan';
-        $type = 'jasamedis';
-        $history = OperasionalJasa::where('user_id', $user_id)
-        ->where('ceklis', 'Ya')
-        ->orderBy('updated_at')
-        ->get();
-        $pending = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Tidak')->count();
-        $complete = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Ya')->count();
-        $totaljasa = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Ya')->sum('tarif_jasa');
-        $jumlah = OperasionalJasa::where('user_id',$user_id)->count();
-        // return $history;
-        return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history','pending','complete','jumlah','totaljasa'));
-    }
-
     public function Delete($user_id)
     {
         $tugas = OperasionalJasa::where('user_id', $user_id)->first();
@@ -201,6 +186,77 @@ class DaftarTugasController extends Controller
         }else{
             return redirect()->back()->with('error','Data Riwayat Gagal Dihapus.');
         }
+    }
+
+    public function DetailRiwayatTugas(Request $request,$user_id)
+    {
+        $title = 'Detail Riwayat Tugas Layanan';
+        $type = 'jasamedis';
+        $now = Carbon::now(); 
+        $bulanBerjalan = $now->format('m'); 
+        $tahunBerjalan = $now->format('Y'); 
+        $history = OperasionalJasa::where('user_id', $user_id)
+                                    ->where('ceklis', 'Ya')
+                                    ->whereYear('bulan', $tahunBerjalan)
+                                    ->whereMonth('bulan', $bulanBerjalan)                                
+                                    ->orderBy('updated_at')
+                                    ->get();
+        $pending = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Tidak')
+                                    ->whereYear('bulan', $tahunBerjalan)
+                                    ->whereMonth('bulan', $bulanBerjalan)                                
+                                    ->count();
+        $complete = OperasionalJasa::where('user_id',$user_id)
+                                    ->where('ceklis','Ya')
+                                    ->whereYear('bulan', $tahunBerjalan)
+                                    ->whereMonth('bulan', $bulanBerjalan)                                
+                                    ->count();
+        $totaljasa = OperasionalJasa::where('user_id',$user_id)
+                                    ->where('ceklis','Ya')
+                                    ->whereYear('bulan', $tahunBerjalan)
+                                    ->whereMonth('bulan', $bulanBerjalan)                                
+                                    ->sum('tarif_jasa');
+        $jumlah = OperasionalJasa::where('user_id',$user_id)
+                                ->whereYear('bulan', $tahunBerjalan)
+                                ->whereMonth('bulan', $bulanBerjalan)                                
+                                ->count();
+        // return $history;
+        return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history','pending','complete','jumlah','totaljasa'));
+    }
+
+    public function SearchRiwayat(Request $request)
+    {
+        $request->validate([
+            'bulan' => ['nullable', 'date'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable','date']
+        ]);
+        $title = 'Jadwal Tugas Layanan';
+        $type = 'jasamedis';
+
+        $user_id = Auth::id();
+
+        $riwayat = OperasionalJasa::query();
+
+        if ($request->filled('bulan')) {
+            $riwayat->where('bulan', $request->bulan);
+        } elseif ($request->filled('start_date') && $request->filled('end_date')) {
+            $riwayat->whereBetween('bulan', [$request->start_date, $request->end_date]);
+        }
+
+        $riwayat = $riwayat->orderBy('bulan', 'desc')->orderBy('updated_at', 'desc')->get();
+
+        $history = OperasionalJasa::query()
+                        ->where('user_id',$user_id)
+                        ->where('ceklis', 'Ya')
+                        ->when($request->filled('bulan'), function ($query) use ($request) {
+                            return $query->where('bulan', $request->bulan)->where('user_id',$user_id)->where('ceklis', 'Ya');
+                        })
+                        ->when($request->filled('start_date') && $request->filled('end_date'), function ($query) use ($request) {
+                            return $query->whereBetween('bulan', [$request->start_date, $request->end_date])->where('user_id',$user_id)->where('ceklis', 'Ya');
+                        })->get();
+        return $history;
+        // return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history','pending','complete','jumlah','totaljasa'));
+ 
     }
 
 }

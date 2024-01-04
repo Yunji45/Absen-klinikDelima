@@ -20,11 +20,10 @@
                 </i> Eksport Excel
         </a>
         <div class="section-header-breadcrumb">
-                <a href="{{route('daftar.tugas')}}" class="btn btn-primary">
+                <a href="{{route('daftar.tugas')}}" class="btn btn-danger">
                     <i class="fas fa-arrow-left">
                         </i> Jadwal Tugas
                 </a>
-
             </div>
     </div>
 
@@ -34,15 +33,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
-                        <div class="card-header-form">
-                                <div class="input-group">
-                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Nama">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                </div>
-                                </div>
-                            
-                        </div>
                         <div class="card-header-form">
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Nama">
@@ -84,9 +74,6 @@
         </div>
     </div>
 </section>
-
-
-
 <script>
     function myFunction() {
     var input, filter, table, tr, td, i, txtValue;

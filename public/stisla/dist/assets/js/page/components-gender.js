@@ -202,7 +202,7 @@ async function fetchData(url) {
 }
 
 // Ambil data untuk chart gender
-fetchData('http://localhost:8000/api/api-gender') // Ganti dengan URL API yang sesuai
+fetchData('https://klinikmitradelima.com/api/api-gender') // Ganti dengan URL API yang sesuai
   .then(data => {
     // Asumsi data memiliki properti 'data'
     const genderData = data.data;

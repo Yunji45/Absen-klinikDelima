@@ -50,12 +50,10 @@
                     <a href="{{route('daftar.tugas.riwayat')}}" class="btn btn-danger"><i class="fas fa-arrow-left"> Back</i></a>
                   </div>
                   <div class="card-header-form">
-                                <div class="input-group">
-                                <input type="date" class="form-control" placeholder="Search By Nama">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                </div>
-                                </div>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#update">
+                                <i class="fas fa-search">
+                                    </i> Periode
+                            </a>
                             
                         </div>
                 </div>
@@ -103,7 +101,40 @@
     </div>
 </section>
 
-
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="kehadiranLabel"> Cari Data {{$title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('task.list.search') }}" method="get">
+                    <div class="modal-body">
+                        <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="bulan" class="col-form-label">By Date:</label>
+                                <input type="date" class="form-control" name="bulan" id="bulan">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="start_date" class="col-form-label">Start Date:</label>
+                                <input type="date" name="start_date" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="end_date" class="col-form-label">End Date:</label>
+                                <input type="date" name="end_date" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Cari</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
 
 <script>
     function myFunction() {

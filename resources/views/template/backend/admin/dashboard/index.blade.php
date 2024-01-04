@@ -38,7 +38,7 @@
             </div> -->
           </div>
           <div class="row">
-            <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+            <div class="col-lg-6 col-md-12 col-12 col-sm-12 mb-4">
               <div class="card">
                 <div class="card-header">
                   <h4>Statistics Tenaga Kesehatan</h4>
@@ -50,11 +50,11 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <canvas id="myChart200" height="182"></canvas>
+                  <canvas id="myChart12" height="182"></canvas>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+            <div class="col-lg-6 col-md-12 col-12 col-sm-12 mb-4">
               <div class="card">
                 <div class="card-header">
                   <h4>Statistics Tenaga Non Kesehatan</h4>
@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <canvas id="myChart11" height="182"></canvas>
+                  <canvas id="myChart15" height="182"></canvas>
                 </div>
               </div>
             </div>

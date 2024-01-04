@@ -1,9 +1,9 @@
 "use strict";
 
-var statistics_chart = document.getElementById("myChart11").getContext('2d');
+var statistics_chart = document.getElementById("myChart15").getContext('2d');
 
 // Melakukan permintaan ke API untuk mendapatkan data
-fetch('http://localhost:8000/api/api-non-nakes') // Ganti URL dengan URL API sebenarnya
+fetch('https://klinikmitradelima.com/api/api-non-nakes') // Ganti URL dengan URL API sebenarnya
   .then(response => {
     if (!response.ok) {
       throw new Error('Gagal mendapatkan data dari API.');
