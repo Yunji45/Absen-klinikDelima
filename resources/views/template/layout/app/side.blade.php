@@ -2,6 +2,7 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="index.html">Mitra Delima</a>
+            <!-- <img src="{{ asset('mitradelima/assets/img/logo-klasik.png') }}" alt="" class="img-fluid"> -->
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">MD</a>
