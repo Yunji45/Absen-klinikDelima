@@ -188,34 +188,35 @@ class DaftarTugasController extends Controller
         }
     }
 
-    public function DetailRiwayatTugas(Request $request,$user_id)
+    public function DetailRiwayatTugas(Request $request,User $user_id)
     {
         $title = 'Detail Riwayat Tugas Layanan';
         $type = 'jasamedis';
         $now = Carbon::now(); 
         $bulanBerjalan = $now->format('m'); 
         $tahunBerjalan = $now->format('Y'); 
-        $history = OperasionalJasa::where('user_id', $user_id)
+        $history = OperasionalJasa::whereUserId($user_id->id)
                                     ->where('ceklis', 'Ya')
                                     ->whereYear('bulan', $tahunBerjalan)
                                     ->whereMonth('bulan', $bulanBerjalan)                                
                                     ->orderBy('updated_at')
                                     ->get();
-        $pending = OperasionalJasa::where('user_id',$user_id)->where('ceklis','Tidak')
+        $pending = OperasionalJasa::whereUserId($user_id->id)
+                                    ->where('ceklis','Tidak')
                                     ->whereYear('bulan', $tahunBerjalan)
                                     ->whereMonth('bulan', $bulanBerjalan)                                
                                     ->count();
-        $complete = OperasionalJasa::where('user_id',$user_id)
+        $complete = OperasionalJasa::whereUserId($user_id->id)
                                     ->where('ceklis','Ya')
                                     ->whereYear('bulan', $tahunBerjalan)
                                     ->whereMonth('bulan', $bulanBerjalan)                                
                                     ->count();
-        $totaljasa = OperasionalJasa::where('user_id',$user_id)
+        $totaljasa = OperasionalJasa::whereUserId($user_id->id)
                                     ->where('ceklis','Ya')
                                     ->whereYear('bulan', $tahunBerjalan)
                                     ->whereMonth('bulan', $bulanBerjalan)                                
                                     ->sum('tarif_jasa');
-        $jumlah = OperasionalJasa::where('user_id',$user_id)
+        $jumlah = OperasionalJasa::whereUserId($user_id->id)
                                 ->whereYear('bulan', $tahunBerjalan)
                                 ->whereMonth('bulan', $bulanBerjalan)                                
                                 ->count();
@@ -257,6 +258,21 @@ class DaftarTugasController extends Controller
         return $history;
         // return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history','pending','complete','jumlah','totaljasa'));
  
+    }
+
+    public function cari(Request $request, User $user_id)
+    {
+        $request->validate([
+            'bulan' => ['required']
+        ]);
+        $data = explode('-',$request->bulan);
+        $history = presensi::whereUserId($user_id->id)
+                            ->where('ceklis', 'Ya')
+                            ->whereMonth('bulan',$data[1])
+                            ->whereYear('bulan',$data[0])
+                            ->orderBy('bulan','desc')->get();
+        
+        return history;
     }
 
 }

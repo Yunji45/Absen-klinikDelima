@@ -113,20 +113,7 @@
                 <form action="{{ route('task.list.search') }}" method="get">
                     <div class="modal-body">
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
-                        <div class="form-row">
-                            <div class="col-md-4">
-                                <label for="bulan" class="col-form-label">By Date:</label>
-                                <input type="date" class="form-control" name="bulan" id="bulan">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="start_date" class="col-form-label">Start Date:</label>
-                                <input type="date" name="start_date" class="form-control">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="end_date" class="col-form-label">End Date:</label>
-                                <input type="date" name="end_date" class="form-control">
-                            </div>
-                        </div>
+                        <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan',date('Y-m')) }}">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Cari</button>

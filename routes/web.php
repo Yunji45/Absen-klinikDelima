@@ -282,7 +282,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         //task list jasa medis
         // Route::get('/task-list',[TasklistJasaMedisController::class,'index'])->name('task.list.index');
         // Route::get('/task-list/history',[TasklistJasaMedisController::class,'HistoryTask'])->name('task.list.history');
-        Route::get('/task-list/search',[DaftarTugasController::class,'SearchRiwayat'])->name('task.list.search');
+        Route::get('/task-list/search/{user_id}',[DaftarTugasController::class,'cari'])->name('task.list.search');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

@@ -70,7 +70,9 @@
             var jamTutup = 21;
 
             var waktuOperasional = "Buka Setiap Hari, " + pad(jamBuka) + ":" + pad(0) + " - " + pad(jamTutup) + ":" + pad(0);
-            document.getElementById("waktu").innerHTML = '<i class="bi bi-clock"></i> ' + waktuOperasional;
+document.getElementById("waktu").innerHTML = waktuOperasional;
+            // var waktuOperasional = "Buka Setiap Hari, " + pad(jamBuka) + ":" + pad(0) + " - " + pad(jamTutup) + ":" + pad(0);
+            // document.getElementById("waktu").innerHTML = '<i class="bi bi-clock"></i> ' + waktuOperasional;
         }
 
         function pad(n) {
