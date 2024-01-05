@@ -150,6 +150,54 @@
                     <span>Setting IP Address</span>
                 </a>
             </li>
+            <li class="menu-header">Layout</li>
+            <li class="nav-item dropdown ">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-list"></i>
+                    <span>Content Management</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="">Content Beranda</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Content Profil</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Content Layanan</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Content Divisi</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Content Foto</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Pengaduan Layanan</a>
+                    </li>
+                   
+                </ul>
+            </li>
+            <li class="nav-item dropdown ">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-list"></i>
+                    <span>Career Management</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="">Divisi</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Kriteria Hire</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Management Berkas</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Announcment</a>
+                    </li>
+                </ul>
+            </li>
             @endif
             @if(auth()->user()->role == 'keuangan')
             <li class="nav-item dropdown {{ $type === 'gaji' ? 'active' : '' }}">

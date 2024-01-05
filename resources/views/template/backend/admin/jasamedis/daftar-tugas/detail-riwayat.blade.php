@@ -110,7 +110,7 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('task.list.search') }}" method="get">
+                <form action="" method="get">
                     <div class="modal-body">
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
                         <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan',date('Y-m')) }}">

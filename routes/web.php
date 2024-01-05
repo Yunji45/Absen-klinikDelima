@@ -32,6 +32,7 @@ use App\Http\Controllers\Backend\DaftarTugasController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
+use App\Http\Controllers\Frontend\CareerController;
 //dokumentasi API (application programming interface)
 use App\Http\Controllers\API\DokumentasiController;
 use App\Http\Controllers\Api\StatistikController;
@@ -64,6 +65,7 @@ Route::get('/api', function () {
     return view('testyu');
 });
 Route::get('/',[ContentController::class,'home'])->name('frontend');
+Route::get('/karir',[CareerController::class,'index'])->name('karir');
 // Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
 // Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
 Route::get('/opencv',[FaceController::class,'index']);
@@ -282,7 +284,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         //task list jasa medis
         // Route::get('/task-list',[TasklistJasaMedisController::class,'index'])->name('task.list.index');
         // Route::get('/task-list/history',[TasklistJasaMedisController::class,'HistoryTask'])->name('task.list.history');
-        Route::get('/task-list/search',[DaftarTugasController::class,'cari'])->name('task.list.search');
+        Route::get('/task-list/search/{user_id}',[DaftarTugasController::class,'cari'])->name('task.list.search');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
