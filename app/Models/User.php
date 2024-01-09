@@ -133,4 +133,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(OperasionalJasa::class,'user_id');
     }
+
+    //note karyawan
+    public function notekarwayan()
+    {
+        return $this->hasMany(NoteKaryawan::class);
+    }
 }

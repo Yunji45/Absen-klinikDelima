@@ -29,6 +29,7 @@ use App\Http\Controllers\Backend\HomeCareController;
 use App\Http\Controllers\Backend\KategoriJasaController;
 use App\Http\Controllers\Backend\DaftarPasienController;
 use App\Http\Controllers\Backend\DaftarTugasController;
+use App\Http\Controllers\Backend\NoteKaryawanController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -285,6 +286,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         // Route::get('/task-list',[TasklistJasaMedisController::class,'index'])->name('task.list.index');
         // Route::get('/task-list/history',[TasklistJasaMedisController::class,'HistoryTask'])->name('task.list.history');
         Route::get('/task-list/search/{user_id}',[DaftarTugasController::class,'cari'])->name('task.list.search');
+
+        //note karyawan
+        Route:resource('/note-karyawan',NoteKaryawanController::class);
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

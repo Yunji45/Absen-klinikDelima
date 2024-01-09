@@ -883,7 +883,8 @@ class KpiController extends Controller
         $target_akhir = $request->bulan;
         $startDate = $request->bulantarget;
         $endDate = $request->bulantarget;
-        $tahun = date('Y'); 
+        // $tahun = date('Y'); 
+        $tahun = '2023'; 
         $tanggalawal = $tahun . '-' . $startDate . '-01';
         $tanggalakhir = $tahun . '-' . $endDate . '-31';
 

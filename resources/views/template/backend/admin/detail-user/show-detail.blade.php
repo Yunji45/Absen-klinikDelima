@@ -276,7 +276,7 @@
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Sertifikat Status</h6>
                         <ul>
-                            @foreach ($detail->user->dokumen as $dokumen)
+                            @foreach ($detail->user->sertifikat as $dokumen)
                             <li>
                                 <a href="{{ asset('storage/sertifikat_pegawai/' . $detail->user->name . '/' . $dokumen->filename) }}" target="_blank">
                                                 {{ $dokumen->filename }}
