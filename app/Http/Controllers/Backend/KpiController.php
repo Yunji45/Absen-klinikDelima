@@ -1086,8 +1086,11 @@ class KpiController extends Controller
         $targetId = $ach->where('id', $realisasi->target_id)->pluck('name')->first();
         $user = User::all();
         // Mendapatkan bulan dan tahun saat ini
-        $currentMonth = date('m');
-        $currentYear = date('Y');
+        // $currentMonth = date('m');
+        // $currentYear = date('Y');
+        $currentMonth = '12';
+        $currentYear = '2023';
+
         $startDate = $currentYear . '-' . $currentMonth . '-01';
         $endDate = $currentYear . '-' . $currentMonth . '-31';
 
