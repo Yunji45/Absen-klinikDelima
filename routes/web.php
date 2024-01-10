@@ -288,7 +288,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/task-list/search/{user_id}',[DaftarTugasController::class,'cari'])->name('task.list.search');
 
         //note karyawan
-        Route::resource('/note-karyawan',NoteKaryawanController::class);
+        Route::resource('/note-karyawan', NoteKaryawanController::class)->names('note-karyawan');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

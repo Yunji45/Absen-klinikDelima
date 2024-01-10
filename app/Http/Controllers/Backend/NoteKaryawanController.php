@@ -31,7 +31,9 @@ class NoteKaryawanController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Tambah Catatan Karyawan';
+        $type = 'kpi';
+        return view ('template.backend.admin.note-karyawan.create',compact('title','type'));
     }
 
     /**

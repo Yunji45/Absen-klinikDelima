@@ -112,6 +112,9 @@
                     <!-- <li>
                         <a class="nav-link" href="{{route('coba')}}">Coba Input Multiple User</a>
                     </li> -->
+                    <li class="{{ Route::currentRouteName() === 'note-karyawan.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('note-karyawan.index') }}">Catatan Karyawan</a>
+                    </li>
 
                     <li class="{{ Route::currentRouteName() === 'target.kpi' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('target.kpi')}}">Target KPI</a>
