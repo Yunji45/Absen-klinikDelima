@@ -21,7 +21,7 @@ class NoteKaryawanController extends Controller
         $title = 'Catatan Karyawan';
         $type = 'kpi';
         $data = NoteKaryawan::all();
-        return view ('template.backend.admin.note-karyawan.index',compact('title','type'));
+        return view ('template.backend.admin.note-karyawan.index',compact('title','type','data'));
     }
 
     /**
@@ -33,7 +33,9 @@ class NoteKaryawanController extends Controller
     {
         $title = 'Tambah Catatan Karyawan';
         $type = 'kpi';
-        return view ('template.backend.admin.note-karyawan.create',compact('title','type'));
+        $user = User::whereIn('role',['pegawai','evaluator','hrd','keuangan'])->get();
+        // return $user;
+        return view ('template.backend.admin.note-karyawan.create',compact('title','type','user'));
     }
 
     /**
@@ -44,7 +46,31 @@ class NoteKaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'user_id' => 'required',
+            'bulan' => 'required',
+            'keterangan' => 'required',
+            'deskripsi' => 'required',
+
+        ],[
+            'user_id.required' => 'Nama Karyawan tidak boleh kosong',
+            'bulan.required' => 'Waktu pembuatan catatan tidak boleh kosong',
+            'keterangan.required' => 'keterangan wajib ada',
+            'deskripsi.required' => 'Deskripsi catatan harus ada',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+        $catatan = new NoteKaryawan;
+        $catatan->user_id = $request->user_id;
+        $catatan->bulan = $request->bulan;
+        $catatan->keterangan = $request->keterangan;
+        $catatan->deskripsi = $request->deskripsi;
+        $catatan->save();
+        // return $catatan;
+        return redirect()->route('note-karyawan.index')->with('success','Data Catatan Berhasil Disimpan.');
     }
 
     /**
@@ -66,7 +92,13 @@ class NoteKaryawanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Tambah Catatan Karyawan';
+        $type = 'kpi';
+        $catatan = NoteKaryawan::find($id);
+        $user = User::whereIn('role',['pegawai','evaluator','hrd','keuangan'])->get();
+        // return $user;
+        return view ('template.backend.admin.note-karyawan.edit',compact('title','type','user','catatan'));
+
     }
 
     /**
@@ -78,7 +110,15 @@ class NoteKaryawanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $catatan = NoteKaryawan::find($id);
+        $catatan->user_id = $request->user_id;
+        $catatan->bulan = $request->bulan;
+        $catatan->keterangan = $request->keterangan;
+        $catatan->deskripsi = $request->deskripsi;
+        // $catatan->save();
+        return $catatan;
+        // return redirect()->route('note-karyawan.index')->with('success','Data Catatan Berhasil Diupdate.');
+
     }
 
     /**
@@ -89,6 +129,24 @@ class NoteKaryawanController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
+    public function delete($id)
+    {
+        $catatan = NoteKaryawan::find($id);
+        $catatan->delete();
+        return redirect()->back()->with('success','Data Catatan Berhasil Dihapus');
+    }
+    public function updatelagi(Request $request, $id)
+    {
+        $catatan = NoteKaryawan::find($id);
+        $catatan->user_id = $request->user_id;
+        $catatan->bulan = $request->bulan;
+        $catatan->keterangan = $request->keterangan;
+        $catatan->deskripsi = $request->deskripsi;
+        $catatan->save();
+        // return $catatan;
+        return redirect()->route('note-karyawan.index')->with('success','Data Catatan Berhasil Diupdate.');
+    }
+
 }

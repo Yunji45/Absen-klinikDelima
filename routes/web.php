@@ -289,6 +289,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
 
         //note karyawan
         Route::resource('/note-karyawan', NoteKaryawanController::class)->names('note-karyawan');
+        Route::get('/note-karyawan/delete/{id}', [NoteKaryawanController::class,'delete'])->name('note-karyawan.delete');
+        Route::get('/note-karyawan/update/{id}', [NoteKaryawanController::class,'updatelagi'])->name('note-karyawan.updatelagi');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

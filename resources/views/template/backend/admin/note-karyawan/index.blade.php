@@ -1,4 +1,5 @@
-@extends('template.layout.app.main') @section('tabel')
+@extends('template.layout.app.main') 
+@section('tabel')
 <section class="section">
     <div class="section-header">
         <h1>{{$title}}</h1>
@@ -11,7 +12,7 @@
     </div>
     <div class="section-header">
         
-        <a href="" class="btn btn-primary">
+        <a href="{{route('note-karyawan.create')}}" class="btn btn-primary">
             <i class="fa fa-plus">
                 Add</i>
         </a>
@@ -67,7 +68,27 @@
                                     <th scope="col" class="text-center">Waktu</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
-                                
+                                @php
+                                $no =1;
+                                @endphp
+                                @foreach ($data as $item)
+                                <tr>
+                                <td class="text-center">{{$no++}}.</td>
+                                <td class="text-center">{{$item->user->name}}</td>
+                                <td class="text-center">{{$item->keterangan}}</td>
+                                <td class="text-center">{{$item->deskripsi}}</td>
+                                <td class="text-center">{{$item->bulan}}</td>
+                                <td class="text-center">
+                                    <a href="{{route('note-karyawan.delete',$item->id)}}" 
+                                    onclick="return confirm('Yakin akan dihapus?')" 
+                                    class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Hapus</a>
+
+                                    <a href="{{route('note-karyawan.edit',$item->id)}}" 
+                                    class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Edit</a>
+
+                                </td>                        
+                            </tr>
+                                @endforeach
                             </table>
                         </div>
                     </div>
