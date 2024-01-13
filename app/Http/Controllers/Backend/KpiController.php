@@ -1588,7 +1588,7 @@ class KpiController extends Controller
 
                             $psCount = jadwalterbaru::where('user_id', $user->id)
                                 ->where(function ($query) use ($column) {
-                                    $query->whereIn($column, ['PS', 'SM', 'PM']);
+                                    $query->whereIn($column, ['PS', 'SM', 'PM','LL']);
                                 })
                                 ->whereMonth('masa_aktif', $bulan)
                                 ->whereYear('masa_aktif', $tahun)
