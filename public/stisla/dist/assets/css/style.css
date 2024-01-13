@@ -1518,8 +1518,7 @@ h6 .badge {
   left: 0;
   width: 100%;
   height: 115px;
-  /* background-color: #6777ef; */
-  background-color: #45e029;
+  background-color: #6777ef;
   z-index: -1; }
 
 .navbar {
@@ -2323,8 +2322,7 @@ pre {
   top: 0;
   height: 100%;
   width: 250px;
-  /* background-color: #fff; */
-  background-color: #45e029;
+  background-color: #fff;
   z-index: 880;
   left: 0; }
 
@@ -2608,8 +2606,7 @@ body.layout-3 .main-footer {
     display: block; }
     .main-sidebar .sidebar-menu li.menu-header {
       padding: 3px 15px;
-      /* color: #bcc1c6; */
-      color: #101011;
+      color: #bcc1c6;
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 1.3px;
@@ -2624,8 +2621,7 @@ body.layout-3 .main-footer {
       padding: 0 20px;
       width: 100%;
       letter-spacing: .3px;
-      /* color: #868e96; */
-      color: #ebf0ee;
+      color: #868e96;
       text-decoration: none; }
       .main-sidebar .sidebar-menu li a .badge {
         float: right;
@@ -2639,8 +2635,7 @@ body.layout-3 .main-footer {
         margin-top: 3px;
         width: 100%; }
       .main-sidebar .sidebar-menu li a:hover {
-        /* background-color: #fcfcfd; } */
-        background-color: #6dee56; }
+        background-color: #fcfcfd; }
     .main-sidebar .sidebar-menu li.active a {
       color: #6777ef;
       font-weight: 600;
@@ -2671,8 +2666,7 @@ body.layout-3 .main-footer {
       box-shadow: none;
       background-color: transparent; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
-        /* color: #868e96; */
-        color: #FFE9A0;
+        color: #868e96;
         height: 35px;
         padding-left: 65px;
         font-weight: 400; }

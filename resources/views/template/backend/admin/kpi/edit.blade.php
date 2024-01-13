@@ -100,7 +100,7 @@
                   </div>
 
                   <div class="form-group col-md-5 col-12">
-                  <p class="text-start col-sm-6" > <strong>ATASAN YANG MENILAI</strong></p>
+                    <p class="text-start col-sm-6" > <strong>ATASAN YANG MENILAI</strong></p>
                       <label for="nama_atasan" class="col-form-label col-sm-6">Nama Atasan</label>
                       <div class="col-sm-12">
                           <select
@@ -185,6 +185,26 @@
                           @enderror
                       </div> -->
 
+                  </div>
+                  <div class="form-group col-md-8 col-12">
+                  <p class="text-start col-sm-6"> <strong>CATATAN KARYAWAN</strong></p>
+
+                    <ol class="list-group list-group-numbered">
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                          <div class="fw-bold">Contoh Kasus / Date</div>
+                          Content kasus
+                        </div>
+                        <span class="badge bg-primary rounded-pill">Positif</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                          <div class="fw-bold">Contoh Kasus / Date</div>
+                          Content kasus
+                        </div>
+                        <span class="badge bg-danger rounded-pill">Negatif</span>
+                      </li>
+                    </ol>
                   </div>
               </div>
 

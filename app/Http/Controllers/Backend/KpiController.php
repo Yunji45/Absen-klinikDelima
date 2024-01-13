@@ -111,13 +111,14 @@ class KpiController extends Controller
         $target_akhir = $request->bulanreal;
         $startDate = $request->bulantarget;
         $endDate = $request->bulantarget;
-        $tahun = date('Y');
+        // $tahun = date('Y');
+        $tahun = '2023';
         $tanggalawal = $tahun . '-' . $startDate . '-01';
         $tanggalakhir = $tahun . '-' . $endDate . '-31';
         $targetawal = $tahun . '-' . $target_awal . '-01';
         $targetakhir = $tahun . '-' . $target_akhir . '-31';
 
-        $data = explode('-', '2023-11-15'); // Memisahkan string bulan menjadi array
+        $data = explode('-', '2023-12-15'); // Memisahkan string bulan menjadi array
         $bulan = $data[1]; // Bulan
         $tahun = $data[0]; // Tahun        
 
