@@ -13,6 +13,7 @@ use App\Models\AchKpi;
 use App\Models\InsentifKpi;
 use App\Models\OmsetKlinik;
 use App\Models\rubahjadwal;
+use App\Models\NoteKaryawan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
@@ -86,9 +87,30 @@ class KpiController extends Controller
     {
         $title = 'Edit Evaluasi';
         $type = 'kpi';
-        $kpi = kpi::find($id);
+        // Menggunakan model Kpi, pastikan nama model diawali huruf kapital
+        $kpi = Kpi::find($id);
         $user = User::all();
-        return view('template.backend.admin.kpi.edit',compact('title','user','type','kpi'));
+
+        if ($kpi) {
+            $catatan = NoteKaryawan::where('user_id', $kpi->user_id)
+                                ->whereMonth('bulan', date('m', strtotime($kpi->bulan)))
+                                ->whereYear('bulan', date('Y', strtotime($kpi->bulan)))
+                                ->get();
+
+            if ($catatan->isNotEmpty()) {
+                $gig = User::find($kpi->user_id);
+                foreach ($catatan as $item) {
+                    $user_id_from_note = $item->user_id;
+                    // Lakukan sesuatu dengan $user_id_from_note
+                }
+            }
+            // return $catatan;
+        } else {
+            // Handle kasus jika Kpi tidak ditemukan
+            return response()->json(['error' => 'Kpi not found'], 404);
+        }
+
+        return view('template.backend.admin.kpi.edit',compact('title','user','type','kpi','catatan'));
     }
 
     public function storeKpiMultiple(Request $request)

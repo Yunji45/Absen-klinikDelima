@@ -187,23 +187,24 @@
 
                   </div>
                   <div class="form-group col-md-8 col-12">
-                  <p class="text-start col-sm-6"> <strong>CATATAN KARYAWAN</strong></p>
+                  <p class="text-start col-sm-6"> <strong>LIST CATATAN KARYAWAN</strong></p>
 
                     <ol class="list-group list-group-numbered">
+                      @foreach($catatan as $item)
                       <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                          <div class="fw-bold">Contoh Kasus / Date</div>
-                          Content kasus
+                          <div class="fw-bold">{{$item->user->name}} / {{$item->bulan}}</div>
+                          {{$item->deskripsi}}
                         </div>
-                        <span class="badge bg-primary rounded-pill">Positif</span>
+                        @if($item->keterangan == 'Negatif')
+                            <span class="badge bg-danger rounded-pill">{{$item->keterangan}}</span>
+                        @elseif($item->keterangan == 'Positif')
+                            <span class="badge bg-primary rounded-pill">{{$item->keterangan}}</span>
+                        @else
+                            <!-- Handle kondisi lain jika diperlukan -->
+                        @endif                      
                       </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                          <div class="fw-bold">Contoh Kasus / Date</div>
-                          Content kasus
-                        </div>
-                        <span class="badge bg-danger rounded-pill">Negatif</span>
-                      </li>
+                      @endforeach
                     </ol>
                   </div>
               </div>

@@ -140,7 +140,7 @@
                     <div class="modal-body">
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
                         <div class="form-group row">
-                            <label for="bulan" class="col-form-label col-sm-3">Ambil Data Evaluasi Bulan</label>
+                            <label for="bulan" class="col-form-label col-sm-3">Ambil Data Realisasi Bulan</label>
                             <div class="col-sm-9">
                                 <select class="form-control @error('bulan') is-invalid @enderror" name="bulantarget" id="bulantarget">
                                     <option value="">Pilih</option>
