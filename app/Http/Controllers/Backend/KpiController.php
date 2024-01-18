@@ -703,8 +703,9 @@ class KpiController extends Controller
         if (!$psTotal){
             return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
         }
+        // $totalabsen = ($totalMasuk + $totalTelat )/$psTotal;
         $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
-        if($totalabsen == 1 && $lembur > 1){
+        if( $lembur === 1){
             $kpi->absen =3;
         }elseif($totalabsen == 1 ){
             $kpi->absen = 2;
@@ -713,6 +714,15 @@ class KpiController extends Controller
         }else{
             $kpi->absen = 0;
         }
+        // if($totalabsen == 1 && $lembur > 1){
+        //     $kpi->absen =3;
+        // }elseif($totalabsen == 1 ){
+        //     $kpi->absen = 2;
+        // }elseif($totalabsen < 1){
+        //     $kpi->absen =1;
+        // }else{
+        //     $kpi->absen = 0;
+        // }
         // $kpi->absen = $totalabsen;
         $totalabsen = $kpi->absen;
         $kpi->bulan = $request->bulan;
