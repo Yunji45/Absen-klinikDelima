@@ -230,6 +230,25 @@
                 </tr>
                 <tr>
                   <td class="text-center">13.</td>
+                  <td class="text-center">Orientasi Pelayanan (ramah, cekatan, solutif)</td>
+                  @for($i = 0; $i <= 3; $i++)
+                    <td class="text-center">
+                      <input type="checkbox" name="layanan[]" value="{{ $i }}" {{ $kpi->layanan == $i ? 'checked' : '' }} />
+                    </td>
+                  @endfor
+                </tr>
+                <tr>
+                  <td class="text-center">12.</td>
+                  <td class="text-center">Akuntabel (disiplin, tanggung jawab, jujur)</td>
+                  @for($i = 0; $i <= 3; $i++)
+                    <td class="text-center">
+                      <input type="checkbox" name="akuntan[]" value="{{ $i }}" {{ $kpi->akuntan == $i ? 'checked' : '' }} />
+                    </td>
+                  @endfor
+                </tr>
+
+                <!-- <tr>
+                  <td class="text-center">13.</td>
                   <td class="text-center">Orientasi Pelayanan (ramah,cekatan,solutif)</td>
                   <td class="text-center"><input type="checkbox" name="layanan[]" value="0" /></td>
                   <td class="text-center"><input type="checkbox" name="layanan[]" value="1" /></td>
@@ -243,46 +262,51 @@
                   <td class="text-center"><input type="checkbox" name="akuntan[]" value="1" /></td>
                   <td class="text-center"><input type="checkbox" name="akuntan[]" value="2" /></td>
                   <td class="text-center"><input type="checkbox" name="akuntan[]" value="3" /></td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td class="text-center">13.</td>
-                  <td class="text-center">Kompeten (terampil, mau belajar , tugas baik)</td>
-                  <td class="text-center"><input type="checkbox" name="kompeten[]" value="0" /></td>
-                  <td class="text-center"><input type="checkbox" name="kompeten[]" value="1" /></td>
-                  <td class="text-center"><input type="checkbox" name="kompeten[]" value="2" /></td>
-                  <td class="text-center"><input type="checkbox" name="kompeten[]" value="3" /></td>
+                  <td class="text-center">Kompeten (terampil, mau belajar, tugas baik)</td>
+                  @for($i = 0; $i <= 3; $i++)
+                    <td class="text-center">
+                      <input type="checkbox" name="kompeten[]" value="{{ $i }}" {{ $kpi->kompeten == $i ? 'checked' : '' }} />
+                    </td>
+                  @endfor
                 </tr>
                 <tr>
                   <td class="text-center">14.</td>
-                  <td class="text-center">Harmonis (suka menolong, menghargai,Jaga kondusif)</td>
-                  <td class="text-center"><input type="checkbox" name="harmonis[]" value="0" /></td>
-                  <td class="text-center"><input type="checkbox" name="harmonis[]" value="1" /></td>
-                  <td class="text-center"><input type="checkbox" name="harmonis[]" value="2" /></td>
-                  <td class="text-center"><input type="checkbox" name="harmonis[]" value="3" /></td>
+                  <td class="text-center">Harmonis (suka menolong, menghargai, jaga kondusif)</td>
+                  @for($i = 0; $i <= 3; $i++)
+                    <td class="text-center">
+                      <input type="checkbox" name="harmonis[]" value="{{ $i }}" {{ $kpi->harmonis == $i ? 'checked' : '' }} />
+                    </td>
+                  @endfor
                 </tr>
                 <tr>
                   <td class="text-center">15.</td>
                   <td class="text-center">Loyal (setia, jaga nama baik, jaga rahasia)</td>
-                  <td class="text-center"><input type="checkbox" name="loyal[]" value="0" /></td>
-                  <td class="text-center"><input type="checkbox" name="loyal[]" value="1" /></td>
-                  <td class="text-center"><input type="checkbox" name="loyal[]" value="2" /></td>
-                  <td class="text-center"><input type="checkbox" name="loyal[]" value="3" /></td>
+                  @for($i = 0; $i <= 3; $i++)
+                    <td class="text-center">
+                      <input type="checkbox" name="loyal[]" value="{{ $i }}" {{ $kpi->loyal == $i ? 'checked' : '' }} />
+                    </td>
+                  @endfor
                 </tr>
                 <tr>
                   <td class="text-center">16.</td>
                   <td class="text-center">Adaptif (kreatif, inovatif/proaktif, antusias)</td>
-                  <td class="text-center"><input type="checkbox" name="adaptif[]" value="0" /></td>
-                  <td class="text-center"><input type="checkbox" name="adaptif[]" value="1" /></td>
-                  <td class="text-center"><input type="checkbox" name="adaptif[]" value="2" /></td>
-                  <td class="text-center"><input type="checkbox" name="adaptif[]" value="3" /></td>
+                  @for($i = 0; $i <= 3; $i++)
+                    <td class="text-center">
+                      <input type="checkbox" name="adaptif[]" value="{{ $i }}" {{ $kpi->adaptif == $i ? 'checked' : '' }} />
+                    </td>
+                  @endfor
                 </tr>
                 <tr>
                   <td class="text-center">17.</td>
-                  <td class="text-center">Kolaboratif (kerjasama tim, kompak , motivator)</td>
-                  <td class="text-center"><input type="checkbox" name="kolaboratif[]" value="0" /></td>
-                  <td class="text-center"><input type="checkbox" name="kolaboratif[]" value="1" /></td>
-                  <td class="text-center"><input type="checkbox" name="kolaboratif[]" value="2" /></td>
-                  <td class="text-center"><input type="checkbox" name="kolaboratif[]" value="3" /></td>
+                  <td class="text-center">Kolaboratif (kerjasama tim, kompak, motivator)</td>
+                  @for($i = 0; $i <= 3; $i++)
+                    <td class="text-center">
+                      <input type="checkbox" name="kolaboratif[]" value="{{ $i }}" {{ $kpi->kolaboratif == $i ? 'checked' : '' }} />
+                    </td>
+                  @endfor
                 </tr>
                 <tr>
                   <td class="text-center"><strong>C.</strong></td>

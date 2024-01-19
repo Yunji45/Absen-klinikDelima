@@ -84,8 +84,8 @@
                                     <th scope="col" class="text-center">Perilaku</th>
                                     <th scope="col" class="text-center">Absensi</th>
                                     <th scope="col" class="text-center">Nilai Total</th>
-                                    <!-- <th scope="col" class="text-center">Nilai Kinerja</th> -->
-                                    <!-- <th scope="col" class="text-center">Ekspektasi Kinerja</th> -->
+                                    <th scope="col" class="text-center">Nilai Kinerja</th>
+                                    <th scope="col" class="text-center">Ekspektasi Kinerja</th>
                                     <th scope="col" class="text-center">Periode</th>
                                     <th scope="col" class="text-center">Lihat</th>
                                     <th scope="col" class="text-center">Action</th>
@@ -100,8 +100,8 @@
                                     <td class="text-center">{{$item->layanan+$item->akuntan+$item->kompeten+$item->harmonis+$item->loyal+$item->adaptif+$item->kolaboratif}}</td>
                                     <td class="text-center">{{$item->absen}}</td>
                                     <td class="text-center">{{$item->total}}</td>
-                                    <!-- <td class="text-center">{{ number_format($item->total_kinerja, 2) }}</td> -->
-                                    <!-- <td class="text-center">{{$item->ket}}</td> -->
+                                    <td class="text-center">{{ number_format($item->total_kinerja, 2) }}</td>
+                                    <td class="text-center">{{$item->ket}}</td>
                                     <td class="text-center">{{$item->bulan}}</td>
                                     <td>
                                         <a href="{{route('kpi.view',$item->id)}}" class="btn btn-info btn-sm" style="margin-right: 10px;">

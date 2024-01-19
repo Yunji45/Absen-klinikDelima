@@ -704,7 +704,8 @@ class KpiController extends Controller
             return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
         }
         $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
-        if($totalabsen == 1 && $lembur > 1){
+        // $totalabsen == 1 &&
+        if( $lembur == 1){
             $kpi->absen =3;
         }elseif($totalabsen == 1 ){
             $kpi->absen = 2;
@@ -765,13 +766,20 @@ class KpiController extends Controller
         $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$kpi->target;
 
         // $kpi ->ket = 'melampaui';
-        if ($kpi->total_kinerja / $kpi->target == 1) {
-            $kpi->ket = 'Sesuai';
-        } elseif ($kpi->total_kinerja / $kpi->target > 1) {
+        if ($kpi->total_kinerja > 2.25) {
             $kpi->ket = 'Melampaui';
+        } elseif ($kpi->total_kinerja >= 2) {
+            $kpi->ket = 'Sesuai';
         } else {
             $kpi->ket = 'Dibawah';
         }
+        // if ($kpi->total_kinerja / $kpi->target >= 2 && $kpi->total_kinerja / $kpi->target <= 2.25) {
+        //     $kpi->ket = 'Sesuai';
+        // } elseif ($kpi->total_kinerja / $kpi->target > 2.25) {
+        //     $kpi->ket = 'Melampaui';
+        // } else {
+        //     $kpi->ket = 'Dibawah';
+        // }
         // $kpi ->bulan = $request->bulan;
         $realisasi = targetkpi::where('user_id', $user_id)
                                 ->whereMonth('bulan', $bulan)
