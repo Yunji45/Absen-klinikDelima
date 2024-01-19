@@ -703,9 +703,8 @@ class KpiController extends Controller
         if (!$psTotal){
             return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
         }
-        // $totalabsen = ($totalMasuk + $totalTelat )/$psTotal;
         $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
-        if( $lembur === 1){
+        if($totalabsen == 1 && $lembur > 1){
             $kpi->absen =3;
         }elseif($totalabsen == 1 ){
             $kpi->absen = 2;
@@ -714,15 +713,6 @@ class KpiController extends Controller
         }else{
             $kpi->absen = 0;
         }
-        // if($totalabsen == 1 && $lembur > 1){
-        //     $kpi->absen =3;
-        // }elseif($totalabsen == 1 ){
-        //     $kpi->absen = 2;
-        // }elseif($totalabsen < 1){
-        //     $kpi->absen =1;
-        // }else{
-        //     $kpi->absen = 0;
-        // }
         // $kpi->absen = $totalabsen;
         $totalabsen = $kpi->absen;
         $kpi->bulan = $request->bulan;
@@ -1597,7 +1587,8 @@ class KpiController extends Controller
 
                 if ($targetkpi) {
                     if ($targetkpi->bulan) {
-                        $data = explode('-', $targetkpi->bulan);
+                        // $data = explode('-', $targetkpi->bulan);
+                        $data = explode('-', '2023-12-01');
                         $bulan = $data[1];
                         $tahun = $data[0];
 
@@ -1612,15 +1603,21 @@ class KpiController extends Controller
                             ->whereMonth('tanggal', $bulan)
                             ->whereYear('tanggal', $tahun)
                             ->count();
+                        $lembur = rubahjadwal::where('user_id', $user->id)
+                            ->where('permohonan', 'lembur')
+                            ->where('status', 'approve')
+                            ->whereMonth('tanggal', $bulan)
+                            ->whereYear('tanggal', $tahun)
+                            ->count();
 
-                        $totalkehadiran = $totalMasuk + $totalTelat;
+                        $totalkehadiran = $totalMasuk + $totalTelat + $lembur;
 
                         for ($day = 1; $day <= 31; $day++) {
                             $column = 'j' . $day;
 
                             $psCount = jadwalterbaru::where('user_id', $user->id)
                                 ->where(function ($query) use ($column) {
-                                    $query->whereIn($column, ['PS', 'SM', 'PM','LL']);
+                                    $query->whereIn($column, ['PS', 'SM', 'PM', 'LL']);
                                 })
                                 ->whereMonth('masa_aktif', $bulan)
                                 ->whereYear('masa_aktif', $tahun)
