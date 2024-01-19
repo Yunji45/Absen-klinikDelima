@@ -707,6 +707,8 @@ class KpiController extends Controller
         // $totalabsen == 1 &&
         if( $lembur == 1){
             $kpi->absen =3;
+        }elseif($lembur > 1){
+            $kpi->absen =3;
         }elseif($totalabsen == 1 ){
             $kpi->absen = 2;
         }elseif($totalabsen < 1){
