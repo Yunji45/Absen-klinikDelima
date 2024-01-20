@@ -11,8 +11,8 @@
         <!-- Slide 1 -->
         <div class="carousel-item active" style="background-image: url(mitradelima/assets/img/slide/slide-1.jpg)">
           <div class="container">
-            <h2>Welcome to <span>Klinik Mitra Delima</span></h2>
-            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel.</p>
+            <h2>Selamat Datang di <span>Klinik Mitra Delima</span></h2>
+            <p>Selamat datang di Portal Kesehatan Terdepan, Klinik Pratama Mitra Delima. Kami menyambut keluhan kesehatan Anda dengan layanan 24 jam yang siap merawat Anda setiap hari.</p>
             <a href="#about" class="btn-get-started scrollto">Read More</a>
           </div>
         </div>
@@ -20,8 +20,8 @@
         <!-- Slide 2 -->
         <div class="carousel-item" style="background-image: url(mitradelima/assets/img/slide/slide-2.jpg)">
           <div class="container">
-            <h2>Lorem Ipsum Dolor</h2>
-            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel.</p>
+            <h2>Dukungan BPJS Kesehatan dan Pelayanan Umum</h2>
+            <p>Bergabunglah dengan kami di Klinik Pratama Mitra Delima, di mana kami dengan bangga melayani peserta BPJS Kesehatan dan umum. Keberagaman layanan kami hadir untuk memenuhi kebutuhan kesehatan semua orang.</p>
             <a href="#about" class="btn-get-started scrollto">Read More</a>
           </div>
         </div>
@@ -29,8 +29,8 @@
         <!-- Slide 3 -->
         <div class="carousel-item" style="background-image: url(mitradelima/assets/img/slide/slide-3.jpg)">
           <div class="container">
-            <h2>Sequi ea ut et est quaerat</h2>
-            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel.</p>
+            <h2>Pelayanan Medis Berkualitas untuk Kepuasan Total</h2>
+            <p>Kami berkomitmen untuk memberikan pelayanan medis terbaik, memastikan kepuasan total bagi kesehatan Anda. Di Klinik Pratama Mitra Delima, kualitas adalah kunci, dan kepedulian terhadap pasien adalah prioritas utama kami.</p>
             <a href="#about" class="btn-get-started scrollto">Read More</a>
           </div>
         </div>
@@ -97,9 +97,9 @@
       <div class="container" data-aos="zoom-in">
 
         <div class="text-center">
-          <h3>In an emergency? Need help now?</h3>
-          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <a class="cta-btn scrollto" href="#appointment">Make an Make an Appointment</a>
+          <h3>Kami Siap Menerima Masukan Anda ,Pendapat Anda untuk Pelayanan Lebih Baik !</h3>
+          <p>Kami membuka diri untuk menerima kritik dan saran, terutama saat berhadapan dengan keadaan darurat. Pendapat Anda membantu kami menilai dan meningkatkan tanggap kami. Mari bersama-sama menjaga keamanan dan kualitas pelayanan dalam setiap situasi.</p>
+          <a class="cta-btn scrollto" href="#appointment">Kritik & Saran</a>
         </div>
 
       </div>
@@ -110,8 +110,8 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>About Us</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Tentang Kami</h2>
+          <p>Menapaki jejak sejak Desember 2012, Klinik Mitra Delima membangun fondasi di Dsn. Kotaharja 14/03, Ds. Sukamukti, Kec. Pamarican. Terbentuk dari praktek bidan mandiri dan balai pengobatan, dipimpin oleh Ibu Bidan Hj.Iis dan Bapak H.Agus, klinik ini mengutamakan pelayanan pada ibu hamil, kesehatan ibu dan anak, persalinan, dan khitanan. Dengan semangat untuk menciptakan lingkungan kesehatan yang nyaman dan peduli, Klinik Mitra Delima mewujudkan visinya sebagai pusat kesehatan terdepan.</p>
         </div>
 
         <div class="row">
@@ -119,8 +119,8 @@
             <img src="mitradelima/assets/img/about.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="fst-italic">
+            <h3>Pengalaman Unik di Klinik Mitra Delima.</h3>
+            <!-- <p class="fst-italic">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
               magna aliqua.
             </p>
@@ -128,11 +128,9 @@
               <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
               <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
               <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-            </ul>
+            </ul> -->
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
+            Di Dsn. Kotaharja 14/03, Klinik Mitra Delima bukan sekadar tempat pelayanan medis. Ini adalah tempat di mana kesehatan didefinisikan ulang. Didukung oleh Ibu Bidan Hajah Iis dan Bapak Haji Agus, setiap kunjungan ke klinik ini tidak hanya memberikan perawatan medis yang komprehensif, tetapi juga menciptakan momen di mana pengunjung merasa dihargai dan didengar. Bergabunglah dengan kami dan rasakan pengalaman kesehatan yang penuh kehangatan dan perhatian.
             </p>
           </div>
         </div>
