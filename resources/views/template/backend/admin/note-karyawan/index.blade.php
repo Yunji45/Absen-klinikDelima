@@ -44,7 +44,7 @@
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
-                            <form action="{{route('search.kpi')}}" method="get">
+                            <form action="{{route('note-karyawan.search')}}" method="get">
                                 @csrf
                                 <div class="input-group">
                                 <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
@@ -65,6 +65,7 @@
                                     <th scope="col" class="text-center">Nama</th>
                                     <th scope="col" class="text-center">Keterangan</th>
                                     <th scope="col" class="text-center">Deskripsi</th>
+                                    <th scope="col" class="text-center">Resume</th>
                                     <th scope="col" class="text-center">Waktu</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
@@ -77,6 +78,7 @@
                                 <td class="text-center">{{$item->user->name}}</td>
                                 <td class="text-center">{{$item->keterangan}}</td>
                                 <td class="text-center">{{$item->deskripsi}}</td>
+                                <td class="text-center">{{$item->resume}}</td>
                                 <td class="text-center">{{$item->bulan}}</td>
                                 <td class="text-center">
                                     <a href="{{route('note-karyawan.delete',$item->id)}}" 

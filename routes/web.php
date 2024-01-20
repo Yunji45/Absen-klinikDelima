@@ -291,6 +291,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::resource('/note-karyawan', NoteKaryawanController::class)->names('note-karyawan');
         Route::get('/note-karyawan/delete/{id}', [NoteKaryawanController::class,'delete'])->name('note-karyawan.delete');
         Route::get('/note-karyawan/update/{id}', [NoteKaryawanController::class,'updatelagi'])->name('note-karyawan.updatelagi');
+        Route::get('/note-karyawan/search',[NoteKaryawanController::class,'SearchCatatan'])->name('note-karyawan.search');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

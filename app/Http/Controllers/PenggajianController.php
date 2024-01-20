@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UMKaryawan;
 use App\Models\kpi;
 use App\Models\InsentifKpi;
+use App\Models\NoteKaryawan;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use PDF;
@@ -523,11 +524,16 @@ class PenggajianController extends Controller
                         ->whereYear('bulan', $tahun)
                         ->whereMonth('bulan', $bulan)
                         ->first();    
+        $catatan = NoteKaryawan::where('user_id',$user)
+                        ->whereYear('bulan', $tahun)
+                        ->whereMonth('bulan', $bulan)
+                        ->value('resume');
                         // return $gaji;
         if(!$gaji){
             return redirect()->back()->with('error','Mohon maaf, Slip Insentif Anda pada periode sekarang belum ada.');
         }
-        return view ('frontend.users.gaji.insentif',compact('title','gaji','kinerja'));
+        // return $catatan;
+        return view ('frontend.users.gaji.insentif',compact('title','gaji','kinerja','catatan'));
 
     }
 

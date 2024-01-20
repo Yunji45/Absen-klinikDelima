@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('bulan')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('deskripsi')->nullable();
+            $table->string('resume')->nullable();
             $table->timestamps();
         });
     }

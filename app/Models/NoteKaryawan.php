@@ -16,6 +16,7 @@ class NoteKaryawan extends Model
         'bulan',
         'keteranagan',
         'deskripsi',
+        'resume',
     ];
 
     public function user()

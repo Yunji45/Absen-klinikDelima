@@ -20,8 +20,28 @@ class NoteKaryawanController extends Controller
     {
         $title = 'Catatan Karyawan';
         $type = 'kpi';
-        $data = NoteKaryawan::all();
+        $data = NoteKaryawan::orderBy('created_at','desc')->get();
+        $bulan = date('m');
+        $tahun = date('Y');
+        // $data = NoteKaryawan::whereYear('bulan', $tahun)
+        //                     ->whereMonth('bulan', $bulan)
+        //                     ->orderBy('created_at', 'desc')
+        //                     ->get();  
         return view ('template.backend.admin.note-karyawan.index',compact('title','type','data'));
+    }
+
+    public function SearchCatatan(Request $request)
+    {
+        $title = 'Catatan Karyawan';
+        $type = 'kpi';
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+    
+        $data = NoteKaryawan::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
+        // dd(DB::getQueryLog());
+        // return $data;
+        return view ('template.backend.admin.note-karyawan.index',compact('title','type','bulan','data'));
     }
 
     /**
@@ -51,7 +71,6 @@ class NoteKaryawanController extends Controller
             'bulan' => 'required',
             'keterangan' => 'required',
             'deskripsi' => 'required',
-
         ],[
             'user_id.required' => 'Nama Karyawan tidak boleh kosong',
             'bulan.required' => 'Waktu pembuatan catatan tidak boleh kosong',
@@ -68,6 +87,7 @@ class NoteKaryawanController extends Controller
         $catatan->bulan = $request->bulan;
         $catatan->keterangan = $request->keterangan;
         $catatan->deskripsi = $request->deskripsi;
+        $catatan->resume = $request->resume;
         $catatan->save();
         // return $catatan;
         return redirect()->route('note-karyawan.index')->with('success','Data Catatan Berhasil Disimpan.');
@@ -115,6 +135,7 @@ class NoteKaryawanController extends Controller
         $catatan->bulan = $request->bulan;
         $catatan->keterangan = $request->keterangan;
         $catatan->deskripsi = $request->deskripsi;
+        $catatan->resume = $request->resume;
         // $catatan->save();
         return $catatan;
         // return redirect()->route('note-karyawan.index')->with('success','Data Catatan Berhasil Diupdate.');
@@ -144,6 +165,7 @@ class NoteKaryawanController extends Controller
         $catatan->bulan = $request->bulan;
         $catatan->keterangan = $request->keterangan;
         $catatan->deskripsi = $request->deskripsi;
+        $catatan->resume = $request->resume;
         $catatan->save();
         // return $catatan;
         return redirect()->route('note-karyawan.index')->with('success','Data Catatan Berhasil Diupdate.');

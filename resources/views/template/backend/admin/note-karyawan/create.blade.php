@@ -54,6 +54,13 @@
                                 @error('deskripsi') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="deskripsi" class="col-form-label col-sm-3">Resume</label>
+                            <div class="col-sm-9">
+                                <textarea name="resume" id="resume" class="form-control @error('resume') is-invalid @enderror" rows="4"></textarea>
+                                @error('resume') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <a href="{{route('note-karyawan.index')}}" type="button" class="btn btn-danger">Batal</a>
                             <button type="submit" class="btn btn-success">Simpan</button>

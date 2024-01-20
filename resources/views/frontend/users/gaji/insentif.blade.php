@@ -40,6 +40,10 @@
                             <td>Performa Kinerja</td>
                             <td>{{$kinerja->ket}} Ekspektasi</td>
                         </tr>
+                        <tr>
+                            <td>Resume</td>
+                            <td>{{$catatan}}</td>
+                        </tr>
                     </table>
 
                     <h2>Insentif :</h2>
