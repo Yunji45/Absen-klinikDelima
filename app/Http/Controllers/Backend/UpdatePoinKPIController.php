@@ -156,8 +156,10 @@ class UpdatePoinKPIController extends Controller
         }
     
         //hanya berlaku untuk target realisasi
-        $month = date('m');
-        $tahun = date('Y');
+        // $month = date('m');
+        // $tahun = date('Y');
+        $month = '12';
+        $tahun = '2023';
         $tanggalawal = $tahun . '-' . $month . '-01';
         $tanggalakhir = $tahun . '-' . $month . '-31';
         //hanya berlaku untuk evaluasi
