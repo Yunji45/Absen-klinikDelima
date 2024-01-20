@@ -50,7 +50,9 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="{{route('auth.index')}}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Log</span> In</a>
+      <a href="{{route('auth.index')}}" class="appointment-btn scrollto" style="margin-right: 20px;"><span class="d-none d-md-inline">Log</span> In</a>
+      <img src="{{ asset('mitradelima/assets/img/paripurna.png') }}" alt="" class="img-fluid" style="width: 150px; height: auto;">
+
 
       <!-- <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Sign</span> In</a> -->
 
