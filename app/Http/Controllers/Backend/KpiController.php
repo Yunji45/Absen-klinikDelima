@@ -760,12 +760,13 @@ class KpiController extends Controller
         
         $kpi->target = $jumlahNonZero;
         
-        $kpi->total_kinerja = 
-        ($kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
-        $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
-        $kpi->lab + $kpi->umum + $kpi->visit +
-        $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
-        $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$kpi->target;
+        $kpi->total_kinerja = $kpi->total/$kpi->target;
+        // $kpi->total_kinerja = 
+        // ($kpi->daftar + $kpi->poli + $kpi->farmasi + $kpi->kasir +
+        // $kpi->bpjs + $kpi->khitan + $kpi->rawat + $kpi->persalinan +
+        // $kpi->lab + $kpi->umum + $kpi->visit +
+        // $totallayanan + $totalakuntan + $totalkompeten + $totalharmonis +
+        // $totalloyal + $totaladaptif + $totalkolaboratif + $kpi->absen)/$kpi->target;
 
         // $kpi ->ket = 'melampaui';
         if ($kpi->total_kinerja > 2.25) {
@@ -1560,7 +1561,8 @@ class KpiController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $target_awal = $request->bulan;
-        $tahun = date('Y');
+        // $tahun = date('Y');
+        $tahun = '2023';
         $awal = $tahun . '-' . $target_awal . '-01';
         $akhir = $tahun . '-' . $target_awal . '-31';
         $deletedRows = InsentifKpi::whereBetween('bulan', [$awal, $akhir])->delete();
