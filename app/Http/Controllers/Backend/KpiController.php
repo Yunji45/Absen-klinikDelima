@@ -390,7 +390,7 @@ class KpiController extends Controller
 
         //save
         $user_id = $request->user_id;
-        $data = explode('-', $request->bulan); // Memisahkan string bulan menjadi array
+        $data = explode('-', $request->bulan);
         $bulan = $data[1]; // Bulan
         $tahun = $data[0]; // Tahun
 
@@ -443,11 +443,11 @@ class KpiController extends Controller
             ->whereYear('tanggal', $tahun)
             ->count();
         //hitung telat
-        // $totalTelat = Presensi::where('user_id', $user_id)
-        //     ->where('keterangan', 'Telat')
-        //     ->whereMonth('tanggal', $bulan)
-        //     ->whereYear('tanggal', $tahun)
-        //     ->count();
+        $totalTelat = Presensi::where('user_id', $user_id)
+            ->where('keterangan', 'Telat')
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->count();
         //hitung lembur
         $lembur = rubahjadwal::where('user_id', $user_id)
                             ->where('permohonan', 'lembur')
@@ -477,8 +477,10 @@ class KpiController extends Controller
             return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
         }
         // $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
-        $totalabsen = $totalMasuk /$psTotal;
-        if($totalabsen == 1 && $lembur > 1){
+        $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+        if( $lembur == 1){
+            $kpi->absen =3;
+        }elseif($lembur > 1){
             $kpi->absen =3;
         }elseif($totalabsen == 1 ){
             $kpi->absen = 2;
@@ -1400,7 +1402,7 @@ class KpiController extends Controller
         $title = 'Insentif Kinerja KPI';
         $type = 'gaji';
 
-        $data = InsentifKpi::whereMonth('bulan', '11')
+        $data = InsentifKpi::whereMonth('bulan', '12')
             ->whereYear('bulan', '2023')
             ->orderBy('bulan', 'asc')
             ->get();
