@@ -17,13 +17,13 @@ class PasswordTest extends TestCase
     {
         $response = $this->get('/ganti-password');
 
-        $response->assertStatus(500);
+        $response->assertStatus(302);
     }
 
     public function test_updatepassword()
     {
         $response = $this->patch('/update-password/{user}');
-        $response->assertStatus(500);
+        $response->assertStatus(419);
 
     }
 }

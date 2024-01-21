@@ -1,0 +1,282 @@
+/* BEGIN: Body */
+body {
+    font-family: 'Titillium Web', sans-serif;
+    background: #6db92b url('../images/bg.jpg') no-repeat top center;
+    width: 100%;
+    height: 900px;
+    overflow-x: hidden;
+}
+/* END: Body */
+
+/* BEGIN: center */
+.center {
+    position: relative;
+    width: 905px;
+    margin: 0 auto;
+    
+}
+/* END: center */
+
+
+/* BEGIN: Page - header */
+header {
+    position: relative;
+    height: 575px;
+}
+
+    header .center {
+        padding-top: 95px;
+    }
+
+    header h1 {
+        font-size: 60px;
+        font-weight: bold;
+        color: #53a523;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    header #social {
+        background: url('../images/bg-social.png') bottom left no-repeat;
+        width: 115px;
+        height: 120px;
+        position: absolute;
+        top: 215px;
+        right: 0px;
+    }
+    
+        header #social ul {
+            list-style: none;
+        }
+        
+            header #social ul li {
+                float: left;
+                width: 34px;
+                height: 34px;
+                margin-right: 4px;
+            }
+            
+            header #social ul li a {
+                background: url('../images/btn-social-icons.png') no-repeat;
+                width: 34px;
+                height: 34px;
+                display: block;
+            }
+            
+                header #social ul li a#fb {
+                    background-position: 0px 0px;
+                }
+                
+                    header #social ul li a#fb:hover {
+                        background-position: 0px -34px;
+                    }
+                    
+                header #social ul li a#google {
+                    background-position: -37px 0px;
+                }
+                
+                    header #social ul li a#google:hover {
+                        background-position: -37px -34px;
+                    }
+                    
+                header #social ul li a#twitter {
+                    background-position: -76px 0px;
+                }
+                
+                    header #social ul li a#twitter:hover {
+                        background-position: -76px -34px;
+                    }
+    
+    header #counter {
+        
+    }
+    
+        header #labels  {
+            color: #b7cee1;
+            font-size: 18px;
+            padding-left: 212px;
+        }
+        
+            header #labels  span {
+                width: 119px;
+                display: block;
+                text-align: center;
+                float: left;
+            }
+
+    header #clouds {
+        background-image: url('../images/bg-clouds.png');
+        background-repeat: repeat-x;
+        width: 100%;
+        height: 260px;
+        position: absolute;
+        left: 0px;
+        top: 30px;
+    }
+    
+    header #city {
+        background-image: url('../images/bg-city.png');
+        background-repeat: repeat-x;
+        width: 100%;
+        height: 312px;
+        position: absolute;
+        left: 0px;
+        top: 350px;
+        z-index: 5;
+    }
+    
+    header #city2 {
+        background-image: url('../images/bg-city2.png');
+        background-repeat: repeat-x;
+        width: 100%;
+        height: 312px;
+        position: absolute;
+        left: 0px;
+        top: 280px;
+        z-index: 10;
+    }
+
+/* END: Page - header */
+
+/* BEGIN: Page - content */
+#content {
+    background: url('../images/bg-content.png') no-repeat;
+    position: relative;
+    width: 100%;
+    height: 430px;
+    margin-top: -230px;
+    z-index: 100;
+}        
+
+    #content p {
+        font-size: 15px;
+        color: #367e16;
+    }
+    
+    #content .center {
+        padding-top: 250px;
+    }
+    
+
+    #content #newsletter,
+    #content #info {
+        float: left;
+    }
+    
+        #content #newsletter h3,
+        #content #info h3 {
+            font-size: 30px;
+            color: #53a523;
+            margin-bottom: 1em;
+        }
+    
+        #content #info .col {
+            width: 200px;
+            float: left;
+            padding-right: 45px;
+        }
+        
+    #content #newsletter {
+	width: 405px;        
+    }
+    
+        #content #newsletter form {
+            position: relative;
+        }
+        
+            #content #newsletter form label.error {
+                position: absolute;
+                color: #ff0000;
+                top: 50px;
+                left: 10px;
+            }
+    
+        #content #newsletter #box-input {
+            background-color: #64ae31;
+            padding: 10px 15px;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+        }
+        
+        #content #newsletter input[type=text] {
+            background-color: #fff;
+            padding: 0 10px;
+            width: 270px;
+            height: 33px;
+            line-height: 33px;
+            color: #41991b;
+            border: 0px;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            float: left;
+        }
+        
+        #content #newsletter input[type=submit] {
+            background: url('../images/bg-btn.jpg') repeat-x;
+            border: 0px;
+            width: 75px;
+            height: 33px;
+            font-size: 14px;
+            color: #41991b;
+            float: left;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+            #content #newsletter input[type=submit]:hover {
+                color: #fff;
+                background-position: 0 -33px;
+            }
+
+    #content #house {
+        background-image: url('../images/bg-home.png');
+        background-repeat: no-repeat;
+        width: 220px;
+        height: 183px;
+        position: absolute;
+        left: 144px;
+        top: 30px;
+        z-index: 10;
+    }
+    
+    #content #car {
+        background-image: url('../images/bg-car.png');
+        background-repeat: no-repeat;
+        width: 113px;
+        height: 53px;
+        position: absolute;
+        left: 700px;
+        top: 150px;
+        z-index: 9;
+    }
+/* END: Page - content */
+
+/* BEGIN: Page - footer */
+footer {
+    background-color: #6db92b;
+    position: relative;
+    color: #83af9d;
+    height: 71px;
+    padding-top: 40px;
+}
+
+    footer p {
+        font-size: 15px;
+        color: #aef24e;
+    }
+    
+    footer a {
+        color: #ffef00;
+        text-decoration: none;
+    }
+    
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+    
+/* END: Page - footer */
+

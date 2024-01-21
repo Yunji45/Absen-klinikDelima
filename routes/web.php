@@ -66,6 +66,7 @@ Route::get('/api', function () {
     return view('testyu');
 });
 Route::get('/',[ContentController::class,'home'])->name('frontend');
+Route::get('/Tentang',[ContentController::class,'tentang'])->name('frontend.tentang');
 Route::get('/karir',[CareerController::class,'index'])->name('karir');
 // Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
 // Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');

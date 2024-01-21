@@ -13,7 +13,7 @@
           <div class="container">
             <h2>Selamat Datang di <span>Klinik Mitra Delima</span></h2>
             <p>Selamat datang di Portal Kesehatan Terdepan, Klinik Pratama Mitra Delima. Kami menyambut keluhan kesehatan Anda dengan layanan 24 jam yang siap merawat Anda setiap hari.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
+            <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
           </div>
         </div>
 
@@ -22,7 +22,7 @@
           <div class="container">
             <h2>Dukungan BPJS Kesehatan dan Pelayanan Umum</h2>
             <p>Bergabunglah dengan kami di Klinik Pratama Mitra Delima, di mana kami dengan bangga melayani peserta BPJS Kesehatan dan umum. Keberagaman layanan kami hadir untuk memenuhi kebutuhan kesehatan semua orang.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
+            <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
           </div>
         </div>
 
@@ -31,7 +31,7 @@
           <div class="container">
             <h2>Pelayanan Medis Berkualitas untuk Kepuasan Total</h2>
             <p>Kami berkomitmen untuk memberikan pelayanan medis terbaik, memastikan kepuasan total bagi kesehatan Anda. Di Klinik Pratama Mitra Delima, kualitas adalah kunci, dan kepedulian terhadap pasien adalah prioritas utama kami.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
+            <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
           </div>
         </div>
 
@@ -106,37 +106,8 @@
     </section><!-- End Cta Section -->
 
     <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Tentang Kami</h2>
-          <p>Menapaki jejak sejak Desember 2012, Klinik Mitra Delima membangun fondasi di Dsn. Kotaharja 14/03, Ds. Sukamukti, Kec. Pamarican. Terbentuk dari praktek bidan mandiri dan balai pengobatan, dipimpin oleh Ibu Bidan Hj.Iis dan Bapak H.Agus, klinik ini mengutamakan pelayanan pada ibu hamil, kesehatan ibu dan anak, persalinan, dan khitanan. Dengan semangat untuk menciptakan lingkungan kesehatan yang nyaman dan peduli, Klinik Mitra Delima mewujudkan visinya sebagai pusat kesehatan terdepan.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6" data-aos="fade-right">
-            <img src="mitradelima/assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>Pengalaman Unik di Klinik Mitra Delima.</h3>
-            <!-- <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-            </ul> -->
-            <p>
-            Di Dsn. Kotaharja 14/03, Klinik Mitra Delima bukan sekadar tempat pelayanan medis. Ini adalah tempat di mana kesehatan didefinisikan ulang. Didukung oleh Ibu Bidan Hajah Iis dan Bapak Haji Agus, setiap kunjungan ke klinik ini tidak hanya memberikan perawatan medis yang komprehensif, tetapi juga menciptakan momen di mana pengunjung merasa dihargai dan didengar. Bergabunglah dengan kami dan rasakan pengalaman kesehatan yang penuh kehangatan dan perhatian.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Us Section -->
+    <!-- End About Us Section -->
 
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">
