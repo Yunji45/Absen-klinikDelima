@@ -67,6 +67,11 @@ Route::get('/api', function () {
 });
 Route::get('/',[ContentController::class,'home'])->name('frontend');
 Route::get('/Tentang',[ContentController::class,'tentang'])->name('frontend.tentang');
+Route::get('/Layanan',[ContentController::class,'layanan'])->name('frontend.layanan');
+Route::get('/Divisi',[ContentController::class,'divisi'])->name('frontend.divisi');
+Route::get('/Dokter',[ContentController::class,'dokter'])->name('frontend.dokter');
+Route::get('/Kontak',[ContentController::class,'kontak'])->name('frontend.kontak');
+Route::get('/Kritik-saran',[ContentController::class,'kritik_saran'])->name('frontend.kritik-saran');
 Route::get('/karir',[CareerController::class,'index'])->name('karir');
 // Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
 // Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');

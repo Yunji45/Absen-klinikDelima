@@ -1,9 +1,8 @@
 @extends('template.frontend.layout.main')
 @section('content-index')
-<style>
-        
+    <style>
         #about {
-            margin-top: 80px; /* Sesuaikan dengan tinggi navbar Anda */
+            margin-top: 100px; /* Sesuaikan dengan tinggi navbar Anda */
         }
     </style>
 

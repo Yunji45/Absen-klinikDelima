@@ -25,15 +25,15 @@
         <ul>
           <li><a class="nav-link scrollto" href="{{route('frontend')}}">Beranda</a></li>
           <li><a class="nav-link scrollto" href="{{route('frontend.tentang')}}">Tentang</a></li>
-          <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-          <li><a class="nav-link scrollto" href="#departments">Divisi</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Dokter</a></li>
+          <li><a class="nav-link scrollto" href="{{route('frontend.layanan')}}">Layanan</a></li>
+          <li><a class="nav-link scrollto" href="{{route('frontend.divisi')}}">Divisi</a></li>
+          <li><a class="nav-link scrollto" href="{{route('frontend.dokter')}}">Dokter</a></li>
           <li><a class="nav-link scrollto" href="{{route('karir')}}">Karir</a></li>
           <!-- <li><a class="nav-link scrollto" href="#contact">Kontak</a></li> -->
           <li class="dropdown"><a href="#"><span>Lain - Lain</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">KONTAK</a></li>
-              <li><a href="#">KRITIK & SARAN</a></li>
+              <li><a href="{{route('frontend.kontak')}}">FAQ & KONTAK</a></li>
+              <li><a href="{{route('frontend.kritik-saran')}}">KRITIK & SARAN</a></li>
             </ul>
           </li>
         </ul>

@@ -35,4 +35,9 @@ class ContentController extends Controller
     {
         return view ('template.frontend.content.kontak');
     }
+
+    public function kritik_saran()
+    {
+        return view ('template.frontend.content.kritik-saran');
+    }
 }
