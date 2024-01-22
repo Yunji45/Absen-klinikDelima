@@ -37,7 +37,7 @@
             <br>
             <br>
             <div style="text-align: center;">
-                <img src="{{ asset('mitradelima/assets/img/hiring.png') }}" alt="" class="img-fluid" style="width: 150px;">
+                <img src="{{ asset('mitradelima/assets/img/hiring.png') }}" alt="" class="img-fluid" style="width: 150px; height: auto;">
             </div>
             @foreach($job as $item)
             <div class="job-container">
