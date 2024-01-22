@@ -1,4 +1,5 @@
-@extends('template.layout.app.main') @section('tabel')
+@extends('template.layout.app.main') 
+@section('tabel')
 <section class="section">
     <div class="section-header">
         <h1>{{$title}}</h1>

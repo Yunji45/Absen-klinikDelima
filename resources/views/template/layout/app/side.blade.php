@@ -181,17 +181,14 @@
                    
                 </ul>
             </li>
-            <li class="nav-item dropdown ">
+            <li class="nav-item dropdown {{ $type === 'layout' ? 'active' : '' }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
                     <span>Career Management</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="">Divisi</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">Kriteria Hire</a>
+                    <li class="{{ Route::currentRouteName() === 'job-vacancy.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('job-vacancy.index')}}">Lowongan Pekerjaan</a>
                     </li>
                     <li>
                         <a class="nav-link" href="">Management Berkas</a>

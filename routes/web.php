@@ -30,6 +30,7 @@ use App\Http\Controllers\Backend\KategoriJasaController;
 use App\Http\Controllers\Backend\DaftarPasienController;
 use App\Http\Controllers\Backend\DaftarTugasController;
 use App\Http\Controllers\Backend\NoteKaryawanController;
+use App\Http\Controllers\Backend\JobVacancyController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -292,13 +293,17 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         // Route::get('/task-list',[TasklistJasaMedisController::class,'index'])->name('task.list.index');
         // Route::get('/task-list/history',[TasklistJasaMedisController::class,'HistoryTask'])->name('task.list.history');
         Route::get('/task-list/search/{user_id}',[DaftarTugasController::class,'cari'])->name('task.list.search');
-
         //note karyawan
         Route::resource('/note-karyawan', NoteKaryawanController::class)->names('note-karyawan');
         Route::get('/note-karyawan/delete/{id}', [NoteKaryawanController::class,'delete'])->name('note-karyawan.delete');
         Route::get('/note-karyawan/update/{id}', [NoteKaryawanController::class,'updatelagi'])->name('note-karyawan.updatelagi');
         Route::get('/note-karyawan/search',[NoteKaryawanController::class,'SearchCatatan'])->name('note-karyawan.search');
 
+        //job-vacancy
+        Route::get('/job-vacancy',[JobVacancyController::class,'index'])->name('job-vacancy.index');
+        Route::get('/job-vacancy/create',[JobVacancyController::class,'create'])->name('job-vacancy.create');
+        Route::post('/job-vacancy/save',[JobVacancyController::class,'store'])->name('job-vacancy.store');
+        
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');
