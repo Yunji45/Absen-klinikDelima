@@ -301,6 +301,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
 
         //job-vacancy
         Route::get('/job-vacancy',[JobVacancyController::class,'index'])->name('job-vacancy.index');
+        Route::get('/job-vacancy-nakes',[JobVacancyController::class,'index_Nakes'])->name('job-vacancy.index.nakes');
+        Route::get('/job-vacancy-non-nakes',[JobVacancyController::class,'index_Non_Nakes'])->name('job-vacancy.index.non-nakes');
         Route::get('/job-vacancy/create',[JobVacancyController::class,'create'])->name('job-vacancy.create');
         Route::post('/job-vacancy/save',[JobVacancyController::class,'store'])->name('job-vacancy.store');
         

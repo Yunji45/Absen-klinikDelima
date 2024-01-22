@@ -20,12 +20,41 @@ class JobVacancyController extends Controller
     {
         $title = 'Lowongan Pekerjaan';
         $type = 'layout';
+        $kode = 'layout-index';
         $job = JobVacancy::orderBy('created_at','desc')->get();
         $count = Jobvacancy::all()->count();
         $Nakes = JobVacancy::where('category','Nakes')->count();
         $NonNakes = JobVacancy::where('category','Non Nakes')->count();
         // return $count;
-        return view ('template.backend.admin.job-vacancy.index',compact('title','type','job','count','Nakes','NonNakes'));
+        return view ('template.backend.admin.job-vacancy.index',compact('title','type','job','count','Nakes','NonNakes','kode'));
+    }
+
+    public function index_Nakes()
+    {
+        $title = 'Lowongan Pekerjaan';
+        $type = 'layout';
+        $kode = 'layout-index';
+        $job = JobVacancy::where('category','Nakes')->orderBy('created_at','desc')->get();
+        $count = Jobvacancy::all()->count();
+        $Nakes = JobVacancy::where('category','Nakes')->count();
+        $NonNakes = JobVacancy::where('category','Non Nakes')->count();
+        // return $count;
+        return view ('template.backend.admin.job-vacancy.index-nakes',compact('title','type','job','count','Nakes','NonNakes','kode'));
+
+    }
+
+    public function index_Non_Nakes()
+    {
+        $title = 'Lowongan Pekerjaan';
+        $type = 'layout';
+        $kode = 'layout-index';
+        $job = JobVacancy::where('category','Non Nakes')->orderBy('created_at','desc')->get();
+        $count = Jobvacancy::all()->count();
+        $Nakes = JobVacancy::where('category','Nakes')->count();
+        $NonNakes = JobVacancy::where('category','Non Nakes')->count();
+        // return $count;
+        return view ('template.backend.admin.job-vacancy.index-non-nakes',compact('title','type','job','count','Nakes','NonNakes','kode'));
+
     }
 
     /**

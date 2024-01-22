@@ -21,13 +21,13 @@
                   <div class="card-body">
                     <ul class="nav nav-pills {{ $kode === 'layout-index' ? 'active' : '' }}">
                       <li class="nav-item ">
-                        <a class="nav-link {{ Route::currentRouteName() === 'job-vacancy.index' ? 'active' : '' }}" href="{{route('job-vacancy.index')}}">All <span class="badge badge-white">{{$count}}</span></a>
+                        <a class="nav-link" href="{{route('job-vacancy.index')}}">All <span class="badge badge-primary">{{$count}}</span></a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{{route('job-vacancy.index.nakes')}}">Nakes <span class="badge badge-primary">{{$Nakes}}</span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{{route('job-vacancy.index.non-nakes')}}">Non Nakes <span class="badge badge-primary">{{$NonNakes}}</span></a>
+                        <a class="nav-link {{ Route::currentRouteName() === 'job-vacancy.index.non-nakes' ? 'active' : '' }}" href="{{route('job-vacancy.index.non-nakes')}}" href="{{route('job-vacancy.index.non-nakes')}}">Non Nakes <span class="badge badge-white">{{$NonNakes}}</span></a>
                       </li>
                     </ul>
                   </div>
