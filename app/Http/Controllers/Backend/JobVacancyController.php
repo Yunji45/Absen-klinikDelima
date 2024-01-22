@@ -135,7 +135,10 @@ class JobVacancyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Pekerjaan';
+        $type = 'layout';
+        $job = JobVacancy::find($id);
+        return view ('template.backend.admin.job-vacancy.edit',compact('title','type','job'));
     }
 
     /**
@@ -147,7 +150,30 @@ class JobVacancyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $job = JobVacancy::find($id);
+        $job->category = $request->category;
+        $job->position = $request->position;
+        $job->deskripsi = $request->deskripsi;
+        $job->kualifikasi_1 = $request->kualifikasi_1;
+        $job->kualifikasi_2 = $request->kualifikasi_2;
+        $job->kualifikasi_3 = $request->kualifikasi_3;
+        $job->kualifikasi_4 = $request->kualifikasi_4;
+        $job->kualifikasi_5 = $request->kualifikasi_5;
+        $job->kualifikasi_6 = $request->kualifikasi_6;
+        $job->kualifikasi_7 = $request->kualifikasi_7;
+        $job->kualifikasi_8 = $request->kualifikasi_8;
+        $job->kualifikasi_9 = $request->kualifikasi_9;
+        $job->kualifikasi_10 = $request->kualifikasi_10;
+        $job->bulan = Carbon::now()->format('Y-m-d');
+
+        // return $job;
+        if ($job){
+            $job -> save();
+            return redirect()->route('job-vacancy.index')->with('success','Lowongan Pekerjaan Berhasil Di Update.');
+        }else{
+            return redirect()->back()->with('error','Lowongan Pekerjaan Gagal Untuk Di Update.');
+        }
+
     }
 
     /**
@@ -158,6 +184,13 @@ class JobVacancyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $job = JobVacancy::find($id);
+        if ($job){
+            $job -> delete();
+            return redirect()->back()->with('success','Lowongan Pekerjaan Berhasil Di Hapus.');
+        }else{
+            return redirect()->back()->with('error','Lowongan Pekerjaan Gagal Untuk Di Hapus.');
+        }
+
     }
 }

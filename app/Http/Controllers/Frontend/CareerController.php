@@ -11,7 +11,7 @@ class CareerController extends Controller
     public function index()
     {
         $title = 'Klinik Mitra Delima - Career';
-        $job = JobVacancy::all();
+        $job = JobVacancy::orderBy('created_at','desc')->get();
         // return $job;
         return view ('template.frontend.content.career',compact('title','job'));
     }

@@ -80,11 +80,9 @@
                           </td>
                           <td>{{$item->category}}
                             <div class="table-links">
-                              <a href="#">View</a>
+                              <a href="{{route('job-vacancy.edit',$item->id)}}">Edit</a>
                               <div class="bullet"></div>
-                              <a href="#">Edit</a>
-                              <div class="bullet"></div>
-                              <a href="#" class="text-danger">Trash</a>
+                              <a href="{{route('job-vacancy.delete',$item->id)}}" class="text-danger">Hapus</a>
                             </div>
                           </td>
                           <td>{{$item->bulan}}</td>

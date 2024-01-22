@@ -305,6 +305,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/job-vacancy-non-nakes',[JobVacancyController::class,'index_Non_Nakes'])->name('job-vacancy.index.non-nakes');
         Route::get('/job-vacancy/create',[JobVacancyController::class,'create'])->name('job-vacancy.create');
         Route::post('/job-vacancy/save',[JobVacancyController::class,'store'])->name('job-vacancy.store');
+        Route::get('/job-vacancy/edit/{id}',[JobVacancyController::class,'edit'])->name('job-vacancy.edit');
+        Route::post('/job-vacancy/update/{id}',[JobVacancyController::class,'update'])->name('job-vacancy.update');
+        Route::get('/job-vacancy/delete/{id}',[JobVacancyController::class,'destroy'])->name('job-vacancy.delete');
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
