@@ -36,56 +36,52 @@
             </p>
             <br>
             <br>
+            <div style="text-align: center;">
+                <img src="{{ asset('mitradelima/assets/img/hiring.png') }}" alt="" class="img-fluid" style="width: 150px;">
+            </div>
+            @foreach($job as $item)
             <div class="job-container">
-                <h2>Posisi: Web Developer</h2>
+                <h2>Posisi: {{$item->position}}</h2>
                 <p>
-                    Kami sedang mencari seorang Web Developer yang berpengalaman untuk bergabung dengan tim kami.
-                    Jika Anda memiliki keterampilan dalam pengembangan web dan minat dalam proyek-proyek menarik,
-                    kami ingin mendengar dari Anda!
+                    {{$item->deskripsi}}
                 </p>
                 <p>Kualifikasi:</p>
                 <ul>
-                    <li>Pengalaman dalam pengembangan web menggunakan HTML, CSS, dan JavaScript.</li>
-                    <li>Kemampuan untuk bekerja dalam tim.</li>
-                    <li>Kreatif dan memiliki kemampuan problem-solving.</li>
+                    @if($item->kualifikasi_1)
+                        <li>{{ $item->kualifikasi_1 }}</li>
+                    @endif
+                    @if($item->kualifikasi_2)
+                        <li>{{ $item->kualifikasi_2 }}</li>
+                    @endif
+                    @if($item->kualifikasi_3)
+                        <li>{{ $item->kualifikasi_3 }}</li>
+                    @endif
+                    @if($item->kualifikasi_4)
+                        <li>{{ $item->kualifikasi_4 }}</li>
+                    @endif
+                    @if($item->kualifikasi_5)
+                        <li>{{ $item->kualifikasi_5 }}</li>
+                    @endif
+                    @if($item->kualifikasi_6)
+                        <li>{{ $item->kualifikasi_6 }}</li>
+                    @endif
+                    @if($item->kualifikasi_7)
+                        <li>{{ $item->kualifikasi_7 }}</li>
+                    @endif
+                    @if($item->kualifikasi_8)
+                        <li>{{ $item->kualifikasi_8 }}</li>
+                    @endif
+                    @if($item->kualifikasi_9)
+                        <li>{{ $item->kualifikasi_9 }}</li>
+                    @endif
+                    @if($item->kualifikasi_10)
+                        <li>{{ $item->kualifikasi_10 }}</li>
+                    @endif
                 </ul>
                 <p>Bagi yang berminat, silakan kirimkan resume dan portofolio Anda dengan cara <a href="">Apply Lowongan Pekerjaan</a>.</p>
                 <button class="apply-button">Apply</button>
             </div>
-
-            <div class="job-container">
-                <h2>Posisi: Administrasi</h2>
-                <p>
-                    Kami sedang mencari seorang Administrasi yang berpengalaman untuk bergabung dengan tim kami.
-                    Jika Anda memiliki keterampilan dalam administrasi dan minat dalam bekerja di lingkungan kesehatan,
-                    kami ingin mendengar dari Anda!
-                </p>
-                <p>Kualifikasi:</p>
-                <ul>
-                    <li>Pengalaman dalam pekerjaan administratif.</li>
-                    <li>Kemampuan untuk bekerja dalam tim.</li>
-                    <li>Rapi, teliti, dan memiliki kemampuan organisasi yang baik.</li>
-                </ul>
-                <p>Bagi yang berminat, silakan kirimkan resume dan portofolio Anda dengan cara <a href="">Apply Lowongan Pekerjaan</a>.</p>
-                <button class="apply-button">Apply</button>
-            </div>
-
-            <div class="job-container">
-                <h2>Posisi: Bidan</h2>
-                <p>
-                    Kami sedang mencari seorang Bidan yang berpengalaman untuk bergabung dengan tim kami.
-                    Jika Anda memiliki keterampilan dalam pelayanan kesehatan maternal dan pediatrik,
-                    serta minat dalam memberikan perawatan yang berkualitas, kami ingin mendengar dari Anda!
-                </p>
-                <p>Kualifikasi:</p>
-                <ul>
-                    <li>Pendidikan formal sebagai Bidan dengan sertifikat yang valid.</li>
-                    <li>Pengalaman kerja dalam pelayanan kesehatan maternal dan pediatrik.</li>
-                    <li>Kemampuan berkomunikasi dan bekerja dengan pasien dan tim medis.</li>
-                </ul>
-                <p>Bagi yang berminat, silakan kirimkan resume dan portofolio Anda dengan cara <a href="">Apply Lowongan Pekerjaan</a>.</p>
-                <button class="apply-button">Apply</button>
-            </div>
+            @endforeach
         </div>
     </section>
 @endsection
