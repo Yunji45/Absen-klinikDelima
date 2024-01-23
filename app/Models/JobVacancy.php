@@ -29,6 +29,6 @@ class JobVacancy extends Model
 
     public function pelamar()
     {
-        
+        return $this->hasMany(JobApplication::class);
     }
 }
