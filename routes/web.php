@@ -65,6 +65,7 @@ Route::get('/face', function () {
     return view('api');
 });
 Route::get('/api', function () {
+    emotify('success', 'You are awesome, your data was successfully created');
     return view('testyu');
 });
 Route::get('/',[ContentController::class,'home'])->name('frontend');

@@ -196,7 +196,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
 
     ],
 
@@ -216,6 +216,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Notify' => Mckenziearts\Notify\Facades\Notify::class,
 
     ])->toArray(),
 
