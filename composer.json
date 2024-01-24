@@ -12,7 +12,6 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
-        "mckenziearts/laravel-notify": "^2.4",
         "munafio/chatify": "^1.6",
         "nesbot/carbon": "^2.69",
         "realrashid/sweet-alert": "^7.1"

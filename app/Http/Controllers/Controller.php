@@ -7,7 +7,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use RealRashid\SweetAlert\Facades\Alert;
-use Mckenziearts\Notify\Facades\Notify;
 
 class Controller extends BaseController
 {
