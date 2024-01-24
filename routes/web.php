@@ -318,6 +318,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         //job-application
         Route::get('job-app',[JobApplicationController::class,'index'])->name('job-app');
         Route::get('job-app/show/{id}',[JobApplicationController::class,'show'])->name('job-app.show');
+        Route::get('job-app/delete/{id}',[JobApplicationController::class,'destroy'])->name('job-app.delete');
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

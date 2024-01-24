@@ -158,8 +158,30 @@ class JobApplicationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $jobApplication = JobApplication::find($id);
+
+            if (!$jobApplication) {
+                return redirect()->back()->with('error', 'Data Lamaran tidak ditemukan.');
+            }
+
+            // Hapus file foto, CV, dan file pendukung dari penyimpanan
+            Storage::delete('public/hiring-foto/' . $jobApplication->foto);
+            Storage::delete('public/hiring-cv/' . $jobApplication->file_cv);
+            
+            if ($jobApplication->file_pendukung) {
+                Storage::delete('public/hiring-file-pendukung/' . $jobApplication->file_pendukung);
+            }
+            // Hapus record dari database
+            $jobApplication->delete();
+
+            return redirect()->back()->with('success', 'Data Lamaran berhasil dihapus.');
+        } catch (\Exception $e) {
+            \Log::error('Kesalahan menghapus data lamaran: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus data lamaran.');
+        }
     }
+
 
     public function index_user()
     {
