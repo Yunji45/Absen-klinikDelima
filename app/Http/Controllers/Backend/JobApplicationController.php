@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
-
 class JobApplicationController extends Controller
 {
     /**
@@ -20,7 +19,10 @@ class JobApplicationController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Job Application';
+        $type = 'layout';
+        $job = JobApplication::orderBy('created_at','desc')->get();
+        return view('template.backend.admin.job-application.index',compact('title','type','job'));
     }
 
     /**
@@ -43,10 +45,16 @@ class JobApplicationController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'nama_lengkap' => 'required',
-            'email' => 'required',
+            'email' => ['required', 'email', function ($attribute, $value, $fail) {
+                // Validasi keunikan email secara manual
+                $existingEmail = JobApplication::where('email', $value)->exists();
+                if ($existingEmail) {
+                    $fail('Alamat email sudah digunakan.');
+                }
+            }],            
             'cover_letter' => 'required',
             'foto' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
-            'file_cv' => 'required',
+            'file_cv' => 'required|file|mimes:pdf|max:2048',
         ],[
             'nama_lengkap.required' => 'nama lengkap tidak boleh kosong',
             'email.required' => 'email yang dibutuhkan tidak boleh kosong.',
@@ -60,25 +68,49 @@ class JobApplicationController extends Controller
                 ->withInput();
         }
 
+        // try {
+        //     $imageName = time().'.'.$request->file('foto')->extension();
+        //     Storage::putFileAs('public/hiring-foto', $request->file('foto'), $imageName);
+        // } catch (\Exception $e) {
+        //     \Log::error('Kesalahan unggah file: ' . $e->getMessage());
+        //     return redirect()->back()
+        //         ->with('errorForm', ['foto' => 'Terjadi kesalahan saat mengunggah file foto'])
+        //         ->withInput();
+        // }
         try {
             $imageName = time().'.'.$request->file('foto')->extension();
             Storage::putFileAs('public/hiring-foto', $request->file('foto'), $imageName);
+        
+            $CvName = time().'.'.$request->file('file_cv')->extension();
+            Storage::putFileAs('public/hiring-cv', $request->file('file_cv'), $CvName);
+        
+            // Logika penyimpanan file_pendukung jika diperlukan
+            if ($request->hasFile('file_pendukung')) {
+                $filePendukungName = time().'.'.$request->file('file_pendukung')->extension();
+                Storage::putFileAs('public/hiring-file-pendukung', $request->file('file_pendukung'), $filePendukungName);
+            }
         } catch (\Exception $e) {
             \Log::error('Kesalahan unggah file: ' . $e->getMessage());
             return redirect()->back()
-                ->with('errorForm', ['foto' => 'Terjadi kesalahan saat mengunggah file foto'])
+                ->with('errorForm', ['file' => 'Terjadi kesalahan saat mengunggah file'])
                 ->withInput();
         }
-
+        
         $JobApp = new JobApplication;
         $JobApp -> vacancy_id = $request->vacancy_id;
         $JobApp -> nama_lengkap = $request->nama_lengkap;
         $JobApp -> email = $request->email;
         $JobApp -> cover_letter = $request->cover_letter;
         $JobApp -> foto = $imageName;
-        $JobApp -> file_cv = $request->file_cv;
-        $JobApp -> file_pendukung = $request->file_pendukung;
-        return $JobApp;
+        $JobApp -> file_cv = $CvName;
+        $JobApp -> file_pendukung = $filePendukungName;
+        // return $JobApp;
+        if ($JobApp){
+            $JobApp->save();
+            return redirect()->route('frontend')->with('success','Data Lamaran Berhasil Disubmit.');
+        }else{
+            return redirect()->back()->with('error','Data Lamaran Gagal Disubmit.');
+        }
     }
 
     /**
@@ -89,7 +121,10 @@ class JobApplicationController extends Controller
      */
     public function show($id)
     {
-        //
+        $title = 'Job Application';
+        $type = 'layout';
+        $detail = JobApplication::find($id);
+        return view('template.backend.admin.job-application.view',compact('title','type','detail'));
     }
 
     /**

@@ -314,6 +314,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/job-vacancy/edit/{id}',[JobVacancyController::class,'edit'])->name('job-vacancy.edit');
         Route::post('/job-vacancy/update/{id}',[JobVacancyController::class,'update'])->name('job-vacancy.update');
         Route::get('/job-vacancy/delete/{id}',[JobVacancyController::class,'destroy'])->name('job-vacancy.delete');
+
+        //job-application
+        Route::get('job-app',[JobApplicationController::class,'index'])->name('job-app');
+        Route::get('job-app/show/{id}',[JobApplicationController::class,'show'])->name('job-app.show');
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

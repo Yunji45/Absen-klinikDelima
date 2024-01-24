@@ -136,7 +136,7 @@
                     @endif
                 </ul>
                 <p>Bagi yang berminat, silakan kirimkan resume dan portofolio Anda dengan cara <a href="{{route('job-app.pelamar')}}">Apply Lowongan Pekerjaan</a>.</p>
-                <button class="apply-button">Apply</button>
+                <a href="{{route('job-app.pelamar')}}" class="apply-button">Apply</a>
             </div>
             @endforeach
         </div>

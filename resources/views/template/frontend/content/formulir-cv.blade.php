@@ -126,11 +126,12 @@
     button:hover {
         background-color: #218838;
     }
+
 </style>
 
 <section class="inner-page">
     <div class="container">
-        <p>Ini Halaman Apply Pekerjaan</p>
+        <p>Apply Pekerjaan</p>
         <br>
         <br>
         <div class="logo-container">

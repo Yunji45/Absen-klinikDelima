@@ -188,13 +188,10 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Route::currentRouteName() === 'job-vacancy.index' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('job-vacancy.index')}}">Lowongan Pekerjaan</a>
+                        <a class="nav-link" href="{{route('job-vacancy.index')}}">Job Openings</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="">Management Berkas</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">Announcment</a>
+                    <li class="{{ Route::currentRouteName() === 'job-app' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('job-app')}}">Jobseeker Data</a>
                     </li>
                 </ul>
             </li>
