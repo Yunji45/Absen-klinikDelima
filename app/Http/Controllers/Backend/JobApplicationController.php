@@ -164,7 +164,6 @@ class JobApplicationController extends Controller
             if (!$jobApplication) {
                 return redirect()->back()->with('error', 'Data Lamaran tidak ditemukan.');
             }
-
             // Hapus file foto, CV, dan file pendukung dari penyimpanan
             Storage::delete('public/hiring-foto/' . $jobApplication->foto);
             Storage::delete('public/hiring-cv/' . $jobApplication->file_cv);

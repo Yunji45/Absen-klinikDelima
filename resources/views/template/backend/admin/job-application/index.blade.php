@@ -70,7 +70,7 @@
                             <div class="table-links">
                               <a href="{{route('job-app.show',$item->id)}}">View</a>
                               <div class="bullet"></div>
-                              <a href="{{route('job-vacancy.delete',$item->id)}}" class="text-danger">Hapus</a>
+                              <a href="{{route('job-app.delete',$item->id)}}" class="text-danger">Hapus</a>
                             </div>
                           </td>
                           <td>{{$item->nama_lengkap}}</td>
