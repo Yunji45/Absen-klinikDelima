@@ -79,6 +79,8 @@ Route::get('/karir',[CareerController::class,'index'])->name('karir');
 //pelamar
 Route::get('/formulir-cv',[JobApplicationController::class,'index_user'])->name('job-app.pelamar');
 Route::post('/formulir-cv/save',[JobApplicationController::class,'store'])->name('job-app.save');
+Route::get('/kirim-email',[JobApplicationController::class,'KirimEmail']);
+
 
 // Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
 // Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');

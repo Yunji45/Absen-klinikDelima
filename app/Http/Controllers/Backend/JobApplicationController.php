@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobVacancy;
 use App\Models\JobApplication;
+use App\Mail\KirimEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
 class JobApplicationController extends Controller
@@ -55,6 +57,7 @@ class JobApplicationController extends Controller
             'cover_letter' => 'required',
             'foto' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
             'file_cv' => 'required|file|mimes:pdf|max:2048',
+            'file_pendukung' => 'required|file|mimes:pdf|max:2048',
         ],[
             'nama_lengkap.required' => 'nama lengkap tidak boleh kosong',
             'email.required' => 'email yang dibutuhkan tidak boleh kosong.',
@@ -105,14 +108,36 @@ class JobApplicationController extends Controller
         $JobApp -> file_cv = $CvName;
         $JobApp -> file_pendukung = $filePendukungName;
         // return $JobApp;
-        if ($JobApp){
+        try {
             $JobApp->save();
-            return redirect()->route('frontend')->with('success','Data Lamaran Berhasil Disubmit.');
-        }else{
-            return redirect()->back()->with('error','Data Lamaran Gagal Disubmit.');
+        
+            $alamatEmail = $request->email;
+        
+            Mail::to($alamatEmail)->send(new KirimEmail());
+            
+            return redirect()->route('frontend')->with('success', 'Data Lamaran Berhasil Disubmit.');
+        } catch (\Exception $e) {
+            \Log::error('Kesalahan saat menyimpan atau mengirim email: ' . $e->getMessage());
+            
+            return redirect()->back()->with('error', 'Terjadi kesalahan. Data Lamaran Gagal Disubmit.');
         }
+        // if ($JobApp){
+        //     $JobApp->save();
+        //     $alamatEmail = $request->email; // Gantilah dengan alamat email yang valid
+        //     Mail::to($alamatEmail)->send(new KirimEmail());
+        //     return redirect()->route('frontend')->with('success','Data Lamaran Berhasil Disubmit.');
+        // }else{
+        //     return redirect()->back()->with('error','Data Lamaran Gagal Disubmit.');
+        // }
     }
 
+    public function KirimEmail()
+    {
+        $alamatEmail = "ihyanatikwibowo@gmail.com"; // Gantilah dengan alamat email yang valid
+        Mail::to($alamatEmail)->send(new KirimEmail());
+    
+        return '<h1>Sukses</h1>';
+    }
     /**
      * Display the specified resource.
      *
@@ -188,4 +213,5 @@ class JobApplicationController extends Controller
         $job = JobVacancy::all();
         return view('template.frontend.content.formulir-cv',compact('title','job'));
     }
+
 }

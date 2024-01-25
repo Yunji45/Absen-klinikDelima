@@ -9,7 +9,6 @@ class ContentController extends Controller
 {
     public function home()
     {
-        emotify('success', 'You are awesome, your data was successfully created');
         return view ('template.frontend.content.index');
     }
     public function tentang()
