@@ -71,15 +71,6 @@ class JobApplicationController extends Controller
                 ->withInput();
         }
 
-        // try {
-        //     $imageName = time().'.'.$request->file('foto')->extension();
-        //     Storage::putFileAs('public/hiring-foto', $request->file('foto'), $imageName);
-        // } catch (\Exception $e) {
-        //     \Log::error('Kesalahan unggah file: ' . $e->getMessage());
-        //     return redirect()->back()
-        //         ->with('errorForm', ['foto' => 'Terjadi kesalahan saat mengunggah file foto'])
-        //         ->withInput();
-        // }
         try {
             $imageName = time().'.'.$request->file('foto')->extension();
             Storage::putFileAs('public/hiring-foto', $request->file('foto'), $imageName);
