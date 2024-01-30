@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('layanans', function (Blueprint $table) {
             $table->id();
+            $table->string('judul_layanan')->nullable();
+            $table->text('content_layanan')->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon"><i class="fas fa-heartbeat"></i></div>
             <h4 class="title"><a href="">Lorem Ipsum</a></h4>
@@ -44,6 +44,15 @@
             <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
             <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
           </div>
+        </div> -->
+        <div class="row">
+          @foreach($layanan as $item)
+          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon"><i class="fas fa-notes-medical"></i></div>
+            <h4 class="title"><a href="">{{$item->judul_layanan}}</a></h4>
+            <p class="description">{{$item->content_layanan}}</p>
+          </div>
+          @endforeach
         </div>
 
       </div>

@@ -4,21 +4,28 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Beranda;
+use App\Models\Tentang;
+use App\Models\Layanan;
 
 class ContentController extends Controller
 {
     public function home()
     {
-        return view ('template.frontend.content.index');
+        $beranda = Beranda::find(1);
+        // return $beranda;
+        return view ('template.frontend.content.index',compact('beranda'));
     }
     public function tentang()
     {
-        return view ('template.frontend.content.tentang');
+        $tentang = Tentang::find(2);
+        return view ('template.frontend.content.tentang',compact('tentang'));
     }
 
     public function layanan()
     {
-        return view ('template.frontend.content.layanan');
+        $layanan = Layanan::all();
+        return view ('template.frontend.content.layanan',compact('layanan'));
     }
 
     public function divisi()

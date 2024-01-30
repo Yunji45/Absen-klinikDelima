@@ -32,6 +32,7 @@ use App\Http\Controllers\Backend\DaftarTugasController;
 use App\Http\Controllers\Backend\NoteKaryawanController;
 use App\Http\Controllers\Backend\JobVacancyController;
 use App\Http\Controllers\Backend\JobApplicationController;
+use App\Http\Controllers\Backend\LayoutController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -321,6 +322,21 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('job-app',[JobApplicationController::class,'index'])->name('job-app');
         Route::get('job-app/show/{id}',[JobApplicationController::class,'show'])->name('job-app.show');
         Route::get('job-app/delete/{id}',[JobApplicationController::class,'destroy'])->name('job-app.delete');
+
+        //setting layout content
+        Route::get('/setting-content',[LayoutController::class,'index'])->name('setting-content.index');
+        Route::get('/setting-content/beranda',[LayoutController::class,'index_beranda'])->name('setting-content.beranda');
+        Route::post('/setting-content/beranda-save',[LayoutController::class,'store_beranda'])->name('setting-content.beranda.save');
+
+        Route::get('/setting-content/profil',[LayoutController::class,'index_tentang'])->name('setting-content.tentang');
+        Route::post('/setting-content/profil-save',[LayoutController::class,'store_tentang'])->name('setting-content.tentang.save');
+
+        Route::get('/setting-content/layanan',[LayoutController::class,'index_layanan'])->name('setting-content.layanan');
+        Route::post('/setting-content/layanan-save',[LayoutController::class,'store_layanan'])->name('setting-content.layanan.save');
+        Route::get('/setting-content/layanan-delete/{id}',[LayoutController::class,'destroy_layanan'])->name('setting-content.layanan.delete');
+        Route::get('/setting-content/layanan-edit/{id}',[LayoutController::class,'edit_layanan'])->name('setting-content.layanan.edit');
+        Route::post('/setting-content/layanan-update/{id}',[LayoutController::class,'update_layanan'])->name('setting-content.layanan.upto');
+
         
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

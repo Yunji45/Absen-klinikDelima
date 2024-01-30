@@ -9,32 +9,41 @@
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(mitradelima/assets/img/slide/slide-1.jpg)">
-          <div class="container">
-            <h2>Selamat Datang di <span>Klinik Mitra Delima</span></h2>
-            <p>Selamat datang di Portal Kesehatan Terdepan, Klinik Pratama Mitra Delima. Kami menyambut keluhan kesehatan Anda dengan layanan 24 jam yang siap merawat Anda setiap hari.</p>
-            <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
-          </div>
-        </div>
+        <!-- <div class="carousel-item active" style="background-image: url(mitradelima/assets/img/slide/slide-1.jpg)"> -->
+        @if ($beranda)
+            <!-- Slide 1 -->
+            @if ($beranda->foto_1 && $beranda->sub_judul_1 && $beranda->content_1)
+                <div class="carousel-item active" style="background-image: url('{{ asset(Storage::url('content-beranda/foto-1/'.$beranda->foto_1)) }}')">
+                    <div class="container">
+                        <h2> {{$beranda->sub_judul_1}}</h2>
+                        <p>{{$beranda->content_1}}</p>
+                        <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            @endif
 
-        <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(mitradelima/assets/img/slide/slide-2.jpg)">
-          <div class="container">
-            <h2>Dukungan BPJS Kesehatan dan Pelayanan Umum</h2>
-            <p>Bergabunglah dengan kami di Klinik Pratama Mitra Delima, di mana kami dengan bangga melayani peserta BPJS Kesehatan dan umum. Keberagaman layanan kami hadir untuk memenuhi kebutuhan kesehatan semua orang.</p>
-            <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
-          </div>
-        </div>
+            <!-- Slide 2 -->
+            @if ($beranda->foto_2 && $beranda->sub_judul_2 && $beranda->content_2)
+                <div class="carousel-item active" style="background-image: url('{{ asset(Storage::url('content-beranda/foto-2/'.$beranda->foto_2)) }}')">
+                    <div class="container">
+                        <h2> {{$beranda->sub_judul_2}}</h2>
+                        <p>{{$beranda->content_2}}</p>
+                        <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            @endif
 
-        <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(mitradelima/assets/img/slide/slide-3.jpg)">
-          <div class="container">
-            <h2>Pelayanan Medis Berkualitas untuk Kepuasan Total</h2>
-            <p>Kami berkomitmen untuk memberikan pelayanan medis terbaik, memastikan kepuasan total bagi kesehatan Anda. Di Klinik Pratama Mitra Delima, kualitas adalah kunci, dan kepedulian terhadap pasien adalah prioritas utama kami.</p>
-            <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
-          </div>
-        </div>
-
+            <!-- Slide 3 -->
+            @if ($beranda->foto_3 && $beranda->sub_judul_3 && $beranda->content_3)
+                <div class="carousel-item active" style="background-image: url('{{ asset(Storage::url('content-beranda/foto-3/'.$beranda->foto_3)) }}')">
+                    <div class="container">
+                        <h2> {{$beranda->sub_judul_3}}</h2>
+                        <p>{{$beranda->content_3}}</p>
+                        <a href="#about" class="btn-get-started scrollto">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            @endif
+        @endif
       </div>
 
       <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('sub_judul_2')->nullable();
             $table->text('content_2')->nullable();
             $table->string('sub_judul_3')->nullable();
+            $table->text('content_3')->nullable();
             $table->string('foto_1')->nullable();
             $table->string('foto_2')->nullable();
             $table->string('foto_3')->nullable();

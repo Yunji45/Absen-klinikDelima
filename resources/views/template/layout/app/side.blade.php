@@ -154,29 +154,17 @@
                 </a>
             </li>
             <li class="menu-header">Layout</li>
-            <li class="nav-item dropdown ">
+            <li class="nav-item dropdown {{ $type === 'layout' ? 'active' : '' }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
                     <span>Content Management</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a class="nav-link" href="">Content Beranda</a>
+                    <li class="{{ Route::currentRouteName() === 'setting-content.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('setting-content.index')}}">Setting Content</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="">Content Profil</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">Content Layanan</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">Content Divisi</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">Content Foto</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">Pengaduan Layanan</a>
+                        <a class="nav-link" href="">Kritik & Saran</a>
                     </li>
                    
                 </ul>
