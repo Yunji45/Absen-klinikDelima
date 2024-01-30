@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Beranda;
 use App\Models\Tentang;
 use App\Models\Layanan;
+use App\Models\Divisi;
 
 class ContentController extends Controller
 {
@@ -30,7 +31,8 @@ class ContentController extends Controller
 
     public function divisi()
     {
-        return view ('template.frontend.content.divisi');
+        $divisi = Divisi::all();
+        return view ('template.frontend.content.divisi',compact('divisi'));
     }
 
     public function dokter()

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Beranda;
 use App\Models\Tentang;
 use App\Models\Layanan;
+use App\Models\Divisi;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
@@ -16,7 +17,7 @@ class LayoutController extends Controller
     public function index()
     {
         $title = 'Setting Content';
-        $type = 'layout';
+        $type = 'content';
         return view ('template.backend.admin.layout-content.index',compact('title','type'));
     }
 
@@ -24,7 +25,7 @@ class LayoutController extends Controller
     public function index_beranda()
     {
         $title = 'Setting Content Beranda';
-        $type = 'layout';
+        $type = 'content';
         return view ('template.backend.admin.layout-content.beranda.index',compact('title','type'));
     }
 
@@ -140,7 +141,7 @@ class LayoutController extends Controller
     public function index_tentang()
     {
         $title = 'Setting Content Profil';
-        $type = 'layout';
+        $type = 'content';
         return view ('template.backend.admin.layout-content.tentang.index',compact('title','type'));
     }
 
@@ -182,7 +183,7 @@ class LayoutController extends Controller
     public function index_layanan()
     {
         $title = 'Setting Content Layanan';
-        $type = 'layout';
+        $type = 'content';
         $layanan = Layanan::all();
         return view ('template.backend.admin.layout-content.layanan.index',compact('title','type','layanan'));
     }
@@ -212,7 +213,7 @@ class LayoutController extends Controller
     public function edit_layanan($id)
     {
         $title = 'Setting Content Layanan';
-        $type = 'layout';
+        $type = 'content';
         $layanan = Layanan::find($id);
         return view ('template.backend.admin.layout-content.layanan.edit',compact('title','type','layanan'));
 
@@ -233,4 +234,113 @@ class LayoutController extends Controller
         $layanan->delete();
         return redirect()->back()->with('success','Data Berhasil Dihapus');
     }
+
+    //divisi
+    public function index_divisi()
+    {
+        $title = 'Setting Content Divisi';
+        $type = 'content';
+        $divisi = Divisi::all();
+        return view ('template.backend.admin.layout-content.divisi.index',compact('title','type','divisi'));
+    }
+
+    public function edit_divisi($id)
+    {
+        $title = 'Setting Content Divisi';
+        $type = 'content';
+        $divisi = Divisi::find($id);
+        return view ('template.backend.admin.layout-content.divisi.edit',compact('title','type','divisi'));
+    }
+
+    public function update_divisi(Request $request, $id)
+    {
+        try {
+            $divisi = Divisi::findOrFail($id);
+
+            // Update data divisi
+            $divisi->nama_divisi = $request->nama_divisi;
+            $divisi->deskripsi_singkat = $request->deskripsi_singkat;
+            $divisi->deskripsi_divisi = $request->deskripsi_divisi;
+
+            // Jika ada file gambar baru diupload
+            if ($request->hasFile('foto_divisi')) {
+                $imageName = time().'.'.$request->file('foto_divisi')->extension();
+
+                // Hapus foto lama dari storage
+                Storage::delete('public/content-divisi/' . $divisi->foto_divisi);
+
+                // Upload foto baru ke storage
+                Storage::putFileAs('public/content-divisi', $request->file('foto_divisi'), $imageName);
+
+                // Update nama file foto baru di database
+                $divisi->foto_divisi = $imageName;
+            }
+
+            $divisi->save();
+
+            return redirect()->route('setting-content.divisi')->with('success', 'Data Berhasil Diupdate');
+        } catch (\Exception $e) {
+            \Log::error('Kesalahan mengupdate data divisi: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate data divisi');
+        }
+    }   
+
+    public function store_divisi(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'nama_divisi' => 'required',
+            'deskripsi_singkat' => 'required',
+            'deskripsi_divisi' => 'required',
+            'foto_divisi' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
+        ],[
+            'nama_divisi.required' => 'nama divisi wajib di isi',
+            'deskripsi_singkat.required' => 'deskripsi singkat wajib diisi',
+            'deskripsi_divisi.required' => 'deskripsi singkat wajib diisi',
+            'foto_divisi.required' => 'Foto wajib diisi',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+        try {
+            $imageName = time().'.'.$request->file('foto_divisi')->extension();
+            Storage::putFileAs('public/content-divisi', $request->file('foto_divisi'), $imageName);
+        
+        } catch (\Exception $e) {
+            \Log::error('Kesalahan unggah file: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('errorForm', ['file' => 'Terjadi kesalahan saat mengunggah file'])
+                ->withInput();
+        }
+
+        $divisi = new Divisi;
+        $divisi -> nama_divisi = $request->nama_divisi;
+        $divisi -> deskripsi_singkat = $request->deskripsi_singkat;
+        $divisi -> deskripsi_divisi = $request->deskripsi_divisi;
+        $divisi -> foto_divisi = $imageName;
+        $divisi -> save();
+        return redirect()->back()->with('success','Data Berhasil Disimpan');
+    }
+
+    public function destroy_divisi($id)
+    {
+        try {
+            $divisi = Divisi::findOrFail($id);
+
+            // Hapus foto dari storage
+            $fotoPath = 'public/content-divisi/' . $divisi->foto_divisi;
+            Storage::delete($fotoPath);
+
+            // Hapus data dari database
+            $divisi->delete();
+
+            return redirect()->back()->with('success', 'Data Berhasil Dihapus');
+        } catch (\Exception $e) {
+            \Log::error('Kesalahan menghapus data divisi: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus data divisi');
+        }
+    }
+
 }

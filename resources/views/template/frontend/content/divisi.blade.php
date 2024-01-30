@@ -13,7 +13,7 @@
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-4 mb-5 mb-lg-0">
             <ul class="nav nav-tabs flex-column">
               <li class="nav-item">
@@ -70,8 +70,33 @@
               </div>
             </div>
           </div>
+        </div> -->
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <ul class="nav nav-tabs flex-column">
+              @foreach($divisi as $index => $item)
+              <li class="nav-item">
+                <a class="nav-link{{ $index === 0 ? ' active show' : '' }}" data-bs-toggle="tab" data-bs-target="#tab-{{ $index + 1 }}">
+                  <h4>{{ $item->nama_divisi }}</h4>
+                  <p>{{ $item->deskripsi_singkat }}</p>
+                </a>
+              </li>
+              @endforeach
+            </ul>
+          </div>
+          <div class="col-lg-8">
+            <div class="tab-content">
+              @foreach($divisi as $index => $item)
+              <div class="tab-pane{{ $index === 0 ? ' active show' : '' }}" id="tab-{{ $index + 1 }}">
+                <h3>{{ $item->nama_divisi }}</h3>
+                <p class="fst-italic">{{ $item->deskripsi_singkat }}</p>
+                <img src="{{ asset(Storage::url('content-divisi/'.$item->foto_divisi)) }}" alt="" class="img-fluid">
+                <p>{{ $item->deskripsi_divisi }}</p>
+              </div>
+              @endforeach
+            </div>
+          </div>
         </div>
-
       </div>
     </section>
 @endsection

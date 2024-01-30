@@ -5,16 +5,16 @@
             <div class="section-header-back">
               <a href="features-settings.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>Layanan Settings</h1>
+            <h1>Edit Divisi Settings</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
               <div class="breadcrumb-item active"><a href="#">Settings</a></div>
-              <div class="breadcrumb-item">Layanan Settings</div>
+              <div class="breadcrumb-item">Edit Divisi Settings</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">All About Layanan Settings</h2>
+            <h2 class="section-title">All About Edit Divisi Settings</h2>
             <p class="section-lead">
               You can adjust all general settings here
             </p>
@@ -28,10 +28,10 @@
                   </div>
                   <div class="card-body">
                     <ul class="nav nav-pills flex-column">
-                      <li class="nav-item"><a href="{{route('setting-content.beranda')}}" class="nav-link">Layanan</a></li>
+                      <li class="nav-item"><a href="{{route('setting-content.beranda')}}" class="nav-link">Divisi</a></li>
                       <li class="nav-item"><a href="{{route('setting-content.tentang')}}" class="nav-link">Tentang</a></li>
-                      <li class="nav-item"><a href="{{route('setting-content.layanan')}}" class="nav-link active">Layanan</a></li>
-                      <li class="nav-item"><a href="{{route('setting-content.divisi')}}" class="nav-link">Divisi</a></li>
+                      <li class="nav-item"><a href="{{route('setting-content.layanan')}}" class="nav-link">Divisi</a></li>
+                      <li class="nav-item"><a href="{{route('setting-content.divisi')}}" class="nav-link active">Divisi</a></li>
                       <li class="nav-item"><a href="#" class="nav-link">Dokter</a></li>
                       <li class="nav-item"><a href="#" class="nav-link">FAQ & Kontak</a></li>
                     </ul>
@@ -39,24 +39,36 @@
                 </div>
               </div>
               <div class="col-md-8">
-                <form action="{{route('setting-content.layanan.save')}}" id="setting-form" method="POST" enctype="multipart/form-data">
+                <form action="{{route('setting-content.divisi.update',$divisi->id)}}" id="setting-form" method="POST" enctype="multipart/form-data">
                   @csrf
                   <div class="card" id="settings-card">
                     <div class="card-header">
-                      <h4>Layanan Settings</h4>
+                      <h4>Edit Divisi Settings</h4>
                     </div>
                     <div class="card-body">
-                      <p class="text-muted">Layanan settings such as, site title, site description, address and so on.</p>
+                      <p class="text-muted">Edit Divisi settings such as, site title, site description, address and so on.</p>
                       <div class="form-group row align-items-center">
-                        <label for="site-title" class="form-control-label col-sm-3 text-md-right">Judul Layanan</label>
+                        <label for="site-title" class="form-control-label col-sm-3 text-md-right">Nama Divisi</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="judul_layanan" class="form-control" id="judul_layanan">
+                          <input type="text" name="nama_divisi" class="form-control" id="nama_divisi" value="{{old('nama_divisi',$divisi->nama_divisi)}}">
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
-                        <label for="site-description" class="form-control-label col-sm-3 text-md-right">Deskripsi Layanan</label>
+                        <label for="site-description" class="form-control-label col-sm-3 text-md-right">Deskripsi Singkat</label>
                         <div class="col-sm-6 col-md-9">
-                          <textarea class="form-control" name="content_layanan" id="content_layanan"></textarea>
+                          <textarea class="form-control" name="deskripsi_singkat" id="deskripsi_singkat">{{old('deskripsi_singkat',$divisi->deskripsi_singkat)}}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row align-items-center">
+                        <label for="site-description" class="form-control-label col-sm-3 text-md-right">Deskripsi Divisi</label>
+                        <div class="col-sm-6 col-md-9">
+                          <textarea class="form-control" name="deskripsi_divisi" id="deskripsi_divisi">{{old('deskripsi_divisi',$divisi->deskripsi_divisi)}}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row align-items-center">
+                        <label for="site-title" class="form-control-label col-sm-3 text-md-right">Foto Divisi</label>
+                        <div class="col-sm-6 col-md-9">
+                          <input type="file" name="foto_divisi" class="form-control" id="foto_divisi">
                         </div>
                       </div>
                     </div>
@@ -67,20 +79,6 @@
                   </div>
                 </form>
               </div>
-            </div>
-            <div class="row">
-              @foreach($layanan as $item)
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">{{$item->judul_layanan}}</h5>
-                    <p class="card-text">{{$item->content_layanan}}</p>
-                    <a href="{{route('setting-content.layanan.edit',$item->id)}}" class="btn btn-success">Edit</a>
-                    <a href="{{route('setting-content.layanan.delete',$item->id)}}" class="btn btn-danger">Hapus</a>
-                  </div>
-                </div>
-              </div>
-              @endforeach
             </div>
   		    </div>
       	</section>

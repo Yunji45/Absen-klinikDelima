@@ -154,7 +154,7 @@
                 </a>
             </li>
             <li class="menu-header">Layout</li>
-            <li class="nav-item dropdown {{ $type === 'layout' ? 'active' : '' }} ">
+            <li class="nav-item dropdown {{ $type === 'content' ? 'active' : '' }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
                     <span>Content Management</span>

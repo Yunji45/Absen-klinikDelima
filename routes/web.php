@@ -40,9 +40,6 @@ use App\Http\Controllers\Frontend\CareerController;
 //dokumentasi API (application programming interface)
 use App\Http\Controllers\API\DokumentasiController;
 use App\Http\Controllers\Api\StatistikController;
-
-
-
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
 use App\Http\Middleware\VerifyFaceMiddleware; // Pastikan untuk mengimpor middleware yang sesuai
@@ -337,7 +334,12 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/setting-content/layanan-edit/{id}',[LayoutController::class,'edit_layanan'])->name('setting-content.layanan.edit');
         Route::post('/setting-content/layanan-update/{id}',[LayoutController::class,'update_layanan'])->name('setting-content.layanan.upto');
 
-        
+        Route::get('/setting-content/divisi',[LayoutController::class,'index_divisi'])->name('setting-content.divisi');
+        Route::post('/setting-content/divisi-save',[LayoutController::class,'store_divisi'])->name('setting-content.divisi.save');
+        Route::get('/setting-content/divisi-delete/{id}',[LayoutController::class,'destroy_divisi'])->name('setting-content.divisi.delete');
+        Route::get('/setting-content/divisi-edit/{id}',[LayoutController::class,'edit_divisi'])->name('setting-content.divisi.edit');
+        Route::post('/setting-content/divisi-update/{id}',[LayoutController::class,'update_divisi'])->name('setting-content.divisi.update');
+
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');
