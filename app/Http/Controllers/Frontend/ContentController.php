@@ -8,6 +8,7 @@ use App\Models\Beranda;
 use App\Models\Tentang;
 use App\Models\Layanan;
 use App\Models\Divisi;
+use App\Models\FaqKontak;
 
 class ContentController extends Controller
 {
@@ -42,7 +43,8 @@ class ContentController extends Controller
 
     public function kontak()
     {
-        return view ('template.frontend.content.kontak');
+        $faqs = FaqKontak::all();
+        return view ('template.frontend.content.kontak',compact('faqs'));
     }
 
     public function kritik_saran()

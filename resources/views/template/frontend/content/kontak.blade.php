@@ -14,8 +14,18 @@
         </div>
 
         <ul class="faq-list">
-
-          <li>
+        @foreach($faqs as $index => $faq)
+            <li>
+                <div data-bs-toggle="collapse" href="#faq{{ $index + 1 }}" class="collapsed question">
+                    {{ $faq->pertanyaan }}
+                    <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
+                </div>
+                <div id="faq{{ $index + 1 }}" class="collapse" data-bs-parent=".faq-list">
+                    <p>{{ $faq->jawaban }}</p>
+                </div>
+            </li>
+        @endforeach
+          <!-- <li>
             <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Apa itu Klinik Mitra Delima dan bagaimana cara menghubunginya ? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq1" class="collapse" data-bs-parent=".faq-list">
                 <p>
@@ -57,7 +67,7 @@
             <div id="faq6" class="collapse" data-bs-parent=".faq-list">
             <p>Anda dapat memberikan umpan balik atau saran untuk Klinik Mitra Delima dengan mengisi formulir yang disediakan di menu kritik & saran yang tertera di situs website kami.</p>
             </div>
-          </li>
+          </li> -->
 
         </ul>
 

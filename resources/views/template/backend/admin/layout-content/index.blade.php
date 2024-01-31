@@ -36,7 +36,7 @@
                   <div class="card-body">
                     <h4>Tentang</h4>
                     <p>Search Engine Optimation</p>
-                    <a href="features-setting-detail.html" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
+                    <a href="{{route('setting-content.tentang')}}" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
                   <div class="card-body">
                     <h4>Layanan</h4>
                     <p>Search Engine Optimation</p>
-                    <a href="features-setting-detail.html" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
+                    <a href="{{route('setting-content.layanan')}}" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -60,7 +60,7 @@
                   <div class="card-body">
                     <h4>Divisi</h4>
                     <p>Search Engine Optimation</p>
-                    <a href="features-setting-detail.html" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
+                    <a href="{{route('setting-content.divisi')}}" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>
@@ -84,7 +84,7 @@
                   <div class="card-body">
                     <h4>FAQ</h4>
                     <p>Search Engine Optimation</p>
-                    <a href="features-setting-detail.html" class="card-cta text-primary">Change Setting <i class="fas fa-chevron-right"></i></a>
+                    <a href="{{route('setting-content.faq')}}" class="card-cta text-primary">Change Setting <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>

@@ -33,7 +33,7 @@
                       <li class="nav-item"><a href="{{route('setting-content.layanan')}}" class="nav-link">Divisi</a></li>
                       <li class="nav-item"><a href="{{route('setting-content.divisi')}}" class="nav-link active">Divisi</a></li>
                       <li class="nav-item"><a href="#" class="nav-link">Dokter</a></li>
-                      <li class="nav-item"><a href="#" class="nav-link">FAQ & Kontak</a></li>
+                      <li class="nav-item"><a href="{{route('setting-content.faq')}}" class="nav-link">FAQ & Kontak</a></li>
                     </ul>
                   </div>
                 </div>

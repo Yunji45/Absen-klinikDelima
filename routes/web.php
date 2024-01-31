@@ -340,6 +340,12 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/setting-content/divisi-edit/{id}',[LayoutController::class,'edit_divisi'])->name('setting-content.divisi.edit');
         Route::post('/setting-content/divisi-update/{id}',[LayoutController::class,'update_divisi'])->name('setting-content.divisi.update');
 
+        Route::get('/setting-content/faq',[LayoutController::class,'index_faq'])->name('setting-content.faq');
+        Route::post('/setting-content/faq-save',[LayoutController::class,'store_faq'])->name('setting-content.faq.save');
+        Route::get('/setting-content/faq-edit/{id}',[LayoutController::class,'edit_faq'])->name('setting-content.faq.edit');
+        Route::get('/setting-content/faq-delete/{id}',[LayoutController::class,'destroy_faq'])->name('setting-content.faq.delete');
+        Route::post('/setting-content/faq-update/{id}',[LayoutController::class,'update_faq'])->name('setting-content.faq.update');
+
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('faq_kontaks', function (Blueprint $table) {
             $table->id();
+            $table->text('pertanyaan')->nullable();
+            $table->text('jawaban')->nullable();
             $table->timestamps();
         });
     }

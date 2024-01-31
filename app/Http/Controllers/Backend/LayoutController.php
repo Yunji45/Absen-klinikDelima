@@ -8,6 +8,7 @@ use App\Models\Beranda;
 use App\Models\Tentang;
 use App\Models\Layanan;
 use App\Models\Divisi;
+use App\Models\FaqKontak;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
@@ -341,6 +342,63 @@ class LayoutController extends Controller
             \Log::error('Kesalahan menghapus data divisi: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus data divisi');
         }
+    }
+
+    //faq
+    public function index_faq()
+    {
+        $title = 'Setting Content FAQ';
+        $type = 'content';
+        $faq = FaqKontak::all();
+        return view ('template.backend.admin.layout-content.faq.index',compact('title','type','faq'));
+    }
+
+    public function store_faq(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'pertanyaan' => 'required',
+            'jawaban' => 'required',
+        ],[
+            'pertanyaan.required' => 'pertanyaan wajib di isi',
+            'jawaban.required' => 'content wajib diisi',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+        $faq = new FaqKontak;
+        $faq -> pertanyaan = $request->pertanyaan;
+        $faq -> jawaban = $request->jawaban;
+        // return $faq;
+        $faq -> save();
+        return redirect()->back()->with('success','Data Berhasil Disimpan.');
+    }
+
+    public function update_faq(Request $request,$id)
+    {
+        $faq = FaqKontak::find($id);
+        $faq -> pertanyaan = $request->pertanyaan;
+        $faq -> jawaban = $request->jawaban;
+        // return $faq;
+        $faq -> save();
+        return redirect()->route('setting-content.faq')->with('success','Data Berhasil Diupdate.');
+    }
+
+    public function edit_faq($id)
+    {
+        $title = 'Setting Content FAQ';
+        $type = 'content';
+        $faq = FaqKontak::find($id);
+        return view ('template.backend.admin.layout-content.faq.edit',compact('title','type','faq'));
+    }
+
+    public function destroy_faq($id)
+    {
+        $faq = FaqKontak::find($id);
+        $faq->delete();
+        return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
 
 }
