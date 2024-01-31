@@ -120,8 +120,8 @@
                             <div class="col-sm-9">
                                 <select class="form-control @error('umr_id') is-invalid @enderror" name="umr_id" id="umr_id">
                                     <option value="{{$gaji->umr->id}}">{{$gaji->umr->Rp}}</option>
-                                    @foreach ($umr as $gaji)
-                                    <option value="{{ $gaji->id }}">{{ $gaji->name }}/{{$gaji->Rp}}</option>
+                                    @foreach ($umr as $gajis)
+                                    <option value="{{ $gajis->id }}">{{ $gajis->name }}/{{$gajis->Rp}}</option>
                                     @endforeach
                                 </select>
                                 @error('umr_id') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
@@ -138,9 +138,33 @@
                             </div>
                         </div>
                         <div class="form-group row" id="penyesuaian">
+                            <label for="penyesuaian" class="col-form-label col-sm-3">Penyesuaian</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="penyesuaian" name="penyesuaian" value="{{old('penyesuaian',$gaji->penyesuaian)}}">
+                                @error('penyesuaian') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row" id="Potongan">
+                            <label for="Potongan" class="col-form-label col-sm-3">Potongan</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control @error('Potongan') is-invalid @enderror" name="Potongan" value="{{ old('Potongan', $gaji->Potongan) }}">
+                                @error('Potongan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row" id="Bonus">
+                            <label for="Bonus" class="col-form-label col-sm-3">Tambahan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="Bonus" id="Bonus" class="form-control @error('Bonus') is-invalid @enderror" value="{{ old('Bonus', $gaji->Bonus) }}">
+                                @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group row" id="penyesuaian">
                             <label for="Potongan" class="col-form-label col-sm-3">Penyesuaian</label>
                             <div class="col-sm-9">
-                                <input type="text" name="penyesuaian" id="penyesuaian" class="form-control @error('penyesuaian') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada penyesuaian" required>
+                                <input type="text" name="penyesuaian" id="penyesuaian" class="form-control @error('penyesuaian') is-invalid @enderror" value="{{ old('Potongan', $gaji->Potongan) }}">
                                 @error('penyesuaian') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -158,7 +182,7 @@
                                 <input type="text" name="Bonus" id="Bonus" class="form-control @error('Bonus') is-invalid @enderror" value="{{ old('Bonus',$gaji->Bonus) }}" placeholder="Masukkan 0 jika tidak ada Tambahan" required>
                                 @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
-                        </div>
+                        </div> -->
                         <div class="modal-footer">
                             <a href="{{route('gaji.adm')}}" type="button" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-success">Simpan</button>
