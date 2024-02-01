@@ -22,7 +22,7 @@
                   <i class="fa fa-plus">
                       Add</i>
               </a> -->
-              <a href="" class="btn btn-danger">
+              <a href="{{route('gaji.download')}}" class="btn btn-danger">
                   <i class="fa fa-download">
                       PDF</i>
               </a>

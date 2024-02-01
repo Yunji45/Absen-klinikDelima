@@ -490,6 +490,18 @@ class PenggajianController extends Controller
         return redirect()->back()->with('success', 'Data Gaji Pegawai Berhasil Disimpan.');
     }
 
+    public function download_gaji()
+    {
+        $bulan = date('01');
+        $tahun = date('Y');
+        $data = gajian::whereYear('bulan', $tahun)
+                        ->whereMonth('bulan', $bulan)
+                        ->get();
+        // $data = jadwal::all();
+        $pdf = PDF::loadview('template.backend.admin.gaji.download-gaji',['data'=>$data]);
+        return $pdf->download('download-gaji');
+    }
+
     //zona pegawai
     public function IndexGajiPegawai()
     {

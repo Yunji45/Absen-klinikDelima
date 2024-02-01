@@ -195,6 +195,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         // Route::get('/Payroll-confirm-penerima/{id}',[PenggajianController::class,'ConfirmPenerima'])->name('gaji.confirm.penerima');
         Route::get('/Payroll-multiple',[PenggajianController::class,'CreateMultipleGaji'])->name('multiple.gaji.create');
         Route::post('/Payroll-save/multiple',[PenggajianController::class,'StoreMultipleGaji'])->name('multiple.gaji.save');
+        Route::get('/index-persentase/download', [PenggajianController::class,'download_gaji'])->name('gaji.download');
+
         //UMR 
         Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');
         Route::get('/index-UMR-create',[PenggajianController::class,'createUMR'])->name('gaji.umr.create');
