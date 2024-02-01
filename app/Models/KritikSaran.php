@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class KritikSaran extends Model
 {
     use HasFactory;
+    protected $table = 'kritik_sarans';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'nama',
+        'no_tlp',
+        'kategori',
+        'deskripsi',
+    ];
 }

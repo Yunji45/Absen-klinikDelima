@@ -33,6 +33,7 @@ use App\Http\Controllers\Backend\NoteKaryawanController;
 use App\Http\Controllers\Backend\JobVacancyController;
 use App\Http\Controllers\Backend\JobApplicationController;
 use App\Http\Controllers\Backend\LayoutController;
+use App\Http\Controllers\Backend\KritikSaraanController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -73,6 +74,9 @@ Route::get('/Dokter',[ContentController::class,'dokter'])->name('frontend.dokter
 Route::get('/Kontak',[ContentController::class,'kontak'])->name('frontend.kontak');
 Route::get('/Kritik-saran',[ContentController::class,'kritik_saran'])->name('frontend.kritik-saran');
 Route::get('/karir',[CareerController::class,'index'])->name('karir');
+
+//kritik dan saran
+Route::post('/kritik/saran-save',[KritikSaraanController::class,'store'])->name('kritik.save');
 
 //pelamar
 Route::get('/formulir-cv',[JobApplicationController::class,'index_user'])->name('job-app.pelamar');

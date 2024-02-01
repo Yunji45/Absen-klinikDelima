@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('kritik_sarans', function (Blueprint $table) {
             $table->id();
+            $table->string('nama')->nullable();
+            $table->integer('no_tlp')->nullable();
+            $table->string('kategori')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }
