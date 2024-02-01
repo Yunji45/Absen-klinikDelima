@@ -32,14 +32,14 @@
                       <li class="nav-item"><a href="{{route('setting-content.tentang')}}" class="nav-link">Tentang</a></li>
                       <li class="nav-item"><a href="{{route('setting-content.layanan')}}" class="nav-link">Layanan</a></li>
                       <li class="nav-item"><a href="{{route('setting-content.divisi')}}" class="nav-link">Divisi</a></li>
-                      <li class="nav-item"><a href="#" class="nav-link">Dokter</a></li>
+                      <li class="nav-item"><a href="{{route('setting-content.dokter')}}" class="nav-link">Dokter</a></li>
                       <li class="nav-item"><a href="{{route('setting-content.faq')}}" class="nav-link">FAQ & Kontak</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
               <div class="col-md-8">
-                <form action="{{route('setting-content.beranda.save')}}" id="setting-form" method="POST" enctype="multipart/form-data">
+                <form action="{{route('setting-content.beranda.update',$beranda->id)}}" id="setting-form" method="POST" enctype="multipart/form-data">
                   @csrf
                   <div class="card" id="settings-card">
                     <div class="card-header">
@@ -50,67 +50,55 @@
                       <div class="form-group row align-items-center">
                         <label for="site-title" class="form-control-label col-sm-3 text-md-right">Sub Judul 1</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="sub_judul_1" class="form-control" id="site-title">
+                          <input type="text" name="sub_judul_1" class="form-control" id="sub_judul_1" value="{{old('sub_judul_1',$beranda->sub_judul_1)}}">
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-description" class="form-control-label col-sm-3 text-md-right">Content 1</label>
                         <div class="col-sm-6 col-md-9">
-                          <textarea class="form-control" name="content_1" id="site-description"></textarea>
+                          <textarea class="form-control" name="content_1" id="site-description" value="{{old('content_1',$beranda->content_1)}}">{{old('content_1',$beranda->content_1)}}</textarea>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
-                        <label class="form-control-label col-sm-3 text-md-right">Foto Content 1</label>
+                        <label for="site-description" class="form-control-label col-sm-3 text-md-right">Foto 1</label>
                         <div class="col-sm-6 col-md-9">
-                          <div class="custom-file">
-                            <input type="file" name="foto_1" class="custom-file-input" id="foto_1">
-                            <label class="custom-file-label">Choose File</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 2MB</div>
+                          <input type="file" class="form-control" name="foto_1" id="foto_1"></input>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-title" class="form-control-label col-sm-3 text-md-right">Sub Judul 2</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="sub_judul_2" class="form-control" id="sub_judul_2">
+                          <input type="text" name="sub_judul_2" class="form-control" id="sub_judul_2" value="{{old('sub_judul_2',$beranda->sub_judul_2)}}">
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-description" class="form-control-label col-sm-3 text-md-right">Content 2</label>
                         <div class="col-sm-6 col-md-9">
-                          <textarea class="form-control" name="content_2" id="content_2"></textarea>
+                          <textarea class="form-control" name="content_2" id="content_2" value="{{old('content_2',$beranda->content_2)}}">{{old('content_2',$beranda->content_2)}}</textarea>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
-                        <label class="form-control-label col-sm-3 text-md-right">Foto Content 2</label>
+                        <label for="site-description" class="form-control-label col-sm-3 text-md-right">Foto 2</label>
                         <div class="col-sm-6 col-md-9">
-                          <div class="custom-file">
-                            <input type="file" name="foto_2" class="custom-file-input" id="foto_2">
-                            <label class="custom-file-label">Choose File</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 2MB</div>
+                          <input type="file" class="form-control" name="foto_2" id="foto_2"></input>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-title" class="form-control-label col-sm-3 text-md-right">Sub Judul 3</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="sub_judul_3" class="form-control" id="sub_judul_3">
+                          <input type="text" name="sub_judul_3" class="form-control" id="sub_judul_3" value="{{old('sub_judul_3',$beranda->sub_judul_3)}}">
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-description" class="form-control-label col-sm-3 text-md-right">Content 3</label>
                         <div class="col-sm-6 col-md-9">
-                          <textarea class="form-control" name="content_3" id="content_3"></textarea>
+                          <textarea class="form-control" name="content_3" id="content_3" value="{{old('content_3',$beranda->content_3)}}">{{old('content_3',$beranda->content_3)}}</textarea>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
-                        <label class="form-control-label col-sm-3 text-md-right">Foto Content 3</label>
+                        <label for="site-description" class="form-control-label col-sm-3 text-md-right">Foto 3</label>
                         <div class="col-sm-6 col-md-9">
-                          <div class="custom-file">
-                            <input type="file" name="foto_3" class="custom-file-input" id="foto_3">
-                            <label class="custom-file-label">Choose File</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 2MB</div>
+                          <input type="file" class="form-control" name="foto_3" id="foto_3"></input>
                         </div>
                       </div>
                     </div>

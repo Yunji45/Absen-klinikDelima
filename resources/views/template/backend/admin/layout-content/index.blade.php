@@ -72,7 +72,7 @@
                   <div class="card-body">
                     <h4>Dokter</h4>
                     <p>Search Engine Optimation</p>
-                    <a href="features-setting-detail.html" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
+                    <a href="{{route('setting-content.dokter')}}" class="card-cta">Change Setting <i class="fas fa-chevron-right"></i></a>
                   </div>
                 </div>
               </div>

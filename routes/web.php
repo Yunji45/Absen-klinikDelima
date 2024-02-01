@@ -324,9 +324,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/setting-content',[LayoutController::class,'index'])->name('setting-content.index');
         Route::get('/setting-content/beranda',[LayoutController::class,'index_beranda'])->name('setting-content.beranda');
         Route::post('/setting-content/beranda-save',[LayoutController::class,'store_beranda'])->name('setting-content.beranda.save');
+        Route::post('/setting-content/beranda-update/{id}',[LayoutController::class,'update_beranda'])->name('setting-content.beranda.update');
 
         Route::get('/setting-content/profil',[LayoutController::class,'index_tentang'])->name('setting-content.tentang');
         Route::post('/setting-content/profil-save',[LayoutController::class,'store_tentang'])->name('setting-content.tentang.save');
+        Route::post('/setting-content/profil-update/{id}',[LayoutController::class,'update_tentang'])->name('setting-content.tentang.update');
 
         Route::get('/setting-content/layanan',[LayoutController::class,'index_layanan'])->name('setting-content.layanan');
         Route::post('/setting-content/layanan-save',[LayoutController::class,'store_layanan'])->name('setting-content.layanan.save');
@@ -345,6 +347,12 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/setting-content/faq-edit/{id}',[LayoutController::class,'edit_faq'])->name('setting-content.faq.edit');
         Route::get('/setting-content/faq-delete/{id}',[LayoutController::class,'destroy_faq'])->name('setting-content.faq.delete');
         Route::post('/setting-content/faq-update/{id}',[LayoutController::class,'update_faq'])->name('setting-content.faq.update');
+
+        Route::get('/setting-content/dokter',[LayoutController::class,'index_dokter'])->name('setting-content.dokter');
+        Route::post('/setting-content/dokter-save',[LayoutController::class,'store_dokter'])->name('setting-content.dokter.save');
+        Route::get('/setting-content/dokter-delete/{id}',[LayoutController::class,'destroy_dokter'])->name('setting-content.dokter.delete');
+        Route::post('/setting-content/dokter-update/{id}',[LayoutController::class,'update_dokter'])->name('setting-content.dokter.update');
+        Route::get('/setting-content/dokter-edit/{id}',[LayoutController::class,'edit_dokter'])->name('setting-content.dokter.edit');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

@@ -15,7 +15,7 @@
 
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <!-- <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
                 <img src="mitradelima/assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
@@ -85,8 +85,26 @@
                 <span>Neurosurgeon</span>
               </div>
             </div>
+          </div> -->
+          @foreach($dokter as $item)
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="100">
+              <div class="member-img">
+                <img src="{{ asset(Storage::url('content-dokter/'.$item->foto)) }}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>{{$item->nama_dokter}}</h4>
+                <span>{{$item->bidang}}</span>
+              </div>
+            </div>
           </div>
-
+          @endforeach
         </div>
 
       </div>

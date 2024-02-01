@@ -32,7 +32,7 @@ class AuthController extends Controller
                 return redirect()->intended('/daftar-hadir')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi Di Menu Home.');
             }
         }else{
-            return redirect('/')->with('error','ERORR !! Mohon Periksa Kembali NIP dan Password Anda.');
+            return redirect('/login')->with('error','ERORR !! Mohon Periksa Kembali NIP dan Password Anda.');
         }
 
         // return redirect('/home');

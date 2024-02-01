@@ -30,7 +30,7 @@ class PenggajianController extends Controller
         // $gaji = gajian::all();
         $gaji = gajian::whereYear('bulan', $tahun)
         ->whereMonth('bulan', $bulan)
-        ->orderBy('created_at', 'desc')
+        ->orderBy('created_at', 'asc')
         ->paginate(10);    
         $total = gajian::whereYear('bulan',$tahun)->whereMonth('bulan',$bulan)->sum('Gaji_akhir');        
         $data = User::all();
@@ -49,7 +49,7 @@ class PenggajianController extends Controller
         $startDate = $bulan . '-01';
         $endDate = $bulan . '-31';
     
-        $gaji = gajian::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->paginate(10);
+        $gaji = gajian::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'asc')->paginate(10);
         $total = gajian::whereBetween('bulan',[$startDate, $endDate])->sum('Gaji_akhir');
         return view('template.backend.admin.gaji.index',compact('title','gaji','data','umr','bulan','type','total'));
 
@@ -68,7 +68,6 @@ class PenggajianController extends Controller
                 ->get();
             return view('backend.admin.gaji.index', compact('gaji', 'title', 'tahun', 'bulanInput','data','umr'));
         } else {
-            // Format bulan tidak sesuai, mungkin Anda ingin menangani ini sesuai kebutuhan Anda.
             return redirect()->back()->with('error', 'Format bulan tidak valid.');
         }
     

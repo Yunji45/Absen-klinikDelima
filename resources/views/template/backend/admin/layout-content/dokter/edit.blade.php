@@ -55,16 +55,16 @@ h4 {
             <div class="section-header-back">
               <a href="features-settings.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>Dokter Settings</h1>
+            <h1>Edit Dokter Settings</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
               <div class="breadcrumb-item active"><a href="#">Settings</a></div>
-              <div class="breadcrumb-item">Dokter Settings</div>
+              <div class="breadcrumb-item">Edit Dokter Settings</div>
             </div>
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">All About Dokter Settings</h2>
+            <h2 class="section-title">All About Edit Dokter Settings</h2>
             <p class="section-lead">
               You can adjust all general settings here
             </p>
@@ -89,24 +89,24 @@ h4 {
                 </div>
               </div>
               <div class="col-md-8">
-                <form action="{{route('setting-content.dokter.save')}}" id="setting-form" method="POST" enctype="multipart/form-data">
+                <form action="{{route('setting-content.dokter.update',$dokter->id)}}" id="setting-form" method="POST" enctype="multipart/form-data">
                   @csrf
                   <div class="card" id="settings-card">
                     <div class="card-header">
-                      <h4>Dokter Settings</h4>
+                      <h4>Edit Dokter Settings</h4>
                     </div>
                     <div class="card-body">
-                      <p class="text-muted">Dokter settings such as, site title, site description, address and so on.</p>
+                      <p class="text-muted">Edit Dokter settings such as, site title, site description, address and so on.</p>
                       <div class="form-group row align-items-center">
                         <label for="site-description" class="form-control-label col-sm-3 text-md-right">Nama Dokter</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" class="form-control" name="nama_dokter" id="nama_dokter"></input>
+                          <input type="text" class="form-control" name="nama_dokter" id="nama_dokter" value="{{old('nama_dokter',$dokter->nama_dokter)}}"></input>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-description" class="form-control-label col-sm-3 text-md-right">Bidang Dokter</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" class="form-control" name="bidang" id="bidang"></input>
+                          <input type="text" class="form-control" name="bidang" id="bidang" value="{{old('bidang',$dokter->bidang)}}"></input>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
@@ -123,28 +123,6 @@ h4 {
                   </div>
                 </form>
               </div>
-            </div>
-            <div class="row">
-                @foreach($dokter as $item)
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="{{ asset(Storage::url('content-dokter/'.$item->foto)) }}" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>{{$item->nama_dokter}}</h4>
-                                <p class="text-muted">{{$item->bidang}}</p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <a href="{{route('setting-content.dokter.edit',$item->id)}}" class="btn btn-success mt-3 btn-rounded waves-effect w-md waves-light">Edit</a>
-                            <a href="{{route('setting-content.dokter.delete',$item->id)}}" class="btn btn-danger mt-3 btn-rounded waves-effect w-md waves-light">Hapus</a>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
             </div>
   		    </div>
       	</section>

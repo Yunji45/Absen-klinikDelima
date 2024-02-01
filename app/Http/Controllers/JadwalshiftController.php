@@ -24,10 +24,10 @@ class JadwalshiftController extends Controller
         // $data = jadwal::all();
         $type = 'jadwal';
         $user = User::all();
-        // $bulan = date('m');
-        // $tahun = date('Y');
-        $bulan = date('01');
-        $tahun = date('2024');
+        $bulan = date('m');
+        $tahun = date('Y');
+        // $bulan = date('01');
+        // $tahun = date('2024');
     
         // Filter jadwal berdasarkan bulan dan tahun pada atribut 'masa_aktif'
         $data = jadwalterbaru::whereYear('masa_aktif', $tahun)

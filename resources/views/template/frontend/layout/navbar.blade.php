@@ -28,7 +28,7 @@
           <li><a class="nav-link scrollto" href="{{route('frontend.layanan')}}">Layanan</a></li>
           <li><a class="nav-link scrollto" href="{{route('frontend.divisi')}}">Divisi</a></li>
           <li><a class="nav-link scrollto" href="{{route('frontend.dokter')}}">Dokter</a></li>
-          <li><a class="nav-link scrollto" href="{{route('karir')}}">Lowongan Pekerjaan</a></li>
+          <li><a class="nav-link scrollto" href="{{route('karir')}}">Loker</a></li>
           <!-- <li><a class="nav-link scrollto" href="#contact">Kontak</a></li> -->
           <li class="dropdown"><a href="#"><span>Lain - Lain</span> <i class="bi bi-chevron-down"></i></a>
             <ul>

@@ -9,6 +9,7 @@ use App\Models\Tentang;
 use App\Models\Layanan;
 use App\Models\Divisi;
 use App\Models\FaqKontak;
+use App\Models\Dokter;
 
 class ContentController extends Controller
 {
@@ -20,7 +21,7 @@ class ContentController extends Controller
     }
     public function tentang()
     {
-        $tentang = Tentang::find(2);
+        $tentang = Tentang::find(1);
         return view ('template.frontend.content.tentang',compact('tentang'));
     }
 
@@ -38,7 +39,8 @@ class ContentController extends Controller
 
     public function dokter()
     {
-        return view ('template.frontend.content.dokter');
+        $dokter = Dokter::all();
+        return view ('template.frontend.content.dokter',compact('dokter'));
     }
 
     public function kontak()

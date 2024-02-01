@@ -9,6 +9,7 @@ use App\Models\Tentang;
 use App\Models\Layanan;
 use App\Models\Divisi;
 use App\Models\FaqKontak;
+use App\Models\Dokter;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
@@ -27,7 +28,8 @@ class LayoutController extends Controller
     {
         $title = 'Setting Content Beranda';
         $type = 'content';
-        return view ('template.backend.admin.layout-content.beranda.index',compact('title','type'));
+        $beranda = Beranda::find(1);
+        return view ('template.backend.admin.layout-content.beranda.index',compact('title','type','beranda'));
     }
 
     public function store_beranda(Request $request)
@@ -84,66 +86,58 @@ class LayoutController extends Controller
         }
     }
 
-    public function update_beranda(Request $request,$id)
+    public function update_beranda(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'foto_1' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
-            'foto_2' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
-            'foto_3' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
-        ],[
-            'foto_1.required' => 'Foto Wajib Di isi.',
-            'foto_2.required' => 'Foto Wajib Di isi.',
-            'foto_3.required' => 'Foto Wajib Di isi.',
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->with('errorForm', $validator->errors()->getMessages())
-                ->withInput();
-        }
-
         try {
-            $imageName = time().'.'.$request->file('foto_1')->extension();
-            Storage::putFileAs('public/content-beranda/foto-1', $request->file('foto_1'), $imageName);
-        
-            $CvName = time().'.'.$request->file('foto_2')->extension();
-            Storage::putFileAs('public/content-beranda/foto-2', $request->file('foto_2'), $CvName);
-        
-            // Logika penyimpanan foto_3 jika diperlukan
-            if ($request->hasFile('foto_3')) {
-                $filePendukungName = time().'.'.$request->file('foto_3')->extension();
-                Storage::putFileAs('public/content-beranda/foto-3', $request->file('foto_3'), $filePendukungName);
+            $beranda = Beranda::findOrFail($id);
+
+            // Update sub judul dan konten
+            $beranda->sub_judul_1 = $request->sub_judul_1;
+            $beranda->sub_judul_2 = $request->sub_judul_2;
+            $beranda->sub_judul_3 = $request->sub_judul_3;
+            $beranda->content_1 = $request->content_1;
+            $beranda->content_2 = $request->content_2;
+            $beranda->content_3 = $request->content_3;
+
+            // Update foto 1 jika ada perubahan
+            if ($request->hasFile('foto_1')) {
+                $imageName = time() . '.' . $request->file('foto_1')->extension();
+                Storage::putFileAs('public/content-beranda/foto-1', $request->file('foto_1'), $imageName);
+                $beranda->foto_1 = $imageName;
             }
+
+            // Update foto 2 jika ada perubahan
+            if ($request->hasFile('foto_2')) {
+                $cvName = time() . '.' . $request->file('foto_2')->extension();
+                Storage::putFileAs('public/content-beranda/foto-2', $request->file('foto_2'), $cvName);
+                $beranda->foto_2 = $cvName;
+            }
+
+            // Update foto 3 jika ada perubahan
+            if ($request->hasFile('foto_3')) {
+                $filePendukungName = time() . '.' . $request->file('foto_3')->extension();
+                Storage::putFileAs('public/content-beranda/foto-3', $request->file('foto_3'), $filePendukungName);
+                $beranda->foto_3 = $filePendukungName;
+            }
+
+            // Simpan perubahan
+            $beranda->save();
+
+            return redirect()->back()->with('success', 'Data Content Berhasil Diupdate.');
         } catch (\Exception $e) {
-            \Log::error('Kesalahan unggah file: ' . $e->getMessage());
-            return redirect()->back()
-                ->with('errorForm', ['file' => 'Terjadi kesalahan saat mengunggah file'])
-                ->withInput();
-        }
-        $beranda = Beranda::find(3);
-        $beranda ->sub_judul_1 = $request->sub_judul_1;
-        $beranda ->sub_judul_2 = $request->sub_judul_2;
-        $beranda ->sub_judul_3 = $request->sub_judul_3;
-        $beranda ->content_1 = $request->content_1;
-        $beranda ->content_2 = $request->content_2;
-        $beranda ->content_3 = $request->content_3;
-        $beranda ->foto_1 = $imageName;
-        $beranda ->foto_2 = $CvName;
-        $beranda ->foto_3 = $filePendukungName;
-        // return $beranda;
-        $beranda ->save();
-        if($beranda){
-            return redirect()->back()->with('success','Data Content Berhasil Disimpan.');
-        }else{
-            return redirect()->back()->with('error','Data Content Gagal Disimpan.');
+            \Log::error('Kesalahan saat mengupdate data: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate data.');
         }
     }
+
 
     //tentang
     public function index_tentang()
     {
         $title = 'Setting Content Profil';
         $type = 'content';
-        return view ('template.backend.admin.layout-content.tentang.index',compact('title','type'));
+        $tentang = Tentang::find(1);
+        return view ('template.backend.admin.layout-content.tentang.index',compact('title','type','tentang'));
     }
 
     public function store_tentang(Request $request)
@@ -179,6 +173,35 @@ class LayoutController extends Controller
         return redirect()->back()->with('success','Data Profil Berhasil Disimpan.');
         
     }
+    public function update_tentang(Request $request, $id)
+    {
+
+        try {
+            $tentang = Tentang::findOrFail($id);
+
+            // Update sub judul dan konten
+            $tentang->sub_judul_1 = $request->sub_judul_1;
+            $tentang->sub_judul_2 = $request->sub_judul_2;
+            $tentang->content_1 = $request->content_1;
+            $tentang->content_2 = $request->content_2;
+
+            // Update foto jika ada perubahan
+            if ($request->hasFile('foto_1')) {
+                $imageName = time() . '.' . $request->file('foto_1')->extension();
+                Storage::putFileAs('public/content-tentang', $request->file('foto_1'), $imageName);
+                $tentang->foto_1 = $imageName;
+            }
+
+            // Simpan perubahan
+            $tentang->save();
+
+            return redirect()->back()->with('success', 'Data Profil Berhasil Diupdate.');
+        } catch (\Exception $e) {
+            \Log::error('Kesalahan saat mengupdate data: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupdate data.');
+        }
+    }
+
 
     //layanan
     public function index_layanan()
@@ -401,4 +424,107 @@ class LayoutController extends Controller
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
 
+    //dokter
+    public function index_dokter()
+    {
+        $title = 'Setting Content Dokter';
+        $type = 'content';
+        $dokter = Dokter::all();
+        return view ('template.backend.admin.layout-content.dokter.index',compact('title','type','dokter'));
+    }
+
+    public function edit_dokter($id)
+    {
+        $title = 'Setting Content Dokter';
+        $type = 'content';
+        $dokter = Dokter::find($id);
+        return view ('template.backend.admin.layout-content.dokter.edit',compact('title','type','dokter'));
+
+    }
+
+    public function store_dokter(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'nama_dokter' => 'required',
+            'bidang' => 'required',
+            'foto' => 'required|file|mimes:png,jpg,jpeg,svg|max:2048',
+        ],[
+            'nama_dokter.required' => 'nama dokter wajib di isi',
+            'bidang.required' => 'bidang wajib diisi',
+            'foto.reuired' => 'foto wajib ada',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+        try {
+            $imageName = time().'.'.$request->file('foto')->extension();
+            Storage::putFileAs('public/content-dokter', $request->file('foto'), $imageName);
+        
+        } catch (\Exception $e) {
+            \Log::error('Kesalahan unggah file: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('errorForm', ['file' => 'Terjadi kesalahan saat mengunggah file'])
+                ->withInput();
+        }
+        $dokter = new Dokter;
+        $dokter ->nama_dokter = $request->nama_dokter;
+        $dokter ->bidang = $request->bidang;
+        $dokter ->foto = $imageName;
+        $dokter -> save();
+        return redirect()->back()->with('success','Data Dokter Berhasil Disimpan.');
+    }
+
+    public function update_dokter(Request $request, $id)
+    {
+
+        $dokter = Dokter::find($id);
+
+        if (!$dokter) {
+            return redirect()->back()->with('error', 'Dokter tidak ditemukan.');
+        }
+
+        // Update nama_dokter dan bidang
+        $dokter->nama_dokter = $request->nama_dokter;
+        $dokter->bidang = $request->bidang;
+
+        // Update foto jika ada file yang diunggah
+        if ($request->hasFile('foto')) {
+            try {
+                $imageName = time() . '.' . $request->file('foto')->extension();
+                Storage::putFileAs('public/content-dokter', $request->file('foto'), $imageName);
+                $dokter->foto = $imageName;
+            } catch (\Exception $e) {
+                \Log::error('Kesalahan unggah file: ' . $e->getMessage());
+                return redirect()->back()
+                    ->with('errorForm', ['file' => 'Terjadi kesalahan saat mengunggah file'])
+                    ->withInput();
+            }
+        }
+
+        $dokter->save();
+
+        return redirect()->route('setting-content.dokter')->with('success', 'Data Dokter Berhasil Diperbarui.');
+    }
+
+    public function destroy_dokter($id)
+    {
+        $dokter = Dokter::find($id);
+
+        if (!$dokter) {
+            return redirect()->back()->with('error', 'Dokter tidak ditemukan.');
+        }
+
+        // Hapus foto dari penyimpanan jika ada
+        if ($dokter->foto) {
+            Storage::delete('public/content-dokter/' . $dokter->foto);
+        }
+
+        // Hapus dokter dari database
+        $dokter->delete();
+
+        return redirect()->back()->with('success', 'Data Dokter Berhasil Dihapus.');
+    }
 }
