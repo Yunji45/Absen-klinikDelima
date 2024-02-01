@@ -497,8 +497,10 @@ class PenggajianController extends Controller
         $data = gajian::whereYear('bulan', $tahun)
                         ->whereMonth('bulan', $bulan)
                         ->get();
+        $total = gajian::whereYear('bulan',$tahun)->whereMonth('bulan',$bulan)->sum('Gaji_akhir');        
+
         // $data = jadwal::all();
-        $pdf = PDF::loadview('template.backend.admin.gaji.download-gaji',['data'=>$data]);
+        $pdf = PDF::loadview('template.backend.admin.gaji.download-gaji',['data'=>$data, 'total' => $total]);
         return $pdf->download('download-gaji');
     }
 

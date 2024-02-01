@@ -16,7 +16,7 @@
             }
         </style>
         <center>
-            <h5>Data Index Insentif Pegawai</h4>
+            <h5>Data Gaji Pegawai</h4>
             <h6>
                 <a target="_blank" href="https://klinikmitradelima.com/">www.klinimitrakdelima.com</a>
             </h5>
@@ -31,7 +31,7 @@
                           <th scope="col" class="text-center">Date</th>
                 </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
             @php $no =1; @endphp @foreach ($data as $item)
                                 <tr>
                                 <td class="text-center">{{$no++}}.</td>
@@ -40,7 +40,27 @@
                                 <td class="text-center">{{$item->bulan}}</td>
                                 </tr>
                                 @endforeach
-            </tbody>
+            </tbody> -->
+            <tbody>
+    @php $no = 1; $totalGaji = 0; @endphp
+    @foreach ($data as $item)
+        <tr>
+            <td class="text-center">{{ $no++ }}.</td>
+            <td class="text-center">{{ $item->user->name }}</td>
+            <td class="text-center">{{ 'Rp.' . number_format(floatval($item->Gaji_akhir), 0, ',', '.') }}</td>
+            <td class="text-center">{{ $item->bulan }}</td>
+        </tr>
+        @php $totalGaji += floatval($item->Gaji_akhir); @endphp
+    @endforeach
+
+    <!-- Tampilkan total gaji di baris terakhir -->
+    <tr>
+        <td colspan="2" class="text-right"><strong>Total Gaji:</strong></td>
+        <td class="text-center"><strong>{{ 'Rp.' . number_format($totalGaji, 0, ',', '.') }}</strong></td>
+        <td></td>
+    </tr>
+</tbody>
+
         </table>
 
     </body>
