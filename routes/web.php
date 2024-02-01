@@ -328,7 +328,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
 
         Route::get('/setting-content/profil',[LayoutController::class,'index_tentang'])->name('setting-content.tentang');
         Route::post('/setting-content/profil-save',[LayoutController::class,'store_tentang'])->name('setting-content.tentang.save');
-        Route::post('/setting-content/profil-update/{id}',[LayoutController::class,'update_tentang'])->name('setting-content.tentang.update');
+        Route::post('/setting-content/profil-update/{id}',[LayoutController::class,'update_tentang'])->name('setting-content.profil.update');
 
         Route::get('/setting-content/layanan',[LayoutController::class,'index_layanan'])->name('setting-content.layanan');
         Route::post('/setting-content/layanan-save',[LayoutController::class,'store_layanan'])->name('setting-content.layanan.save');

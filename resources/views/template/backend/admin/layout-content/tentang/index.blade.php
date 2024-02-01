@@ -39,7 +39,7 @@
                 </div>
               </div>
               <div class="col-md-8">
-                <form action="{{route('setting-content.tentang.save')}}" id="setting-form" method="POST" enctype="multipart/form-data">
+                <form action="{{route('setting-content.profil.update',$tentang->id)}}" id="setting-form" method="POST" enctype="multipart/form-data">
                   @csrf
                   <div class="card" id="settings-card">
                     <div class="card-header">
@@ -50,35 +50,31 @@
                       <div class="form-group row align-items-center">
                         <label for="site-title" class="form-control-label col-sm-3 text-md-right">Sub Judul 1</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="sub_judul_1" class="form-control" id="sub_judul_1">
+                          <input type="text" name="sub_judul_1" class="form-control" id="sub_judul_1" value="{{old('sub_judul_1',$tentang->sub_judul_1)}}">
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-description" class="form-control-label col-sm-3 text-md-right">Content 1</label>
                         <div class="col-sm-6 col-md-9">
-                          <textarea class="form-control" name="content_1" id="content_1"></textarea>
+                          <textarea class="form-control" name="content_1" id="content_1" value="{{old('content_1',$tentang->content_1)}}">{{old('content_1',$tentang->content_1)}}</textarea>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-title" class="form-control-label col-sm-3 text-md-right">Sub Judul 2</label>
                         <div class="col-sm-6 col-md-9">
-                          <input type="text" name="sub_judul_2" class="form-control" id="sub_judul_2">
+                          <input type="text" name="sub_judul_2" class="form-control" id="sub_judul_2" value="{{old('sub_judul_2',$tentang->sub_judul_2)}}">
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
                         <label for="site-description" class="form-control-label col-sm-3 text-md-right">Content 2</label>
                         <div class="col-sm-6 col-md-9">
-                          <textarea class="form-control" name="content_2" id="content_2"></textarea>
+                          <textarea class="form-control" name="content_2" id="content_2" value="{{old('content_2',$tentang->content_2)}}">{{old('content_2',$tentang->content_2)}}</textarea>
                         </div>
                       </div>
                       <div class="form-group row align-items-center">
-                        <label class="form-control-label col-sm-3 text-md-right">Foto Content</label>
+                        <label for="site-description" class="form-control-label col-sm-3 text-md-right">Foto Content</label>
                         <div class="col-sm-6 col-md-9">
-                          <div class="custom-file">
-                            <input type="file" name="foto_1" class="custom-file-input" id="foto_1">
-                            <label class="custom-file-label">Choose File</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 2MB</div>
+                          <input type="file" class="form-control" name="foto_1" id="foto_1"></input>
                         </div>
                       </div>
                     </div>
