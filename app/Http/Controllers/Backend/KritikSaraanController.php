@@ -21,7 +21,13 @@ class KritikSaraanController extends Controller
     {
         $title = 'Kritik dan Saran';
         $type = 'content';
-        $kritik = KritikSaran::all();
+        // $bulan = date('m');
+        // $tahun = date('Y');
+        // $kritik = KritikSaran::whereYear('created_at', $tahun)
+        // ->whereMonth('created_at', $bulan)
+        // ->orderBy('created_at', 'asc')
+        // ->get(); 
+        $kritik = KritikSaran::orderBy('created_at','desc')->get();
         return view ('template.backend.admin.kritik-saran.index',compact('title','type','kritik'));
     }
 
@@ -66,7 +72,7 @@ class KritikSaraanController extends Controller
         $kritik ->kategori = $request->kategori;
         $kritik ->deskripsi = $request->deskripsi;
         $kritik ->save();
-        return redirect()->route('frontend')->with('success','Data Kritik Berhasil Terkirim');
+        return redirect()->back()->with('success','Data Kritik Berhasil Terkirim');
     }
 
     /**
@@ -111,6 +117,25 @@ class KritikSaraanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kritik = KritikSaran::find($id);
+
+        if (!$kritik) {
+            return redirect()->back()->with('error', 'Data Tidak Pada Bulan Tersebut Ada.');
+        }
+
+        $kritik->delete();
+        return redirect()->back()->with('success', 'Data Berhasil Dihapus.');
+    }
+
+    public function SearchKritik(Request $request)
+    {
+        $title = 'Kritik dan Saran';
+        $type = 'content';
+        $bulan = $request->input('bulan');
+        $startDate = $bulan . '-01';
+        $endDate = $bulan . '-31';
+    
+        $kritik = KritikSaran::whereBetween('created', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
+        return view('template.backend.admin.kritik-saran.index',compact('title','type','kritik','bulan'));
     }
 }

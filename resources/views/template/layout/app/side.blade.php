@@ -163,8 +163,8 @@
                     <li class="{{ Route::currentRouteName() === 'setting-content.index' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('setting-content.index')}}">Setting Content</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="">Kritik & Saran</a>
+                    <li class="{{ Route::currentRouteName() === 'kritik-saran' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('kritik-saran')}}">Kritik & Saran</a>
                     </li>
                    
                 </ul>

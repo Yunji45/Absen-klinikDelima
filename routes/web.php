@@ -360,6 +360,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/setting-content/dokter-update/{id}',[LayoutController::class,'update_dokter'])->name('setting-content.dokter.update');
         Route::get('/setting-content/dokter-edit/{id}',[LayoutController::class,'edit_dokter'])->name('setting-content.dokter.edit');
 
+        //kritik dan saran
+        Route::get('/kritik-saran',[KritikSaraanController::class,'index'])->name('kritik-saran');
+        Route::get('/kritik-saran/{id}',[KritikSaraanController::class,'destroy'])->name('kritik-saran.delete');
+        Route::get('/kritik-saran/search',[KritikSaraanController::class,'SearchKritik'])->name('kritik-saran.search');
+
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');
