@@ -1605,7 +1605,7 @@ class KpiController extends Controller
                 if ($targetkpi) {
                     if ($targetkpi->bulan) {
                         // $data = explode('-', $targetkpi->bulan);
-                        $data = explode('-', '2023-12-01');
+                        $data = explode('-', '2024-01-01');
                         $bulan = $data[1];
                         $tahun = $data[0];
 
