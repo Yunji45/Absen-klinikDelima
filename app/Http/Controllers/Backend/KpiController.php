@@ -1665,7 +1665,7 @@ class KpiController extends Controller
             return redirect()->back()->with('error','Data KPI Tidak Ditemukan.');
         }
 
-        // return $psTotal;
-        return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
+        return $ach;
+        // return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
     }
 }
