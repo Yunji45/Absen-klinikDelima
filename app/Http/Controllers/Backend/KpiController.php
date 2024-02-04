@@ -258,7 +258,7 @@ class KpiController extends Controller
                     ($targetData->c_daftar ?? 0) + ($targetData->c_poli ?? 0) + ($targetData->c_farmasi ?? 0) +
                     ($targetData->c_kasir ?? 0) + ($targetData->c_care ?? 0) + ($targetData->c_bpjs ?? 0) +
                     ($targetData->c_khitan ?? 0) + ($targetData->c_rawat ?? 0) + ($targetData->c_salin ?? 0) +
-                    ($targetData->c_lab ?? 0) + ($targetData->c_umum ?? 0) + ($targetData->c_visit ?? 0) + ($targetData->usg ?? 0)
+                    ($targetData->c_lab ?? 0) + ($targetData->c_umum ?? 0) + ($targetData->c_visit ?? 0) + ($targetData->usg ?? 0)+
                     ($kpi->layanan ?? 0) + ($kpi->akuntan ?? 0) + ($kpi->kompeten ?? 0) +
                     ($kpi->harmonis ?? 0) + ($kpi->loyal ?? 0) + ($kpi->adaptif ?? 0) +
                     ($kpi->kolaboratif ?? 0) + ($kpi->absen ?? 0) ;
