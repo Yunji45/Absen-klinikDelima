@@ -134,13 +134,13 @@ class KpiController extends Controller
         $startDate = $request->bulantarget;
         $endDate = $request->bulantarget;
         // $tahun = date('Y');
-        $tahun = '2023';
+        $tahun = '2024';
         $tanggalawal = $tahun . '-' . $startDate . '-01';
         $tanggalakhir = $tahun . '-' . $endDate . '-31';
         $targetawal = $tahun . '-' . $target_awal . '-01';
         $targetakhir = $tahun . '-' . $target_akhir . '-31';
 
-        $data = explode('-', '2023-12-15'); // Memisahkan string bulan menjadi array
+        $data = explode('-', '2024-01-15'); // Memisahkan string bulan menjadi array
         $bulan = $data[1]; // Bulan
         $tahun = $data[0]; // Tahun        
 
@@ -162,13 +162,13 @@ class KpiController extends Controller
                 ->select('user_id', 'c_daftar', 'c_poli', 'c_farmasi', 'c_bpjs', 'c_kasir', 'c_care', 'c_khitan', 'c_rawat', 'c_salin', 'c_lab', 'c_umum', 'c_visit','usg')
                 ->first();
     
-            // $kpi = kpi::where('user_id', $user)
-            //     ->where('bulan', '>=', $tanggalawal)
-            //     ->where('bulan', '<=', $tanggalakhir)
-            //     ->select('div', 'jabatan', 'nama_atasan', 'div_atasan', 'jabatan_atasan', 'daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'persalinan', 'lab', 'umum', 'visit', 'layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif', 'absen')
-            //     ->first();
+            $kpi = kpi::where('user_id', $user)
+                ->where('bulan', '>=', '2023-12-01')
+                ->where('bulan', '<=', '2023-12-31')
+                ->select( 'user_id','layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif')
+                ->first();
     
-            if ($targetData) {
+            if ($targetData && $kpi) {
                 $totalMasuk = Presensi::where('user_id', $user)
                 ->where('keterangan', 'Masuk')
                 ->whereMonth('tanggal', $bulan)
@@ -930,8 +930,10 @@ class KpiController extends Controller
         $data = [];
 
         $targetData = AchKpi::where(function ($query) use ($target_awal, $target_akhir) {
-            $query->where('start_date', '<=', $target_akhir)
-                  ->where('end_date', '>=', $target_awal);
+            // $query->where('start_date', '<=', $target_akhir)
+            //       ->where('end_date', '>=', $target_awal);
+            $query->where('start_date', '<=', '2024-01-31')
+            ->where('end_date', '>=', '2024-01-01');
         })
             ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
             ->first();
