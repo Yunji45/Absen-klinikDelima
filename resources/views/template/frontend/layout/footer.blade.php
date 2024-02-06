@@ -40,17 +40,20 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Rawat Inap</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Rawat Jalan</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Khitanan</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">ANC</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Persalinan</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">KIA & KB</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Laboratorium</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Imunisasi</a></li>
             </ul>
           </div>
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <p>Dapatkan berita terbaru langsung di kotak masuk Anda. Jangan lewatkan kesempatan untuk mendapatkan informasi terkini tentang penawaran, acara, dan berita terkait kesehatan.</p>
             <form action="" method="post">
               <input type="email" name="email"><input type="submit" value="Subscribe">
             </form>

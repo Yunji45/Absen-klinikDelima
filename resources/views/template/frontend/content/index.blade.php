@@ -67,32 +67,36 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="fas fa-heartbeat"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <h4 class="title"><a href="">Pendaftaran Online</a></h4>
+              <p class="description">WhatsApp : +62 822 4008 5447</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
               <div class="icon"><i class="fas fa-pills"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+              <h4 class="title"><a href="">Pelayanan Pasien</a></h4>
+              <p class="description">Umum</p>
+              <p class="description">Bpjs Kesehatan</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
               <div class="icon"><i class="fas fa-thermometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+              <h4 class="title"><a href="">Layanan Konsultasi</a></h4>
+              <p class="description">WhatsApp : +62 822 4008 5447</p>
+              <p class="description">Layanan Gratis 24jam</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
               <div class="icon"><i class="fas fa-dna"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+              <h4 class="title"><a href="">Layanan Kesehatan</a></h4>
+              <p class="description">Pemerikasaan kesehatan rutin</p>
+              <p class="description">Konsultasi medis</p>
+              <p class="description">Tindakan medis</p>
             </div>
           </div>
 
@@ -127,9 +131,9 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fas fa-user-md"></i>
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="2" data-purecounter-duration="1" class="purecounter"></span>
 
-              <p><strong>Doctors</strong> consequuntur quae qui deca rode</p>
+              <p><strong>Doctors</strong></p>
               <a href="#">Find out more &raquo;</a>
             </div>
           </div>
@@ -137,8 +141,8 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="far fa-hospital"></i>
-              <span data-purecounter-start="0" data-purecounter-end="26" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Departments</strong> adipisci atque cum quia aut numquam delectus</p>
+              <span data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Divisi</strong></p>
               <a href="#">Find out more &raquo;</a>
             </div>
           </div>
@@ -146,8 +150,8 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fas fa-flask"></i>
-              <span data-purecounter-start="0" data-purecounter-end="14" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Research Lab</strong> aut commodi quaerat. Aliquam ratione</p>
+              <span data-purecounter-start="0" data-purecounter-end="1" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Laboratorium</strong></p>
               <a href="#">Find out more &raquo;</a>
             </div>
           </div>
@@ -155,8 +159,8 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
             <div class="count-box">
               <i class="fas fa-award"></i>
-              <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Awards</strong> rerum asperiores dolor molestiae doloribu</p>
+              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Awards</strong></p>
               <a href="#">Find out more &raquo;</a>
             </div>
           </div>
@@ -174,23 +178,23 @@
           <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right">
             <div class="icon-box mt-5 mt-lg-0">
               <i class="bx bx-receipt"></i>
-              <h4>Est labore ad</h4>
-              <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+              <h4>Konsultasi Medis</h4>
+              <p>Meliputi pemeriksaan awal dan diskusi dengan dokter untuk mengetahui masalah kesehatan Anda.</p>
             </div>
             <div class="icon-box mt-5">
               <i class="bx bx-cube-alt"></i>
-              <h4>Harum esse qui</h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+              <h4>Pemeriksaan Fisik</h4>
+              <p>Dokter akan melakukan pemeriksaan fisik untuk mengevaluasi kondisi Anda, seperti mengukur tekanan darah, mendengarkan detak jantung, dan memeriksa berbagai bagian tubuh.</p>
             </div>
             <div class="icon-box mt-5">
               <i class="bx bx-images"></i>
-              <h4>Aut occaecati</h4>
-              <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+              <h4>Perawatan Pencegahan</h4>
+              <p>Meliputi vaksinasi, skrining kesehatan, dan konseling gaya hidup sehat untuk mencegah penyakit.</p>
             </div>
             <div class="icon-box mt-5">
               <i class="bx bx-shield"></i>
-              <h4>Beatae veritatis</h4>
-              <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+              <h4>Pelayanan Kesehatan Anak</h4>
+              <p>Klinik juga dapat menyediakan pelayanan kesehatan khusus untuk anak-anak, seperti imunisasi, perawatan penyakit anak-anak, dan konsultasi tumbuh kembang.</p>
             </div>
           </div>
           <div class="image col-lg-6 order-1 order-lg-2" style='background-image: url("mitradelima/assets/img/features.jpg");' data-aos="zoom-in"></div>
@@ -324,7 +328,20 @@
         </div>
 
       </div>
-    </section><!-- End Gallery Section -->
+    </section>
+    <!-- End Gallery Section -->
+
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Partner Klinik Mitra Delima</h2>
+          <p>Nikmati layanan kesehatan berkualitas tinggi di Partner Klinik Mitra Delima. Kami siap memberikan perawatan terbaik dengan tenaga medis terampil dan fasilitas modern. Bergabunglah dengan kami untuk pengalaman perawatan kesehatan yang memuaskan.</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/BPJS_Kesehatan_logo.svg" class="img-fluid rounded" width="400" alt="bri">
+        </div>
+      </div>
+    </section>
 
     <!-- ======= Pricing Section ======= -->
     <!-- <section id="pricing" class="pricing">

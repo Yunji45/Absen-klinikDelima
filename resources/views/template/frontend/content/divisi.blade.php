@@ -9,8 +9,8 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Divisi</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <h2>Divisi</h2>
+        <p>Di Klinik Kami, kami memiliki sejumlah divisi yang berkomitmen untuk memberikan layanan kesehatan yang terbaik. Mulai dari pelayanan medis umum hingga spesialisasi kesehatan yang lebih khusus, setiap divisi kami dipimpin oleh tim profesional yang berpengalaman. Kami bertekad untuk memenuhi kebutuhan kesehatan Anda dengan perawatan yang berkualitas dan terpercaya. Temukan solusi terbaik untuk kesehatan Anda di Klinik Kami.</p>
         </div>
 
         <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
