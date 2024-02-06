@@ -12,7 +12,8 @@ class BiznetController extends Controller
 {
     public function index()
     {
-        return view('template.frontend.face');
+        // return view('template.frontend.face');
+        return view('template.frontend.error-page.500');
     }
 
     public function Face(Request $request)
