@@ -141,8 +141,8 @@ class UserController extends Controller
         //     }
         // }
         // dd($tukarjaga);
-        // return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
-        return view('template.backend.admin.profil-user.index',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur','title','type'));
+        return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
+        // return view('template.backend.admin.profil-user.index',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur','title','type'));
 
     }
 

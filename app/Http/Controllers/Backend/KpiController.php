@@ -966,8 +966,8 @@ class KpiController extends Controller
                         'r_lab' => $realisasi->r_lab,
                         'r_umum' => $realisasi->r_umum,
                         'r_visit' => $realisasi->r_visit,
-                        // 'created_at' => now(),
-                        // 'update_at' => now(),
+                        'created_at' => now(),
+                        'update_at' => now(),
                     ];
                     $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit'];
 
@@ -1565,8 +1565,8 @@ class KpiController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $target_awal = $request->bulan;
-        // $tahun = date('Y');
-        $tahun = '2023';
+        $tahun = date('Y');
+        // $tahun = '2023';
         $awal = $tahun . '-' . $target_awal . '-01';
         $akhir = $tahun . '-' . $target_awal . '-31';
         $deletedRows = InsentifKpi::whereBetween('bulan', [$awal, $akhir])->delete();
