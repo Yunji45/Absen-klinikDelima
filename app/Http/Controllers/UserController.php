@@ -85,6 +85,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $title = 'Profil User';
+        $type = 'users';
         $bulanIni = date('m');
         $tahunIni = date('Y');
         $presents = presensi::whereUserId($user->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->orderBy('tanggal','desc')->get();
@@ -139,7 +141,8 @@ class UserController extends Controller
         //     }
         // }
         // dd($tukarjaga);
-        return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
+        // return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
+        return view('template.backend.admin.profil-user.index',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur','title','type'));
 
     }
 

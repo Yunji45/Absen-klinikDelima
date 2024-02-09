@@ -681,18 +681,27 @@ class PresensiController extends Controller
         ]);
         // $data['tanggal'] = date('Y-m-d');
         $data['tanggal'] = $request->tanggal;
+        // if ($request->keterangan == 'Masuk' || $request->keterangan == 'Telat') {
+        //     $data['jam_masuk'] = $request->jam_masuk;
+        //     if (strtotime($data['jam_masuk']) >= strtotime(config('absensi.jam_masuk') .' -1 hours') && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_masuk'))) {
+        //         $data['keterangan'] = 'Masuk';
+        //     } else if (strtotime($data['jam_masuk']) > strtotime(config('absensi.jam_masuk')) && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_keluar'))) {
+        //         $data['keterangan'] = 'Telat';
+        //     } else {
+        //         $data['keterangan'] = 'Alpha';
+        //     }
+        // }elseif($request->keterangan == 'Izin'){
+        //     $data['keterangan'] = 'Izin';
+        // }
         if ($request->keterangan == 'Masuk' || $request->keterangan == 'Telat') {
-            $data['jam_masuk'] = $request->jam_masuk;
-            if (strtotime($data['jam_masuk']) >= strtotime(config('absensi.jam_masuk') .' -1 hours') && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_masuk'))) {
-                $data['keterangan'] = 'Masuk';
-            } else if (strtotime($data['jam_masuk']) > strtotime(config('absensi.jam_masuk')) && strtotime($data['jam_masuk']) <= strtotime(config('absensi.jam_keluar'))) {
-                $data['keterangan'] = 'Telat';
-            } else {
-                $data['keterangan'] = 'Alpha';
-            }
-        }elseif($request->keterangan == 'Izin'){
-            $data['keterangan'] = 'Izin';
+            $data['keterangan'] = $request->keterangan;
+            $data['jam_masuk'] = $request->jam_masuk; // Memasukkan jam masuk ke dalam data
+        } elseif ($request->keterangan == 'Izin' || $request->keterangan == 'Cuti') {
+            $data['keterangan'] = $request->keterangan;
+        } else {
+            $data['keterangan'] = 'Alpha'; // Ketika tidak ada keterangan yang cocok
         }
+        
         presensi::create($data);
         return redirect()->back()->with('success','Kehadiran berhasil ditambahkan');
     }
