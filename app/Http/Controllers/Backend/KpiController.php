@@ -813,6 +813,29 @@ class KpiController extends Controller
         return redirect()->back()->with('success','Data Berhasil di Hapus');
     }
 
+    public function deleteAllKpi(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'bulan' => 'required',
+        ], [
+            'bulan.required' => 'Bulan tidak boleh kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $target_awal = $request->bulan;
+        $tahun = date('Y');
+        $awal = $tahun . '-' . $target_awal . '-01';
+        $akhir = $tahun . '-' . $target_awal . '-31';
+        $deletedRows = kpi::whereBetween('bulan', [$awal, $akhir])->delete();
+        if ($deletedRows > 0) {
+            return redirect()->back()->with('success', 'Semua Data Pada Bulan Tersebut berhasil dihapus.');
+        } else {
+            return redirect()->back()->with('error', 'Tidak ada data yang ditemukan untuk dihapus pada bulan tersebut.');
+        }
+    
+    }
+
     // Masuk Zona Realisasi KPI
     public function indexTargetKpi()
     {
@@ -844,7 +867,7 @@ class KpiController extends Controller
         $ach = AchKpi::all();
         $target = targetkpi::whereYear('bulan',$tahun)
                             ->whereMonth('bulan',$bulan)
-                            ->orderBy('created_at','desc')
+                            ->orderBy('created_at','asc')
                             ->get();
         return view ('template.backend.admin.data-kpi.index',compact('title','target','type','ach'));
     }
@@ -1342,6 +1365,29 @@ class KpiController extends Controller
                 return redirect()->back()->with('error', 'Data Target Ditemukan.');
             }
 
+    }
+
+    public function deleteAllRealisasi(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'bulan' => 'required',
+        ], [
+            'bulan.required' => 'Bulan tidak boleh kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $target_awal = $request->bulan;
+        $tahun = date('Y');
+        $awal = $tahun . '-' . $target_awal . '-01';
+        $akhir = $tahun . '-' . $target_awal . '-31';
+        $deletedRows = targetKpi::whereBetween('bulan', [$awal, $akhir])->delete();
+        if ($deletedRows > 0) {
+            return redirect()->back()->with('success', 'Semua Data Pada Bulan Tersebut berhasil dihapus.');
+        } else {
+            return redirect()->back()->with('error', 'Tidak ada data yang ditemukan untuk dihapus pada bulan tersebut.');
+        }
+    
     }
         
     //zona Insentif KPI

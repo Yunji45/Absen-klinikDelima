@@ -227,6 +227,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/Search-kpi',[KpiController::class,'SearchKpi'])->name('search.kpi');
         Route::post('/KPI-multiple',[KpiController::class,'storeKpiMultiple'])->name('kpi.multiple');
         Route::post('/KPI-multiple/update',[UpdatePoinKPIController::class,'updateEvaluasi'])->name('kpi.update.multiple');
+        Route::get('/delete-all/kpi',[KpiController::class,'deleteAllKpi'])->name('kpi.kpi.delete-all');
+
         //Realisasi KPI
         Route::get('/KPI/Data-Kinerja', [KpiController::class,'indexTargetKpi'])->name('kpi.datakinerja');
         Route::get('/coba', [KpiController::class,'insertmultiple'])->name('coba');
@@ -240,6 +242,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
 
         Route::post('/multiple-realisasi/save',[KpiController::class,'storeRealisasiMultiple'])->name('kpi.realisasi.multiple');
         Route::post('/multiple-update/save',[UpdatePoinKPIController::class,'updateRealisasi'])->name('kpi.multiple.update');
+        Route::get('/delete-all/realisasi',[KpiController::class,'deleteAllRealisasi'])->name('kpi.realisasi.delete-all');
+
         //Insentif KPI
         Route::get('/Insentif-KPI',[KpiController::class,'indexInsentifKpi'])->name('insentif.kpi');
         Route::post('/Insentif-KPI/save',[KpiController::class,'storeInsentifKpi'])->name('insentif.kpi.save');
