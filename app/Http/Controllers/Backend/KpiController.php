@@ -1630,7 +1630,7 @@ class KpiController extends Controller
     }
 
     //zona view detail KPI
-    public function indexViewKpis($id)
+    public function indexViewKpi($id)
     {
         $kpi = Kpi::find($id);
         $user = User::find($kpi->user_id);
@@ -1692,10 +1692,15 @@ class KpiController extends Controller
                         }
 
                         $target_id = $targetkpi->target_id;
-                        $ach = AchKpi::where('id', $target_id)
-                            ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
-                                'rawat', 'salin', 'lab', 'umum', 'visit')
-                            ->first();
+                        // $ach = AchKpi::where('id', $target_id)
+                        //     ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
+                        //         'rawat', 'salin', 'lab', 'umum', 'visit')
+                        //     ->first();
+                        $ach = AchKpi::where('id', $targetkpi->target_id)
+                                    ->whereMonth('start_date', $bulan)
+                                    ->whereYear('end_date', $tahun)
+                                    ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
+                                    ->firstOrFail();
 
                         if (!$ach) {
                             return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
@@ -1717,7 +1722,7 @@ class KpiController extends Controller
         return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
     }
 
-    public function indexViewKpi($id)
+    public function indexViewKpis($id)
     {
         $kpi = Kpi::findOrFail($id);
         $user = User::findOrFail($kpi->user_id);
