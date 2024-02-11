@@ -990,7 +990,7 @@ class KpiController extends Controller
                         'r_umum' => $realisasi->r_umum,
                         'r_visit' => $realisasi->r_visit,
                         'created_at' => now(),
-                        'update_at' => now(),
+                        'updated_at' => now(),
                     ];
                     $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit'];
 
