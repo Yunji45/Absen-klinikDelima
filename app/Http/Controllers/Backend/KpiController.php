@@ -1781,8 +1781,9 @@ class KpiController extends Controller
 
         $ach = AchKpi::whereMonth('start_date', $bulan)
             ->whereYear('start_date', $tahun)
+            ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
+                    'rawat', 'salin', 'lab', 'umum', 'visit')
             ->first();
-
         if (!$ach) {
             return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
         }
