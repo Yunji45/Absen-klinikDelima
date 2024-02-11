@@ -57,7 +57,7 @@ class KpiController extends Controller
         $startDate = $bulan . '-01';
         $endDate = $bulan . '-31';
     
-        $kpi = kpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
+        $kpi = kpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'asc')->get();
     
         return view ('template.backend.admin.kpi.index',compact('title','kpi','bulan','type'));
     }
