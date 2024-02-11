@@ -882,7 +882,7 @@ class KpiController extends Controller
         $startDate = $bulan . '-01';
         $endDate = $bulan . '-31';
         $ach = AchKpi::all();
-        $target = targetkpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
+        $target = targetkpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'asc')->get();
         return view ('template.backend.admin.data-kpi.index',compact('title','target','type','ach'));
     }
     public function createTarget()
