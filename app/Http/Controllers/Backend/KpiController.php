@@ -1698,7 +1698,7 @@ class KpiController extends Controller
                         //     ->first();
                         $ach = AchKpi::where('id', $targetkpi->target_id)
                                     ->whereMonth('start_date', $bulan)
-                                    ->whereYear('end_date', $tahun)
+                                    ->whereYear('start_date', $tahun)
                                     ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
                                     ->firstOrFail();
 
