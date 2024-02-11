@@ -47,6 +47,6 @@ class TargetKpi extends Model
     }
     public function ach()
     {
-        return $this->belongsTo(AchKpi::class);
+        return $this->belongsTo(AchKpi::class,'target_id');
     }
 }
