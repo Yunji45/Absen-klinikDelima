@@ -140,7 +140,7 @@ class KpiController extends Controller
         $targetawal = $tahun . '-' . $target_awal . '-01';
         $targetakhir = $tahun . '-' . $target_akhir . '-31';
 
-        $data = explode('-', '2024-01-15'); // Memisahkan string bulan menjadi array
+        $data = explode('-', '2024-01-14'); // Memisahkan string bulan menjadi array
         $bulan = $data[1]; // Bulan
         $tahun = $data[0]; // Tahun        
 
@@ -1630,154 +1630,163 @@ class KpiController extends Controller
     }
 
     //zona view detail KPI
+    // public function indexViewKpi($id)
+    // {
+    //     $kpi = Kpi::find($id);
+    //     $user = User::find($kpi->user_id);
+    //     $type = 'kpi';
+    //     $title = 'View Detail KPI ('.$user->name.')';
+
+    //     $ach = null; 
+    //     $psTotal = 0;
+    //     $totalkehadiran= 0;
+
+    //     if ($kpi) {
+    //         $user = User::find($kpi->user_id);
+
+    //         if ($user) {
+    //             $targetkpi = targetkpi::where('user_id', $user->id)
+    //                 ->select('r_daftar', 'r_poli', 'r_farmasi', 'r_kasir', 'r_care', 'r_bpjs', 'r_khitan',
+    //                     'r_rawat', 'r_salin', 'r_lab', 'r_umum', 'r_visit', 'target_id', 'bulan')
+    //                 ->first();
+
+    //             if ($targetkpi) {
+    //                 if ($targetkpi->bulan) {
+    //                     // $data = explode('-', $targetkpi->bulan);
+    //                     $data = explode('-', '2024-01-01');
+    //                     $bulan = $data[1];
+    //                     $tahun = $data[0];
+
+    //                     $totalMasuk = Presensi::where('user_id', $user->id)
+    //                         ->where('keterangan', 'Masuk')
+    //                         ->whereMonth('tanggal', $bulan)
+    //                         ->whereYear('tanggal', $tahun)
+    //                         ->count();
+
+    //                     $totalTelat = Presensi::where('user_id', $user->id)
+    //                         ->where('keterangan', 'Telat')
+    //                         ->whereMonth('tanggal', $bulan)
+    //                         ->whereYear('tanggal', $tahun)
+    //                         ->count();
+    //                     $lembur = rubahjadwal::where('user_id', $user->id)
+    //                         ->where('permohonan', 'lembur')
+    //                         ->where('status', 'approve')
+    //                         ->whereMonth('tanggal', $bulan)
+    //                         ->whereYear('tanggal', $tahun)
+    //                         ->count();
+
+    //                     $totalkehadiran = $totalMasuk + $totalTelat + $lembur;
+
+    //                     for ($day = 1; $day <= 31; $day++) {
+    //                         $column = 'j' . $day;
+
+    //                         $psCount = jadwalterbaru::where('user_id', $user->id)
+    //                             ->where(function ($query) use ($column) {
+    //                                 $query->whereIn($column, ['PS', 'SM', 'PM', 'LL']);
+    //                             })
+    //                             ->whereMonth('masa_aktif', $bulan)
+    //                             ->whereYear('masa_aktif', $tahun)
+    //                             ->count();
+
+    //                         $psTotal += $psCount;
+    //                     }
+
+    //                     $target_id = $targetkpi->target_id;
+    //                     $ach = AchKpi::whereMonth('start_date',$bulan)
+    //                         ->whereYear('start_date',$tahun)
+    //                         ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
+    //                             'rawat', 'salin', 'lab', 'umum', 'visit')
+    //                         ->first();
+
+    //                     if (!$ach) {
+    //                         return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
+    //                     }
+    //                 } else {
+    //                     return redirect()->back()->with('error','Data Periode KPI Tidak Ditemukan.');
+    //                 }
+    //             } else {
+    //                 return redirect()->back()->with('error','Data Realisasi KPI Tidak Ditemukan.');
+    //             }
+    //         } else {
+    //             return redirect()->back()->with('error','Data KPI User NULL atau Tidak Ada.');
+    //         }            
+    //     } else {
+    //         return redirect()->back()->with('error','Data KPI Tidak Ditemukan.');
+    //     }
+
+    //     // return $ach;
+    //     return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
+    // }
+
     public function indexViewKpi($id)
     {
         $kpi = Kpi::find($id);
-        $user = User::find($kpi->user_id);
-        $type = 'kpi';
-        $title = 'View Detail KPI ('.$user->name.')';
 
-        $ach = null; 
-        $psTotal = 0;
-        $totalkehadiran= 0;
-
-        if ($kpi) {
-            $user = User::find($kpi->user_id);
-
-            if ($user) {
-                $targetkpi = targetkpi::where('user_id', $user->id)
-                    ->select('r_daftar', 'r_poli', 'r_farmasi', 'r_kasir', 'r_care', 'r_bpjs', 'r_khitan',
-                        'r_rawat', 'r_salin', 'r_lab', 'r_umum', 'r_visit', 'target_id', 'bulan')
-                    ->first();
-
-                if ($targetkpi) {
-                    if ($targetkpi->bulan) {
-                        // $data = explode('-', $targetkpi->bulan);
-                        $data = explode('-', '2024-01-01');
-                        $bulan = $data[1];
-                        $tahun = $data[0];
-
-                        $totalMasuk = Presensi::where('user_id', $user->id)
-                            ->where('keterangan', 'Masuk')
-                            ->whereMonth('tanggal', $bulan)
-                            ->whereYear('tanggal', $tahun)
-                            ->count();
-
-                        $totalTelat = Presensi::where('user_id', $user->id)
-                            ->where('keterangan', 'Telat')
-                            ->whereMonth('tanggal', $bulan)
-                            ->whereYear('tanggal', $tahun)
-                            ->count();
-                        $lembur = rubahjadwal::where('user_id', $user->id)
-                            ->where('permohonan', 'lembur')
-                            ->where('status', 'approve')
-                            ->whereMonth('tanggal', $bulan)
-                            ->whereYear('tanggal', $tahun)
-                            ->count();
-
-                        $totalkehadiran = $totalMasuk + $totalTelat + $lembur;
-
-                        for ($day = 1; $day <= 31; $day++) {
-                            $column = 'j' . $day;
-
-                            $psCount = jadwalterbaru::where('user_id', $user->id)
-                                ->where(function ($query) use ($column) {
-                                    $query->whereIn($column, ['PS', 'SM', 'PM', 'LL']);
-                                })
-                                ->whereMonth('masa_aktif', $bulan)
-                                ->whereYear('masa_aktif', $tahun)
-                                ->count();
-
-                            $psTotal += $psCount;
-                        }
-
-                        $target_id = $targetkpi->target_id;
-                        $ach = AchKpi::whereMonth('start_date',$bulan)
-                            ->whereYear('start_date',$tahun)
-                            ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
-                                'rawat', 'salin', 'lab', 'umum', 'visit')
-                            ->first();
-
-                        if (!$ach) {
-                            return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
-                        }
-                    } else {
-                        return redirect()->back()->with('error','Data Periode KPI Tidak Ditemukan.');
-                    }
-                } else {
-                    return redirect()->back()->with('error','Data Realisasi KPI Tidak Ditemukan.');
-                }
-            } else {
-                return redirect()->back()->with('error','Data KPI User NULL atau Tidak Ada.');
-            }            
-        } else {
+        if (!$kpi) {
             return redirect()->back()->with('error','Data KPI Tidak Ditemukan.');
         }
 
-        // return $ach;
-        return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
-    }
+        $user = User::find($kpi->user_id);
 
-    public function indexViewKpis($id)
-    {
-        $kpi = Kpi::findOrFail($id);
-        $user = User::findOrFail($kpi->user_id);
+        if (!$user) {
+            return redirect()->back()->with('error','Data KPI User NULL atau Tidak Ada.');
+        }
+
         $type = 'kpi';
         $title = 'View Detail KPI ('.$user->name.')';
 
-        $ach = null; 
-        $psTotal = 0;
-        $totalkehadiran = 0;
+        $targetkpi = TargetKpi::where('user_id', $user->id)->first();
 
-        try {
-            $targetkpi = TargetKpi::where('user_id', $user->id)
-                ->select('r_daftar', 'r_poli', 'r_farmasi', 'r_kasir', 'r_care', 'r_bpjs', 'r_khitan',
-                    'r_rawat', 'r_salin', 'r_lab', 'r_umum', 'r_visit', 'target_id', 'bulan')
-                ->firstOrFail();
-
-            $data = explode('-', $targetkpi->bulan);
-            $bulan = $data[1];
-            $tahun = $data[0];
-
-            $totalMasuk = Presensi::where('user_id', $user->id)
-                ->where('keterangan', 'Masuk')
-                ->whereMonth('tanggal', $bulan)
-                ->whereYear('tanggal', $tahun)
-                ->count();
-
-            $totalTelat = Presensi::where('user_id', $user->id)
-                ->where('keterangan', 'Telat')
-                ->whereMonth('tanggal', $bulan)
-                ->whereYear('tanggal', $tahun)
-                ->count();
-
-            $lembur = RubahJadwal::where('user_id', $user->id)
-                ->where('permohonan', 'lembur')
-                ->where('status', 'approve')
-                ->whereMonth('tanggal', $bulan)
-                ->whereYear('tanggal', $tahun)
-                ->count();
-
-            $totalkehadiran = $totalMasuk + $totalTelat + $lembur;
-
-            for ($day = 1; $day <= 31; $day++) {
-                $column = 'j' . $day;
-
-                $psCount = JadwalTerbaru::where('user_id', $user->id)
-                    ->whereIn($column, ['PS', 'SM', 'PM', 'LL'])
-                    ->whereMonth('masa_aktif', $bulan)
-                    ->whereYear('masa_aktif', $tahun)
-                    ->count();
-
-                $psTotal += $psCount;
-            }
-
-            $ach = AchKpi::findOrFail($targetkpi->target_id, ['daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit']);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        if (!$targetkpi) {
+            return redirect()->back()->with('error','Data Periode KPI Tidak Ditemukan.');
         }
 
-        return view('template.backend.admin.kpi.detail-kpi.index', compact('title', 'kpi', 'targetkpi', 'ach', 'psTotal', 'totalkehadiran', 'type'));
-    }
+        $data = explode('-', $targetkpi->bulan);
+        $tahun = $data[0];
+        $bulan = $data[1];
 
+        $totalMasuk = Presensi::where('user_id', $user->id)
+            ->where('keterangan', 'Masuk')
+            ->whereYear('tanggal', $tahun)
+            ->whereMonth('tanggal', $bulan)
+            ->count();
+
+        $totalTelat = Presensi::where('user_id', $user->id)
+            ->where('keterangan', 'Telat')
+            ->whereYear('tanggal', $tahun)
+            ->whereMonth('tanggal', $bulan)
+            ->count();
+
+        $lembur = RubahJadwal::where('user_id', $user->id)
+            ->where('permohonan', 'lembur')
+            ->where('status', 'approve')
+            ->whereYear('tanggal', $tahun)
+            ->whereMonth('tanggal', $bulan)
+            ->count();
+
+        $totalkehadiran = $totalMasuk + $totalTelat + $lembur;
+
+        $psTotal = 0;
+        for ($day = 1; $day <= 31; $day++) {
+            $column = 'j' . $day;
+
+            $psCount = JadwalTerbaru::where('user_id', $user->id)
+                ->whereIn($column, ['PS', 'SM', 'PM', 'LL'])
+                ->whereYear('masa_aktif', $tahun)
+                ->whereMonth('masa_aktif', $bulan)
+                ->count();
+
+            $psTotal += $psCount;
+        }
+
+        $ach = AchKpi::whereMonth('start_date', $bulan)
+            ->whereYear('start_date', $tahun)
+            ->first();
+
+        if (!$ach) {
+            return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
+        }
+
+        return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
+    }
 }
