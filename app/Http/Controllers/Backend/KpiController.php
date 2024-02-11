@@ -42,7 +42,7 @@ class KpiController extends Controller
         $tahun = date('Y');
         $kpi = kpi::whereYear('bulan', $tahun)
         ->whereMonth('bulan', $bulan)
-        ->orderBy('created_at', 'desc')
+        ->orderBy('created_at', 'asc')
         ->get();    
 
         return view ('template.backend.admin.kpi.index',compact('title','kpi','type'));
@@ -133,8 +133,8 @@ class KpiController extends Controller
         $target_akhir = $request->bulanreal;
         $startDate = $request->bulantarget;
         $endDate = $request->bulantarget;
-        // $tahun = date('Y');
-        $tahun = '2024';
+        $tahun = date('Y');
+        // $tahun = '2024';
         $tanggalawal = $tahun . '-' . $startDate . '-01';
         $tanggalakhir = $tahun . '-' . $endDate . '-31';
         $targetawal = $tahun . '-' . $target_awal . '-01';
@@ -306,6 +306,8 @@ class KpiController extends Controller
                     'total_kinerja' => $total_kinerja,
                     'ket' => $ket,
                     'usg' => $targetData->usg,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
     
                 $data[] = $rowData;
