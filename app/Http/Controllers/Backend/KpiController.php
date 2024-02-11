@@ -1692,15 +1692,11 @@ class KpiController extends Controller
                         }
 
                         $target_id = $targetkpi->target_id;
-                        // $ach = AchKpi::where('id', $target_id)
-                        //     ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
-                        //         'rawat', 'salin', 'lab', 'umum', 'visit')
-                        //     ->first();
-                        $ach = AchKpi::where('id', $targetkpi->target_id)
-                                    ->whereMonth('start_date', $bulan)
-                                    ->whereYear('start_date', $tahun)
-                                    ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
-                                    ->firstOrFail();
+                        $ach = AchKpi::whereMonth('start_date',$bulan)
+                            ->whereYear('start_date',$tahun)
+                            ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
+                                'rawat', 'salin', 'lab', 'umum', 'visit')
+                            ->first();
 
                         if (!$ach) {
                             return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
