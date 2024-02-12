@@ -11,10 +11,23 @@
         </div>
     </div>
     <div class="section-header">
-        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#kehadiran">
+        <!-- <a href="" class="btn btn-primary" data-toggle="modal" data-target="#kehadiran">
             <i class="fa fa-plus">
                 Add</i>
-        </a>
+        </a> -->
+        <button
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fa fa-plus"></i>
+            Add
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" data-toggle="modal" data-target="#kehadiran">Add Normal</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#update">Add Multiple</a>
+        </div>
         <a href="{{ route('download.jadwal', ['bulan' => request('bulan', date('Y-m'))]) }}" class="btn btn-danger">
             <i class="fa fa-download"></i> PDF
         </a>
@@ -1671,6 +1684,55 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="kehadiranLabel"> Insert Multiple {{$title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('jadwal.multiple') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
+                        <div class="form-group row">
+                            <label for="bulan" class="col-form-label col-sm-3">Ambil Data</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('bulan') is-invalid @enderror" name="bulan" id="bulan">
+                                    <option value="">Pilih</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">Maret</option>
+                                    <option value="04">April</option>
+                                    <option value="05">Mei</option>
+                                    <option value="06">Juni</option>
+                                    <option value="07">Juli</option>
+                                    <option value="08">Agustus</option>
+                                    <option value="09">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                                @error('bulan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="UMK">
+                            <label for="UMK" class="col-form-label col-sm-3">Insert</label>
+                            <div class="col-sm-8">
+                                <input type="date" name="bulantarget" id="bulantarget" class="form-control @error('name') is-invalid @enderror">
+                                @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
 <script>
     function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
