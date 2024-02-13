@@ -291,35 +291,40 @@ class JadwalshiftController extends Controller
             'bulan.required' => 'Kolom Target wajib diisi.',
             // 'bulan.required' => 'Kolom bulan wajib diisi.',
         ]);
-    
+
         if ($validator->fails()) {
             return redirect()->back()
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
+
+        $tahun = date('Y');
         $startDate = $request->bulan;
         $endDate = $request->bulan;
-        $tahun = date('Y'); 
-        $tanggalawal = $tahun . '-' . $startDate . '-01';
-        $tanggalakhir = $tahun . '-' . $endDate . '-31';
 
-        $waktuAwal = explode('-',$request->bulantarget);
+        // Menghitung tanggal awal dan akhir untuk bulan yang dipilih
+        $tanggalawal = $tahun . '-' . $startDate . '-01';
+        $tanggalakhir = date('Y-m-t', strtotime($tanggalawal));
+
+        // Mendapatkan bulan dan tahun target
+        $waktuAwal = explode('-', $request->bulantarget);
         $waktuBulan = $waktuAwal[1];
         $waktuTahun = $waktuAwal[0];
         $waktuawal = $waktuTahun . '-' . $waktuBulan . '-01';
-        $waktuakhir = $waktuTahun . '-' . $waktuBulan . '-31';
+
+        // Menghitung tanggal akhir bulan target
+        $tanggalakhirTarget = date('Y-m-t', strtotime($waktuawal));
 
         $namaBulan = [
             'January', 'February', 'Maret', 'April', 'Mei', 'Juni',
             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-        ];    
-    
+        ];
+
+        // Mendapatkan user IDs dengan masa aktif antara tanggalawal dan tanggalakhir
         $userIds = jadwalterbaru::where('masa_aktif', '>=', $tanggalawal)
             ->where('masa_akhir', '<=', $tanggalakhir)
             ->pluck('user_id');
-    
-        $data = [];
-    
+
         foreach ($userIds as $userId) {
             $targetData = jadwalterbaru::where('user_id', $userId)
                 ->where('masa_aktif', '>=', $tanggalawal)
@@ -327,58 +332,179 @@ class JadwalshiftController extends Controller
                 ->select('bulan','j1','j2','j3','j4','j5','j6','j7','j8','j9','j10',
                 'j11','j12','j13','j14','j15','j16','j17','j18','j19','j20',
                 'j21','j22','j23','j24','j25','j26','j27','j28','j29','j30',
-                'j31'
-                )
+                'j31')
                 ->first();
-    
+
             if ($targetData) {
                 $rowData = [
                     'user_id' => $userId,
                     'bulan' => $namaBulan[$waktuBulan - 1],
                     'masa_aktif' => $waktuawal,
-                    'masa_akhir' => $waktuakhir,
-                    'j1' => $targetData->j1,
-                    'j2' => $targetData->j2,
-                    'j3' => $targetData->j3,
-                    'j4' => $targetData->j4,
-                    'j5' => $targetData->j5,
-                    'j6' => $targetData->j6,
-                    'j7' => $targetData->j7,
-                    'j8' => $targetData->j8,
-                    'j9' => $targetData->j9,
-                    'j10' => $targetData->j10,
-                    'j11' => $targetData->j11,
-                    'j12' => $targetData->j12,
-                    'j13' => $targetData->j13,
-                    'j14' => $targetData->j14,
-                    'j15' => $targetData->j15,
-                    'j16' => $targetData->j16,
-                    'j17' => $targetData->j17,
-                    'j18' => $targetData->j18,
-                    'j19' => $targetData->j19,
-                    'j20' => $targetData->j20,
-                    'j21' => $targetData->j21,
-                    'j22' => $targetData->j22,
-                    'j23' => $targetData->j23,
-                    'j24' => $targetData->j24,
-                    'j25' => $targetData->j25,
-                    'j26' => $targetData->j26,
-                    'j27' => $targetData->j27,
-                    'j28' => $targetData->j28,
-                    'j29' => $targetData->j29,
-                    'j30' => $targetData->j30,
-                    'j31' => $targetData->j31,
-
+                    'masa_akhir' => $tanggalakhirTarget,
+                    'j1' => $targetData->j1 ?? null,
+                    'j2' => $targetData->j2 ?? null,
+                    'j3' => $targetData->j3 ?? null,
+                    'j4' => $targetData->j4 ?? null,
+                    'j5' => $targetData->j5 ?? null,
+                    'j6' => $targetData->j6 ?? null,
+                    'j7' => $targetData->j7 ?? null,
+                    'j8' => $targetData->j8 ?? null,
+                    'j9' => $targetData->j9 ?? null,
+                    'j10' => $targetData->j10 ?? null,
+                    'j11' => $targetData->j11 ?? null,
+                    'j12' => $targetData->j12 ?? null,
+                    'j13' => $targetData->j13 ?? null,
+                    'j14' => $targetData->j14 ?? null,
+                    'j15' => $targetData->j15 ?? null,
+                    'j16' => $targetData->j16 ?? null,
+                    'j17' => $targetData->j17 ?? null,
+                    'j18' => $targetData->j18 ?? null,
+                    'j19' => $targetData->j19 ?? null,
+                    'j20' => $targetData->j20 ?? null,
+                    'j21' => $targetData->j21 ?? null,
+                    'j22' => $targetData->j22 ?? null,
+                    'j23' => $targetData->j23 ?? null,
+                    'j24' => $targetData->j24 ?? null,
+                    'j25' => $targetData->j25 ?? null,
+                    'j26' => $targetData->j26 ?? null,
+                    'j27' => $targetData->j27 ?? null,
+                    'j28' => $targetData->j28 ?? null,
+                    'j29' => $targetData->j29 ?? null,
+                    'j30' => $targetData->j30 ?? null,
+                    'j31' => $targetData->j31 ?? null,
                 ];
-                $data[] = $rowData;
+
+                // Menyimpan data baru
+                jadwalterbaru::create($rowData);
+            } else {
+                return redirect()->back()->with('error', 'Data User Pada Bulan Ini sudah Ada.');
             }
         }
-        return $data;
-        // return response()->json($data, 200);
+
+        return redirect()->back()->with('success', 'Terimakasih, Data Jadwal Terbaru Berhasil Disimpan');
     }
+
+    // public function StoreMultipleJadwal(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'bulan' => 'required',
+    //         'bulantarget' => 'required'
+    //     ], [
+    //         'bulan.required' => 'Kolom Target wajib diisi.',
+    //         // 'bulan.required' => 'Kolom bulan wajib diisi.',
+    //     ]);
+    
+    //     if ($validator->fails()) {
+    //         return redirect()->back()
+    //             ->with('errorForm', $validator->errors()->getMessages())
+    //             ->withInput();
+    //     }
+    //     $startDate = $request->bulan;
+    //     $endDate = $request->bulan;
+    //     $tahun = date('Y'); 
+    //     $tanggalawal = $tahun . '-' . $startDate . '-01';
+    //     $tanggalakhir = $tahun . '-' . $endDate . '-31';
+
+    //     $waktuAwal = explode('-',$request->bulantarget);
+    //     $waktuBulan = $waktuAwal[1];
+    //     $waktuTahun = $waktuAwal[0];
+    //     $waktuawal = $waktuTahun . '-' . $waktuBulan . '-01';
+    //     $waktuakhir = $waktuTahun . '-' . $waktuBulan . '-31';
+
+    //     $namaBulan = [
+    //         'January', 'February', 'Maret', 'April', 'Mei', 'Juni',
+    //         'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    //     ];    
+    
+    //     $userIds = jadwalterbaru::where('masa_aktif', '>=', $tanggalawal)
+    //         ->where('masa_akhir', '<=', $tanggalakhir)
+    //         ->pluck('user_id');
+    
+    //     $data = [];
+    
+    //     foreach ($userIds as $userId) {
+    //         $targetData = jadwalterbaru::where('user_id', $userId)
+    //             ->where('masa_aktif', '>=', $tanggalawal)
+    //             ->where('masa_akhir', '<=', $tanggalakhir)
+    //             ->select('bulan','j1','j2','j3','j4','j5','j6','j7','j8','j9','j10',
+    //             'j11','j12','j13','j14','j15','j16','j17','j18','j19','j20',
+    //             'j21','j22','j23','j24','j25','j26','j27','j28','j29','j30',
+    //             'j31'
+    //             )
+    //             ->first();
+    
+    //         if ($targetData) {
+    //             $rowData = [
+    //                 'user_id' => $userId,
+    //                 'bulan' => $namaBulan[$waktuBulan - 1],
+    //                 'masa_aktif' => $waktuawal,
+    //                 'masa_akhir' => $waktuakhir,
+    //                 'j1' => $targetData->j1 ?? null,
+    //                 'j2' => $targetData->j2 ?? null,
+    //                 'j3' => $targetData->j3 ?? null,
+    //                 'j4' => $targetData->j4 ?? null,
+    //                 'j5' => $targetData->j5 ?? null,
+    //                 'j6' => $targetData->j6 ?? null,
+    //                 'j7' => $targetData->j7 ?? null,
+    //                 'j8' => $targetData->j8 ?? null,
+    //                 'j9' => $targetData->j9 ?? null,
+    //                 'j10' => $targetData->j10 ?? null,
+    //                 'j11' => $targetData->j11 ?? null,
+    //                 'j12' => $targetData->j12 ?? null,
+    //                 'j13' => $targetData->j13 ?? null,
+    //                 'j14' => $targetData->j14 ?? null,
+    //                 'j15' => $targetData->j15 ?? null,
+    //                 'j16' => $targetData->j16 ?? null,
+    //                 'j17' => $targetData->j17 ?? null,
+    //                 'j18' => $targetData->j18 ?? null,
+    //                 'j19' => $targetData->j19 ?? null,
+    //                 'j20' => $targetData->j20 ?? null,
+    //                 'j21' => $targetData->j21 ?? null,
+    //                 'j22' => $targetData->j22 ?? null,
+    //                 'j23' => $targetData->j23 ?? null,
+    //                 'j24' => $targetData->j24 ?? null,
+    //                 'j25' => $targetData->j25 ?? null,
+    //                 'j26' => $targetData->j26 ?? null,
+    //                 'j27' => $targetData->j27 ?? null,
+    //                 'j28' => $targetData->j28 ?? null,
+    //                 'j29' => $targetData->j29 ?? null,
+    //                 'j30' => $targetData->j30 ?? null,
+    //                 'j31' => $targetData->j31 ?? null,
+    //             ];
+    //             // $data[] = $rowData;    
+    //                 jadwalterbaru::create($rowData);
+                
+    //         }else {
+    //             return redirect()->back()->with('error', 'Data User Pada Bulan Ini sudah Ada.');
+    //         }
+    //     }
+    //     // return $data;
+    //     // return response()->json($data, 200);
+    //     return redirect()->back()->with('success','Terimakasih , Data Jadwal Terbaru Berhasil Disimpan');
+    // }
 
     public function DestroyAllJadwal(Request $request)
     {
-        
+        $validator = Validator::make($request->all(), [
+            'bulan' => 'required',
+        ], [
+            'bulan.required' => 'Bulan tidak boleh kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $target_awal = $request->bulan;
+        $tahun = date('Y');
+        $awal = $tahun . '-' . $target_awal . '-01';
+        $akhir = $tahun . '-' . $target_awal . '-31';
+        $deletedRows = jadwalterbaru::where('masa_aktif', '>=', $awal)
+                    ->where('masa_akhir', '<=', $akhir)
+                    ->delete();
+
+        if ($deletedRows > 0) {
+            return redirect()->back()->with('success', 'Semua Data Jadwal Pada Bulan Tersebut berhasil dihapus.');
+        } else {
+            return redirect()->back()->with('error', 'Tidak ada data Jadwal yang ditemukan untuk dihapus pada bulan tersebut.');
+        }
     }
 }

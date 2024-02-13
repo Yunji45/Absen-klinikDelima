@@ -174,6 +174,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/jadwal-edit/{id}',[JadwalshiftController::class,'edit'])->name('jadwal.edit');
         Route::post('/jadwal-update/{id}',[JadwalshiftController::class,'update'])->name('jadwal.update');
         Route::post('/jadwal-multiple/save',[JadwalshiftController::class,'StoreMultipleJadwal'])->name('jadwal.multiple');
+        Route::get('/jadwal-delete-all',[JadwalshiftController::class,'DestroyAllJadwal'])->name('jadwal.destroy-all');
 
         //rubah jadwal
         Route::get('/data-permohonan',[RubahjadwalController::class,'indexAdmin'])->name('permohonan.index');

@@ -13,7 +13,13 @@
             <li class="nav-item dropdown {{ $type === 'dashboard' ? 'active' : '' }}">
                 <a class="nav-link" href="{{route('dash.admin')}}">
                     <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
+                    <span>Dashboard SDM</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown {{ $type === 'dashboard' ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('dash.admin')}}">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard Pengunjung</span>
                 </a>
             </li>
             @endif
@@ -50,7 +56,7 @@
             </li>
             <li class="nav-item dropdown {{ $type === 'detail-user' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-list"></i>
+                    <i class="fas fa-folder-open"></i>
                     <span>Informasi Pegawai</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -64,7 +70,7 @@
             </li>
             <li class="nav-item dropdown {{ $type === 'jasamedis' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-list"></i>
+                    <i class="fas fa-stethoscope"></i>
                     <span>Jasa Medis / Tindakan</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -156,7 +162,7 @@
             <li class="menu-header">Layout</li>
             <li class="nav-item dropdown {{ $type === 'content' ? 'active' : '' }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-list"></i>
+                    <i class="fas fa-window-restore"></i>
                     <span>Content Management</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -171,8 +177,8 @@
             </li>
             <li class="nav-item dropdown {{ $type === 'layout' ? 'active' : '' }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-list"></i>
-                    <span>Career Management</span>
+                    <i class="fas fa-user-nurse"></i>
+                    <span>Open Recruitment</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Route::currentRouteName() === 'job-vacancy.index' ? 'active' : '' }}">
@@ -300,7 +306,7 @@
             </li>
             <li>
                 <a class="nav-link" href="">
-                    <i class="fas fa-comments"></i>
+                    <i class="fas fa-headset"></i>
                     <span>Help IT</span>
                 </a>
             </li>
