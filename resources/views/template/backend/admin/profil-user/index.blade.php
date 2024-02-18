@@ -313,9 +313,9 @@
                                                     <td>-</td>
                                                 @endif
                                                 <td>
-                                                    <button id="btnUbahKehadiran" data-id="{{ $present->id }}" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ubahKehadiran">
+                                                    <!-- <button id="btnUbahKehadiran" data-id="{{ $present->id }}" type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#ubahKehadiran">
                                                         <i class="far fa-edit"></i>
-                                                    </button>
+                                                    </button> -->
                                                     <a href="{{ route('kehadiran.delete', $present->id) }}" type="button" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data presensi ini?')">
                                                         <i class="far fa-trash-alt"></i>
                                                     </a>
@@ -333,7 +333,7 @@
           </div>
         </div>
 </section>
-<div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
+    <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -384,6 +384,66 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ubahKehadiran" tabindex="-1" role="dialog" aria-labelledby="ubahKehadiranLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ubahKehadiranLabel">Ubah Kehadiran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formUbahKehadiran" action="{{ route('ajax.get.kehadiran') }}" method="post">
+                    @csrf
+                    @method('patch')
+                    <div class="modal-body">
+                        <h5 class="mb-3" id="tanggal"></h5>
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <div class="form-group row" id="tanggal">
+                            <label for="jam_masuk" class="col-form-label col-sm-3">Tanggal</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror">
+                                @error('tanggal') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ubah_keterangan" class="col-form-label col-sm-3">Keterangan</label>
+                            <div class="col-sm-9">
+                                <select class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" id="ubah_keterangan">
+                                    <option value="Alpha" {{ old('keterangan') == 'Alpha' ? 'selected':'' }}>Alpha</option>
+                                    <option value="Masuk" {{ old('keterangan') == 'Masuk' ? 'selected':'' }}>Masuk</option>
+                                    <option value="Telat" {{ old('keterangan') == 'Telat' ? 'selected':'' }}>Telat</option>
+                                    <option value="Sakit" {{ old('keterangan') == 'Sakit' ? 'selected':'' }}>Sakit</option>
+                                    <option value="Cuti" {{ old('keterangan') == 'Cuti' ? 'selected':'' }}>Cuti</option>
+                                    <option value="Izin" {{ old('keterangan') == 'Cuti' ? 'selected':'' }}>Izin</option>
+                                </select>
+                                @error('keterangan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="jamMasuk">
+                            <label for="ubah_jam_masuk" class="col-form-label col-sm-3">Jam Masuk</label>
+                            <div class="col-sm-9">
+                                <input type="time" name="jam_masuk" id="ubah_jam_masuk" class="form-control @error('jam_masuk') is-invalid @enderror">
+                                @error('jam_masuk') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="jamKeluar">
+                            <label for="ubah_jam_keluar" class="col-form-label col-sm-3">Jam Keluar</label>
+                            <div class="col-sm-9">
+                                <input type="time" name="jam_keluar" id="ubah_jam_keluar" class="form-control @error('jam_keluar') is-invalid @enderror">
+                                @error('jam_keluar') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

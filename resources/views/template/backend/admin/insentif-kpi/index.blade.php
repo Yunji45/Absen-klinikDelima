@@ -28,11 +28,11 @@
                 <i class="fa fa-plus">
                     Add</i>
             </a> -->
-            <a href="{{route('download.insentif.kpi')}}" class="btn btn-danger">
+            <a href="{{route('download.insentif.kpi' ,['bulan' => request('bulan', date('Y-m'))])}}" class="btn btn-danger">
                 <i class="fa fa-download">
                     </i> Pdf
             </a>
-            <a href="" class="btn btn-success">
+            <a href="{{route('download.insentif.excel' ,['bulan' => request('bulan', date('Y-m'))])}}" class="btn btn-success">
                 <i class="fa fa-download">
                     </i> Excel
             </a>

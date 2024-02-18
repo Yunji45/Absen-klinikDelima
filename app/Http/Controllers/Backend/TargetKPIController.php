@@ -282,6 +282,9 @@ class TargetKPIController extends Controller
         foreach ($poin as $data) {
             $jumlah += $data->total;
         }
+        if ($jumlah == 0){
+            return redirect()->back()->with('error','Data Poin Belum ada pada periode tersebut');
+        }
         $omset ->skor = $jumlah;
         $persen = ($request->omset * $request->index) / 100;
         $omset ->total_insentif = round($persen, 2);

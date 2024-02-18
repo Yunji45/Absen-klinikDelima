@@ -29,7 +29,6 @@ class UserController extends Controller
         $pegawai = User::where('role',['pegawai','keuangan','evaluator'])->count();
         // $rank = $users->firstItem();
         return view('template.backend.admin.manage-user.index', compact('users','title','type','admin','pegawai'));
-    
     }
 
     /**
@@ -141,8 +140,8 @@ class UserController extends Controller
         //     }
         // }
         // dd($tukarjaga);
-        return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
-        // return view('template.backend.admin.profil-user.index',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur','title','type'));
+        // return view('frontend.users.show',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur'));
+        return view('template.backend.admin.profil-user.index',compact('user','presents','masuk','telat','cuti','alpha','izin','totalJamTelat','gantijaga','tukarjaga','bulanIni','tahunIni','permohonan','lembur','title','type'));
 
     }
 
@@ -173,21 +172,15 @@ class UserController extends Controller
             'saldo_cuti' => ['required'],
             'foto' => ['image', 'mimes:jpeg,png,gif', 'max:2048']
         ]);
-        
-        // Menggunakan model Eloquent untuk menemukan pengguna berdasarkan ID
         $user = User::find($id); // Ganti 'User' dengan model Anda
         
         if ($user) {
-            // Menghapus gambar lama jika ada file gambar yang diunggah
             if ($request->hasFile('foto')) {
-                // Menghapus gambar yang lama jika bukan 'default.jpeg'
                 if ($user->foto != 'default.jpeg') {
                     File::delete(storage_path('app/public/' . $user->foto));
                 }
                 $user->foto = $request->file('foto')->storeAs('foto-profil', $user->id . '.' . $request->file('foto')->getClientOriginalExtension(), 'public');
             }
-        
-            // Memperbarui data pengguna
             $user->update($data);
         
             return redirect()->back()->with('success', 'User berhasil diperbarui');

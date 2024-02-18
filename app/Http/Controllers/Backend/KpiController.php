@@ -19,6 +19,9 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
 use PDF;
 
+use App\Exports\InsentifExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class KpiController extends Controller
 {
     public function index ()
@@ -1452,15 +1455,32 @@ class KpiController extends Controller
         $title = 'Insentif Kinerja KPI';
         $type = 'gaji';
 
-        $data = InsentifKpi::whereMonth('bulan', '12')
-            ->whereYear('bulan', '2023')
+        $request->validate([
+            'bulan' => ['required']
+        ]);
+        $waktu = explode('-', $request->bulan);
+
+        $data = InsentifKpi::whereMonth('bulan', $waktu[1] )
+            ->whereYear('bulan', $waktu[0])
             ->orderBy('bulan', 'asc')
             ->get();
-        // $data = InsentifKpi::whereBetween('bulan', [$startDate, $endDate])->orderBy('created_at', 'desc')->get();
-        // return response()->json(['data' => $data]);
-        // $data = jadwal::all();
         $pdf = PDF::loadview('template.backend.admin.insentif-kpi.download',['data'=>$data]);
         return $pdf->download('Insentif-KPI');            
+    }
+
+    public function DownloadExcelInsentif(Request $request)
+    {
+        $request->validate([
+            'bulan' => ['required']
+        ]);
+        $waktu = explode('-', $request->bulan);
+
+        $data = InsentifKpi::whereMonth('bulan', $waktu[1] )
+            ->whereYear('bulan', $waktu[0])
+            ->orderBy('bulan', 'asc')
+            ->get();
+
+        return Excel::download(new InsentifExport($data), 'Insentif-Karyawan.xlsx');
     }
 
     public function storeInsentifKpi(Request $request)
@@ -1533,8 +1553,8 @@ class KpiController extends Controller
         $target_akhir = $request->bulan;
         $startDate = $request->bulantarget;
         $endDate = $request->bulantarget;
-        // $tahun = date('Y'); 
-        $tahun = '2023'; 
+        $tahun = date('Y'); 
+        // $tahun = '2024'; 
         $tanggalawal = $tahun . '-' . $startDate . '-01';
         $tanggalakhir = $tahun . '-' . $endDate . '-31';
         $omsetawal = $tahun . '-' . $target_awal . '-01';

@@ -217,8 +217,8 @@ class PresensiController extends Controller
         //         }
         //     }
         // }
-        // return view('frontend.users.show', compact('presents','user','masuk','telat','cuti','alpha','libur','totalJamTelat','gantijaga','tukarjaga','permohonan'));
-        return view('frontend.users.show', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin'));
+        return view('template.backend.admin.profil-user.index', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin'));
+        // return view('frontend.users.show', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin'));
         // return redirect()->back();
     }
 
