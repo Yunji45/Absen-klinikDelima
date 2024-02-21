@@ -17,6 +17,7 @@ use App\Models\NoteKaryawan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use PDF;
 
 use App\Exports\InsentifExport;
@@ -1665,15 +1666,18 @@ class KpiController extends Controller
             $user = User::find($kpi->user_id);
 
             if ($user) {
+                $bulan = Carbon::now()->subMonth()->format('Y-m');
                 $targetkpi = targetkpi::where('user_id', $user->id)
+                    ->whereMonth('bulan', '=', Carbon::parse($bulan)->month)
+                    ->whereYear('bulan', '=', Carbon::parse($bulan)->year)
                     ->select('r_daftar', 'r_poli', 'r_farmasi', 'r_kasir', 'r_care', 'r_bpjs', 'r_khitan',
                         'r_rawat', 'r_salin', 'r_lab', 'r_umum', 'r_visit', 'target_id', 'bulan')
                     ->first();
 
                 if ($targetkpi) {
                     if ($targetkpi->bulan) {
-                        // $data = explode('-', $targetkpi->bulan);
-                        $data = explode('-', '2024-01-01');
+                        $data = explode('-', $targetkpi->bulan);
+                        // $data = explode('-', '2024-01-01');
                         $bulan = $data[1];
                         $tahun = $data[0];
 
@@ -1737,78 +1741,4 @@ class KpiController extends Controller
         // return $ach;
         return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
     }
-
-    // public function indexViewKpi($id)
-    // {
-    //     $kpi = Kpi::find($id);
-
-    //     if (!$kpi) {
-    //         return redirect()->back()->with('error','Data KPI Tidak Ditemukan.');
-    //     }
-
-    //     $user = User::find($kpi->user_id);
-
-    //     if (!$user) {
-    //         return redirect()->back()->with('error','Data KPI User NULL atau Tidak Ada.');
-    //     }
-
-    //     $type = 'kpi';
-    //     $title = 'View Detail KPI ('.$user->name.')';
-
-    //     $targetkpi = TargetKpi::where('user_id', $user->id)->first();
-
-    //     if (!$targetkpi) {
-    //         return redirect()->back()->with('error','Data Periode KPI Tidak Ditemukan.');
-    //     }
-
-    //     // $data = explode('-', $targetkpi->bulan);
-    //     $data = explode('-', '2024-01-10');
-    //     $tahun = $data[0];
-    //     $bulan = $data[1];
-
-    //     $totalMasuk = Presensi::where('user_id', $user->id)
-    //         ->where('keterangan', 'Masuk')
-    //         ->whereYear('tanggal', $tahun)
-    //         ->whereMonth('tanggal', $bulan)
-    //         ->count();
-
-    //     $totalTelat = Presensi::where('user_id', $user->id)
-    //         ->where('keterangan', 'Telat')
-    //         ->whereYear('tanggal', $tahun)
-    //         ->whereMonth('tanggal', $bulan)
-    //         ->count();
-
-    //     $lembur = RubahJadwal::where('user_id', $user->id)
-    //         ->where('permohonan', 'lembur')
-    //         ->where('status', 'approve')
-    //         ->whereYear('tanggal', $tahun)
-    //         ->whereMonth('tanggal', $bulan)
-    //         ->count();
-
-    //     $totalkehadiran = $totalMasuk + $totalTelat + $lembur;
-
-    //     $psTotal = 0;
-    //     for ($day = 1; $day <= 31; $day++) {
-    //         $column = 'j' . $day;
-
-    //         $psCount = JadwalTerbaru::where('user_id', $user->id)
-    //             ->whereIn($column, ['PS', 'SM', 'PM', 'LL'])
-    //             ->whereYear('masa_aktif', $tahun)
-    //             ->whereMonth('masa_aktif', $bulan)
-    //             ->count();
-
-    //         $psTotal += $psCount;
-    //     }
-
-    //     $ach = AchKpi::whereMonth('start_date', $bulan)
-    //         ->whereYear('start_date', $tahun)
-    //         ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
-    //                 'rawat', 'salin', 'lab', 'umum', 'visit')
-    //         ->first();
-    //     if (!$ach) {
-    //         return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
-    //     }
-
-    //     return view ('template.backend.admin.kpi.detail-kpi.index',compact('title','kpi','targetkpi','ach','psTotal','totalkehadiran','type'));
-    // }
 }

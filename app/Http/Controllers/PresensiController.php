@@ -162,6 +162,9 @@ class PresensiController extends Controller
 
     public function cari(Request $request, User $user)
     {
+        $title = 'Absensi';
+        $type = 'presensi';
+
         $request->validate([
             'bulan' => ['required']
         ]);
@@ -217,7 +220,7 @@ class PresensiController extends Controller
         //         }
         //     }
         // }
-        return view('template.backend.admin.profil-user.index', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin'));
+        return view('template.backend.admin.profil-user.index', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin','title','type'));
         // return view('frontend.users.show', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin'));
         // return redirect()->back();
     }
