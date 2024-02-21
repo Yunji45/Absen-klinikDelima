@@ -22,6 +22,17 @@
             <i class="fa fa-download">
                 Excel</i>
         </a>
+        <div class="section-header-breadcrumb">
+            <div class="input-group" style="width: 200px;">
+                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
+                <div class="input-group-append">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="section-body">
         <div class="row">
@@ -45,7 +56,7 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="myTable">
                                 <tr>
                                     <th scope="col" class="text-center">No</th>
                                     <th scope="col" class="text-center">Nama</th>
@@ -170,4 +181,26 @@
     right: 10px;
 }
 </style>
+<script>
+    function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1]; // Ganti angka 1 dengan indeks kolom yang sesuai
+        if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+        }
+    }
+    }
+
+</script>
 @endsection
