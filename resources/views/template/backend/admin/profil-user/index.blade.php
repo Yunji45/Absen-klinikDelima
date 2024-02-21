@@ -111,7 +111,7 @@
                     <h4>LEMBUR</h4>
                   </div>
                   <div class="card-body">
-                    0
+                  {{$lembur}}
                   </div>
                 </div>
               </div>
@@ -126,7 +126,7 @@
                     <h4>TOTAL HADIR</h4>
                   </div>
                   <div class="card-body">
-                    0
+                  {{$permohonan}}
                   </div>
                 </div>
               </div>
