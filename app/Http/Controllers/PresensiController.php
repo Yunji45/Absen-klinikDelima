@@ -739,7 +739,8 @@ class PresensiController extends Controller
                     })->count();       
                     
         // return $permohonan;
-        return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
+        // return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
+        return view('template.frontend.error-page.update', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
     }
 
     /**

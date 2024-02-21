@@ -201,15 +201,20 @@
 
                   <div class="card-footer text-center">
                     <div class="mt-2">
-                        <a href="#" class="btn btn-success mr-1">
+                        <a href="{{ route('users.edit',$user) }}" class="btn btn-success mr-1">
                             <i class="fas fa-edit"></i> Edit
                         </a>
-                        <a href="#" class="btn btn-danger mr-1">
-                            <i class="fas fa-trash-alt"></i> Hapus
-                        </a>
-                        <a href="#" class="btn btn-warning">
-                            <i class="fas fa-key"></i> Reset Password
-                        </a>
+                        @if ($user->id != auth()->user()->id)
+                                    <form class="d-inline-block" action="{{ route('users.destroy',$user) }}" method="post">
+                                        @csrf @method('delete')
+                                        <button type="submit" class="btn btn-danger mr-1" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus user ini ???')"><i class="fas fa-trash-alt"></i> Hapus</button>
+                                    </form>
+                        @endif
+
+                        <form class="d-inline-block" action="{{ route('users.password',$user) }}" method="post">
+                                    @csrf @method('patch')
+                                    <button type="submit" class="btn btn-warning" onclick="return confirm('Apakah anda yakin ingin mereset password user ini ???')"><i class="fas fa-key"></i> Reset Password</button>
+                        </form>
                     </div>
                   </div>
                 </div>

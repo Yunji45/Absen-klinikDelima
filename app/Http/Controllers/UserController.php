@@ -153,7 +153,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view ('frontend.users.edit',compact('user'));
+        // return view ('frontend.users.edit',compact('user'));
+        $title = 'Edit User';
+        $type = 'users';
+        return view ('template.backend.admin.profil-user.edit',compact('user','title','type'));
     }
 
     /**
