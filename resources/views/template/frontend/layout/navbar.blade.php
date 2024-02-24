@@ -14,9 +14,12 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-      <a href="{{ route('frontend') }}" class="logo me-auto">
+      <a href="{{ route('frontend') }}" class="logo me-auto d-none d-sm-block">
           <img src="{{ asset('mitradelima/assets/img/logo-klasik.png') }}" alt="" class="img-fluid">
       </a>
+      <!-- <a href="{{ route('frontend') }}" class="logo me-auto">
+          <img src="{{ asset('mitradelima/assets/img/logo-klasik.png') }}" alt="" class="img-fluid">
+      </a> -->
       <!-- <a href="{{route('frontend')}}" class="logo me-auto"><img src="{{asset('mitradelima/assets/img/logo-klinik.png')}}" alt=""></a> -->
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
@@ -39,7 +42,17 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="{{route('auth.index')}}" class="appointment-btn scrollto" style="margin-right: 20px;"><span class="d-none d-md-inline">Log</span> In</a>
+      @if(Auth::check())
+          <a href="{{ route('daftar-hadir') }}" class="appointment-btn scrollto" style="margin-right: 20px;">
+              <span class="d-none d-md-inline">{{ Auth::user()->name }}</span><span class="d-inline d-md-none">{{ Auth::user()->name }}</span>
+          </a>
+      @else
+          <a href="{{ route('auth.index') }}" class="appointment-btn scrollto" style="margin-right: 20px;">
+              <span class="d-none d-md-inline">Log In</span><span class="d-inline d-md-none">Log In</span>
+          </a>
+      @endif
+
+      <!-- <a href="{{route('auth.index')}}" class="appointment-btn scrollto" style="margin-right: 20px;"><span class="d-none d-md-inline">Log</span> In</a> -->
       <img src="{{ asset('mitradelima/assets/img/paripurna.png') }}" alt="" class="img-fluid" style="width: 150px; height: auto;">
 
 
