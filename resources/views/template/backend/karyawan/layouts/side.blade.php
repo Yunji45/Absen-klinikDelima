@@ -72,6 +72,18 @@
         </ul>
       </li>
       <!-- End Forms Nav -->
-
+      <li class="nav-heading">Support System</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="users-profile.html">
+          <i class="bi bi-code"></i>
+          <span>Docs API</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="users-profile.html">
+          <i class="bi bi-headset"></i>
+          <span>IT Support</span>
+        </a>
+      </li>
 
     </ul>

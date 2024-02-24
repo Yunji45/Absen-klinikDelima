@@ -1,11 +1,11 @@
 @extends('template.backend.karyawan.layouts.app')
 @section('content')
 <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>{{$title}}</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">{{$title}}</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -19,17 +19,17 @@
 
             <!-- Sales Card -->
             <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
+              <div class="card info-card revenue-card">
 
                 <div class="card-body">
                   <h5 class="card-title">On-time <span>| This Month</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                      <i class="bi bi-check"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>12</h6>
+                      <h6>{{$masuk}}</h6>
                       <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -49,10 +49,10 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-exclamation-circle text-danger"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>12</h6>
+                      <h6>{{$telat}}</h6>
                       <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -69,10 +69,10 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-arrow-repeat text-primary"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>12</h6>
+                      <h6>{{$tukarjaga}}</h6>
                       <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -89,10 +89,10 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-arrow-left-right text-warning"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>12</h6>
+                      <h6>{{$gantijaga}}</h6>
                       <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -105,14 +105,14 @@
               <div class="card info-card revenue-card">
 
                 <div class="card-body">
-                  <h5 class="card-title">Izin <span>| This Month</span></h5>
+                  <h5 class="card-title">Alpha <span>| This Month</span></h5>
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-shield-fill-check text-danger"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>12</h6>
+                      <h6>{{$alpha}}</h6>
                       <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -129,10 +129,10 @@
 
                   <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
+                      <i class="bi bi-person text-dark"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>12</h6>
+                      <h6>{{$permohonan}}</h6>
                       <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                     </div>
@@ -169,7 +169,7 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>1244</h6>
+                      <h6>{{$karyawan}}</h6>
                       <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                     </div>

@@ -716,6 +716,8 @@ class PresensiController extends Controller
      */
     public function show()
     {
+        $title = 'Dashboard Karyawan';
+        $type = 'dashboard-karyawan';
         $presents = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->orderBy('tanggal','desc')->paginate(6);
         $masuk = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('masuk')->count();
         $telat = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->whereKeterangan('telat')->count();
@@ -739,12 +741,13 @@ class PresensiController extends Controller
         $permohonan = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->where(function ($query) {
             $query->where('keterangan', 'masuk')
                     ->orWhere('keterangan', 'telat');
-                    })->count();       
+                    })->count();    
+        $karyawan = User::whereIn('role',['evaluator','pegawai','keuangan','hrd'])->count();
                     
         // return $permohonan;
         // return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
         // return view('template.frontend.error-page.update', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
-        return view('template.backend.karyawan.page.dashboard', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
+        return view('template.backend.karyawan.page.dashboard', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur','title','type','karyawan'));
 
     }
 

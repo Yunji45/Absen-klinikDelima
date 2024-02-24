@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Klinik Mitra Delima</title>
+  <title>{{$title}} - Klinik Mitra Delima</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -25,6 +25,7 @@
   <link href="{{asset('nice-admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{asset('nice-admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset('nice-admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-vw0a3HKGO9fXg8KFFW5R5QrV5wueWEJ/VE7R8LAWPYsHDVmzizFEnJrLhfWz+Y1V" crossorigin="anonymous">
 
   <!-- Template Main CSS File -->
   <link href="{{asset('nice-admin/assets/css/style.css')}}" rel="stylesheet">
