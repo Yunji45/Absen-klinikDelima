@@ -60,12 +60,15 @@ class JadwalshiftController extends Controller
     public function indexUser()
     {
         $title = 'Jadwal Shift';
+        $type = 'component';
         $bulan = date('m');
         $tahun = date('Y');
-        $data = jadwalterbaru::whereYear('masa_aktif', $tahun)
+        $data = jadwalterbaru::whereUserId(auth()->user()->id)
+                    ->whereYear('masa_aktif', $tahun)
                     ->whereMonth('masa_aktif', $bulan)
                     ->get();    
-        return view ('frontend.users.jadwal.index',compact('title','data','tahun','bulan'));
+        // return view ('frontend.users.jadwal.index',compact('title','data','tahun','bulan'));
+        return view ('template.backend.karyawan.page.jadwal.index',compact('title','data','tahun','bulan','type'));
     }
 
     /**
