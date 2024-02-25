@@ -509,8 +509,11 @@ class PenggajianController extends Controller
     {
         $title = 'Gaji Karyawan';
         $type = 'insentif & gaji';
-        $bulan = date('m');
-        $tahun = date('Y');
+        $bulanTahunSekarang = date('Y-m');
+        $bulan = date('m', strtotime('last month')); 
+        $tahun = date('Y', strtotime('last month')); 
+        // $bulan = date('m');
+        // $tahun = date('Y');
         $user = Auth::user()->id;
         // $gaji = gajian::all();
         $gaji = gajian::where('user_id',$user)
