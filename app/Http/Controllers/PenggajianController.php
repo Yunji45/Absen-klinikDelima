@@ -508,6 +508,7 @@ class PenggajianController extends Controller
     public function IndexGajiPegawai()
     {
         $title = 'Gaji Karyawan';
+        $type = 'insentif & gaji';
         $bulan = date('m');
         $tahun = date('Y');
         $user = Auth::user()->id;
@@ -520,12 +521,14 @@ class PenggajianController extends Controller
         if(!$gaji){
             return redirect()->back()->with('error','Mohon maaf, Slip Gaji Anda pada periode sekarang belum ada.');
         }
-        return view ('frontend.users.gaji.gaji',compact('title','gaji'));
+        // return view ('frontend.users.gaji.gaji',compact('title','gaji'));
+        return view ('template.backend.karyawan.page.slip.gaji',compact('type','title','gaji'));
     }
 
     public function insentifPegawai()
     {
         $title = 'Insentif Karyawan';
+        $type = 'insentif & gaji';
         $bulanTahunSekarang = date('Y-m');
         $bulan = date('m', strtotime('last month')); 
         $tahun = date('Y', strtotime('last month')); 
@@ -547,7 +550,8 @@ class PenggajianController extends Controller
             return redirect()->back()->with('error','Mohon maaf, Slip Insentif Anda pada periode sekarang belum ada.');
         }
         // return $catatan;
-        return view ('frontend.users.gaji.insentif',compact('title','gaji','kinerja','catatan'));
+        // return view ('frontend.users.gaji.insentif',compact('title','gaji','kinerja','catatan'));
+        return view ('template.backend.karyawan.page.slip.insentif',compact('title','gaji','kinerja','catatan','type'));
 
     }
 

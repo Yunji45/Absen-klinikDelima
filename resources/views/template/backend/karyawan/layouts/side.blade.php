@@ -60,12 +60,12 @@
         </a>
         <ul id="insentif-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="{{route('gaji.pegawai')}}">
               <i class="bi bi-circle"></i><span>Slip Gaji</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="{{route('insentif.pegawai')}}">
               <i class="bi bi-circle"></i><span>Slip Insentif</span>
             </a>
           </li>
