@@ -386,6 +386,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         //izin
         Route::get('/Data-izin',[CutiController::class,'indexCutiUser'])->name('index.izin.user');
         Route::post('/pengajuan-izin',[CutiController::class,'store'])->name('pengajuan.cuti');
+        Route::get('/pengajuan-create',[CutiController::class,'create'])->name('pengajuan.create');
         //rubah-jadwal
         Route::get('/permohonan-jadwal',[RubahjadwalController::class,'index'])->name('permohonan.jadwal.user');
         Route::post('/permohonan-save',[RubahjadwalController::class,'store'])->name('permohonan.save');

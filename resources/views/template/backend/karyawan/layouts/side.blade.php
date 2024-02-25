@@ -43,7 +43,7 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="{{route('pengajuan.create')}}">
               <i class="bi bi-circle"></i><span>Form Izin</span>
             </a>
           </li>

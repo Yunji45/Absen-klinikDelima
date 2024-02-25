@@ -73,7 +73,8 @@ class CutiController extends Controller
     public function create()
     {
         $title = 'Pengajuan Izin';
-        return view('frontend.cuti.create',compact('title'));
+        $type = 'component';
+        return view('template.backend.karyawan.page.perubahan-jaga.form-cuti',compact('title','type'));
     }
 
     /**
@@ -123,7 +124,7 @@ class CutiController extends Controller
 
         cuti::create($cutiData);
         // return $cutiData;
-        return redirect()->back()->with('success', 'Berhasil di ajukan.');
+        return redirect()->route('index.izin.user')->with('success', 'Berhasil di ajukan.');
     }
 
     public function storeAdm(Request $request)
