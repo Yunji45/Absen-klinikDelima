@@ -1,16 +1,16 @@
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-heading">Dashboard</li>
 
-      <li class="nav-item">
-        <a class="nav-link " href="index.html">
+      <li class="nav-item {{ Route::currentRouteName() === 'dashboard' ? 'active' : '' }}">
+        <a class="nav-link " href="{{route('daftar-hadir')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <!-- End Dashboard Nav -->
       <li class="nav-heading">Pages</li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <li class="nav-item {{ $type === 'component' ? 'active' : '' }}">
+        <a class="nav-link collapsed " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -25,12 +25,12 @@
             </a>
           </li>
           <li>
-            <a href="components-alerts.html">
+            <a href="{{ route('permohonan.jadwal.user') }}">
               <i class="bi bi-circle"></i><span>Riwayat Perubahan Jaga</span>
             </a>
           </li>
-          <li>
-            <a href="components-alerts.html">
+          <li class="{{ Route::currentRouteName() === 'index.izin.user' ? 'active' : '' }}">
+            <a href="{{route('index.izin.user')}}">
               <i class="bi bi-circle"></i><span>Riwayat izin & cuti</span>
             </a>
           </li>
@@ -48,7 +48,7 @@
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="{{route('permohonan.create')}}">
               <i class="bi bi-circle"></i><span>Form Perubahan Jaga</span>
             </a>
           </li>

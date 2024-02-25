@@ -234,12 +234,18 @@ class CutiController extends Controller
 
     public function indexCutiUser()
     {
-        $title = 'Pengajuan Cuti';
+        $title = 'Riwayat Izin & Cuti';
+        $type = 'component';
+        $bulan = date('m');
+        $tahun = date('Y');
         $cuti = cuti::whereIn('status', ['pengajuan','approve'])
                     ->where('user_id', Auth::id())
+                    ->whereMonth('tanggal_mulai',$bulan)
+                    ->whereYear('tanggal_mulai',$tahun)
                     ->orderBy('created_at', 'desc')
                     ->get();
-        return view('frontend.users.izin.index', compact('title', 'cuti'));
+        // return view('frontend.users.izin.index', compact('title', 'cuti'));
+        return view('template.backend.karyawan.page.perubahan-jaga.index',compact('title','type','cuti'));
     }
 
 }

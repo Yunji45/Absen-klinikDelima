@@ -1,6 +1,6 @@
 @extends('template.backend.karyawan.layouts.app')
 @section('content')
-<div class="pagetitle">
+    <div class="pagetitle">
       <h1>{{$title}}</h1>
       <nav>
         <ol class="breadcrumb">
@@ -427,4 +427,20 @@
 
       </div>
     </section>
+    <script>
+      // Fungsi untuk menampilkan popup box dengan informasi menarik
+      function showPopup() {
+        const messages = [
+          "form pengajuan izin dan rubah jaga sudah bisa digunakan ya ! Terimakasih!",
+        ];
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        alert(messages[randomIndex]);
+      }
+
+      // Panggil fungsi showPopup saat halaman dimuat
+      window.onload = function() {
+        showPopup();
+      };
+    </script>
+
 @endsection

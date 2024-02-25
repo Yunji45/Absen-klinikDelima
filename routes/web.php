@@ -43,7 +43,7 @@ use App\Http\Controllers\API\DokumentasiController;
 use App\Http\Controllers\Api\StatistikController;
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
-use App\Http\Middleware\VerifyFaceMiddleware; // Pastikan untuk mengimpor middleware yang sesuai
+use App\Http\Middleware\VerifyFaceMiddleware;
 
 
 /*
@@ -389,6 +389,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         //rubah-jadwal
         Route::get('/permohonan-jadwal',[RubahjadwalController::class,'index'])->name('permohonan.jadwal.user');
         Route::post('/permohonan-save',[RubahjadwalController::class,'store'])->name('permohonan.save');
+        Route::get('/permohonan-create',[RubahjadwalController::class,'create'])->name('permohonan.create');
 
         // Route::get('/Gaji-pegawai',[PenggajianController::class,'IndexGajiPegawai'])->name('gaji.pegawai');
         // Route::get('/Insentif-pegawai',[PenggajianController::class,'insentifPegawai'])->name('insentif.pegawai');

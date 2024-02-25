@@ -21,12 +21,18 @@ class RubahjadwalController extends Controller
     public function index()
     {
         $title = 'Permohonan Jadwal';
+        $type = 'component';
         $user = User::all();
+        $tahun = date('Y');
+        $bulan = date('m');
         $permohonan = rubahjadwal::whereIn('status', ['pengajuan','approve'])
                     ->where('user_id', Auth::id())
+                    ->whereMonth('tanggal',$bulan)
+                    ->whereYear('tanggal',$tahun)
                     ->orderBy('created_at', 'desc')
                     ->get();
-        return view ('frontend.users.permohonan.index',compact('title','user','permohonan'));
+        // return view ('frontend.users.permohonan.index',compact('title','user','permohonan'));
+        return view ('template.backend.karyawan.page.perubahan-jaga.rubah-jaga',compact('title','user','permohonan','type'));
     }
 
     /**
@@ -36,7 +42,10 @@ class RubahjadwalController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Create Rubah Jaga';
+        $type = 'component';
+        $user = User::all();
+        return view ('template.backend.karyawan.page.perubahan-jaga.form-jaga',compact('title','type','user'));
     }
 
     /**
@@ -99,7 +108,7 @@ class RubahjadwalController extends Controller
 
         rubahjadwal::create($permohonan);
         // return $cutiData;
-        return redirect()->back()->with('success', 'Berhasil di ajukan.');
+        return redirect()->route('permohonan.jadwal.user')->with('success', 'Berhasil di ajukan.');
     }
 
     /**
