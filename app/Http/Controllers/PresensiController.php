@@ -751,6 +751,14 @@ class PresensiController extends Controller
 
     }
 
+    public function RiwayatShow()
+    {
+        $title = 'Riwayat Presensi';
+        $type = 'component';
+        $presents = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->orderBy('tanggal','desc')->get();
+        return view('template.backend.karyawan.page.presensi.index',compact('title','type','presents'));
+    }
+
     /**
      * Update the specified resource in storage.
      *

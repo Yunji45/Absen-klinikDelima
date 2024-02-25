@@ -20,7 +20,7 @@
             </a>
           </li>
           <li>
-            <a href="components-alerts.html">
+            <a href="{{route('riwayat.daftar-hadir')}}">
               <i class="bi bi-circle"></i><span>Riwayat Presensi</span>
             </a>
           </li>

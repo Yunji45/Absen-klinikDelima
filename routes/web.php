@@ -379,6 +379,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
     //role pegawai
     Route::group(['roles' => 'pegawai'], function(){
         Route::get('/daftar-hadir', [PresensiController::class,'show'])->name('daftar-hadir');
+        Route::get('/daftar-hadir/show',[PresensiController::class,'RiwayatShow'])->name('riwayat.daftar-hadir');
         Route::get('/daftar-hadir/cari', [PresensiController::class,'cariDaftarHadir'])->name('daftar-hadir.cari');
         Route::get('/pengajuan-cuti',[CutiController::class,'index'])->name('cuti.pegawai');
         Route::post('/simpan-cuti',[CutiController::class,'store'])->name('submit.cuti');
