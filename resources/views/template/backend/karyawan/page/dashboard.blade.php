@@ -431,7 +431,7 @@
       // Fungsi untuk menampilkan popup box dengan informasi menarik
       function showPopup() {
         const messages = [
-          "form pengajuan izin dan rubah jaga sudah bisa digunakan ya ! Terimakasih!",
+          "Bagi yang belum melengkapi dokumen pribadi silahkan lengkapi di profil ! Terimakasih!",
         ];
         const randomIndex = Math.floor(Math.random() * messages.length);
         alert(messages[randomIndex]);

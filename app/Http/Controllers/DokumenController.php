@@ -75,7 +75,7 @@ class DokumenController extends Controller
                 }
             }
         }
-        return redirect('/profil')->with('success','Terimakasih ,Data Berhasil Di Simpan.');
+        return redirect()->route('profil')->with('success','Terimakasih ,Data Berhasil Di Simpan.');
     }
 
     /**

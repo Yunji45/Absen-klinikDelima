@@ -213,7 +213,10 @@ class UserController extends Controller
 
     public function profil()
     {
-        return view ('frontend.users.profil');
+        // return view ('frontend.users.profil');
+        $title = 'Profile';
+        $type = 'profile';
+        return view('template.backend.karyawan.page.profil.index',compact('title','type'));
     }
 
     public function updateProfil(Request $request, User $user)
@@ -223,6 +226,8 @@ class UserController extends Controller
             'foto' => ['image', 'mimes:jpeg,png,gif', 'max:2048']
         ]);
         $user->name = $request->name;
+        $user->no_hp = $request->no_hp;
+        $user->email = $request->email;
         if ($request->file('foto')) {
             if ($user->foto != 'default.jpeg') {
                 File::delete(storage_path('app/public/' . $user->foto));
