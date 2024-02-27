@@ -109,7 +109,7 @@
                     <!-- <div class="col-lg-3 col-md-4 label">Email</div> -->
                     @foreach ($dokuments as $dokumen)
                             <li>
-                                <a href="{{ asset('storage/sertifikat_pegawai/' . $dokumen->user->name . '/' . $dokumen->filename) }}" target="_blank">
+                                <a href="{{ asset('storage/dokumen_pegawai/' . $dokumen->user->name . '/' . $dokumen->filename) }}" target="_blank">
                                                 {{ $dokumen->filename }}
                                             </a>
                             </li>
@@ -121,7 +121,7 @@
                     <!-- <div class="col-lg-3 col-md-4 label">Email</div> -->
                     @foreach ($sertifikat as $items)
                             <li>
-                                <a href="{{ asset('storage/dokumen_pegawai/' . $items->user->name . '/' . $items->filename) }}" target="_blank">
+                                <a href="{{ asset('storage/sertifikat_pegawai/' . $items->user->name . '/' . $items->filename) }}" target="_blank">
                                                 {{ $items->filename }}
                                             </a>
                             </li>
