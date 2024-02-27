@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\presensi;
 use App\Models\rubahjadwal;
+use App\Models\SertifikatUser;
+use App\Models\DokumenUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 
 class UserController extends Controller
@@ -216,7 +219,10 @@ class UserController extends Controller
         // return view ('frontend.users.profil');
         $title = 'Profile';
         $type = 'profile';
-        return view('template.backend.karyawan.page.profil.index',compact('title','type'));
+        $dokuments = DokumenUser::where('user_id',Auth::user()->id)->get();
+        $sertifikat = SertifikatUser::where('user_id',Auth::user()->id)->get();
+        // return $dokumen;
+        return view('template.backend.karyawan.page.profil.index',compact('title','type','dokuments','sertifikat'));
     }
 
     public function updateProfil(Request $request, User $user)

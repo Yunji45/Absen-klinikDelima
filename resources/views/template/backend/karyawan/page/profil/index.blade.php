@@ -107,19 +107,25 @@
                   <h5 class="card-title">Document Files</h5>
                   <div class="row">
                     <!-- <div class="col-lg-3 col-md-4 label">Email</div> -->
-                    <div class="col-lg-9 col-md-8">data dummy</div>
-                    <div class="col-lg-9 col-md-8">data dummy</div>
-                    <div class="col-lg-9 col-md-8">data dummy</div>
-                    <div class="col-lg-9 col-md-8">data dummy</div>
+                    @foreach ($dokuments as $dokumen)
+                            <li>
+                                <a href="{{ asset('storage/sertifikat_pegawai/' . $dokumen->user->name . '/' . $dokumen->filename) }}" target="_blank">
+                                                {{ $dokumen->filename }}
+                                            </a>
+                            </li>
+                    @endforeach                    
                   </div>
 
                   <h5 class="card-title">Certificate Files</h5>
                   <div class="row">
                     <!-- <div class="col-lg-3 col-md-4 label">Email</div> -->
-                    <div class="col-lg-9 col-md-8">data dummy</div>
-                    <div class="col-lg-9 col-md-8">data dummy</div>
-                    <div class="col-lg-9 col-md-8">data dummy</div>
-                    <div class="col-lg-9 col-md-8">data dummy</div>
+                    @foreach ($sertifikat as $items)
+                            <li>
+                                <a href="{{ asset('storage/dokumen_pegawai/' . $items->user->name . '/' . $items->filename) }}" target="_blank">
+                                                {{ $items->filename }}
+                                            </a>
+                            </li>
+                    @endforeach                    
                   </div>
 
                 </div>
