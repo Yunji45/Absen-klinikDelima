@@ -699,7 +699,7 @@ class PresensiController extends Controller
         if ($request->keterangan == 'Masuk' || $request->keterangan == 'Telat') {
             $data['keterangan'] = $request->keterangan;
             $data['jam_masuk'] = $request->jam_masuk; // Memasukkan jam masuk ke dalam data
-        } elseif ($request->keterangan == 'Izin' || $request->keterangan == 'Cuti') {
+        } elseif ($request->keterangan == 'Izin' || $request->keterangan == 'Cuti' || $request->keterangan == 'Sakit') {
             $data['keterangan'] = $request->keterangan;
         } else {
             $data['keterangan'] = 'Alpha'; // Ketika tidak ada keterangan yang cocok

@@ -466,23 +466,4 @@
         </div>
       </div>
     </section>
-    <script>
-    function previewProfileImage(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                document.getElementById('profilePreview').src = e.target.result;
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    function removeProfileImage() {
-        document.getElementById('profilePreview').src = 'assets/img/profile-img.jpg';
-        // Jika perlu, Anda bisa menambahkan logika lain di sini, misalnya mengirimkan permintaan ke server untuk menghapus gambar profil.
-    }
-</script>
-
 @endsection
