@@ -199,6 +199,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/Payroll-save/multiple',[PenggajianController::class,'StoreMultipleGaji'])->name('multiple.gaji.save');
         Route::get('/index-persentase/download', [PenggajianController::class,'download_gaji'])->name('gaji.download');
         Route::get('/index-persentase/download-excel', [PenggajianController::class,'excel_gaji'])->name('gaji.download.excel');
+        Route::post('/payroll-multiple/save',[PenggajianController::class,'GetDataMultipleGaji'])->name('gaji.get');
 
         //UMR 
         Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');

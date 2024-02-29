@@ -492,6 +492,170 @@ class PenggajianController extends Controller
         return redirect()->back()->with('success', 'Data Gaji Pegawai Berhasil Disimpan.');
     }
 
+    // public function GetDataMultipleGaji(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'bulan' => 'required',
+    //         'bulantarget' => 'required'
+    //     ], [
+    //         'bulan.required' => 'Kolom Target wajib diisi.',
+    //         // 'bulan.required' => 'Kolom bulan wajib diisi.',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return redirect()->back()
+    //             ->with('errorForm', $validator->errors()->getMessages())
+    //             ->withInput();
+    //     }
+
+    //     $tahun = date('Y');
+    //     $startDate = $request->bulan;
+    //     $endDate = $request->bulan;
+
+    //     // Menghitung tanggal awal dan akhir untuk bulan yang dipilih
+    //     $tanggalawal = $tahun . '-' . $startDate . '-01';
+    //     $tanggalakhir = date('Y-m-t', strtotime($tanggalawal));
+
+    //     // Mendapatkan bulan dan tahun target
+    //     $waktuAwal = explode('-', $request->bulantarget);
+    //     $waktuBulan = $waktuAwal[1];
+    //     $waktuTahun = $waktuAwal[0];
+    //     $waktuawal = $waktuTahun . '-' . $waktuBulan . '-01';
+
+    //     // Menghitung tanggal akhir bulan target
+    //     $tanggalakhirTarget = date('Y-m-t', strtotime($waktuawal));
+
+    //     $namaBulan = [
+    //         'January', 'February', 'Maret', 'April', 'Mei', 'Juni',
+    //         'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    //     ];
+
+    //     // Mendapatkan user IDs dengan masa aktif antara tanggalawal dan tanggalakhir
+    //     $userIds = gajian::where('bulan', '>=', $tanggalawal)
+    //         ->where('bulan', '<=', $tanggalakhir)
+    //         ->pluck('user_id');
+
+    //     foreach ($userIds as $userId) {
+    //         $targetData = gajian::where('user_id', $userId)
+    //             ->where('bulan', '>=', $tanggalawal)
+    //             ->where('bulan', '<=', $tanggalakhir)
+    //             ->select('bulan','pendidikan','umr_id','index','THP','Gaji','Ach','Bonus','Masa_kerja','Gaji_akhir','Potongan',
+    //             'penyesuaian','status_admin','status_penerima')
+    //             ->first();
+
+    //         if ($targetData) {
+    //             $rowData = [
+    //                 'user_id' => $userId,
+    //                 'bulan' => $waktuawal,
+    //                 'pendidikan' => $targetData->pendidikan ??null,
+    //                 'umr_id' => $targetData->umr_id ?? null,
+    //                 'index' => $targetData->index ?? null,
+    //                 'THP' => $targetData->THP ?? null,
+    //                 'Gaji' => $targetData->Gaji ?? null,
+    //                 'Ach' => $targetData->Ach ?? null,
+    //                 'Bonus' => $targetData->Bonus ?? null,
+    //                 'Masa_kerja' => $targetData->Masa_kerja ?? null,
+    //                 'Gaji_akhir' => $targetData->Gaji_akhir ?? null,
+    //                 'Potongan' => $targetData->Potongan ?? null,
+    //                 'penyesuaian' => $targetData->penyesuaian ?? null,
+    //                 'status_admin' => $targetData->status_admin ?? null,
+    //                 'status_penerima' => $targetData->status_penerima ?? null,
+    //                 'created_at' => now(),
+    //                 'updated_at' => now(),
+    //             ];
+
+    //             // Menyimpan data baru
+    //             gajian::create($rowData);
+    //             // return $rowData;
+    //         } else {
+    //             return redirect()->back()->with('error', 'Data Gaji User Pada Bulan Ini sudah Ada.');
+    //         }
+    //     }
+    //     return redirect()->back()->with('success', 'Terimakasih, Data Gaji Terbaru Berhasil Disimpan');
+
+    // }
+    public function GetDataMultipleGaji(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'bulan' => 'required',
+            'bulantarget' => 'required'
+        ], [
+            'bulan.required' => 'Kolom Target wajib diisi.',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+
+        $tahun = date('Y');
+        $startDate = $request->bulan;
+        $endDate = $request->bulan;
+
+        // Menghitung tanggal awal dan akhir untuk bulan yang dipilih
+        $tanggalawal = $tahun . '-' . $startDate . '-01';
+        $tanggalakhir = date('Y-m-t', strtotime($tanggalawal));
+
+        // Mendapatkan bulan dan tahun target
+        $waktuAwal = explode('-', $request->bulantarget);
+        $waktuBulan = $waktuAwal[1];
+        $waktuTahun = $waktuAwal[0];
+        $waktuawal = $waktuTahun . '-' . $waktuBulan . '-01';
+
+        // Menghitung tanggal akhir bulan target
+        $tanggalakhirTarget = date('Y-m-t', strtotime($waktuawal));
+
+        $namaBulan = [
+            'January', 'February', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        // Mendapatkan user IDs dengan masa aktif antara tanggalawal dan tanggalakhir
+        $userIds = gajian::where('bulan', '>=', $tanggalawal)
+            ->where('bulan', '<=', $tanggalakhir)
+            ->pluck('user_id');
+
+        foreach ($userIds as $userId) {
+            $targetData = gajian::where('user_id', $userId)
+                ->where('bulan', '>=', $tanggalawal)
+                ->where('bulan', '<=', $tanggalakhir)
+                ->select('bulan', 'pendidikan', 'umr_id', 'index', 'THP', 'Gaji', 'Ach', 'Bonus', 'Masa_kerja', 'Gaji_akhir', 'Potongan',
+                    'penyesuaian', 'status_admin', 'status_penerima')
+                ->first();
+
+            if (!$targetData) {
+                // Jika data gaji untuk user dan bulan yang dimaksud tidak ditemukan, lanjutkan ke pengembalian pesan error
+                return redirect()->back()->with('error', 'Data Gaji User Pada Bulan Ini sudah Ada.');
+            }
+
+            $rowData = [
+                'user_id' => $userId,
+                'bulan' => $waktuawal,
+                'pendidikan' => $targetData->pendidikan ?? null,
+                'umr_id' => $targetData->umr_id ?? null,
+                'index' => $targetData->index ?? null,
+                'THP' => $targetData->THP ?? null,
+                'Gaji' => $targetData->Gaji ?? null,
+                'Ach' => $targetData->Ach ?? null,
+                'Bonus' => $targetData->Bonus ?? null,
+                'Masa_kerja' => $targetData->Masa_kerja ?? null,
+                'Gaji_akhir' => $targetData->Gaji_akhir ?? null,
+                'Potongan' => $targetData->Potongan ?? null,
+                'penyesuaian' => $targetData->penyesuaian ?? null,
+                'status_admin' => $targetData->status_admin ?? null,
+                'status_penerima' => $targetData->status_penerima ?? null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            // Menyimpan data baru
+            gajian::create($rowData);
+        }
+
+        return redirect()->back()->with('success', 'Terimakasih, Data Gaji Terbaru Berhasil Disimpan');
+    }
+
     public function download_gaji(Request $request)
     {
         $request->validate([
