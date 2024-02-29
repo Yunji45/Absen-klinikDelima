@@ -9,6 +9,8 @@ use App\Models\UMKaryawan;
 use App\Models\kpi;
 use App\Models\InsentifKpi;
 use App\Models\NoteKaryawan;
+use App\Exports\GajiExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use PDF;
@@ -490,19 +492,59 @@ class PenggajianController extends Controller
         return redirect()->back()->with('success', 'Data Gaji Pegawai Berhasil Disimpan.');
     }
 
-    public function download_gaji()
+    public function download_gaji(Request $request)
     {
-        $bulan = date('01');
-        $tahun = date('Y');
+        $request->validate([
+            'bulan' => ['required']
+        ]);
+
+        $waktu = explode('-', $request->bulan);
+        $tahun = $waktu[0];
+        $bulan = $waktu[1];
+
         $data = gajian::whereYear('bulan', $tahun)
                         ->whereMonth('bulan', $bulan)
                         ->get();
-        $total = gajian::whereYear('bulan',$tahun)->whereMonth('bulan',$bulan)->sum('Gaji_akhir');        
+        
+        $total = gajian::whereYear('bulan', $tahun)
+                        ->whereMonth('bulan', $bulan)
+                        ->sum('Gaji_akhir');
 
-        // $data = jadwal::all();
-        $pdf = PDF::loadview('template.backend.admin.gaji.download-gaji',['data'=>$data, 'total' => $total]);
-        return $pdf->download('download-gaji');
+        $pdf = PDF::loadview('template.backend.admin.gaji.download-gaji', ['data' => $data, 'total' => $total]);
+        return $pdf->download('download-gaji.pdf');
     }
+
+    public function excel_gaji(Request $request)
+    {
+        $request->validate([
+            'bulan' => ['required']
+        ]);
+        $waktu = explode('-', $request->bulan);
+        $tahun = $waktu[0];
+        $bulan = $waktu[1];
+    
+        $data = gajian::whereYear('bulan', $tahun)
+                     ->whereMonth('bulan', $bulan)
+                     ->orderBy('bulan', 'asc')
+                     ->get();
+    
+        return Excel::download(new GajiExport($data), 'Gaji-Karyawan.xlsx');
+    }
+    // public function download_gaji()
+    // {
+    //     $request->validate([
+    //         'bulan' => ['required']
+    //     ]);
+    //     $waktu = explode('-', $request->bulan);
+    //     $data = gajian::whereYear('bulan', $waktu[1])
+    //                     ->whereMonth('bulan', $waktu[0])
+    //                     ->get();
+    //     $total = gajian::whereYear('bulan',$tahun)->whereMonth('bulan',$bulan)->sum('Gaji_akhir');        
+
+    //     // $data = jadwal::all();
+    //     $pdf = PDF::loadview('template.backend.admin.gaji.download-gaji',['data'=>$data, 'total' => $total]);
+    //     return $pdf->download('download-gaji');
+    // }
 
     //zona pegawai
     public function IndexGajiPegawai()

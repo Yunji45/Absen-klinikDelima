@@ -22,11 +22,11 @@
                   <i class="fa fa-plus">
                       Add</i>
               </a> -->
-              <a href="{{route('gaji.download')}}" class="btn btn-danger">
+              <a href="{{route('gaji.download', ['bulan' => request('bulan', date('Y-m'))])}}" class="btn btn-danger">
                   <i class="fa fa-download">
                       PDF</i>
               </a>
-              <a href="" class="btn btn-success">
+              <a href="{{route('gaji.download.excel', ['bulan' => request('bulan', date('Y-m'))])}}" class="btn btn-success">
                   <i class="fa fa-download">
                       Excel</i>
               </a>

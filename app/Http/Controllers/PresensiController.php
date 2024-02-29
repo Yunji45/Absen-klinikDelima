@@ -743,7 +743,6 @@ class PresensiController extends Controller
                     ->orWhere('keterangan', 'telat');
                     })->count();    
         $karyawan = User::whereIn('role',['evaluator','pegawai','keuangan','hrd'])->count();
-                    
         // return $permohonan;
         // return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
         // return view('template.frontend.error-page.update', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
