@@ -16,7 +16,7 @@
               <div class="dropdown-menu">
                   <a class="dropdown-item" href="{{ route('gaji.create') }}">Add Normal</a>
                   <a class="dropdown-item" href="{{route('multiple.gaji.create')}}">Add Multiple</a>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#update">get Multiple</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#update">GET Data Multiple</a>
               </div>
 
               <!-- <a href="{{route('gaji.create')}}" class="btn btn-primary">
@@ -25,11 +25,11 @@
               </a> -->
               <a href="{{route('gaji.download', ['bulan' => request('bulan', date('Y-m'))])}}" class="btn btn-danger">
                   <i class="fa fa-download">
-                      PDF</i>
+                      </i> PDF
               </a>
               <a href="{{route('gaji.download.excel', ['bulan' => request('bulan', date('Y-m'))])}}" class="btn btn-success">
                   <i class="fa fa-download">
-                      Excel</i>
+                      </i> Export to Excel
               </a>
               <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item" style="font-size:16px; font-weight:bold;">Total Gaji : {{'Rp.' . number_format(floatval($total), 0, ',', '.')}}</a></div>

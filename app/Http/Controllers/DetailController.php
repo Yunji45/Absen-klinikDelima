@@ -189,7 +189,6 @@ class DetailController extends Controller
         $type = 'detail-user';
         $data = DetailPegawai::find($id);
         return view('template.backend.admin.detail-user.edit',compact('title','type','data'));
-
     }
 
     public function update(Request $request,$id)
@@ -281,6 +280,7 @@ class DetailController extends Controller
         $data ->delete();
         return redirect('/detail-pegawai')->with('success','Data Berhasil Di Hapus');        
     }
+
     public function show($id)
     {
         $title = 'BIODATA PEGAWAI';
@@ -335,6 +335,7 @@ class DetailController extends Controller
         $pdf = PDF::loadView('backend.admin.detail-pegawai.download', $data);
         return $pdf->download('Profile-Pegawai.pdf');
     }
+
     public function downloadindex()
     {
         $detail = DetailPegawai::all();
