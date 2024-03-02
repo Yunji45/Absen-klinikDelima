@@ -32,6 +32,9 @@ return new class extends Migration
             $table->string('status_admin')->nullable();
             $table->string('status_penerima')->nullable();
             $table->string('penyesuaian')->nullable();
+            $table->string('masa_kerja_karyawan')->nullable();
+            $table->date('bergabung')->nullable();
+            $table->date('berakhir')->nullable();
             $table->timestamps();
         });
     }

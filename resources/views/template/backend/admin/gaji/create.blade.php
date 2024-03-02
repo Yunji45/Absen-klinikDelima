@@ -157,6 +157,20 @@
                                 @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        <div class="form-group row" id="Bonus">
+                            <label for="Bonus" class="col-form-label col-sm-3">Bergabung</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="bergabung" id="bergabung" class="form-control @error('Bonus') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada tambahan" required>
+                                @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="Bonus">
+                            <label for="Bonus" class="col-form-label col-sm-3">berakhir</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="berakhir" id="berakhir" class="form-control @error('Bonus') is-invalid @enderror" placeholder="isi dengan 0 jika tidak ada tambahan" required>
+                                @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <a href="{{route('gaji.adm')}}" type="button" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-success">Simpan</button>

@@ -161,6 +161,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group row" id="Bonus">
+                            <label for="Bonus" class="col-form-label col-sm-3">Bergabung</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="bergabung" id="bergabung" class="form-control @error('Bonus') is-invalid @enderror" value="{{ old('Bonus', $gaji->bergabung) }}">
+                                @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row" id="Bonus">
+                            <label for="Bonus" class="col-form-label col-sm-3">Berakhir</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="berakhir" id="berakhir" class="form-control @error('Bonus') is-invalid @enderror" value="{{ old('Bonus', $gaji->berakhir) }}">
+                                @error('Bonus') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
                         <!-- <div class="form-group row" id="penyesuaian">
                             <label for="Potongan" class="col-form-label col-sm-3">Penyesuaian</label>
                             <div class="col-sm-9">

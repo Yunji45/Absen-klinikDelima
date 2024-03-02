@@ -12,6 +12,7 @@ use App\Models\NoteKaryawan;
 use App\Exports\GajiExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 use Auth;
 use PDF;
 
@@ -96,6 +97,77 @@ class PenggajianController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'user_id' => 'required',
+    //         'bulan' => 'required',
+    //         'pendidikan' => 'required',
+    //         'umr_id' => 'required',
+    //         'Masa_kerja' => 'required',
+    //         'Potongan' => 'numeric',
+    //         'penyesuaian' => 'required',
+    //         'index' => 'required'
+    //     ]);
+    //     $bulanYangDicari = $request->bulan; 
+    //     $tahun = date('Y'); 
+    //     $tanggalBulan = $tahun . '-' . $bulanYangDicari . '-01';
+
+    //     $gaji = new gajian;
+    //     $gaji->user_id = $request->user_id;
+    //     $gaji->bulan = $tanggalBulan;
+    //     $gaji->pendidikan = $request->pendidikan;
+    //     $gaji->index = $request->index;
+
+    //     $gaji->umr_id = $request->umr_id;
+    //     // Mengambil nilai UMK berdasarkan umr_id
+    //     $umr_id = $request->umr_id;
+    //     $umk = UMKaryawan::where('id', $umr_id)->value('UMK');
+    //     // Perhitungan THP
+    //     $thp = ($umk * $request->index) / 100;
+    //     $gaji->THP =$thp;
+        
+    //     // Perhitungan Gaji 80 %
+    //     $gaji_80 = ($thp * 80) / 100;
+    //     $gaji->Gaji = $gaji_80;
+        
+    //     // Perhitungan Insentif 20%
+    //     $insentif = ($thp * 20) / 100;
+    //     $gaji->Ach = $insentif;
+    //     $gaji->Masa_kerja = $request->Masa_kerja;
+
+    //     $gaji->Potongan = $request->Potongan;
+    //     $gaji->Bonus = $request->Bonus;
+    //     $gaji->penyesuaian = $request->penyesuaian;
+    //     $gaji->status_admin = 'Pending';
+    //     $gaji->status_penerima = 'Pending';
+
+    //     if ($request->Masa_kerja == 1) {
+    //         $total_potongan_bonus = $request->Potongan - $request->Bonus;
+    //         $gaji_akhir = $gaji_80 - $total_potongan_bonus + $request->penyesuaian;
+    //         $gaji->Gaji_akhir = max($gaji_akhir, 0);
+    //     } elseif ($request->Masa_kerja == 0) {
+    //         $masa = $gaji_80 * 0.8;
+    //         $total_potongan_bonus = $request->Potongan - $request->Bonus;
+    //         $gaji_akhir = $masa - $total_potongan_bonus + $request->penyesuaian;
+    //         $gaji->Gaji_akhir = max($gaji_akhir, 0);
+    //     } else {
+    //         $gaji->Gaji_akhir = null;
+    //     }        
+    //     // $gaji->Potongan = $request->Potongan;
+    //     // $gaji->Bonus = $request->Bonus;
+    //     // $gaji->penyesuaian = 0;
+    //     // $gaji->status_admin = 'Pending';
+    //     // $gaji->status_penerima = 'Pending';
+        
+    //     $gaji->save();
+    //     // return $gaji;
+    //     if($gaji){
+    //         return redirect('/index-persentase')->with('success','Data Berhasil Di Simpan.');
+    //     }else{
+    //         return redirect()->back()->with('error','Data Gagal Untuk Di Simpan.');
+    //     }
+    // }
     public function store(Request $request)
     {
         $request->validate([
@@ -141,6 +213,16 @@ class PenggajianController extends Controller
         $gaji->status_admin = 'Pending';
         $gaji->status_penerima = 'Pending';
 
+        $hireDate = Carbon::parse($request->bergabung);
+        $exitDate = $request->berakhir ? Carbon::parse($request->berakhir) : Carbon::now();
+        $lengthService = $hireDate->diff($exitDate);
+        $years = $lengthService->y;
+        $month = $lengthService->m;
+        $lamakerja = $years . ' tahun ' . $month +1 . ' bulan';
+        $gaji->masa_kerja_karyawan = $lamakerja;
+        $gaji->bergabung = $hireDate->toDateString();
+        $gaji->berakhir = $exitDate->toDateString();
+                
         if ($request->Masa_kerja == 1) {
             $total_potongan_bonus = $request->Potongan - $request->Bonus;
             $gaji_akhir = $gaji_80 - $total_potongan_bonus + $request->penyesuaian;
@@ -248,6 +330,16 @@ class PenggajianController extends Controller
         $gaji->status_penerima = 'Pending';
         $gaji->penyesuaian = $request->penyesuaian;
 
+        $hireDate = Carbon::parse($request->bergabung);
+        $exitDate = $request->berakhir ? Carbon::parse($request->berakhir) : Carbon::now();
+        $lengthService = $hireDate->diff($exitDate);
+        $years = $lengthService->y;
+        $month = $lengthService->m;
+        $lamakerja = $years . ' tahun ' . $month +1 . ' bulan';
+        $gaji->masa_kerja_karyawan = $lamakerja;
+        $gaji->bergabung = $hireDate->toDateString();
+        $gaji->berakhir = $exitDate->toDateString();
+
         if ($request->Masa_kerja == 1) {
             $total_potongan_bonus = $request->Potongan - $request->Bonus;
             $gaji_akhir = $gaji_80 - $total_potongan_bonus + $request->penyesuaian;
@@ -319,29 +411,6 @@ class PenggajianController extends Controller
 
     public function CreateMultipleGaji()
     {
-        // $user_id = 1;
-        // $startDate = '2023-10-01';
-        // $endDate = '2023-10-31';
-        // $data = gajian::where('user_id', $user_id)
-        //     ->where(function ($query) use ($startDate, $endDate) {
-        //         $query->where('bulan', '<=', $endDate)
-        //             ->where('bulan', '>=', $startDate);
-        //     })
-        //     ->select('umr_id', 'index', 'THP', 'Gaji', 'Ach', 'Masa_kerja', 'Gaji_akhir')
-        //     ->first();
-        // return $data;
-                // $user_id = 1;
-        // $data = explode('-', '2023-10-02');
-        // $bulan = $data[1]; // Bulan
-        // $tahun = $data[0]; // Tahun
-
-        // $data = gajian::where('user_id', $user_id)
-        //                 ->whereMonth('bulan', $bulan)
-        //                 ->whereYear('bulan', $tahun)
-        //                 ->select('umr_id','index','THP','Gaji','Ach','Masa_kerja','Gaji_akhir')
-        //                 ->first();
-        // return $data;
-
         $title = 'Payroll Multiple';
         $type = 'gaji';
         $data = User::all();
@@ -491,7 +560,7 @@ class PenggajianController extends Controller
         }
         return redirect()->back()->with('success', 'Data Gaji Pegawai Berhasil Disimpan.');
     }
-    
+
     public function GetDataMultipleGaji(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -541,7 +610,7 @@ class PenggajianController extends Controller
                 ->where('bulan', '>=', $tanggalawal)
                 ->where('bulan', '<=', $tanggalakhir)
                 ->select('bulan', 'pendidikan', 'umr_id', 'index', 'THP', 'Gaji', 'Ach', 'Bonus', 'Masa_kerja', 'Gaji_akhir', 'Potongan',
-                    'penyesuaian', 'status_admin', 'status_penerima')
+                    'penyesuaian', 'status_admin', 'status_penerima', 'masa_kerja_karyawan','bergabung','berakhir')
                 ->first();
 
             if (!$targetData) {
@@ -567,6 +636,9 @@ class PenggajianController extends Controller
                     'penyesuaian' => $targetData->penyesuaian ?? null,
                     'status_admin' => $targetData->status_admin ?? null,
                     'status_penerima' => $targetData->status_penerima ?? null,
+                    'masa_kerja_karyawan' => $targetData->masa_kerja_karyawan ?? null,
+                    'bergabung' => $targetData->bergabung ?? null,
+                    'berakhir' => $targetData->berakhir ?? null,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
