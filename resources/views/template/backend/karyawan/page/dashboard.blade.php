@@ -12,7 +12,13 @@
 
     <section class="section dashboard">
       <div class="row">
-
+              <div class="col-lg-12">
+                <div class="hero bg-success text-white">
+                  <div class="hero-inner">
+                    <h4 style="font-size: 36px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Welcome , {{Auth::user()->name}} !</h4>
+                  </div>
+                </div>
+              </div>
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
@@ -203,75 +209,75 @@
 
                   <!-- Line Chart -->
                   <div id="reportsChart"></div>
-                  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    let startDate = new Date();
-    startDate.setDate(1); // Mengatur tanggal ke 1 untuk mendapatkan awal bulan
-    let startYear = startDate.getFullYear();
-    let startMonth = startDate.getMonth() + 1; // Ditambah 1 karena bulan dimulai dari 0 (Januari)
+                  <!-- <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      let startDate = new Date();
+                      startDate.setDate(1); // Mengatur tanggal ke 1 untuk mendapatkan awal bulan
+                      let startYear = startDate.getFullYear();
+                      let startMonth = startDate.getMonth() + 1; // Ditambah 1 karena bulan dimulai dari 0 (Januari)
 
-    // Mendapatkan tanggal akhir bulan berjalan
-    let endDate = new Date(startYear, startMonth, 0); // Membuat tanggal satu hari setelah bulan berikutnya, lalu mundur satu hari
-    let endDay = endDate.getDate();
+                      // Mendapatkan tanggal akhir bulan berjalan
+                      let endDate = new Date(startYear, startMonth, 0); // Membuat tanggal satu hari setelah bulan berikutnya, lalu mundur satu hari
+                      let endDay = endDate.getDate();
 
-    // Buat array untuk menyimpan tanggal-tanggal dari awal hingga akhir bulan berjalan
-    let categories = [];
-    for (let i = 1; i <= endDay; i++) {
-      // Format tanggal menjadi "YYYY-MM-DD"
-      let date = `${startYear}-${startMonth < 10 ? '0' + startMonth : startMonth}-${i < 10 ? '0' + i : i}`;
-      categories.push(date);
-    }
+                      // Buat array untuk menyimpan tanggal-tanggal dari awal hingga akhir bulan berjalan
+                      let categories = [];
+                      for (let i = 1; i <= endDay; i++) {
+                        // Format tanggal menjadi "YYYY-MM-DD"
+                        let date = `${startYear}-${startMonth < 10 ? '0' + startMonth : startMonth}-${i < 10 ? '0' + i : i}`;
+                        categories.push(date);
+                      }
 
-    new ApexCharts(document.querySelector("#reportsChart"), {
-      series: [{
-        name: 'On-time',
-        data: [{{$masuk}}],
-      }, {
-        name: 'Telat',
-        data: [{{$telat}}],
-      }, {
-        name: 'Alpha',
-        data: [{{$alpha}}],
-      }],
-      chart: {
-        height: 350,
-        type: 'area',
-        toolbar: {
-          show: false
-        },
-      },
-      markers: {
-        size: 4
-      },
-      colors: ['#4154f1', '#2eca6a', '#ff771d'],
-      fill: {
-        type: "gradient",
-        gradient: {
-          shadeIntensity: 1,
-          opacityFrom: 0.3,
-          opacityTo: 0.4,
-          stops: [0, 90, 100]
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'smooth',
-        width: 2
-      },
-      xaxis: {
-        type: 'datetime',
-        categories: categories
-      },
-      tooltip: {
-        x: {
-          format: 'dd/MM/yy HH:mm'
-        },
-      }
-    }).render();
-  });
-</script>
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'On-time',
+                          data: [{{$masuk}}],
+                        }, {
+                          name: 'Telat',
+                          data: [{{$telat}}],
+                        }, {
+                          name: 'Alpha',
+                          data: [{{$alpha}}],
+                        }],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          type: 'datetime',
+                          categories: categories
+                        },
+                        tooltip: {
+                          x: {
+                            format: 'dd/MM/yy HH:mm'
+                          },
+                        }
+                      }).render();
+                    });
+                  </script> -->
 
 
                   <!-- <script>
@@ -344,13 +350,13 @@
                     });
                   </script> -->
 
-                  <!-- <script>
+                  <script>
                     document.addEventListener("DOMContentLoaded", () => {
                       new ApexCharts(document.querySelector("#reportsChart"), {
                         series: [{
                           name: 'On-time',
                           // data: [31, 40, 28, 51, 42, 82, 56],
-                          data: [{{$masuk}}]
+                          data: [20, 42, 21, 10, 30, 11, 4]
                         }, {
                           name: 'Telat',
                           data: [11, 32, 45, 32, 34, 52, 41]
@@ -396,7 +402,7 @@
                         }
                       }).render();
                     });
-                  </script> -->
+                  </script>
                   <!-- End Line Chart -->
 
                 </div>
@@ -568,7 +574,7 @@
 
       </div>
     </section>
-    <script>
+    <!-- <script>
       // Fungsi untuk menampilkan popup box dengan informasi menarik
       function showPopup() {
         const messages = [
@@ -582,6 +588,6 @@
       window.onload = function() {
         showPopup();
       };
-    </script>
+    </script> -->
 
 @endsection

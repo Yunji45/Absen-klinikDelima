@@ -177,9 +177,10 @@ class DaftarTugasController extends Controller
         return view ('template.backend.admin.jasamedis.daftar-tugas.riwayat',compact('title','type','tugas','history'));
     }
 
-    public function Delete($user_id)
+    public function Delete($id)
     {
-        $tugas = OperasionalJasa::where('user_id', $user_id)->first();
+        $tugas=OperasionalJasa::find($id);
+        // $tugas = OperasionalJasa::where('user_id', $user_id)->first();
         if($tugas){
             $tugas ->delete();
             return redirect()->back()->with('success','Data Riwayat Berhasil Dihapus.');
@@ -200,8 +201,11 @@ class DaftarTugasController extends Controller
                                     ->where('ceklis', 'Ya')
                                     ->whereYear('bulan', $tahunBerjalan)
                                     ->whereMonth('bulan', $bulanBerjalan)                                
-                                    ->orderBy('updated_at')
-                                    ->get();
+                                    ->orderBy('created_at','desc')
+                                    ->get();  
+        if ($history->isEmpty()) {
+            return redirect()->back()->with('error', 'Daftar Riwayat Tugas Pada Bulan Sekarang Tidak Ada.');
+        }            
         $pending = OperasionalJasa::where('user_id',$user_id)
                                     ->where('ceklis','Tidak')
                                     ->whereYear('bulan', $tahunBerjalan)
@@ -227,22 +231,55 @@ class DaftarTugasController extends Controller
         //     $userCount += $item->user_id;        
         // }
         // return $userCount;
+
         return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history','pending','complete','jumlah','totaljasa'));
     }
 
     public function cari(Request $request,$user_id)
     {
+        $title = 'Detail Riwayat Tugas Layanan';
+        $type = 'jasamedis';
+
         $request->validate([
             'bulan' => ['required']
         ]);
         $data = explode('-',$request->bulan);
+        $userId = $user_id;
         $history = OperasionalJasa::where('user_id',$user_id)
                             ->where('ceklis', 'Ya')
                             ->whereMonth('bulan',$data[1])
                             ->whereYear('bulan',$data[0])
                             ->orderBy('bulan','desc')->get();
-        
-        return history;
+        if ($history->isEmpty()) {
+            return redirect()->back()->with('error', 'Daftar Riwayat Tugas Tidak Ada.');
+        }
+        $pending = OperasionalJasa::where('user_id',$user_id)
+                            ->where('ceklis','Tidak')
+                            ->whereMonth('bulan',$data[1])
+                            ->whereYear('bulan',$data[0])
+                            ->count();
+        $complete = OperasionalJasa::where('user_id',$user_id)
+                                    ->where('ceklis','Ya')
+                                    ->whereMonth('bulan',$data[1])
+                                    ->whereYear('bulan',$data[0])
+                                    ->count();
+        $totaljasa = OperasionalJasa::where('user_id',$user_id)
+                                    ->where('ceklis','Ya')
+                                    ->whereMonth('bulan',$data[1])
+                                    ->whereYear('bulan',$data[0])
+                                    ->sum('tarif_jasa');
+        $jumlah = OperasionalJasa::where('user_id',$user_id)
+                                ->where('ceklis','Ya')
+                                ->whereMonth('bulan',$data[1])
+                                ->whereYear('bulan',$data[0])
+                                ->count();
+                
+        // return [
+        //     'user_id' => $userId,
+        //     'history' => $totaljasa
+        // ];
+        return view ('template.backend.admin.jasamedis.daftar-tugas.detail-riwayat',compact('title','type','history','pending','complete','jumlah','totaljasa'));
+
     }
 
 }

@@ -308,7 +308,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/daftar-tugas/ceklis/{id}',[DaftarTugasController::class,'CeklisJasaMedis'])->name('daftar.tugas.ceklis');
         Route::get('/daftar-tugas/riwayat',[DaftarTugasController::class,'RiwayatTugas'])->name('daftar.tugas.riwayat');
         Route::get('/detail-tugas/detail/{user_id}', [DaftarTugasController::class, 'DetailRiwayatTugas'])->name('daftar.tugas.detail');
-        Route::get('/detail-tugas/delete/{user_id}',[DaftarTugasController::class,'Delete'])->name('daftar.tugas.delete.user');
+        Route::get('/detail-tugas/delete/{id}',[DaftarTugasController::class,'Delete'])->name('daftar.tugas.delete.user');
+        Route::get('/detail-tugas/cari/{user_id}',[DaftarTugasController::class,'cari'])->name('daftar.tugas.cari.user');
 
         //task list jasa medis
         // Route::get('/task-list',[TasklistJasaMedisController::class,'index'])->name('task.list.index');

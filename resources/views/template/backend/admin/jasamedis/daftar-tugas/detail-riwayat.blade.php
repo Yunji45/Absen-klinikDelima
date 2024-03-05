@@ -85,7 +85,7 @@
                                     <td scope="col" class="text-center">{{ date('F Y', strtotime($item->updated_at)) }}</td>
                                     <td><div class="badge badge-pill badge-success mb-1 float-right">Completed</div></td>
                                     <td scope="col" class="text-center">
-                                        <a href="{{route('daftar.tugas.delete.user',$item->user_id)}}" onclick="return confirm('Yakin akan menghapus Data ?')" class="btn btn-danger btn-sm">
+                                        <a href="{{route('daftar.tugas.delete.user',$item->id)}}" onclick="return confirm('Yakin akan menghapus Data ?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash"> Hapus</i>
                                         </a>
 
@@ -110,7 +110,7 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="get">
+                <form action="{{route('daftar.tugas.cari.user',$history->first()->user_id)}}" method="get">
                     <div class="modal-body">
                         <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
                         <input type="month" class="form-control" name="bulan" id="bulan" value="{{ request('bulan',date('Y-m')) }}">
