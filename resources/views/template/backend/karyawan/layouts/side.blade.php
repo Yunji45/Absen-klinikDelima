@@ -71,6 +71,24 @@
           </li>
         </ul>
       </li>
+      <li class="nav-heading">Layanan Jasa Medis / Tindakan</li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#layanan-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Layanan Medis</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="layanan-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{route('daftar.pasien')}}">
+              <i class="bi bi-circle"></i><span>Daftar Pasien</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('daftar.tugas')}}">
+              <i class="bi bi-circle"></i><span>Daftar Tugas Layanan</span>
+            </a>
+          </li>
+        </ul>
+      </li>
       <!-- End Forms Nav -->
       <li class="nav-heading">Support System</li>
       <li class="nav-item">
