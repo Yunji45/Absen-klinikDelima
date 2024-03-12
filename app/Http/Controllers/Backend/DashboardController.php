@@ -28,4 +28,12 @@ class DashboardController extends Controller
     ));
         // return $JumPegawai;
     }
+
+    //layanan
+    public function dash_layanan()
+    {
+        $title = 'Dashboard Layanan';
+        $type = 'dash_layanan';
+        return view('template.backend.admin.dashboard.layanan',compact('title','type'));
+    }
 }

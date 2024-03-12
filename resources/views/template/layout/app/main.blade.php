@@ -86,6 +86,8 @@
   <script src="{{asset('stisla/dist/assets/modules/jquery-selectric/jquery.selectric.min.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/modules/jquery.sparkline.min.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/js/page/modules-chartjs.js')}}"></script>
+  <script src="{{asset('stisla/dist/assets/js/page/modules-vector-map.js')}}"></script>
 
   <!-- Page Specific JS File -->
   <!-- <script src="{{asset('stisla/dist/assets/js/page/components-gender.js')}}"></script>

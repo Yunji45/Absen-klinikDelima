@@ -16,10 +16,10 @@
                     <span>Dashboard SDM</span>
                 </a>
             </li>
-            <li class="nav-item dropdown {{ $type === 'dashboard' ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('dash.admin')}}">
+            <li class="nav-item dropdown {{ $type === 'dash_layanan' ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('dash.layanan')}}">
                     <i class="fas fa-home"></i>
-                    <span>Dashboard Pengunjung</span>
+                    <span>Dashboard Layanan</span>
                 </a>
             </li>
             @endif
