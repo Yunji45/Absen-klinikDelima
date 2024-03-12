@@ -948,8 +948,8 @@ class KpiController extends Controller
         $target_akhir = $request->bulan;
         $startDate = $request->bulantarget;
         $endDate = $request->bulantarget;
-        // $tahun = date('Y'); 
-        $tahun = '2023'; 
+        $tahun = date('Y'); 
+        // $tahun = '2023'; 
         $tanggalawal = $tahun . '-' . $startDate . '-01';
         $tanggalakhir = $tahun . '-' . $endDate . '-31';
 
@@ -959,10 +959,10 @@ class KpiController extends Controller
         $data = [];
 
         $targetData = AchKpi::where(function ($query) use ($target_awal, $target_akhir) {
-            // $query->where('start_date', '<=', $target_akhir)
-            //       ->where('end_date', '>=', $target_awal);
-            $query->where('start_date', '<=', '2024-01-31')
-            ->where('end_date', '>=', '2024-01-01');
+            $query->where('start_date', '<=', $target_akhir)
+                  ->where('end_date', '>=', $target_awal);
+            // $query->where('start_date', '<=', '2024-01-31')
+            // ->where('end_date', '>=', '2024-01-01');
         })
             ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'care', 'khitan', 'rawat', 'salin', 'lab', 'umum', 'visit')
             ->first();
