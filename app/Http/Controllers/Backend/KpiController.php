@@ -1676,8 +1676,8 @@ class KpiController extends Controller
 
                 if ($targetkpi) {
                     if ($targetkpi->bulan) {
-                        // $data = explode('-', $targetkpi->bulan);
-                        $data = explode('-', '2024-02-01');
+                        $data = explode('-', $targetkpi->bulan);
+                        // $data = explode('-', '2024-02-01');
                         $bulan = $data[1];
                         $tahun = $data[0];
 
@@ -1715,12 +1715,16 @@ class KpiController extends Controller
                             $psTotal += $psCount;
                         }
 
-                        $target_id = $targetkpi->target_id;
-                        $ach = AchKpi::whereMonth('start_date',$bulan)
-                            ->whereYear('start_date',$tahun)
-                            ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
+                        $target_id = $targetkpi->target_id;                    
+                        // $ach = AchKpi::whereMonth('start_date','02')
+                        //     ->whereYear('start_date','2024')
+                        //     ->select('daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
+                        //         'rawat', 'salin', 'lab', 'umum', 'visit')
+                        //     ->first();
+                        $ach = AchKpi::where('start_date','2024-01-01')
+                        ->select('start_date','end_date','daftar', 'poli', 'farmasi', 'kasir', 'care', 'bpjs', 'khitan',
                                 'rawat', 'salin', 'lab', 'umum', 'visit')
-                            ->first();
+                            ->first();;
 
                         if (!$ach) {
                             return redirect()->back()->with('error','Ada Masalah Di Backend Ach KPI.');
