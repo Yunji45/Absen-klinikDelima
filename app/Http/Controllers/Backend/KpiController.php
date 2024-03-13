@@ -167,8 +167,8 @@ class KpiController extends Controller
                 ->first();
     
             $kpi = kpi::where('user_id', $user)
-                ->where('bulan', '>=', '2023-12-01')
-                ->where('bulan', '<=', '2023-12-31')
+                ->where('bulan', '>=', '2024-01-01')
+                ->where('bulan', '<=', '2024-01-31')
                 ->select( 'user_id','layanan', 'akuntan', 'kompeten', 'harmonis', 'loyal', 'adaptif', 'kolaboratif')
                 ->first();
     
