@@ -159,6 +159,34 @@
                     <span>Setting IP Address</span>
                 </a>
             </li>
+            <li class="menu-header">Layanan</li>
+            <li class="nav-item dropdown {{ $type === 'content' ? 'active' : '' }} ">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-window-restore"></i>
+                    <span>Dataset Layanan</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Route::currentRouteName() === 'setting-content.index' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('setting-content.index')}}">Rawat Jalan (Poli & UGD)</a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="">Rawat Inap</a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="">Persalinan</a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="">Khitan</a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="">Laboratorium</a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="">USG</a>
+                    </li>
+
+                </ul>
+            </li>
             <li class="menu-header">Layout</li>
             <li class="nav-item dropdown {{ $type === 'content' ? 'active' : '' }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
