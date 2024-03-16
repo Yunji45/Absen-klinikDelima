@@ -2,6 +2,15 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="index.html">Mitra Delima</a>
+            <!-- <a href="index.html" style="font-family: Rammetto One, cursive; color: #ff0000;">R</a>
+            <a href="index.html" style="font-family: Amatic SC, cursive; color: #ff7f00;">A</a>
+            <a href="index.html" style="font-family: Monoton, cursive; color: #ffff00;">M</a>
+            <a href="index.html" style="font-family: Indie Flower, cursive; color: #00ff00;">A</a>
+            <a href="index.html" style="font-family: Sacramento, cursive; color: #0000ff;">S</a>
+            <a href="index.html" style="font-family: Caveat, cursive; color: #4b0082;">I</a>
+            <a href="index.html" style="font-family: Fredericka the Great, cursive; color: #9400d3;">N</a>
+            <a href="index.html" style="font-family: Pacifico, cursive; color: #8a2be2;">T</a>
+            <a href="index.html" style="font-family: Satisfy, cursive; color: #ff1493;">A</a> -->
             <!-- <img src="{{ asset('mitradelima/assets/img/logo-klasik.png') }}" alt="" class="img-fluid"> -->
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
@@ -68,32 +77,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown {{ $type === 'jasamedis' ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                    <i class="fas fa-stethoscope"></i>
-                    <span>Jasa Medis / Tindakan</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <!-- <li class="{{ Route::currentRouteName() === 'target.jasa.medis' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('target.jasa.medis')}}">Rekam Tarif Jasa Medis</a>
-                    </li> -->
-                    <!-- <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('opr.medis')}}">Riwayat Jasa Medis</a>
-                    </li>
-                    <li class="{{ Route::currentRouteName() === 'home.care' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('home.care')}}">Home Care</a>
-                    </li> -->
-                    <li class="{{ Route::currentRouteName() === 'kategori.jasa' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('kategori.jasa')}}">Setting Kategory</a>
-                    </li>
-                    <li class="{{ Route::currentRouteName() === 'daftar.pasien' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('daftar.pasien')}}">Daftar Pasien</a>
-                    </li>
-                    <li class="{{ Route::currentRouteName() === 'daftar.tugas' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('daftar.tugas')}}">Daftar Tugas Jasa Medis</a>
-                    </li>
-                </ul>
-            </li>
+            
             <!-- <li class="nav-item dropdown {{ $type === 'tasklist' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-list"></i>
@@ -160,6 +144,32 @@
                 </a>
             </li>
             <li class="menu-header">Layanan</li>
+            <li class="nav-item dropdown {{ $type === 'jasamedis' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-stethoscope"></i>
+                    <span>Jasa Medis / Tindakan</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- <li class="{{ Route::currentRouteName() === 'target.jasa.medis' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('target.jasa.medis')}}">Rekam Tarif Jasa Medis</a>
+                    </li> -->
+                    <!-- <li class="{{ Route::currentRouteName() === 'opr.medis' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('opr.medis')}}">Riwayat Jasa Medis</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'home.care' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('home.care')}}">Home Care</a>
+                    </li> -->
+                    <li class="{{ Route::currentRouteName() === 'kategori.jasa' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('kategori.jasa')}}">Setting Kategory</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'daftar.pasien' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('daftar.pasien')}}">Daftar Pasien</a>
+                    </li>
+                    <li class="{{ Route::currentRouteName() === 'daftar.tugas' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('daftar.tugas')}}">Daftar Tugas Jasa Medis</a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-item dropdown {{ $type === 'content' ? 'active' : '' }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-window-restore"></i>

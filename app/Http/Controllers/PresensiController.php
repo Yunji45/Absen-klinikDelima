@@ -171,6 +171,7 @@ class PresensiController extends Controller
         $data = explode('-',$request->bulan);
         $presents = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->orderBy('tanggal','desc')->get();
         $masuk = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('masuk')->count();
+        $sakit = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('sakit')->count();
         $telat = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('telat')->count();
         $cuti = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('cuti')->count();
         $alpha = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->whereKeterangan('alpha')->count();
@@ -197,8 +198,10 @@ class PresensiController extends Controller
 
         $permohonan = presensi::whereUserId($user->id)->whereMonth('tanggal',$data[1])->whereYear('tanggal',$data[0])->where(function ($query) {
                                     $query->where('keterangan', 'masuk')
-                                            ->orWhere('keterangan', 'telat');
-                                            })->count();       
+                                            ->orWhere('keterangan', 'telat')
+                                            ->orWhere('keterangan','cuti')
+                                            ->orWhere('keterangan','sakit');
+                                    })->count();       
                     
         $totalJamTelat = 0;
         foreach ($kehadiran as $present) {
@@ -220,7 +223,7 @@ class PresensiController extends Controller
         //         }
         //     }
         // }
-        return view('template.backend.admin.profil-user.index', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin','title','type'));
+        return view('template.backend.admin.profil-user.index', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin','title','type','sakit'));
         // return view('frontend.users.show', compact('presents', 'user', 'masuk', 'telat', 'cuti', 'alpha', 'totalJamTelat', 'gantijaga', 'tukarjaga', 'permohonan','lembur','izin'));
         // return redirect()->back();
     }
