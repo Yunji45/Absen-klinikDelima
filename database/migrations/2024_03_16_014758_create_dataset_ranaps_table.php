@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('dataset_ranaps', function (Blueprint $table) {
             $table->id();
+            $table->date('tgl_kunjungan')->nullable();
+            $table->string('no_rm')->nullable();
+            $table->string('name')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('poli')->nullable();
             $table->timestamps();
         });
     }

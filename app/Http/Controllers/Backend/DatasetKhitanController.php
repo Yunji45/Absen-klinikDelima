@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\DatasetKhitan;
+use Auth;
+use Validator;
+use App\Imports\DatasetKhitanImport;
 
 class DatasetKhitanController extends Controller
 {
@@ -16,7 +20,8 @@ class DatasetKhitanController extends Controller
     {
         $title = 'Dataset Khitan';
         $type = 'layanan-dataset';
-        
+        $data = DatasetKhitan::all();
+        return view ('template.backend.admin.dataset.khitan.index',compact('title','type','data'));
     }
 
     /**

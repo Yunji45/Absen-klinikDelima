@@ -34,6 +34,7 @@ use App\Http\Controllers\Backend\JobVacancyController;
 use App\Http\Controllers\Backend\JobApplicationController;
 use App\Http\Controllers\Backend\LayoutController;
 use App\Http\Controllers\Backend\KritikSaraanController;
+use App\Http\Controllers\Backend\DatasetKhitanController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -376,6 +377,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/kritik-saran/{id}',[KritikSaraanController::class,'destroy'])->name('kritik-saran.delete');
         Route::get('/kritik-saran/search',[KritikSaraanController::class,'SearchKritik'])->name('kritik-saran.search');
 
+        //dataset
+        Route::get('/dataset-khitan',[DatasetKhitanController::class,'index'])->name('dataset.khitan');
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');

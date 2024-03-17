@@ -2,23 +2,17 @@
 
 namespace App\Imports;
 
-use App\Models\DaftarPasien;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
-
-class DaftarPasienImport implements ToModel
+class DatasetKhitanImport implements ToModel
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
     public function model(array $row)
     {
-        
-        if (empty($row[1]) || empty($row[2]) || empty($row[3]) ) {
+        if (empty($row[0]) || ($row[1]) || empty($row[2]) || empty($row[3]) ) {
             return null;
         }
         try {
@@ -30,12 +24,13 @@ class DaftarPasienImport implements ToModel
             Log::error('Error during date conversion: ' . $e->getMessage());
             return null;
         }
-        return new DaftarPasien([
-            'bulan'         => $formattedDate,
-            'No_RM'         => $row[0],
-            'nama_pasien'   => $row[1],
-            'jenis_kelamin' => $row[2],
-            'alamat'        => $row[3],
+        return new DatasetKhitan([
+            'tgl_kunjungan' => $row[0],
+            'no_rm'         => $row[1],
+            'name'          => $row[2],
+            'poli'          => $row[3],
+            'jenis_kelamin' => $row[4],
         ]);
+    
     }
 }
