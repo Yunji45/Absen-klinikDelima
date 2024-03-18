@@ -379,6 +379,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
 
         //dataset
         Route::get('/dataset-khitan',[DatasetKhitanController::class,'index'])->name('dataset.khitan');
+        Route::post('/dataset-khitan/save',[DatasetKhitanController::class,'store'])->name('dataset.khitan.store');
+        Route::post('/dataset-khitan/import',[DatasetKhitanController::class,'ImportDatasetKhitan'])->name('dataset.khitan.import');
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');

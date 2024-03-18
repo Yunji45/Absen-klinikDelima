@@ -11,11 +11,5 @@ class DatasetKhitan extends Model
 
     protected $table = 'dataset_khitans';
     protected $primaryKey = 'id';
-    protected $fillable = [
-        'tgl_kunjungan',
-        'name',
-        'no_rm',
-        'poli',
-        'jenis_kelamin',
-    ];
+    protected $fillable = ['tgl_kunjungan', 'no_rm', 'name', 'poli', 'jenis_kelamin'];
 }

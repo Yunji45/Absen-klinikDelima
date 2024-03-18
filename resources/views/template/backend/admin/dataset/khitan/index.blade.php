@@ -15,17 +15,9 @@
                 </i> Add
         </a>
 
-        <a href="" class="btn btn-danger">
-            <i class="fa fa-download">
-                </i> PDF
-        </a>
         <a href="" class="btn btn-warning" data-toggle="modal" data-target="#import">
             <i class="fa fa-download">
                 </i> Import Excel
-        </a>
-        <a href="{{route('daftar.pasien.excel')}}" class="btn btn-success">
-            <i class="fa fa-download">
-                </i> Eksport Excel
         </a>
     </div>
 
@@ -36,13 +28,15 @@
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
+                            <form action="{{route('cari.jadwal')}}" method="get">
+                                @csrf
                                 <div class="input-group">
-                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Nama">
+                                <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
                                 </div>
-                            
+                            </form>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -53,23 +47,20 @@
                                     <th scope="col" class="text-center">Nama Pasien</th>
                                     <th scope="col" class="text-center">No RM</th>
                                     <th scope="col" class="text-center">Jenis Kelamin</th>
-                                    <th scope="col" class="text-center">Alamat</th>
-                                    <th scope="col" class="text-center">Date</th>
+                                    <th scope="col" class="text-center">Poli</th>
+                                    <th scope="col" class="text-center">Tgl.Kunjungan</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                                 @php $no =1; @endphp 
-                                @foreach ($pasien as $item)
+                                @foreach ($data as $item)
                                 <tr>
                                     <td class="text-center">{{$no++}}.</td>
-                                    <td scope="col" class="text-center">{{$item->nama_pasien}}</td>
-                                    <td scope="col" class="text-center">{{$item->No_RM}}</td>
+                                    <td scope="col" class="text-center">{{$item->name}}</td>
+                                    <td scope="col" class="text-center">{{$item->no_rm}}</td>
                                     <td scope="col" class="text-center">{{$item->jenis_kelamin}}</td>
-                                    <td scope="col" class="text-center">{{$item->alamat}}</td>
-                                    <td scope="col" class="text-center">{{$item->bulan}}</td>
+                                    <td scope="col" class="text-center">{{$item->poli}}</td>
+                                    <td scope="col" class="text-center">{{$item->tgl_kunjungan}}</td>
                                     <td scope="col" class="text-center">
-                                        <a href="{{route('daftar.pasien.edit',$item->id)}}" onclick="return confirm('Yakin akan di edit?')" class="btn btn-success btn-sm">
-                                            <i class="fas fa-edit"> Edit</i>
-                                        </a>
 
                                     <a href="{{route('daftar.pasien.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
@@ -95,28 +86,28 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('daftar.pasien.save')}}" method="post">
+                    <form action="{{route('dataset.khitan.store')}}" method="post">
                         @csrf
                         <div class="modal-body">
                             <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
                             <div class="form-group row" id="UMK">
                                 <label for="UMK" class="col-form-label col-sm-3">Date</label>
                                 <div class="col-sm-9">
-                                    <input type="date" name="bulan" id="bulan" class="form-control @error('name') is-invalid @enderror">
+                                    <input type="date" name="tgl_kunjungan" id="tgl_kunjungan" class="form-control @error('name') is-invalid @enderror">
                                     @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
                                 <label for="UMK" class="col-form-label col-sm-3">No RM</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="No_RM" id="No_RM" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan No RM">
+                                    <input type="text" name="no_rm" id="no_rm" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan No RM">
                                     @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group row" id="UMK">
                                 <label for="UMK" class="col-form-label col-sm-3">Nama Pasien</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="nama_pasien" id="nama_pasien" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Nama Pasien">
+                                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Masukan Nama Pasien">
                                     @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -129,13 +120,6 @@
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
                                     @error('jenis_kelamin') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row" id="UMK">
-                                <label for="alamat" class="col-form-label col-sm-3">Alamat</label>
-                                <div class="col-sm-9">
-                                    <textarea name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" placeholder="Masukkan Alamat"></textarea>
-                                    @error('alamat') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -156,7 +140,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('daftar.pasien.import')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('dataset.khitan.import')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
