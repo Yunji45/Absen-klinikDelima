@@ -13,7 +13,7 @@ class THRController extends Controller
     public function index()
     {
         $title = 'THR Idul Fitri';
-        $type = 'gajian';
+        $type = 'gaji';
         $data = THR_lebaran::all();
         return view('template.backend.admin.THR.index',compact('title','type','data'));
     }
@@ -30,6 +30,9 @@ class THRController extends Controller
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }    
+
+        $data = new THR_lebaran;
+        
         
     }
 }

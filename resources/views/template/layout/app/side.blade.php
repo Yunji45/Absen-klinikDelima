@@ -135,6 +135,9 @@
                     <li class="{{ Route::currentRouteName() === 'insentif.kpi' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('insentif.kpi')}}">Insentif</a>
                     </li>
+                    <li class="{{ Route::currentRouteName() === 'thr.idul-fitri' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('thr.idul-fitri')}}">THR Idul Fitri</a>
+                    </li>
                 </ul>
             </li>
             <li>

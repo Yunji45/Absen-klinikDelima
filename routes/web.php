@@ -34,6 +34,7 @@ use App\Http\Controllers\Backend\JobVacancyController;
 use App\Http\Controllers\Backend\JobApplicationController;
 use App\Http\Controllers\Backend\LayoutController;
 use App\Http\Controllers\Backend\KritikSaraanController;
+use App\Http\Controllers\Backend\THRController;
 use App\Http\Controllers\Backend\DatasetKhitanController;
 use App\Http\Controllers\Backend\DatasetRawatInapController;
 
@@ -203,6 +204,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/index-persentase/download', [PenggajianController::class,'download_gaji'])->name('gaji.download');
         Route::get('/index-persentase/download-excel', [PenggajianController::class,'excel_gaji'])->name('gaji.download.excel');
         Route::post('/payroll-multiple/save',[PenggajianController::class,'GetDataMultipleGaji'])->name('gaji.get');
+
+        //THR
+        Route::get('/THR-idul-fitri',[THRController::class,'index'])->name('thr.idul-fitri');
+        Route::post('/THR-idul-fitri/multiple',[THRController::class,'GetDataMultiple'])->name('thr.multiple');
 
         //UMR 
         Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');
