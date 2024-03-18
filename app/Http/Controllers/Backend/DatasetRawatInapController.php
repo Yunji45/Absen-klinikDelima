@@ -58,7 +58,7 @@ class DatasetRawatInapController extends Controller
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
-
+        
         $ranap = new DatasetRanap;
         $ranap ->name = $request->name;
         $ranap ->jenis_kelamin = $request->jenis_kelamin;

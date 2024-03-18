@@ -139,4 +139,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(NoteKaryawan::class);
     }
+
+    //THR
+    public function THR()
+    {
+        return $this->hasMany(THR_lebaran::class);
+    }
 }
