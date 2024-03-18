@@ -170,7 +170,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown {{ $type === 'content' ? 'active' : '' }} ">
+            <li class="nav-item dropdown {{ $type === 'layanan-dataset' ? 'active' : '' }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-window-restore"></i>
                     <span>Dataset Layanan</span>
@@ -179,8 +179,8 @@
                     <li class="{{ Route::currentRouteName() === 'setting-content.index' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('setting-content.index')}}">Rawat Jalan (Poli & UGD)</a>
                     </li>
-                    <li class="">
-                        <a class="nav-link" href="">Rawat Inap</a>
+                    <li class="{{ Route::currentRouteName() === 'dataset.ranap' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('dataset.ranap')}}">Rawat Inap</a>
                     </li>
                     <li class="">
                         <a class="nav-link" href="">Persalinan</a>

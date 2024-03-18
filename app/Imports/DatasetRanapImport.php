@@ -2,19 +2,20 @@
 
 namespace App\Imports;
 
-use App\Models\DatasetKhitan;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\DatasetRanap;
 
-class DatasetKhitanImport implements ToModel
+class DatasetRanapImport implements ToModel
 {
+    
     public function model(array $row)
     {
         if (count($row) < 5 || empty($row[0]) || empty($row[1]) || empty($row[2]) || empty($row[3]) || empty($row[4])) {
             return null;
         }
-        
+
         try {
             $currentDate = Carbon::now();
             $formattedDate = $currentDate->format('Y-m-d');
@@ -24,7 +25,7 @@ class DatasetKhitanImport implements ToModel
             return null;
         }
 
-        $data = new DatasetKhitan([
+        $data = new DatasetRanap([
             'tgl_kunjungan' => $formattedDate,
             'no_rm'         => $row[2],
             'name'          => $row[3],
