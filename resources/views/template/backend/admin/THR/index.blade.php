@@ -14,7 +14,7 @@
                   <i class="fa fa-plus"></i> Add
               </button>
               <div class="dropdown-menu">
-                  <a class="dropdown-item" href="{{ route('gaji.create') }}">Add Normal</a>
+                  <a class="dropdown-item" href="{{ route('thr.add') }}">Add Normal</a>
                   <a class="dropdown-item" data-toggle="modal" data-target="#update">Get Data Multiple</a>
               </div>
 
@@ -32,7 +32,7 @@
                       </i> Export to Excel
               </a>
               <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item" style="font-size:16px; font-weight:bold;">Total THR : {{'Rp.' . number_format(floatval(200), 0, ',', '.')}}</a></div>
+                <div class="breadcrumb-item" style="font-size:16px; font-weight:bold;">Total THR : {{'Rp.' . number_format(floatval($total), 0, ',', '.')}}</a></div>
               </div>
           </div>
 
@@ -79,15 +79,13 @@
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->gaji_terakhir), 0, ',', '.')}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->THR), 0, ',', '.')}}</td>
                           <td class="text-center">{{$item->masa_kerja}}</td>
-                          <td class="text-center">{{$item->index}}</td>
-                          <td class="text-center">{{$item->bulan}}</td>
-                          <!-- <td class="text-center">{{$item->user->detailpegawai->length_of_service ?? 0}}</td> -->
-                          
+                          <td class="text-center">{{$item->index}}%</td>
+                          <td class="text-center">{{ \Carbon\Carbon::parse($item->bulan)->year }}</td>                          
                           <td>
-                            <a href="{{route('gaji.edit',$item->id)}}" 
+                            <a href="{{route('thr.edit',$item->id)}}" 
                             onclick="return confirm('Yakin akan edit data ?')" 
                             class="btn btn-success btn-sm"><i class="fas fa-edit"></i>Edit</a>
-                            <a href="{{route('gaji.delete',$item->id)}}" 
+                            <a href="{{route('thr.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
                             class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Hapus</a>
                           </td>                        
