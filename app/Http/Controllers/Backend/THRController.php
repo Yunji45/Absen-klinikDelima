@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\THR_lebaran;
 use App\Models\User;
+use App\Models\gajian;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
@@ -21,6 +22,11 @@ class THRController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->get();
         $total = THR_lebaran::whereYear('bulan',$tahun)->sum('THR');
+        // $bulan_sebelumnya = Carbon::now()->subMonth();
+        // $userIds = Gajian::whereYear('bulan', $bulan_sebelumnya->year)
+        //                 ->whereMonth('bulan', $bulan_sebelumnya->month)
+        //                 ->pluck('user_id');
+        // return $userIds;
         return view('template.backend.admin.THR.index',compact('title','type','data','total'));
     }
 
@@ -71,18 +77,51 @@ class THRController extends Controller
 
     public function GetDataMultiple(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'bulan' => 'required',
-        ],[
-            'bulan.required' => 'Bulan Tidak Boleh Kosong',
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->with('errorForm', $validator->errors()->getMessages())
-                ->withInput();
-        }    
+        
+        $bulan_sebelumnya = Carbon::now()->subMonth();
+        $userIds = Gajian::whereYear('bulan', $bulan_sebelumnya->year)
+                        ->whereMonth('bulan', $bulan_sebelumnya->month)
+                        ->pluck('user_id');
+        $data = [];
 
-        $data = new THR_lebaran;
+        foreach ($userIds as $userId) {
+            $targetData = gajian::where('user_id', $userId)
+                ->whereYear('bulan', $bulan_sebelumnya->year)
+                ->whereMonth('bulan', $bulan_sebelumnya->month)
+                ->select('bulan', 'pendidikan','Masa_kerja', 'Gaji_akhir','masa_kerja_karyawan','bergabung','berakhir')
+                ->first();
+
+            if (!$targetData) {
+                return redirect()->back()->with('error', 'Data Gaji User Pada Bulan Ini sudah Ada.');
+            }
+
+            if($targetData)
+            {
+                $rowData = [
+                    'user_id' => $userId,
+                    'bulan' => now()->format('Y-m-d'),
+                    'pendidikan' => $targetData->pendidikan ?? null,
+                    'gaji_terakhir' => $targetData->Gaji_akhir ?? null,
+                    'masa_kerja' => $targetData->masa_kerja_karyawan ?? null,
+                    'masuk' => $targetData->bergabung ?? null,
+                    'keluar' => $targetData->berakhir ?? null,
+                    'THR' => 0,
+                    'index' => 0,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                $data[] = $rowData;    
+            }
+        }
+        if (!empty($data)) {
+            THR_lebaran::insert($data);
+            // return $data;
+            return redirect()->back()->with('success', 'Terimakasih, Data THR Terbaru Berhasil Disimpan');
+        }else{
+            return redirect()->back()->with('error','Maaf Terjadi Kesalahan Saat Mengambil Data.');
+        }
+        // return $userIds;
     }
 
     public function destroy($id)

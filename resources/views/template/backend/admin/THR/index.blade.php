@@ -15,19 +15,16 @@
               </button>
               <div class="dropdown-menu">
                   <a class="dropdown-item" href="{{ route('thr.add') }}">Add Normal</a>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#update">Get Data Multiple</a>
-              </div>
-
-              <!-- <a href="{{route('gaji.create')}}" class="btn btn-primary">
-                  <i class="fa fa-plus">
-                      Add</i>
-              </a> -->
-              
-              <a href="{{route('gaji.download', ['bulan' => request('bulan', date('Y-m'))])}}" class="btn btn-danger">
+                  <form id="get-data-form" action="{{ route('thr.multiple') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+                  <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('get-data-form').submit();">Get Data Multiple</a>
+              </div>              
+              <a href="" class="btn btn-danger">
                   <i class="fa fa-download">
                       </i> PDF
               </a>
-              <a href="{{route('gaji.download.excel', ['bulan' => request('bulan', date('Y-m'))])}}" class="btn btn-success">
+              <a href="" class="btn btn-success">
                   <i class="fa fa-download">
                       </i> Export to Excel
               </a>
