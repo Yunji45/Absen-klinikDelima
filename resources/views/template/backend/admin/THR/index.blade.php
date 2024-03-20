@@ -24,7 +24,7 @@
                   <i class="fa fa-download">
                       </i> PDF
               </a>
-              <a href="" class="btn btn-success">
+              <a href="{{route('thr.excel')}}" class="btn btn-success">
                   <i class="fa fa-download">
                       </i> Export to Excel
               </a>

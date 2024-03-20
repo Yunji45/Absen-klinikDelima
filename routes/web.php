@@ -213,6 +213,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/THR-idul-fitri/{id}',[THRController::class,'destroy'])->name('thr.delete');
         Route::get('/THR-idul-fitri/edit/{id}',[THRController::class,'edit'])->name('thr.edit');
         Route::post('/THR-idul-fitri/update/{id}',[THRController::class,'update'])->name('thr.update');
+        Route::get('/THR-idul-fitri/download-excel', [THRController::class,'THR_Excel'])->name('thr.excel');
 
         //UMR 
         Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');

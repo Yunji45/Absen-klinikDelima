@@ -10,6 +10,8 @@ use App\Models\gajian;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use App\Exports\THRExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class THRController extends Controller
 {
@@ -37,6 +39,7 @@ class THRController extends Controller
         $data = User::all();
         return view('template.backend.admin.THR.create',compact('title','type','data'));
     }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -139,6 +142,7 @@ class THRController extends Controller
         $thr = THR_lebaran::find($id);
         return view('template.backend.admin.THR.edit',compact('title','type','data','thr'));
     }
+
     public function update(Request $request, $id)
     {
         $data = THR_lebaran::find($id);
@@ -164,5 +168,14 @@ class THRController extends Controller
 
         return redirect()->route('thr.idul-fitri')->with('success','Data Berhasil Diupdate.');
 
+    }
+
+    public function THR_Excel(Request $request)
+    {
+        $tahun = Carbon::now()->year;
+        $data = THR_lebaran::whereYear('bulan', $tahun)
+                        ->orderBy('bulan', 'asc')
+                        ->get();
+        return Excel::download(new THRExport($data), 'THR-Idul-Fitri-MD.xlsx');
     }
 }
