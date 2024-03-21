@@ -25,12 +25,13 @@ class THRController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->get();
         $total = THR_lebaran::whereYear('bulan',$tahun)->sum('THR');
+        $user = THR_lebaran::whereYear('bulan',$tahun)->count();
         // $bulan_sebelumnya = Carbon::now()->subMonth();
         // $userIds = Gajian::whereYear('bulan', $bulan_sebelumnya->year)
         //                 ->whereMonth('bulan', $bulan_sebelumnya->month)
         //                 ->pluck('user_id');
         // return $userIds;
-        return view('template.backend.admin.THR.index',compact('title','type','data','total'));
+        return view('template.backend.admin.THR.index',compact('title','type','data','total','user'));
     }
 
     public function create()

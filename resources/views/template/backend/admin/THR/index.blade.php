@@ -26,7 +26,7 @@
               </a>
               <a href="{{route('thr.excel')}}" class="btn btn-success">
                   <i class="fa fa-download">
-                      </i> Export to Excel
+                      </i> Excel
               </a>
               <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item" style="font-size:16px; font-weight:bold;">Total THR : {{'Rp.' . number_format(floatval($total), 0, ',', '.')}}</a></div>
@@ -40,21 +40,18 @@
                   <div class="card-header">
                     <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
-                            <form action="{{route('gaji.search')}}" method="get">
-                                @csrf
                                 <div class="input-group">
-                                <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
+                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
                                 </div>
-                            </form>        
                         </div>
                   </div>
                   <div class="card-body p-0">
                     <div class="table-responsive">
-                      <table class="table table-striped">
-                      <tr>
+                      <table class="table table-bordered table-sm table-striped" id="myTable">
+                      <tr class="table-secondary">
                           <th scope="col" class="text-center">No</th>
                           <th scope="col" class="text-center">Nama</th>
                           <th scope="col" class="text-center">Pendidikan</th>
@@ -69,7 +66,7 @@
                         $no =1;
                         @endphp
                         @foreach ($data as $item)
-                        <tr>
+                        <tr class="table-success">
                           <td class="text-center">{{$no++}}.</td>
                           <td class="text-center">{{$item->user->name}}</td>
                           <td class="text-center">{{$item->pendidikan}}</td>
@@ -92,6 +89,28 @@
                           </td>                        
                         </tr>
                         @endforeach
+                        <tr class="table-success">
+                          <td class="text-center"></td>
+                          <td class="text-center"></td>
+                          <td class="text-center"></td>
+                          <td class="text-center">TOTAL</td>
+                          <td class="text-center">{{'Rp.' . number_format(floatval($total), 0, ',', '.')}}</td>
+                          <td class="text-center"></td>
+                          <td class="text-center"></td>
+                          <td class="text-center"></td>                          
+                          <td></td>                        
+                        </tr>
+                        <tr class="table-success">
+                          <td class="text-center"></td>
+                          <td class="text-center"></td>
+                          <td class="text-center"></td>
+                          <td class="text-center">Query Data</td>
+                          <td class="text-center">{{$user}}</td>
+                          <td class="text-center"></td>
+                          <td class="text-center"></td>
+                          <td class="text-center"></td>                          
+                          <td></td>                        
+                        </tr>
                       </table>
                     </div>
                   </div>
@@ -162,18 +181,25 @@
             }
         </style>
         <script>
-          function deleteData(id) {
-              if (confirm('Yakin akan dihapus?')) {
-                  axios.delete('{{ route("thr.delete", ":id") }}'.replace(':id', id))
-                      .then(function(response) {
-                          // Handle jika penghapusan berhasil, seperti menghapus baris tabel atau menyegarkan halaman
-                          location.reload(); // misalnya, menyegarkan halaman
-                      })
-                      .catch(function(error) {
-                          console.error(error);
-                          alert('Terjadi kesalahan saat menghapus data.');
-                      });
-              }
-          }
-      </script>
+    function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1]; // Ganti angka 1 dengan indeks kolom yang sesuai
+        if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+        }
+    }
+    }
+</script>
+
 @endsection
