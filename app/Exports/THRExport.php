@@ -5,13 +5,14 @@ namespace App\Exports;
 // use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithCustomStartCell;
 use Illuminate\Support\Collection;
 use App\Models\THR_lebaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
-class THRExport implements FromCollection, WithHeadings
+class THRExport implements FromCollection, WithHeadings, WithCustomStartCell
 {
     protected $data;
 
@@ -45,10 +46,13 @@ class THRExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'NO',
-            'NAMA',
-            'THR',
-            'TAHUN',
+            ['DATA THR Karyawan MD'],
+            ['NO','NAMA','THR','TAHUN']
         ];
+    }
+
+    public function startCell(): string
+    {
+        return 'A1';
     }
 }

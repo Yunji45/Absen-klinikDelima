@@ -20,7 +20,7 @@
                   </form>
                   <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('get-data-form').submit();">Get Data Multiple</a>
               </div>              
-              <a href="" class="btn btn-danger">
+              <a href="{{route('thr.pdf')}}" class="btn btn-danger">
                   <i class="fa fa-download">
                       </i> PDF
               </a>
@@ -82,9 +82,13 @@
                             <a href="{{route('thr.edit',$item->id)}}" 
                             onclick="return confirm('Yakin akan edit data ?')" 
                             class="btn btn-success btn-sm"><i class="fas fa-edit"></i>Edit</a>
-                            <a href="{{route('thr.delete',$item->id)}}" 
-                            onclick="return confirm('Yakin akan dihapus?')" 
-                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Hapus</a>
+                            <form action="{{ route('thr.delete', $item->id) }}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                      <i class="fas fa-trash-alt"></i>Hapus
+                                  </button>
+                            </form>                          
                           </td>                        
                         </tr>
                         @endforeach
@@ -157,4 +161,19 @@
                 right: 10px;
             }
         </style>
+        <script>
+          function deleteData(id) {
+              if (confirm('Yakin akan dihapus?')) {
+                  axios.delete('{{ route("thr.delete", ":id") }}'.replace(':id', id))
+                      .then(function(response) {
+                          // Handle jika penghapusan berhasil, seperti menghapus baris tabel atau menyegarkan halaman
+                          location.reload(); // misalnya, menyegarkan halaman
+                      })
+                      .catch(function(error) {
+                          console.error(error);
+                          alert('Terjadi kesalahan saat menghapus data.');
+                      });
+              }
+          }
+      </script>
 @endsection

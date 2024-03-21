@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Exports\THRExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class THRController extends Controller
 {
@@ -127,13 +128,6 @@ class THRController extends Controller
         // return $userIds;
     }
 
-    public function destroy($id)
-    {
-        $data = THR_lebaran::find($id);
-        $data -> delete();
-        return redirect()->back()->with('success','Data Berhasil Dihapus.');
-    }
-
     public function edit($id)
     {
         $title = 'THR Idul Fitri';
@@ -170,12 +164,32 @@ class THRController extends Controller
 
     }
 
-    public function THR_Excel(Request $request)
+    public function destroy($id)
+    {
+        $data = THR_lebaran::find($id);
+        $data -> delete();
+        return redirect()->back()->with('success','Data Berhasil Dihapus.');
+    }
+
+    public function THR_Excel()
     {
         $tahun = Carbon::now()->year;
         $data = THR_lebaran::whereYear('bulan', $tahun)
                         ->orderBy('bulan', 'asc')
                         ->get();
         return Excel::download(new THRExport($data), 'THR-Idul-Fitri-MD.xlsx');
+    }
+
+    public function THR_pdf(Request $request)
+    {
+        $tahun = date('Y');
+        $data = THR_lebaran::whereYear('bulan', $tahun)
+                        ->get();
+        
+        $total = THR_lebaran::whereYear('bulan', $tahun)
+                        ->sum('THR');
+
+        $pdf = PDF::loadview('template.backend.admin.THR.pdf', ['data' => $data, 'total' => $total]);
+        return $pdf->download('THR-Karyawan-MD.pdf');
     }
 }

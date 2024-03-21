@@ -210,10 +210,11 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/THR-idul-fitri/multiple',[THRController::class,'GetDataMultiple'])->name('thr.multiple');
         Route::get('/THR-idul-fitri/add',[THRController::class,'create'])->name('thr.add');
         Route::post('/THR-idul-fitri/save',[THRController::class,'store'])->name('thr.save');
-        Route::get('/THR-idul-fitri/{id}',[THRController::class,'destroy'])->name('thr.delete');
+        Route::delete('/THR-idul-fitri/{id}',[THRController::class,'destroy'])->name('thr.delete');
         Route::get('/THR-idul-fitri/edit/{id}',[THRController::class,'edit'])->name('thr.edit');
         Route::post('/THR-idul-fitri/update/{id}',[THRController::class,'update'])->name('thr.update');
         Route::get('/THR-idul-fitri/download-excel', [THRController::class,'THR_Excel'])->name('thr.excel');
+        Route::get('/THR-idul-fitri/download-pdf', [THRController::class,'THR_pdf'])->name('thr.pdf');
 
         //UMR 
         Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');
