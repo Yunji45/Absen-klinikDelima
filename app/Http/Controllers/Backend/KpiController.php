@@ -1184,7 +1184,7 @@ class KpiController extends Controller
             $query->where('start_date', '<=', $endDate)
                 ->where('end_date', '>=', $startDate);
         })
-        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit')
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin')
         ->first();
         if ($targetData) {
             $realisasi = targetkpi::find($id);
@@ -1207,12 +1207,14 @@ class KpiController extends Controller
             $realisasi -> r_umum = $request->r_umum;
             $realisasi -> r_visit = $request->r_visit;
             $realisasi -> usg = $request->usg;
+            $realisasi -> r_khitan = $request->r_khitan;
+            $realisasi -> r_salin = $request->r_salin;
 
-            if ($request->r_khitan == 0 || $request->r_khitan == null){
-                $realisasi -> c_khitan = 0;
-            }else{
-                $realisasi -> c_khitan = 3;
-            }
+            // if ($request->r_khitan == 0 || $request->r_khitan == null){
+            //     $realisasi -> c_khitan = 0;
+            // }else{
+            //     $realisasi -> c_khitan = 3;
+            // }
 
             if ($request->r_care == 0 || $request->r_care == null){
                 $realisasi -> c_care = 0;
@@ -1220,13 +1222,13 @@ class KpiController extends Controller
                 $realisasi -> c_care = 3;
             }
             
-            if ($request->r_salin == 0 || $request->r_salin == null){
-                $realisasi -> c_salin = 0;
-            }else{
-                $realisasi -> c_salin = 3;
-            }
+            // if ($request->r_salin == 0 || $request->r_salin == null){
+            //     $realisasi -> c_salin = 0;
+            // }else{
+            //     $realisasi -> c_salin = 3;
+            // }
 
-            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit'];
+            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin'];
 
             foreach ($columns as $column) {
                 $r_column = 'r_' . $column;

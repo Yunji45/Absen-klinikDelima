@@ -1,6 +1,7 @@
 @extends('template.layout.app.main')
 
 @section('tabel')
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <section class="section">
           <div class="section-header">
             <h1>Test API Chart JavaScript</h1>
@@ -34,6 +35,7 @@
                       </div>
                     </div>
                     <div id="visitorMap3"></div>
+                    <!-- <div id="map" style="height: 400px;"></div> -->
                   </div>
                 </div>
               </div>
@@ -85,3 +87,24 @@
           </div>
         </section>
 @endsection
+
+@push('scripts')
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([-7.6145, 110.7125], 8); // Koordinat tengah Jawa Tengah
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Tambahkan marker untuk Jawa Tengah
+    L.marker([-7.6145, 110.7125]).addTo(map)
+        .bindPopup('Jawa Tengah')
+        .openPopup();
+
+    // Tambahkan marker untuk Jawa Barat
+    L.marker([-6.9039, 107.6186]).addTo(map)
+        .bindPopup('Jawa Barat')
+        .openPopup();
+</script>
+@endpush

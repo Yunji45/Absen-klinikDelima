@@ -17,8 +17,7 @@ class DatasetRanapImport implements ToModel
         }
 
         try {
-            $currentDate = Carbon::now();
-            $formattedDate = $currentDate->format('Y-m-d');
+            $tgl_kunjungan = Carbon::createFromFormat('Y-d-m', $row[0])->format('Y-m-d H.i.s');
         } catch (\Exception $e) {
             // Handle error if any
             Log::error('Error during date conversion: ' . $e->getMessage());
@@ -26,7 +25,7 @@ class DatasetRanapImport implements ToModel
         }
 
         $data = new DatasetRanap([
-            'tgl_kunjungan' => $formattedDate,
+            'tgl_kunjungan' => $tgl_kunjungan,
             'no_rm'         => $row[2],
             'name'          => $row[3],
             'poli'          => $row[1],
