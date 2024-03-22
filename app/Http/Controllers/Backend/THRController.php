@@ -151,7 +151,7 @@ class THRController extends Controller
         $lengthService = $hireDate->diff($exitDate);
         $years = $lengthService->y;
         $month = $lengthService->m;
-        $lamakerja = $years . ' tahun ' . $month +1 . ' bulan';
+        $lamakerja = $years . ' tahun ' . $month . ' bulan';
         $data->masa_kerja = $lamakerja;
         $data->masuk = $hireDate->toDateString();
         $data->keluar = $exitDate->toDateString();
@@ -189,7 +189,7 @@ class THRController extends Controller
         
         $total = THR_lebaran::whereYear('bulan', $tahun)
                         ->sum('THR');
-
+                        
         $pdf = PDF::loadview('template.backend.admin.THR.pdf', ['data' => $data, 'total' => $total]);
         return $pdf->download('THR-Karyawan-MD.pdf');
     }
