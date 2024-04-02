@@ -21,7 +21,7 @@ class AuthController extends Controller
             // return redirect()->intended('/home')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi.');
             $role = Auth::user()->role;
             if ($role == 'admin'){
-                return redirect()->intended('/statis')->with('success', 'Selamat Datang !! Silahkan Lakukan Analysa Performa.');
+                return redirect()->intended('/kehadiran')->with('success', 'Selamat Datang !! Silahkan Lakukan Analysa Performa.');
             }elseif ($role == 'keuangan'){
                 return redirect()->intended('/daftar-hadir')->with('success', 'Selamat Datang !! Silahkan Lakukan Presensi Di Menu Home.');
             }elseif ($role == 'pegawai'){
