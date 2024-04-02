@@ -1,5 +1,13 @@
 @extends('template.layout.app.main')
 
+@section('js')
+<script src="{{ $chart->cdn() }}"></script>
+
+{{ $chart->script() }}
+
+@endsection
+
+
 @section('tabel')
 <section class="section">
           <div class="section-header">
@@ -50,7 +58,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <canvas id="myChart12" height="182"></canvas>
+                {!! $chart->container() !!}
                 </div>
               </div>
             </div>

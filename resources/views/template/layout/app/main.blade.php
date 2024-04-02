@@ -100,7 +100,7 @@
   <script src="{{asset('stisla/dist/assets/js/scripts.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/custom.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/bundle.js')}}"></script>
-
+  @yield('js')
 </body>
 
 </html>
