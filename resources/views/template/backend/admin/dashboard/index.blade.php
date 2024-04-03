@@ -1,13 +1,5 @@
 @extends('template.layout.app.main')
 
-@section('js')
-<script src="{{ $chart->cdn() }}"></script>
-
-{{ $chart->script() }}
-
-@endsection
-
-
 @section('tabel')
 <section class="section">
           <div class="section-header">
@@ -58,7 +50,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                {!! $chart->container() !!}
+                  <div id="chart"></div>
                 </div>
               </div>
             </div>
@@ -229,11 +221,41 @@
 
         </section>
         <link rel="stylesheet" href="{{asset('stisla/dist/assets/css/components.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
           <script src="{{asset('stisla/dist/assets/js/page/components-gender.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pendidikan.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pegawai.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pie.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/page/components-pie1.js')}}"></script>
+  <script>
+        var options = {
+          series: [{{ implode(',', $nakes) }}],
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: [
+          @foreach($nakes as $key => $value)
+                    '{{ $key }}',
+                @endforeach
+
+        ],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+  </script>
 
 @endsection
