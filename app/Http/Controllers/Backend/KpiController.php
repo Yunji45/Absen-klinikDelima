@@ -1216,11 +1216,11 @@ class KpiController extends Controller
             //     $realisasi -> c_khitan = 3;
             // }
 
-            if ($request->r_care == 0 || $request->r_care == null){
-                $realisasi -> c_care = 0;
-            }else{
-                $realisasi -> c_care = 3;
-            }
+            // if ($request->r_care == 0 || $request->r_care == null){
+            //     $realisasi -> c_care = 0;
+            // }else{
+            //     $realisasi -> c_care = 3;
+            // }
             
             // if ($request->r_salin == 0 || $request->r_salin == null){
             //     $realisasi -> c_salin = 0;
