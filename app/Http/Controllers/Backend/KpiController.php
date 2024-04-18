@@ -1184,7 +1184,7 @@ class KpiController extends Controller
             $query->where('start_date', '<=', $endDate)
                 ->where('end_date', '>=', $startDate);
         })
-        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin')
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin','care')
         ->first();
         if ($targetData) {
             $realisasi = targetkpi::find($id);
@@ -1228,7 +1228,7 @@ class KpiController extends Controller
             //     $realisasi -> c_salin = 3;
             // }
 
-            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin'];
+            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin','care'];
 
             foreach ($columns as $column) {
                 $r_column = 'r_' . $column;
