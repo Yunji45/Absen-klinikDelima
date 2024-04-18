@@ -178,12 +178,26 @@ class KpiController extends Controller
                 ->whereMonth('tanggal', $bulan)
                 ->whereYear('tanggal', $tahun)
                 ->count();
-                //hitung telat
-                // $totalTelat = Presensi::where('user_id', $user)
-                //     ->where('keterangan', 'Telat')
-                //     ->whereMonth('tanggal', $bulan)
-                //     ->whereYear('tanggal', $tahun)
-                //     ->count();
+                $totalTelat = Presensi::where('user_id', $user)
+                ->where('keterangan', 'Telat')
+                ->whereMonth('tanggal', $bulan)
+                ->whereYear('tanggal', $tahun)
+                ->count();
+                $totalSakit = Presensi::where('user_id', $user)
+                    ->where('keterangan', 'Sakit')
+                    ->whereMonth('tanggal', $bulan)
+                    ->whereYear('tanggal', $tahun)
+                    ->count();
+                $totalCuti = Presensi::where('user_id', $user)
+                    ->where('keterangan', 'Cuti')
+                    ->whereMonth('tanggal', $bulan)
+                    ->whereYear('tanggal', $tahun)
+                    ->count();
+                $totalIzin = Presensi::where('user_id', $user)
+                    ->where('keterangan', 'Izin')
+                    ->whereMonth('tanggal', $bulan)
+                    ->whereYear('tanggal', $tahun)
+                    ->count();
                 //hitung lembur
                 $lembur = rubahjadwal::where('user_id', $user)
                                     ->where('permohonan', 'lembur')
@@ -221,7 +235,8 @@ class KpiController extends Controller
                     // return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
                 }
                 // $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
-                $totalabsen = $totalMasuk /$psTotal;
+                $totalabsen = ($totalMasuk + $totalTelat + $totalCuti + $totalSakit - $totalIzin) /$psTotal;
+                $absen = 0;
                 if($totalabsen == 1 && $lembur > 1){
                     $absen =3;
                 }elseif($totalabsen == 1 ){
@@ -231,6 +246,13 @@ class KpiController extends Controller
                 }else{
                     $absen = 0;
                 }
+                if ($totalIzin > 0) {
+                    $absen -= 1;
+                }
+                if ($absen < 0) {
+                    $absen = 0;
+                }
+                
         
                 $jumlahNonZero = count(array_filter([
                     $targetData->c_daftar,
@@ -683,6 +705,22 @@ class KpiController extends Controller
             ->whereMonth('tanggal', $bulan)
             ->whereYear('tanggal', $tahun)
             ->count();
+        $totalSakit = Presensi::where('user_id', $user_id)
+            ->where('keterangan', 'Sakit')
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->count();
+        $totalCuti = Presensi::where('user_id', $user_id)
+            ->where('keterangan', 'Cuti')
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->count();
+        $totalIzin = Presensi::where('user_id', $user_id)
+            ->where('keterangan', 'Izin')
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->count();
+
         //hitung lembur
         $lembur = rubahjadwal::where('user_id', $user_id)
                             ->where('permohonan', 'lembur')
@@ -711,7 +749,7 @@ class KpiController extends Controller
         if (!$psTotal){
             return redirect()->back()->with('error','Pegawai Tersebut Tidak Mempunyai Data Absen Pada Periode Terpilih');
         }
-        $totalabsen = ($totalMasuk + $totalTelat)/$psTotal;
+        $totalabsen = ($totalMasuk + $totalTelat + $totalSakit + $totalCuti)/$psTotal;
         // $totalabsen == 1 &&
         if( $lembur == 1){
             $kpi->absen =3;
@@ -725,6 +763,9 @@ class KpiController extends Controller
             $kpi->absen = 0;
         }
         // $kpi->absen = $totalabsen;
+        if ($totalIzin > 0) {
+            $kpi->absen -= 1;
+        }
         $totalabsen = $kpi->absen;
         $kpi->bulan = $request->bulan;
         $kpi->total = 
@@ -1184,7 +1225,7 @@ class KpiController extends Controller
             $query->where('start_date', '<=', $endDate)
                 ->where('end_date', '>=', $startDate);
         })
-        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin','care')
+        ->select('daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin')
         ->first();
         if ($targetData) {
             $realisasi = targetkpi::find($id);
@@ -1216,11 +1257,11 @@ class KpiController extends Controller
             //     $realisasi -> c_khitan = 3;
             // }
 
-            // if ($request->r_care == 0 || $request->r_care == null){
-            //     $realisasi -> c_care = 0;
-            // }else{
-            //     $realisasi -> c_care = 3;
-            // }
+            if ($request->r_care == 0 || $request->r_care == null){
+                $realisasi -> c_care = 0;
+            }else{
+                $realisasi -> c_care = 3;
+            }
             
             // if ($request->r_salin == 0 || $request->r_salin == null){
             //     $realisasi -> c_salin = 0;
@@ -1228,7 +1269,7 @@ class KpiController extends Controller
             //     $realisasi -> c_salin = 3;
             // }
 
-            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin','care'];
+            $columns = ['daftar', 'poli', 'farmasi', 'bpjs', 'kasir', 'rawat', 'lab', 'umum', 'visit','khitan','salin'];
 
             foreach ($columns as $column) {
                 $r_column = 'r_' . $column;
