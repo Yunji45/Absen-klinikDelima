@@ -185,14 +185,14 @@
                     <li class="{{ Route::currentRouteName() === 'dataset.ranap' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('dataset.ranap')}}">Rawat Inap</a>
                     </li>
-                    <li class="">
-                        <a class="nav-link" href="">Persalinan</a>
+                    <li class="{{ Route::currentRouteName() === 'dataset.persalinan' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('dataset.persalinan')}}">Persalinan</a>
                     </li>
-                    <li class="">
-                        <a class="nav-link" href="">Khitan</a>
+                    <li class="{{ Route::currentRouteName() === 'dataset.khitan' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('dataset.khitan')}}">Khitan</a>
                     </li>
-                    <li class="">
-                        <a class="nav-link" href="">Laboratorium</a>
+                    <li class="{{ Route::currentRouteName() === 'dataset.lab' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('dataset.lab')}}">Laboratorium</a>
                     </li>
                     <li class="">
                         <a class="nav-link" href="">USG</a>

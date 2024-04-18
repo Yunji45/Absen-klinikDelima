@@ -4,15 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\DatasetKhitan;
-use App\Imports\DatasetKhitanImport;
-use Carbon;
-
-use Maatwebsite\Excel\Facades\Excel;
+use App\Models\DatasetLab;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-class DatasetKhitanController extends Controller
+class DatasetLabController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,10 +17,10 @@ class DatasetKhitanController extends Controller
      */
     public function index()
     {
-        $title = 'Dataset Khitan';
+        $title = 'Dataset lab';
         $type = 'layanan-dataset';
-        $data = DatasetKhitan::all();
-        return view ('template.backend.admin.dataset.khitan.index',compact('title','type','data'));
+        $data = Datasetlab::all();
+        return view ('template.backend.admin.dataset.lab.index',compact('title','type','data'));
     }
 
     /**
@@ -60,16 +56,17 @@ class DatasetKhitanController extends Controller
                 ->withInput();
         }
 
-        $khitan = new DatasetKhitan;
-        $khitan ->name = $request->name;
-        $khitan ->jenis_kelamin = $request->jenis_kelamin;
-        $khitan ->tgl_kunjungan = $request->tgl_kunjungan;
-        $khitan ->no_rm = $request->no_rm;
-        $khitan ->poli = 'KHITAN';
-        // return $khitan;
-        $khitan ->save();
+        $lab = new DatasetLab;
+        $lab ->name = $request->name;
+        $lab ->jenis_kelamin = $request->jenis_kelamin;
+        $lab ->tgl_kunjungan = $request->tgl_kunjungan;
+        $lab ->no_rm = $request->no_rm;
+        $lab ->poli = 'LABORATORIUM';
+        // return $lab;
+        $lab ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');
     }
+
     /**
      * Display the specified resource.
      *
@@ -112,29 +109,8 @@ class DatasetKhitanController extends Controller
      */
     public function destroy($id)
     {
-        $data = DatasetKhitan::find($id);
+        $data = DatasetLab::find($id);
         $data -> delete();
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
-    }
-
-    public function ImportDatasetKhitan(Request $request)
-    {
-        $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
-        ]);
-        $file = $request->file('file');
-        $nama_file = $file->hashName();
-        $path = $file->storeAs('public/dataset-khitan/',$nama_file);
-        // import data
-        $import = Excel::import(new DatasetKhitanImport(), storage_path('app/public/dataset-khitan/'.$nama_file));
-        //remove from server
-        Storage::delete($path);
-        if($import) {
-            //redirect
-            return redirect()->route('dataset.khitan')->with('success', 'Data Berhasil Diimport!');
-        } else {
-            //redirect
-            return redirect()->route('dataset.khitan')->with('error', 'Data Gagal Diimport!');
-        }
     }
 }

@@ -61,7 +61,7 @@
                                     <td scope="col" class="text-center">{{$item->poli}}</td>
                                     <td scope="col" class="text-center">{{$item->tgl_kunjungan}}</td>
                                     <td scope="col" class="text-center">
-                                        <a href="{{route('dataset.khitan.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                        <a href="{{route('dataset.lab.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
                                         </a>
                                     </td>
@@ -84,7 +84,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('dataset.khitan.store')}}" method="post">
+                    <form action="{{route('dataset.lab.store')}}" method="post">
                         @csrf
                         <div class="modal-body">
                             <h5 class="mb-3">{{ date('l, d F Y') }}</h5>
@@ -138,7 +138,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('dataset.khitan.import')}}" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">

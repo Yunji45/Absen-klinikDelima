@@ -37,6 +37,8 @@ use App\Http\Controllers\Backend\KritikSaraanController;
 use App\Http\Controllers\Backend\THRController;
 use App\Http\Controllers\Backend\DatasetKhitanController;
 use App\Http\Controllers\Backend\DatasetRawatInapController;
+use App\Http\Controllers\Backend\DatasetLabController;
+use App\Http\Controllers\Backend\DatasetPersalinanController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -394,6 +396,15 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/dataset-khitan',[DatasetKhitanController::class,'index'])->name('dataset.khitan');
         Route::post('/dataset-khitan/save',[DatasetKhitanController::class,'store'])->name('dataset.khitan.store');
         Route::post('/dataset-khitan/import',[DatasetKhitanController::class,'ImportDatasetKhitan'])->name('dataset.khitan.import');
+        Route::get('/dataset-khitan/delete/{id}',[DatasetKhitanController::class,'destroy'])->name('dataset.khitan.delete');
+
+        Route::get('/dataset-lab',[DatasetLabController::class,'index'])->name('dataset.lab');
+        Route::post('/dataset-lab/save',[DatasetLabController::class,'store'])->name('dataset.lab.store');
+        Route::get('/dataset-lab/delete/{id}',[DatasetLabController::class,'destroy'])->name('dataset.lab.delete');
+
+        Route::get('/dataset-persalinan',[DatasetPersalinanController::class,'index'])->name('dataset.persalinan');
+        Route::post('/dataset-persalinan/save',[DatasetPersalinanController::class,'store'])->name('dataset.persalinan.store');
+        Route::get('/dataset-persalinan/delete/{id}',[DatasetPersalinanController::class,'destroy'])->name('dataset.persalinan.delete');
 
         Route::get('/dataset-ranap',[DatasetRawatInapController::class,'index'])->name('dataset.ranap');
         Route::post('/dataset-ranap/save',[DatasetRawatInapController::class,'store'])->name('dataset.ranap.store');

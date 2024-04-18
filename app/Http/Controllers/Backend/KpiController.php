@@ -1322,6 +1322,7 @@ class KpiController extends Controller
         $ach = AchKpi::all();
         return view ('template.backend.admin.data-kpi.coba',compact('title','user','ach'));
     }
+    
     public function coba(Request $request)
     {
             // $this->validate($request, [
