@@ -763,9 +763,9 @@ class KpiController extends Controller
             $kpi->absen = 0;
         }
         // $kpi->absen = $totalabsen;
-        if ($totalIzin > 0) {
-            $kpi->absen -= 1;
-        }
+        // if ($totalIzin > 0) {
+        //     $kpi->absen -= 1;
+        // }
         $totalabsen = $kpi->absen;
         $kpi->bulan = $request->bulan;
         $kpi->total = 
@@ -1736,6 +1736,16 @@ class KpiController extends Controller
                             ->whereMonth('tanggal', $bulan)
                             ->whereYear('tanggal', $tahun)
                             ->count();
+                        $totalSakit = Presensi::where('user_id', $user->id)
+                            ->where('keterangan', 'Sakit')
+                            ->whereMonth('tanggal', $bulan)
+                            ->whereYear('tanggal', $tahun)
+                            ->count();
+                        $totalCuti = Presensi::where('user_id', $user->id)
+                            ->where('keterangan', 'Cuti')
+                            ->whereMonth('tanggal', $bulan)
+                            ->whereYear('tanggal', $tahun)
+                            ->count();
                         $lembur = rubahjadwal::where('user_id', $user->id)
                             ->where('permohonan', 'lembur')
                             ->where('status', 'approve')
@@ -1743,7 +1753,7 @@ class KpiController extends Controller
                             ->whereYear('tanggal', $tahun)
                             ->count();
 
-                        $totalkehadiran = $totalMasuk + $totalTelat + $lembur;
+                        $totalkehadiran = $totalMasuk + $totalTelat + $lembur + $totalCuti + $totalSakit;
 
                         for ($day = 1; $day <= 31; $day++) {
                             $column = 'j' . $day;
