@@ -57,4 +57,18 @@ class DashboardController extends Controller
         return view('template.backend.admin.dashboard.layanan',compact('title','type'));
     }
 
+    public function dash_rajal()
+    {
+        $title = 'Dashboard Rawat Jalan';
+        $type = 'dash_layanan';
+        return view('template.backend.admin.dashboard.layanan.rajal',compact('title','type'));
+    }
+
+    public function dash_ranap()
+    {
+        $title = 'Dashboard Rawat Inap';
+        $type = 'dash_layanan';
+        return view('template.backend.admin.dashboard.layanan.ranap',compact('title','type'));
+    }
+
 }

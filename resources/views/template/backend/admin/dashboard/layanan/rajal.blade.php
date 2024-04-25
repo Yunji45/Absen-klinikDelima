@@ -18,10 +18,10 @@
             </p>
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">All</a>
+                <a class="nav-link" aria-current="page" href="#">All</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('dash.rajal')}}">Rawat Jalan</a>
+                <a class="nav-link active" href="{{route('dash.rajal')}}">Rawat Jalan</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('dash.ranap')}}">Rawat Inap</a>
