@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\StatistikController;
+use App\Http\Controllers\Api\LayananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,6 @@ Route::get('/api-non-nakes',[StatistikController::class,'StatistikNonNakes']);
 Route::get('/api-gender',[StatistikController::class,'StatistikGender']);
 Route::get('/api-pekerjaan',[StatistikController::class,'StatistikStatusPekerjaan']);
 Route::get('/api-education',[StatistikController::class,'StatistikEducation']);
+
+//API Layanan
+Route::get('/api-layanan', [LayananController::class, 'dash_layanan']);

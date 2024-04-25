@@ -39,6 +39,7 @@ use App\Http\Controllers\Backend\DatasetKhitanController;
 use App\Http\Controllers\Backend\DatasetRawatInapController;
 use App\Http\Controllers\Backend\DatasetLabController;
 use App\Http\Controllers\Backend\DatasetPersalinanController;
+use App\Http\Controllers\Backend\DatasetRajalController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -412,6 +413,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/dataset-ranap',[DatasetRawatInapController::class,'index'])->name('dataset.ranap');
         Route::post('/dataset-ranap/save',[DatasetRawatInapController::class,'store'])->name('dataset.ranap.store');
         Route::post('/dataset-ranap/import',[DatasetRawatInapController::class,'ImportDatasetRanap'])->name('dataset.ranap.import');
+
+        Route::get('/dataset-rajal',[DatasetRajalController::class,'index'])->name('dataset.rajal');
+        Route::post('/dataset-rajal/save',[DatasetRajalController::class,'store'])->name('dataset.rajal.store');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

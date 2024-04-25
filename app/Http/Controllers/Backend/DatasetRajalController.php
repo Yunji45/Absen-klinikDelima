@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use App\Models\DatasetRajal;
 
 class DatasetRajalController extends Controller
 {
@@ -14,7 +17,10 @@ class DatasetRajalController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Dataset Rajal';
+        $type = 'layanan-dataset';
+        $data = DatasetRajal::all();
+        return view ('template.backend.admin.dataset.rajal.index',compact('title','type','data'));
     }
 
     /**
@@ -35,7 +41,30 @@ class DatasetRajalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'no_rm' => 'required',
+            'jenis_kelamin' => 'required',
+        ],[
+            'name.required' => 'Nama pasien Tidak Boleh Kosong',
+            'no_rm.required' => 'No RM Tidak Boleh Kosong',
+            'jenis_kelamin.required' => 'Jenis Kelamin Tidak Boleh Kosong',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
+        
+        $ranap = new DatasetRajal;
+        $ranap ->name = $request->name;
+        $ranap ->jenis_kelamin = $request->jenis_kelamin;
+        $ranap ->tgl_kunjungan = $request->tgl_kunjungan;
+        $ranap ->no_rm = $request->no_rm;
+        $ranap ->poli = 'RAWAT JALAN';
+        // return $ranap;
+        $ranap ->save();
+        return redirect()->back()->with('success','Data Berhasil Disimpan.');
     }
 
     /**

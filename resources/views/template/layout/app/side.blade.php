@@ -179,8 +179,8 @@
                     <span>Dataset Layanan</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Route::currentRouteName() === 'setting-content.index' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{route('setting-content.index')}}">Rawat Jalan (Poli & UGD)</a>
+                    <li class="{{ Route::currentRouteName() === 'dataset.rajal' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('dataset.rajal')}}">Rawat Jalan (Poli & UGD)</a>
                     </li>
                     <li class="{{ Route::currentRouteName() === 'dataset.ranap' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('dataset.ranap')}}">Rawat Inap</a>

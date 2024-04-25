@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\DetailPegawai;
+use App\Models\DatasetRanap;
+use App\Models\DatasetRajal;
+use App\Models\DatasetKhitan;
+use App\Models\DatasetPersalinan;
 
 class DashboardController extends Controller
 {
@@ -54,7 +58,28 @@ class DashboardController extends Controller
         
         $title = 'Dashboard Layanan';
         $type = 'dash_layanan';
-        return view('template.backend.admin.dashboard.layanan',compact('title','type'));
+
+        $current_year = date('Y');
+        $current_month = date('m');
+        $rajal_per_month = [];
+        $ranap_per_month = [];
+        
+        for ($month = 1; $month <= $current_month; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$current_year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$current_year-$month-01"));
+            $rajal_count = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
+            $rajal_per_month[$month] = $rajal_count;
+            $ranap_count = DatasetRanap::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
+            $ranap_per_month[$month] = $ranap_count;
+        }
+        
+        $rajal = DatasetRajal::count();
+        $ranap = DatasetRanap::count();
+        $khitan = DatasetKhitan::count();
+        $persalinan = DatasetPersalinan::count();
+        $sum = $rajal + $ranap + $khitan + $persalinan;
+        // return $ranap_per_month;
+        return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month'));
     }
 
     public function dash_rajal()
