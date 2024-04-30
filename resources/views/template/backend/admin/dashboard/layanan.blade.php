@@ -124,11 +124,9 @@
               var dataSeriesRanap = [];
               var dataSeriesKhitan = [];
               var dataSeriesPersalinan = [];
-
               // Loop untuk setiap bulan
               for (var i = 1; i <= 12; i++) {
                   categories.push(monthNames[i - 1]);
-
                   // Mendapatkan data kunjungan per bulan
                   var rajal = rajalData[i] ? rajalData[i] : 0;
                   var ranap = ranapData[i] ? ranapData[i] : 0;
