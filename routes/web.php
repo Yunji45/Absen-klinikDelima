@@ -96,7 +96,7 @@ Route::get('/opencv',[FaceController::class,'index']);
 Route::get('/login', [AuthController::class,'index'])->name('auth.index')->middleware('guest');
 Route::post('/act-login', [AuthController::class,'login'])->name('auth.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
-// Route::get('/home',[HomeController::class,'index'])->name('home');
+Route::get('/home',[HomeController::class,'index'])->name('home');
 
 // Route::middleware(['auth', 'verified_face'])->group(function () {
 //     Route::get('/biznet', [BiznetController::class, 'index'])->name('biznet.index');
@@ -104,9 +104,9 @@ Route::get('/logout',[AuthController::class,'logout'])->name('auth.logout');
 // });
 
 // Rute untuk halaman home
-Route::middleware(['web','auth', 'verified_face'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-});
+// Route::middleware(['web','auth', 'verified_face'])->group(function () {
+//     Route::get('/home', [HomeController::class, 'index'])->name('home');
+// });
 
 
 Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,evaluator']], function(){

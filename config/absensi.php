@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'ip_internet'    => env('IP_ADDRESS', '36.75.200.138'),
+    'ip_internet'    => env('IP_ADDRESS', '36.75.82.44'),
     
     'jam_masuk'     => env('JAM_MASUK', '00:00'),
     'jam_keluar'    => env('JAM_KELUAR', '24:00'),
