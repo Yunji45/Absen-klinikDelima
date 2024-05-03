@@ -120,7 +120,20 @@
                                     @error('jenis_kelamin') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-
+                            <div class="form-group row">
+                                <label for="poli" class="col-form-label col-sm-3">Poli</label>
+                                <div class="col-sm-9">
+                                    <select name="poli" id="poli" class="form-control @error('poli') is-invalid @enderror">
+                                        <option value="">Pilih</option>
+                                        <option value="Poli Umum">Poli Umum</option>
+                                        <option value="Imunisasi">Imunisasi</option>
+                                        <option value="KB">KB</option>
+                                        <option value="Ibu Hamil">Ibu Hamil</option>
+                                        <option value="Keterangan Sehat">Keterangan Sehat</option>
+                                    </select>
+                                    @error('poli') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-success">Simpan</button>

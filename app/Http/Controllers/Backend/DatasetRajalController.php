@@ -61,7 +61,7 @@ class DatasetRajalController extends Controller
         $ranap ->jenis_kelamin = $request->jenis_kelamin;
         $ranap ->tgl_kunjungan = $request->tgl_kunjungan;
         $ranap ->no_rm = $request->no_rm;
-        $ranap ->poli = 'RAWAT JALAN';
+        $ranap ->poli = $request->poli;
         // return $ranap;
         $ranap ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');

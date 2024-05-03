@@ -28,7 +28,7 @@ class DataLayananSeeder extends Seeder
                     'tgl_kunjungan' => $faker->dateTimeThisMonth()->format('Y-m-d'),
                     'no_rm' => $faker->unique()->randomNumber(6),
                     'name' => $faker->name,
-                    'poli' => $faker->randomElement(['Poli Umum', 'Poli Gigi', 'Poli KIA']),
+                    'poli' => $faker->randomElement(['Poli Umum', 'KB', 'Imunisasi','Ibu Hamil','Keterangan Sehat']),
                     'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan'])
                 ]);
             }

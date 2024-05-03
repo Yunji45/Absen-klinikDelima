@@ -86,7 +86,15 @@ class DashboardController extends Controller
     {
         $title = 'Dashboard Rawat Jalan';
         $type = 'dash_layanan';
-        return view('template.backend.admin.dashboard.layanan.rajal',compact('title','type'));
+        $umum = DatasetRajal::where('poli','Poli Umum')->count();
+        $imunisasi= DatasetRajal::where('poli','Imunisasi')->count();
+        $KB = DatasetRajal::where('poli','KB')->count();
+        $hamil = DatasetRajal::where('poli','Ibu Hamil')->count();
+        $sehat = DatasetRajal::where('poli','Keterangan Sehat')->count();
+        $total =DatasetRajal::count();
+        // $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')->distinct()->pluck('year');
+        // return $years;
+        return view('template.backend.admin.dashboard.layanan.rajal',compact('title','type','umum','KB','imunisasi','hamil','sehat','total'));
     }
 
     public function dash_ranap()

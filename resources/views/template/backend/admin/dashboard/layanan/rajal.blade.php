@@ -27,7 +27,7 @@
                       <h4>Poli Umum</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$umum}}
                     </div>
                   </div>
                 </div>
@@ -42,7 +42,7 @@
                       <h4>KB</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$KB}}
                     </div>
                   </div>
                 </div>
@@ -57,7 +57,7 @@
                       <h4>Imunisasi</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$imunisasi}}
                     </div>
                   </div>
                 </div>
@@ -72,7 +72,7 @@
                       <h4>Ibu Hamil</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$hamil}}
                     </div>
                   </div>
                 </div>
@@ -87,7 +87,7 @@
                       <h4>Keterangan Sehat</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$sehat}}
                     </div>
                   </div>
                 </div>
@@ -102,7 +102,7 @@
                       <h4>Total Kunjungan</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$total}}
                     </div>
                   </div>
                 </div>
@@ -164,121 +164,96 @@
           </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <script>
-          var monthNames = ["Ibu Hamil", "Imunisasi", "Keterangan Sehat", "Poli Umum", "KB"];
-          var currentYear = new Date().getFullYear(); // Tahun saat ini
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-rajal-line.js')}}"></script>
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-rajal-bar.js')}}"></script>
+        
+        <!-- <script>
+            var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-          // Inisialisasi grafik dengan tahun saat ini
-          updateChart(currentYear);
+            // Inisialisasi grafik
+            fetchData();
 
-          function updateChart(selectedYear) {
-              // Fungsi ini akan diperbarui untuk mengambil data dari API atau sumber data lainnya sesuai dengan kebutuhan Anda
-              // Data dummy ditampilkan di sini untuk tujuan demonstrasi
-              var categories = [];
-              var dataSeries = [];
+            async function fetchData() {
+                try {
+                    const response = await fetch('http://localhost:8000/api/api-layanan-rajal');
+                    const data = await response.json();
+                    updateChart(data.umum_per_month, data.kb_per_month, data.imunisasi_per_month, data.sehat_per_month, data.hamil_per_month);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
 
-              // Looping untuk mendapatkan data bulan per tahun yang dipilih
-              for (var i = 0; i < 5; i++) {
-                  var monthData = [];
-                  for (var j = 0; j < 12; j++) {
-                      var data = Math.floor(Math.random() * 100); // Dummy data
-                      monthData.push(data);
-                  }
-                  dataSeries.push({
-                      name: monthNames[i],
-                      data: monthData
-                  });
-              }
+            function updateChart(umumData, kbData, imunisasiData, sehatData, hamilData) {
+                var categories = [];
+                var dataSeriesUmum = [];
+                var dataSeriesKB = [];
+                var dataSeriesImunisasi = [];
+                var dataSeriesSehat = [];
+                var dataSeriesHamil = [];
 
-              // Membuat label untuk setiap bulan
-              for (var j = 0; j < 12; j++) {
-                  categories.push(monthNames[j]);
-              }
+                // Loop untuk setiap bulan
+                for (var i = 1; i <= 12; i++) {
+                    categories.push(monthNames[i - 1]);
+                    // Mendapatkan data kunjungan per bulan
+                    var umum = umumData[i] ? umumData[i] : 0;
+                    var kb = kbData[i] ? kbData[i] : 0;
+                    var imunisasi = imunisasiData[i] ? imunisasiData[i] : 0;
+                    var sehat = sehatData[i] ? sehatData[i] : 0;
+                    var hamil = hamilData[i] ? hamilData[i] : 0;
 
-              var options = {
-                  series: dataSeries,
-                  chart: {
-                      height: 350,
-                      type: 'line',
-                      zoom: {
-                          enabled: false
-                      },
-                  },
-                  dataLabels: {
-                      enabled: false
-                  },
-                  stroke: {
-                      width: [5, 7, 5, 3, 4],
-                      curve: 'straight',
-                      dashArray: [0, 8, 5]
-                  },
-                  title: {
-                      text: 'Trend Data Rawat Jalan',
-                      align: 'left'
-                  },
-                  legend: {
-                      tooltipHoverFormatter: function (val, opts) {
-                          return val + ' - <strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + '</strong>'
-                      }
-                  },
-                  markers: {
-                      size: 0,
-                      hover: {
-                          sizeOffset: 6
-                      }
-                  },
-                  xaxis: {
-                      categories: categories,
-                  },
-                  tooltip: {
-                      y: [
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (ibu hamil)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (imunisasi)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (keterangan sehat)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (poli umum)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (KB)"
-                                  }
-                              }
-                          }
-                      ]
-                  },
-                  grid: {
-                      borderColor: '#f1f1f1',
-                  }
-              };
+                    dataSeriesUmum.push(umum);
+                    dataSeriesKB.push(kb);
+                    dataSeriesImunisasi.push(imunisasi);
+                    dataSeriesSehat.push(sehat);
+                    dataSeriesHamil.push(hamil);
+                }
 
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
-          }
-        </script>
-        <script>
+                var options = {
+                    series: [
+                        {
+                            name: "Umum",
+                            data: dataSeriesUmum
+                        },
+                        {
+                            name: "KB",
+                            data: dataSeriesKB
+                        },
+                        {
+                            name: "Imunisasi",
+                            data: dataSeriesImunisasi
+                        },
+                        {
+                            name: "Keterangan Sehat",
+                            data: dataSeriesSehat
+                        },
+                        {
+                            name: "Ibu Hamil",
+                            data: dataSeriesHamil
+                        }
+                    ],
+                    chart: {
+                        height: 350,
+                        type: 'line',
+                        zoom: {
+                            enabled: false
+                        },
+                    },
+                    title: {
+                        text: 'Trend Data Layanan',
+                        align: 'center'
+                    },
+                    xaxis: {
+                        categories: categories
+                    }
+                    // Sisanya adalah konfigurasi grafik
+                    // ...
+                };
+
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+            }
+        </script> -->
+        <!-- <script>
           var options = {
             series: [{
               name: 'Ibu Hamil',
@@ -355,5 +330,5 @@
 
           var chart = new ApexCharts(document.querySelector("#mychart"), options);
           chart.render();
-        </script>
+        </script> -->
 @endsection
