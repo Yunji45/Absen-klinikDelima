@@ -31,4 +31,6 @@ Route::get('/api-education',[StatistikController::class,'StatistikEducation']);
 Route::get('/api-layanan', [LayananController::class, 'dash_layanan']);
 Route::get('/api-layanan-rajal',[LayananController::class,'dash_layanan_rajal']);
 Route::get('/api-layanan-rajal-bar',[LayananController::class,'dash_layanan_rajal_bar']);
+Route::get('/api-layanan-ranap-line',[LayananController::class,'dash_layanan_ranap_line']);
+Route::get('/api-layanan-ranap-bar',[LayananController::class,'dash_layanan_ranap_bar']);
 

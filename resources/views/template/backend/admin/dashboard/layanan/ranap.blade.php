@@ -27,7 +27,7 @@
                       <h4>Pasien Umum</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$umum}}
                     </div>
                   </div>
                 </div>
@@ -42,7 +42,7 @@
                       <h4>Persalinan</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$persalinan}}
                     </div>
                   </div>
                 </div>
@@ -57,7 +57,7 @@
                       <h4>Total Kunjungan</h4>
                     </div>
                     <div class="card-body">
-                      0
+                      {{$total}}
                     </div>
                   </div>
                 </div>
@@ -109,209 +109,7 @@
           </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <script>
-          var monthNames = ["Pasien Umum", "Persalinan"];
-          var currentYear = new Date().getFullYear(); // Tahun saat ini
-
-          // Inisialisasi grafik dengan tahun saat ini
-          updateChart(currentYear);
-
-          function updateChart(selectedYear) {
-              // Fungsi ini akan diperbarui untuk mengambil data dari API atau sumber data lainnya sesuai dengan kebutuhan Anda
-              // Data dummy ditampilkan di sini untuk tujuan demonstrasi
-              var categories = [];
-              var dataSeries = [];
-
-              // Looping untuk mendapatkan data bulan per tahun yang dipilih
-              for (var i = 0; i < 2; i++) {
-                  var monthData = [];
-                  for (var j = 0; j < 12; j++) {
-                      var data = Math.floor(Math.random() * 100); // Dummy data
-                      monthData.push(data);
-                  }
-                  dataSeries.push({
-                      name: monthNames[i],
-                      data: monthData
-                  });
-              }
-
-              // Membuat label untuk setiap bulan
-              for (var j = 0; j < 12; j++) {
-                  categories.push(monthNames[j]);
-              }
-
-              var options = {
-                  series: dataSeries,
-                  chart: {
-                      height: 350,
-                      type: 'line',
-                      zoom: {
-                          enabled: false
-                      },
-                  },
-                  dataLabels: {
-                      enabled: false
-                  },
-                  stroke: {
-                      width: [5, 7, 5, 3, 4],
-                      curve: 'straight',
-                      dashArray: [0, 8, 5]
-                  },
-                  title: {
-                      text: 'Trend Data Rawat Inap',
-                      align: 'left'
-                  },
-                  legend: {
-                      tooltipHoverFormatter: function (val, opts) {
-                          return val + ' - <strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + '</strong>'
-                      }
-                  },
-                  markers: {
-                      size: 0,
-                      hover: {
-                          sizeOffset: 6
-                      }
-                  },
-                  xaxis: {
-                      categories: categories,
-                  },
-                  tooltip: {
-                      y: [
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (ibu hamil)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (imunisasi)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (keterangan sehat)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (poli umum)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (KB)"
-                                  }
-                              }
-                          }
-                      ]
-                  },
-                  grid: {
-                      borderColor: '#f1f1f1',
-                  }
-              };
-
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
-          }
-        </script>
-        <script>
-          var options = {
-            chart: {
-              height: 350,
-              type: "line",
-              stacked: false
-            },
-            dataLabels: {
-              enabled: false
-            },
-            colors: ['#99C2A2', '#C5EDAC', '#66C7F4'],
-            series: [
-              
-              {
-                name: 'Pasien Umum',
-                type: 'column',
-                data: [21.1, 23, 33.1, 34, 44.1, 44.9, 56.5, 58.5]
-              },
-              {
-                name: "Persalinan",
-                type: 'column',
-                data: [10, 19, 27, 26, 34, 35, 40, 38]
-              },
-              {
-                name: "Line C",
-                type: 'line',
-                data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
-              },
-            ],
-            stroke: {
-              width: [4, 4, 4]
-            },
-            plotOptions: {
-              bar: {
-                columnWidth: "20%"
-              }
-            },
-            xaxis: {
-              categories: [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
-            },
-            yaxis: [
-              {
-                seriesName: 'Column A',
-                axisTicks: {
-                  show: true
-                },
-                axisBorder: {
-                  show: true,
-                },
-                title: {
-                  text: "Columns"
-                }
-              },
-              {
-                seriesName: 'Column A',
-                show: false
-              }, {
-                opposite: true,
-                seriesName: 'Line C',
-                axisTicks: {
-                  show: true
-                },
-                axisBorder: {
-                  show: true,
-                },
-                title: {
-                  text: "Line"
-                }
-              }
-            ],
-            tooltip: {
-              shared: false,
-              intersect: true,
-              x: {
-                show: false
-              }
-            },
-            title: {
-                      text: 'Trend Data Rawat Inap',
-                      align: 'left'
-                  },
-            legend: {
-              horizontalAlign: "left",
-              offsetX: 40
-            }
-          };
-
-          var chart = new ApexCharts(document.querySelector("#baris"), options);
-
-          chart.render();
-        </script>
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/test.js')}}"></script>
+        <!-- <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-ranap-line.js')}}"></script>
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-ranap-bar.js')}}"></script> -->
 @endsection

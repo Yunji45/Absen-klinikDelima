@@ -77,27 +77,100 @@ class LayananController extends Controller
             'hamil_per_month' => $hamil_per_month
         ]);
     }
+    // public function dash_layanan_rajal_bar()
+    // {
+    //     $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')->distinct()->pluck('year');
+
+    //     $data = [];
+    //     foreach ($years as $year) {
+    //         $umum_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'Umum')->count();
+    //         $kb_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'KB')->count();
+    //         $imunisasi_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'Imunisasi')->count();
+    //         $sehat_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'Keterangan Sehat')->count();
+    //         $hamil_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'Ibu Hamil')->count();
+
+    //         $data[$year] = [
+    //             'Umum' => $umum_count,
+    //             'KB' => $kb_count,
+    //             'Imunisasi' => $imunisasi_count,
+    //             'Keterangan Sehat' => $sehat_count,
+    //             'Ibu Hamil' => $hamil_count,
+    //         ];
+    //     }
+
+    //     return response()->json($data);
+    // }
     public function dash_layanan_rajal_bar()
     {
-        $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')->distinct()->pluck('year');
-
+        $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')
+            ->distinct()
+            ->pluck('year')
+            ->toArray();
         $data = [];
+        $polis = ['Umum', 'KB', 'Imunisasi', 'Keterangan Sehat', 'Ibu Hamil'];
         foreach ($years as $year) {
-            $umum_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'Umum')->count();
-            $kb_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'KB')->count();
-            $imunisasi_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'Imunisasi')->count();
-            $sehat_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'Keterangan Sehat')->count();
-            $hamil_count = DatasetRajal::whereYear('tgl_kunjungan', $year)->where('poli', 'Ibu Hamil')->count();
-
-            $data[$year] = [
-                'Umum' => $umum_count,
-                'KB' => $kb_count,
-                'Imunisasi' => $imunisasi_count,
-                'Keterangan Sehat' => $sehat_count,
-                'Ibu Hamil' => $hamil_count,
-            ];
+            $data[$year] = [];
+            foreach ($polis as $poli) {
+                $data[$year][$poli] = 0;
+            }
+        }
+        $visits = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year, poli, COUNT(*) as count')
+            ->groupBy('year', 'poli')
+            ->get();
+        foreach ($visits as $visit) {
+            $data[$visit->year][$visit->poli] = $visit->count;
         }
 
         return response()->json($data);
     }
+
+    public function dash_layanan_ranap_line()
+    {
+        $current_year = date('Y');
+        $current_month = date('m');
+        $umum_per_month = [];
+        $persalinan_per_month = [];
+
+        for ($month = 1; $month <= $current_month; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$current_year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$current_year-$month-01"));
+            $umum_count = DatasetRanap::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->where('poli','Poli Umum')->count();
+            $umum_per_month[$month] = $umum_count;
+            $persalinan_count = DatasetRanap::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->where('poli','Persalinan')->count();
+            $persalinan_per_month[$month] = $persalinan_count;
+        }
+        return response()->json([
+            'umum_per_month' => $umum_per_month,
+            'persalinan_per_month' => $persalinan_per_month,
+        ]);
+    }
+
+    public function dash_layanan_ranap_bar()
+{
+    $current_year = date('Y');
+    
+    $umum_count = [];
+    $persalinan_count = [];
+    $persentase = [];
+
+    for ($year = $current_year - 7; $year <= $current_year; $year++) {
+        $umum = DatasetRanap::whereYear('tgl_kunjungan', $year)->where('poli','Umum')->count();
+        $persalinan = DatasetRanap::whereYear('tgl_kunjungan', $year)->where('poli','Persalinan')->count();
+        $total = $umum + $persalinan;
+
+        $umum_count[] = $umum;
+        $persalinan_count[] = $persalinan;
+        $persentase[] = $total > 0 ? round(($persalinan / $total) * 100, 1) : 0; // Bulatkan ke 1 angka desimal
+    }
+
+    // Mengembalikan data dalam format JSON
+    return response()->json([
+        'umum_count' => $umum_count,
+        'persalinan_count' => $persalinan_count,
+        'persentase' => $persentase,
+        'years' => range($current_year - 7, $current_year),
+    ]);
+}
+
+        
 }

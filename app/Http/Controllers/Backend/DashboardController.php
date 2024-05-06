@@ -101,7 +101,10 @@ class DashboardController extends Controller
     {
         $title = 'Dashboard Rawat Inap';
         $type = 'dash_layanan';
-        return view('template.backend.admin.dashboard.layanan.ranap',compact('title','type'));
+        $umum = DatasetRanap::where('poli','Umum')->count();
+        $persalinan = DatasetRanap::where('poli','Persalinan')->count();
+        $total=DatasetRanap::count();
+        return view('template.backend.admin.dashboard.layanan.ranap',compact('title','type','umum','persalinan','total'));
     }
 
 }
