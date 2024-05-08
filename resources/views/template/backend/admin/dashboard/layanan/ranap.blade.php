@@ -109,7 +109,7 @@
           </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <script src="{{asset('stisla/dist/assets/js/dash-layanan/test.js')}}"></script>
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-ranap.js')}}"></script>
         <!-- <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-ranap-line.js')}}"></script>
         <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-ranap-bar.js')}}"></script> -->
 @endsection

@@ -145,7 +145,7 @@ function drawChart(data) {
     },
     legend: {
       position: 'top',
-      horizontalAlign: 'left',
+      horizontalAlign: 'center',
       offsetX: 40
     }
   };
