@@ -198,11 +198,13 @@ function updateLineChart(umumData, persalinanData) {
         series: [
             {
                 name: "Umum",
-                data: dataSeriesUmum
+                data: dataSeriesUmum,
+                color: "#FF0000"
             },
             {
                 name: "Persalinan",
-                data: dataSeriesPersalinan
+                data: dataSeriesPersalinan,
+                color: "#006400"
             }
         ],
         chart: {
@@ -240,12 +242,12 @@ async function updateChart() {
             dataLabels: {
                 enabled: false
             },
-            colors: ['#99C2A2', '#C5EDAC', '#66C7F4'],
+            colors: ['#006400', '#FF0000', '#FFFF00'],
             series: [
                 {
                     name: 'Umum',
                     type: 'column',
-                    data: umum_count
+                    data: umum_count,
                 },
                 {
                     name: "Persalinan",

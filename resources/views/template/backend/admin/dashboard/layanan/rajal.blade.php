@@ -119,7 +119,7 @@
                 <a class="nav-link" href="{{route('dash.ranap')}}">Rawat Inap</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Khitanan</a>
+                <a class="nav-link" href="{{route('dash.khitan')}}">Khitanan</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Laboratorium</a>

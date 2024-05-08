@@ -50,7 +50,7 @@
                 <a class="nav-link" href="{{route('dash.ranap')}}">Rawat Inap</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Khitanan</a>
+                <a class="nav-link" href="{{route('dash.khitan')}}">Khitanan</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Laboratorium</a>
@@ -68,6 +68,18 @@
                   <div class="card-body">
                     <div class="row align-items-center mb-4">
                     </div>
+                    <div id="daftarWilayah"></div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row align-items-center mb-4">
+                    </div>
                       <div>
                           <label for="year">Pilih Tahun:</label>
                           <select id="year" onchange="updateChart(this.value)">
@@ -78,6 +90,46 @@
                           </select>
                       </div>
                     <div id="chart"></div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row align-items-center mb-4">
+                    </div>
+                      <div>
+                          <label for="year">Pilih Tahun:</label>
+                          <select id="year" onchange="updateChart(this.value)">
+                              <option value="2022">2022</option>
+                              <option value="2023">2023</option>
+                              <option value="2024">2024</option>
+                              <!-- Tambahkan opsi tahun sesuai kebutuhan -->
+                          </select>
+                      </div>
+                    <div id="baris"></div>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row align-items-center mb-4">
+                    </div>
+                      <div>
+                          <label for="year">Pilih Tahun:</label>
+                          <select id="year" onchange="updateChart(this.value)">
+                              <option value="2022">2022</option>
+                              <option value="2023">2023</option>
+                              <option value="2024">2024</option>
+                              <!-- Tambahkan opsi tahun sesuai kebutuhan -->
+                          </select>
+                      </div>
+                    <div id="baris-2"></div>
                     
                   </div>
                 </div>
@@ -102,7 +154,8 @@
           </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <script>
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-index.js')}}"></script>
+        <!-- <script>
           var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
           // Inisialisasi grafik
@@ -179,7 +232,7 @@
               var chart = new ApexCharts(document.querySelector("#chart"), options);
               chart.render();
           }
-        </script>
+        </script> -->
       <script>
 
         const map = L.map('map').setView([-7.314931134411498, 108.43086308707107], 8);

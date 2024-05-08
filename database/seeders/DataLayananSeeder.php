@@ -63,18 +63,18 @@ class DataLayananSeeder extends Seeder
 
 
         // Membuat data dummy per bulan untuk DatasetRanap
-        for ($month = 1; $month <= 12; $month++) {
-            $ranapCount = $faker->numberBetween(5, 1000); // Jumlah kunjungan per bulan
-            for ($i = 0; $i < $ranapCount; $i++) {
-                DatasetRanap::create([
-                    'tgl_kunjungan' => $faker->dateTimeBetween('2024-01-01', '2024-12-31')->format('Y-m-d'),
-                    'no_rm' => $faker->unique()->randomNumber(6),
-                    'name' => $faker->name,
-                    'poli' => $faker->randomElement(['Umum', 'Persalinan']),
-                    'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan'])
-                ]);
-            }
-        }
+        // for ($month = 1; $month <= 12; $month++) {
+        //     $ranapCount = $faker->numberBetween(5, 1000); // Jumlah kunjungan per bulan
+        //     for ($i = 0; $i < $ranapCount; $i++) {
+        //         DatasetKhitan::create([
+        //             'tgl_kunjungan' => $faker->dateTimeBetween('2020-01-01', '2020-12-31')->format('Y-m-d'),
+        //             'no_rm' => $faker->unique()->randomNumber(6),
+        //             'name' => $faker->name,
+        //             'poli' => $faker->randomElement(['Khitan']),
+        //             'jenis_kelamin' => $faker->randomElement(['Laki-laki'])
+        //         ]);
+        //     }
+        // }
 
         // Membuat data dummy per bulan untuk DatasetKhitan
         // for ($month = 1; $month <= 12; $month++) {

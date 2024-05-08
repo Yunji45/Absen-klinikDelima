@@ -107,4 +107,13 @@ class DashboardController extends Controller
         return view('template.backend.admin.dashboard.layanan.ranap',compact('title','type','umum','persalinan','total'));
     }
 
+    public function dash_khitan()
+    {
+        $title = 'Dashboard Khitan';
+        $type = 'dash_layanan';
+        $total = DatasetKhitan::count();
+        return view('template.backend.admin.dashboard.layanan.khitan',compact('title','type','total'));
+
+    }
+
 }

@@ -146,31 +146,70 @@ class LayananController extends Controller
     }
 
     public function dash_layanan_ranap_bar()
-{
-    $current_year = date('Y');
-    
-    $umum_count = [];
-    $persalinan_count = [];
-    $persentase = [];
+    {
+        $current_year = date('Y');
+        
+        $umum_count = [];
+        $persalinan_count = [];
+        $persentase = [];
 
-    for ($year = $current_year - 7; $year <= $current_year; $year++) {
-        $umum = DatasetRanap::whereYear('tgl_kunjungan', $year)->where('poli','Umum')->count();
-        $persalinan = DatasetRanap::whereYear('tgl_kunjungan', $year)->where('poli','Persalinan')->count();
-        $total = $umum + $persalinan;
+        for ($year = $current_year - 7; $year <= $current_year; $year++) {
+            $umum = DatasetRanap::whereYear('tgl_kunjungan', $year)->where('poli','Umum')->count();
+            $persalinan = DatasetRanap::whereYear('tgl_kunjungan', $year)->where('poli','Persalinan')->count();
+            $total = $umum + $persalinan;
 
-        $umum_count[] = $umum;
-        $persalinan_count[] = $persalinan;
-        $persentase[] = $total > 0 ? round(($persalinan / $total) * 100, 1) : 0; // Bulatkan ke 1 angka desimal
+            $umum_count[] = $umum;
+            $persalinan_count[] = $persalinan;
+            $persentase[] = $total > 0 ? round(($persalinan / $total) * 100, 1) : 0; // Bulatkan ke 1 angka desimal
+        }
+
+        // Mengembalikan data dalam format JSON
+        return response()->json([
+            'umum_count' => $umum_count,
+            'persalinan_count' => $persalinan_count,
+            'persentase' => $persentase,
+            'years' => range($current_year - 7, $current_year),
+        ]);
     }
 
-    // Mengembalikan data dalam format JSON
-    return response()->json([
-        'umum_count' => $umum_count,
-        'persalinan_count' => $persalinan_count,
-        'persentase' => $persentase,
-        'years' => range($current_year - 7, $current_year),
-    ]);
-}
+    public function dash_layanan_khitan_line()
+    {
+        $current_year = date('Y');
+        $current_month = date('m');
+        $khitan_per_month = [];
 
-        
+        for ($month = 1; $month <= $current_month; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$current_year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$current_year-$month-01"));
+            $khitan_count = DatasetKhitan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->where('poli','Khitan')->count();
+            $khitan_per_month[$month] = $khitan_count;
+        }
+        return response()->json([
+            'khitan_per_month' => $khitan_per_month,
+        ]);
+    }
+
+    public function dash_layanan_khitan_bar()
+    {
+        $years = DatasetKhitan::selectRaw('YEAR(tgl_kunjungan) as year')
+            ->distinct()
+            ->pluck('year')
+            ->toArray();
+        $data = [];
+        $polis = ['Khitan'];
+        foreach ($years as $year) {
+            $data[$year] = [];
+            foreach ($polis as $poli) {
+                $data[$year][$poli] = 0;
+            }
+        }
+        $visits = DatasetKhitan::selectRaw('YEAR(tgl_kunjungan) as year, poli, COUNT(*) as count')
+            ->groupBy('year', 'poli')
+            ->get();
+        foreach ($visits as $visit) {
+            $data[$visit->year][$visit->poli] = $visit->count;
+        }
+
+        return response()->json($data);
+    }
 }

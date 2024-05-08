@@ -131,6 +131,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/layanan',[DashboardController::class,'dash_layanan'])->name('dash.layanan');
         Route::get('/layanan-rajal',[DashboardController::class,'dash_rajal'])->name('dash.rajal');
         Route::get('/layanan-ranap',[DashboardController::class,'dash_ranap'])->name('dash.ranap');
+        Route::get('/layanan-khitan',[DashboardController::class,'dash_khitan'])->name('dash.khitan');
         
         //user-backend
         Route::get('/users/cari', [UserController::class,'search'])->name('users.search');
