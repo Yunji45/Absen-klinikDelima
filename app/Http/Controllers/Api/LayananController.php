@@ -124,6 +124,10 @@ class LayananController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * Api Untuk Layanan Rawat Inap
+     */
+
     public function dash_layanan_ranap_line()
     {
         $current_year = date('Y');
@@ -171,6 +175,10 @@ class LayananController extends Controller
             'years' => range($current_year - 7, $current_year),
         ]);
     }
+
+    /**
+     * Api Untuk Layanan Khitan
+     */
 
     public function dash_layanan_khitan_line()
     {

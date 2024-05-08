@@ -113,7 +113,28 @@ class DashboardController extends Controller
         $type = 'dash_layanan';
         $total = DatasetKhitan::count();
         return view('template.backend.admin.dashboard.layanan.khitan',compact('title','type','total'));
-
     }
+
+    public function dash_lab()
+    {
+        $title = 'Dashboard Laboratorium';
+        $type = 'dash_layanan';
+        return view('template.backend.admin.dashboard.layanan.lab',compact('title','type'));
+    }
+
+    public function dash_usg()
+    {
+        $title = 'Dashboard USG';
+        $type = 'dash_layanan';
+        return view('template.backend.admin.dashboard.layanan.usg',compact('title','type'));
+    }
+
+    public function dash_estetika()
+    {
+        $title = 'Dashboard Estetika';
+        $type = 'dash_layanan';
+        return view('template.backend.admin.dashboard.layanan.estetika',compact('title','type'));
+    }
+
 
 }

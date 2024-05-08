@@ -47,13 +47,13 @@
                 <a class="nav-link active" href="{{route('dash.khitan')}}">Khitanan</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Laboratorium</a>
+                <a class="nav-link" href="{{route('dash.lab')}}">Laboratorium</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">USG</a>
+                <a class="nav-link" href="{{route('dash.usg')}}">USG</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Estetika</a>
+                <a class="nav-link" href="{{route('dash.estetika')}}">Estetika</a>
               </li>
             </ul>
             <div class="row">
