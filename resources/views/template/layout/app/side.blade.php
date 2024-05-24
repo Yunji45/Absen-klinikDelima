@@ -194,10 +194,12 @@
                     <li class="{{ Route::currentRouteName() === 'dataset.lab' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('dataset.lab')}}">Laboratorium</a>
                     </li>
-                    <li class="">
-                        <a class="nav-link" href="">USG</a>
+                    <li class="{{ Route::currentRouteName() === 'dataset.usg' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('dataset.usg')}}">USG</a>
                     </li>
-
+                    <li class="{{ Route::currentRouteName() === 'dataset.estetika' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{route('dataset.estetika')}}">Estetika</a>
+                    </li>
                 </ul>
             </li>
             <li class="menu-header">Layout</li>

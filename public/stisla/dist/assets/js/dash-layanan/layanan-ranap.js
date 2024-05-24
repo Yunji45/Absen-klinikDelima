@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchLineChartData() {
     try {
-        const response = await fetch('http://localhost:8000/api/api-layanan-ranap-line');
+        const response = await fetch('https://klinikmitradelima.com/api/api-layanan-ranap-line');
         const data = await response.json();
         updateLineChart(data.umum_per_month, data.persalinan_per_month);
     } catch (error) {
@@ -229,7 +229,7 @@ function updateLineChart(umumData, persalinanData) {
 
 async function updateChart() {
     try {
-        const response = await fetch('http://localhost:8000/api/api-layanan-ranap-bar');
+        const response = await fetch('https://klinikmitradelima.com/api/api-layanan-ranap-bar');
         const data = await response.json();
         const { umum_count, persalinan_count, persentase, years } = data;
 

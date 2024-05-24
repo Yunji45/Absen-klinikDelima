@@ -40,6 +40,8 @@ use App\Http\Controllers\Backend\DatasetRawatInapController;
 use App\Http\Controllers\Backend\DatasetLabController;
 use App\Http\Controllers\Backend\DatasetPersalinanController;
 use App\Http\Controllers\Backend\DatasetRajalController;
+use App\Http\Controllers\Backend\DatasetUsgController;
+use App\Http\Controllers\Backend\DatasetEstetikaController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -420,6 +422,14 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
 
         Route::get('/dataset-rajal',[DatasetRajalController::class,'index'])->name('dataset.rajal');
         Route::post('/dataset-rajal/save',[DatasetRajalController::class,'store'])->name('dataset.rajal.store');
+
+        Route::get('/dataset-usg',[DatasetUsgController::class,'index'])->name('dataset.usg');
+        Route::post('/dataset-usg/save',[DatasetUsgController::class,'store'])->name('dataset.usg.store');
+        Route::get('/dataset-usg/delete/{id}',[DatasetUsgController::class,'destroy'])->name('dataset.usg.delete');
+
+        Route::get('/dataset-Estetika',[DatasetEstetikaController::class,'index'])->name('dataset.estetika');
+        Route::post('/dataset-Estetika/save',[DatasetEstetikaController::class,'store'])->name('dataset.estetika.store');
+        Route::get('/dataset-Estetika/delete/{id}',[DatasetEstetikaController::class,'destroy'])->name('dataset.estetika.delete');
 
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');

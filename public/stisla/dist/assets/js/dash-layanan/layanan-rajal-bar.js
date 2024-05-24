@@ -76,7 +76,7 @@
 //   chart.render();
 // Fungsi untuk mendapatkan data dari API
 async function getDataFromAPI() {
-  var url = 'http://localhost:8000/api/api-layanan-rajal-bar'; // Sesuaikan dengan URL API Anda
+  var url = 'https://klinikmitradelima.com/api/api-layanan-rajal-bar'; // Sesuaikan dengan URL API Anda
 
   try {
     const response = await fetch(url);

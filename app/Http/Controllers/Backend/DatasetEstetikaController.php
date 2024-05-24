@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\DatasetUsg;
+use App\Models\DatasetEstetika;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-class DatasetUsgController extends Controller
+class DatasetEstetikaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class DatasetUsgController extends Controller
      */
     public function index()
     {
-        $title = 'Dataset USG';
+        $title = 'Dataset Estetika';
         $type = 'layanan-dataset';
-        $data = DatasetUsg::all();
-        return view ('template.backend.admin.dataset.usg.index',compact('title','type','data'));
+        $data = DatasetEstetika::all();
+        return view ('template.backend.admin.dataset.estetika.index',compact('title','type','data'));
     }
 
     /**
@@ -56,14 +56,14 @@ class DatasetUsgController extends Controller
                 ->withInput();
         }
 
-        $usg = new DatasetUsg;
-        $usg ->name = $request->name;
-        $usg ->jenis_kelamin = $request->jenis_kelamin;
-        $usg ->tgl_kunjungan = $request->tgl_kunjungan;
-        $usg ->no_rm = $request->no_rm;
-        $usg ->poli = 'USG';
-        // return $usg;
-        $usg ->save();
+        $estetika = new DatasetEstetika;
+        $estetika ->name = $request->name;
+        $estetika ->jenis_kelamin = $request->jenis_kelamin;
+        $estetika ->tgl_kunjungan = $request->tgl_kunjungan;
+        $estetika ->no_rm = $request->no_rm;
+        $estetika ->poli = 'ESTETIKA';
+        // return $estetika;
+        $estetika ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');
     }
 
@@ -109,7 +109,7 @@ class DatasetUsgController extends Controller
      */
     public function destroy($id)
     {
-        $data = DatasetUsg::find($id);
+        $data = DatasetEstetika::find($id);
         $data -> delete();
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
