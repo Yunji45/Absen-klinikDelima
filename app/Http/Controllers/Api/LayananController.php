@@ -8,7 +8,9 @@ use App\Models\DatasetRajal;
 use App\Models\DatasetRanap;
 use App\Models\DatasetKhitan;
 use App\Models\DatasetPersalinan;
-
+use App\Models\DatasetLab;
+use App\Models\DatasetUsg;
+use App\Models\DatasetEstetika;
 class LayananController extends Controller
 {
     /**
@@ -360,4 +362,121 @@ class LayananController extends Controller
 
         return response()->json($data);
     }
+
+    /**
+     * Api Untuk Laboratorium
+     */
+
+     public function dash_layanan_lab_line()
+     {
+        $current_year = date('Y');
+        $current_month = date('m');
+        $lab_per_month = [];
+
+        for ($month = 1; $month <= $current_month; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$current_year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$current_year-$month-01"));
+            $lab_count = DatasetLab::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->where('poli','LABORATORIUM')->count();
+            $lab_per_month[$month] = $lab_count;
+        }
+        return response()->json([
+            'lab_per_month' => $lab_per_month,
+        ]);
+     }
+
+    public function dash_layanan_lab_bar()
+    {
+        $years = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year')
+            ->distinct()
+            ->pluck('year')
+            ->toArray();
+
+        $genders = ['Laki-laki', 'Perempuan'];
+        $polis = ['LABORATORIUM'];
+
+        $data = [];
+        foreach ($years as $year) {
+            $data[$year] = [
+                'total_kunjungan' => 0,
+                'poli' => []
+            ];
+            foreach ($polis as $poli) {
+                $data[$year]['poli'][$poli] = [
+                    'total' => 0,
+                    'Laki-laki' => 0,
+                    'Perempuan' => 0
+                ];
+            }
+        }
+
+        $visits = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year, poli, jenis_kelamin, COUNT(*) as count')
+            ->groupBy('year', 'poli', 'jenis_kelamin')
+            ->get();
+
+        foreach ($visits as $visit) {
+            $data[$visit->year]['total_kunjungan'] += $visit->count;
+            $data[$visit->year]['poli'][$visit->poli]['total'] += $visit->count;
+            $data[$visit->year]['poli'][$visit->poli][$visit->jenis_kelamin] += $visit->count;
+        }
+
+        return response()->json($data);
+    }
+
+    //  public function dash_layanan_lab_bar()
+    //  {
+    //     $years = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year')
+    //         ->distinct()
+    //         ->pluck('year')
+    //         ->toArray();
+    //     $data = [];
+    //     $genders = ['Laki-laki', 'Perempuan'];
+    //     $polis = ['LABORATORIUM'];
+    //     foreach ($years as $year) {
+    //         $data[$year] = [];
+    //         foreach ($polis as $poli) {
+    //             $data[$year][$poli] = 0;
+    //         }
+    //         foreach ($genders as $gender) {
+    //             $data[$year][$gender] = 0;
+    //         }
+
+    //     }
+    //     $visits = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year, poli, jenis_kelamin, COUNT(*) as count')
+    //         ->groupBy('year', 'poli','jenis_kelamin')
+    //         ->get();
+    //     foreach ($visits as $visit) {
+    //         $data[$visit->year][$visit->poli][$visit->jenis_kelamin] = $visit->count;
+    //     }
+
+    //     return response()->json($data);
+    //  }
+
+     /**
+      * Api untuk USG
+      */
+
+     public function dash_layanan_usg_line()
+     {
+
+     }
+
+     public function dash_layanan_usg_bar()
+     {
+        
+     }
+
+    /**
+      * Api untuk Estetika
+      */
+
+     public function dash_layanan_estetika_line()
+     {
+
+     }
+
+     public function dash_layanan_estetika_bar()
+     {
+        
+     }
+
 }

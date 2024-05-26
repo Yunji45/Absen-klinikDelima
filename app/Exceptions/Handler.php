@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -47,4 +50,15 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        // Tambahkan pengecekan untuk mode pemeliharaan
+        if ($exception instanceof HttpException && $exception->getStatusCode() === 503) {
+            return response()->view('welcome', [], 503);
+        }
+
+        return parent::render($request, $exception);
+    }
+
 }

@@ -431,6 +431,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/dataset-Estetika/save',[DatasetEstetikaController::class,'store'])->name('dataset.estetika.store');
         Route::get('/dataset-Estetika/delete/{id}',[DatasetEstetikaController::class,'destroy'])->name('dataset.estetika.delete');
 
+        Route::post('/presensi/import',[PresensiController::class,'insert_excel'])->name('presensi.import');
+        Route::get('/presensi/import',[PresensiController::class,'export_presensi'])->name('presensi.export');
+
         //rubahip
         Route::post('/update-ip', [IPConfigController::class,'update'])->name('update-ip');
         Route::get('/index-ip', [IPConfigController::class,'index'])->name('ip.index');

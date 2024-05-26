@@ -137,9 +137,13 @@
                 <i class="fa fa-download">
                     </i> Pdf
             </a>
-            <a href="" class="btn btn-success">
+            <a href="{{route('presensi.export',['tanggal' => request('tanggal', date('Y-m'))])}}" class="btn btn-success">
                 <i class="fa fa-download">
                     </i> Excel
+            </a>
+            <a href="" class="btn btn-warning" data-toggle="modal" data-target="#import">
+            <i class="fa fa-download">
+                </i> Import Excel
             </a>
             <div class="section-header-breadcrumb">
                 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#update">
@@ -235,6 +239,31 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">IMPORT DATA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{route('presensi.import')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>PILIH FILE</label>
+                        <input type="file" name="file" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
+                    <button type="submit" class="btn btn-success">IMPORT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">

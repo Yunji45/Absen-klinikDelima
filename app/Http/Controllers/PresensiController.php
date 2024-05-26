@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\presensi;
 use App\Models\User;
-use App\Exports\PresentExport;
-use App\Exports\UsersPresentExport;
+use App\Exports\PresensiExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use PDF;
@@ -14,6 +13,9 @@ use App\Models\jadwal;
 use App\Models\jadwalterbaru;
 use App\Models\rubahjadwal;
 use App\Models\cuti;
+use App\Imports\AbsensiImport;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class PresensiController extends Controller
 {
@@ -848,4 +850,40 @@ class PresensiController extends Controller
         $present->delete();
         return redirect()->back()->with('success', 'Data presensi berhasil dihapus.');
     }        
+
+    public function insert_excel(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = $file->hashName();
+        $path = $file->storeAs('public/presensi/',$nama_file);
+        // import data
+        $import = Excel::import(new AbsensiImport(), storage_path('app/public/presensi/'.$nama_file));
+        //remove from server
+        Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->route('kehadiran.index')->with('success', 'Data Berhasil Diimport!');
+        } else {
+            //redirect
+            return redirect()->route('kehadiran.index')->with('error', 'Data Gagal Diimport!');
+        }
+    }
+
+    public function export_presensi(Request $request)
+    {
+        $request->validate([
+            'tanggal' => ['required']
+        ]);
+        $waktu = explode('-', $request->tanggal);
+
+        $data = Presensi::whereMonth('tanggal', $waktu[1] )
+            ->whereYear('tanggal', $waktu[0])
+            ->orderBy('tanggal', 'asc')
+            ->get();
+
+        return Excel::download(new PresensiExport($data), 'Presensi-Karyawan.xlsx');
+    }
 }

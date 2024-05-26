@@ -36,6 +36,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // ...
         \App\Console\Commands\AbsensiCron::class,
+        \App\Console\Commands\CustomDownServer::class,
     ];
     
 }
