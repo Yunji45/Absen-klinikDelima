@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\StatistikController;
 use App\Http\Controllers\Api\LayananController;
+use App\Http\Controllers\Api\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,8 @@ use App\Http\Controllers\Api\LayananController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/api-user',[UserController::class,'get_data_user']);
 
 //API NAKES DASHBOARD
 Route::get('/api-nakes',[StatistikController::class,'StatistikNakes']);
