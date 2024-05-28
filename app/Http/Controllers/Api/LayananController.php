@@ -373,6 +373,43 @@ class LayananController extends Controller
         ]);
     }
 
+    public function GetAvailableYears_ranap()
+    {
+        $years = DatasetRanap::selectRaw('YEAR(tgl_kunjungan) as year')
+            ->distinct()
+            ->orderBy('year', 'asc')
+            ->pluck('year');
+
+        return response()->json($years);
+    }
+
+    public function search_layanan_ranap(Request $request)
+    {
+        $year = $request->input('year', date('Y'));
+
+        $umum_per_month = [];
+        $persalinan_per_month = [];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$year-$month-01"));
+
+            $umum_per_month[$month] = DatasetRanap::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->where('poli', 'Umum')
+                                                ->count();
+            $persalinan_per_month[$month] = DatasetRanap::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->where('poli', 'Persalinan')
+                                                ->count();
+        }
+
+        // Mengembalikan hasil sebagai respons JSON
+        return response()->json([
+            'umum_per_month' => $umum_per_month,
+            'persalinan_per_month' => $persalinan_per_month,
+        ]);
+    }
+
+
     /**
      * Api Untuk Layanan Khitan
      */
@@ -417,6 +454,38 @@ class LayananController extends Controller
 
         return response()->json($data);
     }
+
+    public function GetAvailableYears_khitan()
+    {
+        $years = DatasetKhitan::selectRaw('YEAR(tgl_kunjungan) as year')
+            ->distinct()
+            ->orderBy('year', 'asc')
+            ->pluck('year');
+
+        return response()->json($years);
+    }
+
+    public function search_layanan_khitan(Request $request)
+    {
+        $year = $request->input('year', date('Y'));
+
+        $khitan_per_month = [];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$year-$month-01"));
+
+            $khitan_per_month[$month] = DatasetKhitan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->where('poli', 'Khitan')
+                                                ->count();
+        }
+
+        // Mengembalikan hasil sebagai respons JSON
+        return response()->json([
+            'khitan_per_month' => $khitan_per_month,
+        ]);
+    }
+
 
     /**
      * Api Untuk Laboratorium

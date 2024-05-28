@@ -40,11 +40,11 @@ class DataLayananSeeder extends Seeder
         for ($month = 1; $month <= 12; $month++) {
             $rajalCount = $faker->numberBetween(5, 400); // Jumlah kunjungan per bulan
             for ($i = 0; $i < $rajalCount; $i++) {
-                DatasetLab::create([
+                DatasetKhitan::create([
                     'tgl_kunjungan' => $faker->dateTimeBetween('2021-01-01', '2021-12-31')->format('Y-m-d'),
                     'no_rm' => $faker->unique()->randomNumber(6),
                     'name' => $faker->name,
-                    'poli' => $faker->randomElement(['LABORATORIUM']),
+                    'poli' => $faker->randomElement(['Khitan']),
                     'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan'])
                 ]);
             }
@@ -54,11 +54,11 @@ class DataLayananSeeder extends Seeder
         for ($month = 1; $month <= 12; $month++) {
             $rajalCount = $faker->numberBetween(5, 400); // Jumlah kunjungan per bulan
             for ($i = 0; $i < $rajalCount; $i++) {
-                DatasetLab::create([
+                DatasetKhitan::create([
                     'tgl_kunjungan' => $faker->dateTimeBetween('2022-01-01', '2022-12-31')->format('Y-m-d'),
                     'no_rm' => $faker->unique()->randomNumber(6),
                     'name' => $faker->name,
-                    'poli' => $faker->randomElement(['LABORATORIUM']),
+                    'poli' => $faker->randomElement(['Khitan']),
                     'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan'])
                 ]);
             }
@@ -67,11 +67,11 @@ class DataLayananSeeder extends Seeder
         for ($month = 1; $month <= 12; $month++) {
             $rajalCount = $faker->numberBetween(5, 400); // Jumlah kunjungan per bulan
             for ($i = 0; $i < $rajalCount; $i++) {
-                DatasetLab::create([
+                DatasetKhitan::create([
                     'tgl_kunjungan' => $faker->dateTimeBetween('2023-01-01', '2023-12-31')->format('Y-m-d'),
                     'no_rm' => $faker->unique()->randomNumber(6),
                     'name' => $faker->name,
-                    'poli' => $faker->randomElement(['LABORATORIUM']),
+                    'poli' => $faker->randomElement(['Khitan']),
                     'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan'])
                 ]);
             }
@@ -79,11 +79,11 @@ class DataLayananSeeder extends Seeder
         for ($month = 1; $month <= 12; $month++) {
             $rajalCount = $faker->numberBetween(5, 400); // Jumlah kunjungan per bulan
             for ($i = 0; $i < $rajalCount; $i++) {
-                DatasetLab::create([
+                DatasetKhitan::create([
                     'tgl_kunjungan' => $faker->dateTimeBetween('2024-01-01', '2024-12-31')->format('Y-m-d'),
                     'no_rm' => $faker->unique()->randomNumber(6),
                     'name' => $faker->name,
-                    'poli' => $faker->randomElement(['LABORATORIUM']),
+                    'poli' => $faker->randomElement(['Khitan']),
                     'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan'])
                 ]);
             }
@@ -91,11 +91,11 @@ class DataLayananSeeder extends Seeder
         for ($month = 1; $month <= 12; $month++) {
             $rajalCount = $faker->numberBetween(5, 400); // Jumlah kunjungan per bulan
             for ($i = 0; $i < $rajalCount; $i++) {
-                DatasetLab::create([
+                DatasetKhitan::create([
                     'tgl_kunjungan' => $faker->dateTimeBetween('2025-01-01', '2025-12-31')->format('Y-m-d'),
                     'no_rm' => $faker->unique()->randomNumber(6),
                     'name' => $faker->name,
-                    'poli' => $faker->randomElement(['LABORATORIUM']),
+                    'poli' => $faker->randomElement(['Khitan']),
                     'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan'])
                 ]);
             }

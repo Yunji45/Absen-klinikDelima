@@ -44,9 +44,13 @@ Route::get('/api-tahun-rajal',[LayananController::class,'GetAvailableYears']);
 
 Route::get('/api-layanan-ranap-line',[LayananController::class,'dash_layanan_ranap_line']);
 Route::get('/api-layanan-ranap-bar',[LayananController::class,'dash_layanan_ranap_bar']);
+Route::get('/api-search-ranap',[LayananController::class,'search_layanan_ranap']);
+Route::get('/api-tahun-ranap',[LayananController::class,'GetAvailableYears_ranap']);
 
 Route::get('/api-layanan-khitan-line',[LayananController::class,'dash_layanan_khitan_line']);
 Route::get('/api-layanan-khitan-bar',[LayananController::class,'dash_layanan_khitan_bar']);
+Route::get('/api-search-khitan',[LayananController::class,'search_layanan_khitan']);
+Route::get('/api-tahun-khitan',[LayananController::class,'GetAvailableYears_khitan']);
 
 Route::get('/api-layanan-lab-line',[LayananController::class,'dash_layanan_lab_line']);
 Route::get('/api-layanan-lab-bar',[LayananController::class,'dash_layanan_lab_bar']);
