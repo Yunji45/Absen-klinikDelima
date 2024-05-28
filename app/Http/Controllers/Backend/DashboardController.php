@@ -10,6 +10,7 @@ use App\Models\DatasetRanap;
 use App\Models\DatasetRajal;
 use App\Models\DatasetKhitan;
 use App\Models\DatasetPersalinan;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -92,9 +93,51 @@ class DashboardController extends Controller
         $hamil = DatasetRajal::where('poli','Ibu Hamil')->count();
         $sehat = DatasetRajal::where('poli','Keterangan Sehat')->count();
         $total =DatasetRajal::count();
+
+        $hariIni = Carbon::today();
+        $kemarin = Carbon::yesterday();
+        $awalMinggu = Carbon::now()->startOfWeek();
+        $akhirMinggu = Carbon::now()->endOfWeek();
+        $awalMingguLalu = Carbon::now()->subWeek()->startOfWeek();
+        $akhirMingguLalu = Carbon::now()->subWeek()->endOfWeek();
+        $awalBulan = Carbon::now()->startOfMonth();
+        $akhirBulan = Carbon::now()->endOfMonth();
+        $awalBulanLalu = Carbon::now()->subMonth()->startOfMonth();
+        $akhirBulanLalu = Carbon::now()->subMonth()->endOfMonth();
+        $awalTahun = Carbon::now()->startOfYear();
+        $akhirTahun = Carbon::now()->endOfYear();
+        $awalTahunLalu = Carbon::now()->subYear()->startOfYear();
+        $akhirTahunLalu = Carbon::now()->subYear()->endOfYear();
+
+        $kunjunganHariIni = DatasetRajal::whereDate('tgl_kunjungan', $hariIni)->count();
+        $kunjunganKemarin = DatasetRajal::whereDate('tgl_kunjungan', $kemarin)->count();
+        $kunjunganMingguIni = DatasetRajal::whereBetween('tgl_kunjungan', [$awalMinggu, $akhirMinggu])->count();
+        $kunjunganMingguLalu = DatasetRajal::whereBetween('tgl_kunjungan', [$awalMingguLalu, $akhirMingguLalu])->count();
+        $kunjunganBulanIni = DatasetRajal::whereBetween('tgl_kunjungan', [$awalBulan, $akhirBulan])->count();
+        $kunjunganBulanLalu = DatasetRajal::whereBetween('tgl_kunjungan', [$awalBulanLalu, $akhirBulanLalu])->count();
+        $kunjunganTahunIni = DatasetRajal::whereBetween('tgl_kunjungan', [$awalTahun, $akhirTahun])->count();
+        $kunjunganTahunLalu = DatasetRajal::whereBetween('tgl_kunjungan', [$awalTahunLalu, $akhirTahunLalu])->count();
+
+        $perbandinganHariIni = $this->compare_rajal($kunjunganHariIni, $kunjunganKemarin);
+        $perbandinganMingguIni = $this->compare_rajal($kunjunganMingguIni, $kunjunganMingguLalu);
+        $perbandinganBulanIni = $this->compare_rajal($kunjunganBulanIni, $kunjunganBulanLalu);
+        $perbandinganTahunIni = $this->compare_rajal($kunjunganTahunIni, $kunjunganTahunLalu);
         // $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')->distinct()->pluck('year');
         // return $years;
-        return view('template.backend.admin.dashboard.layanan.rajal',compact('title','type','umum','KB','imunisasi','hamil','sehat','total'));
+        return view('template.backend.admin.dashboard.layanan.rajal',
+        compact('title','type','umum','KB','imunisasi','hamil','sehat','total',
+        'kunjunganHariIni', 'kunjunganKemarin', 'kunjunganMingguIni', 'kunjunganMingguLalu', 
+        'kunjunganBulanIni', 'kunjunganBulanLalu', 'kunjunganTahunIni', 'kunjunganTahunLalu',
+        'perbandinganHariIni', 'perbandinganMingguIni', 'perbandinganBulanIni', 'perbandinganTahunIni'
+    ));
+    }
+
+    private function compare_rajal($current, $previous)
+    {
+        if ($previous == 0) {
+            return $current > 0 ? 100 : 0;
+        }
+        return (($current - $previous) / $previous) * 100;
     }
 
     public function dash_ranap()

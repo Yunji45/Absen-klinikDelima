@@ -219,6 +219,61 @@ class LayananController extends Controller
             'hamil_per_month' => $hamil_per_month
         ]);
     }
+
+    public function GetAvailableYears()
+    {
+        $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')
+            ->distinct()
+            ->orderBy('year', 'asc')
+            ->pluck('year');
+
+        return response()->json($years);
+    }
+
+    public function search_layanan_rajal(Request $request)
+    {
+        // Mendapatkan tahun dari parameter request, atau gunakan tahun saat ini jika tidak ada parameter
+        $year = $request->input('year', date('Y'));
+
+        // Mengatur array untuk menyimpan hasil
+        $umum_per_month = [];
+        $kb_per_month = [];
+        $imunisasi_per_month = [];
+        $hamil_per_month = [];
+        $sehat_per_month = [];
+
+        // Iterasi untuk setiap bulan dalam tahun yang dipilih
+        for ($month = 1; $month <= 12; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$year-$month-01"));
+
+            // Menghitung jumlah kunjungan per poli per bulan
+            $umum_per_month[$month] = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->where('poli', 'Poli Umum')
+                                                ->count();
+            $kb_per_month[$month] = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->where('poli', 'KB')
+                                                ->count();
+            $imunisasi_per_month[$month] = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                    ->where('poli', 'Imunisasi')
+                                                    ->count();
+            $sehat_per_month[$month] = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->where('poli', 'Keterangan Sehat')
+                                                ->count();
+            $hamil_per_month[$month] = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->where('poli', 'Ibu Hamil')
+                                                ->count();
+        }
+
+        // Mengembalikan hasil sebagai respons JSON
+        return response()->json([
+            'umum_per_month' => $umum_per_month,
+            'kb_per_month' => $kb_per_month,
+            'imunisasi_per_month' => $imunisasi_per_month,
+            'sehat_per_month' => $sehat_per_month,
+            'hamil_per_month' => $hamil_per_month,
+        ]);
+    }
     // public function dash_layanan_rajal_bar()
     // {
     //     $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')->distinct()->pluck('year');

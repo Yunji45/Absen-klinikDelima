@@ -76,7 +76,7 @@
 //   chart.render();
 // Fungsi untuk mendapatkan data dari API
 async function getDataFromAPI() {
-  var url = 'https://klinikmitradelima.com/api/api-layanan-rajal-bar'; // Sesuaikan dengan URL API Anda
+  var url = 'http://localhost:8000/api/api-layanan-rajal-bar'; // Sesuaikan dengan URL API Anda
 
   try {
     const response = await fetch(url);
@@ -118,7 +118,8 @@ function drawChart(data) {
       colors: ['#fff']
     },
     title: {
-      text: 'Trend Bar Rawat Jalan'
+      text: 'Trend Bar Rawat Jalan',
+      align: 'center'
     },
     xaxis: {
       categories: [],
@@ -136,7 +137,7 @@ function drawChart(data) {
     tooltip: {
       y: {
         formatter: function (val) {
-          return val + " " + "Pasien"
+          return val + " " + "Kunjungan"
         }
       }
     },

@@ -139,15 +139,73 @@
                     </div>
                       <div>
                           <label for="year">Pilih Tahun:</label>
-                          <select id="year" onchange="updateChart(this.value)">
-                              <option value="2022">2022</option>
-                              <option value="2023">2023</option>
-                              <option value="2024">2024</option>
+                          <select id="year">
                               <!-- Tambahkan opsi tahun sesuai kebutuhan -->
                           </select>
                       </div>
                     <div id="chart"></div>
                     
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-12">
+                <div class="card">
+                <div class="card-body">
+                    <div class="statistic-details mt-sm-4">
+                      <div class="statistic-details-item">
+                        <span class="text-muted">
+                            <span class="{{ $perbandinganHariIni >= 0 ? 'text-primary' : 'text-danger' }}">
+                                <i class="fas fa-caret-{{ $perbandinganHariIni >= 0 ? 'up' : 'down' }}"></i>
+                            </span> 
+                            {{ number_format(abs($perbandinganHariIni), 0) }}%
+                        </span>
+                        <div class="detail-value">{{$kunjunganHariIni}}</div>
+                        <div class="detail-name">Kunjungan Hari Ini</div>
+                        <div class="detail-value">{{$kunjunganKemarin}}</div>
+                        <div class="detail-name">Kunjungan Hari Kemarin</div>
+                      </div>
+                      <div class="statistic-details-item">
+                          <span class="text-muted">
+                              <span class="{{ $perbandinganMingguIni >= 0 ? 'text-primary' : 'text-danger' }}">
+                                  <i class="fas fa-caret-{{ $perbandinganMingguIni >= 0 ? 'up' : 'down' }}"></i>
+                              </span> 
+                              {{ number_format(abs($perbandinganMingguIni), 0) }}%
+                          </span>
+                          <div class="detail-value">{{ $kunjunganMingguIni }}</div>
+                          <div class="detail-name">Kunjungan Minggu Ini</div>
+                          <div class="detail-value">{{ $kunjunganMingguLalu }}</div>
+                          <div class="detail-name">Kunjungan Minggu Lalu</div>
+                      </div>
+
+                      <div class="statistic-details-item">
+                          <span class="text-muted">
+                              <span class="{{ $perbandinganBulanIni >= 0 ? 'text-primary' : 'text-danger' }}">
+                                  <i class="fas fa-caret-{{ $perbandinganBulanIni >= 0 ? 'up' : 'down' }}"></i>
+                              </span> 
+                              {{ number_format(abs($perbandinganBulanIni), 0) }}%
+                          </span>
+                          <div class="detail-value">{{ $kunjunganBulanIni }}</div>
+                          <div class="detail-name">Kunjungan Bulan Ini</div>
+                          <div class="detail-value">{{ $kunjunganBulanLalu }}</div>
+                          <div class="detail-name">Kunjungan Bulan Lalu</div>
+                      </div>
+
+                      <div class="statistic-details-item">
+                          <span class="text-muted">
+                              <span class="{{ $perbandinganTahunIni >= 0 ? 'text-primary' : 'text-danger' }}">
+                                  <i class="fas fa-caret-{{ $perbandinganTahunIni >= 0 ? 'up' : 'down' }}"></i>
+                              </span> 
+                              {{ number_format(abs($perbandinganTahunIni), 0) }}%
+                          </span>
+                          <div class="detail-value">{{ $kunjunganTahunIni }}</div>
+                          <div class="detail-name">Kunjungan Tahun Ini</div>
+                          <div class="detail-value">{{ $kunjunganTahunLalu }}</div>
+                          <div class="detail-name">Kunjungan Tahun Lalu</div>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               </div>
@@ -167,5 +225,6 @@
         <!-- <script src="{{asset('stisla/dist/assets/js/dash-layanan/test.js')}}"></script> -->
         <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-rajal-line.js')}}"></script>
         <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-rajal-bar.js')}}"></script>
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/search-layanan-rajal.js')}}" defer></script>
         
 @endsection
