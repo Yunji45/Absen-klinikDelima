@@ -80,15 +80,12 @@
                   <div class="card-body">
                     <div class="row align-items-center mb-4">
                     </div>
-                      <div>
+                    <div>
                           <label for="year">Pilih Tahun:</label>
-                          <select id="year" onchange="updateChart(this.value)">
-                              <option value="2022">2022</option>
-                              <option value="2023">2023</option>
-                              <option value="2024">2024</option>
+                          <select id="year">
                               <!-- Tambahkan opsi tahun sesuai kebutuhan -->
                           </select>
-                      </div>
+                    </div>
                     <div id="chart"></div>
                     
                   </div>
@@ -176,6 +173,7 @@
         </section>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-index.js')}}"></script>
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/search-layanan-index.js')}}"></script>
         <!-- <script>
           var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 

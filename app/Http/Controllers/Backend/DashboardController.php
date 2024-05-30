@@ -9,6 +9,9 @@ use App\Models\DetailPegawai;
 use App\Models\DatasetRanap;
 use App\Models\DatasetRajal;
 use App\Models\DatasetKhitan;
+use App\Models\DatasetLab;
+use App\Models\DatasetUsg;
+use App\Models\DatasetEstetika;
 use App\Models\DatasetPersalinan;
 use Carbon\Carbon;
 
@@ -48,8 +51,7 @@ class DashboardController extends Controller
 
 
         return view('template.backend.admin.dashboard.index',compact('title','type','JumPegawai','S2','S1_Nakes','S1_NonNakes',
-        'D3_Nakes','D3_NonNakes','SLTA_Nakes','SLTA_NonNakes','Dibawah_SLTA','nakes'
-    ));
+        'D3_Nakes','D3_NonNakes','SLTA_Nakes','SLTA_NonNakes','Dibawah_SLTA','nakes'));
         // return $JumPegawai;
     }
 
@@ -238,22 +240,124 @@ class DashboardController extends Controller
     {
         $title = 'Dashboard Laboratorium';
         $type = 'dash_layanan';
-        return view('template.backend.admin.dashboard.layanan.lab',compact('title','type'));
+        $total = DatasetLab::count();
+
+        $hariIni = Carbon::today();
+        $kemarin = Carbon::yesterday();
+        $awalMinggu = Carbon::now()->startOfWeek();
+        $akhirMinggu = Carbon::now()->endOfWeek();
+        $awalMingguLalu = Carbon::now()->subWeek()->startOfWeek();
+        $akhirMingguLalu = Carbon::now()->subWeek()->endOfWeek();
+        $awalBulan = Carbon::now()->startOfMonth();
+        $akhirBulan = Carbon::now()->endOfMonth();
+        $awalBulanLalu = Carbon::now()->subMonth()->startOfMonth();
+        $akhirBulanLalu = Carbon::now()->subMonth()->endOfMonth();
+        $awalTahun = Carbon::now()->startOfYear();
+        $akhirTahun = Carbon::now()->endOfYear();
+        $awalTahunLalu = Carbon::now()->subYear()->startOfYear();
+        $akhirTahunLalu = Carbon::now()->subYear()->endOfYear();
+
+        $kunjunganHariIni = DatasetLab::whereDate('tgl_kunjungan', $hariIni)->count();
+        $kunjunganKemarin = DatasetLab::whereDate('tgl_kunjungan', $kemarin)->count();
+        $kunjunganMingguIni = DatasetLab::whereBetween('tgl_kunjungan', [$awalMinggu, $akhirMinggu])->count();
+        $kunjunganMingguLalu = DatasetLab::whereBetween('tgl_kunjungan', [$awalMingguLalu, $akhirMingguLalu])->count();
+        $kunjunganBulanIni = DatasetLab::whereBetween('tgl_kunjungan', [$awalBulan, $akhirBulan])->count();
+        $kunjunganBulanLalu = DatasetLab::whereBetween('tgl_kunjungan', [$awalBulanLalu, $akhirBulanLalu])->count();
+        $kunjunganTahunIni = DatasetLab::whereBetween('tgl_kunjungan', [$awalTahun, $akhirTahun])->count();
+        $kunjunganTahunLalu = DatasetLab::whereBetween('tgl_kunjungan', [$awalTahunLalu, $akhirTahunLalu])->count();
+
+        $perbandinganHariIni = $this->compare_ranap($kunjunganHariIni, $kunjunganKemarin);
+        $perbandinganMingguIni = $this->compare_ranap($kunjunganMingguIni, $kunjunganMingguLalu);
+        $perbandinganBulanIni = $this->compare_ranap($kunjunganBulanIni, $kunjunganBulanLalu);
+        $perbandinganTahunIni = $this->compare_ranap($kunjunganTahunIni, $kunjunganTahunLalu);
+
+        return view('template.backend.admin.dashboard.layanan.lab',compact('title','type','total',
+        'kunjunganHariIni', 'kunjunganKemarin', 'kunjunganMingguIni', 'kunjunganMingguLalu', 
+        'kunjunganBulanIni', 'kunjunganBulanLalu', 'kunjunganTahunIni', 'kunjunganTahunLalu',
+        'perbandinganHariIni', 'perbandinganMingguIni', 'perbandinganBulanIni', 'perbandinganTahunIni'));
     }
 
     public function dash_usg()
     {
         $title = 'Dashboard USG';
         $type = 'dash_layanan';
-        return view('template.backend.admin.dashboard.layanan.usg',compact('title','type'));
+        $total = DatasetUsg::count();
+
+        $hariIni = Carbon::today();
+        $kemarin = Carbon::yesterday();
+        $awalMinggu = Carbon::now()->startOfWeek();
+        $akhirMinggu = Carbon::now()->endOfWeek();
+        $awalMingguLalu = Carbon::now()->subWeek()->startOfWeek();
+        $akhirMingguLalu = Carbon::now()->subWeek()->endOfWeek();
+        $awalBulan = Carbon::now()->startOfMonth();
+        $akhirBulan = Carbon::now()->endOfMonth();
+        $awalBulanLalu = Carbon::now()->subMonth()->startOfMonth();
+        $akhirBulanLalu = Carbon::now()->subMonth()->endOfMonth();
+        $awalTahun = Carbon::now()->startOfYear();
+        $akhirTahun = Carbon::now()->endOfYear();
+        $awalTahunLalu = Carbon::now()->subYear()->startOfYear();
+        $akhirTahunLalu = Carbon::now()->subYear()->endOfYear();
+
+        $kunjunganHariIni = DatasetUsg::whereDate('tgl_kunjungan', $hariIni)->count();
+        $kunjunganKemarin = DatasetUsg::whereDate('tgl_kunjungan', $kemarin)->count();
+        $kunjunganMingguIni = DatasetUsg::whereBetween('tgl_kunjungan', [$awalMinggu, $akhirMinggu])->count();
+        $kunjunganMingguLalu = DatasetUsg::whereBetween('tgl_kunjungan', [$awalMingguLalu, $akhirMingguLalu])->count();
+        $kunjunganBulanIni = DatasetUsg::whereBetween('tgl_kunjungan', [$awalBulan, $akhirBulan])->count();
+        $kunjunganBulanLalu = DatasetUsg::whereBetween('tgl_kunjungan', [$awalBulanLalu, $akhirBulanLalu])->count();
+        $kunjunganTahunIni = DatasetUsg::whereBetween('tgl_kunjungan', [$awalTahun, $akhirTahun])->count();
+        $kunjunganTahunLalu = DatasetUsg::whereBetween('tgl_kunjungan', [$awalTahunLalu, $akhirTahunLalu])->count();
+
+        $perbandinganHariIni = $this->compare_ranap($kunjunganHariIni, $kunjunganKemarin);
+        $perbandinganMingguIni = $this->compare_ranap($kunjunganMingguIni, $kunjunganMingguLalu);
+        $perbandinganBulanIni = $this->compare_ranap($kunjunganBulanIni, $kunjunganBulanLalu);
+        $perbandinganTahunIni = $this->compare_ranap($kunjunganTahunIni, $kunjunganTahunLalu);
+
+        return view('template.backend.admin.dashboard.layanan.usg',compact('title','type','total',
+        'kunjunganHariIni', 'kunjunganKemarin', 'kunjunganMingguIni', 'kunjunganMingguLalu', 
+        'kunjunganBulanIni', 'kunjunganBulanLalu', 'kunjunganTahunIni', 'kunjunganTahunLalu',
+        'perbandinganHariIni', 'perbandinganMingguIni', 'perbandinganBulanIni', 'perbandinganTahunIni'));
     }
 
     public function dash_estetika()
     {
         $title = 'Dashboard Estetika';
         $type = 'dash_layanan';
-        return view('template.backend.admin.dashboard.layanan.estetika',compact('title','type'));
+        $total = DatasetEstetika::count();
+
+        $hariIni = Carbon::today();
+        $kemarin = Carbon::yesterday();
+        $awalMinggu = Carbon::now()->startOfWeek();
+        $akhirMinggu = Carbon::now()->endOfWeek();
+        $awalMingguLalu = Carbon::now()->subWeek()->startOfWeek();
+        $akhirMingguLalu = Carbon::now()->subWeek()->endOfWeek();
+        $awalBulan = Carbon::now()->startOfMonth();
+        $akhirBulan = Carbon::now()->endOfMonth();
+        $awalBulanLalu = Carbon::now()->subMonth()->startOfMonth();
+        $akhirBulanLalu = Carbon::now()->subMonth()->endOfMonth();
+        $awalTahun = Carbon::now()->startOfYear();
+        $akhirTahun = Carbon::now()->endOfYear();
+        $awalTahunLalu = Carbon::now()->subYear()->startOfYear();
+        $akhirTahunLalu = Carbon::now()->subYear()->endOfYear();
+
+        $kunjunganHariIni = DatasetEstetika::whereDate('tgl_kunjungan', $hariIni)->count();
+        $kunjunganKemarin = DatasetEstetika::whereDate('tgl_kunjungan', $kemarin)->count();
+        $kunjunganMingguIni = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalMinggu, $akhirMinggu])->count();
+        $kunjunganMingguLalu = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalMingguLalu, $akhirMingguLalu])->count();
+        $kunjunganBulanIni = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalBulan, $akhirBulan])->count();
+        $kunjunganBulanLalu = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalBulanLalu, $akhirBulanLalu])->count();
+        $kunjunganTahunIni = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalTahun, $akhirTahun])->count();
+        $kunjunganTahunLalu = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalTahunLalu, $akhirTahunLalu])->count();
+
+        $perbandinganHariIni = $this->compare_ranap($kunjunganHariIni, $kunjunganKemarin);
+        $perbandinganMingguIni = $this->compare_ranap($kunjunganMingguIni, $kunjunganMingguLalu);
+        $perbandinganBulanIni = $this->compare_ranap($kunjunganBulanIni, $kunjunganBulanLalu);
+        $perbandinganTahunIni = $this->compare_ranap($kunjunganTahunIni, $kunjunganTahunLalu);
+
+
+        return view('template.backend.admin.dashboard.layanan.estetika',compact('title','type','total',
+        'kunjunganHariIni', 'kunjunganKemarin', 'kunjunganMingguIni', 'kunjunganMingguLalu', 
+        'kunjunganBulanIni', 'kunjunganBulanLalu', 'kunjunganTahunIni', 'kunjunganTahunLalu',
+        'perbandinganHariIni', 'perbandinganMingguIni', 'perbandinganBulanIni', 'perbandinganTahunIni'));
+
     }
-
-
 }

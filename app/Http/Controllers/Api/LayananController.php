@@ -44,6 +44,60 @@ class LayananController extends Controller
         ]);
     }
 
+    public function GetAvailableYears_layanan()
+    {
+        // Mengambil tahun kunjungan dari masing-masing tabel dan menyatukan hasilnya
+        $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')
+            ->union(
+                DatasetRanap::selectRaw('YEAR(tgl_kunjungan) as year')
+            )
+            ->union(
+                DatasetKhitan::selectRaw('YEAR(tgl_kunjungan) as year')
+            )
+            ->union(
+                DatasetPersalinan::selectRaw('YEAR(tgl_kunjungan) as year')
+            )
+            ->distinct()
+            ->orderBy('year', 'asc')
+            ->pluck('year');
+    
+        // Mengembalikan hasil sebagai respons JSON
+        return response()->json($years);
+    }
+    
+    public function search_layanan(Request $request)
+    {
+        $year = $request->input('year', date('Y'));
+
+        $rajal_per_month = [];
+        $ranap_per_month = [];
+        $khitan_per_month = [];
+        $persalinan_per_month = [];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$year-$month-01"));
+
+            $rajal_per_month[$month] = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->count();
+            $ranap_per_month[$month] = DatasetRanap::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->count();
+            $khitan_per_month[$month] = DatasetKhitan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                    ->count();
+            $persalinan_per_month[$month] = DatasetPersalinan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->count();
+        }
+
+        // Mengembalikan hasil sebagai respons JSON
+        return response()->json([
+            'rajal_per_month' => $rajal_per_month,
+            'ranap_per_month' => $ranap_per_month,
+            'khitan_per_month' => $khitan_per_month,
+            'persalinan_per_month' => $persalinan_per_month,
+        ]);
+    }
+
+
     public function dash_layanan_pie()
     {
         $current_year = date('Y');
@@ -508,99 +562,247 @@ class LayananController extends Controller
         ]);
      }
 
-    public function dash_layanan_lab_bar()
-    {
-        $years = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year')
-            ->distinct()
-            ->pluck('year')
-            ->toArray();
+     public function GetAvailableYears_lab()
+     {
+         $years = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year')
+             ->distinct()
+             ->orderBy('year', 'asc')
+             ->pluck('year');
+ 
+         return response()->json($years);
+     }
 
-        $genders = ['Laki-laki', 'Perempuan'];
-        $polis = ['LABORATORIUM'];
+     public function search_layanan_lab(Request $request)
+     {
+         $year = $request->input('year', date('Y'));
+ 
+         $lab_per_month = [];
+ 
+         for ($month = 1; $month <= 12; $month++) {
+             $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
+             $last_day_of_month = date('Y-m-t', strtotime("$year-$month-01"));
+ 
+             $lab_per_month[$month] = DatasetLab::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                 ->where('poli', 'LABORATORIUM')
+                                                 ->count();
+         }
+ 
+         // Mengembalikan hasil sebagai respons JSON
+         return response()->json([
+             'lab_per_month' => $lab_per_month,
+         ]);
+     }
 
-        $data = [];
-        foreach ($years as $year) {
-            $data[$year] = [
-                'total_kunjungan' => 0,
-                'poli' => []
-            ];
-            foreach ($polis as $poli) {
-                $data[$year]['poli'][$poli] = [
-                    'total' => 0,
-                    'Laki-laki' => 0,
-                    'Perempuan' => 0
-                ];
-            }
-        }
-
-        $visits = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year, poli, jenis_kelamin, COUNT(*) as count')
-            ->groupBy('year', 'poli', 'jenis_kelamin')
-            ->get();
-
-        foreach ($visits as $visit) {
-            $data[$visit->year]['total_kunjungan'] += $visit->count;
-            $data[$visit->year]['poli'][$visit->poli]['total'] += $visit->count;
-            $data[$visit->year]['poli'][$visit->poli][$visit->jenis_kelamin] += $visit->count;
-        }
-
-        return response()->json($data);
-    }
-
-    //  public function dash_layanan_lab_bar()
-    //  {
-    //     $years = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year')
-    //         ->distinct()
-    //         ->pluck('year')
-    //         ->toArray();
-    //     $data = [];
-    //     $genders = ['Laki-laki', 'Perempuan'];
-    //     $polis = ['LABORATORIUM'];
-    //     foreach ($years as $year) {
-    //         $data[$year] = [];
-    //         foreach ($polis as $poli) {
-    //             $data[$year][$poli] = 0;
-    //         }
-    //         foreach ($genders as $gender) {
-    //             $data[$year][$gender] = 0;
-    //         }
-
-    //     }
-    //     $visits = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year, poli, jenis_kelamin, COUNT(*) as count')
-    //         ->groupBy('year', 'poli','jenis_kelamin')
-    //         ->get();
-    //     foreach ($visits as $visit) {
-    //         $data[$visit->year][$visit->poli][$visit->jenis_kelamin] = $visit->count;
-    //     }
-
-    //     return response()->json($data);
-    //  }
-
+     public function dash_layanan_lab_bar()
+     {
+         $years = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year')
+             ->distinct()
+             ->pluck('year')
+             ->toArray();
+     
+         $data = [];
+         $totalPerYear = [];
+     
+         foreach ($years as $year) {
+             $data[$year] = [
+                 'Laki-laki' => 0,
+                 'Perempuan' => 0
+             ];
+             $totalPerYear[$year] = 0;
+         }
+     
+         $visits = DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year, jenis_kelamin, COUNT(*) as count')
+             ->groupBy('year', 'jenis_kelamin')
+             ->get();
+     
+         foreach ($visits as $visit) {
+             $data[$visit->year][$visit->jenis_kelamin] += $visit->count;
+             $totalPerYear[$visit->year] += $visit->count;
+         }
+     
+         $response = [
+             'years' => $years,
+             'series' => [
+                 [
+                     'name' => 'Laki-laki',
+                     'data' => array_column($data, 'Laki-laki')
+                 ],
+                 [
+                     'name' => 'Perempuan',
+                     'data' => array_column($data, 'Perempuan')
+                 ],
+                 [
+                     'name' => 'Total',
+                     'data' => array_values($totalPerYear)
+                 ]
+             ]
+         ];
+     
+         return response()->json($response);
+     }
+          
      /**
       * Api untuk USG
       */
-
-     public function dash_layanan_usg_line()
+    
+     public function GetAvailableYears_usg()
      {
-
+         $years = DatasetUsg::selectRaw('YEAR(tgl_kunjungan) as year')
+             ->distinct()
+             ->orderBy('year', 'asc')
+             ->pluck('year');
+ 
+         return response()->json($years);
      }
+
+     public function search_layanan_usg(Request $request)
+     {
+         $year = $request->input('year', date('Y'));
+ 
+         $usg_per_month = [];
+ 
+         for ($month = 1; $month <= 12; $month++) {
+             $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
+             $last_day_of_month = date('Y-m-t', strtotime("$year-$month-01"));
+ 
+             $usg_per_month[$month] = DatasetUsg::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                 ->where('poli', 'USG')
+                                                 ->count();
+         }
+ 
+         // Mengembalikan hasil sebagai respons JSON
+         return response()->json([
+             'usg_per_month' => $usg_per_month,
+         ]);
+     }
+
 
      public function dash_layanan_usg_bar()
      {
-        
+         $years = DatasetUsg::selectRaw('YEAR(tgl_kunjungan) as year')
+             ->distinct()
+             ->pluck('year')
+             ->toArray();
+     
+         $data = [];
+         $totalPerYear = [];
+     
+         foreach ($years as $year) {
+             $data[$year] = [
+                 'Perempuan' => 0
+             ];
+             $totalPerYear[$year] = 0;
+         }
+     
+         $visits = DatasetUsg::selectRaw('YEAR(tgl_kunjungan) as year, COUNT(*) as count')
+             ->where('jenis_kelamin', 'Perempuan')
+             ->groupBy('year')
+             ->get();
+     
+         foreach ($visits as $visit) {
+             $data[$visit->year]['Perempuan'] += $visit->count;
+             $totalPerYear[$visit->year] += $visit->count;
+         }
+     
+         $response = [
+             'years' => $years,
+             'series' => [
+                 [
+                     'name' => 'Perempuan',
+                     'data' => array_column($data, 'Perempuan')
+                 ],
+                 [
+                     'name' => 'Total',
+                     'data' => array_values($totalPerYear)
+                 ]
+             ]
+         ];
+     
+         return response()->json($response);
      }
-
+     
     /**
       * Api untuk Estetika
       */
 
-     public function dash_layanan_estetika_line()
-     {
-
-     }
-
-     public function dash_layanan_estetika_bar()
-     {
-        
-     }
-
+      public function GetAvailableYears_estetika()
+      {
+          $years = DatasetEstetika::selectRaw('YEAR(tgl_kunjungan) as year')
+              ->distinct()
+              ->orderBy('year', 'asc')
+              ->pluck('year');
+  
+          return response()->json($years);
+      }
+ 
+      public function search_layanan_estetika(Request $request)
+      {
+          $year = $request->input('year', date('Y'));
+  
+          $esteika_per_month = [];
+  
+          for ($month = 1; $month <= 12; $month++) {
+              $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
+              $last_day_of_month = date('Y-m-t', strtotime("$year-$month-01"));
+  
+              $estetika_per_month[$month] = DatasetEstetika::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                  ->where('poli', 'Estetika')
+                                                  ->count();
+          }
+  
+          // Mengembalikan hasil sebagai respons JSON
+          return response()->json([
+              'estetika_per_month' => $estetika_per_month,
+          ]);
+      }
+ 
+ 
+      public function dash_layanan_estetika_bar()
+      {
+          $years = DatasetEstetika::selectRaw('YEAR(tgl_kunjungan) as year')
+              ->distinct()
+              ->pluck('year')
+              ->toArray();
+      
+          $data = [];
+          $totalPerYear = [];
+      
+          foreach ($years as $year) {
+              $data[$year] = [
+                  'Laki-laki' => 0,
+                  'Perempuan' => 0
+              ];
+              $totalPerYear[$year] = 0;
+          }
+      
+          $visits = DatasetEstetika::selectRaw('YEAR(tgl_kunjungan) as year, jenis_kelamin, COUNT(*) as count')
+              ->groupBy('year', 'jenis_kelamin')
+              ->get();
+      
+          foreach ($visits as $visit) {
+              $data[$visit->year][$visit->jenis_kelamin] += $visit->count;
+              $totalPerYear[$visit->year] += $visit->count;
+          }
+      
+          $response = [
+              'years' => $years,
+              'series' => [
+                  [
+                      'name' => 'Laki-laki',
+                      'data' => array_column($data, 'Laki-laki')
+                  ],
+                  [
+                      'name' => 'Perempuan',
+                      'data' => array_column($data, 'Perempuan')
+                  ],
+                  [
+                      'name' => 'Total',
+                      'data' => array_values($totalPerYear)
+                  ]
+              ]
+          ];
+      
+          return response()->json($response);
+      }
+  
 }

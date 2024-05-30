@@ -381,7 +381,7 @@ function line_chart()
 
           async function fetchData() {
               try {
-                  const response = await fetch('https://klinikmitradelima.com/api/api-layanan');
+                  const response = await fetch('http://localhost:8000/api/api-layanan');
                   const data = await response.json();
                   updateChart(data.rajal_per_month, data.ranap_per_month, data.khitan_per_month, data.persalinan_per_month);
               } catch (error) {

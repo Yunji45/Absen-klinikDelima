@@ -36,6 +36,8 @@ Route::get('/api-layanan', [LayananController::class, 'dash_layanan']);
 Route::get('/api-layanan-pie', [LayananController::class, 'dash_layanan_pie']);
 Route::get('/api-layanan-piramid', [LayananController::class, 'dash_layanan_piramid']);
 Route::get('/api-layanan-gender', [LayananController::class, 'dash_layanan_gender']);
+Route::get('/api-tahun-layanan',[LayananController::class,'GetAvailableYears_layanan']);
+Route::get('/api-search-layanan',[LayananController::class,'search_layanan']);
 
 Route::get('/api-layanan-rajal',[LayananController::class,'dash_layanan_rajal']);
 Route::get('/api-layanan-rajal-bar',[LayananController::class,'dash_layanan_rajal_bar']);
@@ -54,12 +56,19 @@ Route::get('/api-tahun-khitan',[LayananController::class,'GetAvailableYears_khit
 
 Route::get('/api-layanan-lab-line',[LayananController::class,'dash_layanan_lab_line']);
 Route::get('/api-layanan-lab-bar',[LayananController::class,'dash_layanan_lab_bar']);
+Route::get('/api-search-lab',[LayananController::class,'search_layanan_lab']);
+Route::get('/api-tahun-lab',[LayananController::class,'GetAvailableYears_lab']);
 
-Route::get('/api-layanan-usg-line',[LayananController::class,'dash_layanan_usg_line']);
+// Route::get('/api-layanan-usg-line',[LayananController::class,'dash_layanan_usg_line']);
 Route::get('/api-layanan-usg-bar',[LayananController::class,'dash_layanan_usg_bar']);
+Route::get('/api-search-usg',[LayananController::class,'search_layanan_usg']);
+Route::get('/api-tahun-usg',[LayananController::class,'GetAvailableYears_usg']);
 
-Route::get('/api-layanan-estetika-line',[LayananController::class,'dash_layanan_estetika_line']);
+// Route::get('/api-layanan-estetika-line',[LayananController::class,'dash_layanan_estetika_line']);
 Route::get('/api-layanan-estetika-bar',[LayananController::class,'dash_layanan_estetika_bar']);
+Route::get('/api-search-estetika',[LayananController::class,'search_layanan_estetika']);
+Route::get('/api-tahun-estetika',[LayananController::class,'GetAvailableYears_estetika']);
+
 
 
 
