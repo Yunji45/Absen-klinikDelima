@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchLineChartData() {
     try {
-        const response = await fetch('http://localhost:8000/api/api-layanan-khitan-line');
+        const response = await fetch('https://klinikmitradelima.com/api/api-layanan-khitan-line');
         const data = await response.json();
         updateLineChart(data.khitan_per_month);
     } catch (error) {
@@ -53,7 +53,7 @@ function updateLineChart(khitanData) {
 }
 
 function bar_khitan() {
-    fetch('http://localhost:8000/api/api-layanan-khitan-bar')
+    fetch('https://klinikmitradelima.com/api/api-layanan-khitan-bar')
     .then(response => response.json())
     .then(data => {
         var years = Object.keys(data);

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     bar_chart();
 });
 function fetchYears() {
-    fetch('http://localhost:8000/api/api-tahun-layanan')
+    fetch('https://klinikmitradelima.com/api/api-tahun-layanan')
         .then(response => response.json())
         .then(years => {
             const yearSelect = document.getElementById('year-select');
@@ -33,7 +33,7 @@ function fetchYears() {
 }
 
 function pie_chart(year) {
-    fetch(`http://localhost:8000/api/api-layanan-pie?year=${year}`)
+    fetch(`https://klinikmitradelima.com/api/api-layanan-pie?year=${year}`)
         .then(response => response.json())
         .then(data => {
             var series = data.series;
@@ -119,7 +119,7 @@ function pie_chart(year) {
 }
 
 async function getDataFromAPI() {
-    var url = 'http://localhost:8000/api/api-layanan-piramid'; // Sesuaikan dengan URL API Anda
+    var url = 'https://klinikmitradelima.com/api/api-layanan-piramid'; // Sesuaikan dengan URL API Anda
   
     try {
       const response = await fetch(url);
@@ -220,7 +220,7 @@ async function getDataFromAPI() {
 
 function gender() {
   // Lakukan permintaan HTTP ke endpoint API
-  fetch('http://localhost:8000/api/api-layanan-gender')
+  fetch('https://klinikmitradelima.com/api/api-layanan-gender')
       .then(response => response.json())
       .then(data => {
           // Proses data yang diterima

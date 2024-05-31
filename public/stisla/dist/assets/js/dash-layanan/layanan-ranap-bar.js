@@ -90,7 +90,7 @@
 
         // async function updateChart() {
         //     try {
-        //         const response = await fetch('http://localhost:8000/api/api-layanan-ranap-bar');
+        //         const response = await fetch('https://klinikmitradelima.com/api/api-layanan-ranap-bar');
         //         const data = await response.json();
         //         const { umum_count, persalinan_count, persentase, years } = data;
         
@@ -192,7 +192,7 @@
         
         async function updateChart() {
             try {
-                const response = await fetch('http://localhost:8000/api/api-layanan-ranap-bar');
+                const response = await fetch('https://klinikmitradelima.com/api/api-layanan-ranap-bar');
                 const data = await response.json();
                 const { umum_count, persalinan_count, persentase, years } = data;
         

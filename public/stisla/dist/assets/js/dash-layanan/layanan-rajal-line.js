@@ -5,7 +5,7 @@ var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
 
             async function fetchData() {
                 try {
-                    const response = await fetch('http://localhost:8000/api/api-layanan-rajal');
+                    const response = await fetch('https://klinikmitradelima.com/api/api-layanan-rajal');
                     const data = await response.json();
                     updateChart(data.umum_per_month, data.kb_per_month, data.imunisasi_per_month, data.sehat_per_month, data.hamil_per_month);
                 } catch (error) {

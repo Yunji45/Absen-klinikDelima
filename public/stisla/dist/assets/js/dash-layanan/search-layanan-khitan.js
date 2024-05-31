@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function fetchAvailableYears() {
         try {
-            const response = await fetch('http://localhost:8000/api/api-tahun-khitan');
+            const response = await fetch('https://klinikmitradelima.com/api/api-tahun-khitan');
             const years = await response.json();
             const yearSelect = document.getElementById('year');
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function fetchData(year = new Date().getFullYear()) {
         console.log(`Fetching data for year: ${year}`);
         try {
-            const response = await fetch(`http://localhost:8000/api/api-search-khitan?year=${year}`);
+            const response = await fetch(`https://klinikmitradelima.com/api/api-search-khitan?year=${year}`);
             const data = await response.json();
             console.log('Data fetched:', data);
             updateChart(data.khitan_per_month);

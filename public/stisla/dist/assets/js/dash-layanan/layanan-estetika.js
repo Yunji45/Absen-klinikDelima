@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     async function fetchBarChartData() {
         try {
-            const response = await fetch('http://localhost:8000/api/api-layanan-estetika-bar');
+            const response = await fetch('https://klinikmitradelima.com/api/api-layanan-estetika-bar');
             const data = await response.json();
   
             var options = {
