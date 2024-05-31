@@ -76,12 +76,16 @@ class DashboardController extends Controller
             $ranap_per_month[$month] = $ranap_count;
         }
         
-        $rajal = DatasetRajal::count();
-        $ranap = DatasetRanap::count();
-        $khitan = DatasetKhitan::count();
-        $persalinan = DatasetPersalinan::count();
-        $sum = $rajal + $ranap + $khitan + $persalinan;
-        // return $ranap_per_month;
+        $datasets = [
+            'rajal' => DatasetRajal::count(),
+            'ranap' => DatasetRanap::count(),
+            'khitan' => DatasetKhitan::count(),
+            'lab' => DatasetLab::count(),
+            'usg' => DatasetUsg::count(),
+            'estetika' => DatasetEstetika::count()
+        ];
+        $sum = array_sum($datasets);
+
         return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month'));
     }
 

@@ -55,8 +55,15 @@ class LayananController extends Controller
                 DatasetKhitan::selectRaw('YEAR(tgl_kunjungan) as year')
             )
             ->union(
-                DatasetPersalinan::selectRaw('YEAR(tgl_kunjungan) as year')
+                DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year')
             )
+            ->union(
+                DatasetUsg::selectRaw('YEAR(tgl_kunjungan) as year')
+            )
+            ->union(
+                DatasetEstetika::selectRaw('YEAR(tgl_kunjungan) as year')
+            )
+
             ->distinct()
             ->orderBy('year', 'asc')
             ->pluck('year');
@@ -72,7 +79,9 @@ class LayananController extends Controller
         $rajal_per_month = [];
         $ranap_per_month = [];
         $khitan_per_month = [];
-        $persalinan_per_month = [];
+        $lab_per_month = [];
+        $usg_per_month = [];
+        $estetika_per_month = [];
 
         for ($month = 1; $month <= 12; $month++) {
             $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
@@ -84,8 +93,13 @@ class LayananController extends Controller
                                                 ->count();
             $khitan_per_month[$month] = DatasetKhitan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
                                                     ->count();
-            $persalinan_per_month[$month] = DatasetPersalinan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+            $lab_per_month[$month] = DatasetLab::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
                                                 ->count();
+            $usg_per_month[$month] = DatasetUsg::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->count();
+            $estetika_per_month[$month] = DatasetEstetika::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])
+                                                ->count();
+
         }
 
         // Mengembalikan hasil sebagai respons JSON
@@ -93,43 +107,46 @@ class LayananController extends Controller
             'rajal_per_month' => $rajal_per_month,
             'ranap_per_month' => $ranap_per_month,
             'khitan_per_month' => $khitan_per_month,
-            'persalinan_per_month' => $persalinan_per_month,
+            'lab_per_month' => $lab_per_month,
+            'usg_per_month' => $usg_per_month,
+            'estetika_per_month' => $estetika_per_month,
         ]);
     }
 
-
-    public function dash_layanan_pie()
+    public function dash_layanan_pie(Request $request)
     {
-        $current_year = date('Y');
-        $current_month = date('m');
+        $year = $request->input('year', date('Y'));
+
         $rajal_per_month = [];
         $ranap_per_month = [];
         $khitan_per_month = [];
-        $persalinan_per_month = [];
-        
-        for ($month = 1; $month <= $current_month; $month++) {
-            $first_day_of_month = date('Y-m-01', strtotime("$current_year-$month-01"));
-            $last_day_of_month = date('Y-m-t', strtotime("$current_year-$month-01"));
-            $rajal_count = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
-            $rajal_per_month[$month] = $rajal_count;
-            $ranap_count = DatasetRanap::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
-            $ranap_per_month[$month] = $ranap_count;
-            $khitan_count = DatasetKhitan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
-            $khitan_per_month[$month] = $khitan_count;
-            $persalinan_count = DatasetPersalinan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
-            $persalinan_per_month[$month] = $persalinan_count;
+        $lab_per_month = [];
+        $usg_per_month = [];
+        $estetika_per_month = [];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $first_day_of_month = date('Y-m-01', strtotime("$year-$month-01"));
+            $last_day_of_month = date('Y-m-t', strtotime("$year-$month-01"));
+
+            $rajal_per_month[$month] = DatasetRajal::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
+            $ranap_per_month[$month] = DatasetRanap::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
+            $khitan_per_month[$month] = DatasetKhitan::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
+            $lab_per_month[$month] = DatasetLab::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
+            $usg_per_month[$month] = DatasetUsg::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
+            $estetika_per_month[$month] = DatasetEstetika::whereBetween('tgl_kunjungan', [$first_day_of_month, $last_day_of_month])->count();
         }
 
         // Menghitung total kunjungan per kategori layanan
         $total_rajal = array_sum($rajal_per_month);
         $total_ranap = array_sum($ranap_per_month);
         $total_khitan = array_sum($khitan_per_month);
-        $total_persalinan = array_sum($persalinan_per_month);
+        $total_lab = array_sum($lab_per_month);
+        $total_usg = array_sum($usg_per_month);
+        $total_estetika = array_sum($estetika_per_month);
 
-        // Menyiapkan data dalam format yang diharapkan oleh fungsi pie_chart()
         $pie_data = [
-            'series' => [$total_rajal, $total_ranap, $total_khitan, $total_persalinan],
-            'labels' => ["Rawat Jalan", "Rawat Inap", "Khitan", "Persalinan"]
+            'series' => [$total_rajal, $total_ranap, $total_khitan, $total_lab, $total_usg, $total_estetika],
+            'labels' => ["Rawat Jalan", "Rawat Inap", "Khitan", "Laboratorium", "USG", "Estetika"]
         ];
 
         // Mengembalikan data dalam format JSON
@@ -138,31 +155,50 @@ class LayananController extends Controller
 
     public function dash_layanan_piramid()
     {
-        $rajal_count = DatasetRajal::count();
-        $ranap_count = DatasetRanap::count();
-        $khitan_count = DatasetKhitan::count();
-        $persalinan_count = DatasetPersalinan::count();
-
-        $data_for_bar_chart = [
-            'categories' => ["Rawat Jalan", "Rawat Inap", "Khitan", "Laboratorium", "USG", "Estetika"],
-            'series' => [
-                [
-                    'name' => '',
-                    'data' => [$rajal_count, $ranap_count, $khitan_count, $persalinan_count],
-                ],
-            ],
-        ];
-
-        // arsort($data_for_bar_chart['series'][0]['data']);
-        // $sorted_categories = [];
-        // foreach ($data_for_bar_chart['series'][0]['data'] as $key => $value) {
-        //     $sorted_categories[] = $data_for_bar_chart['categories'][$key];
-        // }
-        // $data_for_bar_chart['categories'] = $sorted_categories;    
-
-        return response()->json($data_for_bar_chart);
+        // Mengambil tahun dari semua tabel dan membuat daftar tahun unik
+        $years = DatasetRajal::selectRaw('YEAR(tgl_kunjungan) as year')
+            ->union(DatasetRanap::selectRaw('YEAR(tgl_kunjungan) as year'))
+            ->union(DatasetKhitan::selectRaw('YEAR(tgl_kunjungan) as year'))
+            ->union(DatasetUsg::selectRaw('YEAR(tgl_kunjungan) as year'))
+            ->union(DatasetLab::selectRaw('YEAR(tgl_kunjungan) as year'))
+            ->union(DatasetEstetika::selectRaw('YEAR(tgl_kunjungan) as year'))
+            ->distinct()
+            ->pluck('year')
+            ->toArray();
+        
+        // Inisialisasi data dengan tahun dan kategori yang tersedia
+        $data = [];
+        $categories = ['Rajal', 'Ranap', 'Khitan', 'USG', 'Lab', 'Estetika'];
+        foreach ($years as $year) {
+            $data[$year] = [];
+            foreach ($categories as $category) {
+                $data[$year][$category] = 0;
+            }
+        }
+        
+        // Fungsi untuk menggabungkan data dari tabel
+        function addVisitsData($model, $category, &$data) {
+            $visits = $model::selectRaw('YEAR(tgl_kunjungan) as year, COUNT(*) as count')
+                ->groupBy('year')
+                ->get();
+            foreach ($visits as $visit) {
+                if (isset($data[$visit->year][$category])) {
+                    $data[$visit->year][$category] += $visit->count;
+                }
+            }
+        }
+    
+        // Mengambil data kunjungan dari setiap tabel
+        addVisitsData(DatasetRajal::class, 'Rajal', $data);
+        addVisitsData(DatasetRanap::class, 'Ranap', $data);
+        addVisitsData(DatasetKhitan::class, 'Khitan', $data);
+        addVisitsData(DatasetUsg::class, 'USG', $data);
+        addVisitsData(DatasetLab::class, 'Lab', $data);
+        addVisitsData(DatasetEstetika::class, 'Estetika', $data);
+    
+        return response()->json($data);
     }
-
+    
     public function dash_layanan_gender()
     {
         // Ambil tahun dari masing-masing model

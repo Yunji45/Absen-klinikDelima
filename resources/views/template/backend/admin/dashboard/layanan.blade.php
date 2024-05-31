@@ -68,7 +68,8 @@
                   <div class="card-body">
                     <div class="row align-items-center mb-4">
                     </div>
-                    <div id="daftarWilayah"></div>
+                    <!-- <div id="daftarWilayah"></div> -->
+                    <h2>div Result Cost & Benefit</h2>
                     
                   </div>
                 </div>
@@ -98,15 +99,12 @@
                   <div class="card-body">
                     <div class="row align-items-center mb-4">
                     </div>
-                      <div>
+                    <div>
                           <label for="year">Pilih Tahun:</label>
-                          <select id="year" onchange="updateChart(this.value)">
-                              <option value="2022">2022</option>
-                              <option value="2023">2023</option>
-                              <option value="2024">2024</option>
-                              <!-- Tambahkan opsi tahun sesuai kebutuhan -->
-                          </select>
-                      </div>
+                          <select id="year-select"></select>
+
+                    </div>
+
                     <div id="baris"></div>
                     
                   </div>
@@ -117,37 +115,7 @@
                   <div class="card-body">
                     <div class="row align-items-center mb-4">
                     </div>
-                      <div>
-                          <label for="year">Pilih Tahun:</label>
-                          <select id="year" onchange="updateChart(this.value)">
-                              <option value="2022">2022</option>
-                              <option value="2023">2023</option>
-                              <option value="2024">2024</option>
-                              <!-- Tambahkan opsi tahun sesuai kebutuhan -->
-                          </select>
-                      </div>
                     <div id="baris-2"></div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row align-items-center mb-4">
-                    </div>
-                      <div>
-                          <label for="year">Pilih Tahun:</label>
-                          <select id="year" onchange="updateChart(this.value)">
-                              <option value="2022">2022</option>
-                              <option value="2023">2023</option>
-                              <option value="2024">2024</option>
-                              <!-- Tambahkan opsi tahun sesuai kebutuhan -->
-                          </select>
-                      </div>
-                    <div id="gender"></div>
                     
                   </div>
                 </div>

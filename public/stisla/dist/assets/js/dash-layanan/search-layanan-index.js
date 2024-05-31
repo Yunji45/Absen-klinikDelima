@@ -31,18 +31,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const response = await fetch(`http://localhost:8000/api/api-search-layanan?year=${year}`);
             const data = await response.json();
             console.log('Data fetched:', data);
-            updateChart(data.rajal_per_month, data.ranap_per_month, data.khitan_per_month, data.persalinan_per_month);
+            updateChart(data.rajal_per_month, data.ranap_per_month, data.khitan_per_month, data.lab_per_month, data.usg_per_month, data.usg_per_month);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
 
-    function updateChart(rajalData, ranapData, khitanData, persalinanData) {
+    function updateChart(rajalData, ranapData, khitanData, labData , usgData, estetikaData) {
         var categories = [];
         var dataSeriesRajal = [];
         var dataSeriesRanap = [];
         var dataSeriesKhitan = [];
-        var dataSeriesPersalinan = [];
+        var dataSeriesLab = [];
+        var dataSeriesUsg = [];
+        var dataSeriesEstetika = [];
+
 
         // Loop untuk setiap bulan
         for (var i = 1; i <= 12; i++) {
@@ -52,12 +55,17 @@ document.addEventListener('DOMContentLoaded', function() {
             var rajal = rajalData[i] ? rajalData[i] : 0;
             var ranap = ranapData[i] ? ranapData[i] : 0;
             var khitan = khitanData[i] ? khitanData[i] : 0;
-            var persalinan = persalinanData[i] ? persalinanData[i] : 0;
+            var lab = labData[i] ? labData[i] : 0;
+            var usg = usgData[i] ? usgData[i] : 0;
+            var estetika = estetikaData[i] ? estetikaData[i] : 0;
+
 
             dataSeriesRajal.push(rajal);
             dataSeriesRanap.push(ranap);
             dataSeriesKhitan.push(khitan);
-            dataSeriesPersalinan.push(persalinan);
+            dataSeriesLab.push(lab);
+            dataSeriesUsg.push(usg);
+            dataSeriesEstetika.push(estetika);
         }
 
         var options = {
@@ -75,9 +83,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     data: dataSeriesKhitan
                 },
                 {
-                    name: "Persalinan",
-                    data: dataSeriesPersalinan
+                    name: "Lab",
+                    data: dataSeriesLab
+                },
+                {
+                    name: "Usg",
+                    data: dataSeriesUsg
+                },
+                {
+                    name: "Estetika",
+                    data: dataSeriesEstetika
                 }
+
+
             ],
             chart: {
                 height: 350,
@@ -87,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
             },
             title: {
-                text: 'Trend Data Layanan',
+                text: 'Trend Data 6 Sub Layanan',
                 align: 'center'
             },
             xaxis: {
