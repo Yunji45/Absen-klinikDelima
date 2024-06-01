@@ -166,7 +166,7 @@
 // }
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetchLineChartData();
+    // fetchLineChartData();
     updateChart();
 });
 
@@ -180,52 +180,52 @@ async function fetchLineChartData() {
     }
 }
 
-function updateLineChart(umumData, persalinanData) {
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var categories = monthNames;
-    var dataSeriesUmum = [];
-    var dataSeriesPersalinan = [];
+// function updateLineChart(umumData, persalinanData) {
+//     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+//     var categories = monthNames;
+//     var dataSeriesUmum = [];
+//     var dataSeriesPersalinan = [];
 
-    for (var i = 0; i < monthNames.length; i++) {
-        var umum = umumData[i] || 0;
-        var persalinan = persalinanData[i] || 0;
+//     for (var i = 0; i < monthNames.length; i++) {
+//         var umum = umumData[i] || 0;
+//         var persalinan = persalinanData[i] || 0;
 
-        dataSeriesUmum.push(umum);
-        dataSeriesPersalinan.push(persalinan);
-    }
+//         dataSeriesUmum.push(umum);
+//         dataSeriesPersalinan.push(persalinan);
+//     }
 
-    var options = {
-        series: [
-            {
-                name: "Umum",
-                data: dataSeriesUmum,
-                color: "#FF0000"
-            },
-            {
-                name: "Persalinan",
-                data: dataSeriesPersalinan,
-                color: "#006400"
-            }
-        ],
-        chart: {
-            height: 350,
-            type: 'line',
-            zoom: {
-                enabled: false
-            },
-        },
-        title: {
-            text: 'Trend Data Layanan',
-            align: 'center'
-        },
-        xaxis: {
-            categories: categories
-        }
-    };
+//     var options = {
+//         series: [
+//             {
+//                 name: "Umum",
+//                 data: dataSeriesUmum,
+//                 color: "#FF0000"
+//             },
+//             {
+//                 name: "Persalinan",
+//                 data: dataSeriesPersalinan,
+//                 color: "#006400"
+//             }
+//         ],
+//         chart: {
+//             height: 350,
+//             type: 'line',
+//             zoom: {
+//                 enabled: false
+//             },
+//         },
+//         title: {
+//             text: 'Trend Data Layanan',
+//             align: 'center'
+//         },
+//         xaxis: {
+//             categories: categories
+//         }
+//     };
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-}
+//     var chart = new ApexCharts(document.querySelector("#chart"), options);
+//     chart.render();
+// }
 
 async function updateChart() {
     try {

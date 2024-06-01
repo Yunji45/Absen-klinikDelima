@@ -5,7 +5,15 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> -->
+<style>
+        #map { height: 600px; }
+        .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255, 255, 255, 0.8); box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); border-radius: 5px; }
+        .info h4 { margin: 0 0 5px; color: #777; }
+        .legend { text-align: left; line-height: 18px; color: #555; }
+        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+    </style>
+
 
 <section class="section">
           <div class="section-header">
@@ -140,199 +148,9 @@
           </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-index.js')}}"></script>
         <script src="{{asset('stisla/dist/assets/js/dash-layanan/search-layanan-index.js')}}"></script>
-        <!-- <script>
-          var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-          // Inisialisasi grafik
-          fetchData();
-
-          async function fetchData() {
-              try {
-                  const response = await fetch('http://localhost:8000/api/api-layanan');
-                  const data = await response.json();
-                  updateChart(data.rajal_per_month, data.ranap_per_month, data.khitan_per_month, data.persalinan_per_month);
-              } catch (error) {
-                  console.error('Error fetching data:', error);
-              }
-          }
-
-          function updateChart(rajalData, ranapData, khitanData, persalinanData) {
-              var categories = [];
-              var dataSeriesRajal = [];
-              var dataSeriesRanap = [];
-              var dataSeriesKhitan = [];
-              var dataSeriesPersalinan = [];
-              // Loop untuk setiap bulan
-              for (var i = 1; i <= 12; i++) {
-                  categories.push(monthNames[i - 1]);
-                  // Mendapatkan data kunjungan per bulan
-                  var rajal = rajalData[i] ? rajalData[i] : 0;
-                  var ranap = ranapData[i] ? ranapData[i] : 0;
-                  var khitan = khitanData[i] ? khitanData[i] : 0;
-                  var persalinan = persalinanData[i] ? persalinanData[i] : 0;
-
-                  dataSeriesRajal.push(rajal);
-                  dataSeriesRanap.push(ranap);
-                  dataSeriesKhitan.push(khitan);
-                  dataSeriesPersalinan.push(persalinan);
-              }
-
-              var options = {
-                  series: [
-                      {
-                          name: "Rajal",
-                          data: dataSeriesRajal
-                      },
-                      {
-                          name: "Ranap",
-                          data: dataSeriesRanap
-                      },
-                      {
-                          name: "Khitan",
-                          data: dataSeriesKhitan
-                      },
-                      {
-                          name: "Persalinan",
-                          data: dataSeriesPersalinan
-                      }
-                  ],
-                  chart: {
-                      height: 350,
-                      type: 'line',
-                      zoom: {
-                          enabled: false
-                      },
-                  },
-                  title: {
-                      text: 'Trend Data Layanan',
-                      align: 'center'
-                  },
-                  xaxis: {
-                      categories: categories
-                  }
-                  // Sisanya adalah konfigurasi grafik
-                  // ...
-              };
-
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
-          }
-        </script> -->
-      <script>
-
-        const map = L.map('map').setView([-7.314931134411498, 108.43086308707107], 8);
-
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-        L.control({position: 'topleft'}).onAdd = function (map) {
-            var div = L.DomUtil.create('div', 'info');
-            div.innerHTML = '<h4>Trend Data Pengunjung</h4>';
-            return div;
-        }.addTo(map);
-
-
-      </script>
-
-        <!-- <script>
-          var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-          var currentYear = new Date().getFullYear(); // Tahun saat ini
-
-          // Inisialisasi grafik dengan tahun saat ini
-          updateChart(currentYear);
-
-          function updateChart(selectedYear) {
-              var categories = [];
-              var dataSeries = [];
-
-              // Looping untuk mendapatkan data bulan per tahun yang dipilih
-              for (var i = 0; i < 12; i++) {
-                  var daysInMonth = new Date(selectedYear, i + 1, 0).getDate(); // Jumlah hari dalam bulan
-                  var monthData = [];
-                  for (var j = 1; j <= daysInMonth; j++) {
-                      categories.push(j + " " + monthNames[i]);
-                      // Mendapatkan data dari controller berdasarkan bulan dan tahun
-                      // Contoh: var data = getDataFromController(selectedYear, i + 1, j);
-                      var data = Math.floor(Math.random() * 100); // Dummy data
-                      monthData.push(data);
-                  }
-                  dataSeries.push({
-                      name: monthNames[i],
-                      data: monthData
-                  });
-              }
-
-              var options = {
-                  series: dataSeries,
-                  chart: {
-                      height: 350,
-                      type: 'line',
-                      zoom: {
-                          enabled: false
-                      },
-                  },
-                  dataLabels: {
-                      enabled: false
-                  },
-                  stroke: {
-                      width: [5, 7, 5],
-                      curve: 'straight',
-                      dashArray: [0, 8, 5]
-                  },
-                  title: {
-                      text: 'Trend Data Linear Pengunjung',
-                      align: 'left'
-                  },
-                  legend: {
-                      tooltipHoverFormatter: function (val, opts) {
-                          return val + ' - <strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + '</strong>'
-                      }
-                  },
-                  markers: {
-                      size: 0,
-                      hover: {
-                          sizeOffset: 6
-                      }
-                  },
-                  xaxis: {
-                      categories: categories,
-                  },
-                  tooltip: {
-                      y: [
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " (mins)"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val + " per session"
-                                  }
-                              }
-                          },
-                          {
-                              title: {
-                                  formatter: function (val) {
-                                      return val;
-                                  }
-                              }
-                          }
-                      ]
-                  },
-                  grid: {
-                      borderColor: '#f1f1f1',
-                  }
-              };
-
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
-          }
-        </script> -->
+        <script src="{{asset('stisla/dist/assets/js/dash-layanan/map.js')}}"></script>
 @endsection
 

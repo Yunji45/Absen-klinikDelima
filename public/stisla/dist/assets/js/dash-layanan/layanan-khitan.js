@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetchLineChartData();
+    // fetchLineChartData();
     bar_khitan();
 });
 
@@ -13,44 +13,44 @@ async function fetchLineChartData() {
     }
 }
 
-function updateLineChart(khitanData) {
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var categories = monthNames;
-    var dataSeriesKhitan = [];
+// function updateLineChart(khitanData) {
+//     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+//     var categories = monthNames;
+//     var dataSeriesKhitan = [];
 
-    for (var i = 0; i < monthNames.length; i++) {
-        var khitan = khitanData[i] || 0;
+//     for (var i = 0; i < monthNames.length; i++) {
+//         var khitan = khitanData[i] || 0;
 
-        dataSeriesKhitan.push(khitan);
-    }
+//         dataSeriesKhitan.push(khitan);
+//     }
 
-    var options = {
-        series: [
-            {
-                name: "Khitan",
-                data: dataSeriesKhitan,
-                color: "#FF0000" // Merah untuk data khitan
-            },
-        ],
-        chart: {
-            height: 350,
-            type: 'line',
-            zoom: {
-                enabled: false
-            },
-        },
-        title: {
-            text: 'Trend Data Khitan',
-            align: 'center'
-        },
-        xaxis: {
-            categories: categories
-        }
-    };
+//     var options = {
+//         series: [
+//             {
+//                 name: "Khitan",
+//                 data: dataSeriesKhitan,
+//                 color: "#FF0000" // Merah untuk data khitan
+//             },
+//         ],
+//         chart: {
+//             height: 350,
+//             type: 'line',
+//             zoom: {
+//                 enabled: false
+//             },
+//         },
+//         title: {
+//             text: 'Trend Data Khitan',
+//             align: 'center'
+//         },
+//         xaxis: {
+//             categories: categories
+//         }
+//     };
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-}
+//     var chart = new ApexCharts(document.querySelector("#chart"), options);
+//     chart.render();
+// }
 
 function bar_khitan() {
     fetch('https://klinikmitradelima.com/api/api-layanan-khitan-bar')

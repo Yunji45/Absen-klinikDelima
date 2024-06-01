@@ -28,7 +28,7 @@
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
-                            <form action="{{route('cari.jadwal')}}" method="get">
+                            <form action="{{route('ranap.cari')}}" method="get">
                                 @csrf
                                 <div class="input-group">
                                 <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
@@ -61,7 +61,7 @@
                                     <td scope="col" class="text-center">{{$item->poli}}</td>
                                     <td scope="col" class="text-center">{{$item->tgl_kunjungan}}</td>
                                     <td scope="col" class="text-center">
-                                        <a href="{{route('daftar.pasien.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
+                                        <a href="{{route('ranap.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
                                         </a>
                                     </td>

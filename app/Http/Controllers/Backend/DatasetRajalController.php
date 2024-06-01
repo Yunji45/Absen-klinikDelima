@@ -19,7 +19,17 @@ class DatasetRajalController extends Controller
     {
         $title = 'Dataset Rajal';
         $type = 'layanan-dataset';
-        $data = DatasetRajal::all();
+        $bulan= date('m');
+        $tahun= date('Y');    
+
+        $data = DatasetRajal::whereNotNull('tgl_kunjungan')
+                            ->whereYear('tgl_kunjungan', $tahun)
+                            ->whereMonth('tgl_kunjungan', $bulan)
+                            ->get();
+        if ($data->isEmpty()) {
+            session()->flash('message', 'Tidak ada data untuk bulan dan tahun ini.');
+            // return redirect()->route('dash.layanan')->with('error','Data Rajal Pada Bulan Ini tidak ada');
+        }
         return view ('template.backend.admin.dataset.rajal.index',compact('title','type','data'));
     }
 
@@ -109,6 +119,21 @@ class DatasetRajalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = DatasetRajal::find($id);
+        $data->delete();
+        return redirect()->back()->with('success','Data Berhasil Dihapus.');
+    }
+
+    public function Cari_Dataset_Rajal(Request $request)
+    {
+        $title = 'Dataset Rajal';
+        $type = 'layanan-dataset';
+        // $user = User::all();
+        $bulan = $request->input('bulan');
+        $data = DatasetRajal::where('tgl_kunjungan', '>=', $bulan . '-01')
+                        ->where('tgl_kunjungan', '<=', $bulan . '-31')
+                        ->get();
+                
+        return view ('template.backend.admin.dataset.rajal.index',compact('title','type','data'));
     }
 }

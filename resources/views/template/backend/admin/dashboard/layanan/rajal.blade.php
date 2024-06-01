@@ -223,7 +223,7 @@
         </section>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <!-- <script src="{{asset('stisla/dist/assets/js/dash-layanan/test.js')}}"></script> -->
-        <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-rajal-line.js')}}"></script>
+        <!-- <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-rajal-line.js')}}"></script> -->
         <script src="{{asset('stisla/dist/assets/js/dash-layanan/layanan-rajal-bar.js')}}"></script>
         <script src="{{asset('stisla/dist/assets/js/dash-layanan/search-layanan-rajal.js')}}" defer></script>
         

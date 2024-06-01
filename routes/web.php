@@ -419,9 +419,14 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/dataset-ranap',[DatasetRawatInapController::class,'index'])->name('dataset.ranap');
         Route::post('/dataset-ranap/save',[DatasetRawatInapController::class,'store'])->name('dataset.ranap.store');
         Route::post('/dataset-ranap/import',[DatasetRawatInapController::class,'ImportDatasetRanap'])->name('dataset.ranap.import');
+        Route::get('/dataset-ranap-cari', [DatasetRawatInapController::class,'Cari_Dataset_Ranap'])->name('ranap.cari');
+        Route::get('/dataset-ranap-delete/{id}', [DatasetRawatInapController::class,'destroy'])->name('ranap.delete');
+
 
         Route::get('/dataset-rajal',[DatasetRajalController::class,'index'])->name('dataset.rajal');
         Route::post('/dataset-rajal/save',[DatasetRajalController::class,'store'])->name('dataset.rajal.store');
+        Route::get('/dataset-rajal-cari', [DatasetRajalController::class,'Cari_Dataset_Rajal'])->name('rajal.cari');
+        Route::get('/dataset-delete/{id}', [DatasetRajalController::class,'destroy'])->name('rajal.delete');
 
         Route::get('/dataset-usg',[DatasetUsgController::class,'index'])->name('dataset.usg');
         Route::post('/dataset-usg/save',[DatasetUsgController::class,'store'])->name('dataset.usg.store');

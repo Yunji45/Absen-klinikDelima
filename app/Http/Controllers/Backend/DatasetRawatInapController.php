@@ -22,7 +22,19 @@ class DatasetRawatInapController extends Controller
     {
         $title = 'Dataset Ranap';
         $type = 'layanan-dataset';
-        $data = DatasetRanap::all();
+        // $data = DatasetRanap::all();
+        $bulan= date('m');
+        $tahun= date('Y');    
+
+        $data = DatasetRanap::whereNotNull('tgl_kunjungan')
+                            ->whereYear('tgl_kunjungan', $tahun)
+                            ->whereMonth('tgl_kunjungan', $bulan)
+                            ->get();
+        if ($data->isEmpty()) {
+            session()->flash('message', 'Tidak ada data untuk bulan dan tahun ini.');
+            // return redirect()->route('dash.layanan')->with('error','Data Rajal Pada Bulan Ini tidak ada');
+        }
+
         return view ('template.backend.admin.dataset.ranap.index',compact('title','type','data'));
     }
 
@@ -112,7 +124,9 @@ class DatasetRawatInapController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = DatasetRanap::find($id);
+        $data->delete();
+        return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
 
     public function ImportDatasetRanap(Request $request)
@@ -135,4 +149,18 @@ class DatasetRawatInapController extends Controller
             return redirect()->route('dataset.khitan')->with('error', 'Data Gagal Diimport!');
         }
     }
+
+    public function Cari_Dataset_Ranap(Request $request)
+    {
+        $title = 'Dataset Ranap';
+        $type = 'layanan-dataset';
+        // $user = User::all();
+        $bulan = $request->input('bulan');
+        $data = DatasetRanap::where('tgl_kunjungan', '>=', $bulan . '-01')
+                        ->where('tgl_kunjungan', '<=', $bulan . '-31')
+                        ->get();
+                
+        return view ('template.backend.admin.dataset.ranap.index',compact('title','type','data'));
+    }
+
 }
