@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Imports\DatasetRajalImport;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\DatasetRajal;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class DatasetRajalController extends Controller
 {
@@ -136,4 +139,26 @@ class DatasetRajalController extends Controller
                 
         return view ('template.backend.admin.dataset.rajal.index',compact('title','type','data'));
     }
+
+    public function ImportDatasetRajal(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = $file->hashName();
+        $path = $file->storeAs('public/dataset-rajal/',$nama_file);
+        // import data
+        $import = Excel::import(new DatasetRajalImport(), storage_path('app/public/dataset-rajal/'.$nama_file));
+        //remove from server
+        Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->route('dataset.rajal')->with('success', 'Data Berhasil Diimport!');
+        } else {
+            //redirect
+            return redirect()->route('dataset.rajal')->with('error', 'Data Gagal Diimport!');
+        }
+    }
+
 }

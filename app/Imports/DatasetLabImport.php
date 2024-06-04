@@ -2,13 +2,15 @@
 
 namespace App\Imports;
 
+use Illuminate\Support\Collection;
+use App\Models\DatasetLab;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-use App\Models\DatasetRanap;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class DatasetRanapImport implements ToModel
+
+class DatasetLabImport implements ToModel
 {
     public function model(array $row)
     {
@@ -27,7 +29,7 @@ class DatasetRanapImport implements ToModel
             return null;
         }
 
-        return new DatasetRanap([
+        return new DatasetLab([
             'tgl_kunjungan' => $tgl_kunjungan,
             'no_rm'         => $row[1],
             'name'          => $row[2],

@@ -2,13 +2,13 @@
 
 namespace App\Imports;
 
+use App\Models\DatasetRajal;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-use App\Models\DatasetRanap;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class DatasetRanapImport implements ToModel
+class DatasetRajalImport implements ToModel
 {
     public function model(array $row)
     {
@@ -27,7 +27,7 @@ class DatasetRanapImport implements ToModel
             return null;
         }
 
-        return new DatasetRanap([
+        return new DatasetRajal([
             'tgl_kunjungan' => $tgl_kunjungan,
             'no_rm'         => $row[1],
             'name'          => $row[2],

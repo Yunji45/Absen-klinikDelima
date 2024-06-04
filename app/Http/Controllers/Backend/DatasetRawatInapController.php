@@ -136,17 +136,17 @@ class DatasetRawatInapController extends Controller
         ]);
         $file = $request->file('file');
         $nama_file = $file->hashName();
-        $path = $file->storeAs('public/dataset-khitan/',$nama_file);
+        $path = $file->storeAs('public/dataset-ranap/',$nama_file);
         // import data
-        $import = Excel::import(new DatasetRanapImport(), storage_path('app/public/dataset-khitan/'.$nama_file));
+        $import = Excel::import(new DatasetRanapImport(), storage_path('app/public/dataset-ranap/'.$nama_file));
         //remove from server
         Storage::delete($path);
         if($import) {
             //redirect
-            return redirect()->route('dataset.khitan')->with('success', 'Data Berhasil Diimport!');
+            return redirect()->route('dataset.ranap')->with('success', 'Data Berhasil Diimport!');
         } else {
             //redirect
-            return redirect()->route('dataset.khitan')->with('error', 'Data Gagal Diimport!');
+            return redirect()->route('dataset.ranap')->with('error', 'Data Gagal Diimport!');
         }
     }
 

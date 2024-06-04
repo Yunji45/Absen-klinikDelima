@@ -13,6 +13,7 @@ use App\Models\DatasetLab;
 use App\Models\DatasetUsg;
 use App\Models\DatasetEstetika;
 use App\Models\DatasetPersalinan;
+use App\Models\KodeWilayah;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -85,8 +86,9 @@ class DashboardController extends Controller
             'estetika' => DatasetEstetika::count()
         ];
         $sum = array_sum($datasets);
+        $data = KodeWilayah::all();
 
-        return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month'));
+        return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month','data'));
     }
 
     public function dash_rajal()

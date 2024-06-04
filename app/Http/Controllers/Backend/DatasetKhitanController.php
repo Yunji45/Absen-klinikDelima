@@ -65,7 +65,7 @@ class DatasetKhitanController extends Controller
         $khitan ->jenis_kelamin = $request->jenis_kelamin;
         $khitan ->tgl_kunjungan = $request->tgl_kunjungan;
         $khitan ->no_rm = $request->no_rm;
-        $khitan ->poli = 'KHITAN';
+        $khitan ->poli = 'Khitan';
         // return $khitan;
         $khitan ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');

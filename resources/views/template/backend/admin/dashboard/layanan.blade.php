@@ -145,6 +145,59 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Kode Wilayah Table Ref <a href="https://id.wikipedia.org/">Wiki Pedia 2024</a></h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="myTable">
+                                    <tr>
+                                        <th scope="col" class="text-center">Kode</th>
+                                        <th scope="col" class="text-center">Daftar Wilayah</th>
+                                    </tr>
+                                    @foreach ($data as $item)
+                                    <tr>
+                                        <td scope="col" class="text-center">{{$item->kode}}</td>
+                                        <td scope="col" class="text-center">{{$item->wilayah}}</td>
+                                    </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                          <h4>Top 10 Kunjungan Berdasarkan Wilayah </h4>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="myTable">
+                                    <tr>
+                                        <th scope="col" class="text-center">No</th>
+                                        <th scope="col" class="text-center">Kode</th>
+                                        <th scope="col" class="text-center">Daftar Wilayah</th>
+                                        <th scope="col" class="text-center">Total Kunjungan</th>
+                                    </tr>
+                                    @php $no =1; @endphp 
+                                    @foreach ($data as $item)
+                                    <tr>
+                                        <td class="text-center">{{$no++}}.</td>
+                                        <td scope="col" class="text-center">{{$item->kode}}</td>
+                                        <td scope="col" class="text-center">{{$item->wilayah}}</td>
+                                        <td scope="col" class="text-center">{{$item->kode}}</td>
+                                    </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
           </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

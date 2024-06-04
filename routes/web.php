@@ -427,6 +427,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/dataset-rajal/save',[DatasetRajalController::class,'store'])->name('dataset.rajal.store');
         Route::get('/dataset-rajal-cari', [DatasetRajalController::class,'Cari_Dataset_Rajal'])->name('rajal.cari');
         Route::get('/dataset-delete/{id}', [DatasetRajalController::class,'destroy'])->name('rajal.delete');
+        Route::post('/dataset-rajal/import',[DatasetRajalController::class,'ImportDatasetRajal'])->name('dataset.rajal.import');
 
         Route::get('/dataset-usg',[DatasetUsgController::class,'index'])->name('dataset.usg');
         Route::post('/dataset-usg/save',[DatasetUsgController::class,'store'])->name('dataset.usg.store');
