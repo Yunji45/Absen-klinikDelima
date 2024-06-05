@@ -16,6 +16,8 @@ use App\Models\cuti;
 use App\Imports\AbsensiImport;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\AbsensiNotification;
+use App\Notifications\AbsensiExitNotification;
 
 class PresensiController extends Controller
 {
@@ -329,7 +331,8 @@ class PresensiController extends Controller
                     'jam_keluar' => null,
                 ];
 
-                Presensi::create($attendanceData);
+                $presensi=Presensi::create($attendanceData);
+                $user->notify(new AbsensiNotification($user,$presensi)); // Mengirim notifikasi
                 return back()->with('success', 'Absen berhasil.');
             //absen PS
             }else if ($statusHariIni === 'PS') {
@@ -373,7 +376,9 @@ class PresensiController extends Controller
                     'jam_keluar' => null,
                 ];
 
-                Presensi::create($attendanceData);
+                // Presensi::create($attendanceData);
+                $presensi=Presensi::create($attendanceData);
+                $user->notify(new AbsensiNotification($user,$presensi)); // Mengirim notifikasi
                 return back()->with('success', 'Absen berhasil.');
             //absen PM
             }else if ($statusHariIni === 'PM') {
@@ -417,7 +422,9 @@ class PresensiController extends Controller
                     'jam_keluar' => null,
                 ];
 
-                Presensi::create($attendanceData);
+                // Presensi::create($attendanceData);
+                $presensi=Presensi::create($attendanceData);
+                $user->notify(new AbsensiNotification($user,$presensi)); // Mengirim notifikasi
                 return back()->with('success', 'Absen berhasil.');
             }else if ($statusHariIni === 'LL') {
                 $userIpAddress = request()->ip();
@@ -460,7 +467,10 @@ class PresensiController extends Controller
                     'jam_keluar' => null,
                 ];
 
-                Presensi::create($attendanceData);
+                // Presensi::create($attendanceData);
+                $presensi=Presensi::create($attendanceData);
+                $user->notify(new AbsensiNotification($user,$presensi)); // Mengirim notifikasi
+
                 return back()->with('success', 'Absen berhasil.');
             }else if ($statusHariIni === 'L1') {
                 $userIpAddress = request()->ip();
@@ -516,7 +526,9 @@ class PresensiController extends Controller
                     'jam_keluar' => null,
                 ];
 
-                Presensi::create($attendanceData);
+                // Presensi::create($attendanceData);
+                $presensi=Presensi::create($attendanceData);
+                $user->notify(new AbsensiNotification($user,$presensi)); // Mengirim notifikasi
                 return back()->with('success', 'Absen berhasil.');
             }else if($statusHariIni === 'L2'){
                 $userIpAddress = request()->ip();
@@ -582,7 +594,10 @@ class PresensiController extends Controller
                     'jam_keluar' => null,
                 ];
 
-                Presensi::create($attendanceData);
+                // Presensi::create($attendanceData);
+                $presensi=Presensi::create($attendanceData);
+                $user->notify(new AbsensiNotification($user,$presensi)); // Mengirim notifikasi
+
                 return back()->with('success', 'Absen berhasil.');
             }else if(in_array($statusHariIni, ['C', 'IJ'])){
                 $userIpAddress = request()->ip();
@@ -644,7 +659,9 @@ class PresensiController extends Controller
                             'jam_keluar' => null,
                         ];
                 
-                        Presensi::create($attendanceData);
+                        // Presensi::create($attendanceData);
+                        $presensi=Presensi::create($attendanceData);
+                        $user->notify(new AbsensiNotification($user,$presensi)); // Mengirim notifikasi        
                         return back()->with('success', 'Absen berhasil.');
                     } else {
                         return back()->with('error', 'Anda memiliki izin cuti untuk hari ini.');
@@ -661,6 +678,8 @@ class PresensiController extends Controller
     {
         $data['jam_keluar'] = date('H:i:s');
         $kehadiran->update($data);
+        $user = $kehadiran->user;
+        $user->notify(new AbsensiExitNotification($user,$kehadiran)); // Mengirim notifikasi
         return redirect()->back()->with('success', 'Absen keluar berhasil');
     }
 

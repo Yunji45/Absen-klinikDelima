@@ -42,6 +42,7 @@ use App\Http\Controllers\Backend\DatasetPersalinanController;
 use App\Http\Controllers\Backend\DatasetRajalController;
 use App\Http\Controllers\Backend\DatasetUsgController;
 use App\Http\Controllers\Backend\DatasetEstetikaController;
+use App\Http\Controllers\Backend\WAController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -74,6 +75,8 @@ Route::get('/face', function () {
 Route::get('/api', function () {
     return view('testyu');
 });
+Route::get('/send', [WAController::class, 'index']);
+
 Route::get('/',[ContentController::class,'home'])->name('frontend');
 Route::get('/Tentang',[ContentController::class,'tentang'])->name('frontend.tentang');
 Route::get('/Layanan',[ContentController::class,'layanan'])->name('frontend.layanan');

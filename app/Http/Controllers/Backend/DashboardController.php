@@ -15,6 +15,7 @@ use App\Models\DatasetEstetika;
 use App\Models\DatasetPersalinan;
 use App\Models\KodeWilayah;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -88,7 +89,167 @@ class DashboardController extends Controller
         $sum = array_sum($datasets);
         $data = KodeWilayah::all();
 
-        return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month','data'));
+        $hariIni = Carbon::today();
+        $kemarin = Carbon::yesterday();
+        $awalMinggu = Carbon::now()->startOfWeek();
+        $akhirMinggu = Carbon::now()->endOfWeek();
+        $awalMingguLalu = Carbon::now()->subWeek()->startOfWeek();
+        $akhirMingguLalu = Carbon::now()->subWeek()->endOfWeek();
+        $awalBulan = Carbon::now()->startOfMonth();
+        $akhirBulan = Carbon::now()->endOfMonth();
+        $awalBulanLalu = Carbon::now()->subMonth()->startOfMonth();
+        $akhirBulanLalu = Carbon::now()->subMonth()->endOfMonth();
+        $awalTahun = Carbon::now()->startOfYear();
+        $akhirTahun = Carbon::now()->endOfYear();
+        $awalTahunLalu = Carbon::now()->subYear()->startOfYear();
+        $akhirTahunLalu = Carbon::now()->subYear()->endOfYear();
+
+        $kunjunganHariIni = DatasetEstetika::whereDate('tgl_kunjungan', $hariIni)
+                            ->union(
+                                DatasetRanap::whereDate('tgl_kunjungan', $hariIni)
+                            )
+                            ->union(
+                                DatasetRajal::whereDate('tgl_kunjungan', $hariIni)
+                            )
+                            ->union(
+                                DatasetKhitan::whereDate('tgl_kunjungan', $hariIni)
+                            )
+                            ->union(
+                                DatasetUsg::whereDate('tgl_kunjungan', $hariIni)
+                            )
+                            ->union(
+                                DatasetLab::whereDate('tgl_kunjungan', $hariIni)
+                            )
+                            ->count();
+        $kunjunganKemarin = DatasetEstetika::whereDate('tgl_kunjungan', $kemarin)
+                            ->union(
+                                DatasetRanap::whereDate('tgl_kunjungan',$kemarin)
+                            )
+                            ->union(
+                                DatasetRajal::whereDate('tgl_kunjungan',$kemarin)
+                            )
+                            ->union(
+                                DatasetKhitan::whereDate('tgl_kunjungan',$kemarin)
+                            )
+                            ->union(
+                                DatasetUsg::whereDate('tgl_kunjungan',$kemarin)
+                            )
+                            ->union(
+                                DatasetLab::whereDate('tgl_kunjungan',$kemarin)
+                            )
+                            ->count();
+        $kunjunganMingguIni = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalMinggu, $akhirMinggu])
+                            ->union(
+                                DatasetRanap::whereBetween('tgl_kunjungan',[$awalMinggu, $akhirMinggu])
+                            )
+                            ->union(
+                                DatasetRajal::whereBetween('tgl_kunjungan',[$awalMinggu, $akhirMinggu])
+                            )
+                            ->union(
+                                DatasetKhitan::whereBetween('tgl_kunjungan',[$awalMinggu, $akhirMinggu])
+                            )
+                            ->union(
+                                DatasetUsg::whereBetween('tgl_kunjungan',[$awalMinggu, $akhirMinggu])
+                            )
+                            ->union(
+                                DatasetLab::whereBetween('tgl_kunjungan',[$awalMinggu, $akhirMinggu])
+                            )
+                            ->count();
+        $kunjunganMingguLalu = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalMingguLalu, $akhirMingguLalu])
+                            ->union(
+                                DatasetRanap::whereBetween('tgl_kunjungan',[$awalMingguLalu, $akhirMingguLalu])
+                            )
+                            ->union(
+                                DatasetRajal::whereBetween('tgl_kunjungan',[$awalMingguLalu, $akhirMingguLalu])
+                            )
+                            ->union(
+                                DatasetKhitan::whereBetween('tgl_kunjungan',[$awalMingguLalu, $akhirMingguLalu])
+                            )
+                            ->union(
+                                DatasetUsg::whereBetween('tgl_kunjungan',[$awalMingguLalu, $akhirMingguLalu])
+                            )
+                            ->union(
+                                DatasetLab::whereBetween('tgl_kunjungan',[$awalMingguLalu, $akhirMingguLalu])
+                            )
+                            ->count();
+        $kunjunganBulanIni = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalBulan, $akhirBulan])
+                            ->union(
+                                DatasetRanap::whereBetween('tgl_kunjungan',[$awalBulan, $akhirBulan])
+                            )
+                            ->union(
+                                DatasetRajal::whereBetween('tgl_kunjungan',[$awalBulan, $akhirBulan])
+                            )
+                            ->union(
+                                DatasetKhitan::whereBetween('tgl_kunjungan',[$awalBulan, $akhirBulan])
+                            )
+                            ->union(
+                                DatasetUsg::whereBetween('tgl_kunjungan',[$awalBulan, $akhirBulan])
+                            )
+                            ->union(
+                                DatasetLab::whereBetween('tgl_kunjungan',[$awalBulan, $akhirBulan])
+                            )
+                            ->count();
+        $kunjunganBulanLalu = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalBulanLalu, $akhirBulanLalu])
+                            ->union(
+                                DatasetRanap::whereBetween('tgl_kunjungan',[$awalBulanLalu, $akhirBulanLalu])
+                            )
+                            ->union(
+                                DatasetRajal::whereBetween('tgl_kunjungan',[$awalBulanLalu, $akhirBulanLalu])
+                            )
+                            ->union(
+                                DatasetKhitan::whereBetween('tgl_kunjungan',[$awalBulanLalu, $akhirBulanLalu])
+                            )
+                            ->union(
+                                DatasetUsg::whereBetween('tgl_kunjungan',[$awalBulanLalu, $akhirBulanLalu])
+                            )
+                            ->union(
+                                DatasetLab::whereBetween('tgl_kunjungan',[$awalBulanLalu, $akhirBulanLalu])
+                            )
+                            ->count();
+        $kunjunganTahunIni = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalTahun, $akhirTahun])
+                            ->union(
+                                DatasetRanap::whereBetween('tgl_kunjungan',[$awalTahun, $akhirTahun])
+                            )
+                            ->union(
+                                DatasetRajal::whereBetween('tgl_kunjungan',[$awalTahun, $akhirTahun])
+                            )
+                            ->union(
+                                DatasetKhitan::whereBetween('tgl_kunjungan',[$awalTahun, $akhirTahun])
+                            )
+                            ->union(
+                                DatasetUsg::whereBetween('tgl_kunjungan',[$awalTahun, $akhirTahun])
+                            )
+                            ->union(
+                                DatasetLab::whereBetween('tgl_kunjungan',[$awalTahun, $akhirTahun])
+                            )
+                            ->count();
+        $kunjunganTahunLalu = DatasetEstetika::whereBetween('tgl_kunjungan', [$awalTahunLalu, $akhirTahunLalu])
+                            ->union(
+                                DatasetRanap::whereBetween('tgl_kunjungan',[$awalTahunLalu, $akhirTahunLalu])
+                            )
+                            ->union(
+                                DatasetRajal::whereBetween('tgl_kunjungan',[$awalTahunLalu, $akhirTahunLalu])
+                            )
+                            ->union(
+                                DatasetKhitan::whereBetween('tgl_kunjungan',[$awalTahunLalu, $akhirTahunLalu])
+                            )
+                            ->union(
+                                DatasetUsg::whereBetween('tgl_kunjungan',[$awalTahunLalu, $akhirTahunLalu])
+                            )
+                            ->union(
+                                DatasetLab::whereBetween('tgl_kunjungan',[$awalTahunLalu, $akhirTahunLalu])
+                            )
+                            ->count();
+        $perbandinganHariIni = $this->compare_ranap($kunjunganHariIni, $kunjunganKemarin);
+        $perbandinganMingguIni = $this->compare_ranap($kunjunganMingguIni, $kunjunganMingguLalu);
+        $perbandinganBulanIni = $this->compare_ranap($kunjunganBulanIni, $kunjunganBulanLalu);
+        $perbandinganTahunIni = $this->compare_ranap($kunjunganTahunIni, $kunjunganTahunLalu);
+                    
+        // return $perbandinganHariIni;
+        return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month','data',
+        'kunjunganHariIni', 'kunjunganKemarin', 'kunjunganMingguIni', 'kunjunganMingguLalu', 
+        'kunjunganBulanIni', 'kunjunganBulanLalu', 'kunjunganTahunIni', 'kunjunganTahunLalu',
+        'perbandinganHariIni', 'perbandinganMingguIni', 'perbandinganBulanIni', 'perbandinganTahunIni'));
     }
 
     public function dash_rajal()
