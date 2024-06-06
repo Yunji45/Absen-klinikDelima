@@ -28,10 +28,42 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
+            <span class="badge bg-primary badge-number">{{ $notifications->count() }}</span>
+          </a>
+          <!-- End Notification Icon -->
+          <!-- Bagian untuk menampilkan notifikasi -->
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+              <li class="dropdown-header">
+                  Anda memiliki {{ $notifications->count() }} notification pada bulan ini
+                  <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              @foreach($notifications as $notification)
+              <li class="notification-item">
+                  @if($notification->type == 'App\Notifications\LemburNotification')
+                  <i class="bi bi-exclamation-circle text-warning"></i>
+                  @elseif($notification->type == 'App\Notifications\OtherNotification')
+                  <!-- Tambahkan ikon lain untuk jenis notifikasi yang berbeda -->
+                  @endif
+                  <div>
+                      <h4>{{ $notification->data['message'] }}</h4>
+                      <p>Lembur ID: {{ $notification->data['lembur_id'] }}</p>
+                      <p>Tanggal: {{ $notification->data['tanggal'] }}</p>
+                      <p>Alasan: {{ $notification->data['alasan'] }}</p>
+                      <p>{{ $notification->created_at->diffForHumans() }}</p>
+                  </div>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              @endforeach
+              <li class="dropdown-footer">
+                  <a href="#">Show all notifications</a>
+              </li>
+          </ul>
+
+
+
+
+          <!-- <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               You have 4 new notifications
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
@@ -95,7 +127,8 @@
               <a href="#">Show all notifications</a>
             </li>
 
-          </ul><!-- End Notification Dropdown Items -->
+          </ul> -->
+          <!-- End Notification Dropdown Items -->
 
         </li><!-- End Notification Nav -->
 
@@ -103,9 +136,9 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
+            <span class="badge bg-success badge-number">0</span>
+          </a>
+          <!-- End Messages Icon -->
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
               You have 3 new messages
@@ -161,7 +194,8 @@
               <a href="#">Show all messages</a>
             </li>
 
-          </ul><!-- End Messages Dropdown Items -->
+          </ul>
+          <!-- End Messages Dropdown Items -->
 
         </li><!-- End Messages Nav -->
 

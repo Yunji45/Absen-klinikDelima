@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Exports\PresensiExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use PDF;
 use Auth;
 use App\Models\jadwal;
@@ -768,11 +769,15 @@ class PresensiController extends Controller
                     ->orWhere('keterangan', 'telat');
                     })->count();    
         $karyawan = User::whereIn('role',['evaluator','pegawai','keuangan','hrd'])->count();
+        $notifications = Auth::user()->notifications()
+                                ->whereYear('created_at', Carbon::now()->year)
+                                ->whereMonth('created_at', Carbon::now()->month)
+                                ->orderBy('created_at', 'desc')->take(3)->get();
+        // $notifications = Auth::user()->notifications()->orderBy('created_at', 'desc')->take(3)->get();
         // return $permohonan;
         // return view('backend.admin.show', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
         // return view('template.frontend.error-page.update', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur'));
-        return view('template.backend.karyawan.page.dashboard', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur','title','type','karyawan','lembur'));
-
+        return view('template.backend.karyawan.page.dashboard', compact('presents','masuk','telat','cuti','alpha','gantijaga','tukarjaga','permohonan','lembur','title','type','karyawan','lembur','notifications'));
     }
 
     public function RiwayatShow()
@@ -780,7 +785,11 @@ class PresensiController extends Controller
         $title = 'Riwayat Presensi';
         $type = 'component';
         $presents = presensi::whereUserId(auth()->user()->id)->whereMonth('tanggal',date('m'))->whereYear('tanggal',date('Y'))->orderBy('tanggal','desc')->get();
-        return view('template.backend.karyawan.page.presensi.index',compact('title','type','presents'));
+        $notifications = Auth::user()->notifications()
+        ->whereYear('created_at', Carbon::now()->year)
+        ->whereMonth('created_at', Carbon::now()->month)
+        ->orderBy('created_at', 'desc')->take(3)->get();
+        return view('template.backend.karyawan.page.presensi.index',compact('title','type','presents','notifications'));
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\LemburApproved;
 use App\Models\rubahjadwal;
 use App\Models\jadwal;
 use App\Models\jadwalterbaru;
@@ -10,6 +11,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use PDF;
+use App\Notifications\AbsensiNotification;
+use App\Notifications\AbsensiExitNotification;
 
 class RubahjadwalController extends Controller
 {
@@ -25,6 +28,10 @@ class RubahjadwalController extends Controller
         $user = User::all();
         $tahun = date('Y');
         $bulan = date('m');
+        $notifications = Auth::user()->notifications()
+                        ->whereYear('created_at', Carbon::now()->year)
+                        ->whereMonth('created_at', Carbon::now()->month)
+                        ->orderBy('created_at', 'desc')->take(3)->get();
         $permohonan = rubahjadwal::whereIn('status', ['pengajuan','approve'])
                     ->where('user_id', Auth::id())
                     ->whereMonth('tanggal',$bulan)
@@ -32,7 +39,7 @@ class RubahjadwalController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->get();
         // return view ('frontend.users.permohonan.index',compact('title','user','permohonan'));
-        return view ('template.backend.karyawan.page.perubahan-jaga.rubah-jaga',compact('title','user','permohonan','type'));
+        return view ('template.backend.karyawan.page.perubahan-jaga.rubah-jaga',compact('title','user','permohonan','type','notifications'));
     }
 
     /**
@@ -45,7 +52,11 @@ class RubahjadwalController extends Controller
         $title = 'Create Rubah Jaga';
         $type = 'component';
         $user = User::all();
-        return view ('template.backend.karyawan.page.perubahan-jaga.form-jaga',compact('title','type','user'));
+        $notifications = Auth::user()->notifications()
+        ->whereYear('created_at', Carbon::now()->year)
+        ->whereMonth('created_at', Carbon::now()->month)
+        ->orderBy('created_at', 'desc')->take(3)->get();
+        return view ('template.backend.karyawan.page.perubahan-jaga.form-jaga',compact('title','type','user','notifications'));
     }
 
     /**
@@ -233,6 +244,8 @@ class RubahjadwalController extends Controller
     
                 // Mengubah status permohonan menjadi 'approve'
                 $permohonan->update(['status' => 'approve']);
+
+                event(new LemburApproved($permohonan));
     
                 return redirect()->back()->with('success', 'Permohonan User Berhasil Di Setujui');
             } elseif ($permohonan->permohonan == 'ganti_jaga') {

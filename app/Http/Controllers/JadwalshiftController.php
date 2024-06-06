@@ -11,6 +11,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use PDF;
 use Auth;
+use Carbon\Carbon;
+use App\Notifications\AbsensiNotification;
+use App\Notifications\AbsensiExitNotification;
+
 
 class JadwalshiftController extends Controller
 {
@@ -63,12 +67,17 @@ class JadwalshiftController extends Controller
         $type = 'component';
         $bulan = date('m');
         $tahun = date('Y');
+        $notifications = Auth::user()->notifications()
+                    ->whereYear('created_at', Carbon::now()->year)
+                    ->whereMonth('created_at', Carbon::now()->month)
+                    ->orderBy('created_at', 'desc')->take(3)->get();
+
         $data = jadwalterbaru::whereUserId(auth()->user()->id)
                     ->whereYear('masa_aktif', $tahun)
                     ->whereMonth('masa_aktif', $bulan)
                     ->get();    
         // return view ('frontend.users.jadwal.index',compact('title','data','tahun','bulan'));
-        return view ('template.backend.karyawan.page.jadwal.index',compact('title','data','tahun','bulan','type'));
+        return view ('template.backend.karyawan.page.jadwal.index',compact('title','data','tahun','bulan','type','notifications'));
     }
 
     /**

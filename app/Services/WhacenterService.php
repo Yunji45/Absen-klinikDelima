@@ -21,7 +21,8 @@ class WhacenterService
     {
         $this->lines = $lines;
         $this->baseUrl = 'https://app.whacenter.com/api';
-        $this->deviceId = '442e32f30523e0ebe8f72338bd2399b4';
+        // $this->deviceId = '442e32f30523e0ebe8f72338bd2399b4';
+        $this->deviceId = env('DEVICE_WA_BOT');
     }
 
     public function getDeviceStatus()

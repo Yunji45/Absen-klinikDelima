@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\cuti;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Notifications\AbsensiNotification;
+use App\Notifications\AbsensiExitNotification;
 
 class CutiController extends Controller
 {
@@ -74,7 +76,11 @@ class CutiController extends Controller
     {
         $title = 'Pengajuan Izin';
         $type = 'component';
-        return view('template.backend.karyawan.page.perubahan-jaga.form-cuti',compact('title','type'));
+        $notifications = Auth::user()->notifications()
+        ->whereYear('created_at', Carbon::now()->year)
+        ->whereMonth('created_at', Carbon::now()->month)
+        ->orderBy('created_at', 'desc')->take(3)->get();
+        return view('template.backend.karyawan.page.perubahan-jaga.form-cuti',compact('title','type','notifications'));
     }
 
     /**
@@ -239,6 +245,11 @@ class CutiController extends Controller
         $type = 'component';
         $bulan = date('m');
         $tahun = date('Y');
+        $notifications = Auth::user()->notifications()
+                    ->whereYear('created_at', Carbon::now()->year)
+                    ->whereMonth('created_at', Carbon::now()->month)
+                    ->orderBy('created_at', 'desc')->take(3)->get();
+
         $cuti = cuti::whereIn('status', ['pengajuan','approve'])
                     ->where('user_id', Auth::id())
                     ->whereMonth('tanggal_mulai',$bulan)
@@ -246,7 +257,7 @@ class CutiController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->get();
         // return view('frontend.users.izin.index', compact('title', 'cuti'));
-        return view('template.backend.karyawan.page.perubahan-jaga.index',compact('title','type','cuti'));
+        return view('template.backend.karyawan.page.perubahan-jaga.index',compact('title','type','cuti','notifications'));
     }
 
 }
