@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class DatasetLab extends Model
 {
     use HasFactory;
-    protected $table = 'dataset_labs';
+    protected $table = 'laboratoriums';
     protected $primaryKey = 'id';
-    protected $fillable = ['tgl_kunjungan', 'no_rm', 'name', 'poli', 'jenis_kelamin'];
+    protected $fillable = ['tgl_kunjungan', 'no_rm', 'name', 'poli', 'jenis_kelamin' ,'kode_wilayah'];
+
+
+    public function wilayah()
+    {
+        return $this->belongsTo(KodeWilayah::class);
+    }
 }

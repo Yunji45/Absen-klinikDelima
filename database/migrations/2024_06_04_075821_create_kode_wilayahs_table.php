@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('kode')->nullable();
             $table->string('wilayah')->nullable();
+            $table->decimal('longitude', 25, 20)->nullable();
+            $table->decimal('latitude', 25, 20)->nullable();
             $table->timestamps();
         });
     }

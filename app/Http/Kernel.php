@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'roles' => \App\Http\Middleware\CheckRole::class,
         'cekIp' => \App\Http\Middleware\IpCheck::class,
         'verified_face' => \App\Http\Middleware\VerifiedFaceMiddleware::class,
+        'auth.api' => \App\Http\Middleware\ApiAuthMiddleware::class,
     ];
 }

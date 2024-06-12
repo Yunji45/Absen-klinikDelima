@@ -11,6 +11,7 @@ use App\Models\DatasetPersalinan;
 use App\Models\DatasetLab;
 use App\Models\DatasetUsg;
 use App\Models\DatasetEstetika;
+use App\Models\KodeWilayah;
 class LayananController extends Controller
 {
     /**
@@ -840,5 +841,50 @@ class LayananController extends Controller
       
           return response()->json($response);
       }
-  
+
+      //GEOJSON
+      public function GeoJson()
+      {
+        $wilayahs = KodeWilayah::all();
+        $features = [];
+
+        // Iterasi melalui setiap wilayah
+        foreach ($wilayahs as $wilayah) {
+            $rajalCount = DatasetRajal::where('kode_wilayah', $wilayah->kode)->count();
+            $ranapCount = DatasetRanap::where('kode_wilayah', $wilayah->kode)->count();
+            $khitanCount = DatasetKhitan::where('kode_wilayah', $wilayah->kode)->count();
+            $usgCount = DatasetUsg::where('kode_wilayah', $wilayah->kode)->count();
+            $labCount = DatasetLab::where('kode_wilayah', $wilayah->kode)->count();
+            $estetikaCount = DatasetEstetika::where('kode_wilayah', $wilayah->kode)->count();
+
+            // Membuat fitur GeoJSON untuk wilayah
+            $features[] = [
+                "type" => "Feature",
+                "id" => $wilayah->kode,
+                "properties" => [
+                    "name" => $wilayah->wilayah,
+                    "rajal" => $rajalCount,
+                    "ranap" => $ranapCount,
+                    "khitan" => $khitanCount,
+                    "usg" => $usgCount,
+                    "lab" => $labCount,
+                    "estetika" => $estetikaCount
+                ],
+                "geometry" => [
+                    "type" => "Point",
+                    "coordinates" => [$wilayah->longitude, $wilayah->latitude]
+                ]
+            ];
+        }
+
+        // Membuat koleksi fitur GeoJSON
+        $geoJson = [
+            "type" => "FeatureCollection",
+            "features" => $features
+        ];
+
+        // Mengembalikan data GeoJSON sebagai response JSON
+        return response()->json($geoJson);
+      }
+    
 }

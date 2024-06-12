@@ -244,8 +244,24 @@ class DashboardController extends Controller
         $perbandinganMingguIni = $this->compare_ranap($kunjunganMingguIni, $kunjunganMingguLalu);
         $perbandinganBulanIni = $this->compare_ranap($kunjunganBulanIni, $kunjunganBulanLalu);
         $perbandinganTahunIni = $this->compare_ranap($kunjunganTahunIni, $kunjunganTahunLalu);
-                    
-        // return $perbandinganHariIni;
+
+        // $topWilayah = KodeWilayah::withCount([
+        //     'rajal',
+        //     'ranap',
+        //     'khitan',
+        //     'lab',
+        //     'usg',
+        //     'estetika'
+        // ])
+        // ->orderByDesc('rajal_count')
+        // ->orderByDesc('ranap_count')
+        // ->orderByDesc('khitan_count')
+        // ->orderByDesc('lab_count')
+        // ->orderByDesc('usg_count')
+        // ->orderByDesc('estetika_count')
+        // ->take(10)
+        // ->get();                        
+        // return $topWilayah;
         return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month','data',
         'kunjunganHariIni', 'kunjunganKemarin', 'kunjunganMingguIni', 'kunjunganMingguLalu', 
         'kunjunganBulanIni', 'kunjunganBulanLalu', 'kunjunganTahunIni', 'kunjunganTahunLalu',

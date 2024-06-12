@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\StatistikController;
 use App\Http\Controllers\Api\LayananController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AbsensiUsersController;
 
 
 /*
@@ -24,6 +25,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/api-user',[UserController::class,'get_data_user']);
 
+//Api Dashboard absensi user
+Route::get('/absensi', [AbsensiUsersController::class, 'get_absensi_users']);
+
 //API NAKES DASHBOARD
 Route::get('/api-nakes',[StatistikController::class,'StatistikNakes']);
 Route::get('/api-non-nakes',[StatistikController::class,'StatistikNonNakes']);
@@ -32,6 +36,8 @@ Route::get('/api-pekerjaan',[StatistikController::class,'StatistikStatusPekerjaa
 Route::get('/api-education',[StatistikController::class,'StatistikEducation']);
 
 //API Layanan
+Route::get('/api-map',[LayananController::class,'GeoJson']);
+
 Route::get('/api-layanan', [LayananController::class, 'dash_layanan']);
 Route::get('/api-layanan-pie', [LayananController::class, 'dash_layanan_pie']);
 Route::get('/api-layanan-piramid', [LayananController::class, 'dash_layanan_piramid']);
