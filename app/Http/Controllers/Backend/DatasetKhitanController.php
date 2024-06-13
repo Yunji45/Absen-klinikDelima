@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DatasetKhitan;
+use App\Models\KodeWilayah;
 use App\Imports\DatasetKhitanImport;
 use Carbon;
 
@@ -23,8 +24,19 @@ class DatasetKhitanController extends Controller
     {
         $title = 'Dataset Khitan';
         $type = 'layanan-dataset';
-        $data = DatasetKhitan::all();
-        return view ('template.backend.admin.dataset.khitan.index',compact('title','type','data'));
+        $bulan= date('m');
+        $tahun= date('Y');    
+
+        $data = DatasetKhitan::whereNotNull('tgl_kunjungan')
+                            ->whereYear('tgl_kunjungan', $tahun)
+                            ->whereMonth('tgl_kunjungan', $bulan)
+                            ->get();
+        if ($data->isEmpty()) {
+            session()->flash('message', 'Tidak ada data untuk bulan dan tahun ini.');
+            // return redirect()->route('dash.layanan')->with('error','Data Rajal Pada Bulan Ini tidak ada');
+        }
+        $kode = KodeWilayah::all();
+        return view ('template.backend.admin.dataset.khitan.index',compact('title','type','data','kode'));
     }
 
     /**
@@ -66,6 +78,7 @@ class DatasetKhitanController extends Controller
         $khitan ->tgl_kunjungan = $request->tgl_kunjungan;
         $khitan ->no_rm = $request->no_rm;
         $khitan ->poli = 'Khitan';
+        $khitan ->kode_wilayah = $request->kode_wilayah;
         // return $khitan;
         $khitan ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');
@@ -137,4 +150,19 @@ class DatasetKhitanController extends Controller
             return redirect()->route('dataset.khitan')->with('error', 'Data Gagal Diimport!');
         }
     }
+
+    public function Cari_Dataset_Khitan(Request $request)
+    {
+        $title = 'Dataset Khitan';
+        $type = 'layanan-dataset';
+        // $user = User::all();
+        $bulan = $request->input('bulan');
+        $kode = KodeWilayah::all();
+        $data = DatasetKhitan::where('tgl_kunjungan', '>=', $bulan . '-01')
+                        ->where('tgl_kunjungan', '<=', $bulan . '-31')
+                        ->get();
+                
+        return view ('template.backend.admin.dataset.khitan.index',compact('title','type','data','kode'));
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DatasetEstetika;
+use App\Models\KodeWilayah;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,8 +20,19 @@ class DatasetEstetikaController extends Controller
     {
         $title = 'Dataset Estetika';
         $type = 'layanan-dataset';
-        $data = DatasetEstetika::all();
-        return view ('template.backend.admin.dataset.estetika.index',compact('title','type','data'));
+        $bulan= date('m');
+        $tahun= date('Y');    
+
+        $data = DatasetEstetika::whereNotNull('tgl_kunjungan')
+                            ->whereYear('tgl_kunjungan', $tahun)
+                            ->whereMonth('tgl_kunjungan', $bulan)
+                            ->get();
+        if ($data->isEmpty()) {
+            session()->flash('message', 'Tidak ada data untuk bulan dan tahun ini.');
+            // return redirect()->route('dash.layanan')->with('error','Data Rajal Pada Bulan Ini tidak ada');
+        }
+        $kode = KodeWilayah::all();
+        return view ('template.backend.admin.dataset.estetika.index',compact('title','type','data','kode'));
     }
 
     /**
@@ -61,7 +73,8 @@ class DatasetEstetikaController extends Controller
         $estetika ->jenis_kelamin = $request->jenis_kelamin;
         $estetika ->tgl_kunjungan = $request->tgl_kunjungan;
         $estetika ->no_rm = $request->no_rm;
-        $estetika ->poli = 'ESTETIKA';
+        $estetika ->poli = 'Estetika';
+        $estetika ->kode_wilayah = $request->kode_wilayah;
         // return $estetika;
         $estetika ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');
@@ -113,4 +126,19 @@ class DatasetEstetikaController extends Controller
         $data -> delete();
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
+
+    public function Cari_Dataset_Estetika(Request $request)
+    {
+        $title = 'Dataset Estetika';
+        $type = 'layanan-dataset';
+        // $user = User::all();
+        $bulan = $request->input('bulan');
+        $kode = KodeWilayah::all();
+        $data = DatasetEstetika::where('tgl_kunjungan', '>=', $bulan . '-01')
+                        ->where('tgl_kunjungan', '<=', $bulan . '-31')
+                        ->get();
+                
+        return view ('template.backend.admin.dataset.estetika.index',compact('title','type','data','kode'));
+    }
+
 }

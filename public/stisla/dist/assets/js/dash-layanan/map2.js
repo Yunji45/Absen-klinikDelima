@@ -1,16 +1,16 @@
 // Inisialisasi peta
-const map = L.map('map').setView([-6.9854865,109.3917492], 8);
+const map = L.map('map').setView([-6.9854865, 109.3917492], 8);
 
-// Menambahkan tile layer dari OpenStreetMap
+// Menambahkan lapisan tile dari OpenStreetMap
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://portofolio-ihya.netlify.app">Ihya Natik W</a>'
 }).addTo(map);
 
-// Control untuk menampilkan informasi
+// Kontrol untuk menampilkan informasi
 const info = L.control();
 
-info.onAdd = function (map) {
+info.onAdd = function () {
     this._div = L.DomUtil.create('div', 'info');
     this.update();
     return this._div;
@@ -31,7 +31,8 @@ function getColor(d) {
         d > 100 ? '#FC4E2A' :
         d > 50 ? '#FD8D3C' :
         d > 20 ? '#FEB24C' :
-        d > 10 ? '#FED976' : '#FFEDA0';
+        d > 10 ? '#FED976' :
+        '#FFEDA0';
 }
 
 // Fungsi untuk menentukan gaya
@@ -54,9 +55,7 @@ function style(feature) {
     };
 }
 
-
-
-// Fungsi untuk highlight fitur
+// Fungsi untuk menyoroti fitur
 function highlightFeature(e) {
     const layer = e.target;
 
@@ -72,7 +71,7 @@ function highlightFeature(e) {
     info.update(layer.feature.properties);
 }
 
-// Fungsi untuk reset highlight
+// Fungsi untuk mereset sorotan
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
     info.update();
@@ -88,7 +87,7 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: function(e) {
+        click: function (e) {
             const props = e.target.feature.properties;
             const content = `
                 <b>${props.name}</b><br>
@@ -107,32 +106,57 @@ function onEachFeature(feature, layer) {
     });
 }
 
-// Inisialisasi geojson data
-let geojsonData;
-
 // Membuat layer GeoJSON dari data yang diambil dari server
-fetch('http://localhost:8000/api/api-map')
-  .then(response => response.json()) // Mengubah respons menjadi JSON
-  .then(data => {
-    // Memasukkan data GeoJSON ke dalam variabel geojson
-    geojsonData = data;
-    // Membuat layer GeoJSON menggunakan data yang diambil dari server
-    geojson = L.geoJson(geojsonData, {
-      style,
-      onEachFeature
-    }).addTo(map);
-  })
-  .catch(error => {
-    console.error('Error fetching GeoJSON:', error);
-  });
+let geojsonData;
+let geojson;
+
+fetch('http://klinikmitradelima.com/api/api-map')
+    .then(response => response.json())
+    .then(data => {
+        geojsonData = data;
+        geojson = L.geoJson(geojsonData, {
+            style,
+            onEachFeature
+        }).addTo(map);
+
+        // Kontrol untuk pencarian
+        const searchControl = new L.Control.Search({
+            layer: geojson,
+            propertyName: 'name',
+            marker: false,
+            moveToLocation: function (latlng, title) {
+                map.setView(latlng, 12); // Sesuaikan tingkat zoom sesuai kebutuhan
+            }
+        });
+
+        searchControl.on('search:locationfound', function (e) {
+            e.layer.setStyle({
+                weight: 3,
+                color: '#0f0',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+            if (e.layer._popup) e.layer.openPopup();
+        }).on('search:collapsed', function () {
+            geojson.eachLayer(function (layer) {
+                geojson.resetStyle(layer);
+            });
+        });
+
+        map.addControl(searchControl);
+
+    })
+    .catch(error => {
+        console.error('Error fetching GeoJSON:', error);
+    });
 
 // Menambahkan atribusi untuk data
 map.attributionControl.addAttribution('Data Kunjungan &copy; <a href="http://klinikmitradelima.com/">Klinik Mitradelima</a>');
 
-// Control untuk legenda
-const legend = L.control({position: 'bottomright'});
+// Kontrol untuk legenda
+const legend = L.control({ position: 'bottomright' });
 
-legend.onAdd = function (map) {
+legend.onAdd = function () {
     const div = L.DomUtil.create('div', 'info legend');
     const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
     const labels = [];
@@ -150,30 +174,3 @@ legend.onAdd = function (map) {
 };
 
 legend.addTo(map);
-
-// Control untuk pencarian
-const searchControl = new L.Control.Search({
-    layer: geojson,
-    propertyName: 'name',
-    marker: false,
-    moveToLocation: function(latlng, title, map) {
-        // Zoom the map to the searched location
-        map.setView(latlng, 12); // Adjust zoom level as needed
-    }
-});
-
-searchControl.on('search:locationfound', function(e) {
-    e.layer.setStyle({
-        weight: 3,
-        color: '#0f0',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-    if (e.layer._popup) e.layer.openPopup();
-}).on('search:collapsed', function(e) {
-    geojson.eachLayer(function(layer) {
-        geojson.resetStyle(layer);
-    });
-});
-
-map.addControl(searchControl);

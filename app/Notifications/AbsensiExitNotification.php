@@ -79,8 +79,8 @@ class AbsensiExitNotification extends Notification
                     ->line('Status Hari Ini : ' . $this->presensi->keterangan);
 
         $waService2 = (new WhacenterService())
-                    // ->to('085880631562')
-                    ->to('085225559504')
+                    ->to('085880631562')
+                    // ->to('085225559504')
                     ->line("Laporan Realtime Presensi")
                     ->line('Nama: ' . $this->user->name)
                     ->line('Presensi Masuk: ' . $this->presensi->jam_masuk . ' WIB')

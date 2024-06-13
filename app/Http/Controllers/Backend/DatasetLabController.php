@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DatasetLab;
+use App\Models\KodeWilayah;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,8 +20,19 @@ class DatasetLabController extends Controller
     {
         $title = 'Dataset lab';
         $type = 'layanan-dataset';
-        $data = Datasetlab::all();
-        return view ('template.backend.admin.dataset.lab.index',compact('title','type','data'));
+        $kode = KodeWilayah::all();   
+        $bulan= date('m');
+        $tahun= date('Y');    
+
+        $data = DatasetLab::whereNotNull('tgl_kunjungan')
+                            ->whereYear('tgl_kunjungan', $tahun)
+                            ->whereMonth('tgl_kunjungan', $bulan)
+                            ->get();
+        if ($data->isEmpty()) {
+            session()->flash('message', 'Tidak ada data untuk bulan dan tahun ini.');
+            // return redirect()->route('dash.layanan')->with('error','Data Rajal Pada Bulan Ini tidak ada');
+        }
+        return view ('template.backend.admin.dataset.lab.index',compact('title','type','data','kode'));
     }
 
     /**
@@ -62,6 +74,7 @@ class DatasetLabController extends Controller
         $lab ->tgl_kunjungan = $request->tgl_kunjungan;
         $lab ->no_rm = $request->no_rm;
         $lab ->poli = 'LABORATORIUM';
+        $lab ->kode_wilayah = $request->kode_wilayah;
         // return $lab;
         $lab ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');
@@ -113,4 +126,19 @@ class DatasetLabController extends Controller
         $data -> delete();
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
+
+    public function Cari_Dataset_Lab(Request $request)
+    {
+        $title = 'Dataset Lab';
+        $type = 'layanan-dataset';
+        // $user = User::all();
+        $bulan = $request->input('bulan');
+        $kode = KodeWilayah::all();
+        $data = DatasetLab::where('tgl_kunjungan', '>=', $bulan . '-01')
+                        ->where('tgl_kunjungan', '<=', $bulan . '-31')
+                        ->get();
+                
+        return view ('template.backend.admin.dataset.lab.index',compact('title','type','data','kode'));
+    }
+
 }

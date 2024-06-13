@@ -28,7 +28,7 @@
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
-                            <form action="{{route('cari.jadwal')}}" method="get">
+                            <form action="{{route('lab.cari')}}" method="get">
                                 @csrf
                                 <div class="input-group">
                                 <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
@@ -49,6 +49,7 @@
                                     <th scope="col" class="text-center">Jenis Kelamin</th>
                                     <th scope="col" class="text-center">Poli</th>
                                     <th scope="col" class="text-center">Tgl.Kunjungan</th>
+                                    <th scope="col" class="text-center">Kode Wilayah</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                                 @php $no =1; @endphp 
@@ -60,6 +61,7 @@
                                     <td scope="col" class="text-center">{{$item->jenis_kelamin}}</td>
                                     <td scope="col" class="text-center">{{$item->poli}}</td>
                                     <td scope="col" class="text-center">{{$item->tgl_kunjungan}}</td>
+                                    <th scope="col" class="text-center">{{$item->kode_wilayah}}</th>
                                     <td scope="col" class="text-center">
                                         <a href="{{route('dataset.lab.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
@@ -118,6 +120,18 @@
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
                                     @error('jenis_kelamin') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="kode_wilayah" class="col-form-label col-sm-3">Kode Wilayah</label>
+                                <div class="col-sm-9">
+                                    <select name="kode_wilayah" id="kode_wilayah" class="form-control @error('kode_wilayah') is-invalid @enderror">
+                                        <option value="">Pilih</option>
+                                        @foreach($kode as $wilayah)
+                                            <option value="{{ $wilayah->id }}">{{ $wilayah->kode }} - {{ $wilayah->wilayah }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('kode_wilayah') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 

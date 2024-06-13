@@ -410,10 +410,12 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/dataset-khitan/save',[DatasetKhitanController::class,'store'])->name('dataset.khitan.store');
         Route::post('/dataset-khitan/import',[DatasetKhitanController::class,'ImportDatasetKhitan'])->name('dataset.khitan.import');
         Route::get('/dataset-khitan/delete/{id}',[DatasetKhitanController::class,'destroy'])->name('dataset.khitan.delete');
+        Route::get('/dataset-khitan-cari', [DatasetKhitanController::class,'Cari_Dataset_Khitan'])->name('khitan.cari');
 
         Route::get('/dataset-lab',[DatasetLabController::class,'index'])->name('dataset.lab');
         Route::post('/dataset-lab/save',[DatasetLabController::class,'store'])->name('dataset.lab.store');
         Route::get('/dataset-lab/delete/{id}',[DatasetLabController::class,'destroy'])->name('dataset.lab.delete');
+        Route::get('/dataset-lab-cari', [DatasetLabController::class,'Cari_Dataset_Lab'])->name('lab.cari');
 
         Route::get('/dataset-persalinan',[DatasetPersalinanController::class,'index'])->name('dataset.persalinan');
         Route::post('/dataset-persalinan/save',[DatasetPersalinanController::class,'store'])->name('dataset.persalinan.store');
@@ -425,7 +427,6 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/dataset-ranap-cari', [DatasetRawatInapController::class,'Cari_Dataset_Ranap'])->name('ranap.cari');
         Route::get('/dataset-ranap-delete/{id}', [DatasetRawatInapController::class,'destroy'])->name('ranap.delete');
 
-
         Route::get('/dataset-rajal',[DatasetRajalController::class,'index'])->name('dataset.rajal');
         Route::post('/dataset-rajal/save',[DatasetRajalController::class,'store'])->name('dataset.rajal.store');
         Route::get('/dataset-rajal-cari', [DatasetRajalController::class,'Cari_Dataset_Rajal'])->name('rajal.cari');
@@ -435,10 +436,12 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/dataset-usg',[DatasetUsgController::class,'index'])->name('dataset.usg');
         Route::post('/dataset-usg/save',[DatasetUsgController::class,'store'])->name('dataset.usg.store');
         Route::get('/dataset-usg/delete/{id}',[DatasetUsgController::class,'destroy'])->name('dataset.usg.delete');
+        Route::get('/dataset-usg-cari', [DatasetUsgController::class,'Cari_Dataset_Usg'])->name('usg.cari');
 
         Route::get('/dataset-Estetika',[DatasetEstetikaController::class,'index'])->name('dataset.estetika');
         Route::post('/dataset-Estetika/save',[DatasetEstetikaController::class,'store'])->name('dataset.estetika.store');
         Route::get('/dataset-Estetika/delete/{id}',[DatasetEstetikaController::class,'destroy'])->name('dataset.estetika.delete');
+        Route::get('/dataset-Estetika-cari', [DatasetEstetikaController::class,'Cari_Dataset_Estetika'])->name('estetika.cari');
 
         Route::post('/presensi/import',[PresensiController::class,'insert_excel'])->name('presensi.import');
         Route::get('/presensi/import',[PresensiController::class,'export_presensi'])->name('presensi.export');

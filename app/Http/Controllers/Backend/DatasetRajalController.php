@@ -8,6 +8,7 @@ use App\Imports\DatasetRajalImport;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\DatasetRajal;
+use App\Models\Kodewilayah;
 
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -33,7 +34,8 @@ class DatasetRajalController extends Controller
             session()->flash('message', 'Tidak ada data untuk bulan dan tahun ini.');
             // return redirect()->route('dash.layanan')->with('error','Data Rajal Pada Bulan Ini tidak ada');
         }
-        return view ('template.backend.admin.dataset.rajal.index',compact('title','type','data'));
+        $kode = KodeWilayah::all();
+        return view ('template.backend.admin.dataset.rajal.index',compact('title','type','data','kode'));
     }
 
     /**
@@ -75,6 +77,7 @@ class DatasetRajalController extends Controller
         $ranap ->tgl_kunjungan = $request->tgl_kunjungan;
         $ranap ->no_rm = $request->no_rm;
         $ranap ->poli = $request->poli;
+        $ranap ->kode_wilayah = $request->kode_wilayah;
         // return $ranap;
         $ranap ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');
@@ -132,12 +135,13 @@ class DatasetRajalController extends Controller
         $title = 'Dataset Rajal';
         $type = 'layanan-dataset';
         // $user = User::all();
+        $kode = KodeWilayah::all();
         $bulan = $request->input('bulan');
         $data = DatasetRajal::where('tgl_kunjungan', '>=', $bulan . '-01')
                         ->where('tgl_kunjungan', '<=', $bulan . '-31')
                         ->get();
                 
-        return view ('template.backend.admin.dataset.rajal.index',compact('title','type','data'));
+        return view ('template.backend.admin.dataset.rajal.index',compact('title','type','data','kode'));
     }
 
     public function ImportDatasetRajal(Request $request)

@@ -227,12 +227,14 @@
                                 <table class="table table-striped" id="myTable">
                                     <tr>
                                         <th scope="col" class="text-center">Kode</th>
-                                        <th scope="col" class="text-center">Daftar Wilayah</th>
+                                        <th scope="col" class="text-center">Nama Wilayah</th>
+                                        <th scope="col" class="text-center">Titik Koordinat</th>
                                     </tr>
                                     @foreach ($data as $item)
                                     <tr>
                                         <td scope="col" class="text-center">{{$item->kode}}</td>
                                         <td scope="col" class="text-center">{{$item->wilayah}}</td>
+                                        <td scope="col" class="text-center">[{{$item->longitude}}, {{$item->latitude}}]</td>
                                     </tr>
                                     @endforeach
                                 </table>
@@ -243,7 +245,7 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                          <h4>Top 10 Kunjungan Berdasarkan Wilayah </h4>
+                          <h4>Top 10 Kunjungan Berdasarkan KTP </h4>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
@@ -251,17 +253,17 @@
                                     <tr>
                                         <th scope="col" class="text-center">No</th>
                                         <th scope="col" class="text-center">Kode</th>
-                                        <th scope="col" class="text-center">Daftar Wilayah</th>
+                                        <th scope="col" class="text-center">Nama Wilayah</th>
                                         <th scope="col" class="text-center">Total Kunjungan</th>
                                     </tr>
                                     @php $no =1; @endphp 
-                                    @foreach ($data as $item)
+                                    @foreach ($topCities as $item)
                                     <tr>
-                                        <td class="text-center">{{$no++}}.</td>
+                                        <td scope="col" class="text-center">{{$no++}}.</td>
                                         <td scope="col" class="text-center">{{$item->kode}}</td>
                                         <td scope="col" class="text-center">{{$item->wilayah}}</td>
-                                        <td scope="col" class="text-center">{{$item->kode}}</td>
-                                    </tr>
+                                        <td scope="col" class="text-center">{{ $item->total_kunjungan }}</td>
+                                        </tr>
                                     @endforeach
                                 </table>
                             </div>

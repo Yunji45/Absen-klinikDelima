@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DatasetRanap;
+use App\Models\KodeWilayah;
 
 use App\Imports\DatasetRanapImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,7 +25,8 @@ class DatasetRawatInapController extends Controller
         $type = 'layanan-dataset';
         // $data = DatasetRanap::all();
         $bulan= date('m');
-        $tahun= date('Y');    
+        $tahun= date('Y'); 
+        $kode = KodeWilayah::all();   
 
         $data = DatasetRanap::whereNotNull('tgl_kunjungan')
                             ->whereYear('tgl_kunjungan', $tahun)
@@ -35,7 +37,7 @@ class DatasetRawatInapController extends Controller
             // return redirect()->route('dash.layanan')->with('error','Data Rajal Pada Bulan Ini tidak ada');
         }
 
-        return view ('template.backend.admin.dataset.ranap.index',compact('title','type','data'));
+        return view ('template.backend.admin.dataset.ranap.index',compact('title','type','data','kode'));
     }
 
     /**
@@ -76,7 +78,8 @@ class DatasetRawatInapController extends Controller
         $ranap ->jenis_kelamin = $request->jenis_kelamin;
         $ranap ->tgl_kunjungan = $request->tgl_kunjungan;
         $ranap ->no_rm = $request->no_rm;
-        $ranap ->poli = 'RAWAT INAP';
+        $ranap ->poli = $request->poli;
+        $ranap ->kode_wilayah = $request->kode_wilayah;
         // return $ranap;
         $ranap ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');
@@ -156,11 +159,12 @@ class DatasetRawatInapController extends Controller
         $type = 'layanan-dataset';
         // $user = User::all();
         $bulan = $request->input('bulan');
+        $kode = KodeWilayah::all();
         $data = DatasetRanap::where('tgl_kunjungan', '>=', $bulan . '-01')
                         ->where('tgl_kunjungan', '<=', $bulan . '-31')
                         ->get();
                 
-        return view ('template.backend.admin.dataset.ranap.index',compact('title','type','data'));
+        return view ('template.backend.admin.dataset.ranap.index',compact('title','type','data','kode'));
     }
 
 }

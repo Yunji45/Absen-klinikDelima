@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DatasetUsg;
+use App\Models\KodeWilayah;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,8 +20,19 @@ class DatasetUsgController extends Controller
     {
         $title = 'Dataset USG';
         $type = 'layanan-dataset';
-        $data = DatasetUsg::all();
-        return view ('template.backend.admin.dataset.usg.index',compact('title','type','data'));
+        $kode = KodeWilayah::all();   
+        $bulan= date('m');
+        $tahun= date('Y');    
+
+        $data = DatasetUsg::whereNotNull('tgl_kunjungan')
+                            ->whereYear('tgl_kunjungan', $tahun)
+                            ->whereMonth('tgl_kunjungan', $bulan)
+                            ->get();
+        if ($data->isEmpty()) {
+            session()->flash('message', 'Tidak ada data untuk bulan dan tahun ini.');
+            // return redirect()->route('dash.layanan')->with('error','Data Rajal Pada Bulan Ini tidak ada');
+        }
+        return view ('template.backend.admin.dataset.usg.index',compact('title','type','data','kode'));
     }
 
     /**
@@ -62,6 +74,7 @@ class DatasetUsgController extends Controller
         $usg ->tgl_kunjungan = $request->tgl_kunjungan;
         $usg ->no_rm = $request->no_rm;
         $usg ->poli = 'USG';
+        $usg ->kode_wilayah = $request->kode_wilayah;
         // return $usg;
         $usg ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');
@@ -113,4 +126,19 @@ class DatasetUsgController extends Controller
         $data -> delete();
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
+
+    public function Cari_Dataset_Usg(Request $request)
+    {
+        $title = 'Dataset USG';
+        $type = 'layanan-dataset';
+        // $user = User::all();
+        $bulan = $request->input('bulan');
+        $kode = KodeWilayah::all();
+        $data = DatasetUsg::where('tgl_kunjungan', '>=', $bulan . '-01')
+                        ->where('tgl_kunjungan', '<=', $bulan . '-31')
+                        ->get();
+                
+        return view ('template.backend.admin.dataset.lab.index',compact('title','type','data','kode'));
+    }
+
 }
