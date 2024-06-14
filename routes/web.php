@@ -43,12 +43,12 @@ use App\Http\Controllers\Backend\DatasetRajalController;
 use App\Http\Controllers\Backend\DatasetUsgController;
 use App\Http\Controllers\Backend\DatasetEstetikaController;
 use App\Http\Controllers\Backend\WAController;
+use App\Http\Controllers\Backend\ApiDocsController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
 use App\Http\Controllers\Frontend\CareerController;
 //dokumentasi API (application programming interface)
-use App\Http\Controllers\API\DokumentasiController;
 use App\Http\Controllers\Api\StatistikController;
 //Error Bro
 use App\Http\Controllers\ErrorMas\ErrorController;
@@ -129,8 +129,6 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
     
     //role admin
     Route::group(['roles' => 'admin,hrd,keuangan,evaluator'], function(){
-        //Dok API
-        Route::get('/Dokumentasi-API',[DokumentasiController::class,'index'])->name('dok.api');
         //Dashboard
         Route::get('/statis',[DashboardController::class,'index'])->name('dash.admin');
         Route::get('/layanan',[DashboardController::class,'dash_layanan'])->name('dash.layanan');
@@ -404,6 +402,9 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/kritik-saran',[KritikSaraanController::class,'index'])->name('kritik-saran');
         Route::get('/kritik-saran/{id}',[KritikSaraanController::class,'destroy'])->name('kritik-saran.delete');
         Route::get('/kritik-saran/search',[KritikSaraanController::class,'SearchKritik'])->name('kritik-saran.search');
+
+        //Docs API
+        Route::get('/hit-api',[ApiDocsController::class,'index'])->name('api.docs');
 
         //dataset
         Route::get('/dataset-khitan',[DatasetKhitanController::class,'index'])->name('dataset.khitan');

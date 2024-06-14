@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let userId = document.getElementById("userId").value;
 
-      fetch(`http://localhost:8000/api/absensi?user_id=${userId}`)
+      fetch(`https://klinikmitradelima.com/api/absensi?user_id=${userId}`)
           .then(response => response.json())
           .then(data => {
               const seriesData = [];

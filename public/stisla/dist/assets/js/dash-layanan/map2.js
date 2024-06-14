@@ -110,7 +110,7 @@ function onEachFeature(feature, layer) {
 let geojsonData;
 let geojson;
 
-fetch('http://klinikmitradelima.com/api/api-map')
+fetch('https://klinikmitradelima.com/api/api-map')
     .then(response => response.json())
     .then(data => {
         geojsonData = data;

@@ -342,7 +342,7 @@
 
             <li class="menu-header">HELP IT</li>
             <li>
-                <a class="nav-link" href="{{route('dok.api')}}">
+                <a class="nav-link" href="{{route('api.docs')}}">
                     <i class="fas fa-code"></i>
                     <span>Dokumentasi API</span>
                 </a>

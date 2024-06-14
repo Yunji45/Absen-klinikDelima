@@ -8,7 +8,7 @@ use App\Imports\DatasetRajalImport;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\DatasetRajal;
-use App\Models\Kodewilayah;
+use App\Models\KodeWilayah;
 
 use Maatwebsite\Excel\Facades\Excel;
 
