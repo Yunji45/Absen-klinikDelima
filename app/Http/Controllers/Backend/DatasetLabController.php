@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DatasetLab;
+use App\Imports\DatasetLabImport;
 use App\Models\KodeWilayah;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -140,5 +141,27 @@ class DatasetLabController extends Controller
                 
         return view ('template.backend.admin.dataset.lab.index',compact('title','type','data','kode'));
     }
+
+    public function ImportDatasetLab(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = $file->hashName();
+        $path = $file->storeAs('public/dataset-lab/',$nama_file);
+        // import data
+        $import = Excel::import(new DatasetLabImport(), storage_path('app/public/dataset-lab/'.$nama_file));
+        //remove from server
+        Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->route('dataset.lab')->with('success', 'Data Berhasil Diimport!');
+        } else {
+            //redirect
+            return redirect()->route('dataset.lab')->with('error', 'Data Gagal Diimport!');
+        }
+    }
+
 
 }

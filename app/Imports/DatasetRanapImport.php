@@ -12,7 +12,7 @@ class DatasetRanapImport implements ToModel
 {
     public function model(array $row)
     {
-        if (count($row) < 5 || empty($row[0]) || empty($row[1]) || empty($row[2]) || empty($row[3]) || empty($row[4])) {
+        if (count($row) < 6 || empty($row[0]) || empty($row[1]) || empty($row[2]) || empty($row[3]) || empty($row[4]) || empty($row[5])) {
             return null;
         }
 
@@ -33,6 +33,7 @@ class DatasetRanapImport implements ToModel
             'name'          => $row[2],
             'poli'          => $row[3],
             'jenis_kelamin' => $row[4],
+            'kode_wilayah' => $row[5],
         ]);
     }
 }

@@ -417,6 +417,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/dataset-lab/save',[DatasetLabController::class,'store'])->name('dataset.lab.store');
         Route::get('/dataset-lab/delete/{id}',[DatasetLabController::class,'destroy'])->name('dataset.lab.delete');
         Route::get('/dataset-lab-cari', [DatasetLabController::class,'Cari_Dataset_Lab'])->name('lab.cari');
+        Route::post('/dataset-lab/import',[DatasetLabController::class,'ImportDatasetLab'])->name('dataset.lab.import');
 
         Route::get('/dataset-persalinan',[DatasetPersalinanController::class,'index'])->name('dataset.persalinan');
         Route::post('/dataset-persalinan/save',[DatasetPersalinanController::class,'store'])->name('dataset.persalinan.store');

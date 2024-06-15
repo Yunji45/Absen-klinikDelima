@@ -78,7 +78,6 @@ class JobApplicationController extends Controller
             $CvName = time().'.'.$request->file('file_cv')->extension();
             Storage::putFileAs('public/hiring-cv', $request->file('file_cv'), $CvName);
         
-            // Logika penyimpanan file_pendukung jika diperlukan
             if ($request->hasFile('file_pendukung')) {
                 $filePendukungName = time().'.'.$request->file('file_pendukung')->extension();
                 Storage::putFileAs('public/hiring-file-pendukung', $request->file('file_pendukung'), $filePendukungName);
