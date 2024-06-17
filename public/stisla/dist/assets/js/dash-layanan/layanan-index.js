@@ -119,7 +119,7 @@ function pie_chart(year) {
 }
 
 async function getDataFromAPI() {
-    var url = 'https://klinikmitradelima.com/api/api-layanan-piramid'; // Sesuaikan dengan URL API Anda
+    var url = 'https://klinikmitradelima.com/api/api-layanan-piramid';
   
     try {
       const response = await fetch(url);

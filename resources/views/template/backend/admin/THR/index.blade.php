@@ -40,6 +40,16 @@
                   <div class="card-header">
                     <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
+                        <form action="{{route('thr.cari')}}" method="get">
+                                @csrf
+                                <div class="input-group">
+                                <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                                </div>
+                            </form>
+
                                 <div class="input-group">
                                 <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
                                 <div class="input-group-btn">

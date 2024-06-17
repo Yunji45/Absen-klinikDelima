@@ -193,4 +193,21 @@ class THRController extends Controller
         $pdf = PDF::loadview('template.backend.admin.THR.pdf', ['data' => $data, 'total' => $total]);
         return $pdf->download('THR-Karyawan-MD.pdf');
     }
+
+    public function Cari_THR(Request $request)
+    {
+        $title = 'THR Idul Fitri';
+        $type = 'gaji';
+        // $user = User::all();
+        $tahun = date('Y');
+        $total = THR_lebaran::whereYear('bulan',$tahun)->sum('THR');
+        $user = THR_lebaran::whereYear('bulan',$tahun)->count();
+        $bulan = $request->input('bulan');
+        $data = THR_lebaran::where('bulan', '>=', $bulan . '-01')
+                        ->where('bulan', '<=', $bulan . '-31')
+                        ->get();
+                
+        return view ('template.backend.admin.THR.index',compact('title','type','data','total','user'));
+    }
+
 }

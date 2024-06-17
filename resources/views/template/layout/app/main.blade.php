@@ -101,6 +101,9 @@
   <script src="{{asset('stisla/dist/assets/js/custom.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/bundle.js')}}"></script>
   @yield('js')
+  <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+  <div class="elfsight-app-6b9aa81d-0c88-405e-8d4d-6aa922097524" data-elfsight-app-lazy></div>
+
 </body>
 
 </html>

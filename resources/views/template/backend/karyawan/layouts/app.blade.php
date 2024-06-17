@@ -78,6 +78,9 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('nice-admin/assets/js/main.js')}}"></script>
+  <!-- Live Chat -->
+  <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+  <div class="elfsight-app-6b9aa81d-0c88-405e-8d4d-6aa922097524" data-elfsight-app-lazy></div>
 
 </body>
 

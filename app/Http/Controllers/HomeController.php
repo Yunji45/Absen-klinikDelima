@@ -7,7 +7,8 @@ use App\Models\presensi;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Http\Controllers\Backend\BiznetController;
-
+use App\Notifications\AbsensiNotification;
+use App\Notifications\AbsensiExitNotification;
 
 
 class HomeController extends Controller
@@ -25,12 +26,19 @@ class HomeController extends Controller
     }
     public function index(Request $request)
     {
+        $title = 'Halaman Presensi';
+        $type = 'component';
         $currentTimeInWIB = Carbon::now();
 
         $currentTimeFormatted = $currentTimeInWIB->format('Y-m-d H:i:s');
         $present = presensi::whereUserId(auth()->user()->id)->whereTanggal(date('Y-m-d'))->first();
+        $notifications = Auth::user()->notifications()
+                        ->whereYear('created_at', Carbon::now()->year)
+                        ->whereMonth('created_at', Carbon::now()->month)
+                        ->orderBy('created_at', 'desc')->take(3)->get();
 
-        return view('frontend.home', compact('present', 'currentTimeFormatted'));    
+        // return view('frontend.home', compact('present', 'currentTimeFormatted'));    
+        return view('template.backend.karyawan.page.presensi.presensi', compact('present', 'currentTimeFormatted','title','type','notifications'));    
 
         // $biznetController = new BiznetController();
 

@@ -13,7 +13,13 @@
         <a class="nav-link collapsed " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="components-nav" class="nav-content collapse {{ request()->routeIs(['home', 'jadwal.user', 'riwayat.daftar-hadir', 'permohonan.jadwal.user', 'index.izin.user']) ? 'show active' : '' }} " data-bs-parent="#sidebar-nav">
+          <li class="{{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
+            <a href="{{route('home')}}">
+              <i class="bi bi-circle"></i><span>Presensi</span>
+            </a>
+          </li>
+
           <li>
             <a href="{{route('jadwal.user')}}">
               <i class="bi bi-circle"></i><span>Jadwal Jaga</span>
@@ -97,11 +103,11 @@
           <span>Docs API</span>
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-headset"></i>
           <span>IT Support</span>
         </a>
-      </li>
+      </li> -->
 
     </ul>
