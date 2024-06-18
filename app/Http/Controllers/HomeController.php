@@ -64,6 +64,17 @@ class HomeController extends Controller
         // }
     }
 
+    public function skill()
+    {
+        $title = 'Future Plan';
+        $type = 'skills';
+        $notifications = Auth::user()->notifications()
+        ->whereYear('created_at', Carbon::now()->year)
+        ->whereMonth('created_at', Carbon::now()->month)
+        ->orderBy('created_at', 'desc')->take(3)->get();
+    
+        return view('template.backend.karyawan.page.skill.index',compact('title','notifications','type'));
+    }
     /**
      * Show the form for creating a new resource.
      *

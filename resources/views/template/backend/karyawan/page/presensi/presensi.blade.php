@@ -15,6 +15,20 @@
     background-color: darkgreen;
     border-color: darkgreen;
   }
+  .signature-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        .signature-box {
+            width: 45%;
+            text-align: center;
+        }
+        .signature-box p {
+            border-top: 1px solid #000;
+            margin-top: 50px;
+        }
+
 </style>
 
 <div class="pagetitle">
@@ -121,5 +135,53 @@
           </div>
         </div>
       </div>
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card card-custom">
+                    <div class="card-body">
+                      <br>
+                        <ol>
+                        <h3 class="text-center">Attendance Board</h3>
+
+                            <li>
+                                <p> <strong>Persiapkan Diri:</strong> Pastikan Anda berada di zona tempat yang sesuai untuk melakukan absensi.</p>
+                            </li>
+                            <li>
+                                <p><strong>Login ke Sistem:</strong> Buka aplikasi atau situs web absensi dan masukkan kredensial login Anda.</p>
+                            </li>
+                            <li>
+                                <p><strong>Pilih Menu Absensi:</strong> Setelah login, pilih menu absensi yang tersedia di dashboard Anda (components->presensi).</p>
+                            </li>
+                            <li>
+                                <p> <strong>Lakukan kredensial presensi:</strong> klik Button OR Face Recognition atau lainnya sesuai instruksi by System.</p>
+                            </li>
+                            <li>
+                              <p><strong>Error:</strong> Jika terjadi problem maka konfirmasi kendala yang dihadapi kepada pihak terkait atau bisa gunakan Live Chat.</p>
+                            </li>
+                            <li>
+                                <p><strong>Cek Status Absensi:</strong> Cek kembali status absensi Anda untuk memastikan bahwa absensi telah tercatat dengan benar.</p>
+                            </li>
+                            <li>
+                                <p><strong>Logout:</strong> Setelah selesai, jangan lupa untuk logout dari sistem untuk menjaga keamanan akun Anda.</p>
+                            </li>
+                            <li>
+                              <p><strong>========== Have a nice day. ==========</strong></p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="signature-container">
+                    <div class="signature-box">
+                        <p>cc: Hrd/Spv</p>
+                    </div>
+                    <div class="signature-box">
+                        <p>cc: CEO/Direktur</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
     </section>
 @endsection

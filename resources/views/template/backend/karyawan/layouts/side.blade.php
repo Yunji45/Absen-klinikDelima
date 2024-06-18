@@ -7,6 +7,12 @@
           <span>Dashboard</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link " href="{{route('skill')}}">
+          <i class="bi bi-grid"></i>
+          <span>Bootcamp Soft Skills & Hard Skills</span>
+        </a>
+      </li>
       <!-- End Dashboard Nav -->
       <li class="nav-heading">Pages</li>
       <li class="nav-item {{ $type === 'component' ? 'active' : '' }}">
