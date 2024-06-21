@@ -11,12 +11,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/hightlightjs-dark.css">
+    <link rel="stylesheet" href="{{asset('API/css/dark.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="{{asset('API-Docs/css/style.css')}}" media="all">
+    <link rel="stylesheet" href="{{asset('API/css/style.css')}}" media="all">
     <script>
         hljs.initHighlightingOnLoad();
     </script>
@@ -26,7 +26,7 @@
 <div class="left-menu">
     <div class="content-logo">
         <div class="logo">
-            <img alt="platform by Emily van den Heever from the Noun Project" title="platform by Emily van den Heever from the Noun Project" src="{{asset('API-Docs/images/logo.png')}}" height="32" />
+            <img alt="platform by Emily van den Heever from the Noun Project" title="platform by Emily van den Heever from the Noun Project" src="{{asset('API/images/logo.png')}}" height="32" />
             <span>API Docs Klinik MD</span>
         </div>
         <button class="burger-menu-icon" id="button-menu-mobile">
@@ -176,7 +176,7 @@
     @media only screen and (max-width:680px){ .github-corner > svg { right: auto!important; left: 0!important; transform: rotate(270deg)!important;}}
 </style>
 <!-- END Github Corner Ribbon - to remove -->
-<script src="{{asset('API-Docs/js/script.js')}}"></script>
+<script src="{{asset('API/js/script.js')}}"></script>
 </body>
 
 </html>

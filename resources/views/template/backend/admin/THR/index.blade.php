@@ -20,13 +20,12 @@
                   </form>
                   <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('get-data-form').submit();">Get Data Multiple</a>
               </div>              
-              <a href="{{route('thr.pdf')}}" class="btn btn-danger">
+              <a href="{{route('thr.pdf',['tahun' => request('tahun', date('Y'))])}}" class="btn btn-danger">
                   <i class="fa fa-download">
                       </i> PDF
               </a>
-              <a href="{{route('thr.excel')}}" class="btn btn-success">
-                  <i class="fa fa-download">
-                      </i> Excel
+              <a href="{{ route('thr.excel', ['tahun' => request()->input('tahun', date('Y'))]) }}" class="btn btn-success">
+                  <i class="fa fa-download"></i> Excel
               </a>
               <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item" style="font-size:16px; font-weight:bold;">Total THR : {{'Rp.' . number_format(floatval($total), 0, ',', '.')}}</a></div>
@@ -39,24 +38,27 @@
                 <div class="card">
                   <div class="card-header">
                     <h4>{{$title}} Table</h4>
-                        <div class="card-header-form">
-                        <form action="{{route('thr.cari')}}" method="get">
+                    <div class="card-header-form">
+                        <div class="d-flex justify-content-between">
+                            <!-- Form Cari Tahun -->
+                            <form action="{{ route('thr.cari') }}" method="get" class="form-inline">
                                 @csrf
-                                <div class="input-group">
-                                <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                </div>
+                                <div class="input-group mb-3 mr-3">
+                                    <input type="number" class="form-control" name="tahun" id="tahun" placeholder="Search Tahun" value="{{ request('tahun', date('Y')) }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                    </div>
                                 </div>
                             </form>
-
-                                <div class="input-group">
+                            <!-- Input Cari Nama -->
+                            <div class="input-group mb-3">
                                 <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
-                                <div class="input-group-btn">
+                                <div class="input-group-append">
                                     <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
-                                </div>
+                            </div>
                         </div>
+                    </div>
                   </div>
                   <div class="card-body p-0">
                     <div class="table-responsive">

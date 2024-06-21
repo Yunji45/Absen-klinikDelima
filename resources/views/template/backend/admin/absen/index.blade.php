@@ -150,23 +150,20 @@
                     <i class="fas fa-search">
                         </i> Cari Berdasarkan Periode
                 </a>
-
             </div>
-
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>{{$title}} Table</h4>
                         <div class="card-header-form">
-                                <div class="input-group">
+                              <div class="input-group">
                                 <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
-                                </div>
+                              </div>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -187,7 +184,7 @@
                             <tbody>
                                 @if (!$presents->count())
                                     <tr>
-                                        <td colspan="7" class="text-center">Tidak ada data yang tersedia</td>
+                                        <td colspan="8" class="text-center">Tidak ada data yang tersedia</td>
                                     </tr>
                                 @else
                                 @php $no =1; @endphp

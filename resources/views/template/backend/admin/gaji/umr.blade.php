@@ -27,11 +27,11 @@
                   </div>
                   <div class="card-body p-0">
                     <div class="table-responsive">
-                      <table class="table table-striped">
+                      <table class="table table-sm table-striped">
                       <tr>
                           <th scope="col" class="text-center">No</th>
-                          <th scope="col" class="text-center">Tahun</th>
-                          <th scope="col" class="text-center">UMR</th>
+                          <th scope="col" class="text-center">Name/Tahun</th>
+                          <th scope="col" class="text-center">UMR/UMK</th>
                           <th scope="col" class="text-center">Action</th>
                         </tr>
                         @php
@@ -42,10 +42,10 @@
                           <td class="text-center">{{$no++}}.</td>
                           <td class="text-center">{{$item->name}}</td>
                           <td class="text-center">{{'Rp.' . number_format(floatval($item->UMK), 0, ',', '.')}}</td>
-                          <td>
+                          <td class="text-center">
                             <a href="{{route('gaji.UMR.delete',$item->id)}}" 
                             onclick="return confirm('Yakin akan dihapus?')" 
-                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Hapus</a>
                         </td>                        
                     </tr>
                         @endforeach

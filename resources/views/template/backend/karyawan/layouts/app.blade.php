@@ -8,6 +8,7 @@
   <title>{{$title}} - Klinik Mitra Delima</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicons -->
   <link href="{{('mitradelima/assets/img/logo-klinik.png')}}" rel="icon">
@@ -29,6 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset('nice-admin/assets/css/style.css')}}" rel="stylesheet">
+  <link href="{{asset('nice-admin/assets/css/bot.css')}}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -58,6 +60,34 @@
     @yield('content')
 
   </main><!-- End #main -->
+  <button class="chat-toggle" id="toggle-chat">
+    <img src="https://img.icons8.com/ios-filled/50/FFFFFF/phone.png" width="20" height="20">
+    <strong>Live Chat</strong>
+</button>
+
+<div class="chat-widget" id="chat-widget">
+    <div class="chat-header">
+        <h4>👋 MitraHealth !</h4>
+        <button id="close-chat">✖</button>
+    </div>
+    <div class="chat-body" id="chat-body">
+        <div class="message bot">Halo! Ada yang bisa saya bantu?</div>
+    </div>
+    <div class="chat-shortcuts">
+        <button class="shortcut" data-message="IP internet error">IP Internet </button>
+        <button class="shortcut" data-message="Face ID">Face ID</button>
+        <button class="shortcut" data-message="Bye">Bye !!</button>
+        <button class="shortcut" data-message="Hallo">Hallo !!</button>
+        <button class="shortcut" data-message="Siapa kamu">Siapa Kamu?</button>
+        <button class="shortcut" data-message="Terima kasih">Thanks.</button>
+    </div>
+
+    <div class="chat-footer">
+        <input type="text" id="user-input" placeholder="Tulis pesan...">
+        <button id="send-message">Kirim</button>
+    </div>
+</div>
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -78,10 +108,10 @@
 
   <!-- Template Main JS File -->
   <script src="{{asset('nice-admin/assets/js/main.js')}}"></script>
+  <script src="{{asset('nice-admin/assets/js/bot.js')}}"></script>
   <!-- Live Chat -->
-  <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-  <div class="elfsight-app-6b9aa81d-0c88-405e-8d4d-6aa922097524" data-elfsight-app-lazy></div>
-
+  <!-- <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+  <div class="elfsight-app-6b9aa81d-0c88-405e-8d4d-6aa922097524" data-elfsight-app-lazy></div> -->
 </body>
 
 </html>

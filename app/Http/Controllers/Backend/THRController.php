@@ -172,9 +172,9 @@ class THRController extends Controller
         return redirect()->back()->with('success','Data Berhasil Dihapus.');
     }
 
-    public function THR_Excel()
+    public function THR_Excel(Request $request)
     {
-        $tahun = Carbon::now()->year;
+        $tahun = $request->input('tahun', date('Y'));
         $data = THR_lebaran::whereYear('bulan', $tahun)
                         ->orderBy('bulan', 'asc')
                         ->get();
@@ -183,31 +183,49 @@ class THRController extends Controller
 
     public function THR_pdf(Request $request)
     {
-        $tahun = date('Y');
-        $data = THR_lebaran::whereYear('bulan', $tahun)
-                        ->get();
-        
-        $total = THR_lebaran::whereYear('bulan', $tahun)
-                        ->sum('THR');
-                        
+        $tahun = $request->input('tahun', date('Y'));
+        $data = THR_lebaran::whereYear('bulan', $tahun)->get();
+        $total = THR_lebaran::whereYear('bulan', $tahun)->sum('THR');
         $pdf = PDF::loadview('template.backend.admin.THR.pdf', ['data' => $data, 'total' => $total]);
-        return $pdf->download('THR-Karyawan-MD.pdf');
+        return $pdf->download('THR-Karyawan-MD-' . $tahun . '.pdf');
+    
+        // $tahun = date('Y');
+        // $data = THR_lebaran::whereYear('bulan', $tahun)
+        //                 ->get();
+        
+        // $total = THR_lebaran::whereYear('bulan', $tahun)
+        //                 ->sum('THR');
+                        
+        // $pdf = PDF::loadview('template.backend.admin.THR.pdf', ['data' => $data, 'total' => $total]);
+        // return $pdf->download('THR-Karyawan-MD.pdf');
     }
 
     public function Cari_THR(Request $request)
     {
         $title = 'THR Idul Fitri';
         $type = 'gaji';
-        // $user = User::all();
-        $tahun = date('Y');
-        $total = THR_lebaran::whereYear('bulan',$tahun)->sum('THR');
-        $user = THR_lebaran::whereYear('bulan',$tahun)->count();
-        $bulan = $request->input('bulan');
-        $data = THR_lebaran::where('bulan', '>=', $bulan . '-01')
-                        ->where('bulan', '<=', $bulan . '-31')
-                        ->get();
-                
-        return view ('template.backend.admin.THR.index',compact('title','type','data','total','user'));
+        $tahun = $request->input('tahun', date('Y'));
+        $total = THR_lebaran::whereYear('bulan', $tahun)->sum('THR');
+        $user = THR_lebaran::whereYear('bulan', $tahun)->count();
+        $data = THR_lebaran::whereYear('bulan', $tahun)->get();
+
+        return view('template.backend.admin.THR.index', compact('title', 'type', 'data', 'total', 'user'));
     }
 
+
+    // public function Cari_THR(Request $request)
+    // {
+    //     $title = 'THR Idul Fitri';
+    //     $type = 'gaji';
+    //     // $user = User::all();
+    //     $tahun = date('Y');
+    //     $total = THR_lebaran::whereYear('bulan',$tahun)->sum('THR');
+    //     $user = THR_lebaran::whereYear('bulan',$tahun)->count();
+    //     $bulan = $request->input('bulan');
+    //     $data = THR_lebaran::where('bulan', '>=', $bulan . '-01')
+    //                     ->where('bulan', '<=', $bulan . '-31')
+    //                     ->get();
+                
+    //     return view ('template.backend.admin.THR.index',compact('title','type','data','total','user'));
+    // }
 }

@@ -32,6 +32,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('stisla/dist/assets/css/components.css')}}">
+    <link href="{{asset('nice-admin/assets/css/bot.css')}}" rel="stylesheet">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -101,8 +102,9 @@
   <script src="{{asset('stisla/dist/assets/js/custom.js')}}"></script>
   <script src="{{asset('stisla/dist/assets/js/bundle.js')}}"></script>
   @yield('js')
-  <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-  <div class="elfsight-app-6b9aa81d-0c88-405e-8d4d-6aa922097524" data-elfsight-app-lazy></div>
+  <script src="{{asset('nice-admin/assets/js/bot.js')}}"></script>
+  <!-- <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+  <div class="elfsight-app-6b9aa81d-0c88-405e-8d4d-6aa922097524" data-elfsight-app-lazy></div> -->
 
 </body>
 

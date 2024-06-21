@@ -44,6 +44,7 @@ use App\Http\Controllers\Backend\DatasetUsgController;
 use App\Http\Controllers\Backend\DatasetEstetikaController;
 use App\Http\Controllers\Backend\WAController;
 use App\Http\Controllers\Backend\ApiDocsController;
+use App\Http\Controllers\Backend\SignaturePadController;
 
 use App\Http\Controllers\Frontend\TasklistJasaMedisController;
 use App\Http\Controllers\Frontend\ContentController;
@@ -115,6 +116,12 @@ Route::get('/home',[HomeController::class,'index'])->name('home');
 
 
 Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,evaluator']], function(){
+    Route::post('/send-message', [WAController::class, 'sendMessage'])->name('test.message');
+    Route::get('/form-message', function () {
+        return view('send');
+    });
+
+
     Route::get('/biznet',[BiznetController::class,'index'])->name('biznet.index');
     Route::post('/biznet-identify',[BiznetController::class,'identifyFace'])->name('biznet.identify');
 
@@ -440,11 +447,13 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/dataset-usg/save',[DatasetUsgController::class,'store'])->name('dataset.usg.store');
         Route::get('/dataset-usg/delete/{id}',[DatasetUsgController::class,'destroy'])->name('dataset.usg.delete');
         Route::get('/dataset-usg-cari', [DatasetUsgController::class,'Cari_Dataset_Usg'])->name('usg.cari');
+        Route::post('/dataset-usg/import',[DatasetUsgController::class,'ImportDatasetUsg'])->name('dataset.usg.import');
 
         Route::get('/dataset-Estetika',[DatasetEstetikaController::class,'index'])->name('dataset.estetika');
         Route::post('/dataset-Estetika/save',[DatasetEstetikaController::class,'store'])->name('dataset.estetika.store');
         Route::get('/dataset-Estetika/delete/{id}',[DatasetEstetikaController::class,'destroy'])->name('dataset.estetika.delete');
         Route::get('/dataset-Estetika-cari', [DatasetEstetikaController::class,'Cari_Dataset_Estetika'])->name('estetika.cari');
+        Route::post('/dataset-Estetika/import',[DatasetEstetikaController::class,'ImportDatasetEstetika'])->name('dataset.estetika.import');
 
         Route::post('/presensi/import',[PresensiController::class,'insert_excel'])->name('presensi.import');
         Route::get('/presensi/import',[PresensiController::class,'export_presensi'])->name('presensi.export');
@@ -473,6 +482,10 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/Gaji-pegawai',[PenggajianController::class,'IndexGajiPegawai'])->name('gaji.pegawai');
         Route::get('/Insentif-pegawai',[PenggajianController::class,'insentifPegawai'])->name('insentif.pegawai');
         Route::get('/skills',[HomeController::class,'skill'])->name('skill');
+        Route::get('/signature-pad', [SignaturePadController::class, 'index'])->name('signature');
+        Route::post('/signature-pad/save', [SignaturePadController::class, 'save'])->name('signpad.save');
+        Route::get('/signature-pad/{id}', [SignaturePadController::class, 'destroy'])->name('signpad.delete');
+
     });
 
     // ATUR IP ADDRESS DISINI

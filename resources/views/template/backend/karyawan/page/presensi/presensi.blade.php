@@ -15,7 +15,7 @@
     background-color: darkgreen;
     border-color: darkgreen;
   }
-  .signature-container {
+  /* .signature-container {
             display: flex;
             justify-content: space-between;
             margin-top: 50px;
@@ -27,7 +27,28 @@
         .signature-box p {
             border-top: 1px solid #000;
             margin-top: 50px;
-        }
+        } */
+        .signature-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 50px;
+
+    }
+    .signature-box {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .signature-box img {
+        display: block;
+        margin: 0 auto;
+    }
+    .signature-line {
+        border-top: 1px solid #000;
+        width: 100px;
+        margin: 5px auto;
+    }
+
 
 </style>
 
@@ -169,14 +190,29 @@
                               <p><strong>========== Have a nice day. ==========</strong></p>
                             </li>
                         </ol>
-                    </div>
-                </div>
-                <div class="signature-container">
-                    <div class="signature-box">
-                        <p>cc: Hrd/Spv</p>
-                    </div>
-                    <div class="signature-box">
-                        <p>cc: CEO/Direktur</p>
+                        <div class="signature-container">
+                            <div class="signature-box">
+                                @if ($spv)
+                                    <div>{{ $spv->name }}</div>
+                                    <div><img src="{{ asset('storage/signatures/' . $spv->signature) }}" alt="Signature" width="100"></div>
+                                    <div class="signature-line"></div>
+                                @else
+                                    <div colspan="2">not found</div>
+                                @endif
+                                <p>cc: Hrd/Spv</p>
+                            </div>
+                            <div class="signature-box">
+                                @if ($dir)
+                                    <div>{{ $dir->name }}</div>
+                                    <div><img src="{{ asset('storage/signatures/' . $dir->signature) }}" alt="Signature" width="100"></div>
+                                    <div class="signature-line"></div>
+                                @else
+                                    <div colspan="2">not found</div>
+                                @endif
+                                <p>cc: CEO/Direktur</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

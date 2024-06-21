@@ -3,7 +3,7 @@
 namespace App\Imports;
 
 use Illuminate\Support\Collection;
-use App\Models\DataseEstetika;
+use App\Models\DatasetEstetika;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;

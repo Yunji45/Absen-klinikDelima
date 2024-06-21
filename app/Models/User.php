@@ -145,4 +145,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(THR_lebaran::class);
     }
+
+    public function chat()
+    {
+        return $this->hasMany(ChatingApp::class);
+    }
 }

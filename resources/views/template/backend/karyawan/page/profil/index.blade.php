@@ -58,9 +58,11 @@
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-sertifikat">Certificate</button>
                 </li>
-
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-dokumen">Document</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-detail-pegawai">Detail Pegawai</button>
                 </li>
 
               </ul>
@@ -456,6 +458,9 @@
                     </div>
                   </form>
                   <!-- End Change Password Form -->
+
+                </div>
+                <div class="tab-pane fade pt-3" id="profile-detail-pegawai">
 
                 </div>
 

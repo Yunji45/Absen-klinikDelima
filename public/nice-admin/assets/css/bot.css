@@ -1,0 +1,127 @@
+.chat-widget {
+    position: fixed;
+    bottom: 120px;
+    right: 40px;
+    width: 300px;
+    max-height: 400px; /* Limit the height of the chat widget */
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+}
+.chat-header {
+    background: linear-gradient(to right, #008000, #008000);
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat-header h4 {
+    margin: 0;
+}
+.chat-header button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+.chat-body {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 250px; /* Ensure it doesn't exceed this height */
+}
+.chat-body .message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    word-wrap: break-word; /* Ensure long words wrap to next line */
+}
+.chat-body .message.user {
+    background: #f0f0f0;
+    text-align: right;
+}
+.chat-body .message.user::before {
+    content: "Anda: ";
+    font-weight: bold;
+}
+.chat-body .message.bot {
+    background: #e0e0e0;
+    text-align: left;
+}
+.chat-body .message.bot::before {
+    content: "System: ";
+    font-weight: bold;
+}
+.chat-footer {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+.chat-footer input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.chat-footer button {
+    background: #008000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.chat-shortcuts {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+.chat-shortcuts button {
+    background: #008000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.chat-toggle {
+    position: fixed;
+    bottom: 70px;
+    right: 50px;
+    background: #008000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: bounce 2s infinite;
+    transition: background 0.3s;
+}
+.chat-toggle img {
+    margin-right: 10px;
+}
+.chat-toggle:hover {
+    background: #00b300;
+}
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

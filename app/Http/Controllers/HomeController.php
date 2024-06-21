@@ -7,6 +7,7 @@ use App\Models\presensi;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Http\Controllers\Backend\BiznetController;
+use App\Models\SignaturePad;
 use App\Notifications\AbsensiNotification;
 use App\Notifications\AbsensiExitNotification;
 
@@ -31,37 +32,17 @@ class HomeController extends Controller
         $currentTimeInWIB = Carbon::now();
 
         $currentTimeFormatted = $currentTimeInWIB->format('Y-m-d H:i:s');
+        $spv = SignaturePad::where('name','spv')->first();
+        $dir = SignaturePad::where('name','contoh')->first();
         $present = presensi::whereUserId(auth()->user()->id)->whereTanggal(date('Y-m-d'))->first();
         $notifications = Auth::user()->notifications()
                         ->whereYear('created_at', Carbon::now()->year)
                         ->whereMonth('created_at', Carbon::now()->month)
                         ->orderBy('created_at', 'desc')->take(3)->get();
 
-        // return view('frontend.home', compact('present', 'currentTimeFormatted'));    
-        return view('template.backend.karyawan.page.presensi.presensi', compact('present', 'currentTimeFormatted','title','type','notifications'));    
+        // return $spv;
+        return view('template.backend.karyawan.page.presensi.presensi', compact('present', 'currentTimeFormatted','title','type','notifications','spv','dir'));    
 
-        // $biznetController = new BiznetController();
-
-        // // Memanggil metode identifyFace pada BiznetController
-        // $result = $biznetController->identifyFace(request());
-
-        // // Memeriksa apakah verifikasi wajah berhasil
-        // if ($result instanceof \Illuminate\Http\RedirectResponse) {
-        //     return $result;
-        // } else {
-        //     // Jika bukan objek redirect, lanjutkan dengan pemeriksaan status
-        //     if (isset($result['risetai']['status']) && $result['risetai']['status'] === "200") {
-        //         // Jika verifikasi berhasil, lanjutkan dengan tampilan home
-        //         $currentTimeInWIB = Carbon::now();
-        //         $currentTimeFormatted = $currentTimeInWIB->format('Y-m-d H:i:s');
-        //         $present = Presensi::whereUserId(auth()->user()->id)->whereTanggal(date('Y-m-d'))->first();
-        
-        //         return view('frontend.home', compact('present', 'currentTimeFormatted'));
-        //     } else {
-        //         // Jika verifikasi gagal, redirect ke /biznet
-        //         return redirect('/biznet')->with('error', 'Anda harus melewati verifikasi wajah di /biznet terlebih dahulu.');
-        //     }
-        // }
     }
 
     public function skill()

@@ -65,11 +65,15 @@ class DetailController extends Controller
         }
 
         if ($existingDetail) {
-            return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update','jumlahanak'));
+            // return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update','jumlahanak'));
+            return view('template.backend.karyawan.page.profil.detail', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update','jumlahanak'));
         } else {
             // Jika detail pegawai belum ada, tampilkan modal update profil
-            return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update','jumlahanak'))
-                ->with('showUpdateModal', true);
+            // return view('frontend.users.detail_user.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update','jumlahanak'))
+            //     ->with('showUpdateModal', true);
+            return view('template.backend.karyawan.page.profil.index', compact('title', 'data', 'detail', 'existingDetail', 'dokumen', 'sertifikat', 'update','jumlahanak'))
+            ->with('showUpdateModal', true);
+
         }
 
     

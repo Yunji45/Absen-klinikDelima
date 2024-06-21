@@ -146,6 +146,12 @@
                     <span>Setting IP Address</span>
                 </a>
             </li>
+            <li class="nav-item dropdown {{ $type === 'Signature-pad' ? 'active' : '' }}">
+                <a class="nav-link" href="{{route('signature')}}">
+                    <i class="fas fa-check"></i>
+                    <span>Signature-pad</span>
+                </a>
+            </li>
             <li class="menu-header">Layanan</li>
             <li class="nav-item dropdown {{ $type === 'jasamedis' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
@@ -185,9 +191,9 @@
                     <li class="{{ Route::currentRouteName() === 'dataset.ranap' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('dataset.ranap')}}">Rawat Inap</a>
                     </li>
-                    <li class="{{ Route::currentRouteName() === 'dataset.persalinan' ? 'active' : '' }}">
+                    <!-- <li class="{{ Route::currentRouteName() === 'dataset.persalinan' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('dataset.persalinan')}}">Persalinan</a>
-                    </li>
+                    </li> -->
                     <li class="{{ Route::currentRouteName() === 'dataset.khitan' ? 'active' : '' }}">
                         <a class="nav-link" href="{{route('dataset.khitan')}}">Khitan</a>
                     </li>
@@ -364,4 +370,32 @@
             </a>
         </div>
     </aside>
+    <button class="chat-toggle" id="toggle-chat">
+    <img src="https://img.icons8.com/ios-filled/50/FFFFFF/phone.png" width="20" height="20">
+    <strong>Live Chat</strong>
+</button>
+
+<div class="chat-widget" id="chat-widget">
+    <div class="chat-header">
+        <h4>👋 MitraHealth !</h4>
+        <button id="close-chat">✖</button>
+    </div>
+    <div class="chat-body" id="chat-body">
+        <div class="message bot">Halo! Ada yang bisa saya bantu?</div>
+    </div>
+    <div class="chat-shortcuts">
+        <button class="shortcut" data-message="IP internet error">IP Internet </button>
+        <button class="shortcut" data-message="Face ID">Face ID</button>
+        <button class="shortcut" data-message="Bye">Bye !!</button>
+        <button class="shortcut" data-message="Hallo">Hallo !!</button>
+        <button class="shortcut" data-message="Siapa kamu">Siapa Kamu?</button>
+        <button class="shortcut" data-message="Terima kasih">Thanks.</button>
+    </div>
+
+    <div class="chat-footer">
+        <input type="text" id="user-input" placeholder="Tulis pesan...">
+        <button id="send-message">Kirim</button>
+    </div>
+</div>
+
 </div>

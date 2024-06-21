@@ -13,7 +13,7 @@
     <section class="section dashboard">
       <div class="row">
               <div class="col-lg-12">
-                <div class="hero bg-success text-white">
+                <div class="hero bg-success text-white text-center">
                   <div class="hero-inner">
                     <h4 style="font-size: 36px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Welcome , {{Auth::user()->name}} !</h4>
                   </div>

@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use App\Notifications\AbsensiNotification;
+use App\Notifications\AbsensiExitNotification;
+use Carbon\Carbon;
 
 
 class UserController extends Controller
@@ -223,8 +226,13 @@ class UserController extends Controller
         $type = 'profile';
         $dokuments = DokumenUser::where('user_id',Auth::user()->id)->get();
         $sertifikat = SertifikatUser::where('user_id',Auth::user()->id)->get();
+        $notifications = Auth::user()->notifications()
+        ->whereYear('created_at', Carbon::now()->year)
+        ->whereMonth('created_at', Carbon::now()->month)
+        ->orderBy('created_at', 'desc')->take(3)->get();
+
         // return $dokumen;
-        return view('template.backend.karyawan.page.profil.index',compact('title','type','dokuments','sertifikat'));
+        return view('template.backend.karyawan.page.profil.index',compact('title','type','dokuments','sertifikat','notifications'));
     }
 
     public function updateProfil(Request $request, User $user)

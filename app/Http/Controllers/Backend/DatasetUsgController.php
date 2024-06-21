@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DatasetUsg;
 use App\Models\KodeWilayah;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\DatasetUsgImport;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -140,5 +142,27 @@ class DatasetUsgController extends Controller
                 
         return view ('template.backend.admin.dataset.lab.index',compact('title','type','data','kode'));
     }
+
+    public function ImportDatasetUsg(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = $file->hashName();
+        $path = $file->storeAs('public/dataset-usg/',$nama_file);
+        // import data
+        $import = Excel::import(new DatasetUsgImport(), storage_path('app/public/dataset-usg/'.$nama_file));
+        //remove from server
+        Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->route('dataset.usg')->with('success', 'Data Berhasil Diimport!');
+        } else {
+            //redirect
+            return redirect()->route('dataset.usg')->with('error', 'Data Gagal Diimport!');
+        }
+    }
+
 
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DatasetEstetika;
 use App\Models\KodeWilayah;
+use App\Imports\DatasetEstetikaImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -140,5 +142,27 @@ class DatasetEstetikaController extends Controller
                 
         return view ('template.backend.admin.dataset.estetika.index',compact('title','type','data','kode'));
     }
+
+    public function ImportDatasetEstetika(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = $file->hashName();
+        $path = $file->storeAs('public/dataset-estetik/',$nama_file);
+        // import data
+        $import = Excel::import(new DatasetEstetikaImport(), storage_path('app/public/dataset-estetik/'.$nama_file));
+        //remove from server
+        Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->route('dataset.estetika')->with('success', 'Data Berhasil Diimport!');
+        } else {
+            //redirect
+            return redirect()->route('dataset.estetika')->with('error', 'Data Gagal Diimport!');
+        }
+    }
+
 
 }
