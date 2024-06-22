@@ -12,6 +12,8 @@ use App\Models\NoteKaryawan;
 use App\Exports\GajiExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\AbsensiNotification;
+use App\Notifications\AbsensiExitNotification;
 use Carbon\Carbon;
 use Auth;
 use PDF;
@@ -727,11 +729,16 @@ class PenggajianController extends Controller
                         ->whereMonth('bulan', $bulan)
                         ->first();    
                         // return $gaji;
+        $notifications = Auth::user()->notifications()
+                        ->whereYear('created_at', Carbon::now()->year)
+                        ->whereMonth('created_at', Carbon::now()->month)
+                        ->orderBy('created_at', 'desc')->take(3)->get();
+
         if(!$gaji){
             return redirect()->back()->with('error','Mohon maaf, Slip Gaji Anda pada periode sekarang belum ada.');
         }
         // return view ('frontend.users.gaji.gaji',compact('title','gaji'));
-        return view ('template.backend.karyawan.page.slip.gaji',compact('type','title','gaji'));
+        return view ('template.backend.karyawan.page.slip.gaji',compact('type','title','gaji','notifications'));
     }
 
     public function insentifPegawai()
@@ -755,12 +762,17 @@ class PenggajianController extends Controller
                         ->whereMonth('bulan', $bulan)
                         ->value('resume');
                         // return $gaji;
+        $notifications = Auth::user()->notifications()
+                        ->whereYear('created_at', Carbon::now()->year)
+                        ->whereMonth('created_at', Carbon::now()->month)
+                        ->orderBy('created_at', 'desc')->take(3)->get();
+
         if(!$gaji){
             return redirect()->back()->with('error','Mohon maaf, Slip Insentif Anda pada periode sekarang belum ada.');
         }
         // return $catatan;
         // return view ('frontend.users.gaji.insentif',compact('title','gaji','kinerja','catatan'));
-        return view ('template.backend.karyawan.page.slip.insentif',compact('title','gaji','kinerja','catatan','type'));
+        return view ('template.backend.karyawan.page.slip.insentif',compact('title','gaji','kinerja','catatan','type','notifications'));
 
     }
 
