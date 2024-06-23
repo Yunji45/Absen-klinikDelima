@@ -35,6 +35,10 @@
             <i class="fa fa-download">
                 </i>Excel
         </a>
+        <a href="" class="btn btn-warning" data-toggle="modal" data-target="#import">
+                <i class="fa fa-download">
+                    </i> Import Excel
+              </a>
         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#hapussemua">
             <i class="fa fa-trash">
                 </i>Hapus Semua
@@ -1778,6 +1782,31 @@
                 </form>
             </div>
           </div>
+        </div>
+        <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">IMPORT DATA</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{route('jadwal.import')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>PILIH FILE</label>
+                                <input type="file" name="file" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
+                            <button type="submit" class="btn btn-success">IMPORT</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 <script>
     function myFunction() {

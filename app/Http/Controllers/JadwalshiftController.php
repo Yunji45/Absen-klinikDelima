@@ -14,6 +14,9 @@ use Auth;
 use Carbon\Carbon;
 use App\Notifications\AbsensiNotification;
 use App\Notifications\AbsensiExitNotification;
+use App\Imports\JadwalShiftImport;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class JadwalshiftController extends Controller
@@ -34,7 +37,6 @@ class JadwalshiftController extends Controller
         // $bulan = date('01');
         // $tahun = date('2024');
     
-        // Filter jadwal berdasarkan bulan dan tahun pada atribut 'masa_aktif'
         $data = jadwalterbaru::whereYear('masa_aktif', $tahun)
                     ->whereMonth('masa_aktif', $bulan)
                     ->get();    
@@ -171,7 +173,6 @@ class JadwalshiftController extends Controller
         $bulan = date('m');
         $tahun = date('Y');
     
-        // Filter jadwal berdasarkan bulan dan tahun pada atribut 'masa_aktif'
         $data = jadwalterbaru::whereYear('masa_aktif', $tahun)
                             ->whereMonth('masa_aktif', $bulan)
                             ->get();    
@@ -314,17 +315,14 @@ class JadwalshiftController extends Controller
         $startDate = $request->bulan;
         $endDate = $request->bulan;
 
-        // Menghitung tanggal awal dan akhir untuk bulan yang dipilih
         $tanggalawal = $tahun . '-' . $startDate . '-01';
         $tanggalakhir = date('Y-m-t', strtotime($tanggalawal));
 
-        // Mendapatkan bulan dan tahun target
         $waktuAwal = explode('-', $request->bulantarget);
         $waktuBulan = $waktuAwal[1];
         $waktuTahun = $waktuAwal[0];
         $waktuawal = $waktuTahun . '-' . $waktuBulan . '-01';
 
-        // Menghitung tanggal akhir bulan target
         $tanggalakhirTarget = date('Y-m-t', strtotime($waktuawal));
 
         $namaBulan = [
@@ -332,7 +330,6 @@ class JadwalshiftController extends Controller
             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
         ];
 
-        // Mendapatkan user IDs dengan masa aktif antara tanggalawal dan tanggalakhir
         $userIds = jadwalterbaru::where('masa_aktif', '>=', $tanggalawal)
             ->where('masa_akhir', '<=', $tanggalakhir)
             ->pluck('user_id');
@@ -517,6 +514,25 @@ class JadwalshiftController extends Controller
             return redirect()->back()->with('success', 'Semua Data Jadwal Pada Bulan Tersebut berhasil dihapus.');
         } else {
             return redirect()->back()->with('error', 'Tidak ada data Jadwal yang ditemukan untuk dihapus pada bulan tersebut.');
+        }
+    }
+
+    public function JadwalImport(Request $request)
+    {
+        $this->validate($request,[
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        $file = $request->file('file');
+        $nama = $file->hashName();
+        $path = $file -> storeAs('public/jadwal/', $nama);
+        $import = Excel::import(new JadwalShiftImport() , storage_path('app/public/jadwal/'. $nama));
+        Storage::delete($path);
+        if($import)
+        {
+            return redirect()->back()->with('success','Data Berhasil Di import.');
+        }else{
+            return redirect()->back()->with('error','Data Gagal Di import.');
         }
     }
 }

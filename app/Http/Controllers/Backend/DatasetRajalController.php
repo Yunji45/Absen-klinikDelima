@@ -152,9 +152,7 @@ class DatasetRajalController extends Controller
         $file = $request->file('file');
         $nama_file = $file->hashName();
         $path = $file->storeAs('public/dataset-rajal/',$nama_file);
-        // import data
         $import = Excel::import(new DatasetRajalImport(), storage_path('app/public/dataset-rajal/'.$nama_file));
-        //remove from server
         Storage::delete($path);
         if($import) {
             //redirect

@@ -199,6 +199,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::post('/jadwal-update/{id}',[JadwalshiftController::class,'update'])->name('jadwal.update');
         Route::post('/jadwal-multiple/save',[JadwalshiftController::class,'StoreMultipleJadwal'])->name('jadwal.multiple');
         Route::get('/jadwal-delete-all',[JadwalshiftController::class,'DestroyAllJadwal'])->name('jadwal.destroy-all');
+        Route::post('/jadwal-impirt',[JadwalshiftController::class,'JadwalImport'])->name('jadwal.import');
 
         //rubah jadwal
         Route::get('/data-permohonan',[RubahjadwalController::class,'indexAdmin'])->name('permohonan.index');
@@ -236,6 +237,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles:admin,pegawai,keuangan,hrd,
         Route::get('/THR-idul-fitri/download-excel', [THRController::class,'THR_Excel'])->name('thr.excel');
         Route::get('/THR-idul-fitri/download-pdf', [THRController::class,'THR_pdf'])->name('thr.pdf');
         Route::get('/THR-cari', [THRController::class,'Cari_THR'])->name('thr.cari');
+        Route::post('/THR-import',[THRController::class,'ImportTHR'])->name('thr.import');
 
         //UMR 
         Route::get('/index-UMR',[PenggajianController::class,'indexUMR'])->name('gaji.indexUMR');

@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Exports\THRExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
+use App\Imports\ThrImport;
 
 class THRController extends Controller
 {
@@ -212,20 +213,23 @@ class THRController extends Controller
         return view('template.backend.admin.THR.index', compact('title', 'type', 'data', 'total', 'user'));
     }
 
+    public function ImportTHR(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = $file->hashName();
+        $path = $file->storeAs('public/thr/',$nama_file);
+        $import = Excel::import(new ThrImport(), storage_path('app/public/thr/'.$nama_file));
+        Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->route('thr.idul-fitri')->with('success', 'Data Berhasil Diimport!');
+        } else {
+            //redirect
+            return redirect()->route('thr.idul-fitri')->with('error', 'Data Gagal Diimport!');
+        }
+    }
 
-    // public function Cari_THR(Request $request)
-    // {
-    //     $title = 'THR Idul Fitri';
-    //     $type = 'gaji';
-    //     // $user = User::all();
-    //     $tahun = date('Y');
-    //     $total = THR_lebaran::whereYear('bulan',$tahun)->sum('THR');
-    //     $user = THR_lebaran::whereYear('bulan',$tahun)->count();
-    //     $bulan = $request->input('bulan');
-    //     $data = THR_lebaran::where('bulan', '>=', $bulan . '-01')
-    //                     ->where('bulan', '<=', $bulan . '-31')
-    //                     ->get();
-                
-    //     return view ('template.backend.admin.THR.index',compact('title','type','data','total','user'));
-    // }
 }
