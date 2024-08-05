@@ -79,7 +79,8 @@ class DatasetRawatInapController extends Controller
         $ranap ->tgl_kunjungan = $request->tgl_kunjungan;
         $ranap ->no_rm = $request->no_rm;
         $ranap ->poli = $request->poli;
-        $ranap ->kode_wilayah = $request->kode_wilayah;
+        $ranap -> alamat = $request->alamat;
+        // $ranap ->kode_wilayah = $request->kode_wilayah;
         // return $ranap;
         $ranap ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');

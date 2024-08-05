@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->string('poli')->nullable();
-            $table->unsignedBigInteger('kode_wilayah');
-            $table->foreign('kode_wilayah')->references('id')->on('kode_wilayahs');
+            $table->text('alamat')->nullable();
+            // $table->unsignedBigInteger('kode_wilayah');
+            // $table->foreign('kode_wilayah')->references('id')->on('kode_wilayahs');
             $table->timestamps();
         });
     }

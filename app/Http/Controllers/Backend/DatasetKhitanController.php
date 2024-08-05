@@ -78,7 +78,8 @@ class DatasetKhitanController extends Controller
         $khitan ->tgl_kunjungan = $request->tgl_kunjungan;
         $khitan ->no_rm = $request->no_rm;
         $khitan ->poli = 'Khitan';
-        $khitan ->kode_wilayah = $request->kode_wilayah;
+        $khitan -> alamat = $request->alamat;
+        // $khitan ->kode_wilayah = $request->kode_wilayah;
         // return $khitan;
         $khitan ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');

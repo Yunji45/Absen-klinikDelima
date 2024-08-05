@@ -132,6 +132,8 @@
                                     <option value="cuti_bersama">Cuti Bersama</option>
                                     <option value="cuti_besar">Cuti Besar</option>
                                     <option value="cuti_melahirkan">Cuti Melahirkan</option>
+                                    <option value="cuti_menikah
+                                    ">Cuti Menikah</option>
                                 </select>
                                 @error('keterangan') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                             </div>

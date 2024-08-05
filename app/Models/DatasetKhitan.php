@@ -11,7 +11,7 @@ class DatasetKhitan extends Model
 
     protected $table = 'sunat';
     protected $primaryKey = 'id';
-    protected $fillable = ['tgl_kunjungan', 'no_rm', 'name', 'poli', 'jenis_kelamin' ,'kode_wilayah'];
+    protected $fillable = ['tgl_kunjungan', 'no_rm', 'name', 'poli', 'jenis_kelamin' ,'alamat'];
 
 
     public function wilayah()

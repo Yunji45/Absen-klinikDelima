@@ -242,7 +242,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                {{-- <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                           <h4>Top 10 Kunjungan Berdasarkan KTP </h4>
@@ -269,7 +269,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
               </div>
           </div>
         </section>

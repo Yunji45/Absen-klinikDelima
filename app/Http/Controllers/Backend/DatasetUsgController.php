@@ -76,7 +76,8 @@ class DatasetUsgController extends Controller
         $usg ->tgl_kunjungan = $request->tgl_kunjungan;
         $usg ->no_rm = $request->no_rm;
         $usg ->poli = 'USG';
-        $usg ->kode_wilayah = $request->kode_wilayah;
+        $usg -> alamat = $request->alamat;
+        // $usg ->kode_wilayah = $request->kode_wilayah;
         // return $usg;
         $usg ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');

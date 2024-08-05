@@ -76,7 +76,8 @@ class DatasetLabController extends Controller
         $lab ->tgl_kunjungan = $request->tgl_kunjungan;
         $lab ->no_rm = $request->no_rm;
         $lab ->poli = 'LABORATORIUM';
-        $lab ->kode_wilayah = $request->kode_wilayah;
+        $lab -> alamat = $request->alamat;
+        // $lab ->kode_wilayah = $request->kode_wilayah;
         // return $lab;
         $lab ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');

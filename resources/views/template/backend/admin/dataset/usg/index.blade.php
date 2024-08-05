@@ -49,7 +49,7 @@
                                     <th scope="col" class="text-center">Jenis Kelamin</th>
                                     <th scope="col" class="text-center">Poli</th>
                                     <th scope="col" class="text-center">Tgl.Kunjungan</th>
-                                    <th scope="col" class="text-center">Kode Wilayah</th>
+                                    <th scope="col" class="text-center">Alamat</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                                 @php $no =1; @endphp 
@@ -61,7 +61,7 @@
                                     <td scope="col" class="text-center">{{$item->jenis_kelamin}}</td>
                                     <td scope="col" class="text-center">{{$item->poli}}</td>
                                     <td scope="col" class="text-center">{{$item->tgl_kunjungan}}</td>
-                                    <th scope="col" class="text-center">{{$item->kode_wilayah}}</th>
+                                    <th scope="col" class="text-center">{{$item->alamat}}</th>
                                     <td scope="col" class="text-center">
                                         <a href="{{route('dataset.usg.delete',$item->id)}}" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt"> Hapus</i>
@@ -122,7 +122,15 @@
                                     @error('jenis_kelamin') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row" id="UMK">
+                                <label for="UMK" class="col-form-label col-sm-3">Alamat</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" placeholder="Masukan Alamat Pasien">
+                                    @error('UMK') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            {{-- <div class="form-group row">
                                 <label for="kode_wilayah" class="col-form-label col-sm-3">Kode Wilayah</label>
                                 <div class="col-sm-9">
                                     <select name="kode_wilayah" id="kode_wilayah" class="form-control @error('kode_wilayah') is-invalid @enderror">
@@ -133,7 +141,7 @@
                                     </select>
                                     @error('kode_wilayah') <span class="invalid-feedback" role="alert">{{ $message }}</span> @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                         <div class="modal-footer">

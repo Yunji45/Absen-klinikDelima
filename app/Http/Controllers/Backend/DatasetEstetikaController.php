@@ -76,7 +76,8 @@ class DatasetEstetikaController extends Controller
         $estetika ->tgl_kunjungan = $request->tgl_kunjungan;
         $estetika ->no_rm = $request->no_rm;
         $estetika ->poli = 'Estetika';
-        $estetika ->kode_wilayah = $request->kode_wilayah;
+        $estetika -> alamat = $request->alamat;
+        // $estetika ->kode_wilayah = $request->kode_wilayah;
         // return $estetika;
         $estetika ->save();
         return redirect()->back()->with('success','Data Berhasil Disimpan.');

@@ -202,6 +202,20 @@ class CutiController extends Controller
                     return redirect()->back()->with('error', 'Saldo cuti tahunan tidak mencukupi.');
                 }
             }
+
+            // if ($jenisIzin == 'cuti_menikah') {
+            //     $mulai = Carbon::parse($status->tanggal_mulai);
+            //     $akhir = Carbon::parse($status->tanggal_berakhir);
+        
+            //     $jumlahHari = $mulai->diffInDays($akhir) + 1; 
+        
+            //     if ($user->saldo_cuti >= $jumlahHari) {
+            //         $user->saldo_cuti -= $jumlahHari;
+            //         $user->save();
+            //     } else {
+            //         return redirect()->back()->with('error', 'Saldo cuti tahunan tidak mencukupi.');
+            //     }
+            // }
         
             $status->update(['status' => 'approve']);
             $keterangan = null;
@@ -209,6 +223,7 @@ class CutiController extends Controller
                 case 'cuti_tahunan':
                 case 'cuti_bersama':
                 case 'cuti_melahirkan':
+                case 'cuti_menikah':
                 case 'cuti_besar':
                     $keterangan = 'Cuti';
                     break;

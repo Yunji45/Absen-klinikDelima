@@ -246,26 +246,26 @@ class DashboardController extends Controller
         $perbandinganBulanIni = $this->compare_ranap($kunjunganBulanIni, $kunjunganBulanLalu);
         $perbandinganTahunIni = $this->compare_ranap($kunjunganTahunIni, $kunjunganTahunLalu);
 
-        $cacheKey = 'top_cities';
-        $topCities = Cache::remember($cacheKey, 60 * 60, function () {
-            return KodeWilayah::withCount(['rajal', 'ranap', 'khitan', 'usg', 'lab', 'estetik'])
-                ->get()
-                ->map(function ($wilayah) {
-                    $wilayah->total_kunjungan = $wilayah->rajal_count
-                        + $wilayah->ranaps_count
-                        + $wilayah->khitan_count
-                        + $wilayah->usg_count
-                        + $wilayah->lab_count
-                        + $wilayah->estetik_count;
-                    return $wilayah;
-                })
-                ->sortByDesc('total_kunjungan')
-                ->take(10)
-                ->values();
-        });
+        // $cacheKey = 'top_cities';
+        // $topCities = Cache::remember($cacheKey, 60 * 60, function () {
+        //     return KodeWilayah::withCount(['rajal', 'ranap', 'khitan', 'usg', 'lab', 'estetik'])
+        //         ->get()
+        //         ->map(function ($wilayah) {
+        //             $wilayah->total_kunjungan = $wilayah->rajal_count
+        //                 + $wilayah->ranaps_count
+        //                 + $wilayah->khitan_count
+        //                 + $wilayah->usg_count
+        //                 + $wilayah->lab_count
+        //                 + $wilayah->estetik_count;
+        //             return $wilayah;
+        //         })
+        //         ->sortByDesc('total_kunjungan')
+        //         ->take(10)
+        //         ->values();
+        // });
     
         // return $topCities;
-        return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month','data','topCities',
+        return view('template.backend.admin.dashboard.layanan',compact('title','type','sum','rajal_per_month','ranap_per_month','data',
         'kunjunganHariIni', 'kunjunganKemarin', 'kunjunganMingguIni', 'kunjunganMingguLalu', 
         'kunjunganBulanIni', 'kunjunganBulanLalu', 'kunjunganTahunIni', 'kunjunganTahunLalu',
         'perbandinganHariIni', 'perbandinganMingguIni', 'perbandinganBulanIni', 'perbandinganTahunIni'));
