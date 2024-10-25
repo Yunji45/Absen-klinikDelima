@@ -20,7 +20,7 @@ class NoteKaryawanController extends Controller
     {
         $title = 'Catatan Karyawan';
         $type = 'kpi';
-        $data = NoteKaryawan::orderBy('created_at','desc')->get();
+        $data = NoteKaryawan::orderBy('created_at',direction: 'desc')->get();
         $bulan = date('m');
         $tahun = date('Y');
         // $data = NoteKaryawan::whereYear('bulan', $tahun)
