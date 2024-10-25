@@ -38,38 +38,33 @@
               </div>
              </div>
           </div>
-          <div class="card-body p-0">
-          <div class="d-flex justify-content-end mb-4 px-4">
-        <a href="" class="btn btn-outline-primary" data-toggle="modal" data-target="#kehadiran">
-                            <i class="fa fa-plus">
-                                </i> Add
-                        </a>
+          <div class="card-body px-4">
+          <div class="d-flex justify-content-end mb-4">
+              <a href="" class="btn btn-outline-primary" data-toggle="modal" data-target="#kehadiran">
+                  <i class="fa fa-plus">
+                    </i> Add
+              </a>
           </div>
-            <div class="table-responsive px-3">
+            <div class="table-responsive">
               <table class="table table-striped table-md" id="myTable">
                 <thead>
                   <tr>
-                <th>No</th>
-                                <th>Nama</th>
-                                <th>Signature-pad</th>
-                                <th>Action</th>
-
+                      <th>No</th>
+                      <th>Nama</th>
+                      <th>Signature-pad</th>
+                      <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                  @foreach ($data as $item)
-                                <tr >
-                                  <td>{{$no++}}.</td>
-                                  <td>{{$item->name}}</td>
-                                  <td><img src="{{ asset('storage/signatures/' . $item->signature) }}" alt="Signature" width="100" height="50"></td>
-                                  <td>
-                                    <a href="{{route('signpad.delete',$item->id)}}" 
-                                    onclick="return confirm('Yakin akan hapus data ?')" 
-                                    class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a>
-                                  </td>                        
-                                </tr>
-                                @endforeach
-
+                    <tr >
+                        <td>{{$no++}}.</td>
+                        <td>{{$item->name}}</td>
+                        <td><img src="{{ asset('storage/signatures/' . $item->signature) }}" alt="Signature" width="100" height="50"></td>
+                        <td>
+                          <a href="{{route('signpad.delete',$item->id)}}" onclick="return confirm('Yakin akan hapus data ?')" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a></td>                        
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -154,9 +149,96 @@
                 }
             }
             }
+
+            function previewUser(userId) {
+              alert('Preview User ID: ' + userId);
+            } 
+
+            document.addEventListener("DOMContentLoaded", function() {
+              const rowsPerPage = 10;
+              const table = document.getElementById("myTable");
+              const tbody = table.querySelector("tbody");
+              const rows = tbody.querySelectorAll("tr");
+              const paginationContainer = document.getElementById("pagination");
+
+              if (rows.length > 0) {
+                  let currentPage = 1;
+                  const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+                  function displayPage(page) {
+                      const start = (page - 1) * rowsPerPage;
+                      const end = start + rowsPerPage;
+                      rows.forEach((row, index) => {
+                          row.style.display = (index >= start && index < end) ? "" : "none";
+                      });
+                      currentPage = page;
+                      updatePaginationButtons();
+                  }
+
+                  function setupPagination() {
+                      paginationContainer.innerHTML = ""; 
+                      const prevLi = document.createElement("li");
+                      prevLi.className = "page-item" + (currentPage === 1 ? " disabled" : "");
+                      prevLi.innerHTML = '<a class="page-link" href="#" id="prev"><i class="fas fa-chevron-left"></i></a>';
+                      prevLi.addEventListener("click", function(e) {
+                          e.preventDefault();
+                          if (currentPage > 1) {
+                              currentPage--;
+                              displayPage(currentPage);
+                          }
+                      });
+                      paginationContainer.appendChild(prevLi);
+
+                      for (let i = 1; i <= totalPages; i++) {
+                          const li = document.createElement("li");
+                          li.className = "page-item" + (i === currentPage ? " active" : "");
+                          li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                          li.addEventListener("click", function(e) {
+                              e.preventDefault();
+                              displayPage(i);
+                          });
+                          paginationContainer.appendChild(li);
+                      }
+
+                      const nextLi = document.createElement("li");
+                      nextLi.className = "page-item" + (currentPage === totalPages ? " disabled" : "");
+                      nextLi.innerHTML = '<a class="page-link" href="#" id="next"><i class="fas fa-chevron-right"></i></a>';
+                      nextLi.addEventListener("click", function(e) {
+                          e.preventDefault();
+                          if (currentPage < totalPages) {
+                              currentPage++;
+                              displayPage(currentPage);
+                          }
+                      });
+                      paginationContainer.appendChild(nextLi);
+                  }
+
+                  function updatePaginationButtons() {
+                      const pageItems = paginationContainer.getElementsByClassName("page-item");
+                      for (let item of pageItems) {
+                          item.classList.remove("active");
+                      }
+                      const activeItem = paginationContainer.children[currentPage];
+                      if (activeItem) {
+                          activeItem.classList.add("active");
+                      }
+
+                      const prevButton = document.getElementById("prev");
+                      const nextButton = document.getElementById("next");
+                      prevButton.parentElement.classList.toggle("disabled", currentPage === 1);
+                      nextButton.parentElement.classList.toggle("disabled", currentPage === totalPages);
+                  }
+
+                  setupPagination();
+                  displayPage(currentPage);
+              } else {
+                  paginationContainer.style.display = "none";
+              }
+          });
         </script>
         
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
     <script type="text/javascript">
         var sig = $('#sig').signature({syncField: '#signature', syncFormat: 'PNG'});
         $('#clear').click(function (e) {
@@ -164,89 +246,6 @@
             sig.signature('clear');
             $("#signature64").val('');
         });
-
-  function previewUser(userId) {
-    alert('Preview User ID: ' + userId);
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    const rowsPerPage = 5; // Jumlah baris per halaman
-    const table = document.getElementById("myTable");
-    const tbody = table.querySelector("tbody");
-    const rows = tbody.querySelectorAll("tr");
-    const paginationContainer = document.getElementById("pagination");
-
-    let currentPage = 1;
-    const totalPages = Math.ceil(rows.length / rowsPerPage);
-
-    function displayPage(page) {
-      const start = (page - 1) * rowsPerPage;
-      const end = start + rowsPerPage;
-      rows.forEach((row, index) => {
-        row.style.display = (index >= start && index < end) ? "" : "none";
-      });
-      currentPage = page; // Update currentPage here
-      updatePaginationButtons(); // Call to update pagination buttons
-    }
-
-    function setupPagination() {
-      paginationContainer.innerHTML = ""; 
-      const prevLi = document.createElement("li");
-      prevLi.className = "page-item" + (currentPage === 1 ? " disabled" : "");
-      prevLi.innerHTML = '<a class="page-link" href="#" id="prev"><i class="fas fa-chevron-left"></i></a>';
-      prevLi.addEventListener("click", function(e) {
-        e.preventDefault();
-        if (currentPage > 1) {
-          currentPage--;
-          displayPage(currentPage);
-        }
-      });
-      paginationContainer.appendChild(prevLi);
-
-      for (let i = 1; i <= totalPages; i++) {
-        const li = document.createElement("li");
-        li.className = "page-item" + (i === currentPage ? " active" : "");
-        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-        li.addEventListener("click", function(e) {
-          e.preventDefault();
-          displayPage(i); // Directly display the clicked page
-        });
-        paginationContainer.appendChild(li);
-      }
-
-      const nextLi = document.createElement("li");
-      nextLi.className = "page-item" + (currentPage === totalPages ? " disabled" : "");
-      nextLi.innerHTML = '<a class="page-link" href="#" id="next"><i class="fas fa-chevron-right"></i></a>';
-      nextLi.addEventListener("click", function(e) {
-        e.preventDefault();
-        if (currentPage < totalPages) {
-          currentPage++;
-          displayPage(currentPage);
-        }
-      });
-      paginationContainer.appendChild(nextLi);
-    }
-
-    function updatePaginationButtons() {
-      const pageItems = paginationContainer.getElementsByClassName("page-item");
-      for (let item of pageItems) {
-        item.classList.remove("active");
-      }
-      const activeItem = paginationContainer.children[currentPage]; // Get the current page item
-      if (activeItem) {
-        activeItem.classList.add("active");
-      }
-      
-      const prevButton = document.getElementById("prev");
-      const nextButton = document.getElementById("next");
-      prevButton.parentElement.classList.toggle("disabled", currentPage === 1);
-      nextButton.parentElement.classList.toggle("disabled", currentPage === totalPages);
-    }
-
-    setupPagination();
-    displayPage(currentPage);
-  });
-
     </script>
 
 
