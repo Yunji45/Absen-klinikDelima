@@ -86,35 +86,37 @@
 </section>
 
 
-        <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="kehadiranLabel"> Signature-pad</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                        <form method="POST" action="{{ route('signpad.save') }}">
-                            @csrf
-                            <div class="col-md-12">
-                                 <label class="" for="">Name:</label>
-                                 <input type="text" name="name" class="form-group" value="">
-                            </div>        
-                            <div class="col-md-12">
-                                <label>Signature:</label>
-                                <br/>
-                                <div id="sig"></div>
-                                <br/><br/>
-                                <button id="clear" class="btn btn-danger btn-sm">Clear</button>
-                                <textarea id="signature" name="signed" style="display: none"></textarea>
-                            </div>
-                            <br/>
-                            <button class="btn btn-primary">Save</button>
-                        </form>
-            </div>
+    <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="kehadiranLabel">Signature Pad</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <form method="POST" action="{{ route('signpad.save') }}">
+                  @csrf
+                  <div class="modal-body">
+                      <div class="form-group">
+                          <label for="name">Name:</label>
+                          <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+                      </div>
+                      <div class="form-group">
+                          <label>Signature:</label>
+                          <div id="sig" class="border rounded"></div>
+                          <button id="clear" class="btn btn-danger btn-sm mt-2">Clear</button>
+                          <textarea id="signature" name="signed" style="display: none"></textarea>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+              </form>
           </div>
-        </div>
+      </div>
+    </div>
        
         <style>
             .card-body {
@@ -126,28 +128,34 @@
                 top: 10px;
                 right: 10px;
             }
+            #sig {
+        width: 100%;
+        height: 200px;
+    }
         </style>
-        <script>
-    function myFunction() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("myTable");
-    tr = table.getElementsByTagName("tr");
 
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1]; // Ganti angka 1 dengan indeks kolom yang sesuai
-        if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-        } else {
-            tr[i].style.display = "none";
-        }
-        }
-    }
-    }
-</script>
+        <script>
+            function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1]; // Ganti angka 1 dengan indeks kolom yang sesuai
+                if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }
+            }
+            }
+        </script>
+        
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
     <script type="text/javascript">
         var sig = $('#sig').signature({syncField: '#signature', syncFormat: 'PNG'});
