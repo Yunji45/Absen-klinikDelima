@@ -13,8 +13,9 @@ class SignaturePadController extends Controller
     {
         $title= 'Signature-pad';
         $type = 'Signature-pad';
-        $data = signature::orderBy('created_at','desc')->get();
-        return view('template.backend.admin.signature-pad.index',compact('title','type','data'));
+        $data = signature::orderBy('created_at',direction: 'desc')->get();
+        $no = 1;
+        return view('template.backend.admin.signature-pad.index',compact('title','type','data', 'no'));
     }
 
     public function save(Request $request)

@@ -14,71 +14,78 @@
         }
     </style>
 <section class="section">
-          <div class="section-header">
-            <h1>{{$title}}</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item">{{$title}}</div>
-            </div>
-          </div>
-          <div class="section-header">
-                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#kehadiran">
-                    <i class="fa fa-plus">
-                        </i> Add
-                </a>
-          </div>
-
-          <div class="section-body">
-          <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>{{$title}} Table</h4>
-                    <div class="card-header-form">
-                        <div class="d-flex justify-content-between">
-                            <!-- Input Cari Nama -->
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table class="table table-bordered table-striped" id="myTable">
-                      <tr class="table-secondary">
-                          <th scope="col" class="text-center">No</th>
-                          <th scope="col" class="text-center">Nama</th>
-                          <th scope="col" class="text-center">Signature-pad</th>
-                          <th scope="col" class="text-center">Action</th>
-                        </tr>
-                        @php
-                        $no =1;
-                        @endphp
-                        @foreach ($data as $item)
-                        <tr class="table-success">
-                          <td class="text-center">{{$no++}}.</td>
-                          <td class="text-center">{{$item->name}}</td>
-                          <td class="text-center"><img src="{{ asset('storage/signatures/' . $item->signature) }}" alt="Signature" width="100" height="50"></td>
-                          <td class="text-center">
-                            <a href="{{route('signpad.delete',$item->id)}}" 
-                            onclick="return confirm('Yakin akan hapus data ?')" 
-                            class="btn btn-danger btn-sm"><i class="fas fa-edit"></i> Hapus</a>
-                          </td>                        
-                        </tr>
-                        @endforeach
-
-                      </table>
-                    </div>
-                  </div>
-                </div>
+       <div class="section-header mt-4">
+            <div>
+              <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+                <div class="breadcrumb-item">{{$title}}</div>
               </div>
+              <h1 class="mt-3">{{$title}}</h1>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3>{{$title}} Table</h3>
+            <div class="card-header-form">
+              <div class="input-group">
+              <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
+              <div class="input-group-btn">
+                  <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+              </div>
+              </div>
+             </div>
+          </div>
+          <div class="card-body p-0">
+          <div class="d-flex justify-content-end mb-4 px-4">
+        <a href="" class="btn btn-outline-primary" data-toggle="modal" data-target="#kehadiran">
+                            <i class="fa fa-plus">
+                                </i> Add
+                        </a>
+          </div>
+            <div class="table-responsive px-3">
+              <table class="table table-striped table-md" id="myTable">
+                <thead>
+                  <tr>
+                <th>No</th>
+                                <th>Nama</th>
+                                <th>Signature-pad</th>
+                                <th>Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                 @foreach ($data as $item)
+                                <tr >
+                                  <td>{{$no++}}.</td>
+                                  <td>{{$item->name}}</td>
+                                  <td><img src="{{ asset('storage/signatures/' . $item->signature) }}" alt="Signature" width="100" height="50"></td>
+                                  <td>
+                                    <a href="{{route('signpad.delete',$item->id)}}" 
+                                    onclick="return confirm('Yakin akan hapus data ?')" 
+                                    class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a>
+                                  </td>                        
+                                </tr>
+                                @endforeach
+
+                </tbody>
+              </table>
             </div>
           </div>
-        </section>
+          <div class="card-footer text-right">
+            <nav class="d-inline-block">
+              <ul class="pagination mb-0" id="pagination"></ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+
         <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -149,6 +156,89 @@
             sig.signature('clear');
             $("#signature64").val('');
         });
+
+  function previewUser(userId) {
+    alert('Preview User ID: ' + userId);
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const rowsPerPage = 5; // Jumlah baris per halaman
+    const table = document.getElementById("myTable");
+    const tbody = table.querySelector("tbody");
+    const rows = tbody.querySelectorAll("tr");
+    const paginationContainer = document.getElementById("pagination");
+
+    let currentPage = 1;
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+    function displayPage(page) {
+      const start = (page - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      rows.forEach((row, index) => {
+        row.style.display = (index >= start && index < end) ? "" : "none";
+      });
+      currentPage = page; // Update currentPage here
+      updatePaginationButtons(); // Call to update pagination buttons
+    }
+
+    function setupPagination() {
+      paginationContainer.innerHTML = ""; 
+      const prevLi = document.createElement("li");
+      prevLi.className = "page-item" + (currentPage === 1 ? " disabled" : "");
+      prevLi.innerHTML = '<a class="page-link" href="#" id="prev"><i class="fas fa-chevron-left"></i></a>';
+      prevLi.addEventListener("click", function(e) {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          displayPage(currentPage);
+        }
+      });
+      paginationContainer.appendChild(prevLi);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement("li");
+        li.className = "page-item" + (i === currentPage ? " active" : "");
+        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        li.addEventListener("click", function(e) {
+          e.preventDefault();
+          displayPage(i); // Directly display the clicked page
+        });
+        paginationContainer.appendChild(li);
+      }
+
+      const nextLi = document.createElement("li");
+      nextLi.className = "page-item" + (currentPage === totalPages ? " disabled" : "");
+      nextLi.innerHTML = '<a class="page-link" href="#" id="next"><i class="fas fa-chevron-right"></i></a>';
+      nextLi.addEventListener("click", function(e) {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+          currentPage++;
+          displayPage(currentPage);
+        }
+      });
+      paginationContainer.appendChild(nextLi);
+    }
+
+    function updatePaginationButtons() {
+      const pageItems = paginationContainer.getElementsByClassName("page-item");
+      for (let item of pageItems) {
+        item.classList.remove("active");
+      }
+      const activeItem = paginationContainer.children[currentPage]; // Get the current page item
+      if (activeItem) {
+        activeItem.classList.add("active");
+      }
+      
+      const prevButton = document.getElementById("prev");
+      const nextButton = document.getElementById("next");
+      prevButton.parentElement.classList.toggle("disabled", currentPage === 1);
+      nextButton.parentElement.classList.toggle("disabled", currentPage === totalPages);
+    }
+
+    setupPagination();
+    displayPage(currentPage);
+  });
+
     </script>
 
 
