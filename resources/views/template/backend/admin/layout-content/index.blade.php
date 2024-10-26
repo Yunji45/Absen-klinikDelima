@@ -1,13 +1,15 @@
 @extends('template.layout.app.main') 
 @section('tabel')
 <section class="section">
-          <div class="section-header">
-            <h1>{{$title}}</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item">{{$title}}</div>
-            </div>
-          </div>
+  <div class="section-header mt-4">
+    <div>
+      <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+        <div class="breadcrumb-item">{{$title}}</div>
+      </div>
+      <h1 class="mt-3">{{$title}}</h1>
+    </div>
+</div>
 
           <div class="section-body">
             <h2 class="section-title">Overview</h2>
@@ -18,7 +20,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <div class="card card-large-icons">
-                  <div class="card-icon bg-primary text-white">
+                  <div class="card-icon text-white" style="background-color: green">
                     <i class="fas fa-cog"></i>
                   </div>
                   <div class="card-body">
@@ -30,7 +32,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="card card-large-icons">
-                  <div class="card-icon bg-primary text-white">
+                  <div class="card-icon text-white" style="background-color: green">
                     <i class="fas fa-search"></i>
                   </div>
                   <div class="card-body">
@@ -42,7 +44,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="card card-large-icons">
-                  <div class="card-icon bg-primary text-white">
+                  <div class="card-icon text-white" style="background-color: green">
                     <i class="fas fa-envelope"></i>
                   </div>
                   <div class="card-body">
@@ -54,7 +56,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="card card-large-icons">
-                  <div class="card-icon bg-primary text-white">
+                  <div class="card-icon text-white" style="background-color: green">
                     <i class="fas fa-power-off"></i>
                   </div>
                   <div class="card-body">
@@ -66,7 +68,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="card card-large-icons">
-                  <div class="card-icon bg-primary text-white">
+                  <div class="card-icon text-white" style="background-color: green"> 
                     <i class="fas fa-lock"></i>
                   </div>
                   <div class="card-body">
@@ -78,7 +80,7 @@
               </div>
               <div class="col-lg-6">
                 <div class="card card-large-icons">
-                  <div class="card-icon bg-primary text-white">
+                  <div class="card-icon text-white" style="background-color: green">
                     <i class="fas fa-stopwatch"></i>
                   </div>
                   <div class="card-body">
