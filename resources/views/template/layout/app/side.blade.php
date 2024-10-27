@@ -363,12 +363,13 @@
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a
-                href="{{route('daftar-hadir')}}"
-                class="btn btn-primary btn-lg btn-block btn-icon-split">
+                href="{{ route('daftar-hadir') }}"
+                class="btn btn-light btn-lg btn-block btn-icon-split">
                 <i class="fas fa-rocket"></i>
                 Home
             </a>
         </div>
+        
     </aside>
     <button class="chat-toggle" id="toggle-chat">
     <img src="https://img.icons8.com/ios-filled/50/FFFFFF/phone.png" width="20" height="20">

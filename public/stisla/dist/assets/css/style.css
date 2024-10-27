@@ -2676,7 +2676,7 @@ body.layout-3 .main-footer {
           color: #f2f2f2;
           background-color: #ffffff6e; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li.active > a {
-        color: #6777ef;
+        color: #0d0f1d;
         font-weight: 600; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li a i {
         margin-top: 1px;
@@ -2725,7 +2725,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a {
   position: relative; }
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-menu li a {
   padding-left: 61px;
-  background-color: #fff; }
+  background-color: #008000; }
 
 @media (max-width: 1024px) {
   .sidebar-gone-hide {
