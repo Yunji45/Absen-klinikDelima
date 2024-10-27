@@ -2,85 +2,97 @@
 
 @section('tabel')
 <section class="section">
-          <div class="section-header">
-            <h1>{{$title}}</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item">{{$title}}</div>
-            </div>
-          </div>
+  <div class="section-header mt-4">
+    <div>
+      <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+        <div class="breadcrumb-item">{{$title}}</div>
+      </div>
+      <h1 class="mt-3">{{$title}}</h1>
+    </div>
+  </div>
 
-          <div class="section-body">
-          <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>{{$title}} Table</h4>
-                      <div class="card-header-form">
-                        <div class="buttons">
-                          <a href="{{route('target.kpi.create')}}" class="btn btn-primary"><i class="fa fa-plus"> Add</i></a>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                      <tr>
-                          <th scope="col" class="text-center">No</th>
-                          <th scope="col" class="text-center">Nama Target</th>
-                          <th scope="col" class="text-center">Periode</th>
-                          <th scope="col" class="text-center">Pendaftar</th>
-                          <th scope="col" class="text-center">Poli</th>
-                          <th scope="col" class="text-center">Farmasi</th>
-                          <th scope="col" class="text-center">Kasir</th>
-                          <th scope="col" class="text-center">Home Care</th>
-                          <th scope="col" class="text-center">Bpjs</th>
-                          <th scope="col" class="text-center">Khitan</th>
-                          <th scope="col" class="text-center">Rawat Inap</th>
-                          <th scope="col" class="text-center">Persalinan</th>
-                          <th scope="col" class="text-center">Lab</th>
-                          <th scope="col" class="text-center">Umum</th>
-                          <th scope="col" class="text-center">Visit Dokter</th>
-                          <th scope="col" class="text-center">Action</th>
-                        </tr>
-                        @php
-                        $no =1;
-                        @endphp
-                        @foreach ($target as $item)
-                        <tr>
-                          <td class="text-center">{{$no++}}.</td>
-                          <td class="text-center">{{$item->name}}</td>
-                          <td class="text-center">{{date('m-Y', strtotime($item->start_date))}} s/d {{date('m-Y', strtotime($item->end_date))}}</td>
-                          <td class="text-center">{{$item->daftar}}</td>
-                          <td class="text-center">{{$item->poli}}</td>
-                          <td class="text-center">{{$item->farmasi}}</td>
-                          <td class="text-center">{{$item->kasir}}</td>
-                          <td class="text-center">{{$item->care}}</td>
-                          <td class="text-center">{{$item->bpjs}}</td>
-                          <td class="text-center">{{$item->khitan}}</td>
-                          <td class="text-center">{{$item->rawat}}</td>
-                          <td class="text-center">{{$item->salin}}</td>
-                          <td class="text-center">{{$item->lab}}</td>
-                          <td class="text-center">{{$item->umum}}</td>
-                          <td class="text-center">{{$item->visit}}</td>
-                          <td>
-                          <a href="{{route('target.kpi.edit',$item->id)}}" 
-                            onclick="return confirm('Yakin akan edit Data ?')" 
-                            class="btn btn-success btn-sm"><i class="fas fa-edit"></i>Edit</a>
-
-                            <a href="{{route('target.kpi.delete',$item->id)}}" 
-                            onclick="return confirm('Yakin akan dihapus?')" 
-                            class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Hapus</a>
-                          </td>      
-                    </tr>
-                        @endforeach
-                      </table>
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>{{$title}} Table</h3>
+        </div>
+        <div class="card-body px-4">
+        <div class="d-flex justify-content-end mb-4">
+            <a href="{{route('target.kpi.create')}}" class="btn btn-outline-primary">
+                <i class="fa fa-plus">
+                  </i> Add
+            </a>
+        </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-md" id="myTable">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama Target</th>
+                  <th>Periode</th>
+                  <th>Pendaftar</th>
+                  <th>Poli</th>
+                  <th>Farmasi</th>
+                  <th>Kasir</th>
+                  <th>Home Care</th>
+                  <th>Bpjs</th>
+                  <th>Khitan</th>
+                  <th>Rawat Inap</th>
+                  <th>Persalinan</th>
+                  <th>Lab</th>
+                  <th>Umum</th>
+                  <th>Visit Dokter</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @php
+                $no =1;
+                @endphp
+                @foreach ($target as $item)
+                <tr>
+                  <td>{{$no++}}.</td>
+                  <td>{{$item->name}}</td>
+                  <td>{{date('m-Y', strtotime($item->start_date))}} s/d {{date('m-Y', strtotime($item->end_date))}}</td>
+                  <td>{{$item->daftar}}</td>
+                  <td>{{$item->poli}}</td>
+                  <td>{{$item->farmasi}}</td>
+                  <td>{{$item->kasir}}</td>
+                  <td>{{$item->care}}</td>
+                  <td>{{$item->bpjs}}</td>
+                  <td>{{$item->khitan}}</td>
+                  <td>{{$item->rawat}}</td>
+                  <td>{{$item->salin}}</td>
+                  <td>{{$item->lab}}</td>
+                  <td>{{$item->umum}}</td>
+                  <td>{{$item->visit}}</td>
+                  <td>
+                    <div class="d-flex gap-2">
+                      <a href="{{route('target.kpi.edit',$item->id)}}" 
+                        onclick="return confirm('Yakin akan edit Data ?')" 
+                        class="btn btn-outline-success btn-sm"><i class="fas fa-edit"></i>Edit</a>
+    
+                        <a href="{{route('target.kpi.delete',$item->id)}}" 
+                        onclick="return confirm('Yakin akan dihapus?')" 
+                        class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i>Hapus</a>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  </td>      
+            </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
+        </div>
+        <div class="card-footer text-right">
+          <nav class="d-inline-block">
+            <ul class="pagination mb-0" id="pagination"></ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
         </section>
         <style>
             .card-body {
@@ -93,6 +105,8 @@
                 right: 10px;
             }
         </style>
+
+        
             <script>
         $(document).ready(function () {
             $("#closeModalBtn").click(function () {
@@ -135,6 +149,92 @@
                 return 'Rp ' + hasil;
             }
         });
+
+        function previewUser(userId) {
+              alert('Preview User ID: ' + userId);
+            } 
+
+            document.addEventListener("DOMContentLoaded", function() {
+              const rowsPerPage = 10;
+              const table = document.getElementById("myTable");
+              const tbody = table.querySelector("tbody");
+              const rows = tbody.querySelectorAll("tr");
+              const paginationContainer = document.getElementById("pagination");
+
+              if (rows.length > 0) {
+                  let currentPage = 1;
+                  const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+                  function displayPage(page) {
+                      const start = (page - 1) * rowsPerPage;
+                      const end = start + rowsPerPage;
+                      rows.forEach((row, index) => {
+                          row.style.display = (index >= start && index < end) ? "" : "none";
+                      });
+                      currentPage = page;
+                      updatePaginationButtons();
+                  }
+
+                  function setupPagination() {
+                      paginationContainer.innerHTML = ""; 
+                      const prevLi = document.createElement("li");
+                      prevLi.className = "page-item" + (currentPage === 1 ? " disabled" : "");
+                      prevLi.innerHTML = '<a class="page-link" href="#" id="prev"><i class="fas fa-chevron-left"></i></a>';
+                      prevLi.addEventListener("click", function(e) {
+                          e.preventDefault();
+                          if (currentPage > 1) {
+                              currentPage--;
+                              displayPage(currentPage);
+                          }
+                      });
+                      paginationContainer.appendChild(prevLi);
+
+                      for (let i = 1; i <= totalPages; i++) {
+                          const li = document.createElement("li");
+                          li.className = "page-item" + (i === currentPage ? " active" : "");
+                          li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                          li.addEventListener("click", function(e) {
+                              e.preventDefault();
+                              displayPage(i);
+                          });
+                          paginationContainer.appendChild(li);
+                      }
+
+                      const nextLi = document.createElement("li");
+                      nextLi.className = "page-item" + (currentPage === totalPages ? " disabled" : "");
+                      nextLi.innerHTML = '<a class="page-link" href="#" id="next"><i class="fas fa-chevron-right"></i></a>';
+                      nextLi.addEventListener("click", function(e) {
+                          e.preventDefault();
+                          if (currentPage < totalPages) {
+                              currentPage++;
+                              displayPage(currentPage);
+                          }
+                      });
+                      paginationContainer.appendChild(nextLi);
+                  }
+
+                  function updatePaginationButtons() {
+                      const pageItems = paginationContainer.getElementsByClassName("page-item");
+                      for (let item of pageItems) {
+                          item.classList.remove("active");
+                      }
+                      const activeItem = paginationContainer.children[currentPage];
+                      if (activeItem) {
+                          activeItem.classList.add("active");
+                      }
+
+                      const prevButton = document.getElementById("prev");
+                      const nextButton = document.getElementById("next");
+                      prevButton.parentElement.classList.toggle("disabled", currentPage === 1);
+                      nextButton.parentElement.classList.toggle("disabled", currentPage === totalPages);
+                  }
+
+                  setupPagination();
+                  displayPage(currentPage);
+              } else {
+                  paginationContainer.style.display = "none";
+              }
+          });
     </script>
 
 @endsection
