@@ -27,14 +27,20 @@
                     <form action="{{route('search.omset')}}" method="get">
                         @csrf
                         <div class="input-group">
-                        <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
+                        <input type="month" class="form-control" name="tahun" id="tahun" placeholder="Search Tahun" value="{{ request('tahun', date('Y')) }}">
                         <div class="input-group-btn">
                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
                         </div>
                     </form>
-                    
+                    <div class="input-group mt-3">
+                        <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                        </div>
                    </div>
+                   
                 </div>
                 <div class="card-body px-4">
                 <div class="d-flex justify-content-end mb-4">
