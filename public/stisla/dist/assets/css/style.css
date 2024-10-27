@@ -649,48 +649,48 @@ select.form-control:not([size]):not([multiple]) {
       border-radius: 30px; }
       .card .card-header .form-control + .input-group-btn .btn {
         margin-top: -1px; }
-    .card .card-header h4 {
-      font-size: 16px;
+    .card .card-header h3 {
+      font-size: 24px;
       line-height: 28px;
       padding-right: 10px;
       margin-bottom: 0; }
-      .card .card-header h4 + .card-header-action,
-      .card .card-header h4 + .card-header-form {
+      .card .card-header h3 + .card-header-action,
+      .card .card-header h3 + .card-header-form {
         margin-left: auto; }
-        .card .card-header h4 + .card-header-action .btn,
-        .card .card-header h4 + .card-header-form .btn {
+        .card .card-header h3 + .card-header-action .btn,
+        .card .card-header h3 + .card-header-form .btn {
           font-size: 12px;
           border-radius: 30px !important;
           padding-left: 13px !important;
           padding-right: 13px !important; }
-          .card .card-header h4 + .card-header-action .btn.active,
-          .card .card-header h4 + .card-header-form .btn.active {
+          .card .card-header h3 + .card-header-action .btn.active,
+          .card .card-header h3 + .card-header-form .btn.active {
             box-shadow: 0 2px 6px #acb5f6;
             background-color: #6777ef;
             color: #fff; }
-        .card .card-header h4 + .card-header-action .dropdown,
-        .card .card-header h4 + .card-header-form .dropdown {
+        .card .card-header h3 + .card-header-action .dropdown,
+        .card .card-header h3 + .card-header-form .dropdown {
           display: inline; }
-        .card .card-header h4 + .card-header-action .btn-group .btn,
-        .card .card-header h4 + .card-header-form .btn-group .btn {
+        .card .card-header h3 + .card-header-action .btn-group .btn,
+        .card .card-header h3 + .card-header-form .btn-group .btn {
           border-radius: 0 !important; }
-        .card .card-header h4 + .card-header-action .btn-group .btn:first-child,
-        .card .card-header h4 + .card-header-form .btn-group .btn:first-child {
+        .card .card-header h3 + .card-header-action .btn-group .btn:first-child,
+        .card .card-header h3 + .card-header-form .btn-group .btn:first-child {
           border-radius: 30px 0 0 30px !important; }
-        .card .card-header h4 + .card-header-action .btn-group .btn:last-child,
-        .card .card-header h4 + .card-header-form .btn-group .btn:last-child {
+        .card .card-header h3 + .card-header-action .btn-group .btn:last-child,
+        .card .card-header h3 + .card-header-form .btn-group .btn:last-child {
           border-radius: 0 30px 30px 0 !important; }
-        .card .card-header h4 + .card-header-action .input-group .form-control,
-        .card .card-header h4 + .card-header-form .input-group .form-control {
+        .card .card-header h3 + .card-header-action .input-group .form-control,
+        .card .card-header h3 + .card-header-form .input-group .form-control {
           border-radius: 30px 0 0 30px !important; }
-          .card .card-header h4 + .card-header-action .input-group .form-control + .input-group-btn .btn,
-          .card .card-header h4 + .card-header-form .input-group .form-control + .input-group-btn .btn {
+          .card .card-header h3 + .card-header-action .input-group .form-control + .input-group-btn .btn,
+          .card .card-header h3 + .card-header-form .input-group .form-control + .input-group-btn .btn {
             border-radius: 0 30px 30px 0 !important; }
-        .card .card-header h4 + .card-header-action .input-group .input-group-btn + .form-control,
-        .card .card-header h4 + .card-header-form .input-group .input-group-btn + .form-control {
+        .card .card-header h3 + .card-header-action .input-group .input-group-btn + .form-control,
+        .card .card-header h3 + .card-header-form .input-group .input-group-btn + .form-control {
           border-radius: 0 30px 30px 0 !important; }
-        .card .card-header h4 + .card-header-action .input-group .input-group-btn .btn,
-        .card .card-header h4 + .card-header-form .input-group .input-group-btn .btn {
+        .card .card-header h3 + .card-header-action .input-group .input-group-btn .btn,
+        .card .card-header h3 + .card-header-form .input-group .input-group-btn .btn {
           margin-top: -1px;
           border-radius: 30px 0 0 30px !important; }
   .card .card-footer {
@@ -1501,6 +1501,7 @@ h6 .badge {
 
 /* 3.18 Navbar */
 .navbar {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   height: 70px;
   left: 250px;
   right: 5px;
@@ -1518,7 +1519,7 @@ h6 .badge {
   left: 0;
   width: 100%;
   height: 115px;
-  background-color: #6777ef;
+  background-color: #fff;
   z-index: -1; }
 
 .navbar {
@@ -2322,7 +2323,7 @@ pre {
   top: 0;
   height: 100%;
   width: 250px;
-  background-color: #fff;
+  background-color: #008000;
   z-index: 880;
   left: 0; }
 
@@ -2586,8 +2587,9 @@ body.layout-3 .main-footer {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-weight: 700;
-    color: #000; }
+    font-weight: 900;
+    font-size: 15px;
+    color: #ffffff; }
 .main-sidebar .sidebar-user {
   display: inline-block;
   width: 100%;
@@ -2606,11 +2608,11 @@ body.layout-3 .main-footer {
     display: block; }
     .main-sidebar .sidebar-menu li.menu-header {
       padding: 3px 15px;
-      color: #bcc1c6;
-      font-size: 10px;
+      color: #fcfcfc;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 1.3px;
-      font-weight: 600; }
+      font-weight: 800; }
       .main-sidebar .sidebar-menu li.menu-header:not(:first-child) {
         margin-top: 10px; }
     .main-sidebar .sidebar-menu li a {
@@ -2621,7 +2623,7 @@ body.layout-3 .main-footer {
       padding: 0 20px;
       width: 100%;
       letter-spacing: .3px;
-      color: #868e96;
+      color: #ffffff;
       text-decoration: none; }
       .main-sidebar .sidebar-menu li a .badge {
         float: right;
@@ -2635,13 +2637,13 @@ body.layout-3 .main-footer {
         margin-top: 3px;
         width: 100%; }
       .main-sidebar .sidebar-menu li a:hover {
-        background-color: #fcfcfd; }
+        background-color: #fcfcfdb6; }
     .main-sidebar .sidebar-menu li.active a {
-      color: #6777ef;
+      color: #000000;
       font-weight: 600;
       background-color: #fcfcfd; }
     .main-sidebar .sidebar-menu li.active ul.dropdown-menu {
-      background-color: #fcfcfd; }
+      background-color: #fcfdfc; }
     .main-sidebar .sidebar-menu li a.has-dropdown:after {
       content: "";
       font-family: 'Font Awesome 5 Free';
@@ -2664,17 +2666,17 @@ body.layout-3 .main-footer {
       float: none;
       width: 100%;
       box-shadow: none;
-      background-color: transparent; }
+      background-color: #008000; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
-        color: #868e96;
+        color: #fefeff;
         height: 35px;
         padding-left: 65px;
         font-weight: 400; }
         .main-sidebar .sidebar-menu li ul.dropdown-menu li a:hover {
-          color: #6777ef;
-          background-color: inherit; }
+          color: #f2f2f2;
+          background-color: #ffffff6e; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li.active > a {
-        color: #6777ef;
+        color: #0d0f1d;
         font-weight: 600; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li a i {
         margin-top: 1px;
@@ -2719,20 +2721,11 @@ body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu li.active ul.dropdown-men
 
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a {
   padding-left: 16px;
-  background-color: transparent;
+  background-color: #fff;
   position: relative; }
-  body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 25px;
-    width: 4px;
-    background-color: #6777ef; }
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-menu li a {
   padding-left: 61px;
-  background-color: #fff; }
+  background-color: #008000; }
 
 @media (max-width: 1024px) {
   .sidebar-gone-hide {

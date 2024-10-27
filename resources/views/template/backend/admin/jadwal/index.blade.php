@@ -1,23 +1,38 @@
 @extends('template.layout.app.main') 
 @section('tabel')
 <section class="section">
-    <div class="section-header">
-        <h1>{{$title}}</h1>
-        <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active">
-                <a href="#">Dashboard</a>
-            </div>
+    <div class="section-header mt-4">
+        <div>
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
             <div class="breadcrumb-item">{{$title}}</div>
+          </div>
+          <h1 class="mt-3">{{$title}}</h1>
         </div>
-    </div>
-    <div class="section-header">
-        <!-- <a href="" class="btn btn-primary" data-toggle="modal" data-target="#kehadiran">
-            <i class="fa fa-plus">
-                Add</i>
-        </a> -->
-        <button
+      </div>
+    
+    <div class="row mt-5">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3>{{$title}} Table</h3>
+              <div class="card-header-form">
+                <form action="{{route('search.kpi')}}" method="get">
+                    @csrf
+                    <div class="input-group">
+                    <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                    </div>
+                </form>
+               </div>
+            </div>
+            <div class="card-body px-4">
+                <div class="d-flex justify-content-end mb-4 gap-2">
+                    <button
             type="button"
-            class="btn btn-primary dropdown-toggle"
+            class="btn btn-outline-primary dropdown-toggle"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false">
@@ -28,1104 +43,1079 @@
             <a class="dropdown-item" data-toggle="modal" data-target="#kehadiran">Add Normal</a>
             <a class="dropdown-item" data-toggle="modal" data-target="#update">Add Multiple</a>
         </div>
-        <a href="{{ route('download.jadwal', ['bulan' => request('bulan', date('Y-m'))]) }}" class="btn btn-danger">
+        <a href="{{ route('download.jadwal', ['bulan' => request('bulan', date('Y-m'))]) }}" class="btn btn-outline-danger">
             <i class="fa fa-download"></i> PDF
         </a>
-        <a href="" class="btn btn-success">
+        <a href="" class="btn btn-outline-success">
             <i class="fa fa-download">
                 </i>Excel
         </a>
-        <a href="" class="btn btn-warning" data-toggle="modal" data-target="#import">
+        <a href="" class="btn btn-outline-warning" data-toggle="modal" data-target="#import">
                 <i class="fa fa-download">
                     </i> Import Excel
               </a>
-        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#hapussemua">
+        <a href="" class="btn btn-outline-danger" data-toggle="modal" data-target="#hapussemua">
             <i class="fa fa-trash">
                 </i>Hapus Semua
         </a>
-        <div class="section-header-breadcrumb">
-
-            <div class="input-group" style="width: 200px;">
-                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
-                <div class="input-group-append">
-                <div class="input-group-append">
-                    <span class="input-group-text"><i class="fas fa-search"></i></span>
-                </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    
-    <div class="section-body">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>{{$title}} Table</h4>
-                        <div class="card-header-form">
-                            <form action="{{route('cari.jadwal')}}" method="get">
-                                @csrf
-                                <div class="input-group">
-                                <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                </div>
-                                </div>
-                            </form>
+                    <div class="input-group" style="width: 200px; height: 38px;">
+                        <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
                         </div>
                     </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <div class="table-container table-striped" id="myTable">
-                                <table border="1" style="text-align: center;">
-                                    <caption>
-                                        <p>PERHATIAN !!!</p>
-                                        <p>Hijau = Tukar Jaga & Merah = Ganti Jaga</p>
-                                    </caption>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <div class="table-container table-striped" id="myTable">
+                        <table border="1" style="text-align: center;">
+                            <caption>
+                                <p>PERHATIAN !!!</p>
+                                <p>Hijau = Tukar Jaga & Merah = Ganti Jaga</p>
+                            </caption>
 
-                                    <tr>
-                                        <th rowspan="2" bgcolor="yellow">NO</th>
-                                        <th rowspan="2" bgcolor="yellow">Nama Pegawai</th>
-                                        <th colspan="32" bgcolor="#00ff80" style="text-align: center;">JADWAL JAGA KLINIK Mitra Delima</th>
-                                    </tr>
-                                    <tr>
-                                        @for ($i = 1; $i <= 31; $i++)
-                                        <th>{{ $i }}</th>
-                                        @endfor
-                                        <th>Action</th>
+                            <tr>
+                                <th rowspan="2" bgcolor="yellow">NO</th>
+                                <th rowspan="2" bgcolor="yellow">Nama Pegawai</th>
+                                <th colspan="32" bgcolor="#00ff80" style="text-align: center;">JADWAL JAGA KLINIK Mitra Delima</th>
+                            </tr>
+                            <tr>
+                                @for ($i = 1; $i <= 31; $i++)
+                                <th>{{ $i }}</th>
+                                @endfor
+                                <th>Action</th>
 
-                                    </tr>
-                                    @php $no =1; @endphp @if($data->isEmpty())
-                                    <tr>
-                                        <td colspan="34" style="text-align: center; font-size: 14px;">Tidak ada data yang tersedia</td>
-                                    </tr>
-                                    @else @foreach ($data as $item)
-                                    <tr>
-                                        <td style="text-align: center; font-size: 14px;">{{$no++}}.</td>
-                                        <td style="text-align: center; font-size: 9px;">{{$item->user->name}}</td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                            </tr>
+                            @php $no =1; @endphp @if($data->isEmpty())
+                            <tr>
+                                <td colspan="34" style="text-align: center; font-size: 14px;">Tidak ada data yang tersedia</td>
+                            </tr>
+                            @else @foreach ($data as $item)
+                            <tr>
+                                <td style="text-align: center; font-size: 14px;">{{$no++}}.</td>
+                                <td style="text-align: center; font-size: 9px;">{{$item->user->name}}</td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 1)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j1}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j1}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 1)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j1}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j1}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j1}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j1}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 2)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j2}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j2}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 2)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j2}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j2}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j2}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j2}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 3)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j3}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j3}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 3)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j3}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j3}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j3}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j3}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                                @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 4)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j4}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j4}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                        @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 4)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j4}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j4}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j4}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j4}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 5)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j5}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j5}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 5)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j5}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j5}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j5}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j5}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 6)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j6}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j6}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 6)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j6}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j6}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j6}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j6}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 7)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j7}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j7}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 7)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j7}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j7}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j7}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j7}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 8)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j8}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j8}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 8)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j8}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j8}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j8}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j8}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 9)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j9}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j9}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 9)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j9}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j9}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j9}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j9}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 10)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j10}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j10}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 10)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j10}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j10}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j10}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j10}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 11)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j11}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j11}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 11)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j11}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j11}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j11}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;" >
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j11}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;" >
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 12)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j12}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j12}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 12)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j12}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j12}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j12}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j12}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 13)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j13}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j13}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 13)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j13}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j13}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j13}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j13}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 14)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j14}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j14}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 14)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j14}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j14}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j14}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j14}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 15)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j15}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j15}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 15)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j15}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j15}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j15}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j15}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 16)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j16}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j16}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 16)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j16}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j16}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j16}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j16}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 17)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j17}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j17}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 17)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j17}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j17}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j17}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j17}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 18)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j18}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j18}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 18)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j18}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j18}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j18}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j18}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 19)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j19}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j19}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 19)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j19}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j19}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j19}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j19}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 20)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j20}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j20}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 20)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j20}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j20}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j20}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j20}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 21)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j21}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j21}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 21)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j21}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j21}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j21}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j21}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 22)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j22}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j22}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 22)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j22}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j22}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j22}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j22}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 23)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j23}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j23}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 23)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j23}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j23}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j23}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j23}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 24)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j24}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j24}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 24)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j24}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j24}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j24}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j24}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 25)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j25}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j25}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 25)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j25}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j25}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j25}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j25}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 26)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j26}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j26}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 26)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j26}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j26}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j26}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j26}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 27)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j27}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j27}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 27)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j27}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j27}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j27}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j27}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 28)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j28}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j28}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 28)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j28}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j28}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j28}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j28}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 29)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j29}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j29}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 29)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j29}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j29}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j29}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j29}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 30)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j30}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j30}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 30)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j30}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j30}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j30}}
                                         @endif
-                                        </td>
-                                        <td style="text-align: center; font-size: 14px;">
-                                        @php
-                                        $hasApproved = false;
-                                        @endphp
+                                    @endif
+                                @endforeach
 
-                                        @foreach ($item->user->permohonan as $permohonan)
-                                            @php
-                                            $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
-                                            $currentDate = \Carbon\Carbon::now();
-                                            @endphp
+                                @if (!$hasApproved)
+                                    {{$item->j30}}
+                                @endif
+                                </td>
+                                <td style="text-align: center; font-size: 14px;">
+                                @php
+                                $hasApproved = false;
+                                @endphp
 
-                                            @if ($permohonan->status === 'approve')
-                                            @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
-                                                    @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 31)
-                                                        @if ($permohonan->permohonan === 'ganti_jaga')
-                                                            <span class="bg-merah">{{$item->j31}}</span>
-                                                        @elseif ($permohonan->permohonan === 'tukar_jaga')
-                                                            <span class="bg-hijau">{{$item->j31}}</span>
-                                                        @endif
-                                                        @php
-                                                        $hasApproved = true;
-                                                        break;
-                                                        @endphp
-                                                    @endif
+                                @foreach ($item->user->permohonan as $permohonan)
+                                    @php
+                                    $permohonanDate = \Carbon\Carbon::parse($permohonan->tanggal);
+                                    $currentDate = \Carbon\Carbon::now();
+                                    @endphp
+
+                                    @if ($permohonan->status === 'approve')
+                                    @if (($permohonan->permohonan === 'ganti_jaga') || ($permohonan->permohonan === 'tukar_jaga' ))
+                                            @if ($permohonanDate->isSameMonth($currentDate) && $permohonanDate->day === 31)
+                                                @if ($permohonan->permohonan === 'ganti_jaga')
+                                                    <span class="bg-merah">{{$item->j31}}</span>
+                                                @elseif ($permohonan->permohonan === 'tukar_jaga')
+                                                    <span class="bg-hijau">{{$item->j31}}</span>
                                                 @endif
+                                                @php
+                                                $hasApproved = true;
+                                                break;
+                                                @endphp
                                             @endif
-                                        @endforeach
-
-                                        @if (!$hasApproved)
-                                            {{$item->j31}}
                                         @endif
-                                        </td>
-                                        <td class="button-container">
-                                            <a
-                                                href="{{route('jadwal.edit',$item->id)}}"
-                                                class="btn btn-sm btn-success"
-                                                title="{{$title}}"
-                                            >
-                                                <i class="fas fa-edit">
-                                                    </i>
-                                            </a>
+                                    @endif
+                                @endforeach
 
-                                            <a
-                                                href="{{ route('jadwal.hapus',$item->id)}}"
-                                                class="btn btn-sm btn-danger"
-                                                title="{{$title}}"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')">
-                                                <i class="fas fa-trash">
-                                                    </i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    @endforeach @endif
+                                @if (!$hasApproved)
+                                    {{$item->j31}}
+                                @endif
+                                </td>
+                                <td class="button-container">
+                                    <a
+                                        href="{{route('jadwal.edit',$item->id)}}"
+                                        class="btn btn-sm btn-success"
+                                        title="{{$title}}"
+                                    >
+                                        <i class="fas fa-edit">
+                                            </i>
+                                    </a>
 
-                                </table>                        
-                            </div>
-                        </div>
+                                    <a
+                                        href="{{ route('jadwal.hapus',$item->id)}}"
+                                        class="btn btn-sm btn-danger"
+                                        title="{{$title}}"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')">
+                                        <i class="fas fa-trash">
+                                            </i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach @endif
+
+                        </table>                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+        </div>
+      </div>
 </section>
 <div class="modal fade" id="kehadiran" tabindex="-1" role="dialog" aria-labelledby="kehadiranLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
