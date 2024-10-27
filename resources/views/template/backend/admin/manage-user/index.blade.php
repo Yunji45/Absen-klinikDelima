@@ -71,7 +71,7 @@
               </div>
              </div>
           </div>
-          <div class="card-body p-0">
+          <div class="card-body px-4">
           <div class="d-flex justify-content-end mb-4">
             <a href="{{ route('users.create') }}" class="btn btn-outline-primary mr-2">
               <i class="fa fa-plus">
@@ -86,7 +86,7 @@
                       Excel</i>
               </a>
           </div>
-            <div class="table-responsive px-3">
+            <div class="table-responsive">
               <table class="table table-striped table-md" id="myTable">
                 <thead>
                   <tr>
@@ -149,7 +149,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function() {
-    const rowsPerPage = 5; // Jumlah baris per halaman
+    const rowsPerPage = 10; // Jumlah baris per halaman
     const table = document.getElementById("myTable");
     const tbody = table.querySelector("tbody");
     const rows = tbody.querySelectorAll("tr");

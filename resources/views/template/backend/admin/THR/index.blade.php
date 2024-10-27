@@ -2,88 +2,86 @@
 
 @section('tabel')
 <section class="section">
-          <div class="section-header">
-            <h1>{{$title}}</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item">{{$title}}</div>
-            </div>
+    <div class="section-header mt-4">
+        <div>
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item">{{$title}}</div>
           </div>
-          <div class="section-header">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-plus"></i> Add
-              </button>
-              <div class="dropdown-menu">
-                  <a class="dropdown-item" href="{{ route('thr.add') }}">Add Normal</a>
-                  <form id="get-data-form" action="{{ route('thr.multiple') }}" method="POST" style="display: none;">
-                      @csrf
-                  </form>
-                  <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('get-data-form').submit();">Get Data Multiple</a>
-              </div>              
-              <a href="{{route('thr.pdf',['tahun' => request('tahun', date('Y'))])}}" class="btn btn-danger">
-                  <i class="fa fa-download">
-                      </i> PDF
-              </a>
-              <a href="{{ route('thr.excel', ['tahun' => request()->input('tahun', date('Y'))]) }}" class="btn btn-success">
-                  <i class="fa fa-download"></i> Excel
-              </a>
-              <a href="" class="btn btn-warning" data-toggle="modal" data-target="#import">
-                <i class="fa fa-download">
-                    </i> Import Excel
-              </a>
+          <h1 class="mt-3">{{$title}}</h1>
+        </div>
+      </div>
 
+          <div class="section-header">
               <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item" style="font-size:16px; font-weight:bold;">Total THR : {{'Rp.' . number_format(floatval($total), 0, ',', '.')}}</a></div>
               </div>
           </div>
 
-          <div class="section-body">
-          <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>{{$title}} Table</h4>
-                    <div class="card-header-form">
-                        <div class="d-flex justify-content-between">
-                            <!-- Form Cari Tahun -->
-                            <form action="{{ route('thr.cari') }}" method="get" class="form-inline">
-                                @csrf
-                                <div class="input-group mb-3 mr-3">
-                                    <input type="number" class="form-control" name="tahun" id="tahun" placeholder="Search Tahun" value="{{ request('tahun', date('Y')) }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- Input Cari Nama -->
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search By Name">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                </div>
-                            </div>
+          <div class="row mt-5">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3>{{$title}} Table</h3>
+                  <div class="card-header-form">
+                    <form action="{{route('search.omset')}}" method="get">
+                        @csrf
+                        <div class="input-group">
+                        <input type="month" class="form-control" name="bulan" id="bulan" placeholder="Search Bulan" value="{{ request('bulan',date('Y-m')) }}">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
-                    </div>
-                  </div>
-                  <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table class="table table-bordered table-sm table-striped" id="myTable">
-                      <tr class="table-secondary">
-                          <th scope="col" class="text-center">No</th>
-                          <th scope="col" class="text-center">Nama</th>
-                          <th scope="col" class="text-center">Pendidikan</th>
-                          <th scope="col" class="text-center">Gaji Terakhir</th>
-                          <th scope="col" class="text-center">THR</th>
-                          <th scope="col" class="text-center">Masa Kerja</th>
-                          <th scope="col" class="text-center">Presentase</th>
-                          <th scope="col" class="text-center">Date</th>
-                          <th scope="col" class="text-center">Action</th>
+                        </div>
+                    </form>
+                    
+                   </div>
+                </div>
+                <div class="card-body px-4">
+                <div class="d-flex justify-content-end mb-4">
+                    <button type="button" class="btn btn-outline-primary mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-plus"></i> Add
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('thr.add') }}">Add Normal</a>
+                        <form id="get-data-form" action="{{ route('thr.multiple') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('get-data-form').submit();">Get Data Multiple</a>
+                    </div>              
+                    <a href="{{route('thr.pdf',['tahun' => request('tahun', date('Y'))])}}" class="btn btn-outline-danger mr-2">
+                        <i class="fa fa-download">
+                            </i> PDF
+                    </a>
+                    <a href="{{ route('thr.excel', ['tahun' => request()->input('tahun', date('Y'))]) }}" class="btn btn-outline-success mr-2">
+                        <i class="fa fa-download"></i> Excel
+                    </a>
+                    <a href="" class="btn btn-outline-warning" data-toggle="modal" data-target="#import">
+                      <i class="fa fa-download">
+                          </i> Import Excel
+                    </a>
+      
+                </div>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-md" id="myTable">
+                      <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Pendidikan</th>
+                            <th>Gaji Terakhir</th>
+                            <th>THR</th>
+                            <th>Masa Kerja</th>
+                            <th>Presentase</th>
+                            <th>Date</th>
+                            <th>Action</th>
                         </tr>
+                      </thead>
+                      <tbody>
                         @php
                         $no =1;
                         @endphp
                         @foreach ($data as $item)
-                        <tr class="table-success">
+                        <tr>
                           <td class="text-center">{{$no++}}.</td>
                           <td class="text-center">{{$item->user->name}}</td>
                           <td class="text-center">{{$item->pendidikan}}</td>
@@ -93,17 +91,24 @@
                           <td class="text-center">{{$item->index}}%</td>
                           <td class="text-center">{{ \Carbon\Carbon::parse($item->bulan)->year }}</td>                          
                           <td>
-                            <a href="{{route('thr.edit',$item->id)}}" 
-                            onclick="return confirm('Yakin akan edit data ?')" 
-                            class="btn btn-success btn-sm"><i class="fas fa-edit"></i>Edit</a>
-                            <form action="{{ route('thr.delete', $item->id) }}" method="POST">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" onclick="return confirm('Yakin akan dihapus?')" class="btn btn-danger btn-sm">
-                                      <i class="fas fa-trash-alt"></i>Hapus
-                                  </button>
-                            </form>                          
-                          </td>                        
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('thr.edit', $item->id) }}" 
+                                   onclick="return confirm('Yakin akan edit data ?')" 
+                                   class="btn btn-outline-success btn-sm">
+                                   <i class="fas fa-edit"></i> Edit
+                                </a>
+                                
+                                <form action="{{ route('thr.delete', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Yakin akan dihapus?')" 
+                                            class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> Hapus
+                                    </button>
+                                </form> 
+                            </div>
+                        </td>
+                                               
                         </tr>
                         @endforeach
                         <tr class="table-success">
@@ -128,9 +133,14 @@
                           <td class="text-center"></td>                          
                           <td></td>                        
                         </tr>
-                      </table>
-                    </div>
+                      </tbody>
+                    </table>
                   </div>
+                </div>
+                <div class="card-footer text-right">
+                  <nav class="d-inline-block">
+                    <ul class="pagination mb-0" id="pagination"></ul>
+                  </nav>
                 </div>
               </div>
             </div>
